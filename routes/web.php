@@ -28,7 +28,7 @@ use App\Http\Controllers\Auth\SuperAdminRegistrationController;
 use App\Http\Controllers\Admins\Memberships\BuyMemberShipPlanController;
 use App\Http\Controllers\Admins\News\NewsController;
 // Vetvine Without Auth Routes;
-use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\Frontend\ContactUsController;
 
 // Vetvine Frontend Routes;
 use App\Http\Controllers\Frontend\HomeController;
@@ -124,12 +124,6 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
 
 
 
-
-
-/**
- * Vetvine Home Frontend Routes
- */
-
 Route::group(['middleware'=>['frontendUserRole']], function(){
     Route::get('/',function(){
         return view('frontend.home');
@@ -139,6 +133,8 @@ Route::get('grow',[HomeController::class,'grow'])->name('grow');
 Route::get('thrive',[HomeController::class,'thrive'])->name('thrive');
 Route::get('heal',[HomeController::class,'heal'])->name('heal');
 Route::get('terms-of-service',[HomeController::class,'termsOfService'])->name('termsofservice');
+Route::post('contact-us',[ContactUsController::class,'submitContactForm'])->name('contactus.submit');
+
 // upcoming webinars
 Route::get('upcoming-webinars',[HomeController::class,'upcomingWebinars'])->name('upcoming_webinars');
 Route::get('publications',[HomeController::class,'publications'])->name('upcoming_publications');
