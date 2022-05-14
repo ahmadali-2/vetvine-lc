@@ -17,12 +17,11 @@ class AdminRole
      */
     public function handle(Request $request, Closure $next)
     {
-        
+
         $admin =Auth::check() ? Auth::user() : null;
-    
+
         if($admin->type !=1) {
              notify()->warning("You Are Not Admin Rights" .'⚡️');
-            session()->flash('message', 'This user is not an Admin ');
             return redirect('/');
         }
         return $next($request);
