@@ -150,7 +150,7 @@ Route::get('term',function(){
  * Vetvine Home Frontend Routes
  */
 
-
+Route::group(['middleware'=>['frontendUserRole']], function(){
     Route::get('/',function(){
         return view('frontend.home');
     });
@@ -175,7 +175,7 @@ Route::post('/comment/store', [CommentController::class,'store'])->name('comment
 Route::delete('comment-destroy/{id}', [CommentController::class,'destroy'])->name('comment.destroy');
 Route::post('/reply/store', [CommentController::class,'replyStore'])->name('reply.add');
 Route::get('frontend-news',[NewsController::class,'frontIndex'])->name('newsfrontend');
-
+});
 Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetvineUserRole']], function(){
     Route::get('dashboard',[HomeController::class,'userdashboard'])->name('userdashboard');
     Route::resource('updateprofile',ProfileController::class);

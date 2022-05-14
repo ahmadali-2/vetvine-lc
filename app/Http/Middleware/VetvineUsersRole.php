@@ -19,16 +19,16 @@ class VetvineUsersRole
      */
     public function handle(Request $request, Closure $next)
     {
-        
+
 
         $user = Auth::check() ? Auth::user() : null;
-       
+
         if($user->type !=2) {
             notify()->error("Your account is not approved by admin. Please try again later");
-            
-            Auth::logout();      
+
+            Auth::logout();
             return redirect('/');
-        } 
+        }
         return $next($request);
     }
 }
