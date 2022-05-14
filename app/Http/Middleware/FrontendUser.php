@@ -18,13 +18,13 @@ class FrontendUser
      */
     public function handle(Request $request, Closure $next)
     {
-      if(!Auth::check()){
-          return $next($request);
-      }elseif(Auth::check()){
-          if(Auth::user()->type == 3){
+        if(!Auth::check()){
             return $next($request);
-          }else{
-              return redirect()->back();
+        }elseif(Auth::check()){
+            if(Auth::user()->type == 1){
+                return redirect()->route('admindashboard');
+            }else{
+              return $next($request);
           }
       }else{
           return redirect()->back();
