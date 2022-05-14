@@ -27,9 +27,6 @@ use App\Http\Controllers\Admins\Webinar\EventController;
 use App\Http\Controllers\Auth\SuperAdminRegistrationController;
 use App\Http\Controllers\Admins\Memberships\BuyMemberShipPlanController;
 use App\Http\Controllers\Admins\News\NewsController;
-// Vetvine Users Routes;
-use App\Http\Controllers\VetvineUsers\DashboardController as VetvineUserDashboardController;
-
 // Vetvine Without Auth Routes;
 use App\Http\Controllers\Frontend\ContactUsController;
 
@@ -125,41 +122,19 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
     Route::resource('webinars', EventController::class);
 });
 
-/**
- * Vetvine Users Routes
- */
-Route::group(['prefix' => 'user'], function () {
-Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum','verified']], function () {
-    Route::get('dashboard', [VetvineUserDashboardController::class, 'dashboard'])->name('users_dashboard');
 
-});
-});
-
-
-/**
- * Vetvine Common Users Routes
- */
-Route::post('contact-us',[ContactUsController::class,'submitContactForm'])->name('contactus.submit');
-Route::get('term',function(){
- return view('frontend.pages.term_conditions');
-
-});
-
-
-/**
- * Vetvine Home Frontend Routes
- */
 
 Route::group(['middleware'=>['frontendUserRole']], function(){
     Route::get('/',function(){
         return view('frontend.home');
     });
 Route::get('why-vetvine',[HomeController::class,'whyVetvine'])->name('why_vetvine');
-// Route::get('contact',[HomeController::class,'contactUs'])->name('contact_us');
 Route::get('grow',[HomeController::class,'grow'])->name('grow');
 Route::get('thrive',[HomeController::class,'thrive'])->name('thrive');
 Route::get('heal',[HomeController::class,'heal'])->name('heal');
 Route::get('terms-of-service',[HomeController::class,'termsOfService'])->name('termsofservice');
+Route::post('contact-us',[ContactUsController::class,'submitContactForm'])->name('contactus.submit');
+
 // upcoming webinars
 Route::get('upcoming-webinars',[HomeController::class,'upcomingWebinars'])->name('upcoming_webinars');
 Route::get('publications',[HomeController::class,'publications'])->name('upcoming_publications');
@@ -190,6 +165,4 @@ Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetv
     Route::resource('privacy',PrivacySettingController::class);
     // User Post management routes
     Route::resource('post', PostController::class);
-
-
 });
