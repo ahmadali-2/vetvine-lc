@@ -31,7 +31,7 @@ use App\Http\Controllers\Admins\News\NewsController;
 use App\Http\Controllers\VetvineUsers\DashboardController as VetvineUserDashboardController;
 
 // Vetvine Without Auth Routes;
-use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\Frontend\ContactUsController;
 
 // Vetvine Frontend Routes;
 use App\Http\Controllers\Frontend\HomeController;
@@ -139,7 +139,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth:sanctum','verified']], 
 /**
  * Vetvine Common Users Routes
  */
-Route::get('contactus', [ContactUsController::class, 'contactus'])->name('contactus');
+Route::post('contact-us',[ContactUsController::class,'submitContactForm'])->name('contactus.submit');
 Route::get('term',function(){
  return view('frontend.pages.term_conditions');
 
@@ -155,7 +155,7 @@ Route::get('term',function(){
         return view('frontend.home');
     });
 Route::get('why-vetvine',[HomeController::class,'whyVetvine'])->name('why_vetvine');
-Route::get('contact',[HomeController::class,'contactUs'])->name('contact_us');
+// Route::get('contact',[HomeController::class,'contactUs'])->name('contact_us');
 Route::get('grow',[HomeController::class,'grow'])->name('grow');
 Route::get('thrive',[HomeController::class,'thrive'])->name('thrive');
 Route::get('heal',[HomeController::class,'heal'])->name('heal');
