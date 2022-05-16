@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\VetvineUsers\PostManagement;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admins\News\News;
 use App\Models\VetvineUsers\Post;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use vetvineHelper;
 
 class PostController extends Controller
@@ -17,10 +19,16 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::where("forum_id", "=", Null)->get();
+        $posts = Post::with('user')->get();
         return view('vetvineUsers.post.index', compact('posts'));
     }
 
+    public function memberHome()
+    {
+        $news   =   News::all();
+        $posts  = Post::with('user')->get();
+        return view('frontend.pages.member-home',compact('posts','news'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -39,15 +47,17 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $user   = Auth::user()->id;
         $path   = public_path('vetvineUsers/posts/');
         $result = vetvineHelper::saveImage($request->post_photo, $path);
         $path   = public_path('vetvineUsers/videos/');
-        $video = vetvineHelper::saveImage($request->post_add_video, $path);
+        $video  = vetvineHelper::saveImage($request->post_add_video, $path);
         $input  = $request->all();
         try {
             Post::create([
                 "post_title"                 =>  $request->post_title,
                 "post_photo"                 =>  $result,
+                "user_id"                    =>  $user,
                 "post_description"           =>  $request->description,
                 "post_link"                  =>  $request->post_link,
                 "post_add_ytlink"            =>  $request->post_add_ytlink,
@@ -57,7 +67,6 @@ class PostController extends Controller
             parent::successMessage('Post saved successfully.');
             return redirect(route('post.index'));
         } catch (Exception $e) {
-            dd($e->getMessage());
             parent::dangerMessage("Post Does Not Created, Please Try  Again");
             return redirect()->back();
         }
@@ -96,14 +105,16 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $post = Post::find($id);
+            $user   = Auth::user()->id;
+            $post   = Post::find($id);
             $path   = public_path('vetvineUsers/posts/');
             $result = vetvineHelper::updateImage($request->post_photo, $post->post_photo, $path);
             $path   = public_path('vetvineUsers/videos/');
-            $video = vetvineHelper::saveImage($request->post_add_video, $path);
+            $video  = vetvineHelper::saveImage($request->post_add_video, $path);
             $post->update([
                 'post_title'             =>  $request->input('post_title'),
                 'post_photo'             =>  $result,
+                "user_id"                =>  $user,
                 'post_description'       =>  $request->input('description'),
                 'post_link'              =>  $request->input('post_link'),
                 'post_add_ytlink'        =>  $request->input('post_add_ytlink'),

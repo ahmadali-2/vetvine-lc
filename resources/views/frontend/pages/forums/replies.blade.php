@@ -2,7 +2,7 @@
 <div class="display-comment">
     <strong>{{ $comment->user->name }}</strong>
     <p class="m-3">{{ $comment->comment }}
-        <a href="javascript:void(0);" class="btn btn-sm btn-outline-danger py-0" onclick="deleteRecord('{{$comment->id}}', '/comment-destroy/')">Delete</a>
+        <a href="javascript:void(0);" class="btn btn-sm btn-outline-danger py-0" onclick="deleteRecord('{{$comment->id}}', '/vetvine-member/comment-destroy/')">Delete</a>
     </p>
     <a href="" id="reply"></a>
     <form method="post" id="replyfrm" action="{{ route('reply.add') }}">
