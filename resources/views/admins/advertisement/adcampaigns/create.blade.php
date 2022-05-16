@@ -147,7 +147,7 @@
 
                                 </div>
 
-                                <div>
+                                <div class="mt-3">
 
                                     <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
 
