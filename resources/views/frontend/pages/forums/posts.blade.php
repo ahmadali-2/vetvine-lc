@@ -17,7 +17,7 @@
         <div class="row mb-2">
             <div class="col-sm-12 text-right">
                 <a class="btn btn-primary" href="{{ route('forums-posts.edit',$posts->id)}}">Edit</a>
-                <a href="javascript:void(0);" class="btn btn-primary" onclick="deleteRecord('{{$posts->id}}', '/forums-posts/')">Delete</a>
+                <a href="javascript:void(0);" class="btn btn-primary" onclick="deleteRecord('{{$posts->id}}', '/vetvine-member/forums-posts/')">Delete</a>
             </div>
         </div>
 </section>
