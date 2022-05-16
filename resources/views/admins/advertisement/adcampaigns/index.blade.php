@@ -1,7 +1,6 @@
  @extends('admins.master')
 
  @section('content')
-
      <section class="content-header">
 
          <div class="container-fluid">
@@ -76,7 +75,6 @@
                              <tbody>
 
                                  @foreach ($adCampaigns as $adCampaign)
-
                                      <tr>
 
                                          <td scope="row">{{ $loop->iteration }}</td>
@@ -97,13 +95,9 @@
                                          <td>
 
                                              @if ($adCampaign->status == 1)
-
                                                  <span class="badge badge-pill badge-success">Active</span>
-
                                              @else
-
                                                  <span class="badge badge-pill badge-danger">Inactive</span>
-
                                              @endif
 
                                          </td>
@@ -111,12 +105,10 @@
                                          <td>
 
                                              <a href="{{ route('ads-campaign.edit', $adCampaign->id) }}"><i
-
                                                      class="fas fa-edit text-primary"></i></a>
 
 
                                              <a href="javascript:void(0);" class="text-decoration-none"
-
                                                  onclick="deleteRecord('{{ $adCampaign->id }}', '/superadmin/ads-campaign/')">
 
                                                  <i class="fa fa-trash text-danger" aria-hidden="true"></i>
@@ -126,7 +118,6 @@
                                          </td>
 
                                      </tr>
-
                                  @endforeach
 
                              </tbody>
@@ -140,6 +131,4 @@
              </div>
 
          </div>
-
      @endsection
-

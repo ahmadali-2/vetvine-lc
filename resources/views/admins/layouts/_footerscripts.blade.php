@@ -49,6 +49,11 @@
     {!! JsValidator::formRequest('App\Http\Requests\Admin\Announcements\CreateAnnouncementRequest', '#announcementsform') !!}
     {!! JsValidator::formRequest('App\Http\Requests\Admin\Forums\CreateForumRequest','#forumform') !!}
     {!! JsValidator::formRequest('App\Http\Requests\Admin\Forums\ForumCategoryRequest','#categoryform') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\Admin\Webinar\CreateEventRequest','#publicationfrm') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\Admin\Webinar\CreateContinueEducationRequest','#continueeducationfrm') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\Admin\Membership\CreatePlanCategoryRequest','#plancategory') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\Admin\Membership\CreatePlanRequest','#plan') !!}
+
 
     @toastr_js
 
