@@ -48,19 +48,28 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="pdf_file" class="control-label mb-1">PDF file</label>
+                                                <input id="pdf_file" placeholder="Enter Name" name="file" type="file"
+                                                    class="form-control" value="{{ $event->pdf_file }}">
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-group">
-                                                <label for="pdf_file" class="control-label mb-1">PDF file</label>
-                                                <input id="pdf_file" placeholder="Enter Name" name="pdf_file" type="file"
-                                                    class="form-control" value="{{ $event->pdf_file }}">
+                                                <label for="Vet_Pet_Prof_Premium" class="control-label mb-1">Vet/Pet Prof.
+                                                    Premium</label>
+                                                <input id="Vet_Pet_Prof_Premium" placeholder="Enter Name"
+                                                    name="Vet_Pet_Prof_Premium" type="number" class="form-control"
+                                                    value="{{ $event->Vet_Pet_Prof_Premium }}">
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="main_photo" class="control-label mb-1">Main Photo</label>
-                                                <input id="main_photo" placeholder="Enter Name" name="main_photo"
+                                                <input id="main_photo" placeholder="Enter Name" name="photo"
                                                     type="file" class="form-control" value="{{ $event->main_photo }}">
                                             </div>
                                         </div>
@@ -93,15 +102,6 @@
                                                 <input id="Pet_Owner_Fee" placeholder="Enter Name" name="Pet_Owner_Fee"
                                                     type="number" class="form-control"
                                                     value="{{ $event->Pet_Owner_Fee }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <label for="Vet_Pet_Prof_Premium" class="control-label mb-1">Vet/Pet Prof.
-                                                    Premium</label>
-                                                <input id="Vet_Pet_Prof_Premium" placeholder="Enter Name"
-                                                    name="Vet_Pet_Prof_Premium" type="number" class="form-control"
-                                                    value="{{ $event->Vet_Pet_Prof_Premium }}">
                                             </div>
                                         </div>
                                     </div>
@@ -162,19 +162,10 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <label for="pdf_file" class="control-label mb-1">PDF file</label>
-                                                <input id="pdf_file" placeholder="Enter Name" name="pdf_file" type="file"
-                                                    class="form-control" value="{{ $event->pdf_file }}">
-                                            </div>
-                                        </div>
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="main_photo" class="control-label mb-1">Main Photo</label>
-                                                <input id="main_photo" placeholder="Enter Name" name="main_photo"
+                                                <input id="main_photo" placeholder="Enter Name" name="photo"
                                                     type="file" class="form-control" value="{{ $event->main_photo }}">
                                             </div>
                                         </div>
@@ -182,36 +173,11 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-group">
-                                                <div class="form-group">
-                                                    <label for="video" class="control-label mb-1 form-select">Video
-                                                        Source</label>
-                                                    <select name="result" class="form-control" id="sel3"
-                                                        onchange="showresult(this.value)">
-                                                        <option value="" disabled selected>--Select--</option>
-                                                        <option value="1">Youtube</option>
-                                                        <option value="2">Vimeo</option>
-                                                        <option value="3">My Computer</option>
-                                                    </select>
-                                                </div>
+                                                <label for="pdf_file" class="control-label mb-1">PDF file</label>
+                                                <input id="pdf_file" placeholder="Enter Name" name="file" type="file"
+                                                    class="form-control" value="{{ $event->pdf_file }}">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6" id="ytlink">
-                                            <label for="" class="control-label mb-1 form-select">Add YouTube Video</label>
-                                            <input id="event_add_ytlink" name="event_add_ytlink" type="url"
-                                                class="form-control" value="{{ $event->event_add_ytlink }}">
-                                        </div>
-                                        <div class="col-sm-6" id="vimeolink">
-                                            <label for="" class="control-label mb-1 form-select">Add Vimeo Video</label>
-                                            <input id="event_add_vimeolink" name="event_add_vimeolink" type="url"
-                                                class="form-control" value="{{ $event->event_add_vimeolink }}">
-                                        </div>
-                                        <div class="col-sm-6" id="video">
-                                            <label for="" class="control-label mb-1 form-select">Upload Video</label>
-                                            <input id="event_add_video" name="event_add_video" type="file"
-                                                class="form-control" value="">
-                                        </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="sponser_one" class="control-label mb-1">Sponsor 1</label>
@@ -219,6 +185,8 @@
                                                     type="text" class="form-control" value="{{ $event->sponser_one }}">
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="sponser_two" class="control-label mb-1">Sponsor 2</label>
@@ -226,8 +194,6 @@
                                                     type="text" class="form-control" value="{{ $event->sponser_two }}">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="sponser_three" class="control-label mb-1">Sponsor 3</label>
@@ -334,6 +300,38 @@
                                             </div>
                                         </div>
 
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <label for="video" class="control-label mb-1 form-select">Video
+                                                        Source</label>
+                                                    <select name="result" class="form-control" id="sel3"
+                                                        onchange="showresult(this.value)">
+                                                        <option value="" disabled selected>--Select--</option>
+                                                        <option value="1">Youtube</option>
+                                                        <option value="2">Vimeo</option>
+                                                        <option value="3">My Computer</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6" id="ytlink">
+                                            <label for="" class="control-label mb-1 form-select">Add YouTube Video</label>
+                                            <input id="event_add_ytlink" name="event_add_ytlink" type="url"
+                                                class="form-control" value="{{ $event->event_add_ytlink }}">
+                                        </div>
+                                        <div class="col-sm-6" id="vimeolink">
+                                            <label for="" class="control-label mb-1 form-select">Add Vimeo Video</label>
+                                            <input id="event_add_vimeolink" name="event_add_vimeolink" type="url"
+                                                class="form-control" value="{{ $event->event_add_vimeolink }}">
+                                        </div>
+                                        <div class="col-sm-6" id="video">
+                                            <label for="" class="control-label mb-1 form-select">Upload Video</label>
+                                            <input id="event_add_video" name="event_add_video" type="file"
+                                                class="form-control" value="">
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-12">

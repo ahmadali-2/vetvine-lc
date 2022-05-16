@@ -18,37 +18,38 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Manage Forums</strong>
+                        <strong class="card-title">Manage Forums Category</strong>
                     </div>
                     <div class="card-body">
-                        <table class="table manage_forum">
+                        <table class="table">
                             <thead>
                                 <tr>
+
                                     <th scope="col">#</th>
-                                    <th scope="col">Forum Title</th>
-                                    <th scope="col">Forum Category</th>
-                                    <th scope="col">Forum Description</th>
+
+                                    <th scope="col">Category Name</th>
+
                                     <th scope="col">Action</th>
+
                                 </tr>
                             </thead>
                             <tbody>
-
-                                @foreach ($forums as $forum)
+                                @foreach ($categories as $category)
                                     <tr>
                                         <td scope="row">{{ $loop->iteration }}</td>
-                                        <td>{{ $forum->forum_title }}</td>
-                                        <td>{{ $forum->category->category_title }}</td>
-                                        <td>{{ $forum->forum_description }}</td>
-                                        <td> <a href="{{ route('forums.edit', $forum->id) }}"><i
+                                        <td>{{ $category->category_title }}</td>
+                                        <td> <a href="{{ route('forums-category.edit', $category->id) }}"><i
                                                     class="fas fa-edit text-primary"></i></a>
                                             <a href="javascript:void(0);" class="text-decoration-none"
-                                                onclick="deleteRecord('{{ $forum->id }}', '/superadmin/forums/')">
+                                                onclick="deleteRecord('{{ $category->id }}', '/superadmin/forums-category/')">
                                                 <i class="fa fa-trash text-danger" aria-hidden="true"></i>
                                             </a>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
+
+
                         </table>
                     </div>
                 </div>

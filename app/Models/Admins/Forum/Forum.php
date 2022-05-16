@@ -23,4 +23,8 @@ class Forum extends Model
     {
         return $this->hasMany(Post::class,'forum_id','id');
     }
+    function category()
+    {
+        return $this->belongsTo(CategoryForum::class,'category_id','id');
+    }
 }
