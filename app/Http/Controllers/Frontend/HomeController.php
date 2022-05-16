@@ -119,7 +119,6 @@ class HomeController extends Controller
             });
             return $this->dashboard['filters'];
         } 
-
     }
 
  
