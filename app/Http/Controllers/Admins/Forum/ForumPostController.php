@@ -8,6 +8,7 @@ use App\Models\Admins\Forum\Post;
 use Exception;
 use vetvineHelper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ForumPostController extends Controller
 {
@@ -39,6 +40,7 @@ class ForumPostController extends Controller
      */
     public function store(Request $request)
     {
+        $user   = Auth::user()->id;
         $path   = public_path('vetvineUsers/posts/');
         $result = vetvineHelper::saveImage($request->post_photo, $path);
         $path   = public_path('vetvineUsers/videos/');
@@ -46,6 +48,7 @@ class ForumPostController extends Controller
         try {
             Post::create([
                 "forum_id"                   =>  $request->forum_id,
+                "user_id"                    =>  $user,
                 "post_title"                 =>  $request->post_title,
                 "post_photo"                 =>  $result,
                 "post_description"           =>  $request->description,
@@ -71,7 +74,7 @@ class ForumPostController extends Controller
      */
     public function show($id)
     {
-        $posts = Post::find($id);
+        $posts = Post::with('user')->where('forum_id','!=','Null')->find($id);
         return view('frontend.pages.forums.posts',compact('posts'));
     }
 
@@ -114,13 +117,15 @@ class ForumPostController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user   = Auth::user()->id;
         $path   = public_path('vetvineUsers/posts/');
         $result = vetvineHelper::saveImage($request->post_photo, $path);
         $path   = public_path('vetvineUsers/videos/');
-        $video = vetvineHelper::saveImage($request->post_add_video, $path);
+        $video  = vetvineHelper::saveImage($request->post_add_video, $path);
         try {
             Post::find($id)->update([
                 "forum_id"                   =>  $request->forum_id,
+                "user_id"                    =>  $user,
                 "post_title"                 =>  $request->post_title,
                 "post_photo"                 =>  $result,
                 "post_description"           =>  $request->description,
