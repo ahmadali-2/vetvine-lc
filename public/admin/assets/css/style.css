@@ -7370,3 +7370,8 @@ header .form-inline .search-form.close {
   background-color:#f27222 !important;
 }
 
+.manage_forum th{
+
+    white-space: nowrap;
+    overflow: hidden;
+}

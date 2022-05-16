@@ -8,29 +8,29 @@
                 </div>
                 <div class="card-body">
                     <div id="pay-invoice">
-                    <form action="{{ route('forums-category.update',$CategoryForum->id) }}" method="post" novalidate="novalidate">
-                                @csrf
-                                @method('put')
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="category_title" class="control-label mb-1">Category Title</label>
-                                    <input id="category_title" placeholder="Enter Title" name="category_title"
-                                        type="text" class="form-control" aria-required="true" aria-invalid="false"
-                                        value="{{$CategoryForum->category_title ?? ''}}">
+                        <form action="{{ route('forums-category.update', $CategoryForum->id) }}" method="post"
+                            novalidate="novalidate">
+                            @csrf
+                            @method('put')
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="category_title" class="control-label mb-1">Category Title</label>
+                                        <input id="category_title" placeholder="Enter Title" name="category_title"
+                                            type="text" class="form-control" aria-required="true" aria-invalid="false"
+                                            value="{{ $CategoryForum->category_title ?? '' }}">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                            <span id="payment-button-amount">Submit</span>
-                            <span id="payment-button-sending" style="display:none;">Sending…</span>
-                        </button>
-                    </form>
+                            <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                                <span id="payment-button-amount">Submit</span>
+                                <span id="payment-button-sending" style="display:none;">Sending…</span>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     </div>
-    </div>
-
 @endsection

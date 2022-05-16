@@ -59,38 +59,38 @@
                                             <strong>Site Information</strong>
                                         </p>
                                         <div class="col-sm-12 mt-2 p-4">
-                                            <div class="col-sm-6">
-                                                <label class="label__wrapper ">Vetvine Logo</label><span
-                                                    class="imgsixeofspan"> Size(1024*720px)</span>
-                                                <div class="custom-file">
-                                                    <input type="file" name="logo" value="{{ $data->logo ?? '' }}"
-                                                        class="form-control input__box--wrapper custom-file-input"
-                                                        accept="image/*">
-                                                    <span class="custom-file-label"
-                                                        for="validatedCustomFile"></span>
+                                            <div class="row mb-2">
+                                                <div class="col-sm-6">
+                                                    <label class="label__wrapper ">Vetvine Logo</label><span
+                                                        class="imgsixeofspan"></span>
+                                                    <div class="custom-file">
+                                                        <input type="file" name="logo" value="{{ $data->logo ?? '' }}"
+                                                            class="form-control input__box--wrapper custom-file-input"
+                                                            accept="image/*">
+                                                        <span class="custom-file-label" for="validatedCustomFile">{{ $data->logo ?? '' }}</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <label class="label__wrapper required">Email *</label>
-                                                <input type="email" name="email" value="{{ $data->email ?? '' }}"
-                                                    class="form-control input__box--wrapper">
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <label class="label__wrapper required">Phone No. *</label>
-                                                <input type="text" name="phone_no" id="phone_no"
-                                                    class="form-control input__box--wrapper"
-                                                    value="{{ $data->phone_no ?? '' }}">
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <label class="label__wrapper required">Mission Statment</label>
-                                                <textarea type="text" name="mission_statement" value="{{ $data->mission_statement ?? '' }}"
-                                                    class="form-control input__box--wrapper">{{ $data->mission_statement ?? '' }}</textarea>
+                                                <div class="col-sm-6">
+                                                    <label class="label__wrapper required">Email *</label>
+                                                    <input type="email" name="email" value="{{ $data->email ?? '' }}"
+                                                        class="form-control input__box--wrapper">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label class="label__wrapper required">Phone No. *</label>
+                                                    <input type="text" name="phone_no" id="phone_no"
+                                                        class="form-control input__box--wrapper"
+                                                        value="{{ $data->phone_no ?? '' }}">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label class="label__wrapper required">Mission Statment</label>
+                                                    <textarea type="text" name="mission_statement" value="{{ $data->mission_statement ?? '' }}"
+                                                        class="form-control input__box--wrapper">{{ $data->mission_statement ?? '' }}</textarea>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div>
+                                <div class="row mt-3">
                                     <input type="submit" class="btn btn-lg btn-info btn-block" value="Update Setting">
                                 </div>
                             </form>

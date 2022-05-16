@@ -1,7 +1,6 @@
 @extends('admins.master')
 
 @section('content')
-
     <div class="row">
 
         <div class="col-lg-12">
@@ -21,7 +20,6 @@
                         <div class="card-body">
 
                             <form action="{{ route('ads-campaign.store') }}" method="post" id="createadscampaign"
-
                                 novalidate="novalidate" enctype="multipart/form-data">
 
                                 @csrf
@@ -35,9 +33,7 @@
                                             <label for="campaign_name" class="control-label mb-1">Campaign Name</label>
 
                                             <input id="campaign_name" placeholder="Enter Name" name="campaign_name"
-
                                                 type="text" class="form-control" aria-required="true" aria-invalid="false"
-
                                                 value="">
 
                                         </div>
@@ -53,7 +49,6 @@
                                             <label for="start_date" class="control-label mb-1">Start Date</label>
 
                                             <input id="start_date" name="start_date" type="date" class="form-control"
-
                                                 aria-required="true" aria-invalid="false" value="">
 
                                         </div>
@@ -73,9 +68,7 @@
                                                 Clicks</label>
 
                                             <input id="total_clicks_allowed" name="total_clicks_allowed" type="number"
-
                                                 min="0" class="form-control" aria-required="true" aria-invalid="false"
-
                                                 value="">
 
                                         </div>
@@ -89,7 +82,6 @@
                                             <label for="end_date" class="control-label mb-1">End Date</label>
 
                                             <input id="end_date" name="end_date" type="date" class="form-control"
-
                                                 aria-required="true" aria-invalid="false" value="">
 
                                         </div>
@@ -107,7 +99,6 @@
                                             <label for="min_ctr" class="control-label mb-1">CTR</label>
 
                                             <input id="min_ctr" name="min_ctr" type="number" min="0" class="form-control"
-
                                                 aria-required="true" aria-invalid="false" value="">
 
                                         </div>
@@ -121,7 +112,6 @@
                                             <label for="total_views_allowed" class="control-label mb-1">Total View</label>
 
                                             <input id="total_views_allowed" name="total_views_allowed" type="number" min="0"
-
                                                 class="form-control" aria-required="true" aria-invalid="false" value="">
 
                                         </div>
@@ -136,8 +126,10 @@
                                         <div class="form-group">
                                             <label for="network_id" class="control-label mb-1 form-select">Network
                                                 Level</label>
-                                            <select id="network_id" style="width: 100%"  name="network_id[]" aria-label="Default select example"
-                                            class="js-example-basic-multiple form-control" data-val="true" multiple="multiple" >
+                                            <select id="network_id" style="width: 100%" name="network_id[]"
+                                                aria-label="Default select example"
+                                                class="js-example-basic-multiple form-control" data-val="true"
+                                                multiple="multiple">
                                                 @foreach ($adcampaigns as $campaign)
                                                     <option value="{{ $campaign->id }}">{{ $campaign->name }}</option>
                                                 @endforeach
@@ -176,6 +168,4 @@
     </div>
 
     </div>
-
 @endsection
-
