@@ -1,6 +1,5 @@
 @extends('frontend.master')
 @section('content')
-
 <main>
     <section class="Section_top">
         <div class="container">
@@ -103,9 +102,6 @@
 
     </div>
 </section>
-
-
-
 <section class="grow_banner">
     <div class="container">
         <div class="mm-grow-new">
@@ -120,9 +116,7 @@
                     help busy
                     professionals stay current and grow in their career.
                 </p>
-
                 <a href="#" class="btn_why_vetvine">LEARN MORE</a>
-
             </div>
         </div>
 
@@ -172,17 +166,10 @@
                     service was established to support people grieving the loss of an animal in their life - whether
                     due to the
                     death of a pet or loss of a relationship with an animal of any kind due to any circumstance.
-
                 </p>
-
                 <a href="#" class="btn_join_thepet">GET PET LOSS GRIEF SUPPORT ></a>
-
             </div>
         </div>
-
-
     </div>
 </section>
-
-
 @endsection
