@@ -7374,3 +7374,8 @@ header .form-inline .search-form.close {
     bottom: -1px !important;
 }
 
+.manage_forum th{
+
+    white-space: nowrap;
+    overflow: hidden;
+}

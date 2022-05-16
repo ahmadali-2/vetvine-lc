@@ -24,7 +24,7 @@
                                         <div class="form-group">
                                             <label for="news_link" class="control-label mb-1">News Link</label>
                                             <input id="news_link" placeholder="Enter Link" name="news_link"
-                                                type="link" class="form-control" aria-required="true" aria-invalid="false"
+                                                type="url" class="form-control" aria-required="true" aria-invalid="false"
                                                 value="">
                                         </div>
                                     </div>
@@ -49,7 +49,4 @@
     </div>
     </div>
 @endsection
-@section('scripts')
-<script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-{!! JsValidator::formRequest('App\Http\Requests\Admin\News\CreateNewsRequest','#newsform') !!}
-@endsection
+

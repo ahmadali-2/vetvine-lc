@@ -75,6 +75,12 @@ Route::get('/migrate',function(){
 });
 
 
+Route::get('contactusschedule', function(){
+    Artisan::call('schedule:run');
+    return 'Contact Us Cron Job Schedule Run Successfully';
+});
+
+
 
 
 /**
@@ -137,7 +143,7 @@ Route::post('contact-us',[ContactUsController::class,'submitContactForm'])->name
 // upcoming webinars
 Route::get('upcoming-webinars',[HomeController::class,'upcomingWebinars'])->name('upcoming_webinars');
 Route::get('publications',[HomeController::class,'publications'])->name('upcoming_publications');
-Route::get('educations',[HomeController::class,'searceducations'])->name('search_educations');
+Route::post('educations',[HomeController::class,'searceducations'])->name('search_educations');
 
 Route::get('faqs',[HomeController::class,'faqs'])->name('faqs');
 Route::get('frontend-forums',[ForumController::class,'frontendIndex'])->name('forumsfrontend');
