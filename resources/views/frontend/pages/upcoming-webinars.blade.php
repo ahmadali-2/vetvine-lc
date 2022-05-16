@@ -3,7 +3,7 @@
     <section class="video-section-wrapper mb-4">
         <div class="container">
             <h1 class="Upcoming-webinars mt-2">Find an Upcoming Event</h1>
-            <form action="{{ route('search_educations') }}"  method="GET">
+            <form action="{{ route('search_educations') }}"  method="post">
                 @csrf
                 <ul class="filter_list">
                     <li class="top-three-input">
