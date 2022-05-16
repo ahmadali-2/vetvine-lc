@@ -7368,6 +7368,10 @@ header .form-inline .search-form.close {
 
 .btn-primary {
   background-color:#f27222 !important;
+}#network_id-error
+{
+    position: absolute !important;
+    bottom: -1px !important;
 }
 
 .manage_forum th{
