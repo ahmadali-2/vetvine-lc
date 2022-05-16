@@ -11,9 +11,10 @@ use App\Models\Admins\Forum\Forum;
 use App\Models\Admins\Forum\ForumPost;
 use App\Models\Admins\Webinar\CategoryEvent;
 use App\Models\Admins\Webinar\Event;
-
+use DB;
 class HomeController extends Controller
 {
+    protected $dashboard;
     public function frontendHome()
     {
         return view('frontend.home');
@@ -73,36 +74,54 @@ class HomeController extends Controller
     }
     public function searceducations(Request $request)
     {
-        $showevent = Event::with('events')->get();
+        $this->dashboard['filters'] = Event::with('events');
         $category = CategoryEvent::all();
+     
         if ($request->name) {
-            $showevent = Event::with('events')->where('event_title', 'like', '%'.request('name').'%')->get();
+            $this->dashboard['filters'] = $this->applyFilters('event_title', $request->name);
         }
         if ($request->category) {
-            $showevent = Event::with('events')->where('category_id', 'like', '%'.request('category').'%')->get();
+            $this->dashboard['filters'] = $this->applyFilters('category_id', $request->category);
         }
         if ($request->presenter) {
-            $showevent = Event::with('events')->where('presenter_one', 'like', '%'.request('presenter').'%')->get();
+            $this->dashboard['filters'] = $this->applyFilters('presenter_one', $request->presenter);
         }
         if ($request->sponser) {
-            $showevent = Event::with('events')->where('sponser_one', 'like', '%'.request('sponser').'%')->get();
+            $this->dashboard['filters'] = $this->applyFilters('sponser_one', $request->sponser);
         }
         if ($request->from && $request->to) {
-            $from = $request->from;
-            $to   = $request->to;
-            $showevent = Event::with('events')->whereBetween('date', [$from, $to])->get();
+            $this->dashboard['filters'] = $this->aplyDateFilters($request->from, $request->to);
         }
-        if ($request->name && $request->category && $request->presenter && $request->sponser && $request->from && $request->to) {
-            $from = $request->from;
-            $to   = $request->to;
-            $showevent = Event::with('events')->where('event_title', 'like', '%'.request('name').'%')->
-                                                where('category_id', 'like', '%'.request('category').'%')->
-                                                where('presenter_one', 'like', '%'.request('presenter').'%')->
-                                                where('sponser_one', 'like', '%'.request('sponser').'%')->
-                                                whereBetween('date', [$from, $to])->get();
-        }
+        $showevent =$this->dashboard['filters']->get();      
         return view('frontend.pages.upcoming-webinars',compact('showevent','category'));
     }
 
+
+    public function applyFilters($dbColumn, $formElement)
+    {      
+        if(isset($this->dashboard['filters']) && !empty($this->dashboard['filters']))
+        {            
+            $this->dashboard['filters'] =$this->dashboard['filters']->where(function($query) use($dbColumn,$formElement){
+                foreach((array) $formElement as $key=> $value){
+                    $query->orWhere($dbColumn,'like','%'.$formElement[$key].'%');
+                }
+            });
+            return $this->dashboard['filters'];
+        }             
+    }
+
+    public function aplyDateFilters($from, $to)
+    {
+        if(isset($this->dashboard['filters']) && !empty($this->dashboard['filters']))
+        {            
+            $this->dashboard['filters'] =$this->dashboard['filters']->where(function($query) use($from, $to){
+                $query->whereBetween('date', [$from, $to]);
+            });
+            return $this->dashboard['filters'];
+        } 
+
+    }
+
+ 
 
 }
