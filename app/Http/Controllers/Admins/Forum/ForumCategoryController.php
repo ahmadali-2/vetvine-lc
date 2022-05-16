@@ -16,7 +16,8 @@ class ForumCategoryController extends Controller
      */
     public function index()
     {
-        return view('admins.forums.index');
+        $categories   =   CategoryForum::all();
+        return view('admins.forums.categoryindex',compact('categories'));
     }
 
     /**
@@ -43,7 +44,7 @@ class ForumCategoryController extends Controller
                 "category_title"      => $input['category_title'],
             ]);
             parent::successMessage('Category saved successfully.');
-            return redirect(route('forums.index'));
+            return redirect(route('forums-category.index'));
         } catch(Exception $e) {
             parent::dangerMessage("Category Does Not Created, Please Try  Again");
             return redirect()->back();
@@ -93,7 +94,7 @@ class ForumCategoryController extends Controller
                 "category_title"      => $input['category_title'],
             ]);
             parent::successMessage('Category Updated successfully.');
-            return redirect(route('forums.index'));
+            return redirect(route('forums-category.index'));
         } catch(Exception $e) {
             parent::dangerMessage("Category Does Not Updated, Please Try  Again");
             return redirect()->back();
@@ -111,7 +112,7 @@ class ForumCategoryController extends Controller
         try{
             CategoryForum::find($id)->delete();
             parent::successMessage('Category Deleted successfully.');
-            return redirect(route('forums.index'));
+            return redirect(route('forums-category.index'));
         } catch(Exception $e) {
             parent::dangerMessage("Category Does Not Deleted, Please Try  Again");
             return redirect()->back();

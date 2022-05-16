@@ -1,7 +1,6 @@
 @extends('admins.master')
 
 @section('content')
-
     <section class="content-header">
 
         <div class="container-fluid">
@@ -71,7 +70,6 @@
                             <tbody>
 
                                 @foreach ($ads as $ad)
-
                                     <tr>
 
                                         <td scope="row">{{ $loop->iteration }}</td>
@@ -83,7 +81,6 @@
                                         <td>
 
                                             <img src="{{ asset('admin/advertisement/' . $ad->ad_media) }}"
-
                                                 style="border-radius:4px;height:60px; width:60px">
 
                                         </td>
@@ -93,20 +90,16 @@
                                         <td>
 
                                             @if ($ad->status == 1)
-
                                                 <span class="badge badge-pill badge-success">Active</span>
-
                                             @else
-
                                                 <span class="badge badge-pill badge-danger">Inactive</span>
-
                                             @endif
 
                                         </td>
 
                                         <td>
 
-                                            
+
 
                                             <a href="{{ route('ads-manage.edit', $ad->id) }}">
 
@@ -115,7 +108,6 @@
                                             </a>
 
                                             <a href="javascript:void(0);" class="text-decoration-none"
-
                                                 onclick="deleteRecord('{{ $ad->id }}', '/superadmin/ads-manage/')">
 
                                                 <i class="fa fa-trash text-danger" aria-hidden="true"></i>
@@ -125,7 +117,6 @@
                                         </td>
 
                                     </tr>
-
                                 @endforeach
 
                             </tbody>
@@ -141,6 +132,4 @@
         </div>
 
     </div>
-
 @endsection
-

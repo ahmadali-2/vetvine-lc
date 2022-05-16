@@ -74,14 +74,15 @@
                                         <div class="form-group">
                                             <label for="network_id" class="control-label mb-1 form-select">Network
                                                 Level</label>
-                                            <select id="network_id" style="width: 100%"  name="network_id[]" aria-label="Default select example"
-                                            class="js-example-basic-multiple form-control" data-val="true" multiple="multiple" >
+                                            <select id="network_id" style="width: 100%" name="network_id[]"
+                                                aria-label="Default select example"
+                                                class="js-example-basic-multiple form-control" data-val="true"
+                                                multiple="multiple">
                                                 @foreach ($networklevel as $campaign)
-                                                {{-- <option value="{{ $campaign->id }}"
-                                                    {{ $campaign->id == $adCampaigns->network_id ? 'selected' : '' }}>
-                                                    {{ $campaign->name }}</option> --}}
-                                                    <option value="{{ $campaign->id }}" @if(in_array($campaign->id,$selectedMembers)) selected @endif>{{ $campaign->name }}</option>
-                                            @endforeach
+                                                    <option value="{{ $campaign->id }}"
+                                                        @if (in_array($campaign->id, $selectedMembers)) selected @endif>
+                                                        {{ $campaign->name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
