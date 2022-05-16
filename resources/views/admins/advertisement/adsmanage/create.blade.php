@@ -25,8 +25,8 @@
                                             <label for="banner_image_url" class="control-label mb-1">Advertisement
                                                 Media Url</label>
                                             <input id="banner_image_url" placeholder="Enter Name" name="banner_image_url"
-                                                type="url" placeholder="https://example.com"
-                                                class="form-control" aria-required="true" aria-invalid="false" value="">
+                                                type="url" placeholder="https://example.com" class="form-control"
+                                                aria-required="true" aria-invalid="false" value="">
                                         </div>
                                     </div>
                                 </div>
@@ -44,11 +44,12 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="campaign_id" class="control-label mb-1 form-select">Campaign</label>
-                                                <select id="campaign_id" name="campaign_id" aria-label="Default select example"
+                                            <select id="campaign_id" name="campaign_id" aria-label="Default select example"
                                                 class="form-control cc-number identified visa" value="" data-val="true">
                                                 <option selected value="">Open this select level</option>
                                                 @foreach ($advertisement as $campaign)
-                                                    <option value="{{ $campaign->id }}">{{ $campaign->campaign_name }}</option>
+                                                    <option value="{{ $campaign->id }}">{{ $campaign->campaign_name }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                         </div>

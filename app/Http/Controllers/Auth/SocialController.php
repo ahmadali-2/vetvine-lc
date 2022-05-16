@@ -25,16 +25,16 @@ class SocialController extends Controller
         $this->setCommaSepratedValues = implode(",", $this->setUserAndNetwork);
         session(['comma_separated' => $this->setCommaSepratedValues]);
 
-       return  $this->redirectToProvider($provider);       
+       return  $this->redirectToProvider($provider);
     }
 
     private function redirectToProvider($provider)
-    {      
+    {
         try{
             if($provider == 'twitter') {
-                return Socialite::driver($provider)->redirect();    
-            } else {             
-                return Socialite::driver($provider)->with(['state' =>  $this->setUserAndNetwork])->redirect();    
+                return Socialite::driver($provider)->redirect();
+            } else {
+                return Socialite::driver($provider)->with(['state' =>  $this->setUserAndNetwork])->redirect();
             }
         } catch(Exception $e) {
             return $this->sendErrorMessage($e->getMessage());
@@ -60,20 +60,20 @@ class SocialController extends Controller
     }
 
     public function handleProviderCallback(Request $request, $provider)
-    {      
+    {
         try {
-            
+
             $userAndNetworkType = explode(",", session('comma_separated'));
             $user_type = $userAndNetworkType[0];
             $network_type = $userAndNetworkType[1];
-          
+
             if ($provider == 'twitter') {
                $user = $this->authenticateWithTwitter();
             } else {
                 $user = Socialite::driver($provider)->stateless()->user();
             }
 
-            $finduser = User::where('email', $user->email)->first();          
+            $finduser = User::where('email', $user->email)->first();
 
             if ($finduser) {
                 Auth::login($finduser);

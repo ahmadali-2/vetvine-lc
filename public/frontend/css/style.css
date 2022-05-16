@@ -5560,3 +5560,8 @@ letter-spacing:1px;
         margin-left: 16px;
     }
 }
+#network_id-error
+{
+    position: absolute !important;
+    bottom: 14px !important;
+}

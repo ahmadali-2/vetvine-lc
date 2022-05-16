@@ -30,7 +30,7 @@ $timezones =vetvineHelper::timezones()
                                     <div class="lightpage">
                                         <div class="arrow-tabs ui-tabs ui-widget ui-widget-content ui-corner-all">
                                             <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix   ui-widget-header ui-corner-all">
-                                            <li class="ui-state-default ui-corner-top     ui-tabs-active tab_1_section_parent" >
+                                                <li class="ui-state-default ui-corner-top     ui-tabs-active tab_1_section_parent" >
                                                     <a href="#" class="ui-tabs-anchor" role="presentation">
                                                         <span >Veterinary Professional</span>
                                                     </a>
@@ -65,8 +65,8 @@ $timezones =vetvineHelper::timezones()
                                                     </ul>
                                                 </li>
 
-                                                
-                                                <li class="tab_2_section_parent" >
+
+                                                <li class="ui-state-default ui-corner-top tab_2_section_parent" >
                                                     <a href="#">
                                                         <span >Vet / Vet Tech Student</span>
                                                     </a>
@@ -294,7 +294,7 @@ $timezones =vetvineHelper::timezones()
                                     <a href="{{ url('social/twitter/0/0') }}" class="socialbtnslogin"><i class="fa fa-twitter-square " aria-hidden="true"></i></a>
                                     <a href="{{ url('social/google/0/0') }}" class="socialbtnslogin"><i class="fa fa-google " aria-hidden="true"></i></a>
                                 </div>
-                                
+
                                 </div>
                             <div class="popup-footer">
                         <input type="submit"  value="Log In" class="toggle button send-msg">
@@ -324,6 +324,7 @@ $('.ui-corner-top').on('change',function() {
   var usertype=  $(this).find('span').attr('data-memberlevel');
   $('#setmemberlevel').val(usertype);
   var networkLevel = $('input[name="networklevel"]:checked').val()
+  console.log(networkLevel)
   $('#regibtnsmsg').hide();
   $('.socialbtns').css({
         'pointer-events': 'visible'

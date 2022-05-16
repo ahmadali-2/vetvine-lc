@@ -24,15 +24,15 @@ class CreateEventRequest extends FormRequest
     public function rules()
     {
         return [
-            'event_title'               => ['required','string'],
-            'tags'                      => ['required','string'],
-            'category_id'               => ['required'],
-            'pdf_file'                  => ['required'],
-            'main_photo'                => ['required'],
-            'Vet_Pet_Prof_Fee'          => ['required','numeric','min:0'],
-            'Pet_Owner_Premium_Fee'     => ['required','numeric','min:0'],
-            'Pet_Owner_Fee'             => ['required','numeric','min:0'],
-            'Vet_Pet_Prof_Premium'      => ['required','numeric','min:0'],
+            'event_title'                        => ['required','string'],
+            'tags'                               => ['required','string'],
+            'category_id'                        => ['required'],
+            'pdf_file'                           => ['required'],
+            'main_photo'                         => ['required'],
+            'Vet_Pet_Prof_Fee'                   => ['required','numeric','min:0'],
+            'Pet_Owner_Premium_Fee'              => ['required','numeric','min:0'],
+            'Pet_Owner_Fee'                      => ['required','numeric','min:0'],
+            'Vet_Pet_Prof_Premium'               => ['required','numeric','min:0'],
         ];
     }
     public function messages()
@@ -46,7 +46,7 @@ class CreateEventRequest extends FormRequest
             'Vet_Pet_Prof_Fee.required'          => 'Vet Pet Prof Fee Field Is Required',
             'Pet_Owner_Premium_Fee.required'     => 'Pet Owner Premium Fee Field Is Required',
             'Pet_Owner_Fee.required'             => 'Pet Owner Fee Field Is Required',
-            'Vet_Pet_Prof_Premium.required'      => 'Vet Pet Prof Premium Field Is Required',
+            'Vet_Pet_Prof_Premium.required'      => '         Field Is Required',
         ];
 
     }
