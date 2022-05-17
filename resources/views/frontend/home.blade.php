@@ -1,6 +1,5 @@
 @extends('frontend.master')
 @section('content')
-
 <main>
     <section class="Section_top">
         <div class="container">
@@ -15,12 +14,8 @@
                         <a href="{{ route('why_vetvine') }}" class="btn btn-warning home_banner_btn">WHY VITVINE?</a>
                     </div>
                 </div>
-
-
             </div>
         </div>
-
-
     </section>
 </main>
 <section class="main_banner_bottob_label">
@@ -103,9 +98,6 @@
 
     </div>
 </section>
-
-
-
 <section class="grow_banner">
     <div class="container">
         <div class="mm-grow-new">
@@ -120,9 +112,7 @@
                     help busy
                     professionals stay current and grow in their career.
                 </p>
-
                 <a href="#" class="btn_why_vetvine">LEARN MORE</a>
-
             </div>
         </div>
 
@@ -172,17 +162,10 @@
                     service was established to support people grieving the loss of an animal in their life - whether
                     due to the
                     death of a pet or loss of a relationship with an animal of any kind due to any circumstance.
-
                 </p>
-
                 <a href="#" class="btn_join_thepet">GET PET LOSS GRIEF SUPPORT ></a>
-
             </div>
         </div>
-
-
     </div>
 </section>
-
-
 @endsection

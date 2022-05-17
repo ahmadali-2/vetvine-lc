@@ -2,6 +2,7 @@
 
 namespace App\Models\VetvineUsers;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,8 +13,7 @@ class Post extends Model
     public $table = 'posts';
 
     public $fillable = [
-        'postable_id',
-        'postable_type',
+        'user_id',
         'post_title',
         'post_photo',
         'post_description',
@@ -23,8 +23,8 @@ class Post extends Model
         'post_add_vimeolink',
         'post_add_video',
     ];
-    public function postable()
+    public function user()
     {
-        $this->morphTo();
+        return $this->belongsTo(User::class,'user_id');
     }
 }

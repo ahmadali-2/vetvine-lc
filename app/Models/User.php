@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Admins\Forum\Post as ForumPost;
 use App\Models\Admins\Memberships\BuyMemberShipPlan;
 use App\Models\Generals\TimeZone;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -12,10 +13,12 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\UserMemberAndNetworkLevel;
+use App\Models\VetvineUsers\Post;
 use App\Models\VetvineUsers\UserEmploymentInfo;
 use App\Models\VetvineUsers\UserSkillsAndExpertise;
 use App\Models\VetvineUsers\UserEducation;
 use Carbon\Carbon;
+use App\Models\UserEducationDegree;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
@@ -108,6 +111,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(UserEducation::class);
     }
+    public function userEducationDegree()
+    {
+        return $this->hasMany(UserEducationDegree::class);
+    }
     public function employmentInfo()
     {
         return $this->hasOne(UserEmploymentInfo::class);
@@ -125,10 +132,12 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     public function posts()
     {
-
         return $this->hasMany(Post::class);
     }
-
+    public function forumposts()
+    {
+        return $this->hasMany(ForumPost::class);
+    }
     public function generateTwoFactorCode()
     {
     $this->timestamps = false;

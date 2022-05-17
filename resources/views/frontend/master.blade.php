@@ -53,7 +53,7 @@ padding: 0px 30px 0px !important;
 
   </style>
 
-@notifyCss 
+@notifyCss
 
 @toastr_css
 
@@ -84,7 +84,7 @@ padding: 0px 30px 0px !important;
 
 <script src="{{asset('bootstrap/jquery/popper.min.js')}}"></script>
 
-    
+
 
 <script src="{{ asset('frontend/js/bootstrap.js')}}"></script>
 
@@ -160,7 +160,7 @@ padding: 0px 30px 0px !important;
 
         });
 
-    </script>    
+    </script>
 
   @endif
 
@@ -175,16 +175,7 @@ padding: 0px 30px 0px !important;
     $('#deleteModal').modal('show')
 }
 </script>
-  
-
-
-
 </body>
-
-
-
-
-
 </html>
 
 
