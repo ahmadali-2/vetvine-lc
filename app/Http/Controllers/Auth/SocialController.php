@@ -89,6 +89,7 @@ class SocialController extends Controller
                     'type'           =>  2,
                     'network_id'     => $network_type,
                     'password'       => Hash::make($newpassword),
+                    'status'         => 1
                 ]);
                 $newuser->markEmailAsVerified();
                 $this->checkUserDetail($newuser->email, $newuser->type);
