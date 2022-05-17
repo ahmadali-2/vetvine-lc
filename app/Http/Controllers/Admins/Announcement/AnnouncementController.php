@@ -44,8 +44,8 @@ class AnnouncementController extends Controller
         $input = $request->all();
         try{
             $announcemnets  = Announcement::create([
-            "announcement_title"   => $input['announcement_title'],
-            "description"          => $input['description'],
+            "announcement_title"   => ucwords($input['announcement_title']),
+            "description"          => ucfirst($input['description']),
             ]);
             if($announcemnets->wasRecentlyCreated)
             {
@@ -109,8 +109,8 @@ class AnnouncementController extends Controller
         $announcements  =   Announcement::find($id);
         try{
                $announcements->update([
-                "announcement_title"   => $input['announcement_title'],
-                "description"          => $input['description'],
+                "announcement_title"   => ucwords($input['announcement_title']),
+                "description"          => ucfirst($input['description']),
             ]);
             $selectedMembers    =   $announcements->members->pluck('id')->toArray();
             Member::whereIn('id',$selectedMembers)->delete();

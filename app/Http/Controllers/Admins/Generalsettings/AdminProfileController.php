@@ -31,16 +31,16 @@ class AdminProfileController extends Controller
         return view('admins.generalsettings.generalsetting', compact('data'));
     }
     public function storegeneralsetting(Request $request)
-    { 
+    {
         $path = public_path('admin/generalsetting/');
         if(!empty($request->setting_id)) {
             $dbimage = GeneralSetting::find($request->setting_id);
-            $result = vetvineHelper::updateImage($request->logo,$dbimage->logo, $path);            
+            $result = vetvineHelper::updateImage($request->logo,$dbimage->logo, $path);
         } else {
-            $result = vetvineHelper::saveImage($request->logo, $path);            
+            $result = vetvineHelper::saveImage($request->logo, $path);
 
-        }       
-        
+        }
+
         $input = $request->all();
         try {
                 GeneralSetting::UpdateOrcreate(['id' => $request->setting_id ?? ''],[
@@ -51,7 +51,7 @@ class AdminProfileController extends Controller
                     "logo"                   => $result,
                     "email"                  => $input['email'],
                     "phone_no"               => $input['phone_no'],
-                    "mission_statement"      => $input['mission_statement'],
+                    "mission_statement"      => ucfirst($input['mission_statement']),
                 ]);
                 parent::successMessage('Settings saved successfully.');
                 return redirect()->back();
@@ -82,8 +82,8 @@ class AdminProfileController extends Controller
         $profile->updateProfile($request) == 'updated'
         ? parent::successMessage("Your Profile Updated Successfully")
         : parent::dangerMessage("Your Profile Does Not Updated , Please Try Again");
-        return redirect()->back();   
-        
+        return redirect()->back();
+
     }
 
     /**

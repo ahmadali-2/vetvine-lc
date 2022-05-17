@@ -41,7 +41,7 @@ class ForumCategoryController extends Controller
         $input = $request->all();
         try{
             CategoryForum::create([
-                "category_title"      => $input['category_title'],
+                "category_title"      => ucwords($input['category_title']),
             ]);
             parent::successMessage('Category saved successfully.');
             return redirect(route('forums-category.index'));
@@ -91,7 +91,7 @@ class ForumCategoryController extends Controller
         $input = $request->all();
         try{
             CategoryForum::find($id)->update([
-                "category_title"      => $input['category_title'],
+                "category_title"      => ucwords($input['category_title']),
             ]);
             parent::successMessage('Category Updated successfully.');
             return redirect(route('forums-category.index'));
