@@ -5,7 +5,7 @@ use App\Models\User;
 
 trait UserDetailTrait {
 
-    public function checkuserdetail($email , $type)
+    public function checkUserDetail($email , $type)
     {
         $userIp   = $_SERVER['REMOTE_ADDR'];
         $userInfo = User::where('email', $email)->where('type',$type)->first();

@@ -34,7 +34,7 @@ class CreateNewUser implements CreatesNewUsers
             'timezone_id'       => $input['timezone'],
             'type'              => 2,
         ]);
-         $this->checkuserdetail($user->email, $user->type);
+         $this->checkUserDetail($user->email, $user->type);
          Auth::login($user);
          return $user ;
 
