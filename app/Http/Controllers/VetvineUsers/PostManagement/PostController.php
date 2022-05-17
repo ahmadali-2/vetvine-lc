@@ -26,7 +26,7 @@ class PostController extends Controller
     public function memberHome()
     {
         $news   =   News::all();
-        $posts  = Post::with('user','forum')->get();
+        $posts  = Post::with('user')->get();
         return view('frontend.pages.member-home',compact('posts','news'));
     }
     /**
