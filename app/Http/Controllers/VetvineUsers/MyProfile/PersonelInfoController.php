@@ -141,6 +141,7 @@ class PersonelInfoController extends Controller
         }
         catch(Exception $e)
         {
+            dd($e->getMessage());
             parent::dangerMessage("Profile Info Not Saved! Please Try Again.");
             return redirect()->back();
         }
