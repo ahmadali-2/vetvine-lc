@@ -17,7 +17,7 @@
                             class="form-control filter-slect" value="" data-val="true">
                             <option title="" value="" label=""></option>
                             @foreach ($category as $search)
-                                <option value="{{ $search->id }}">{{ $search->category_title }}
+                                <option value="{{ $search->id }} ">{{ $search->category_title }}
                                 </option>
                             @endforeach
                         </select>
@@ -48,9 +48,9 @@
                 <li class="active">
                     <a href="{{ route('upcoming_webinars') }}">Continuing Education</a>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="{{ route('upcoming_publications') }}">Publications</a>
-                </li>
+                </li> --}}
                 <li>
                     <a href="#">My Past Events</a>
                 </li>

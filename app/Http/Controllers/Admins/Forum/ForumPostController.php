@@ -46,9 +46,9 @@ class ForumPostController extends Controller
         try {
             Post::create([
                 "forum_id"                   =>  $request->forum_id,
-                "post_title"                 =>  $request->post_title,
+                "post_title"                 =>  ucwords($request->post_title),
                 "post_photo"                 =>  $result,
-                "post_description"           =>  $request->description,
+                "post_description"           =>  ucfirst($request->description),
                 "post_link"                  =>  $request->post_link,
                 "post_add_ytlink"            =>  $request->post_add_ytlink,
                 "post_add_vimeolink"         =>  $request->post_add_vimeolink,
@@ -121,9 +121,9 @@ class ForumPostController extends Controller
         try {
             Post::find($id)->update([
                 "forum_id"                   =>  $request->forum_id,
-                "post_title"                 =>  $request->post_title,
+                "post_title"                 =>  ucwords($request->post_title),
                 "post_photo"                 =>  $result,
-                "post_description"           =>  $request->description,
+                "post_description"           =>  ucfirst($request->description),
                 "post_link"                  =>  $request->post_link,
                 "post_add_ytlink"            =>  $request->post_add_ytlink,
                 "post_add_vimeolink"         =>  $request->post_add_vimeolink,

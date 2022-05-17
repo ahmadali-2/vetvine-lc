@@ -4,12 +4,12 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <strong class="card-title">Add New Event</strong>
+                    <strong class="card-title">Add New Event/Webinar</strong>
                 </div>
                 <div class="card-body">
                     <div id="pay-invoice">
                         <div class="card-body">
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="select_form" class="control-label mb-1 form-select">Item Type</label>
@@ -21,8 +21,8 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
-                            <form action="{{ route('webinars.store') }}" method="post" id="publicationfrm"
+                            </div> --}}
+                            {{-- <form action="{{ route('webinars.store') }}" method="post" id="publicationfrm"
                                 novalidate="novalidate" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="item_type" value="publications">
@@ -127,7 +127,7 @@
                                 </div>
 
 
-                            </form>
+                            </form> --}}
                             <form action="{{ route('webinars.store') }}" method="post" id="continueeducationfrm"
                                 novalidate="novalidate" enctype="multipart/form-data">
                                 @csrf
@@ -384,7 +384,7 @@
 
         })
     </script>
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         $('#publicationfrm').hide();
         $('#continueeducationfrm').hide();
         $("#select_form").change(function() {
@@ -399,5 +399,5 @@
                 $('#continueeducationfrm').hide();
             }
         });
-    </script>
+    </script> --}}
 @endsection
