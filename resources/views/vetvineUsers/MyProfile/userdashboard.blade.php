@@ -282,6 +282,8 @@
             $(this).closest('div').find('#error1').hide();
         }
         else {
+            $("#error1").html("First name field can't be left blank.");
+
             $(this).closest('div').find('#error1').show();
         }
     });
@@ -290,6 +292,7 @@
             $(this).closest('div').find('#error2').hide();
         }
         else {
+            $("#error2").html("Last name field can't be left blank.");
             $(this).closest('div').find('#error2').show();
         }
     });
@@ -298,6 +301,7 @@
             $(this).closest('div').find('#error3').hide();
         }
         else {
+            $("#error3").html("Licensure field can't be left blank.");
             $(this).closest('div').find('#error3').show();
         }
     });
@@ -306,7 +310,9 @@
             $(this).closest('div').find('#error4').hide();
         }
         else {
+            $("#error4").html("Professional position field can't be left blank.");
             $(this).closest('div').find('#error4').show();
+
         }
     });
     $('#employment_status').on('click', function () {
@@ -314,6 +320,7 @@
             $(this).closest('div').find('#error5').hide();
         }
         else {
+            $("#error5").html("Employment status field can't be left blank.");
             $(this).closest('div').find('#error5').show();
         }
     });
@@ -322,6 +329,7 @@
             $(this).closest('div').find('#error6').hide();
         }
         else {
+            $("#error6").html("Street address field can't be left blank.");
             $(this).closest('div').find('#error6').show();
         }
     });
@@ -330,6 +338,8 @@
             $(this).closest('div').find('#error7').hide();
         }
         else {
+            $("#error7").html("Business name field can't be left blank.");
+
             $(this).closest('div').find('#error7').show();
         }
     });
@@ -338,6 +348,7 @@
             $(this).closest('div').find('#error8').hide();
         }
         else {
+            $("#error8").html("Business email field can't be left blank.");
             $(this).closest('div').find('#error8').show();
         }
     });
@@ -346,6 +357,8 @@
             $(this).closest('div').find('#error9').hide();
         }
         else {
+
+            $("#error9").html("Country field can't be left blank.");
             $(this).closest('div').find('#error9').show();
         }
     });
@@ -354,6 +367,7 @@
             $(this).closest('div').find('#error10').hide();
         }
         else {
+            $("#error10").html("State field can't be left blank.");
             $(this).closest('div').find('#error10').show();
         }
     });
@@ -362,6 +376,7 @@
             $(this).closest('div').find('#error11').hide();
         }
         else {
+            $("#error11").html("City field can't be left blank.");
             $(this).closest('div').find('#error11').show();
         }
     });
@@ -370,6 +385,7 @@
             $(this).closest('div').find('#error12').hide();
         }
         else {
+            $("#error12").html("Zip code field can't be left blank.");
             $(this).closest('div').find('#error12').show();
         }
     });
@@ -378,6 +394,7 @@
             $(this).closest('div').find('#error13').hide();
         }
         else {
+            $("#error13").html("Work phone field can't be left blank.");
             $(this).closest('div').find('#error13').show();
         }
     });
@@ -386,6 +403,7 @@
             $(this).closest('div').find('#error18').hide();
         }
         else {
+            $("#error18").html("Details field can't be left blank.");
             $(this).closest('div').find('#error18').show();
         }
     });
@@ -395,6 +413,7 @@
             $(this).closest('div').find('#error14').hide();
         }
         else {
+            $("#error14").html("There should atleaset one skill and expertise selected!.");
             $(this).closest('div').find('#error14').show();
         }
     });
@@ -404,6 +423,7 @@
             $(this).closest('div').find('#error15').hide();
         }
         else {
+            $("#error15").html("There should atleaset one degree selected!.");
             $(this).closest('div').find('#error15').show();
         }
     });
@@ -412,6 +432,7 @@
             $(this).closest('div').find('#error16').hide();
         }
         else {
+            $("#error16").html("Please select one school name first!.");
             $(this).closest('div').find('#error16').show();
         }
     });
@@ -420,30 +441,17 @@
             $(this).closest('div').find('#error17').hide();
         }
         else {
+            $("#error17").html("Please select one Graduation year first!.");
             $(this).closest('div').find('#error17').show();
         }
     });
     $(document).ready(function(e){
     $("#personal_btn").on("click",function(e){
-    // e.preventDefault();
-    var flag =true;
-    if($.trim($('#firstname').val()) == '')
+    if($.trim($('#firstname').val()) == '' || $.trim($('#lastname').val()) == '' || $.trim($('#licensure').val()) == '')
     {
-      flag =false;
-    $("#error1").html("First name field can't be left blank.");
+      return;
    }
-   if($.trim($('#lastname').val()) == '')
-    {
-      flag =false;
-    $("#error2").html("Last name field can't be left blank.");
-   }
-   if($.trim($('#licensure').val()) == '')
-    {
-      flag =false;
-    $("#error3").html("Licensure field can't be left blank.");
-   }
-   else if(flag == true){
-
+   else{
      $("#personal").addClass('d-none');
      $("#employe").removeClass('d-none');
      $("#employe").removeClass('hide_form');
@@ -451,73 +459,16 @@
      $(".nav_ul li .employe").addClass("active");
      $(".personal").addClass("personal_show");
    }
-
-
     })
     $("#employe_btn").on("click",function(e){
-    // e.preventDefault();
-    var flag =true;
-    if($.trim($('#professional_position').val()) == '')
-    {
-      flag =false;
-    $("#error4").html("Professional position field can't be left blank.");
-   }
-   if($('#employment_status option:selected').val() == '')
-    {
-      flag =false;
-    $("#error5").html("Employment status field can't be left blank.");
-    return;
-   }
-   if($.trim($('#street_address').val()) == '')
-    {
-      flag =false;
-    $("#error6").html("Street address field can't be left blank.");
-   }
-   if($.trim($('#business_name').val()) == '')
-    {
-      flag =false;
-    $("#error7").html("Business name field can't be left blank.");
-   }
-   if($.trim($('#business_email').val()) == '')
-    {
-      flag =false;
-    $("#error8").html("Business email field can't be left blank.");
-   }
-   if($('#country option:selected').val() == '')
-    {
-      flag =false;
-    $("#error9").html("Country field can't be left blank.");
-    return;
-   }
-   if($.trim($('#state').val()) == '')
-    {
-      flag =false;
-    $("#error10").html("State field can't be left blank.");
-   }
-   if($.trim($('#city').val()) == '')
-    {
-      flag =false;
-    $("#error11").html("City field can't be left blank.");
-   }
-   if($.trim($('#zip_code').val()) == '')
-    {
-      flag =false;
-    $("#error12").html("Zip code field can't be left blank.");
-   }
-   if($.trim($('#work_phone').val()) == '')
-    {
-      flag =false;
-    $("#error13").html("Work phone field can't be left blank.");
-   }
-   if($.trim($('#details').val()) == '')
-    {
-      flag =false;
-    $("#error18").html("Details field can't be left blank.");
-   }
 
-   else if(flag = true){
-
-
+    if($.trim($('#professional_position').val()) == '' || $('#employment_status option:selected').val() == '' || $.trim($('#street_address').val()) == '' || $.trim($('#business_name').val()) == '' || $.trim($('#business_email').val()) == ''
+    || $('#country option:selected').val() == '' || $.trim($('#state').val()) == '' || $.trim($('#city').val()) == '' || $.trim($('#zip_code').val()) == ''
+    || $.trim($('#work_phone').val()) == '' || $.trim($('#details').val()) == '')
+    {
+      return;
+    }
+   else{
      $("#employe").addClass('d-none');
      $(".employe").addClass('employee_show');
      $("#skill").removeClass('d-none');
@@ -527,20 +478,15 @@
     }
     })
 
-
     // education form show
     $("#skill_btn").on("click",function(e){
-    // e.preventDefault();
-    // alert("click");
     var selected = $("#skillsandexpertise :selected").map((_, e) => e.value).get();
     if (selected == '')
     {
-        $("#error14").html("Skills and expertise field can't be left blank.");
+        return;
     }
    else{
       let per = $("#personal").html();
-      console.log(per);
-
      $("#skill").addClass('d-none');
      $(".skill").addClass('skill_show');
      $("#education").removeClass('d-none');
@@ -551,30 +497,14 @@
     })
     // profile form show
     $("#education_btn").on("click",function(e){
-    var flag =true;
+    // var flag =true;
     var selected = $("#degree_id :selected").map((_, e) => e.value).get();
-    if (selected == '')
+    if (selected == '' || $('#schoolname option:selected').val() == '' || $('#gradutionyear option:selected').val() == '')
     {
-      flag =false;
-    $("#error15").html("Degree field can't be left blank.");
-    return;
+    return ;
     }
-   if($('#schoolname option:selected').val() == '')
-    {
-      flag =false;
-    $("#error16").html("School name field can't be left blank.");
-    return;
-   }
-   if($('#gradutionyear option:selected').val() == '')
-    {
-      flag =false;
-    $("#error17").html("Gradution year field can't be left blank.");
-    return;
-   }
-   else if(flag=true){
+   else{
       let per = $("#personal").html();
-      console.log(per);
-
      $("#education").addClass('d-none');
      $(".education").addClass('education_show');
      $("#profile").removeClass('d-none');
@@ -583,7 +513,8 @@
      $(".nav_ul li .profile").addClass("active");
     }
     })
-     $("#submit_btn").on("click",function(){
+     $("#submit_btn").on("click",function(e){
+        e.preventDefault();
       $("#profile_form").submit();
      })
 

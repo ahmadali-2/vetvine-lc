@@ -14,12 +14,8 @@
                         <a href="{{ route('why_vetvine') }}" class="btn btn-warning home_banner_btn">WHY VITVINE?</a>
                     </div>
                 </div>
-
-
             </div>
         </div>
-
-
     </section>
 </main>
 <section class="main_banner_bottob_label">

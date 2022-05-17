@@ -17,13 +17,13 @@ class SocialController extends Controller
     use UserDetailTrait;
 
     protected $setUserAndNetwork;
-    protected $setCommaSepratedValues;
+    protected $setCommaSeparatedValues;
 
-    public function redirect($provider, $usertype, $network)
+    public function redirect($provider, $userType, $network)
     {
-        $this->setUserAndNetwork = ['usertype' => $usertype, 'networktype' => $network];
-        $this->setCommaSepratedValues = implode(",", $this->setUserAndNetwork);
-        session(['comma_separated' => $this->setCommaSepratedValues]);
+        $this->setUserAndNetwork = ['usertype' => $userType, 'networktype' => $network];
+        $this->setCommaSeparatedValues = implode(",", $this->setUserAndNetwork);
+        session(['comma_separated' => $this->setCommaSeparatedValues]);
 
        return  $this->redirectToProvider($provider);
     }
@@ -52,14 +52,7 @@ class SocialController extends Controller
         }
     }
 
-
-    private function sendErrorMessage($msg=null)
-    {
-         parent::dangerMessage("Something Went Wrong, Please Try Again");
-         return redirect('/');
-    }
-
-    public function handleProviderCallback(Request $request, $provider)
+    public function handleProviderCallback($provider)
     {
         try {
 
@@ -73,11 +66,11 @@ class SocialController extends Controller
                 $user = Socialite::driver($provider)->stateless()->user();
             }
 
-            $finduser = User::where('email', $user->email)->first();
+            $findUser = User::where('email', $user->email)->first();
 
-            if ($finduser) {
-                Auth::login($finduser);
-                $this->checkuserdetail($finduser->email, $finduser->type);
+            if ($findUser) {
+                Auth::login($findUser);
+                $this->checkUserDetail($findUser->email, $findUser->type);
                 return redirect()->route('checkusertype');
             } elseif($user_type == 0 || $network_type == 0){
                 parent::dangerMessage("You Are Not Registered In The System");
@@ -98,12 +91,18 @@ class SocialController extends Controller
                     'password'       => Hash::make($newpassword),
                 ]);
                 $newuser->markEmailAsVerified();
-                $this->checkuserdetail($newuser->email, $newuser->type);
+                $this->checkUserDetail($newuser->email, $newuser->type);
                 Auth::login($newuser);
                 return redirect()->route('checkusertype');
             }
         } catch (Exception $e) {
             return $this->sendErrorMessage($e->getMessage());
         }
+    }
+
+    private function sendErrorMessage()
+    {
+         parent::dangerMessage("Something Went Wrong, Please Try Again");
+         return redirect('/');
     }
 }
