@@ -7,7 +7,7 @@ $timezones =vetvineHelper::timezones()
 <button type="button" class="btn btn-primary d-none" id="registration_modal_box_show_btn" data-toggle="modal" data-target="#Registration-modal">
     Launch demo modal
 </button>
-<div class="modal fade" id="Registration-modal">
+<div class="modal fade registraion_form_pop_up" id="Registration-modal">
     <div class="modal-dialog register-modal">
         <div class="modal-content">
             <div class="modal-header">
