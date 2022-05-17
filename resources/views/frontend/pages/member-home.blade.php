@@ -60,6 +60,7 @@
             <div class="activty-post">
               <p>post something</p>
             </div>
+            @dd($post->forum);
             <div class="activty-feed">
               <ul>
                   @foreach ($posts as $post)

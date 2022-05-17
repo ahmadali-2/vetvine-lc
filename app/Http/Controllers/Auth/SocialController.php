@@ -90,7 +90,7 @@ class SocialController extends Controller
                 $newuser = User::create([
                     'name'           => $user->getName(),
                     'email'          => $user->getEmail(),
-                    'image_full_path' => $user->getAvatar(),
+                    'image_full_path'=> $user->getAvatar(),
                     'provider_id'    => $user->getId(),
                     'provider'       => $provider,
                     'type'           =>  2,
