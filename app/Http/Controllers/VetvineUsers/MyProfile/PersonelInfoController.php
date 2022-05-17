@@ -13,7 +13,7 @@ use App\Models\VetvineUsers\Settings\Country;
 use App\Models\VetvineUsers\PersonelInfo;
 use App\Models\VetvineUsers\SkillAndExpertise;
 use App\Models\VetvineUsers\UserEducation;
-use App\Models\VetVineUsers\UserEmploymentInfo;
+use App\Models\VetvineUsers\UserEmploymentInfo;
 use App\Models\VetvineUsers\UserSkillsAndExpertise;
 use Exception;
 use Illuminate\Support\Facades\Auth;
