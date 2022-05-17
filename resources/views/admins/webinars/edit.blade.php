@@ -10,11 +10,12 @@
                 <div class="card-body">
                     <div id="pay-invoice">
                         <div class="card-body">
-                            @if ($event->item_type == 'publications')
+                            @if($event->item_type == 'publications')
                                 <form action="{{ route('webinars.update', $event->id) }}" method="post" id="createevent"
-                                    novalidate="novalidate" enctype="multipart/form-data">
-                                    @csrf
+                                     enctype="multipart/form-data">
+                                     @csrf
                                     @method('PUT')
+                                    <input type="hidden" name="item_type" value="publications">
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-group">
@@ -124,10 +125,11 @@
 
 
                                 </form>
-                            @else
-                                <form action="{{ route('webinars.store') }}" method="post" id="continueeducationfrm"
+                            @elseif($event->item_type == 'continue_edu')
+                                <form action="{{ route('webinars.update',$event->id) }}" method="post" id="continueeducationfrm"
                                     novalidate="novalidate" enctype="multipart/form-data">
                                     @csrf
+                                    @method('PUT')
                                     <input type="hidden" name="item_type" value="continue_edu">
                                     <div class="row">
                                         <div class="col-6">

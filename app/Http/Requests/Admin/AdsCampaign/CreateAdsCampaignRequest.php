@@ -24,7 +24,7 @@ class CreateAdsCampaignRequest extends FormRequest
     public function rules()
     {
         return [
-            'campaign_name'             => ['required','string'],
+            'campaign_name'             => ['required','string',],
             'start_date'                => ['required','after:yesterday'],
             'end_date'                  => ['required','after:yesterday'],
             'total_views_allowed'       => ['required','numeric','min:0'],
