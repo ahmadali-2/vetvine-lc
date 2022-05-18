@@ -41,7 +41,7 @@ class EventCategoryController extends Controller
         $input = $request->all();
         try{
             CategoryEvent::create([
-                "category_title"      => $input['category_title'],
+                "category_title"      => ucwords($input['category_title']),
             ]);
             parent::successMessage(' Event Category saved successfully.');
             return redirect(route('webinars-category.index'));
@@ -91,7 +91,7 @@ class EventCategoryController extends Controller
         $input = $request->all();
         try{
             CategoryEvent::find($id)->update([
-                "category_title"      => $input['category_title'],
+                "category_title"      => ucwords($input['category_title']),
             ]);
             parent::successMessage('Event Category Updated successfully.');
             return redirect(route('webinars-category.index'));

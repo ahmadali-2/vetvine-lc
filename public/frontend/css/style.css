@@ -2582,7 +2582,7 @@ letter-spacing:1px;
 .page-link-list li a {
     text-decoration: none;
     font-family: "Museo 700";
-    width: 250px;
+    width: 337px;
     height: 51px;
     border: 2px solid #5c7c85 !important;
     padding: 20px;
@@ -5890,3 +5890,22 @@ letter-spacing:1px;
 {
     display: none;
 }
+.registraion_form_pop_up ul li:hover{
+    background:#f27222;
+    color:#fff !important;
+  }
+  .registraion_form_pop_up ul li label:hover{
+    color:#fff ; 
+  }
+  .registraion_form_pop_up ul li input[type=radio]{
+    display:none !important;
+  }
+  
+  .active_li{
+  background:#f27222 !important;
+  color:#fff;
+   
+  }
+  .active_li label{
+    color:#fff !important;
+  }

@@ -46,7 +46,7 @@ class ManageAdController extends Controller
         $input  = $request->all();
         try{
               Ad::create([
-                "ad_name"                  =>  $input['ad_name'],
+                "ad_name"                  =>  ucwords($input['ad_name']),
                 "ad_media"                 =>  $result,
                 "banner_image_url"         =>  $input['banner_image_url'],
                 "campaign_id"              =>  $input['campaign_id']
@@ -97,7 +97,7 @@ class ManageAdController extends Controller
             $path   = public_path('admin/advertisement/');
             $result = vetvineHelper::updateImage($request->ad_media,$ad->ad_media, $path);
             $ad->update([
-             'ad_name'                      =>  $request->input('ad_name'),
+             'ad_name'                      =>  ucwords($request->input('ad_name')),
              'ad_media'                     =>  $result,
              'banner_image_url'             =>  $request->input('banner_image_url'),
              'campaign_id'                  =>  $request->input('campaign_id'),

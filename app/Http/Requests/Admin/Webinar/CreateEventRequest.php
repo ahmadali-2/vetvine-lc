@@ -25,6 +25,7 @@ class CreateEventRequest extends FormRequest
     {
         return [
             'event_title'                        => ['required','string'],
+            'event_description'                  => ['required','string'],
             'tags'                               => ['required','string'],
             'category_id'                        => ['required'],
             'pdf_file'                           => ['required'],
@@ -39,6 +40,7 @@ class CreateEventRequest extends FormRequest
     {
         return [
             'event_title.required'               => 'Event Title Field Is Required',
+            'event_description.required'         => 'Event Description Field Is Required',
             'tags.required'                      => 'Keywords Field Is Required',
             'category_id.required'               => 'Category Field Is Required',
             'pdf_file.required'                  => 'PDF Field Is Required',
@@ -46,7 +48,7 @@ class CreateEventRequest extends FormRequest
             'Vet_Pet_Prof_Fee.required'          => 'Vet Pet Prof Fee Field Is Required',
             'Pet_Owner_Premium_Fee.required'     => 'Pet Owner Premium Fee Field Is Required',
             'Pet_Owner_Fee.required'             => 'Pet Owner Fee Field Is Required',
-            'Vet_Pet_Prof_Premium.required'      => '         Field Is Required',
+            'Vet_Pet_Prof_Premium.required'      => 'Vet Pet Prof Premium Field Is Required',
         ];
 
     }

@@ -32,6 +32,7 @@ class CreateNewUser implements CreatesNewUsers
             'network_id'        => $input['networklevel'],
             'timezone_id'       => $input['timezone'],
             'type'              => 2,
+            'status'            => 1
         ]);
          $this->checkUserDetail($user->email, $user->type);
          Auth::login($user);

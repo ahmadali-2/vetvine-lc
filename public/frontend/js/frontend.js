@@ -95,7 +95,12 @@ $(document).ready(function(e) {
     });
     
    
-
+    $(".remove_box").on("click",function(e){
+       
+        $(".registraion_form_pop_up").find('.active_li').removeClass('active_li');
+         $(this).closest('.form-check').addClass('active_li');
+        
+});
 
 
 

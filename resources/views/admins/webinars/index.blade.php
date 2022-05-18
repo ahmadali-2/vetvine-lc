@@ -7,7 +7,7 @@
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right" href="{{ route('webinars.create') }}">
-                            Add New Event
+                            Add New Event/Webinar
                     </a>
                 </div>
             </div>

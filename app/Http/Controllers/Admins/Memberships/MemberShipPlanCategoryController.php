@@ -15,7 +15,7 @@ class MemberShipPlanCategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {      
+    {
         $planCategories =MemberShipPlanCategory::all();
         return view('admins.memberships.category.index',compact('planCategories'));
     }
@@ -41,8 +41,8 @@ class MemberShipPlanCategoryController extends Controller
     {
        try{
         MemberShipPlanCategory::create([
-            'category_name' => $request->category_name,
-            'status'        => ($request->status == "on") ? 1 : 0,            
+            'category_name' => ucwords($request->category_name),
+            'status'        => ($request->status == "on") ? 1 : 0,
         ]);
         parent::successMessage("Plan Category Created Successfully");
         return redirect()->route('membership-category.index');
@@ -52,7 +52,7 @@ class MemberShipPlanCategoryController extends Controller
            parent::dangerMessage("Plan Category Does Not Created , Please Try Again");
            return redirect()->back();
        }
-        
+
     }
 
     /**
@@ -90,12 +90,12 @@ class MemberShipPlanCategoryController extends Controller
         try{
             $planCategory =MemberShipPlanCategory::find($id);
             $planCategory->update([
-                'category_name' => $request->category_name,
-                'status'        => ($request->status == "on") ? 1 : 0,            
+                'category_name' => ucwords($request->category_name),
+                'status'        => ($request->status == "on") ? 1 : 0,
             ]);
             parent::successMessage("Plan Category Update Successfully");
             return redirect()->route('membership-category.index');
-    
+
            } catch(Exception $e) {
                parent::dangerMessage("Plan Category Does Not Updated , Please Try Again");
                return redirect()->back();

@@ -19,9 +19,11 @@ class HomeController extends Controller
     {
         return view('frontend.home');
     }
+
     public function whyVetvine(){
         return view('frontend.pages.why-vetvine');
     }
+    
     public function contactUs(){
         return view('frontend.pages.contact-us');
     }
@@ -66,6 +68,7 @@ class HomeController extends Controller
         $category = CategoryEvent::all();
         return view('frontend.pages.upcoming-webinars',compact('showevent','category'));
     }
+
     public function publications()
     {
         $publication = Event::with('events')->where('item_type','publications')->get();
@@ -118,9 +121,6 @@ class HomeController extends Controller
                 $query->whereBetween('date', [$from, $to]);
             });
             return $this->dashboard['filters'];
-        } 
+        }  
     }
-
- 
-
 }
