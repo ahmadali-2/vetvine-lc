@@ -18,7 +18,6 @@ class CreateEventsTable extends Migration
             $table->unSignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('category_events')->onDelete('cascade');
             $table->string('event_title');
-            $table->enum('item_type', ['publications', 'continue_edu']);
             $table->string('tags');
             $table->string('pdf_file')->nullable();
             $table->string('main_photo')->nullable();
@@ -36,11 +35,10 @@ class CreateEventsTable extends Migration
             $table->string('presenter_two_url')->nullable();
             $table->string('presenter_three')->nullable();
             $table->string('presenter_three_url')->nullable();
-            $table->text('event_description');
+            $table->longText('event_description');
             $table->bigInteger('Vet_Pet_Prof_Fee');
             $table->bigInteger('Pet_Owner_Premium_Fee');
             $table->bigInteger('Pet_Owner_Fee');
-            $table->bigInteger('Vet_Pet_Prof_Premium')->nullable();
             $table->enum('status', ['0', '1'])->comment('0.disable,1.enable')->default('1');
             $table->timestamps();
         });

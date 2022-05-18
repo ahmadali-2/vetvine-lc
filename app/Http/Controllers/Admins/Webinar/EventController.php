@@ -43,34 +43,8 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->item_type == 'publications'){
-        $path   = public_path('admin/eventss/');
-        $result = vetvineHelper::saveImage($request->main_photo, $path);
-        $path   = public_path('admin/eventss/');
-        $file   = vetvineHelper::saveImage($request->pdf_file, $path);
-        $input  = $request->all();
         try{
-            Event::create([
-                "item_type"                     =>   $input['item_type'],
-                "category_id"                   =>   $input['category_id'],
-                "event_title"                   =>   ucwords($input['event_title']),
-                "tags"                          =>   $input['tags'],
-                "pdf_file"                      =>   $file,
-                "main_photo"                    =>   $result,
-                "event_description"             =>   ucfirst($input['event_description']),
-                "Vet_Pet_Prof_Fee"              =>   $input['Vet_Pet_Prof_Fee'],
-                "Pet_Owner_Premium_Fee"         =>   $input['Pet_Owner_Premium_Fee'],
-                "Pet_Owner_Fee"                 =>   $input['Pet_Owner_Fee'],
-                "Vet_Pet_Prof_Premium"          =>   $input['Vet_Pet_Prof_Premium'],
-            ]);
-            parent::successMessage('Event saved successfully.');
-            return redirect(route('webinars.index'));
-        } catch(Exception $e) {
-            dd($e->getMessage());
-            parent::dangerMessage("Publication Event Does Not Created, Please Try  Again");
-            return redirect()->back();
-        }
-    }elseif($request->item_type == 'continue_edu'){
+
         $path   = public_path('admin/eventss/');
         $result = vetvineHelper::saveImage($request->main_photo, $path);
         $path   = public_path('admin/eventss/');
@@ -78,9 +52,7 @@ class EventController extends Controller
         $path   = public_path('admin/eventss/');
         $video  = vetvineHelper::saveImage($request->event_add_video, $path);
         $input  = $request->all();
-        try{
             Event::create([
-                "item_type"                     =>   $input['item_type'],
                 "category_id"                   =>   $input['category_id'],
                 "event_title"                   =>   ucwords($input['event_title']),
                 "tags"                          =>   $input['tags'],
@@ -114,7 +86,7 @@ class EventController extends Controller
         }
 
     }
-    }
+
 
     /**
      * Display the specified resource.
@@ -154,32 +126,6 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if ($request->item_type == 'publications') {
-            try {
-                $event  = Event::find($id);
-                $path   = public_path('admin/eventss/');
-                $result = vetvineHelper::updateImage($request->main_photo, $event->main_photo, $path);
-                $path   = public_path('admin/eventss/');
-                $file   = vetvineHelper::updateImage($request->pdf_file, $event->pdf_file, $path);
-                $event->update([
-                "event_title"                   =>   $request->input('event_title'),
-                "tags"                          =>   $request->input('tags'),
-                "category_id"                   =>   $request->input('category_id'),
-                "pdf_file"                      =>   $file,
-                "main_photo"                    =>   $result,
-                "event_description"             =>   $request->input('event_description'),
-                "Vet_Pet_Prof_Fee"              =>   $request->input('Vet_Pet_Prof_Fee'),
-                "Pet_Owner_Premium_Fee"         =>   $request->input('Pet_Owner_Premium_Fee'),
-                "Pet_Owner_Fee"                 =>   $request->input('Pet_Owner_Fee'),
-                "Vet_Pet_Prof_Premium"          =>   $request->input('Vet_Pet_Prof_Premium'),
-            ]);
-                parent::successMessage('Event updated successfully.');
-                return redirect(route('webinars.index'));
-            } catch (Exception $e) {
-                parent::dangerMessage(" Publications Event Does Not Updated, Please Try  Again");
-                return redirect()->back();
-            }
-        } elseif($request->item_type == 'continue_edu'){
             try {
             $event  = Event::find($id);
             $path   = public_path('admin/eventss/');
@@ -189,7 +135,6 @@ class EventController extends Controller
             $path   = public_path('admin/eventss/');
             $video  = vetvineHelper::saveImage($request->event_add_video, $event->event_add_video, $path);
             $event->update([
-                    "item_type"                     =>   $request->input('item_type'),
                     "category_id"                   =>   $request->input('category_id'),
                     "event_title"                   =>   $request->input('event_title'),
                     "tags"                          =>   $request->input('tags'),
@@ -217,12 +162,10 @@ class EventController extends Controller
                 parent::successMessage('Event updated successfully.');
                 return redirect(route('webinars.index'));
             } catch (Exception $e) {
-                dd($e->getMessage());
                 parent::dangerMessage("Continue Education Event Does Not Updated, Please Try  Again");
                 return redirect()->back();
             }
         }
-    }
 
     /**
      * Remove the specified resource from storage.
