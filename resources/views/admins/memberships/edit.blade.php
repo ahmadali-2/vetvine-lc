@@ -67,18 +67,16 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
+
                                         <div class="form-group">
-                                            <label for="network_id" class=" control-label mb-1 form-select">Network
-                                                Level</label>
-                                            <select id="network_id" name="network_id[]" aria-label=" Default select example"
-                                                class=" js-example-basic-multiple form-control cc-number identified visa"
-                                                value="" data-val="true" multiple="multiple">
+                                            <label for="member_id" class="control-label mb-1 form-select">Member Level</label>
+                                            <select class="js-example-basic-multiple form-control" name="member_id[]"
+                                                multiple="multiple">
                                                 @foreach ($nerworklevels as $networklevel)
-                                                    <option selected value="{{ $networklevel->id }}">
-                                                        {{ $networklevel->name }}</option>
+                                                    <option value="{{ $networklevel->id }}"
+                                                        @if (in_array($networklevel->id, $selectedMembers)) selected @endif>{{ $networklevel->name }}
+                                                    </option>
                                                 @endforeach
-
-
                                             </select>
                                         </div>
                                     </div>
