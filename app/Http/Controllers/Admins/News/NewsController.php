@@ -41,9 +41,9 @@ class NewsController extends Controller
         $input = $request->all();
         try{
             $news  = News::create([
-            "news_title"        => $input['news_title'],
+            "news_title"        => ucwords($input['news_title']),
             "news_link"         => $input['news_link'],
-            "news_description"  => $input['news_description'],
+            "news_description"  => ucfirst($input['news_description']),
             ]);
             parent::successMessage('News saved successfully.');
             return redirect(route('news.index'));
@@ -98,9 +98,9 @@ class NewsController extends Controller
         $news   = News::find($id);
         try{
                $news->update([
-                "news_title"        => $input['news_title'],
+                "news_title"        => ucwords($input['news_title']),
                 "news_link"         => $input['news_link'],
-                "news_description"  => $input['news_description'],
+                "news_description"  => ucfirst($input['news_description']),
             ]);
             parent::successMessage('News updated successfully.');
             return redirect(route('news.index'));

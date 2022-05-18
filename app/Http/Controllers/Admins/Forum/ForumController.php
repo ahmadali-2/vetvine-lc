@@ -55,8 +55,8 @@ class ForumController extends Controller
         try{
                $forum = Forum::create([
                 "category_id"           => $input['category_id'],
-                "forum_title"           => $input['forum_title'],
-                "forum_description"     => $input['forum_description'],
+                "forum_title"           => ucwords($input['forum_title']),
+                "forum_description"     => ucfirst($input['forum_description']),
             ]);
             if($forum->wasRecentlyCreated)
             {
@@ -123,8 +123,8 @@ class ForumController extends Controller
         try{
                $forum->update([
                 "category_id"           => $input['category_id'],
-                "forum_title"           => $input['forum_title'],
-                "forum_description"     => $input['forum_description'],
+                "forum_title"           => ucwords($input['forum_title']),
+                "forum_description"     => ucfirst($input['forum_description']),
             ]);
             $selectedMembers    =   $forum->members->pluck('id')->toArray();
             Member::whereIn('id',$selectedMembers)->delete();

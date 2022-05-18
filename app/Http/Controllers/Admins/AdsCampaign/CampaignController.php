@@ -51,7 +51,7 @@ class CampaignController extends Controller
         $input = $request->all();
         try{
               $adCampaign = AdCampaign::create([
-                "campaign_name"            => $input['campaign_name'],
+                "campaign_name"            => ucwords($input['campaign_name']),
                 "start_date"               => $input['start_date'],
                 "end_date"                 => $input['end_date'],
                 "total_views_allowed"      => $input['total_views_allowed'],
@@ -118,7 +118,7 @@ class CampaignController extends Controller
         try{
            $adCampaign = AdCampaign::find($id);
            $adCampaign->update([
-            'campaign_name'           =>  $request->input('campaign_name'),
+            'campaign_name'           =>  ucwords($request->input('campaign_name')),
             'start_date'              =>  $request->input('start_date'),
             'end_date'                =>  $request->input('end_date'),
             'total_views_allowed'     =>  $request->input('total_views_allowed'),

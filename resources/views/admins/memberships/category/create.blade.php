@@ -4,7 +4,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <strong class="card-title">Create Membership Plans</strong>
+                    <strong class="card-title">Create Membership Category</strong>
                 </div>
                 <div class="card-body">
                     <div id="pay-invoice">

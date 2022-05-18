@@ -146,28 +146,27 @@ Route::get('publications',[HomeController::class,'publications'])->name('upcomin
 Route::post('educations',[HomeController::class,'searceducations'])->name('search_educations');
 
 Route::get('faqs',[HomeController::class,'faqs'])->name('faqs');
-Route::get('frontend-forums',[ForumController::class,'frontendIndex'])->name('forumsfrontend');
-Route::get('create-forumpost/{id}',[ForumPostController::class,'createPost'])->name('createforumpost');
-Route::get('forumpostlist/{id}',[ForumPostController::class,'forumPostList'])->name('forumpostlist');
-Route::resource('forums-posts',ForumPostController::class);
-//Forum-posts Comments Routes
-Route::post('/comment/store', [CommentController::class,'store'])->name('comment.add');
-Route::delete('comment-destroy/{id}', [CommentController::class,'destroy'])->name('comment.destroy');
-Route::post('/reply/store', [CommentController::class,'replyStore'])->name('reply.add');
-Route::get('frontend-news',[NewsController::class,'frontIndex'])->name('newsfrontend');
+
 });
 Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetvineUserRole']], function(){
-    Route::get('dashboard',[HomeController::class,'userdashboard'])->name('userdashboard');
-    Route::resource('updateprofile',ProfileController::class);
-    Route::resource('skillsexpertise',SkillsAndExpertiseController::class);
+    Route::get('dashboard',[PersonelInfoController::class,'userdashboard'])->name('userdashboard');
+    Route::get('member-home',[PostController::class,'memberHome'])->name('member_home');
     Route::resource('personelinfo',PersonelInfoController::class);
-    Route::resource('education',EducationController::class);
-    Route::resource('editPhoto',EditPhotoController::class);
-    Route::resource('employmentInfo',EmploymentInfoController::class);
+    Route::resource('updateprofile',ProfileController::class);
     Route::resource('usermemberships',StripePaymentController::class);
     //User setting routes
     Route::resource('general',GeneralSettingController::class);
     Route::resource('privacy',PrivacySettingController::class);
     // User Post management routes
     Route::resource('post', PostController::class);
+    //forum posts
+    Route::get('frontend-forums',[ForumController::class,'frontendIndex'])->name('forumsfrontend');
+    Route::get('create-forumpost/{id}',[ForumPostController::class,'createPost'])->name('createforumpost');
+    Route::get('forumpostlist/{id}',[ForumPostController::class,'forumPostList'])->name('forumpostlist');
+    Route::resource('forums-posts',ForumPostController::class);
+    //Forum-posts Comments Routes
+    Route::post('/comment/store', [CommentController::class,'store'])->name('comment.add');
+    Route::delete('comment-destroy/{id}', [CommentController::class,'destroy'])->name('comment.destroy');
+    Route::post('/reply/store', [CommentController::class,'replyStore'])->name('reply.add');
+    Route::get('frontend-news',[NewsController::class,'frontIndex'])->name('newsfrontend');
 });

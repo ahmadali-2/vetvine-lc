@@ -38,15 +38,15 @@ $vetvineLogo =vetvineHelper::vetvineGeneralSetting()
 
                     @auth
 
-                    <form method="POST" action="{{ route('logout') }}">
+                    <li> <form method="POST" action="{{ route('logout') }}">
 
                         @csrf
 
-                        <li><a class="reg-login_btn" href="{{ route('logout') }}" onclick="event.preventDefault();
+                        <a class="reg-login_btn" href="{{ route('logout') }}" onclick="event.preventDefault();
 
-                        this.closest('form').submit();">Logout</a></li>
+                        this.closest('form').submit();">Logout</a>
 
-                    </form>
+                    </form></li>
 
                     @else
 

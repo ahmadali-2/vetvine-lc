@@ -45,10 +45,10 @@ class MemberShipPlansController extends Controller
     public function store(Request $request)
     {
         try {
-               $Membershipplan = MemberShipPlan::create([
-                'plan_name'          => $request->plan_name,
-                'plan_description'   => $request->plan_description,
-                'plan_features'      => json_encode($request->plan_features),
+            MemberShipPlan::create([
+                'plan_name'          => ucwords($request->plan_name),
+                'plan_description'   => ucfirst($request->plan_description),
+                'plan_features'      => ucfirst(json_encode($request->plan_features)),
                 'plan_price'         => $request->plan_price,
                 'expiry_date'        => $request->expiry_date,
                 'member_ship_plan_categories_id' => $request->plancategoryid,
@@ -112,9 +112,9 @@ class MemberShipPlansController extends Controller
             $features =array_filter($request->plan_features);
             $newFeatures =json_encode($features);
             $memberplan->update([
-                'plan_name'          => $request->plan_name,
-                'plan_description'   => $request->plan_description,
-                'plan_features'      => $newFeatures,
+                'plan_name'          => ucwords($request->plan_name),
+                'plan_description'   => ucfirst($request->plan_description),
+                'plan_features'      => ucfirst($newFeatures),
                 'plan_price'         => $request->plan_price,
                 'expiry_date'        => $request->expiry_date,
                 'member_ship_plan_categories_id' => $request->plancategoryid

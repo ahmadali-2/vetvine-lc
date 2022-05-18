@@ -175,16 +175,7 @@ padding: 0px 30px 0px !important;
     $('#deleteModal').modal('show')
 }
 </script>
-
-
-
-
 </body>
-
-
-
-
-
 </html>
 
 
