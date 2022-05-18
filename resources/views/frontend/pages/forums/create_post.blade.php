@@ -72,6 +72,7 @@
                                   <input id="post_add_video" name="post_add_video" type="file" class="form-control"
                                       value="">
                               </div>
+
                           </div>
                         <div class="form-group text-center">
                             <input type="submit" class="btn btn-primary mt-3" value="POST">
