@@ -184,10 +184,8 @@ $timezones =vetvineHelper::timezones()
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 text-center">
-
-
                                                     <div class="d-flex justify-content-center ">
-                                                        <div class="g-recaptcha" data-sitekey="6Lel4Z4UAAAAAOa8LO1Q9mqKRUiMYl_00o5mXJrR">
+                                                        <div class="g-recaptcha" data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
                                                             <div style="width: 304px; height: 78px;">
                                                                 <div><iframe title="reCAPTCHA" src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6Lel4Z4UAAAAAOa8LO1Q9mqKRUiMYl_00o5mXJrR&amp;co=ZmlsZTo.&amp;hl=en&amp;v=dPctOHA2ifhWm5WzFM_B5TjT&amp;size=normal&amp;cb=fao1bvu68guf" width="304" height="78" role="presentation" name="a-k2i5c5yx6045" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe>
                                                                 </div>
@@ -349,4 +347,5 @@ $('#password').on('keyup',function(){
     $('#passwordmsg').empty()
 })
 </script>
+
 @endsection
