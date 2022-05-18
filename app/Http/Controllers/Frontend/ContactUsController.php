@@ -13,10 +13,10 @@ class ContactUsController extends Controller
     public function submitContactForm(Request $request)
     {
         $data = [
-            'email' => $request->email,
+            'email'     => $request->email,
             'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
-            'message' => $request->message,
+            'lastname'  => $request->lastname,
+            'message'   => $request->message,
         ];
         dispatch((new ContactUsJob($data))->delay(now()->addSeconds(10)));
         return redirect()->back();
