@@ -30,13 +30,6 @@
         <a href="#" class="employe"><i class="fa fa-angle-right" aria-hidden="true"></i> Employment Info</a>
       </li>
       <li>
-        <a href="#" class="skill"><i class="fa fa-angle-right" aria-hidden="true"></i> Skills & Expertise</a>
-      </li>
-      <li>
-        <a href="#" class="education"><i class="fa fa-angle-right" aria-hidden="true"></i> Education</a>
-      </li>
-
-      <li>
         <a href="#" class="profile"><i class="fa fa-angle-right" aria-hidden="true"></i> Edit My Photo</a>
       </li>
 
