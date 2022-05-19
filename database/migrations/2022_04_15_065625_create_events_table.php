@@ -36,9 +36,10 @@ class CreateEventsTable extends Migration
             $table->string('presenter_three')->nullable();
             $table->string('presenter_three_url')->nullable();
             $table->longText('event_description');
-            $table->bigInteger('Vet_Pet_Prof_Fee');
-            $table->bigInteger('Pet_Owner_Premium_Fee');
-            $table->bigInteger('Pet_Owner_Fee');
+            $table->bigInteger('Vet_Pet_Prof_Fee')->nullable();;
+            $table->bigInteger('Pet_Owner_Premium_Fee')->nullable();;
+            $table->bigInteger('Pet_Owner_Fee')->nullable();;
+            $table->bigInteger('Vet_Pet_Prof_Premium_Fee')->nullable();;
             $table->enum('status', ['0', '1'])->comment('0.disable,1.enable')->default('1');
             $table->timestamps();
         });

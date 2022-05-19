@@ -76,6 +76,7 @@ class EventController extends Controller
                 "Vet_Pet_Prof_Fee"              =>   $input['Vet_Pet_Prof_Fee'],
                 "Pet_Owner_Premium_Fee"         =>   $input['Pet_Owner_Premium_Fee'],
                 "Pet_Owner_Fee"                 =>   $input['Pet_Owner_Fee'],
+                "Vet_Pet_Prof_Premium_Fee"      =>   $input['Vet_Pet_Prof_Premium_Fee'],
             ]);
             parent::successMessage('Event saved successfully.');
             return redirect(route('webinars.index'));
@@ -112,6 +113,7 @@ class EventController extends Controller
             $eventcategory = CategoryEvent::all();
             return view('admins.webinars.edit',compact('event' ,'eventcategory'));
         } catch(Exception $e) {
+
             parent::dangerMessage("Event Does Not Edited, Please Try  Again");
             return $e->getMessage();
         }
@@ -158,6 +160,7 @@ class EventController extends Controller
                     "Vet_Pet_Prof_Fee"              =>   $request->input('Vet_Pet_Prof_Fee'),
                     "Pet_Owner_Premium_Fee"         =>   $request->input('Pet_Owner_Premium_Fee'),
                     "Pet_Owner_Fee"                 =>   $request->input('Pet_Owner_Fee'),
+                    "Vet_Pet_Prof_Premium_Fee"      =>   $request->input('Vet_Pet_Prof_Premium_Fee'),
                 ]);
                 parent::successMessage('Event updated successfully.');
                 return redirect(route('webinars.index'));

@@ -178,6 +178,14 @@
                                                 type="number" class="form-control" value="">
                                         </div>
                                     </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="Vet_Pet_Prof_Premium_Fee" class="control-label mb-1">Vet/Pet Prof. Premium Fee
+                                                $</label>
+                                            <input id="Vet_Pet_Prof_Premium_Fee" placeholder="Enter Fee" name="Vet_Pet_Prof_Premium_Fee"
+                                                type="number" class="form-control" value="">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
@@ -214,7 +222,7 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="event_description" class="control-label mb-1">Forum
+                                            <label for="event_description" class="control-label mb-1">Event
                                                 Description</label>
                                             <textarea class="form-control" id="event_description" rows="3" name="event_description" value=""></textarea>
                                         </div>

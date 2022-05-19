@@ -9,7 +9,7 @@
             <div class="user-profile">
               <h3>Welcome Colleague!</h3>
               <div class="profile-img">
-                 {{-- <img src="{{ asset('frontend/img/user_thumb_profile.png')}}" alt=""> --}}
+                <img src="@if(Auth()->user()->profile_photo ?? '') {{ asset('/frontend/images/Profile-Images/'.Auth()->user()->profile_photo)}} @else {{asset('frontend/images/thumbnail.jfif')}} @endif" alt="">
               </div>
             </div>
             <div class="quicky-link">
