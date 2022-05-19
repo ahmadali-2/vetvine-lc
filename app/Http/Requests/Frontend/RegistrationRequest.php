@@ -32,6 +32,7 @@ class RegistrationRequest extends FormRequest
             'confirm_password'   => ['same:password','required'],
             'timezone'           => ['required'],
             'termsofservice'     => ['required'],
+            'CaptchaCode'        => ['required|valid_captcha']
 
         ];
     }

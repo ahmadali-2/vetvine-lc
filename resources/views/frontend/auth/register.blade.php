@@ -183,18 +183,30 @@ $timezones =vetvineHelper::timezones()
                                                             </a></span>
                                                     </div>
                                                 </div>
+
+
+
                                                 <div class="col-sm-12 text-center">
 
+                                                    {{-- captcha  --}}
+                                                    <div class="form-group{{ $errors->has('CaptchaCode') ? ' has-error' : '' }}">
+                                                        <label class="col-md-4 control-label">Captcha</label>
 
-                                                    <div class="d-flex justify-content-center ">
-                                                        <div class="g-recaptcha" data-sitekey="6Lel4Z4UAAAAAOa8LO1Q9mqKRUiMYl_00o5mXJrR">
-                                                            <div style="width: 304px; height: 78px;">
-                                                                <div><iframe title="reCAPTCHA" src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6Lel4Z4UAAAAAOa8LO1Q9mqKRUiMYl_00o5mXJrR&amp;co=ZmlsZTo.&amp;hl=en&amp;v=dPctOHA2ifhWm5WzFM_B5TjT&amp;size=normal&amp;cb=fao1bvu68guf" width="304" height="78" role="presentation" name="a-k2i5c5yx6045" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe>
-                                                                </div>
-                                                                <textarea id="g-recaptcha-response-1" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                          <div class="col-md-6">
+                                                            {!! captcha_image_html('ContactCaptcha') !!}
+                                                          <input class="form-control" type="text" id="CaptchaCode" name="CaptchaCode">
+
+                                                           @if ($errors->has('CaptchaCode'))
+                                                              <span class="help-block">
+                                                           <strong>{{ $errors->first('CaptchaCode') }}</strong>
+                                                             </span>
+                                                          @endif
+
+                                                     </div>
+                                                   </div>
+
+                                                    {{-- captcha --}}
+
                                                     <h3 style="color:red" id="regibtnsmsg">Please Select Above Category And Profession To Continue</h3>
 
                                                     <div class="social_icons_modal">
@@ -348,5 +360,7 @@ $('.ui-corner-top').on('change',function() {
 $('#password').on('keyup',function(){
     $('#passwordmsg').empty()
 })
+
+
 </script>
 @endsection

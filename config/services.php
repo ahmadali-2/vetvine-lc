@@ -49,5 +49,4 @@ return [
         'access_token_url' => 'https://api.twitter.com/oauth/access_token',
         'request_token_url' => 'https://api.twitter.com/oauth/request_token',
     ],
-
 ];

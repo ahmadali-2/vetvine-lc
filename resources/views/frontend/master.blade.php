@@ -33,7 +33,6 @@
   <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}" />
 
   <meta name="csrf-token" content="{{ csrf_token() }}" />
-
   <style>
 
     .nav-wrapper-one a {
