@@ -75,14 +75,25 @@ class PersonelInfoController extends Controller
         try
         {
             $user   = Auth::user();
-            $path   = public_path('/frontend/images/Profile-Images/');
-            $result = vetvineHelper::saveImage($request->profile_photo, $path);
-            User::find($user->id)->update([
-                'referred_by'   => $request->referredby,
-                'name'          => $request->lastname.' '.$request->lastname,
-                'licence_no'    => $request->licensure,
-                'profile_photo' => $result
-            ]);
+            if (request()->hasFile('profile_photo'))
+            {
+                $path   = public_path('/frontend/images/Profile-Images/');
+                $result = vetvineHelper::saveImage($request->profile_photo, $path);
+                User::find($user->id)->update([
+                    'profile_photo' => $result,
+                    'referred_by'   => $request->referredby,
+                    'name'          => $request->firstname.' '.$request->lastname,
+                    'licence_no'    => $request->licensure
+                ]);
+            }
+            else
+            {
+                User::find($user->id)->update([
+                    'referred_by'   => $request->referredby,
+                    'name'          => $request->firstname.' '.$request->lastname,
+                    'licence_no'    => $request->licensure,
+                ]);
+            }
             UserEmploymentInfo::updateOrCreate(
                 [
                     'user_id' => Auth::user()->id
