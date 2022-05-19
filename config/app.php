@@ -182,6 +182,7 @@ return [
         App\Providers\VetvineHelperServiceProvider::class,
         Mckenziearts\Notify\LaravelNotifyServiceProvider::class,
         Yoeunes\Toastr\ToastrServiceProvider::class,
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
     ],
 
     /*
@@ -242,6 +243,7 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
         'Flash'     => Laracasts\Flash\Flash::class,
         'vetvineHelper' => App\VetvineFacades\VetvineHelperFacade::class,
+        'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
 
     ],
 

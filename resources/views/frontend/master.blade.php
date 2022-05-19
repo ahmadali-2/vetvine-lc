@@ -33,6 +33,7 @@
   <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}" />
 
   <meta name="csrf-token" content="{{ csrf_token() }}" />
+  {!! NoCaptcha::renderJs() !!}
 
   <style>
 
@@ -98,14 +99,15 @@ padding: 0px 30px 0px !important;
 
 <script src="{{ asset('frontend/js/frontend.js')}}"></script>
 
+<script src="https://www.google.com/recaptcha/api.js"></script>
 
+    </script>
 
 <script>
 
   CKEDITOR.replace( 'description' );
 
 </script>
-
 <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 
 {!! JsValidator::formRequest('App\Http\Requests\Frontend\RegistrationRequest', '#regform') !!}

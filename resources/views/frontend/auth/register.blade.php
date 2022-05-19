@@ -21,6 +21,7 @@ $timezones =vetvineHelper::timezones()
                     <h2 class="member-login"><span>Member Registration</span></h2>
                     <form action="{{route('register')}}" class="custom_form" method="post" id="regform">
                         @csrf
+                        {!! NoCaptcha::renderJs() !!}
                         <section class="registration-tab">
                             <div class="container">
                                 <div>
@@ -173,8 +174,19 @@ $timezones =vetvineHelper::timezones()
                                                     </span>
                                                     @endif
                                                 </div>
+                        <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Captcha</label>
+                            <div class="col-md-6 nave_google_captcha" >
 
-                                                <div class="col-md-12 text-center">
+                                {!! app('captcha')->display() !!}
+                                @if ($errors->has('g-recaptcha-response'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>    
+                         <div class="col-md-12 text-center">
                                                     <div class="mm-new-checkbox" style="margin-left:24px;">
                                                         <input class="form-check-input input_click" type="checkbox" name="termsofservice">
                                                         <span><a href="#" class="">
@@ -319,8 +331,15 @@ $(document).ready(function(){
         'pointer-events': 'none'
     });
 })
+
+$('.nave_google_captcha').on('click',function(){
+    alert("oj");
+})
+
+
 //step2 get value of member level and network level
 $('.ui-corner-top').on('change',function() {
+
   var usertype=  $(this).find('span').attr('data-memberlevel');
   $('#setmemberlevel').val(usertype);
   var networkLevel = $('input[name="networklevel"]:checked').val()
@@ -340,7 +359,10 @@ $('.ui-corner-top').on('change',function() {
         var curlink = $(this).attr('href', anchorlick + '/' + usertype + '/' + networkLevel);
     })
  })
-
+ 
+ $('#nav_id_google').on('click',function(){
+     alert("oaspda");
+ });
 
  $('#email').on('keyup',function(){
     $('#emailmsg').empty()
