@@ -48,6 +48,7 @@ class ForumPostController extends Controller
         try {
             Post::create([
                 "forum_id"                   =>  $request->forum_id,
+                "user_id"                    =>  $user,
                 "post_title"                 =>  ucwords($request->post_title),
                 "post_photo"                 =>  $result,
                 "post_description"           =>  ucfirst($request->description),
@@ -124,6 +125,7 @@ class ForumPostController extends Controller
         try {
             Post::find($id)->update([
                 "forum_id"                   =>  $request->forum_id,
+                "user_id"                    =>  $user,
                 "post_title"                 =>  ucwords($request->post_title),
                 "post_photo"                 =>  $result,
                 "post_description"           =>  ucfirst($request->description),
