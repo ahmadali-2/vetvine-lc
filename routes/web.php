@@ -74,6 +74,9 @@ Route::get('/migrate',function(){
     return 'migrated successfully';
 });
 
+Route::get('phpinfo', function () {
+    phpinfo();
+});
 
 Route::get('contactusschedule', function(){
     Artisan::call('schedule:run');
