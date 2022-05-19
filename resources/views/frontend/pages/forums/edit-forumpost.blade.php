@@ -22,7 +22,7 @@
                     <form action="{{route('forums-posts.update',$post->id)}}" method="post" id="createpost" enctype="multipart/form-data">
                         @csrf
                         @method('put')
-                        <input type="hidden" name="forum_id" value="{{$post->postable_id}}">
+                        <input type="hidden" name="forum_id" value="{{$post->forum_id}}">
                         <div class="row">
                             <div class="col-sm-6">
                                 <h6>Post Title</h6>

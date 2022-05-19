@@ -60,7 +60,6 @@ class ForumPostController extends Controller
             parent::successMessage('Post saved successfully.');
             return redirect(route('forumpostlist',$request->forum_id));
         } catch (Exception $e) {
-            dd($e->getMessage());
             parent::dangerMessage("Post Does Not Created, Please Try  Again");
             return redirect()->back();
         }
