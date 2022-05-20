@@ -33,8 +33,6 @@
   <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}" />
 
   <meta name="csrf-token" content="{{ csrf_token() }}" />
-  {!! NoCaptcha::renderJs() !!}
-
   <style>
 
     .nav-wrapper-one a {

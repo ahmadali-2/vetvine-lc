@@ -7,8 +7,8 @@ trait UserDetailTrait {
 
     public function checkUserDetail($email , $type)
     {
-        $userIp =$_SERVER['REMOTE_ADDR'];
-        $userInfo =User::where('email', $email)->where('type',$type)->first();
+        $userIp   = $_SERVER['REMOTE_ADDR'];
+        $userInfo = User::where('email', $email)->where('type',$type)->first();
         if(empty($userInfo->creation_ip)) {
             $userInfo->update([
                 'creation_ip' => $userIp
