@@ -75,7 +75,7 @@ class EventCategoryController extends Controller
             return view('admins.webinars.category.edit',compact('EventCategory'));
         } catch(Exception $e) {
             parent::dangerMessage(" Event Category Does Not Edited, Please Try  Again");
-            return $e->getMessage();//redirect()->back();
+            return $e->getMessage();
         }
     }
 
@@ -96,7 +96,6 @@ class EventCategoryController extends Controller
             parent::successMessage('Event Category Updated successfully.');
             return redirect(route('webinars-category.index'));
         } catch(Exception $e) {
-            dd($e->getMessage());
             parent::dangerMessage(" Event Category Does Not Updated, Please Try  Again");
             return redirect()->back();
         }

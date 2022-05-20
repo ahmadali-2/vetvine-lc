@@ -5,7 +5,7 @@ namespace App\Models\Admins\Memberships;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Admins\Memberships\BuyMemberShipPlan;
-
+use App\Models\Generals\Member;
 use App\Models\Network;
 
 class MemberShipPlan extends Model
@@ -19,10 +19,10 @@ class MemberShipPlan extends Model
         'plan_price',
         'expiry_date',
         'member_ship_plan_categories_id'
-        
+
     ];
 
-    
+
 
     public function network()
     {
@@ -36,5 +36,9 @@ class MemberShipPlan extends Model
     public function buymemberships()
     {
         return $this->hasMany(BuyMemberShipPlan::class);
+    }
+    public function members()
+    {
+        return $this->morphMany(Member::class,'memberable');
     }
 }

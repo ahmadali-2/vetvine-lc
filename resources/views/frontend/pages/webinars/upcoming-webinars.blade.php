@@ -3,7 +3,7 @@
     <section class="video-section-wrapper mb-4">
         <div class="container">
             <h1 class="Upcoming-webinars mt-2">Find an Upcoming Event</h1>
-            <form action="{{ route('search_educations') }}"  method="post">
+            <form action="{{ route('search_educations') }}" method="post">
                 @csrf
                 <ul class="filter_list">
                     <li class="top-three-input">
@@ -13,14 +13,14 @@
                     <li>
                         <div id="fav_show_wrapper mt-0">
                             <label for="fav_Show" id="fav_show_label">Category:</label>
-                            <select id="category" name="category"
-                            class="form-control filter-slect" value="" data-val="true">
-                            <option title="" value="" label=""></option>
-                            @foreach ($category as $search)
-                                <option value="{{ $search->id }} ">{{ $search->category_title }}
-                                </option>
-                            @endforeach
-                        </select>
+                            <select id="category" name="category" class="form-control filter-slect" value="" data-val="true">
+                                <option title="" value="" label=""></option>
+                                @foreach ($category as $search)
+                                    <option value="{{ $search->id }} ">{{ $search->category_title }}
+                                    </option>
+                                @endforeach
+
+                            </select>
                         </div>
                     </li>
                     <li class="top-three-input">
@@ -48,14 +48,11 @@
                 <li class="active">
                     <a href="{{ route('upcoming_webinars') }}">Continuing Education</a>
                 </li>
-                {{-- <li>
-                    <a href="{{ route('upcoming_publications') }}">Publications</a>
-                </li> --}}
                 <li>
-                    <a href="#">My Past Events</a>
+                    <a href="{{ route('pastevent') }}">My Past Events</a>
                 </li>
                 <li>
-                    <a href="#">My Upcoming Events</a>
+                    <a href="{{ route('upcomingevent') }}">My Upcoming Events</a>
                 </li>
             </ul>
 
@@ -90,14 +87,17 @@
                             </div>
                             <div class="video-bottom-description">
                                 <h5>{{ date('m/d/Y', strtotime($showevents->date)) }}</h5>
-                                <p><span>Presented by:</span> {{ $showevents->presenter_one }}<br />
-                                    <strong>Sponsored by:</strong>{{ $showevents->sponser_one }}
+                                <p><span>Presented by:</span> <a href="{{ $showevents->presenter_one_url }}"
+                                        class="vetvine_a" target="_blank">{{ $showevents->presenter_one }}</a><br />
+                                    <strong>Sponsored by:</strong><a href="{{ $showevents->sponser_one_url }}"
+                                        class="vetvine_a" target="_blank"
+                                        rel="noopener noreferrer">{{ $showevents->sponser_one }}</a>
                                 </p>
                                 </p>
                                 <p class="para-decription">
-                                    {{ $showevents->event_description }}
+                                    {{ Str::limit($showevents->event_description, 250) }}
                                 </p>
-                                <a href="#">Read More</a>
+                                <a href="{{ route('upcoming_details') }}">Read More</a>
                             </div>
                         </div>
                     </div>

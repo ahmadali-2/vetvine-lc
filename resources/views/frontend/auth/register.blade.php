@@ -2,7 +2,6 @@
 $timezones =vetvineHelper::timezones()
 @endphp
 
-
 <!-- Registeration Modal Form  Start-->
 <button type="button" class="btn btn-primary d-none" id="registration_modal_box_show_btn" data-toggle="modal" data-target="#Registration-modal">
     Launch demo modal
@@ -173,7 +172,6 @@ $timezones =vetvineHelper::timezones()
                                                     </span>
                                                     @endif
                                                 </div>
-
                                                 <div class="col-md-12 text-center">
                                                     <div class="mm-new-checkbox" style="margin-left:24px;">
                                                         <input class="form-check-input input_click" type="checkbox" name="termsofservice">
