@@ -57,16 +57,17 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label for="pdf_file" class="control-label mb-1">PDF file</label>
-                                            <input id="pdf_file" placeholder="Enter Name" name="file" type="file"
-                                                class="form-control" value="{{ $event->pdf_file }}">
+                                            <label for="sponser_one" class="control-label mb-1">Sponsor 1</label>
+                                            <input id="sponser_one" placeholder="Enter Name" name="sponser_one" type="text"
+                                                class="form-control" value="{{ $event->sponser_one }}">
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label for="sponser_one" class="control-label mb-1">Sponsor 1</label>
-                                            <input id="sponser_one" placeholder="Enter Name" name="sponser_one" type="text"
-                                                class="form-control" value="{{ $event->sponser_one }}">
+                                            <label for="presenter_one_url" class="control-label mb-1">Sponsor 1
+                                                URL</label>
+                                            <input id="sponser_one_url"placeholder="https://" name="sponser_one_url" type="url"
+                                                class="form-control" value="{{ $event->sponser_one_url }}">
                                         </div>
                                     </div>
                                 </div>
@@ -80,9 +81,27 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
+                                            <label for="sponser_one_url" class="control-label mb-1">Sponsor 2
+                                                URL (optional)</label>
+                                            <input id="sponser_two_url" placeholder="https://" name="sponser_two_url" type="url"
+                                                class="form-control" value="{{ $event->sponser_two_url }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
                                             <label for="sponser_three" class="control-label mb-1">Sponsor 3</label>
                                             <input id="sponser_three" placeholder="Enter Name" name="sponser_three"
                                                 type="text" class="form-control" value="{{ $event->sponser_three }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="sponser_one_url" class="control-label mb-1">Sponsor 3
+                                                URL (optional)</label>
+                                            <input id="sponser_three_url"  name="sponser_three_url" type="url"
+                                                class="form-control" placeholder="https://" value="{{ $event->sponser_three_url }}">
                                         </div>
                                     </div>
                                 </div>
@@ -113,8 +132,8 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="presenter_one_url" class="control-label mb-1">Presenter 1
-                                                URL</label>
-                                            <input id="presenter_one_url" placeholder="" name="presenter_one_url" type="url"
+                                                URL (optional)</label>
+                                            <input id="presenter_one_url" placeholder="https://" name="presenter_one_url" type="url"
                                                 class="form-control" value="{{ $event->presenter_one_url }}">
                                         </div>
                                     </div>
@@ -130,8 +149,8 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="presenter_two_url" class="control-label mb-1">Presenter 2
-                                                URL</label>
-                                            <input id="presenter_two_url" placeholder="" name="presenter_two_url" type="url"
+                                                URL (optional)</label>
+                                            <input id="presenter_two_url" placeholder="https://" name="presenter_two_url" type="url"
                                                 class="form-control" value="{{ $event->presenter_two_url }}">
                                         </div>
                                     </div>
@@ -147,8 +166,8 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="presenter_three_url" class="control-label mb-1">Presenter 3
-                                                URL</label>
-                                            <input id="presenter_three_url" placeholder="" name="presenter_three_url"
+                                                URL (optional)</label>
+                                            <input id="presenter_three_url" placeholder="https://" name="presenter_three_url"
                                                 type="url" class="form-control"
                                                 value="{{ $event->presenter_three_url }}">
                                         </div>
@@ -157,74 +176,51 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label for="Pet_Owner_Fee" class="control-label mb-1">Pet Owner Fee
+                                            <label for="pet_owner_fee" class="control-label mb-1">Pet Owner Fee
                                                 $</label>
-                                            <input id="Pet_Owner_Fee" placeholder="Enter Fee" name="Pet_Owner_Fee"
-                                                type="number" class="form-control" value="{{ $event->Pet_Owner_Fee }}">
+                                            <input id="pet_owner_fee" placeholder="Enter Fee" name="pet_owner_fee"
+                                                type="number" class="form-control" value="{{ $event->pet_owner_fee }}">
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label for="Pet_Owner_Premium_Fee" class="control-label mb-1">Pet Owner
-                                                Premium
+                                            <label for="pet_owner_premium_fee" class="control-label mb-1">Pet Owner Premium
                                                 Fee
                                                 $</label>
-                                            <input id="Pet_Owner_Premium_Fee" placeholder="Enter Fee"
-                                                name="Pet_Owner_Premium_Fee" type="number" class="form-control"
-                                                value="{{ $event->Pet_Owner_Premium_Fee }}">
+                                            <input id="pet_owner_premium_fee" placeholder="Enter Fee"
+                                                name="pet_owner_premium_fee" type="number" class="form-control"
+                                                value="{{ $event->pet_owner_premium_fee }}">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label for="Vet_Pet_Prof_Fee" class="control-label mb-1">Vet/Pet Prof. Fee
+                                            <label for="vet_pet_prof_fee" class="control-label mb-1">Vet/Pet Prof. Fee
                                                 $</label>
-                                            <input id="Vet_Pet_Prof_Fee" placeholder="Enter Fee" name="Vet_Pet_Prof_Fee"
+                                            <input id="vet_pet_prof_fee" placeholder="Enter Fee" name="vet_pet_prof_fee"
                                                 type="number" class="form-control"
-                                                value="{{ $event->Vet_Pet_Prof_Fee }}">
+                                                value="{{ $event->vet_pet_prof_fee }}">
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label for="Vet_Pet_Prof_Premium_Fee" class="control-label mb-1">Vet/Pet Prof. Premium Fee
+                                            <label for="vet_pet_prof_premium_pee" class="control-label mb-1">Vet/Pet Prof.
+                                                Premium Fee
                                                 $</label>
-                                            <input id="Vet_Pet_Prof_Premium_Fee" placeholder="Enter Fee" name=" Vet_Pet_Prof_Premium_Fee"
-                                                type="number" class="form-control" value="{{ $event->Vet_Pet_Prof_Premium_Fee }}">
+                                            <input id="vet_pet_prof_premium_fee" placeholder="Enter Fee"
+                                                name="vet_pet_prof_premium_fee" type="number" class="form-control"
+                                                value="{{ $event->vet_pet_prof_premium_fee }}">
                                         </div>
                                     </div>
-
                                 </div>
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
-                                            <div class="form-group">
-                                                <label for="video" class="control-label mb-1 form-select">Video
-                                                    Source</label>
-                                                <select name="result" class="form-control" id="sel3"
-                                                    onchange="showresult(this.value)">
-                                                    <option value="" disabled selected>--Select--</option>
-                                                    <option value="1">Youtube</option>
-                                                    <option value="2">Vimeo</option>
-                                                    <option value="3">My Computer</option>
-                                                </select>
-                                            </div>
+                                            <label for="event_add_ytlink" class="control-label mb-1 form-select">Add Video Link</label>
+                                            <input id="event_add_ytlink" name="event_add_ytlink" type="url"
+                                                class="form-control" value="{{ $event->event_add_ytlink }}">
                                         </div>
-                                    </div>
-                                    <div class="col-sm-6" id="ytlink">
-                                        <label for="" class="control-label mb-1 form-select">Add YouTube Video</label>
-                                        <input id="event_add_ytlink" name="event_add_ytlink" type="url"
-                                            class="form-control" value="{{ $event->event_add_ytlink }}">
-                                    </div>
-                                    <div class="col-sm-6" id="vimeolink">
-                                        <label for="" class="control-label mb-1 form-select">Add Vimeo Video</label>
-                                        <input id="event_add_vimeolink" name="event_add_vimeolink" type="url"
-                                            class="form-control" value="{{ $event->event_add_vimeolink }}">
-                                    </div>
-                                    <div class="col-sm-6" id="video">
-                                        <label for="" class="control-label mb-1 form-select">Upload Video</label>
-                                        <input id="event_add_video" name="event_add_video" type="file"
-                                            class="form-control" value="">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -250,34 +246,4 @@
             </div>
         </div>
     </div>
-@endsection
-@section('scripts')
-    <script>
-        $(document).ready(function() {
-            $('#ytlink').hide();
-            $('#vimeolink').hide();
-            $('#video').hide();
-
-        })
-    </script>
-    <script>
-        function showresult(str) {
-            if (str == "1") {
-                $
-                    ("#ytlink").css('display', 'block');
-            } else {
-                $("#ytlink").css('display', 'none');
-            }
-            if (str == "2") {
-                $("#vimeolink").css('display', 'block');
-            } else {
-                $("#vimeolink").css('display', 'none');
-            }
-            if (str == "3") {
-                $("#video").css('display', 'block');
-            } else {
-                $("#video").css('display', 'none');
-            }
-        }
-    </script>
 @endsection

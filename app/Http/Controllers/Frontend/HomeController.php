@@ -23,7 +23,7 @@ class HomeController extends Controller
     public function whyVetvine(){
         return view('frontend.pages.why-vetvine');
     }
-    
+
     public function contactUs(){
         return view('frontend.pages.contact-us');
     }
@@ -50,6 +50,10 @@ class HomeController extends Controller
     {
         return view('frontend.pages.faqs');
     }
+    public function payementwebinars()
+    {
+        return view('frontend.pages.webinars.payementwebinars');
+    }
     public function forums()
     {
         $forums     =   Forum::all();
@@ -64,22 +68,36 @@ class HomeController extends Controller
     }
     public function upcomingWebinars()
     {
-        $showevent = Event::with('events')->where('item_type','continue_edu')->get();
+        $showevent = Event::with('events')->get();
         $category = CategoryEvent::all();
-        return view('frontend.pages.upcoming-webinars',compact('showevent','category'));
+        return view('frontend.pages.webinars.upcoming-webinars',compact('showevent','category'));
     }
-
-    public function publications()
+    public function pastevent()
     {
-        $publication = Event::with('events')->where('item_type','publications')->get();
+        $showevent = Event::with('events')->where('date', '<=', date('Y-m-d'))
+        ->orderBy('date')->get();
         $category = CategoryEvent::all();
-        return view('frontend.pages.publications',compact('publication','category'));
+        return view('frontend.pages.webinars.upcoming-webinars',compact('showevent','category'));
+    }
+    public function upcomingevent()
+    {
+        $showevent = Event::with('events')->where('date', '>=', date('Y-m-d'))
+        ->orderBy('date')->get();
+        $category = CategoryEvent::all();
+        return view('frontend.pages.webinars.upcoming-webinars',compact('showevent','category'));
+    }
+    public function upcomingWebinarsdetails()
+    {
+        $eventdetail = Event::with('events')->get();
+        $category = CategoryEvent::all();
+        return view('frontend.pages.webinars.upcoming-eventsdetails',compact('eventdetail','category'));
+
     }
     public function searceducations(Request $request)
     {
         $this->dashboard['filters'] = Event::with('events');
         $category = CategoryEvent::all();
-     
+
         if ($request->name) {
             $this->dashboard['filters'] = $this->applyFilters('event_title', $request->name);
         }
@@ -95,32 +113,32 @@ class HomeController extends Controller
         if ($request->from && $request->to) {
             $this->dashboard['filters'] = $this->aplyDateFilters($request->from, $request->to);
         }
-        $showevent =$this->dashboard['filters']->get();      
-        return view('frontend.pages.upcoming-webinars',compact('showevent','category'));
+        $showevent =$this->dashboard['filters']->get();
+        return view('frontend.pages.webinars.upcoming-webinars',compact('showevent','category'));
     }
 
 
     public function applyFilters($dbColumn, $formElement)
-    {      
+    {
         if(isset($this->dashboard['filters']) && !empty($this->dashboard['filters']))
-        {            
+        {
             $this->dashboard['filters'] =$this->dashboard['filters']->where(function($query) use($dbColumn,$formElement){
                 foreach((array) $formElement as $key=> $value){
                     $query->orWhere($dbColumn,'like','%'.$formElement[$key].'%');
                 }
             });
             return $this->dashboard['filters'];
-        }             
+        }
     }
 
     public function aplyDateFilters($from, $to)
     {
         if(isset($this->dashboard['filters']) && !empty($this->dashboard['filters']))
-        {            
+        {
             $this->dashboard['filters'] =$this->dashboard['filters']->where(function($query) use($from, $to){
                 $query->whereBetween('date', [$from, $to]);
             });
             return $this->dashboard['filters'];
-        }  
+        }
     }
 }
