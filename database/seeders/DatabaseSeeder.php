@@ -18,11 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserMemberAndNetworkLevelSeeder::class,
             TimeZoneSeeder::class,
-            SkillsAndExpertiseSeeder::class,
             CountriesSeeder::class,
-            EducationSchoolSeeder::class,
             LocaleSeeder::class,
-            EducationDegreeSeeder::class,
         ]);
     }
 }

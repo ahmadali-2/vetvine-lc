@@ -64,7 +64,7 @@
                   @foreach ($posts as $post)
                 <li>
                   <div class="feed-photo">
-                    <img src="@if($post->user->profile_photo) {{ asset('/frontend/images/Profile-Images/'.$post->user->profile_photo)}} @else {{asset('frontend/images/thumbnail.jfif')}} @endif" alt="feed 1 pic">
+                    <img src="@if($post->user->profile_photo ?? '') {{ asset('/frontend/images/Profile-Images/'.$post->user->profile_photo)}} @else {{asset('frontend/images/thumbnail.jfif')}} @endif" alt="feed 1 pic">
                       {{-- <img src="{{ asset('frontend/img/feed-img-1.png')}}" alt="feed 1 pic"> --}}
                     </div>
                   <div class="feed-body">
