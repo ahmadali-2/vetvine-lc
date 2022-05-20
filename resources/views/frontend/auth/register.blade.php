@@ -197,7 +197,7 @@ $timezones =vetvineHelper::timezones()
 
                                                            @if ($errors->has('CaptchaCode'))
                                                               <span class="help-block">
-                                                           <strong>{{ $errors->first('CaptchaCode') }}</strong>
+                                                           <strong style="color:red">{{ $errors->first('CaptchaCode') }}</strong>
                                                              </span>
                                                           @endif
 

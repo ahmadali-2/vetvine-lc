@@ -55,7 +55,6 @@ class RegistrationRequest extends FormRequest
             'password.confirmed'         => 'Password  Must Be Confirmed With Confirm Password',
             'confirm_password.required'  => 'Confirm Password  Field Is Required',
             'confirm_password.same'      => 'Confirm Password And  Password Must be Same',
-           
         ];
 
     }
