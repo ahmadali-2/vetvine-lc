@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\UserMemberAndNetworkLevel;
 use App\Models\Admins\Memberships\MemberShipPlan;
+use App\Models\Generals\Member;
 use App\Models\Network;
 use App\Models\Admins\Memberships\MemberShipPlanCategory;
 
@@ -50,8 +51,19 @@ class MemberShipPlansController extends Controller
                 'plan_features'      => ucfirst(json_encode($request->plan_features)),
                 'plan_price'         => $request->plan_price,
                 'expiry_date'        => $request->expiry_date,
-                'member_ship_plan_categories_id' => $request->plancategoryid
+                'member_ship_plan_categories_id' => $request->plancategoryid,
             ]);
+            if($Membershipplan->wasRecentlyCreated)
+            {
+                foreach($request['member_id'] as $member)
+                {
+                    Member::create([
+                    "memberable_id"   =>  $Membershipplan->id,
+                    "memberable_type" => 'App\Models\Admins\Memberships\MemberShipPlan',
+                    'member_id'       => $member,
+                    ]);
+                }
+            }
             parent::successMessage("Plan Created Successfully");
             return redirect()->route('membership.index');
         } catch(\Exception $e){
@@ -80,9 +92,10 @@ class MemberShipPlansController extends Controller
     public function edit($id)
     {
        $editPlan = MemberShipPlan::find($id);
-       $nerworklevels =UserMemberAndNetworkLevel::where('parent_id', '!=', Null)->get();
+       $nerworklevels =UserMemberAndNetworkLevel::all();
        $planCategories =MemberShipPlanCategory::where('status',1)->get();
-       return view('admins.memberships.edit',compact('editPlan','nerworklevels','planCategories'));
+       $selectedMembers    =   $editPlan->members->pluck('member_id')->toArray();
+       return view('admins.memberships.edit',compact('editPlan','nerworklevels','planCategories','selectedMembers'));
     }
 
     /**
@@ -98,7 +111,6 @@ class MemberShipPlansController extends Controller
             $memberplan =MemberShipPlan::find($id);
             $features =array_filter($request->plan_features);
             $newFeatures =json_encode($features);
-
             $memberplan->update([
                 'plan_name'          => ucwords($request->plan_name),
                 'plan_description'   => ucfirst($request->plan_description),
@@ -107,9 +119,20 @@ class MemberShipPlansController extends Controller
                 'expiry_date'        => $request->expiry_date,
                 'member_ship_plan_categories_id' => $request->plancategoryid
             ]);
+            $selectedMembers    =   $memberplan->members->pluck('id')->toArray();
+            Member::whereIn('id',$selectedMembers)->delete();
+            foreach($request['member_id'] as $member)
+            {
+                Member::create([
+                    "memberable_id"   =>  $memberplan->id,
+                    "memberable_type" => 'App\Models\Admins\Memberships\MemberShipPlan',
+                    'member_id'       =>  $member,
+                ]);
+            }
             parent::successMessage("Plan Updated Successfully");
             return redirect()->route('membership.index');
         } catch(\Exception $e){
+            dd($e->getMessage());
             parent::dangerMessage("Plan Does Not Updated, Please Try Again");
             return redirect()->back();
         }

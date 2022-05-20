@@ -42,6 +42,17 @@
       'Agent' => 'Jenssegers\\Agent\\Facades\\Agent',
     ),
   ),
+  'josiasmontag/laravel-recaptchav3' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Lunaweb\\RecaptchaV3\\Providers\\RecaptchaV3ServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'RecaptchaV3' => 'Lunaweb\\RecaptchaV3\\Facades\\RecaptchaV3',
+    ),
+  ),
   'laracasts/flash' => 
   array (
     'providers' => 
