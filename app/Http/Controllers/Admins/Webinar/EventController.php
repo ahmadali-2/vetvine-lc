@@ -43,55 +43,22 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->item_type == 'publications'){
+        try{
         $path   = public_path('admin/eventss/');
         $result = vetvineHelper::saveImage($request->main_photo, $path);
-        $path   = public_path('admin/eventss/');
-        $file   = vetvineHelper::saveImage($request->pdf_file, $path);
         $input  = $request->all();
-        try{
             Event::create([
-                "item_type"                     =>   $input['item_type'],
                 "category_id"                   =>   $input['category_id'],
                 "event_title"                   =>   ucwords($input['event_title']),
                 "tags"                          =>   $input['tags'],
-                "pdf_file"                      =>   $file,
-                "main_photo"                    =>   $result,
-                "event_description"             =>   ucfirst($input['event_description']),
-                "Vet_Pet_Prof_Fee"              =>   $input['Vet_Pet_Prof_Fee'],
-                "Pet_Owner_Premium_Fee"         =>   $input['Pet_Owner_Premium_Fee'],
-                "Pet_Owner_Fee"                 =>   $input['Pet_Owner_Fee'],
-                "Vet_Pet_Prof_Premium"          =>   $input['Vet_Pet_Prof_Premium'],
-            ]);
-            parent::successMessage('Event saved successfully.');
-            return redirect(route('webinars.index'));
-        } catch(Exception $e) {
-            dd($e->getMessage());
-            parent::dangerMessage("Publication Event Does Not Created, Please Try  Again");
-            return redirect()->back();
-        }
-    }elseif($request->item_type == 'continue_edu'){
-        $path   = public_path('admin/eventss/');
-        $result = vetvineHelper::saveImage($request->main_photo, $path);
-        $path   = public_path('admin/eventss/');
-        $file   = vetvineHelper::saveImage($request->pdf_file, $path);
-        $path   = public_path('admin/eventss/');
-        $video  = vetvineHelper::saveImage($request->event_add_video, $path);
-        $input  = $request->all();
-        try{
-            Event::create([
-                "item_type"                     =>   $input['item_type'],
-                "category_id"                   =>   $input['category_id'],
-                "event_title"                   =>   ucwords($input['event_title']),
-                "tags"                          =>   $input['tags'],
-                "pdf_file"                      =>   $file,
                 "main_photo"                    =>   $result,
                 "event_add_ytlink"              =>   $input['event_add_ytlink'],
-                "event_add_vimeolink"           =>   $input['event_add_vimeolink'],
-                "event_add_video"               =>   $video,
                 "sponser_one"                   =>   ucwords($input['sponser_one']),
+                "sponser_one_url"               =>   $input['sponser_one_url'],
                 "sponser_two"                   =>   ucwords($input['sponser_two']),
+                "sponser_two_url"               =>   $input['sponser_two_url'],
                 "sponser_three"                 =>   ucwords($input['sponser_three']),
+                "sponser_three_url"             =>   $input['sponser_three_url'],
                 "date"                          =>   $input['date'],
                 "time"                          =>   $input['time'],
                 "presenter_one"                 =>   ucwords($input['presenter_one']),
@@ -101,9 +68,10 @@ class EventController extends Controller
                 "presenter_three"               =>   ucwords($input['presenter_three']),
                 "presenter_three_url"           =>   $input['presenter_three_url'],
                 "event_description"             =>   ucfirst($input['event_description']),
-                "Vet_Pet_Prof_Fee"              =>   $input['Vet_Pet_Prof_Fee'],
-                "Pet_Owner_Premium_Fee"         =>   $input['Pet_Owner_Premium_Fee'],
-                "Pet_Owner_Fee"                 =>   $input['Pet_Owner_Fee'],
+                "vet_pet_prof_fee"              =>   $input['vet_pet_prof_fee'],
+                "pet_owner_premium_fee"         =>   $input['pet_owner_premium_fee'],
+                "pet_owner_fee"                 =>   $input['pet_owner_fee'],
+                "vet_pet_prof_premium_fee"      =>   $input['vet_pet_prof_premium_fee'],
             ]);
             parent::successMessage('Event saved successfully.');
             return redirect(route('webinars.index'));
@@ -114,7 +82,7 @@ class EventController extends Controller
         }
 
     }
-    }
+
 
     /**
      * Display the specified resource.
@@ -154,53 +122,22 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if ($request->item_type == 'publications') {
-            try {
-                $event  = Event::find($id);
-                $path   = public_path('admin/eventss/');
-                $result = vetvineHelper::updateImage($request->main_photo, $event->main_photo, $path);
-                $path   = public_path('admin/eventss/');
-                $file   = vetvineHelper::updateImage($request->pdf_file, $event->pdf_file, $path);
-                $event->update([
-                "event_title"                   =>   $request->input('event_title'),
-                "tags"                          =>   $request->input('tags'),
-                "category_id"                   =>   $request->input('category_id'),
-                "pdf_file"                      =>   $file,
-                "main_photo"                    =>   $result,
-                "event_description"             =>   $request->input('event_description'),
-                "Vet_Pet_Prof_Fee"              =>   $request->input('Vet_Pet_Prof_Fee'),
-                "Pet_Owner_Premium_Fee"         =>   $request->input('Pet_Owner_Premium_Fee'),
-                "Pet_Owner_Fee"                 =>   $request->input('Pet_Owner_Fee'),
-                "Vet_Pet_Prof_Premium"          =>   $request->input('Vet_Pet_Prof_Premium'),
-            ]);
-                parent::successMessage('Event updated successfully.');
-                return redirect(route('webinars.index'));
-            } catch (Exception $e) {
-                parent::dangerMessage(" Publications Event Does Not Updated, Please Try  Again");
-                return redirect()->back();
-            }
-        } elseif($request->item_type == 'continue_edu'){
             try {
             $event  = Event::find($id);
             $path   = public_path('admin/eventss/');
             $result = vetvineHelper::updateImage($request->main_photo, $event->main_photo, $path);
-            $path   = public_path('admin/eventss/');
-            $file   = vetvineHelper::saveImage($request->pdf_file, $event->pdf_file, $path);
-            $path   = public_path('admin/eventss/');
-            $video  = vetvineHelper::saveImage($request->event_add_video, $event->event_add_video, $path);
             $event->update([
-                    "item_type"                     =>   $request->input('item_type'),
                     "category_id"                   =>   $request->input('category_id'),
                     "event_title"                   =>   $request->input('event_title'),
                     "tags"                          =>   $request->input('tags'),
-                    "pdf_file"                      =>   $file,
                     "main_photo"                    =>   $result,
                     "event_add_ytlink"              =>   $request->input('event_add_ytlink'),
-                    "event_add_vimeolink"           =>   $request->input('event_add_vimeolink'),
-                    "event_add_video"               =>   $video,
                     "sponser_one"                   =>   $request->input('sponser_one'),
+                    "sponser_one_url"               =>   $request->input('sponser_one_url'),
                     "sponser_two"                   =>   $request->input('sponser_two'),
+                    "sponser_two_url"               =>   $request->input('sponser_two_url'),
                     "sponser_three"                 =>   $request->input('sponser_three'),
+                    "sponser_three_url"             =>   $request->input('sponser_three_url'),
                     "date"                          =>   $request->input('date'),
                     "time"                          =>   $request->input('time'),
                     "presenter_one"                 =>   $request->input('presenter_one'),
@@ -210,19 +147,18 @@ class EventController extends Controller
                     "presenter_three"               =>   $request->input('presenter_three'),
                     "presenter_three_url"           =>   $request->input('presenter_three_url'),
                     "event_description"             =>   $request->input('event_description'),
-                    "Vet_Pet_Prof_Fee"              =>   $request->input('Vet_Pet_Prof_Fee'),
-                    "Pet_Owner_Premium_Fee"         =>   $request->input('Pet_Owner_Premium_Fee'),
-                    "Pet_Owner_Fee"                 =>   $request->input('Pet_Owner_Fee'),
+                    "vet_pet_prof_fee"              =>   $request->input('vet_pet_prof_fee'),
+                    "pet_owner_premium_fee"         =>   $request->input('pet_owner_premium_fee'),
+                    "pet_owner_fee"                 =>   $request->input('pet_owner_fee'),
+                    "vet_pet_prof_premium_fee"      =>   $request->input('vet_pet_prof_premium_fee'),
                 ]);
                 parent::successMessage('Event updated successfully.');
                 return redirect(route('webinars.index'));
             } catch (Exception $e) {
-                dd($e->getMessage());
                 parent::dangerMessage("Continue Education Event Does Not Updated, Please Try  Again");
                 return redirect()->back();
             }
         }
-    }
 
     /**
      * Remove the specified resource from storage.

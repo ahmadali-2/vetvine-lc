@@ -29,11 +29,11 @@
   <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.css') }}" />
 
   <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}" />
+  
 
-  <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}" />
+
 
   <meta name="csrf-token" content="{{ csrf_token() }}" />
-
   <style>
 
     .nav-wrapper-one a {
@@ -58,7 +58,7 @@ padding: 0px 30px 0px !important;
 @toastr_css
 
 @yield('extra_css')
-
+<link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}" />
 </head>
 
 

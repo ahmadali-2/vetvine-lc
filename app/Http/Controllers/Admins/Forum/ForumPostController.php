@@ -48,6 +48,7 @@ class ForumPostController extends Controller
         try {
             Post::create([
                 "forum_id"                   =>  $request->forum_id,
+                "user_id"                    =>  $user,
                 "post_title"                 =>  ucwords($request->post_title),
                 "post_photo"                 =>  $result,
                 "post_description"           =>  ucfirst($request->description),
@@ -59,7 +60,6 @@ class ForumPostController extends Controller
             parent::successMessage('Post saved successfully.');
             return redirect(route('forumpostlist',$request->forum_id));
         } catch (Exception $e) {
-            dd($e->getMessage());
             parent::dangerMessage("Post Does Not Created, Please Try  Again");
             return redirect()->back();
         }
@@ -124,6 +124,7 @@ class ForumPostController extends Controller
         try {
             Post::find($id)->update([
                 "forum_id"                   =>  $request->forum_id,
+                "user_id"                    =>  $user,
                 "post_title"                 =>  ucwords($request->post_title),
                 "post_photo"                 =>  $result,
                 "post_description"           =>  ucfirst($request->description),

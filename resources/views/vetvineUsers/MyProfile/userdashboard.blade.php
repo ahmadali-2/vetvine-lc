@@ -1,8 +1,5 @@
 @extends('vetvineUsers.dashboard_master')
 @section('dashboardcontent')
-{{-- @php
-    $arr = explode(',',$userEducationData->degree_name ?? '');
-@endphp --}}
 <form  method="post" action="{{ route('personelinfo.store') }}" id="profile_form" enctype="multipart/form-data">
     @csrf
     <div class="dashboard-content-wrapper"  id="personal">
@@ -46,24 +43,6 @@
     </div>
     <div class="dashboard-content-wrapper d-none" id="employe">
       <h4>Employment Info</h4>
-      <div class="row">
-        <div class="col-sm-6">
-            <h6>Professional Position<span class="asteric">*</span></h6>
-            <input type="text" name="professional_position" id="professional_position" value="{{$employmentInfo->professional_position ?? ''}}" placeholder=""  class="form-control" />
-            <span class="asteric" id ="error4"></span>
-          </div>
-          <div class="col-sm-6">
-            <h6>Employment Status<span class="asteric">*</span></h6>
-            <select class="form-control" name="employment_status" id="employment_status">
-                <option value="">Select Employment Status</option>
-                <option value="full_time" @if(isset($employmentInfo->employment_status) && $employmentInfo->employment_status == 'full_time') selected @endif>Full Time</option>
-                <option value="part_time" @if(isset($employmentInfo->employment_status) && $employmentInfo->employment_status == 'part_time') selected @endif>Part Time</option>
-                <option value="retired" @if(isset($employmentInfo->employment_status) && $employmentInfo->employment_status == 'retired') selected @endif>Retired</option>
-                <option value="none" @if(isset($employmentInfo->employment_status) && $employmentInfo->employment_status == 'none') selected @endif>None</option>
-              </select>
-              <span class="asteric" id ="error5"></span>
-          </div>
-      </div>
         <div class="row">
             <div class="col-sm-12 my-4">
                 <h6>Street Address<span class="asteric">*</span></h6>
@@ -98,23 +77,10 @@
                   </select>
                   <span class="asteric" id ="error9"></span>
               </div>
-                <div class="col-sm-6 my-4">
-                    <h6>State<span class="asteric">*</span></h6>
-                    <input type="text" name="state" id="state" value="{{$employmentInfo->state ?? ''}}" placeholder=""  class="form-control" />
-                    <span class="asteric" id ="error10"></span>
-                  </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6 mb-4">
+              <div class="col-sm-6 my-4">
                 <h6>City<span class="asteric">*</span></h6>
                 <input type="text" name="city" id="city" value="{{$employmentInfo->city ?? ''}}" placeholder=""  class="form-control" />
                 <span class="asteric" id ="error11"></span>
-              </div>
-
-            <div class="col-sm-6 mb-4">
-                <h6>Zip Code<span class="asteric">*</span></h6>
-                <input type="text" name="zip_code" id="zip_code" value="{{$employmentInfo->zip_code ?? ''}}" placeholder=""  class="form-control" />
-                <span class="asteric" id ="error12"></span>
               </div>
         </div>
         <div class="row">
@@ -122,11 +88,6 @@
                 <h6>Work Phone Number<span class="asteric">*</span></h6>
                 <input type="number" name="work_phone" id="work_phone" value="{{$employmentInfo->work_phone ?? ''}}" placeholder=""  class="form-control" />
                 <span class="asteric" id ="error13"></span>
-              </div>
-              <div class="col-sm-6 mt-4">
-                <h6>Details</h6>
-                <textarea name="details" id="details" placeholder="" class="form-control">{{$employmentInfo->details ?? ''}}</textarea>
-                <span class="asteric" id ="error18"></span>
             </div>
         </div>
         <div class="row">
@@ -136,125 +97,6 @@
         </div>
       </div>
     </div>
-
-    <!-- skilss Form div start  -->
-    <div class="dashboard-content-wrapper d-none" id="skill">
-      <h4>Skills & Expertise<span class="asteric">*</span></h4>
-      <div class="row">
-        <div class="col-sm-12">
-            <h6>Species Contact</h6>
-            <select class="js-example-basic-multiple form-control" name="skillsandexpertise[]" id="skillsandexpertise" multiple="multiple" style="width: 100%;">
-                @foreach ($skills as $skill)
-                    @if(in_array($skill->id,$sks))
-                        <option value="{{ $skill->id }}" selected>{{ $skill->name }}</option>
-                    @else
-                        <option value="{{ $skill->id }}">{{ $skill->name }}</option>
-                @endif
-                @endforeach
-              </select>
-              <span class="asteric" id ="error14"></span>
-          </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-12 mt-5">
-          <button type="button" class="dashboard-btn" id="skill_btn">Save & Continue</button>
-        </div>
-      </div>
-    </div>
-    <!-- skilss Form div end  -->
-
-<!-- Education  Form div end  -->
-
-    <div class="dashboard-content-wrapper d-none" id="education">
-      <h4>Education</h4>
-      <div class="row">
-      <div class="col-sm-12">
-        <h6>Degree(s) Earned<span class="asteric">*</span></h6>
-        <p class="text-right">
-            If you don't see a degree or diploma listed, enter it in the textbox below.
-        </p>
-        <select class="js-example-basic-multiple form-control" id="degree_id" name="degree_id[]" multiple="multiple"  style="width: 100%;">
-            @foreach ($degrees as $degree)
-                @if(in_array($degree->id,$ued))
-                    <option value="{{ $degree->id }}" selected>{{ $degree->degree_name }}</option>
-                @else
-                    <option value="{{ $degree->id }}">{{ $degree->degree_name }}</option>
-                @endif
-            @endforeach
-          </select>
-          <span class="asteric" id ="error15"></span>
-          <p class="text-right">
-            Please specify 'Other', if any, in the text field below.
-        </p>
-        <input type="text" placeholder="" required class="form-control" name="otherdegree" value="{{$userEducationData->other_school ?? ''}}"/>
-      </div>
-    </div>
-      <div class="row">
-        <div class="col-sm-6 mt-4">
-            <h6>Vaterinary School<span class="asteric">*</span></h6>
-            <select class="form-control" name="schoolname" id="schoolname">
-                <option value="">Select Veterinary School</option>
-                @foreach ($schoolnames as $schoolname)
-                @if(isset($userEducationData->school) && $userEducationData->school == $schoolname->id)
-                      <option value='{{$schoolname->id }}' selected>{{$schoolname->school_name}}</option>;
-                    @else
-                    <option value="{{ $schoolname->id }}">{{ $schoolname->school_name }}</option>
-                    @endif
-                @endforeach
-            </select>
-            <span class="asteric" id ="error16"></span>
-            <p class="text-right">
-                Please specify "Other", if any, in the text field below.
-            </p>
-            <input type="text" placeholder="" required class="form-control" name="otherschool" value="{{$userEducationData->other_school ?? ''}}"/>
-          </div>
-          <div class="col-sm-6 mt-4">
-            <h6>Year Graduated<span class="asteric">*</span></h6>
-            <select class="form-control" name="gradutionyear" id="gradutionyear">
-                <option value="">Select Graduation Year</option>
-                @for($i = date('Y') ; $i > 1950; $i--)
-                    @if(isset($userEducationData->graduation_year) && $userEducationData->graduation_year == $i)
-                      <option value='{{$i}}' selected>{{$i}}</option>;
-                    @else
-                        <option value='{{$i}}'>{{$i}}</option>;
-                    @endif
-                @endfor
-              </select>
-              <span class="asteric" id ="error17"></span>
-          </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6 mt-4">
-                <h6>Did You Do Internship?</h6>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="internship" id="internship" value="1" @if(isset($userEducationData->internship) && $userEducationData->internship==1 ) checked @endif/>
-                    <label class="form-check-label" for="flexRadioDefault1"> Yes </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="internship" id="internship" value="0" @if(isset($userEducationData->internship) && $userEducationData->internship==0 ) checked @endif/>
-                    <label class="form-check-label" for="flexRadioDefault2"> No </label>
-                  </div>
-              </div>
-              <div class="col-sm-6 mt-4">
-                <h6>Did You Do Residency?</h6>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="residency" id="residency" value="1" @if(isset($userEducationData->residency) && $userEducationData->residency==1 ) checked @endif>
-                    <label class="form-check-label" for="flexRadioDefault1"> Yes </label>
-                    </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="residency" id="residency" value="0" @if(isset($userEducationData->residency) && $userEducationData->residency==0 ) checked @endif/>
-                    <label class="form-check-label" for="flexRadioDefault2"> No </label>
-                  </div>
-              </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 mt-5">
-                <button type="button" class="dashboard-btn" id="education_btn">Save & Continue</button>
-            </div>
-      </div>
-    </div>
-
-<!-- Education Form div end  -->
 
     <!-- edit profile Form div start  -->
     <div class="dashboard-content-wrapper d-none" id="profile">
@@ -305,25 +147,6 @@
             $(this).closest('div').find('#error3').show();
         }
     });
-    $('#professional_position').on('keyup', function () {
-        if ($(this).val().length > 0) {
-            $(this).closest('div').find('#error4').hide();
-        }
-        else {
-            $("#error4").html("Professional position field can't be left blank.");
-            $(this).closest('div').find('#error4').show();
-
-        }
-    });
-    $('#employment_status').on('click', function () {
-        if ($(this).val().length > 0) {
-            $(this).closest('div').find('#error5').hide();
-        }
-        else {
-            $("#error5").html("Employment status field can't be left blank.");
-            $(this).closest('div').find('#error5').show();
-        }
-    });
     $('#street_address').on('keyup', function () {
         if ($(this).val().length > 0) {
             $(this).closest('div').find('#error6').hide();
@@ -362,15 +185,6 @@
             $(this).closest('div').find('#error9').show();
         }
     });
-    $('#state').on('keyup', function () {
-        if ($(this).val().length > 0) {
-            $(this).closest('div').find('#error10').hide();
-        }
-        else {
-            $("#error10").html("State field can't be left blank.");
-            $(this).closest('div').find('#error10').show();
-        }
-    });
     $('#city').on('keyup', function () {
         if ($(this).val().length > 0) {
             $(this).closest('div').find('#error11').hide();
@@ -380,15 +194,6 @@
             $(this).closest('div').find('#error11').show();
         }
     });
-    $('#zip_code').on('keyup', function () {
-        if ($(this).val().length > 0) {
-            $(this).closest('div').find('#error12').hide();
-        }
-        else {
-            $("#error12").html("Zip code field can't be left blank.");
-            $(this).closest('div').find('#error12').show();
-        }
-    });
     $('#work_phone').on('keyup', function () {
         if ($(this).val().length > 0) {
             $(this).closest('div').find('#error13').hide();
@@ -396,53 +201,6 @@
         else {
             $("#error13").html("Work phone field can't be left blank.");
             $(this).closest('div').find('#error13').show();
-        }
-    });
-    $('#details').on('keyup', function () {
-        if ($(this).val().length > 0) {
-            $(this).closest('div').find('#error18').hide();
-        }
-        else {
-            $("#error18").html("Details field can't be left blank.");
-            $(this).closest('div').find('#error18').show();
-        }
-    });
-    $('#skillsandexpertise').on('change', function () {
-        var selected = $("#skillsandexpertise :selected").map((_, e) => e.value).get();
-        if (selected != '') {
-            $(this).closest('div').find('#error14').hide();
-        }
-        else {
-            $("#error14").html("There should atleaset one skill and expertise selected!.");
-            $(this).closest('div').find('#error14').show();
-        }
-    });
-    $('#degree_id').on('change', function () {
-        var selected = $("#degree_id :selected").map((_, e) => e.value).get();
-        if (selected != '') {
-            $(this).closest('div').find('#error15').hide();
-        }
-        else {
-            $("#error15").html("There should atleaset one degree selected!.");
-            $(this).closest('div').find('#error15').show();
-        }
-    });
-    $('#schoolname').on('click', function () {
-        if ($(this).val().length > 0) {
-            $(this).closest('div').find('#error16').hide();
-        }
-        else {
-            $("#error16").html("Please select one school name first!.");
-            $(this).closest('div').find('#error16').show();
-        }
-    });
-    $('#gradutionyear').on('click', function () {
-        if ($(this).val().length > 0) {
-            $(this).closest('div').find('#error17').hide();
-        }
-        else {
-            $("#error17").html("Please select one Graduation year first!.");
-            $(this).closest('div').find('#error17').show();
         }
     });
     $(document).ready(function(e){
@@ -462,54 +220,18 @@
     })
     $("#employe_btn").on("click",function(e){
 
-    if($.trim($('#professional_position').val()) == '' || $('#employment_status option:selected').val() == '' || $.trim($('#street_address').val()) == '' || $.trim($('#business_name').val()) == '' || $.trim($('#business_email').val()) == ''
-    || $('#country option:selected').val() == '' || $.trim($('#state').val()) == '' || $.trim($('#city').val()) == '' || $.trim($('#zip_code').val()) == ''
-    || $.trim($('#work_phone').val()) == '' || $.trim($('#details').val()) == '')
+    if( $.trim($('#street_address').val()) == '' || $.trim($('#business_name').val()) == '' || $.trim($('#business_email').val()) == ''
+    || $('#country option:selected').val() == '' || $.trim($('#city').val()) == ''
+    || $.trim($('#work_phone').val()) == '')
     {
       return;
     }
    else{
      $("#employe").addClass('d-none');
      $(".employe").addClass('employee_show');
-     $("#skill").removeClass('d-none');
-     $("#skill").removeClass('hide_form');
-     $(".nav_ul li .active").removeClass("active");
-     $(".nav_ul li .skill").addClass("active");
-    }
-    })
-
-    // education form show
-    $("#skill_btn").on("click",function(e){
-    var selected = $("#skillsandexpertise :selected").map((_, e) => e.value).get();
-    if (selected == '')
-    {
-        return;
-    }
-   else{
-      let per = $("#personal").html();
-     $("#skill").addClass('d-none');
-     $(".skill").addClass('skill_show');
-     $("#education").removeClass('d-none');
-     $("#education").removeClass('hide_form');
-     $(".nav_ul li .skill").removeClass("active");
-     $(".nav_ul li .education").addClass("active");
-   }
-    })
-    // profile form show
-    $("#education_btn").on("click",function(e){
-    // var flag =true;
-    var selected = $("#degree_id :selected").map((_, e) => e.value).get();
-    if (selected == '' || $('#schoolname option:selected').val() == '' || $('#gradutionyear option:selected').val() == '')
-    {
-    return ;
-    }
-   else{
-      let per = $("#personal").html();
-     $("#education").addClass('d-none');
-     $(".education").addClass('education_show');
      $("#profile").removeClass('d-none');
      $("#profile").removeClass('hide_form');
-     $(".nav_ul li .education").removeClass("active");
+     $(".nav_ul li .active").removeClass("active");
      $(".nav_ul li .profile").addClass("active");
     }
     })
@@ -656,33 +378,6 @@ $(document).ready(function(){
       $(".nav_ul li .active").removeClass("active");
       $(".nav_ul li .employe").addClass("active");
   })
-
-
-    // Skill form show
-    $(document).on("click",".skill_show",function(){
-
-      $("#personal").addClass("hide_form");
-      $("#employe").addClass("hide_form");
-      $("#profile").addClass("hide_form");
-      $("#skill").removeClass("hide_form");
-      $("#skill").removeClass("d-none");
-      $("#education").addClass("hide_form");
-      $(".nav_ul li .active").removeClass("active");
-      $(".nav_ul li .skill").addClass("active");
-  })
-    // Education form show
-    $(document).on("click",".education_show",function(){
-
-      $("#personal").addClass("hide_form");
-      $("#employe").addClass("hide_form");
-      $("#profile").addClass("hide_form");
-      $("#education").removeClass("hide_form");
-      $("#education").removeClass("d-none");
-      $("#skill").addClass("hide_form");
-      $(".nav_ul li .active").removeClass("active");
-      $(".nav_ul li .education").addClass("active");
-  })
-
 
 })
 
