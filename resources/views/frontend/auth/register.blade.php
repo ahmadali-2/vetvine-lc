@@ -172,7 +172,7 @@ $timezones =vetvineHelper::timezones()
                                                     </span>
                                                     @endif
                                                 </div>
-        
+
                          <div class="col-md-12 text-center">
                                                     <div class="mm-new-checkbox" style="margin-left:24px;">
                                                         <input class="form-check-input input_click" type="checkbox" name="termsofservice">
@@ -185,11 +185,11 @@ $timezones =vetvineHelper::timezones()
 
 
 
-                                                
+
                                                 <div class="col-sm-12 text-center pad-left-captha">
-                                                   
+
                                                     <div class="form-group{{ $errors->has('CaptchaCode') ? ' has-error' : '' }}">
-                                                      
+
                                                           <div class="col-md-6 captcha_top mx-auto">
                                                             {!! captcha_image_html('ContactCaptcha') !!}
                                                           <input class="form-control" type="text" id="CaptchaCode" name="CaptchaCode">
@@ -207,7 +207,7 @@ $timezones =vetvineHelper::timezones()
                                             </div>
                                                     <div class="col-sm-12 text-center">
 
-                                        
+
 
                                                     <div class="social_icons_modal">
                                                         <a href="{{ url('social/facebook') }}" class="socialbtns "><i class="fa fa-facebook-square " aria-hidden="true"></i></a>
@@ -359,7 +359,7 @@ $('.ui-corner-top').on('change',function() {
         var curlink = $(this).attr('href', anchorlick + '/' + usertype + '/' + networkLevel);
     })
  })
- 
+
  $('#nav_id_google').on('click',function(){
      alert("oaspda");
  });
@@ -375,7 +375,7 @@ $('#password').on('keyup',function(){
 
     let a = $(".pad-left-captha").find("a").css("display","none");
     // console.log(a);
-     
+
 
    })
 
