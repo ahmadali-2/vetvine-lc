@@ -19,8 +19,6 @@ class Post extends Model
         'post_description',
         'post_link',
         'status',
-        'post_add_ytlink',
-        'post_add_vimeolink',
         'post_add_video',
     ];
     public function user()

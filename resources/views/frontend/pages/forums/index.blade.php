@@ -30,7 +30,6 @@
         </h2>
     </div>
 </section>
-
 <section>
     <div class="specialty-topics">
         <div class="container">
@@ -55,14 +54,14 @@
                             </div>
                             <div class="behavior-description">
                                 <div class="file">
-                                    <img src="{{ asset('frontend/forums/img/forum-file-icon.png') }}"
-                                        alt="">
-                                    <p>105</p>
+                                    {{-- <img src="{{ asset('frontend/forums/img/forum-file-icon.png') }}"
+                                        alt=""> --}}
+                                    <p>Posts</p>
                                 </div>
                                 <div class="latter-box">
                                     <img src="{{ asset('frontend/forums/img/later-box-icon.png') }}"
                                         alt="">
-                                    <p>202</p>
+                                    <p>{{$forum->posts->count()}}</p>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +73,7 @@
                         <div class="behavior-details-right ">
                             <p class="behavior-card-description">Last reply by VetVine CE in Child-Dog Safety Resources
                             </p>
-                            <p class="date">March 3, 2021</p>
+                            <p class="date">{{$forum->created_at->format('d M Y')}}</p>
                         </div>
                     </div>
                 </div>

@@ -13,9 +13,12 @@ class CommentController extends Controller
 {
     public function store(Request $request)
     {
-        $request->validate([
-            'comment'      => 'required',
-        ]);
+        if($request->comment == '')
+        {
+            return back();
+        }
+        else
+        {
         $comment = new Comment;
 
         $comment->comment = $request->comment;
@@ -27,22 +30,30 @@ class CommentController extends Controller
         $post->comments()->save($comment);
 
         return back();
+        }
     }
     public function replyStore(Request $request)
     {
-        $reply = new Comment();
+        if($request->reply == '')
+        {
+            return back();
+        }
+        else
+        {
+            $reply = new Comment();
 
-        $reply->comment = $request->get('reply');
+            $reply->comment = $request->get('reply');
 
-        $reply->user()->associate($request->user());
+            $reply->user()->associate($request->user());
 
-        $reply->parent_id = $request->get('comment_id');
+            $reply->parent_id = $request->get('comment_id');
 
-        $post = Post::find($request->get('post_id'));
+            $post = Post::find($request->get('post_id'));
 
-        $post->comments()->save($reply);
+            $post->comments()->save($reply);
 
-        return back();
+            return back();
+        }
 
     }
     public function destroy($id)
@@ -50,8 +61,9 @@ class CommentController extends Controller
         try{
             Comment::find($id)->delete();
             parent::successMessage('Comment Deleted successfully.');
-            return redirect(route('forumpostlist'));
+            return redirect()->back();
         } catch(Exception $e) {
+        //    dd( $e->getMessage());
             parent::dangerMessage("Comment Does Not Deleted, Please Try  Again");
             return redirect()->back();
         }

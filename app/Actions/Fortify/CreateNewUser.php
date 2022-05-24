@@ -23,10 +23,10 @@ class CreateNewUser implements CreatesNewUsers
     {
        Validator::make($input, [
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'CaptchaCode' => 'required|valid_captcha',           
+            'CaptchaCode' => 'required|valid_captcha',
          ])->validate();
-        
-          
+
+
        $user = User::create([
             'name'              => $input['first_name'] .' '. $input['last_name'] ,
             'email'             => $input['email'],
