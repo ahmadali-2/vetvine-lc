@@ -95,7 +95,7 @@ class ManageAdController extends Controller
         try{
             $ad     = Ad::find($id);
             $path   = public_path('admin/advertisement/');
-            $result = vetvineHelper::updateImage($request->ad_media,$ad->ad_media, $path);
+            $result = vetvineHelper::updateImage($request->ad_media_update,$ad->ad_media, $path);
             $ad->update([
              'ad_name'                      =>  ucwords($request->input('ad_name')),
              'ad_media'                     =>  $result,

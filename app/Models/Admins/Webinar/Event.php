@@ -2,6 +2,7 @@
 
 namespace App\Models\Admins\Webinar;
 
+use App\Models\Webinar\BuyEventPlan;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -38,5 +39,9 @@ class Event extends Model
     public function events()
     {
         return $this->belongsTo(CategoryEvent::class,"category_id");
+    }
+    public function buymemberships()
+    {
+        return $this->hasMany(BuyEventPlan::class);
     }
 }
