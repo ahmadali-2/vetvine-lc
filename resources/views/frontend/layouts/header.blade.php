@@ -141,8 +141,8 @@ $vetvineLogo =vetvineHelper::vetvineGeneralSetting()
                                   <li><a href="#">videos on demand</a></li>
 
                                                              <li><a href="#">Certificate & special programs</a></li>
-                                  <li><a href="#">forums</a></li>
-                                  <li><a href="#">Pet Health Articles </a></li>
+                                                             <li><a href="{{route('forumsfrontend')}}">forums</a></li>
+                                                             <li><a href="#">Pet Health Articles </a></li>
 
                                                         </ul>
 

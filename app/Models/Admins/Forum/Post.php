@@ -18,8 +18,6 @@ class Post extends Model
         'post_photo',
         'post_link',
         'status',
-        'post_add_ytlink',
-        'post_add_vimeolink',
         'post_add_video',
     ];
 

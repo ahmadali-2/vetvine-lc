@@ -10,6 +10,7 @@ use App\Models\Generals\Member;
 use App\Models\UserMemberAndNetworkLevel;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ForumController extends Controller
 {
@@ -27,6 +28,9 @@ class ForumController extends Controller
 
     public function frontendIndex()
     {
+        $user=Auth::user();
+        if($user)
+        {
         $categories   =   CategoryForum::all();
         $ads          =   Ad::all();
         $forums       =   Forum::all();

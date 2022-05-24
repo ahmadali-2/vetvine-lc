@@ -182,6 +182,7 @@ return [
         App\Providers\VetvineHelperServiceProvider::class,
         Mckenziearts\Notify\LaravelNotifyServiceProvider::class,
         Yoeunes\Toastr\ToastrServiceProvider::class,
+       
     ],
 
     /*

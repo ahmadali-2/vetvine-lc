@@ -97,7 +97,6 @@ Route::get('login', function(){
     return view('frontend.home');
 })->name('login');
 
-        //  --------------------- Fahad commented this line jus to check -------------------
 
 /**
  * Admin Routes
@@ -154,6 +153,8 @@ Route::get('publications',[HomeController::class,'publications'])->name('upcomin
 Route::post('educations',[HomeController::class,'searceducations'])->name('search_educations');
 
 Route::get('faqs',[HomeController::class,'faqs'])->name('faqs');
+Route::get('frontend-news',[NewsController::class,'frontIndex'])->name('newsfrontend');
+Route::get('frontend-forums',[ForumController::class,'frontendIndex'])->name('forumsfrontend');
 
 });
 Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetvineUserRole']], function(){
@@ -168,7 +169,6 @@ Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetv
     // User Post management routes
     Route::resource('post', PostController::class);
     //forum posts
-    Route::get('frontend-forums',[ForumController::class,'frontendIndex'])->name('forumsfrontend');
     Route::get('create-forumpost/{id}',[ForumPostController::class,'createPost'])->name('createforumpost');
     Route::get('forumpostlist/{id}',[ForumPostController::class,'forumPostList'])->name('forumpostlist');
     Route::resource('forums-posts',ForumPostController::class);
@@ -176,5 +176,5 @@ Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetv
     Route::post('/comment/store', [CommentController::class,'store'])->name('comment.add');
     Route::delete('comment-destroy/{id}', [CommentController::class,'destroy'])->name('comment.destroy');
     Route::post('/reply/store', [CommentController::class,'replyStore'])->name('reply.add');
-    Route::get('frontend-news',[NewsController::class,'frontIndex'])->name('newsfrontend');
+
 });
