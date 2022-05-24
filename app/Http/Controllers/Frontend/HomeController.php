@@ -6,6 +6,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use vetvineHelper;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Admins\Forum\CategoryForum;
 use App\Models\Admins\Forum\Forum;
 use App\Models\Admins\Forum\ForumPost;
@@ -52,7 +53,15 @@ class HomeController extends Controller
     }
     public function payementwebinars()
     {
-        return view('frontend.pages.webinars.payementwebinars');
+        $user = Auth::user();
+        if($user){
+            return view('frontend.pages.webinars.payementwebinars');
+        }
+        else{
+            parent::dangerMessage("Your Are Not Logged in, Please Login And Try  Again");
+            return redirect('login');
+        }
+
     }
     public function forums()
     {
@@ -68,6 +77,7 @@ class HomeController extends Controller
     }
     public function upcomingWebinars()
     {
+
         $showevent = Event::with('events')->get();
         $category = CategoryEvent::all();
         return view('frontend.pages.webinars.upcoming-webinars',compact('showevent','category'));
@@ -86,9 +96,10 @@ class HomeController extends Controller
         $category = CategoryEvent::all();
         return view('frontend.pages.webinars.upcoming-webinars',compact('showevent','category'));
     }
-    public function upcomingWebinarsdetails()
+    public function upcomingWebinarsdetails($id)
     {
-        $eventdetail = Event::with('events')->get();
+
+        $eventdetail = Event::with('events')->where('id',$id)->get();
         $category = CategoryEvent::all();
         return view('frontend.pages.webinars.upcoming-eventsdetails',compact('eventdetail','category'));
 

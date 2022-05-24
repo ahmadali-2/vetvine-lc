@@ -97,7 +97,8 @@
                                 <p class="para-decription">
                                     {{ Str::limit($showevents->event_description, 250) }}
                                 </p>
-                                <a href="{{ route('upcoming_details') }}">Read More</a>
+                            
+                                <a href="{{ route('upcoming_details', $showevents->id) }}">Read More</a>
                             </div>
                         </div>
                     </div>

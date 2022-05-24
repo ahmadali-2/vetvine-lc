@@ -177,7 +177,7 @@
                                         <div class="form-group">
                                             <label for="pet_owner_fee" class="control-label mb-1">Pet Owner Fee $</label>
                                             <input id="pet_owner_fee" placeholder="Enter Fee" name="pet_owner_fee"
-                                                type="number" class="form-control" value="">
+                                                type="number" class="form-control" value="" min="0">
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -186,7 +186,7 @@
                                                 Fee
                                                 $</label>
                                             <input id="pet_owner_premium_fee" placeholder="Enter Fee"
-                                                name="pet_owner_premium_fee" type="number" class="form-control" value="">
+                                                name="pet_owner_premium_fee" type="number" class="form-control" value="" min="0">
                                         </div>
                                     </div>
                                 </div>
@@ -196,7 +196,7 @@
                                             <label for="vet_pet_prof_fee" class="control-label mb-1">Vet/Pet Prof. Fee
                                                 $</label>
                                             <input id="vet_pet_prof_fee" placeholder="Enter Fee" name="vet_pet_prof_fee"
-                                                type="number" class="form-control">
+                                                type="number" class="form-control" min="0">
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -205,7 +205,7 @@
                                                 Premium Fee
                                                 $</label>
                                             <input placeholder="Enter Fee" name="vet_pet_prof_premium_fee" type="number"
-                                                class="form-control">
+                                                class="form-control" min="0">
                                         </div>
                                     </div>
                                 </div>

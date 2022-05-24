@@ -37,7 +37,7 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for=ad_media" class="control-label mb-1">Advertisement Media</label>
-                                            <input id="ad_media" name="admedia" accept='image/*' type="file"
+                                            <input id="admedia" name="ad_media_update" accept='image/*' type="file"
                                                 class="form-control cc-number identified visa"
                                                 value="{{ $ad->ad_media }}">
                                             <span class="form-group-label">

@@ -132,7 +132,6 @@ class MemberShipPlansController extends Controller
             parent::successMessage("Plan Updated Successfully");
             return redirect()->route('membership.index');
         } catch(\Exception $e){
-            dd($e->getMessage());
             parent::dangerMessage("Plan Does Not Updated, Please Try Again");
             return redirect()->back();
         }
