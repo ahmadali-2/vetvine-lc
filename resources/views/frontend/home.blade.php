@@ -11,7 +11,7 @@
                         <p> A better life for animals and the humans <br> who care for them.</p>
 
                         <div class="line"></div>
-                        <a href="{{ route('why_vetvine') }}" class="btn btn-warning home_banner_btn">WHY VITVINE?</a>
+                        <a href="{{ route('why_vetvine') }}" class="btn btn-warning home_banner_btn">WHY VETVINE?</a>
                     </div>
                 </div>
             </div>

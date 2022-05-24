@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admins\Forum;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admins\Forum\CategoryForum;
+use App\Models\Admins\Advertisement\Ad;
 use App\Models\Admins\Forum\Forum;
 use App\Models\Generals\Member;
 use App\Models\UserMemberAndNetworkLevel;
@@ -31,7 +32,9 @@ class ForumController extends Controller
         if($user)
         {
         $categories   =   CategoryForum::all();
-        return view('frontend.pages.forums.index',compact('categories'));
+        $ads          =   Ad::all();
+        $forums       =   Forum::all();
+        return view('frontend.pages.forums.index',compact('categories','forums','ads'));
         }
         else
         {
@@ -126,7 +129,7 @@ class ForumController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $input = $request->all();
         $forum = Forum::find($id);
         try{
