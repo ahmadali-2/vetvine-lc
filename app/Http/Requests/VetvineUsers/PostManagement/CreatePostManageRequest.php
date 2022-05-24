@@ -25,7 +25,7 @@ class CreatePostManageRequest extends FormRequest
     {
         return [
             'post_title'          => 'required',
-            'post_photo'          => 'required',
+            // 'post_photo'          => 'required',
             'post_link'           => 'required',
             'post_description'    => 'required',
         ];
@@ -34,7 +34,7 @@ class CreatePostManageRequest extends FormRequest
     {
         return [
             'post_title.required'            => 'The Post Title Field is Required',
-            'post_photo.required'            => 'The Post Photo Field is Required',
+            // 'post_photo.required'            => 'The Post Photo Field is Required',
             'post_link.required'             => 'The Post Link Field is Required',
             'post_description.required'      => 'The Description Field is Required',
         ];

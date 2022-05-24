@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admins\News\News;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NewsController extends Controller
 {
@@ -65,8 +66,18 @@ class NewsController extends Controller
     }
     public function frontIndex()
     {
-        $news   =   News::all();
-        return view('frontend.pages.news.index',compact('news'));
+        $user=Auth::user();
+        if($user)
+        {
+            $news   =   News::all();
+            return view('frontend.pages.news.index',compact('news'));
+        }
+        else
+        {
+            parent::dangerMessage("Your Are Not Logged in, Please Login And Try  Again");
+            return redirect('login');
+        }
+
     }
     /**
      * Show the form for editing the specified resource.

@@ -9,8 +9,7 @@
                 <div class="card-body">
                     <div id="pay-invoice">
                         <div class="card-body">
-                            <form action="{{ route('ads-manage.update', $ad->id) }}" method="post" id="createadsmanage"
-                                novalidate="novalidate" enctype="multipart/form-data">
+                            <form action="{{ route('ads-manage.update', $ad->id) }}" method="post" id="createadsmanage" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">

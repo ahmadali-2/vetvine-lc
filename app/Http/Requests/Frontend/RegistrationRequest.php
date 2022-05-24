@@ -24,6 +24,7 @@ class RegistrationRequest extends FormRequest
     public function rules()
     {
         return [
+            
             'first_name'         => ['required'],
             'last_name'          => ['required'],
             'email'              => ['required','email', 'string',  'max:255', 'unique:users'],
@@ -32,8 +33,7 @@ class RegistrationRequest extends FormRequest
             'confirm_password'   => ['same:password','required'],
             'timezone'           => ['required'],
             'termsofservice'     => ['required'],
-            'captchaCode'        => ['required|valid_captcha']
-
+          
         ];
     }
 
@@ -55,8 +55,6 @@ class RegistrationRequest extends FormRequest
             'password.confirmed'         => 'Password  Must Be Confirmed With Confirm Password',
             'confirm_password.required'  => 'Confirm Password  Field Is Required',
             'confirm_password.same'      => 'Confirm Password And  Password Must be Same',
-            'captchaCode.required'       =>  'Please enter captcha!',
-            'captchaCode.valid_captcha'  =>  'Captcha code not matched.Try again!',
         ];
 
     }

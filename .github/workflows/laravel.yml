@@ -13,4 +13,4 @@ jobs:
       with:
         server: ftp.leadconcept.business
         username: ${{secrets.ftp_username}}
-        password: ${{secrets.ftp_password}}
+        password: 

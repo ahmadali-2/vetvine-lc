@@ -53,8 +53,6 @@ class ForumPostController extends Controller
                 "post_photo"                 =>  $result,
                 "post_description"           =>  ucfirst($request->description),
                 "post_link"                  =>  $request->post_link,
-                "post_add_ytlink"            =>  $request->post_add_ytlink,
-                "post_add_vimeolink"         =>  $request->post_add_vimeolink,
                 "post_add_video"             =>  $video,
             ]);
             parent::successMessage('Post saved successfully.');
@@ -116,23 +114,42 @@ class ForumPostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user   = Auth::user()->id;
-        $path   = public_path('vetvineUsers/posts/');
-        $result = vetvineHelper::saveImage($request->post_photo, $path);
-        $path   = public_path('vetvineUsers/videos/');
-        $video  = vetvineHelper::saveImage($request->post_add_video, $path);
+
         try {
+            $user   = Auth::user()->id;
             Post::find($id)->update([
-                "forum_id"                   =>  $request->forum_id,
-                "user_id"                    =>  $user,
-                "post_title"                 =>  ucwords($request->post_title),
-                "post_photo"                 =>  $result,
-                "post_description"           =>  ucfirst($request->description),
-                "post_link"                  =>  $request->post_link,
-                "post_add_ytlink"            =>  $request->post_add_ytlink,
-                "post_add_vimeolink"         =>  $request->post_add_vimeolink,
-                "post_add_video"             =>  $video,
+                "forum_id"               =>  $request->forum_id,
+                "user_id"                =>  $user,
+                "post_title"             =>  ucwords($request->post_title),
+                "post_description"       =>  ucfirst($request->description),
+                "post_link"              =>  $request->post_link,
             ]);
+            if (request()->hasFile('post_photo'))
+            {
+                $path   = public_path('vetvineUsers/posts/');
+                $result = vetvineHelper::saveImage($request->post_photo, $path);
+                Post::find($id)->update([
+                    "post_photo"    =>  $result
+                ]);
+            }
+            else if(request()->hasFile('post_add_video')){
+                $path   = public_path('vetvineUsers/videos/');
+                $video  = vetvineHelper::saveImage($request->post_add_video, $path);
+                Post::find($id)->update([
+                    "post_add_video"   =>  $video,
+                ]);
+            }
+            else
+            {
+                $user   = Auth::user()->id;
+                Post::find($id)->update([
+                    "forum_id"                   =>  $request->forum_id,
+                    "user_id"                    =>  $user,
+                    "post_title"                 =>  ucwords($request->post_title),
+                    "post_description"           =>  ucfirst($request->description),
+                    "post_link"                  =>  $request->post_link,
+                ]);
+            }
             parent::successMessage('Post Updated successfully.');
             return redirect(route('forumpostlist',$request->forum_id));
         } catch(Exception $e) {

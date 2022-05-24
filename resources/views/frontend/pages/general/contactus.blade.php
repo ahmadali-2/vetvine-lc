@@ -44,12 +44,7 @@
                                     <textarea name="message" id="" class="my-custom_textarea"></textarea>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <div class="google-captcha google_custom">
-                                    <div class="g-recaptcha" data-sitekey="6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW">
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
 
 

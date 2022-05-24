@@ -38,6 +38,7 @@
                                         <div class="behavior-title">
                                             <h2>{{$post->post_title}}</h2>
                                         </div>
+                                        
                                     </div>
                                 </a>
                     </div>
@@ -48,7 +49,7 @@
                         <div class="behavior-details-right ">
                             <p class="behavior-card-description">Last reply by VetVine CE in Child-Dog Safety Resources
                             </p>
-                            <p class="date">March 3, 2021</p>
+                            <p class="date">{{$post->created_at->format('d M Y')}}</p>
                         </div>
                     </div>
                 </div>

@@ -93,7 +93,7 @@ class ManageAdController extends Controller
     public function update(Request $request, $id)
     {
         try{
-            $ad = Ad::find($id);
+            $ad     = Ad::find($id);
             $path   = public_path('admin/advertisement/');
             $result = vetvineHelper::updateImage($request->ad_media_update,$ad->ad_media, $path);
             $ad->update([
@@ -105,6 +105,7 @@ class ManageAdController extends Controller
              parent::successMessage('Advertisement updated successfully.');
              return redirect(route('ads-manage.index'));
         } catch(Exception $e) {
+            dd($e->getMessage());
              parent::dangerMessage("Advertisement Does Not Updated, Please Try  Again");
              return redirect()->back();
         }

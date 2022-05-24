@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admins\Forum;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admins\Forum\CategoryForum;
+use App\Models\Admins\Advertisement\Ad;
 use App\Models\Admins\Forum\Forum;
 use App\Models\Generals\Member;
 use App\Models\UserMemberAndNetworkLevel;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ForumController extends Controller
 {
@@ -26,9 +28,19 @@ class ForumController extends Controller
 
     public function frontendIndex()
     {
+        $user=Auth::user();
+        if($user)
+        {
         $categories   =   CategoryForum::all();
+        $ads          =   Ad::all();
         $forums       =   Forum::all();
-        return view('frontend.pages.forums.index',compact('categories','forums'));
+        return view('frontend.pages.forums.index',compact('categories','forums','ads'));
+        }
+        else
+        {
+            parent::dangerMessage("Your Are Not Logged in, Please Login And Try  Again");
+            return redirect('login');
+        }
     }
 
     /**
@@ -117,7 +129,7 @@ class ForumController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $input = $request->all();
         $forum = Forum::find($id);
         try{

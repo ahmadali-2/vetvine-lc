@@ -60,8 +60,6 @@ class PostController extends Controller
                 "user_id"                    =>  $user,
                 "post_description"           =>  $request->description,
                 "post_link"                  =>  $request->post_link,
-                "post_add_ytlink"            =>  $request->post_add_ytlink,
-                "post_add_vimeolink"         =>  $request->post_add_vimeolink,
                 "post_add_video"             =>  $video,
             ]);
             parent::successMessage('Post saved successfully.');
@@ -117,8 +115,6 @@ class PostController extends Controller
                 "user_id"                =>  $user,
                 'post_description'       =>  $request->input('description'),
                 'post_link'              =>  $request->input('post_link'),
-                'post_add_ytlink'        =>  $request->input('post_add_ytlink'),
-                'post_add_vimeolink'     =>  $request->input('post_add_vimeolink'),
                 'post_add_video'         =>  $video,
             ]);
             parent::successMessage('Post updated successfully.');
