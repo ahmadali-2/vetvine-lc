@@ -35,6 +35,12 @@ class ForumController extends Controller
         $ads          =   Ad::all();
         $forums       =   Forum::all();
         return view('frontend.pages.forums.index',compact('categories','forums','ads'));
+        }
+        else
+        {
+            parent::dangerMessage("Your Are Not Logged in, Please Login And Try  Again");
+            return redirect('login');
+        }
     }
 
     /**
