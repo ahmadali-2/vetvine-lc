@@ -55,14 +55,14 @@
             <form method="post" id="commentform" action="{{ route('comment.add') }}">
                 @csrf
                 <div class="form-group mt-2">
-                    <input type="text" name="comment" class="form-control" style="border: 1px solid #ced4da !important;"/>
+                    <input type="text" name="comment" id="comment" class="form-control" style="border: 1px solid #ced4da !important;"/>
+                    <span class="asteric" id ="error1"></span>
                     <input type="hidden" name="post_id" value="{{ $posts->id }}" />
-                    @error('comment')
-                <p class="alert-danger">{{ $message }}</p>
-                @enderror
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-sm btn-outline-danger py-0" style="font-size: 0.8em;" value="Add Comment" />
+                    <button type="submit" class="btn btn-primary"" id="comment_btn">Add Comment</button>
+
+                    {{-- <input type="submit" id="comment_btn" class="btn btn-sm btn-outline-danger py-0" style="font-size: 0.8em;" value="Add Comment" /> --}}
                 </div>
             </form>
            </div>
@@ -70,8 +70,17 @@
     <div style="height: 50px;"></div>
 </section>
 @endsection
-@section('scripts')
-<script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-{!! JsValidator::formRequest('App\Http\Requests\VetvineUsers\PostManagement\CreateCommentRequest','#commentform') !!}
-@endsection
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+                $("#comment_btn").click(function () {
+                    if( $.trim($('#comment').val()) == '')
+                    {
+                        $("#error1").html("Comment field can't be left blank.");
+                        return false;
+                    }
+                });
+            })
+    </script> --}}
+
 

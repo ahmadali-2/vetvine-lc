@@ -23,6 +23,10 @@ class Forum extends Model
     {
         return $this->hasMany(Post::class,'forum_id','id');
     }
+    public function countposts()
+    {
+        return $this->hasMany('posts')->count();
+    }
     function category()
     {
         return $this->belongsTo(CategoryForum::class,'category_id','id');

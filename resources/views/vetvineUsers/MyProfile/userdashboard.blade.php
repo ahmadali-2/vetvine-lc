@@ -207,6 +207,7 @@
     $("#personal_btn").on("click",function(e){
     if($.trim($('#firstname').val()) == '' || $.trim($('#lastname').val()) == '' || $.trim($('#licensure').val()) == '')
     {
+        toastr.error('Make sure compulsory fields are not empty.');
       return;
    }
    else{
@@ -224,6 +225,7 @@
     || $('#country option:selected').val() == '' || $.trim($('#city').val()) == ''
     || $.trim($('#work_phone').val()) == '')
     {
+        toastr.error('Make sure compulsory fields are not empty.');
       return;
     }
    else{
