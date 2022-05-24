@@ -65,6 +65,7 @@ class NewsController extends Controller
     }
     public function frontIndex()
     {
+        
         $news   =   News::all();
         return view('frontend.pages.news.index',compact('news'));
     }

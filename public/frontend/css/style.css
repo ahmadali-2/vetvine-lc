@@ -5910,6 +5910,39 @@ letter-spacing:1px;
     color:#fff !important;
   }
 
+  .BDC_CaptchaImageDiv{
+
+    width: 250px;
+    height: 40px;
+    margin: 49px 0px 0px 0px !important;
+  }
+
+  /* .captcha_top a {
+      visibility: hidden !important;
+  } */
+
+  #CaptchaCode{
+    text-transform: uppercase;
+    height: 64px !important;
+    padding-left: 37px  !important;
+    font-size: 35px;
+  }
+
+  #ContactCaptcha_CaptchaIconsDiv{
+    margin-top: 7px;
+    width: 24px !important;
+    margin-left: 6px;
+}
+  
+.pad-left-captha{
+    padding-left: 0px;
+}
+#ContactCaptcha_ReloadLink{
+    margin-bottom: 3px !important;
+}
+#ContactCaptcha_ReloadLink , #ContactCaptcha_SoundLink{
+    display: block !important;
+}
   .video-bottom-description .vetvine_a{
       background: #fff;
 color:  #507f87;
