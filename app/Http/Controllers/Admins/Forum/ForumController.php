@@ -126,6 +126,7 @@ class ForumController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         $input = $request->all();
         $forum = Forum::find($id);
         try{

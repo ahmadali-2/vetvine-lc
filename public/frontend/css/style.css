@@ -4550,7 +4550,7 @@ letter-spacing:1px;
         color: yellow !important;
         background-color: #000;
     }
-}
+
 
 @media (max-width:400px) {
     #Registration-modal .container {
@@ -5895,17 +5895,538 @@ letter-spacing:1px;
     color:#fff !important;
   }
   .registraion_form_pop_up ul li label:hover{
-    color:#fff ; 
+    color:#fff ;
   }
   .registraion_form_pop_up ul li input[type=radio]{
     display:none !important;
   }
-  
+
   .active_li{
   background:#f27222 !important;
   color:#fff;
-   
+
   }
   .active_li label{
     color:#fff !important;
+  }
+
+  .BDC_CaptchaImageDiv{
+
+    width: 250px;
+    height: 40px;
+    margin: 49px 0px 0px 0px !important;
+  }
+
+  /* .captcha_top a {
+      visibility: hidden !important;
+  } */
+
+  #CaptchaCode{
+    text-transform: uppercase;
+    height: 64px !important;
+    padding-left: 37px  !important;
+    font-size: 35px;
+  }
+
+  #ContactCaptcha_CaptchaIconsDiv{
+    margin-top: 7px;
+    width: 24px !important;
+    margin-left: 6px;
+}
+  
+.pad-left-captha{
+    padding-left: 0px;
+}
+#ContactCaptcha_ReloadLink{
+    margin-bottom: 3px !important;
+}
+#ContactCaptcha_ReloadLink , #ContactCaptcha_SoundLink{
+    display: block !important;
+}
+  .video-bottom-description .vetvine_a{
+      background: #fff;
+color:  #507f87;
+width: 138px;
+  }
+
+
+  /* publication style Start  */
+.publication-bottom-text h3{
+    font-size: 17px;
+    color: #5c7c85;
+    font-family: "Museo 700";
+    margin-bottom: 10px;
+    margin-top:15px;
+    text-transform: uppercase;
+  letter-spacing:1px;
+  }
+  .publication-bottom-text h4{
+    font-size: 15px;
+    color: #5c7c85;
+    margin-bottom:10px;
+    font-family: "Museo Sans 500";
+    text-transform: uppercase;
+  }
+  .publication_col{
+    padding-left:0px;
+    padding-right:0px;
+  }
+  .publication_col img{
+    width:90%;
+  }
+  .publication-bottom-description p{
+    font-family: "Museo Sans 500";
+    font-size: 13px;
+    color: #507f87;
+    text-transform: initial;
+    margin-bottom: 18px;
+    width: 272px;
+  }
+  .publication-bottom-description .p_btn{
+
+      text-decoration: none;
+      font-family: "Museo 700";
+      border: 1px solid #f27222;
+      text-align: center;
+      color: #fff;
+      border-radius: 30px;
+      display: inline-block;
+      background-color: #f27222;
+      font-size: 13px;
+      text-transform: capitalize;
+      transition: all 0.3s;
+      width: 125px;
+      height: 33px;
+      font-family: "Museo Sans 500";
+      line-height: 31px;
+
+  }
+  .pagination_col{
+    display: flex;
+      justify-content: end;
+  }
+  .page-item.active .page-link{
+    background:#f27222 !important;
+  }
+
+  .pagination_col .page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #728d95;
+  }
+  .pagination_col .page-item .page-link {
+      color: #728d95;
+
+
+  }
+  /* publication style end  */
+  .public-detail-inner h2 {
+    font-size: 24px;
+    letter-spacing: 1px;
+    color: #5c7c85;
+    font-family: "Museo 500";
+    padding: 30px 0;
+    margin-bottom: 0 !important;
+}
+
+.public2-title {
+    font-size: 16px;
+    font-family: "Museo 500";
+    color: #5c7c85;
+    text-transform: uppercase;
+}
+.publication-detail {
+    display: flex;
+    padding: 15px 0;
+}
+.publication-arrow-icon {
+    padding-right: 15px;
+}
+
+
+
+.public2-description {
+    font-size: 14px;
+    font-family: "Museo 500";
+    color: #5c7c85;
+}
+.public-cat img {
+    width: 100%;
+    height: 490px;
+}
+.publication-arrow-icon img{
+    max-width: 15px;
+    height: 15px;
+}
+.click_join
+{
+    text-decoration: none;
+    font-family: "Museo 700";
+    border: 1px solid #f27222;
+    text-align: center;
+    color: #fff;
+    border-radius: 30px;
+    display: inline-block;
+    background-color: #f27222;
+    font-size: 13px;
+    text-transform: capitalize;
+    transition: all 0.3s;
+    width: 125px;
+    height: 33px;
+    font-family: "Museo Sans 500";
+    line-height: 31px;
+}
+.join_parent {
+    display: flex;
+    justify-content: space-between;
+}
+.public2-info{
+    width: 100%;
+}
+.payment-summery{
+    background-color: #fff;
+  }
+  .payment-summery-area {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 40px;
+    background-color: #fff !important;
+  }
+  @media (max-width:767px) {
+    .payment-summery-area{
+      flex-direction: column;
+    }
+    .payment-method-form{
+      max-width: 100%;
+
+    }
+  }
+  .payment-summery-area .payment-method-form{
+    /* max-width: 283px; */
+    width: 100%;
+    padding: 20px 18px;
+    background-color: #F5F5F5;
+    margin-bottom: 20px;
+  }
+
+  .payment-summery-area .payment-method-form .billing-description .title P{
+  color: #5c7c85;
+  font-family: "Museo 500";
+  font-size: 18px;
+  margin-bottom: 0 !important;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 26px;
+  text-align: left;
+  }
+  .billing-description .description p{
+    color: #5c7c85;
+    font-family: "Museo 500";
+    font-size: 14px;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 26px;
+    text-align: left;
+    margin-bottom: 0 !important;
+  }
+
+  .visa-card-detail .title p{
+    color: #ff9800;
+  font-family: "Museo Sans ";
+    font-size: 16px;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 26px;
+    text-align: left;
+    margin-top: 10px;
+  }
+  .credit-card-details .card-title p{
+    color: #5c7c85;
+    font-family: "Museo 500";
+    font-size: 18px;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 26px;
+    text-align: left;
+    margin-bottom: 0 !important;
+    margin-top: 10px;
+  }
+  .billing-btn{
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+  }
+  .billing-btn button{
+    color: #ffffff;
+    font-family: "Museo 500";
+    font-size: 16px;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 15px 30px;
+    background-color: #f27222;
+    border: none;
+    border-radius: 20px;
+  }
+  .billing-btn button:focus{
+    outline: none;
+  }
+
+
+  .qty-input {
+    color: #000;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+    .product-qty,
+    .qty-count {
+      background: transparent;
+      color: inherit;
+      font-weight: bold;
+      font-size: inherit;
+
+      display: inline-block;
+      min-width: 0;
+      height: 1.5rem;
+      line-height: 1;
+      border: 1px solid #F5F5F5;
+    }
+    .product-qty {
+      width: 20px;
+      min-width: 0;
+      display: inline-block;
+      text-align: center;
+      appearance: textfield;
+      font-size: 10px;
+      color: #507f87;
+
+    }
+      .product-qty::-webkit-outer-spin-button,
+      .product-qty::-webkit-inner-spin-button {
+        appearance: none;
+        margin: 0;
+      }
+
+
+    .qty-count {
+      padding: 0;
+      cursor: pointer;
+      width: 25px;
+      font-size: 10px;
+      color: #507f87 ;
+      overflow: hidden;
+      position: relative;
+
+    }
+    button:focus{
+      outline: none;
+    }
+
+      .qty-count:disabled {
+        color: #ccc;
+        background: #f2f2f2;
+        cursor: not-allowed;
+        border-color: transparent;
+      }
+        .qty-count:disabled:before,
+        .qty-count:disabled:after {
+          background: #ccc;
+        }
+
+
+
+
+
+
+  .qty-input {
+    border-radius: 4px;
+
+
+  }
+
+  form  label{
+    color: #5c7c85;
+    font-family: "Museo 500";
+    font-size: 14px;
+    margin-bottom: 0 !important;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 26px;
+    text-align: left;
+    padding-top: 5px;
+  }
+  form .name-feild{
+    display: flex;
+    justify-content: space-between;
+  }
+  form .name-feild .fname, .lname{
+    display: flex;
+    flex-direction: column;
+    width: 47%;
+  }
+  form .name-feild input{
+    /* width: 119px; */
+    padding: 10px;
+    background-color: #ffffff;
+    border: none;
+  }
+
+  form .num-feild input{
+  width: 100%;
+  background-color: #ffffff;
+  border: none;
+  padding: 10px;
+  }
+  form .expiry-feild{
+    display: flex;
+    justify-content: space-between;
+  }
+  form .expiry-feild .month input{
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+  padding: 10px;
+    background-color: #ffffff;
+    border: none;
+  }
+  form .expiry-feild .year input{
+    display: flex;
+    flex-direction: column;
+    /* width: 77px; */
+    padding: 10px;
+    background-color: #ffffff;
+    border: none;
+    width: 100%;
+  }
+  .shoping-cart-details{
+    max-width: 592px;
+    width: 100%;
+  }
+  @media (max-width:767px) {
+    .shoping-cart-details {
+      max-width: 100%;
+    }
+  }
+  .shoping-cart-details .title{
+    display: flex;
+    justify-content: space-between;
+  }
+  .shoping-cart-details .title p{
+  color: #5c7c85;
+  font-family: "Museo 500";
+  font-size: 20px;
+  margin-bottom: 0 !important;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 41px;
+  text-align: center;
+  text-transform: uppercase;
+  }
+  .shoping-cart-details .bar{
+    max-width: 592px;
+    width: 100%;
+    height: 3px;
+    background-color: #e6e6e6;
+    margin-bottom: 10px;
+  }
+  .year,.month{
+      width: 49%;
+  }
+  @media (max-width:767px) {
+    .shoping-cart-details .title p {
+      font-size: 16px !important;
+    }
+    .shoping-cart-details .bar{
+      max-width: 100%;
+    }
+  }
+  /* table styling start */
+  table{
+    max-width: 592px;
+    width: 100%;
+  }
+  @media (max-width:767px) {
+   table{
+     max-width: 100%;
+   }
+  }
+  table td:not(:last-child){
+    padding-right: 35px;
+  }
+  @media (max-width:767px) {
+    table td{
+      padding-top: 10px !important;
+      padding-right: 5px !important;
+      font-size: 12px !important;
+    }
+  }
+  table tbody .last-items td{
+    padding-bottom: 20px;
+  }
+  table tbody tr td{
+    padding-top: 20px;
+    color: #5c7c85;
+    font-family: "Museo 500";
+    font-size: 15px;
+    margin-bottom: 0 !important;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+  @media (max:992px) {
+    table tbody tr td {
+      font-size: 12px !important;
+    }
+  }
+  @media (max-width:400px) {
+   table tbody tr td {
+     font-size: 10px !important;
+   }
+  }
+  table tbody tr .remove{
+    color: #f27222 !important;
+      font-family: "Museo 700";
+
+  }
+  table thead tr th{
+    color: #5c7c85;
+    font-family: "Museo 700";
+    font-size: 16px;
+    margin-bottom: 0 !important;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+  @media (max-width:767px) {
+    table thead tr th {
+      font-size: 10px !important;
+      text-align: center;
+    }
+  }
+  table tbody .count{
+    margin-top: 20px;
+    border-top: 3px solid #e6e6e6;
+    border-bottom: 3px solid #e6e6e6;
+  }
+  table tbody .count td{
+    padding-top: 10px !important;
+    padding-bottom: 10px;
+    color: #5c7c85;
+    font-family: "Museo 700";
+    font-size: 18px;
+    font-style: normal;
+    letter-spacing: normal;
+  }
+
+  .accepted-cards img{
+      margin-right:  5px;
   }

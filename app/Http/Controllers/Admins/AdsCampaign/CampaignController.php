@@ -72,7 +72,6 @@ class CampaignController extends Controller
             parent::successMessage('Campaign saved successfully.');
             return redirect(route('ads-campaign.index'));
         } catch(Exception $e) {
-            dd($e->getMessage());
             parent::dangerMessage("Campaign Does Not Created, Please Try  Again");
             return redirect()->back();
         }

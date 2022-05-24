@@ -2,7 +2,6 @@
 $timezones =vetvineHelper::timezones()
 @endphp
 
-
 <!-- Registeration Modal Form  Start-->
 <button type="button" class="btn btn-primary d-none" id="registration_modal_box_show_btn" data-toggle="modal" data-target="#Registration-modal">
     Launch demo modal
@@ -174,7 +173,7 @@ $timezones =vetvineHelper::timezones()
                                                     @endif
                                                 </div>
 
-                                                <div class="col-md-12 text-center">
+                         <div class="col-md-12 text-center">
                                                     <div class="mm-new-checkbox" style="margin-left:24px;">
                                                         <input class="form-check-input input_click" type="checkbox" name="termsofservice">
                                                         <span><a href="#" class="">
@@ -186,19 +185,18 @@ $timezones =vetvineHelper::timezones()
 
 
 
-                                                <div class="col-sm-12 text-center">
 
-                                                    {{-- captcha  --}}
+                                                <div class="col-sm-12 text-center pad-left-captha">
+
                                                     <div class="form-group{{ $errors->has('CaptchaCode') ? ' has-error' : '' }}">
-                                                        <label class="col-md-4 control-label">Captcha</label>
 
-                                                          <div class="col-md-6">
+                                                          <div class="col-md-6 captcha_top mx-auto">
                                                             {!! captcha_image_html('ContactCaptcha') !!}
                                                           <input class="form-control" type="text" id="CaptchaCode" name="CaptchaCode">
 
                                                            @if ($errors->has('CaptchaCode'))
                                                               <span class="help-block">
-                                                           <strong>{{ $errors->first('CaptchaCode') }}</strong>
+                                                           <strong style="color:red">{{ $errors->first('CaptchaCode') }}</strong>
                                                              </span>
                                                           @endif
 
@@ -206,8 +204,10 @@ $timezones =vetvineHelper::timezones()
                                                    </div>
 
                                                     {{-- captcha --}}
+                                            </div>
+                                                    <div class="col-sm-12 text-center">
 
-                                                    <h3 style="color:red" id="regibtnsmsg">Please Select Above Category And Profession To Continue</h3>
+
 
                                                     <div class="social_icons_modal">
                                                         <a href="{{ url('social/facebook') }}" class="socialbtns "><i class="fa fa-facebook-square " aria-hidden="true"></i></a>
@@ -331,8 +331,15 @@ $(document).ready(function(){
         'pointer-events': 'none'
     });
 })
+
+$('.nave_google_captcha').on('click',function(){
+    alert("oj");
+})
+
+
 //step2 get value of member level and network level
 $('.ui-corner-top').on('change',function() {
+
   var usertype=  $(this).find('span').attr('data-memberlevel');
   $('#setmemberlevel').val(usertype);
   var networkLevel = $('input[name="networklevel"]:checked').val()
@@ -353,6 +360,9 @@ $('.ui-corner-top').on('change',function() {
     })
  })
 
+ $('#nav_id_google').on('click',function(){
+     alert("oaspda");
+ });
 
  $('#email').on('keyup',function(){
     $('#emailmsg').empty()
@@ -360,6 +370,15 @@ $('.ui-corner-top').on('change',function() {
 $('#password').on('keyup',function(){
     $('#passwordmsg').empty()
 })
+
+   $(document).ready(function(){
+
+    let a = $(".pad-left-captha").find("a").css("display","none");
+    // console.log(a);
+
+
+   })
+
 
 
 </script>
