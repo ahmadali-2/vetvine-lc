@@ -31,7 +31,7 @@ $timezones =vetvineHelper::timezones()
                                             <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix   ui-widget-header ui-corner-all">
                                                 <li class="ui-state-default ui-corner-top     ui-tabs-active tab_1_section_parent" >
                                                     <a href="#" class="ui-tabs-anchor" role="presentation">
-                                                        <span >Veterinary Professional</span>
+                                                        <span data-memberlevel="1">Veterinary Professional</span>
                                                     </a>
                                                     <input type="hidden" id="setmemberlevel" name="memberlevel">
 
@@ -67,7 +67,7 @@ $timezones =vetvineHelper::timezones()
 
                                                 <li class="ui-state-default ui-corner-top tab_2_section_parent" >
                                                     <a href="#">
-                                                        <span >Vet / Vet Tech Student</span>
+                                                        <span data-memberlevel="2">Vet / Vet Tech Student</span>
                                                     </a>
 
                                                     <ul class="tab_2_section">
