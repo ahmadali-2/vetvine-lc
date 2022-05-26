@@ -78,7 +78,6 @@ class HomeController extends Controller
     }
     public function upcomingWebinars()
     {
-
         $showevent = Event::with('events', 'sponsers' ,'members','user')->get();
         $sponser  = SponserTable::all();
         $category = CategoryEvent::all();
