@@ -4,6 +4,7 @@ namespace App\Models\Admins\Webinar;
 
 use App\Models\User;
 use App\Models\Webinar\BuyEventPlan;
+use App\Models\Sponser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,12 +17,6 @@ class Event extends Model
         'event_title',
         'tags',
         'event_add_ytlink',
-        'sponser_one',
-        'sponser_one_url',
-        'sponser_two',
-        'sponser_two_url',
-        'sponser_three',
-        'sponser_three_url',
         'date',
         'time',
         'presenter_one',
@@ -42,10 +37,19 @@ class Event extends Model
     {
         return $this->belongsTo(CategoryEvent::class,"category_id");
     }
-    public function buymemberships()
+    public function sponsermember()
     {
-        return $this->hasMany(BuyEventPlan::class);
+        return $this->belongsTo(SponserTable::class,"sponser_id");
     }
+    public function sponsers()
+    {
+        return $this->morphMany(Sponser::class,'sponserable');
+    }
+    public function members()
+    {
+        return $this->belongsToMany(SponserTable::class, "sponsers",'sponserable_id', 'sponser_id',);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class,'user_id');

@@ -17,16 +17,12 @@ class CreateEventsTable extends Migration
             $table->id();
             $table->unSignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('category_events')->onDelete('cascade');
+            $table->unSignedBigInteger('sponser_id')->nullable();
+            $table->foreign('sponser_id')->references('id')->on('sponser_tables')->onDelete('cascade');
             $table->string('event_title');
             $table->string('tags');
             $table->string('main_photo')->nullable();
             $table->string('event_add_ytlink')->nullable();
-            $table->string('sponser_one')->nullable();
-            $table->string('sponser_one_url')->nullable();
-            $table->string('sponser_two')->nullable();
-            $table->string('sponser_two_url')->nullable();
-            $table->string('sponser_three')->nullable();
-            $table->string('sponser_three_url')->nullable();
             $table->date('date')->nullable();
             $table->time('time')->nullable();
             $table->string('presenter_one')->nullable();

@@ -70,10 +70,14 @@
                             <div class="public2-title">
                                 Sponsor:
                             </div>
+                            @foreach ($item->members as $items)
+
+
                             <div class="public2-description">
-                                {{ $item->sponser_one }}
+                                {{ $items->sponser_name }}
 
                             </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="publication-detail">

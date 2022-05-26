@@ -54,60 +54,6 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label for="sponser_one" class="control-label mb-1">Sponsor 1</label>
-                                            <input id="sponser_one" placeholder="Enter Name" name="sponser_one" type="text"
-                                                class="form-control" value="">
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="sponser_one_url" class="control-label mb-1">Sponsor 1
-                                                URL</label>
-                                            <input id="sponser_one_url" placeholder="https://" name="sponser_one_url" type="url"
-                                                class="form-control" value="">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="sponser_two" class="control-label mb-1">Sponsor 2 (optional)</label>
-                                            <input id="sponser_two" placeholder="Enter Name" name="sponser_two" type="text"
-                                                class="form-control" value="">
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="sponser_two_url" class="control-label mb-1">Sponsor 2
-                                                URL (optional)</label>
-                                            <input id="sponser_two_url" placeholder="https://" name="sponser_two_url" type="url"
-                                                class="form-control" value="">
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="sponser_three" class="control-label mb-1">Sponsor 3 (optional)</label>
-                                            <input id="sponser_three" placeholder="Enter Name" name="sponser_three"
-                                                type="text" class="form-control" value="">
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="sponser_three_url" class="control-label mb-1">Sponsor 3
-                                                URL (optional)</label>
-                                            <input id="sponser_three_url" placeholder="https://" name="sponser_three_url" type="url"
-                                                class="form-control" value="">
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="form-group">
                                             <label for="date" class="control-label mb-1">Date</label>
                                             <input id="date" placeholder="" name="date" type="date" class="form-control"
                                                 value="">
@@ -217,12 +163,26 @@
                                                 type="url" class="form-control" value="">
                                         </div>
                                     </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="network_id" class="control-label mb-1 form-select">Select Sponsor
+                                                   </label>
+                                                <select id="sponser_id" style="width: 100%" name="sponser_id[]"
+                                                    aria-label="Default select example"
+                                                    class="js-example-basic-multiple form-control" data-val="true"
+                                                    multiple="multiple">
+                                                    @foreach ($sponser as $sponsers)
+                                                        <option value="{{ $sponsers->id }}">{{ $sponsers->sponser_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="event_description" class="control-label mb-1">Event
-                                                Description</label>
+                                                Detail</label>
                                             <textarea class="form-control" id="event_description" rows="3" name="event_description" value=""></textarea>
                                         </div>
                                     </div>

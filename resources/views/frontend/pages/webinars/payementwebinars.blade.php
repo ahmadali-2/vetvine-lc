@@ -10,6 +10,11 @@
                             <h2>
                                 <span>Payment Method</span>
                             </h2>
+                            <div class="col-sm-12">
+                                <a class="btn btn-primary float-right" style="background-color:#f27222" href="{{ route('upcoming_webinars') }}">
+                                  Go Back
+                               </a>
+                           </div>
                             <!-- <p class="membership-text">Please review the following details for this transaction.</p> -->
                         </div>
                     </section>
