@@ -19,6 +19,7 @@ use App\Http\Controllers\Admins\Forum\ForumController;
 use App\Http\Controllers\Admins\Forum\ForumPostController;
 use App\Http\Controllers\Admins\Generalsettings\AdminProfileController;
 use App\Http\Controllers\Admins\Generalsettings\ManageUserController;
+use App\Http\Controllers\Admins\Members\MemberTypeController;
 use App\Http\Controllers\Admins\Memberships\MemberShipPlanCategoryController;
 use App\Http\Controllers\Admins\Memberships\MemberShipPlansController;
 use App\Http\Controllers\Admins\Webinar\EventCategoryController;
@@ -116,6 +117,9 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
     Route::get('network', [AdminDashboardController::class, 'network'])->name('network');
     Route::get('unapproved-users', [ManageUserController::class, 'unapprovedUsers'])->name('unapproved');
     Route::post('approved-user', [ManageUserController::class, 'approvedUsers'])->name('approveuser');
+    Route::post('member-permission', [MemberTypeController::class, 'MemberStatus'])->name('memberstatus');
+    Route::get('member-type', [MemberTypeController::class, 'MemberTypes'])->name('membertype');
+    Route::get('member-permissions/{id}', [MemberTypeController::class, 'MemberPermissions'])->name('memberpermissions');
     Route::delete('delete-users/{id}', [ManageUserController::class, 'deleteUser']);
 
     Route::resource('forums-category', ForumCategoryController::class);
