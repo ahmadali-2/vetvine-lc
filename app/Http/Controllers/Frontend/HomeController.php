@@ -79,7 +79,7 @@ class HomeController extends Controller
     public function upcomingWebinars()
     {
 
-        $showevent = Event::with('events', 'sponsers' ,'members')->get();
+        $showevent = Event::with('events', 'sponsers' ,'members','user')->get();
         $sponser  = SponserTable::all();
         $category = CategoryEvent::all();
         return view('frontend.pages.webinars.upcoming-webinars',compact('showevent', 'sponser', 'category'));
@@ -101,7 +101,7 @@ class HomeController extends Controller
     public function upcomingWebinarsdetails($id)
     {
 
-        $eventdetail = Event::with('events', 'sponsers' ,'members')->where('id',$id)->get();
+        $eventdetail = Event::with('events', 'sponsers' ,'members' ,'user')->where('id',$id)->get();
         $category = CategoryEvent::all();
         return view('frontend.pages.webinars.upcoming-eventsdetails',compact('eventdetail','category'));
 

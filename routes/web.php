@@ -132,7 +132,9 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
 });
 
 
-
+Route::get("/page", function(){
+    return view("frontend.pages.forums.post_detail");
+ });
 Route::group(['middleware'=>['frontendUserRole']], function(){
     Route::get('/',function(){
         return view('frontend.home');

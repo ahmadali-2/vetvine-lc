@@ -88,8 +88,24 @@
                             {{-- @dd(
                                 $showevents
                             ); --}}
+                            @if (Auth::user())
+                            @php
+                                // Time Convert Acoording to timezone
+                                    $eventTime      =   $showevents->time;
+                                    $timeZone       =   $showevents->user->timezone->name;
+                                    $today          =   new DateTime($showevents->time, new DateTimeZone($timeZone));
+                                    // $today->format('Y-m-d H:i').'<br>';
+                                    $userTimeZone   =  Auth::user()->timezone->name;
+                                    $userEventTime  =  new DateTimeZone($userTimeZone);
+                                    $convertedTime  =  $today->setTimeZone($userEventTime);
+                                    $formattedTime  =  $convertedTime->format('H:i');
+                                @endphp
+                             @endif
                             <div class="video-bottom-description">
-                                <h5>{{ date('m/d/Y', strtotime($showevents->date)) }}</h5>
+                                <h5>Start Date : {{ date('Y-m-d', strtotime($showevents->date)) }}</h5>
+                               @if (Auth::user())
+                                <h5>Start Time : {{ date('g:i a', strtotime($formattedTime)) }}</h5>
+                               @endif
                                 <p><span>Presented by:</span> <a href="{{ $showevents->presenter_one_url }}"
                                         class="vetvine_a" target="_blank">{{ $showevents->presenter_one }}</a><br />
 
