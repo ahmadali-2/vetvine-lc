@@ -44,16 +44,19 @@
                     </li>
                 </ul>
             </form>
+            {{-- @dd(ROUTE::current()->uri); --}}
             <ul class="page-link-list">
-                <li class="active">
+                <li @if(ROUTE::current()->uri == 'upcoming-webinars') class="active"  @endif>
                     <a href="{{ route('upcoming_webinars') }}">Continuing Education</a>
                 </li>
-                <li>
+                @if(Auth::user())
+                <li @if(ROUTE::current()->uri == 'past-event') class="active"  @endif>
                     <a href="{{ route('pastevent') }}">My Past Events</a>
                 </li>
-                <li>
+                <li @if(ROUTE::current()->uri == 'upcoming-event') class="active"  @endif>
                     <a href="{{ route('upcomingevent') }}">My Upcoming Events</a>
                 </li>
+                @endif
             </ul>
 
             <div class="row w-100 video-cat-main m-0">
@@ -97,7 +100,7 @@
                                 <p class="para-decription">
                                     {{ Str::limit($showevents->event_description, 250) }}
                                 </p>
-                            
+
                                 <a href="{{ route('upcoming_details', $showevents->id) }}">Read More</a>
                             </div>
                         </div>
