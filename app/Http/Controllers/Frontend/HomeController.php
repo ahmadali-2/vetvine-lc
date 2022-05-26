@@ -78,7 +78,7 @@ class HomeController extends Controller
     public function upcomingWebinars()
     {
 
-        $showevent = Event::with('events')->get();
+        $showevent = Event::with('user')->get();
         $category = CategoryEvent::all();
         return view('frontend.pages.webinars.upcoming-webinars',compact('showevent','category'));
     }
@@ -98,9 +98,8 @@ class HomeController extends Controller
     }
     public function upcomingWebinarsdetails($id)
     {
-
-        $eventdetail = Event::with('events')->where('id',$id)->get();
-        $category = CategoryEvent::all();
+        $eventdetail = Event::with('events','user')->where('id',$id)->get();
+        $category    = CategoryEvent::all();
         return view('frontend.pages.webinars.upcoming-eventsdetails',compact('eventdetail','category'));
 
     }

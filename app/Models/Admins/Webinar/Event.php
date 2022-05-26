@@ -2,6 +2,7 @@
 
 namespace App\Models\Admins\Webinar;
 
+use App\Models\User;
 use App\Models\Webinar\BuyEventPlan;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,6 +12,7 @@ class Event extends Model
     use HasFactory;
     protected $fillable = [
         'category_id',
+        'user_id',
         'event_title',
         'tags',
         'event_add_ytlink',
@@ -43,5 +45,9 @@ class Event extends Model
     public function buymemberships()
     {
         return $this->hasMany(BuyEventPlan::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class,'user_id');
     }
 }
