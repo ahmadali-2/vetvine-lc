@@ -39,6 +39,7 @@
                 class="menu-icon fa fa-table"></i>Webinars</a>
         <ul class="sub-menu children dropdown-menu">
             <li><i class="fa fa-table"></i><a href="{{ route('webinars-category.index') }}">Add Category</a></li>
+            <li><i class="fa fa-table"></i><a href="{{ route('sponsors.index') }}">Add Sponsor</a></li>
             <li><i class="fa fa-table"></i><a href="{{ route('webinars.index') }}">Post New Webinar</a></li>
         </ul>
     </li>

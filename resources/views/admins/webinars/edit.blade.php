@@ -57,57 +57,6 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label for="sponser_one" class="control-label mb-1">Sponsor 1</label>
-                                            <input id="sponser_one" placeholder="Enter Name" name="sponser_one" type="text"
-                                                class="form-control" value="{{ $event->sponser_one }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="presenter_one_url" class="control-label mb-1">Sponsor 1
-                                                URL</label>
-                                            <input id="sponser_one_url"placeholder="https://" name="sponser_one_url" type="url"
-                                                class="form-control" value="{{ $event->sponser_one_url }}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="sponser_two" class="control-label mb-1">Sponsor 2</label>
-                                            <input id="sponser_two" placeholder="Enter Name" name="sponser_two" type="text"
-                                                class="form-control" value="{{ $event->sponser_two }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="sponser_one_url" class="control-label mb-1">Sponsor 2
-                                                URL (optional)</label>
-                                            <input id="sponser_two_url" placeholder="https://" name="sponser_two_url" type="url"
-                                                class="form-control" value="{{ $event->sponser_two_url }}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="sponser_three" class="control-label mb-1">Sponsor 3</label>
-                                            <input id="sponser_three" placeholder="Enter Name" name="sponser_three"
-                                                type="text" class="form-control" value="{{ $event->sponser_three }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="sponser_one_url" class="control-label mb-1">Sponsor 3
-                                                URL (optional)</label>
-                                            <input id="sponser_three_url"  name="sponser_three_url" type="url"
-                                                class="form-control" placeholder="https://" value="{{ $event->sponser_three_url }}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="form-group">
                                             <label for="date" class="control-label mb-1">Date</label>
                                             <input id="date" placeholder="" name="date" type="date" class="form-control"
                                                 value="{{ $event->date }}">
@@ -222,12 +171,28 @@
                                                 class="form-control" value="{{ $event->event_add_ytlink }}">
                                         </div>
                                     </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="network_id" class="control-label mb-1 form-select">Select Sponsor
+                                                </label>
+                                                <select id="sponser_id" style="width: 100%" name="sponser_id[]"
+                                                    aria-label="Default select example"
+                                                    class="js-example-basic-multiple form-control" data-val="true"
+                                                    multiple="multiple">
+                                                    @foreach ($sponser as $sponsers)
+                                                    <option value="{{ $sponsers->id }}"
+                                                        @if (in_array($sponsers->id, $selectedMembers)) selected @endif>
+                                                        {{ $sponsers->sponser_name  }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="event_description" class="control-label mb-1">Event
-                                                Description</label>
+                                                Detail</label>
                                             <textarea class="form-control" id="event_description" rows="3" name="event_description"
                                                 value=" {{ $event->event_description }}">{{ $event->event_description }}</textarea>
                                         </div>

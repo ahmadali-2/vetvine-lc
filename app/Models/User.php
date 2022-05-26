@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Admins\Forum\Post as ForumPost;
 use App\Models\Admins\Memberships\BuyMemberShipPlan;
+use App\Models\Admins\Webinar\Event;
 use App\Models\Generals\TimeZone;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -137,6 +138,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function forumposts()
     {
         return $this->hasMany(ForumPost::class);
+    }
+    public function events()
+    {
+        return $this->hasMany(Event::class);
     }
     public function generateTwoFactorCode()
     {
