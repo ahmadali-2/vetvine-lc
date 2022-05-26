@@ -12,6 +12,7 @@ use App\Models\Admins\Forum\Forum;
 use App\Models\Admins\Forum\ForumPost;
 use App\Models\Admins\Webinar\CategoryEvent;
 use App\Models\Admins\Webinar\Event;
+use App\Models\Admins\Webinar\SponserTable;
 use DB;
 class HomeController extends Controller
 {
@@ -78,9 +79,10 @@ class HomeController extends Controller
     public function upcomingWebinars()
     {
 
-        $showevent = Event::with('events')->get();
+        $showevent = Event::with('events', 'sponsers' ,'members')->get();
+        $sponser  = SponserTable::all();
         $category = CategoryEvent::all();
-        return view('frontend.pages.webinars.upcoming-webinars',compact('showevent','category'));
+        return view('frontend.pages.webinars.upcoming-webinars',compact('showevent', 'sponser', 'category'));
     }
     public function pastevent()
     {
@@ -99,7 +101,7 @@ class HomeController extends Controller
     public function upcomingWebinarsdetails($id)
     {
 
-        $eventdetail = Event::with('events')->where('id',$id)->get();
+        $eventdetail = Event::with('events', 'sponsers' ,'members')->where('id',$id)->get();
         $category = CategoryEvent::all();
         return view('frontend.pages.webinars.upcoming-eventsdetails',compact('eventdetail','category'));
 

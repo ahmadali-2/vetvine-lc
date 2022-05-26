@@ -85,19 +85,27 @@
                                     <span class="fas fa-star"></span>
                                 </div>
                             </div>
+                            {{-- @dd(
+                                $showevents
+                            ); --}}
                             <div class="video-bottom-description">
                                 <h5>{{ date('m/d/Y', strtotime($showevents->date)) }}</h5>
                                 <p><span>Presented by:</span> <a href="{{ $showevents->presenter_one_url }}"
                                         class="vetvine_a" target="_blank">{{ $showevents->presenter_one }}</a><br />
-                                    <strong>Sponsored by:</strong><a href="{{ $showevents->sponser_one_url }}"
+
+                                        <strong>Sponsored by:</strong>   @foreach ($showevents->members as $item)
+                                    <a href="{{ $item->sponser_link }}"
                                         class="vetvine_a" target="_blank"
-                                        rel="noopener noreferrer">{{ $showevents->sponser_one }}</a>
+                                        rel="noopener noreferrer">{{ $item->sponser_name }}</a>
+                                        @endforeach
                                 </p>
+
+
                                 </p>
                                 <p class="para-decription">
                                     {{ Str::limit($showevents->event_description, 250) }}
                                 </p>
-                            
+
                                 <a href="{{ route('upcoming_details', $showevents->id) }}">Read More</a>
                             </div>
                         </div>
