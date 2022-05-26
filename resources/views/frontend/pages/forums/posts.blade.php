@@ -70,17 +70,6 @@
     <div style="height: 50px;"></div>
 </section>
 @endsection
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-                $("#comment_btn").click(function () {
-                    if( $.trim($('#comment').val()) == '')
-                    {
-                        $("#error1").html("Comment field can't be left blank.");
-                        return false;
-                    }
-                });
-            })
-    </script> --}}
+
 
 

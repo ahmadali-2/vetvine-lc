@@ -36,20 +36,32 @@
                             </div>
                         </div>
                     </div>
+                    @if (Auth::user())
                     <div class="publication-detail">
                         <div class="publication-arrow-icon">
                             <img src="{{ asset('frontend/img/arrow-right.png') }}" alt="arrow-right icon">
                         </div>
+
                         <div class="public2-info">
                             <div class="public2-title">
                                 Time:
                             </div>
+                            @php
+                                $eventTime      =   $item->time;
+                                $timeZone       =   $item->user->timezone->name;
+                                $today          =   new DateTime($item->time, new DateTimeZone($timeZone));
+                                // $today->format('Y-m-d H:i').'<br>';
+                                $userTimeZone   =  Auth::user()->timezone->name;
+                                $userEventTime  =  new DateTimeZone($userTimeZone);
+                                $convertedTime  =  $today->setTimeZone($userEventTime);
+                                $formattedTime  =  $convertedTime->format('H:i');
+                            @endphp
                             <div class="public2-description">
-                                {{ $item->time }}
-
+                                {{ date('g:i a', strtotime($formattedTime)) }}
                             </div>
                         </div>
                     </div>
+                    @endif
                     <div class="publication-detail">
                         <div class="publication-arrow-icon">
                             <img src="{{ asset('frontend/img/arrow-right.png') }}" alt="arrow-right icon">
@@ -58,10 +70,14 @@
                             <div class="public2-title">
                                 Sponsor:
                             </div>
+                            @foreach ($item->members as $items)
+
+
                             <div class="public2-description">
-                                {{ $item->sponser_one }}
+                                {{ $items->sponser_name }}
 
                             </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="publication-detail">

@@ -20,7 +20,7 @@
                        Go Back
                     </a>
 
-                    
+
 
                 </div>
 
@@ -31,16 +31,12 @@
     </section>
 
     <div class="container">
-
         
-
          <div class="row">
 
             <div class="col-md-12">
 
                <div class="panel panel-default credit-card-box">
-
-                
 
                   <div class="panel-body">
 
@@ -90,7 +86,7 @@
 
                            <div class='col-xs-12 col-md-6  form-group card required'>
 
-                              <label class='control-label'>Card Number</label> 
+                              <label class='control-label'>Card Number</label>
 
                               <input autocomplete='off' name="card_number" class='form-control card-number' size='20'
 
@@ -98,18 +94,18 @@
 
                            </div>
 
-                           
+
 
                         </div>
 
                          <input type="hidden" value="{{$plan->plan_price}}" name="plan_price">
                         <input type="hidden" value="{{$plan->id}}" name="membershipplan_id">
                         <input type="hidden" value="{{Auth::user()->id}}" name="user_id">
-                          
-                       
-                          
 
-                       
+
+
+
+
 
                         <div class='form-row row'>
 
@@ -159,11 +155,11 @@
 
                         </div>
 
-                        
+
 
             <input type="submit" class="dashboard-btn mb-3 mt-3" value="Pay {{$plan->plan_price}} $">
 
-          
+
 
                      </form>
 
@@ -183,7 +179,7 @@
 
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 
-  
+
 
 <script type="text/javascript">
 
@@ -209,7 +205,7 @@ $(function() {
 
         $errorMessage.addClass('hide');
 
- 
+
 
         $('.has-error').removeClass('has-error');
 
@@ -229,7 +225,7 @@ $(function() {
 
     });
 
-  
+
 
     if (!$form.data('cc-on-file')) {
 
@@ -251,11 +247,11 @@ $(function() {
 
     }
 
-  
+
 
   });
 
-  
+
 
   function stripeResponseHandler(status, response) {
 
@@ -287,7 +283,7 @@ $(function() {
 
     }
 
-  
+
 
 });
 

@@ -60,7 +60,7 @@ class MemberShipPlansController extends Controller
                     Member::create([
                     "memberable_id"   =>  $Membershipplan->id,
                     "memberable_type" => 'App\Models\Admins\Memberships\MemberShipPlan',
-                    'member_id'       => $member,
+                    'member_id'       =>  $member,
                     ]);
                 }
             }
