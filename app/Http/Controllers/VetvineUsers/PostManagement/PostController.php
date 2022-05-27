@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\VetvineUsers\PostManagement;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admins\Forum\Like;
+use App\Models\Admins\Forum\Post;
 use App\Models\Admins\News\News;
-use App\Models\VetvineUsers\Post;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -25,9 +26,54 @@ class PostController extends Controller
 
     public function memberHome()
     {
-        $news   =   News::all();
-        $posts  = Post::with('user')->get();
+        $news       =   News::all();
+        $posts      =   Post::with('user','likes')->get();
         return view('frontend.pages.member-home',compact('posts','news'));
+    }
+    public function likeSave(Request $request)
+    {
+           $liked= Like::where('user_id',Auth::id())->where('post_id',$request->likepostid)->first();
+           if($liked == null )
+            {
+                Like::create([
+                    "post_id"       =>  $request->likepostid,
+                    "user_id"       =>  $request->likeuserid,
+                    "like"          => 1
+                ]);
+                return response()->json(
+                    [
+                        'success' => true,
+                        'message' => 'Data inserted successfully',
+                        'like'    => $liked
+                    ]
+                );
+            }
+            elseif($liked->like == 0)
+            {
+                $liked->update([
+                    "like"          => '1'
+                ]);
+                return response()->json(
+                    [
+                        'success' => true,
+                        'message' => 'Data inserted successfully',
+                        'like'    => $liked
+                    ]
+                );
+            }
+            else
+            {
+                $liked->update([
+                    "like"          => '0'
+                ]);
+                return response()->json(
+                    [
+                        'success' => true,
+                        'message' => 'Data inserted successfully',
+                        'like'    => $liked
+                    ]
+                );
+            }
     }
     /**
      * Show the form for creating a new resource.

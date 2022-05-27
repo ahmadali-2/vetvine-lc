@@ -6474,6 +6474,19 @@ width: 138px;
     font-family: "Museo Sans 500";
     font-weight:bold;
   }
+
+.icon_post a{
+
+    color:#5e7c85;
+
+}
+.icon_post a:hover{
+
+    color: #f27222;
+}
+.comment_input{
+    border: 1px solid #5e7c85 !important;
+}
   /*  post detail style */
 
 .sposer_name {
