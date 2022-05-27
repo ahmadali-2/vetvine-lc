@@ -19,6 +19,8 @@ class ContactUsController extends Controller
             'message'   => $request->message,
         ];
         dispatch((new ContactUsJob($data))->delay(now()->addSeconds(10)));
+        parent::successMessage('Message sent successfully');
+
         return redirect()->back();
     }
 }

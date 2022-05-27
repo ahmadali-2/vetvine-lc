@@ -54,8 +54,8 @@ class SocialController extends Controller
 
     public function handleProviderCallback($provider)
     {
-        try {
 
+        try {
             $userAndNetworkType = explode(",", session('comma_separated'));
             $user_type = $userAndNetworkType[0];
             $network_type = $userAndNetworkType[1];
@@ -65,9 +65,8 @@ class SocialController extends Controller
             } else {
                 $user = Socialite::driver($provider)->stateless()->user();
             }
-
             $findUser = User::where('email', $user->email)->first();
-
+            // dd($user);
             if ($findUser) {
                 Auth::login($findUser);
                 $this->checkUserDetail($findUser->email, $findUser->type);
@@ -89,7 +88,8 @@ class SocialController extends Controller
                     'type'           =>  2,
                     'network_id'     => $network_type,
                     'password'       => Hash::make($newpassword),
-                    'status'         => 1
+                    'status'         => 1,
+                    'timezone_id'    => 133,
                 ]);
                 $newuser->markEmailAsVerified();
                 $this->checkUserDetail($newuser->email, $newuser->type);

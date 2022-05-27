@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\MemberTypes;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class MemberTypeSeeder extends Seeder
 {
@@ -14,29 +15,22 @@ class MemberTypeSeeder extends Seeder
      */
     public function run()
     {
-        MemberTypes::create([
-            'member_type' => 'Super Admin',
-        ]);
-        MemberTypes::create([
-            'member_type' => 'Public',
-        ]);
-        MemberTypes::create([
-            'member_type' => 'Pet Owner',
-        ]);
-        MemberTypes::create([
-            'member_type' => 'Vet Professional',
-        ]);
-        MemberTypes::create([
-            'member_type' => 'Pet Professional',
-        ]);
-        MemberTypes::create([
-            'member_type' => 'Pet Owner Premium',
-        ]);
-        MemberTypes::create([
-            'member_type' => 'Vet Professional Premium',
-        ]);
-        MemberTypes::create([
-            'member_type' => 'Pet Professional Premium',
+        DB::table('member_types')->insert([
+            ['member_type' => 'Super Admin'],
+
+            ['member_type' => 'Public'],
+
+            ['member_type' => 'Pet Owner'],
+
+            ['member_type' => 'Vet Professional'],
+
+            ['member_type' => 'Pet Professional'],
+
+            ['member_type' => 'Pet Owner Premium'],
+
+            ['member_type' => 'Vet Professional Premium'],
+
+            ['member_type' => 'Pet Professional Premium'],
         ]);
     }
 }

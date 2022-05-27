@@ -33,7 +33,7 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="sponser_image" class="control-label mb-1">Sponsor Image</label>
-                                            <input id="sponser_image" placeholder="Enter Name" name="sponser_image"
+                                            <input id="sponser_image" placeholder="Enter Name" name="sponser_image_update"
                                                 type="file" class="form-control" value="{{ $sponser->sponser_image }}">
                                         </div>
                                     </div>

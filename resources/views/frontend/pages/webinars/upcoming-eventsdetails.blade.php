@@ -2,7 +2,7 @@
 @section('content')
     <section class="video-section-wrapper mb-4">
         <div class="container">
-            <form action="{{ route('payementwebinars')}}" method="POST" >
+            <form action="{{ route('submitPayment')}}" method="POST" >
                 <div class="public-detail-inner">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 

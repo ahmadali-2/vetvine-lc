@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSponsersTable extends Migration
+class AddNewColumnProfileStatusInUserEmploymentInfosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateSponsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('sponser', function (Blueprint $table) {
-            $table->id();
-            $table->integer('sponser_id');
-            $table->morphs('sponserable');
-            $table->timestamps();
+        Schema::table('user_employment_infos', function (Blueprint $table) {
+            //
+
+            $table->string('profile_status')->nullable();
         });
     }
 
@@ -28,6 +27,8 @@ class CreateSponsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sponser');
+        Schema::table('user_employment_infos', function (Blueprint $table) {
+            //
+        });
     }
 }

@@ -27,6 +27,7 @@ class VetvineUsersRole
             Auth::logout();
             return redirect('/');
         }
+
         return $next($request);
     }
 }

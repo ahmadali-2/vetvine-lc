@@ -94,7 +94,7 @@ class SponserController extends Controller
         try{
             $sponser = Sponsertable::find($id);
             $path   = public_path('admin/eventss/');
-            $result = vetvineHelper::updateImage($request->sponser_image, $sponser->sponser_image, $path);
+            $result = vetvineHelper::updateImage($request->sponser_image_update, $sponser->sponser_image, $path);
             $sponser->update([
                 "sponser_name"      => ucwords($request->sponser_name),
                 "sponser_link"      => $request->sponser_link_edit,

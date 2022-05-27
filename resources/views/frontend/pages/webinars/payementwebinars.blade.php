@@ -48,9 +48,10 @@
                                             <div class="card-title">
                                                 <p>Credit Card * </p>
                                             </div>
-                                            <form role="form" action="{{ route('eventpayments.store') }}" method="Post"
+                                            <form action="{{ route('payementwebinars') }}" method="POST"
                                                 class="require-validation" data-cc-on-file="false"
                                                 data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
+                                               
                                                 @csrf
                                                 <input type="hidden" value="{{ $event_price }}" name="event_price">
                                                 <input type="hidden" value="{{ $event_id }}" name="event_id">
@@ -80,7 +81,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="billing-btn">
-                                                    <button value="{{ $event_price }}">Pay {{ $event_price }} $</button>
+                                                    <button type="submit" value="{{ $event_price }}">Pay {{ $event_price }} $</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -175,7 +176,7 @@ $(function() {
   function stripeResponseHandler(status, response) {
 
         if (response.error) {
-
+            toastr.error(response.error.message)
             $('.error')
 
                 .removeClass('hide')
@@ -187,7 +188,7 @@ $(function() {
         } else {
 
             // token contains id, last4, and card type
-
+            // alert(response);
             var token = response['id'];
 
             // insert the token into the form so it gets submitted to the server
