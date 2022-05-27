@@ -18,7 +18,8 @@ class ManageUserController extends Controller
      */
     public function index()
     {
-        $allUsers =User::where('type', 2)->get();
+        $allUsers =User::with('userMemberType')->where('type','!=','1')->get();
+
         return view('admins.generalsettings.manageusers.index',compact('allUsers'));
     }
 
@@ -146,11 +147,25 @@ class ManageUserController extends Controller
     }
     public function changeUserType($id)
     {
+        $memberTypes = MemberTypes::all();
+        $user =User::with('userMemberType')->where('id',$id)->first();
+        return view('admins.generalsettings.manageusers.editusertype',compact('memberTypes','user'));
 
-        $membertype = MemberTypes::with('userTypeCheck')->get();
-        // $allUsers =User::with('userMemberType')->get();
-        // dd($membertype[0]->id);
-        return view('admins.generalsettings.manageusers.editusertype',compact('membertype'));
+    }
+    public function updateUserType(Request $request)
+    {
+        try{
+            $user =User::where('id', $request->id)->first();
+            $user->update([
+                'type'  => $request->type,
+            ]);
+            parent::successMessage("User Status Updated Successfully");
+             return redirect(route('manageuser.index'));
+        } catch(Exception $e) {
+            parent::dangerMessage("User Does Not  Updated Successfully , Please Try Again");
+
+           return  redirect()->back();
+        }
 
     }
 }
