@@ -47,23 +47,23 @@ class EventPaymentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function paymentWebinars(Request $request)
     {
-
         $checkUser =BuyEventPlan::where('user_id',$request->user_id)->where('event_id', $request->event_id)->first();
         if(!empty($checkUser)){
             parent::warningMessage("You Already Purchased An Event");
             parent::warningMessage("Please Contact With Admin To Proceed Your Query");
-            return redirect()->back();
+            return route('upcoming_webinars');
         }
         try{
 
-            Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+            Stripe\Stripe::setApiKey('sk_test_51L43BqKuqsAISa0ttkLpNjhOiJPwPK4KjychhTSoNof5g0WHg8uppTYHqpqEz4yQFaNbEcxbnQW0jabEqno6GQn200dm5rjGm1');
             $stripeResponse =Stripe\Charge::create ([
-                    "amount" => $request->event_price,
-                    "currency" => "usd",
-                    "source" => $request->stripeToken,
-                    "description" => "Vetvine Payment Subscription"
+                    "amount" => $request->event_price*100,
+                    "currency" => "USD",
+                    // "source" => $request->stripeToken,
+                    "source" => 'tok_visa',
+                    "description" => "Vetvine Event Payment Subscription"
             ]);
 
             BuyEventPlan::create([
@@ -74,9 +74,8 @@ class EventPaymentController extends Controller
             ]);
         parent::successMessage("Your Plan Subscribed Successfully");
         parent::successMessage("Your Transaction Id " .$stripeResponse->id);
-        return redirect()->route('usermemberships.index');
+        return redirect()->route('upcoming_webinars');
         } catch(Exception $e) {
-            dd($e->getMessage());
             parent::dangerMessage("Something Went Wrong Payment Does Not Proceed");
             parent::dangerMessage("Please Try Again ");
             return redirect()->back();
