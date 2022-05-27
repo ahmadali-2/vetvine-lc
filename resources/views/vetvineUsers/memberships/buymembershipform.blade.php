@@ -31,7 +31,7 @@
     </section>
 
     <div class="container">
-        
+
          <div class="row">
 
             <div class="col-md-12">
@@ -98,7 +98,7 @@
 
                         </div>
 
-                         <input type="hidden" value="{{$plan->plan_price}}" name="plan_price">
+                        <input type="hidden" value="{{$plan->plan_price}}" name="plan_price">
                         <input type="hidden" value="{{$plan->id}}" name="membershipplan_id">
                         <input type="hidden" value="{{Auth::user()->id}}" name="user_id">
 
