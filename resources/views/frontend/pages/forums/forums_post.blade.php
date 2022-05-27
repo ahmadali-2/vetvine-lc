@@ -38,7 +38,7 @@
                                         <div class="behavior-title">
                                             <h2>{{$post->post_title}}</h2>
                                         </div>
-                                        
+
                                     </div>
                                 </a>
                     </div>
