@@ -18,7 +18,8 @@ class ManageUserController extends Controller
      */
     public function index()
     {
-        $allUsers =User::where('type', 2)->get();
+        $allUsers =User::with('userMemberType')->where('type','!=','1')->get();
+        
         return view('admins.generalsettings.manageusers.index',compact('allUsers'));
     }
 
@@ -146,11 +147,10 @@ class ManageUserController extends Controller
     }
     public function changeUserType($id)
     {
-
-        $membertype = MemberTypes::with('userTypeCheck')->get();
-        // $allUsers =User::with('userMemberType')->get();
-        // dd($membertype[0]->id);
-        return view('admins.generalsettings.manageusers.editusertype',compact('membertype'));
+        
+        $memberTypes = MemberTypes::all();
+        $user =User::with('userMemberType')->where('id',$id)->first();
+        return view('admins.generalsettings.manageusers.editusertype',compact('memberTypes','user'));
 
     }
 }

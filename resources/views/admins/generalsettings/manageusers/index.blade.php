@@ -40,7 +40,7 @@
                                             <td>{{$approveuser->name ?? '' }}</td>
                                             <td>{{$approveuser->email ?? ''}}</td>
                                             <td>{{$approveuser->userNetworkLevel->name}}</td>
-                                            <td>{{$approveuser->type}}</td>
+                                            <td>{{$approveuser->userMemberType->member_type}}</td>
                                             <td>
                                             <a href="{{route('changeusertype',$approveuser->id )}}"><i class="fas fa-edit text-primary"></i></a>
                                             <a href="{{route('userhistory', $approveuser->id)}}"> <i class="far fa-eye text-info"></i></a>
