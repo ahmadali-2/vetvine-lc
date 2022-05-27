@@ -11,7 +11,6 @@ use App\Models\Network;
 class MemberShipPlan extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'plan_name',
         'plan_description',
@@ -21,9 +20,6 @@ class MemberShipPlan extends Model
         'member_ship_plan_categories_id'
 
     ];
-
-
-
     public function network()
     {
         return $this->morphToMany(Network::class,'networkable');

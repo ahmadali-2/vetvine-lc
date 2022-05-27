@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Exception;
 use App\Models\Generals\TimeZone;
+use App\Models\MemberTypes;
 use App\Models\UserMemberAndNetworkLevel;
 class ManageUserController extends Controller
 {
@@ -17,7 +18,8 @@ class ManageUserController extends Controller
      */
     public function index()
     {
-        $allUsers =User::where('type', 2)->get();
+        $allUsers =User::with('userMemberType')->where('type','!=','1')->get();
+        
         return view('admins.generalsettings.manageusers.index',compact('allUsers'));
     }
 
@@ -65,7 +67,7 @@ class ManageUserController extends Controller
         $timezones = TimeZone::all();
         $networklevels = UserMemberAndNetworkLevel::where('parent_id', Null)->get();
 
-                
+
         return view('admins.generalsettings.manageusers.edituser',compact('user','timezones','networklevels'));
     }
 
@@ -103,7 +105,7 @@ class ManageUserController extends Controller
     }
 
     public function unapprovedUsers()
-    {       
+    {
         $allUsers =User::where('type', 2)->where('status', 0)->get();
         return view('admins.generalsettings.manageusers.viewusersrequest',compact('allUsers'));
     }
@@ -142,5 +144,13 @@ class ManageUserController extends Controller
 
         $userlevels = UserMemberAndNetworkLevel::where('parent_id', $id)->get();
         return json_encode($userlevels);
+    }
+    public function changeUserType($id)
+    {
+        
+        $memberTypes = MemberTypes::all();
+        $user =User::with('userMemberType')->where('id',$id)->first();
+        return view('admins.generalsettings.manageusers.editusertype',compact('memberTypes','user'));
+
     }
 }

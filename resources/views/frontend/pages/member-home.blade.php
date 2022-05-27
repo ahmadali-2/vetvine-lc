@@ -25,6 +25,9 @@
                      <div class="icon"><img src="{{ asset('frontend/img/socialdna.png')}}" alt=""></div>
                     My Social DNA
                   </li>
+                  <li>
+                    <div class="icon" style="margin-left: 5px;"><a href="{{ route('userdashboard') }}">Profile</a></div>
+                 </li>
                 </ul>
               </div>
             </div>

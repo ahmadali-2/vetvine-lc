@@ -6489,3 +6489,11 @@ width: 138px;
 }
   /*  post detail style */
 
+.sposer_name {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+.sposer_name a{
+    text-align: left;
+}

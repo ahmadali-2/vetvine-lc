@@ -14,9 +14,10 @@ class Network extends Model
         'networkable_id',
         'networkable_type'
     ];
-    
+
     public function networkable()
     {
         return $this->morphTo();
     }
+    
 }

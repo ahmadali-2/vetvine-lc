@@ -12,6 +12,7 @@ use App\Models\Admins\Forum\Forum;
 use App\Models\Admins\Forum\ForumPost;
 use App\Models\Admins\Webinar\CategoryEvent;
 use App\Models\Admins\Webinar\Event;
+use App\Models\Admins\Webinar\SponserTable;
 use DB;
 class HomeController extends Controller
 {
@@ -51,18 +52,18 @@ class HomeController extends Controller
     {
         return view('frontend.pages.faqs');
     }
-    public function payementwebinars()
-    {
-        $user = Auth::user();
-        if($user){
-            return view('frontend.pages.webinars.payementwebinars');
-        }
-        else{
-            parent::dangerMessage("Your Are Not Logged in, Please Login And Try  Again");
-            return redirect('login');
-        }
+    // public function payementwebinars()
+    // {
+    //     $user = Auth::user();
+    //     if($user){
+    //         return view('frontend.pages.webinars.payementwebinars');
+    //     }
+    //     else{
+    //         parent::dangerMessage("Your Are Not Logged in, Please Login And Try  Again");
+    //         return redirect('login');
+    //     }
 
-    }
+    // }
     public function forums()
     {
         $forums     =   Forum::all();
@@ -77,10 +78,10 @@ class HomeController extends Controller
     }
     public function upcomingWebinars()
     {
-
-        $showevent = Event::with('user')->get();
+        $showevent = Event::with('events', 'sponsers' ,'members','user')->get();
+        $sponser  = SponserTable::all();
         $category = CategoryEvent::all();
-        return view('frontend.pages.webinars.upcoming-webinars',compact('showevent','category'));
+        return view('frontend.pages.webinars.upcoming-webinars',compact('showevent', 'sponser', 'category'));
     }
     public function pastevent()
     {
@@ -98,8 +99,8 @@ class HomeController extends Controller
     }
     public function upcomingWebinarsdetails($id)
     {
-        $eventdetail = Event::with('events','user')->where('id',$id)->get();
-        $category    = CategoryEvent::all();
+        $eventdetail = Event::with('events', 'sponsers' ,'members' ,'user','buyeventplan')->where('id',$id)->get();
+        $category = CategoryEvent::all();
         return view('frontend.pages.webinars.upcoming-eventsdetails',compact('eventdetail','category'));
 
     }

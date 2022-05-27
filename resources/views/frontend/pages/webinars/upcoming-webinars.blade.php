@@ -44,16 +44,19 @@
                     </li>
                 </ul>
             </form>
+            {{-- @dd(ROUTE::current()->uri); --}}
             <ul class="page-link-list">
-                <li class="active">
+                <li @if(ROUTE::current()->uri == 'upcoming-webinars') class="active"  @endif>
                     <a href="{{ route('upcoming_webinars') }}">Continuing Education</a>
                 </li>
-                <li>
+                @if(Auth::user())
+                <li @if(ROUTE::current()->uri == 'past-event') class="active"  @endif>
                     <a href="{{ route('pastevent') }}">My Past Events</a>
                 </li>
-                <li>
+                <li @if(ROUTE::current()->uri == 'upcoming-event') class="active"  @endif>
                     <a href="{{ route('upcomingevent') }}">My Upcoming Events</a>
                 </li>
+                @endif
             </ul>
 
             <div class="row w-100 video-cat-main m-0">
@@ -85,13 +88,16 @@
                                     <span class="fas fa-star"></span>
                                 </div>
                             </div>
+                            {{-- @dd(
+                                $showevents
+                            ); --}}
                             @if (Auth::user())
                             @php
                                 // Time Convert Acoording to timezone
                                     $eventTime      =   $showevents->time;
                                     $timeZone       =   $showevents->user->timezone->name;
+
                                     $today          =   new DateTime($showevents->time, new DateTimeZone($timeZone));
-                                    // $today->format('Y-m-d H:i').'<br>';
                                     $userTimeZone   =  Auth::user()->timezone->name;
                                     $userEventTime  =  new DateTimeZone($userTimeZone);
                                     $convertedTime  =  $today->setTimeZone($userEventTime);
@@ -104,11 +110,20 @@
                                 <h5>Start Time : {{ date('g:i a', strtotime($formattedTime)) }}</h5>
                                @endif
                                 <p><span>Presented by:</span> <a href="{{ $showevents->presenter_one_url }}"
-                                        class="vetvine_a" target="_blank">{{ $showevents->presenter_one }}</a><br />
-                                    <strong>Sponsored by:</strong><a href="{{ $showevents->sponser_one_url }}"
+                                        class="vetvine_a" target="_blank">{{ $showevents->presenter_one }}</a><br>
+
+                                        <strong>Sponsored by:</strong>
+                                        <div class="sposer_name">
+                                        @foreach ($showevents->members as $item)
+                                    <a href="{{ $item->sponser_link }}"
                                         class="vetvine_a" target="_blank"
-                                        rel="noopener noreferrer">{{ $showevents->sponser_one }}</a>
+                                        rel="noopener noreferrer">{{ $item->sponser_name }}</a>
+                                        @endforeach
+
+                                    </div>
                                 </p>
+
+
                                 </p>
                                 <p class="para-decription">
                                     {{ Str::limit($showevents->event_description, 250) }}

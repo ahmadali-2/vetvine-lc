@@ -219,10 +219,10 @@ $timezones = vetvineHelper::timezones();
 
 
 
-                                                <div class="col-sm-12 text-center pad-left-captha">
-
-                                                    <div
-                                                        class="form-group{{ $errors->has('CaptchaCode') ? ' has-error' : '' }}">
+                                                <div class="col-sm-12 text-center">
+                                                    <div class="g-recaptcha" data-sitekey="{{ env('GOOGLE_RECAPTCHA_SITE_KEY') }}">
+                                                        </div>
+                                                    {{-- <div class="form-group{{ $errors->has('CaptchaCode') ? ' has-error' : '' }}">
 
                                                         <div class="col-md-6 captcha_top mx-auto">
                                                             {!! captcha_image_html('ContactCaptcha') !!}
@@ -236,12 +236,17 @@ $timezones = vetvineHelper::timezones();
                                                                 </span>
                                                             @endif
 
-                                                        </div>
-                                                    </div>
+                                                     </div>
+                                                   </div> --}}
 
-                                                    {{-- captcha --}}
-                                                </div>
-                                                <div class="col-sm-12 text-center">
+
+                                            </div>
+
+
+
+
+
+                                                    <div class="col-sm-12 text-center">
 
 
 
@@ -370,16 +375,18 @@ $timezones = vetvineHelper::timezones();
 <!-- Login Modal Form  End-->
 
 @section('scripts')
-    <script>
-        $(document).ready(function() {
-            //step1 hide buttons until user select the network level
-            $('.socialbtns').css({
-                'pointer-events': 'none'
-            });
-            $('#submitbtn').css({
-                'pointer-events': 'none'
-            });
-        })
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script>
+
+$(document).ready(function(){
+//step1 hide buttons until user select the network level
+    $('.socialbtns').css({
+        'pointer-events': 'none'
+    });
+    $('#submitbtn').css({
+        'pointer-events': 'none'
+    });
+})
 
         $('.nave_google_captcha').on('click', function() {
             alert("oj");
@@ -426,6 +433,22 @@ $timezones = vetvineHelper::timezones();
             // console.log(a);
 
 
-        })
-    </script>
+   })
+
+
+
+   $('#regform').submit(function(e) {
+
+if(grecaptcha.getResponse() == ''){
+    toastr.error('Please verify captcha first!');
+    e.preventDefault();
+    return;
+}else{
+
+}
+
+})
+
+</script>
+
 @endsection

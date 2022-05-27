@@ -19,8 +19,6 @@ class StripePaymentController extends Controller
      */
     public function index()
     {
-
-       
         $plans =MemberShipPlan::with('plancategory')->get();
         return view('vetvineUsers.memberships.index',compact('plans'));
     }
@@ -51,14 +49,14 @@ class StripePaymentController extends Controller
         }
         try{
 
-        
+
 
             Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
             $stripeResponse =Stripe\Charge::create ([
                     "amount" => $request->plan_price,
                     "currency" => "usd",
                     "source" => $request->stripeToken,
-                    "description" => "Vetvine Payment Subscription" 
+                    "description" => "Vetvine Payment Subscription"
             ]);
 
             BuyMemberShipPlan::create([
@@ -68,14 +66,14 @@ class StripePaymentController extends Controller
                 'amount' => $request->plan_price,
             ]);
         parent::successMessage("Your Plan Subscribed Successfully");
-        parent::successMessage("Your Transaction Id " .$stripeResponse->id);  
+        parent::successMessage("Your Transaction Id " .$stripeResponse->id);
         return redirect()->route('usermemberships.index');
         } catch(Exception $e) {
             parent::dangerMessage("Something Went Wrong Payment Does Not Proceed");
             parent::dangerMessage("Please Try Again ");
             return redirect()->back();
         }
-        
+
     }
 
     /**
@@ -86,7 +84,7 @@ class StripePaymentController extends Controller
      */
     public function show($id)
     {
-        
+
         $plan =MemberShipPlan::with('plancategory')->find($id);
         return view('vetvineUsers.memberships.buymembershipform',compact('plan'));
     }
