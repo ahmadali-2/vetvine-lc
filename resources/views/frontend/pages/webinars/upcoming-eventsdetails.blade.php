@@ -143,11 +143,6 @@
                     @endforeach
                 </div>
             </form>
-            {{-- <div class="row">
-                <div class="col-sm-12 my-3">
-                    <a href="{{ route('payementwebinars',$item->id) }}" class="click_join">Click me to Join</a>
-                </div>
-            </div> --}}
     </section>
 @endsection
 
