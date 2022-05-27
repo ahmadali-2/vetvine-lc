@@ -138,7 +138,7 @@ $vetvineLogo =vetvineHelper::vetvineGeneralSetting()
 
                                                             <li><a href="{{ route('upcoming_webinars') }}">Upcoming Webinars</a></li>
 
-                                  <li><a href="#">videos on demand</a></li>
+                                  <li><a href="{{ route('videosOnDemand') }}">videos on demand</a></li>
 
                                                              <li><a href="#">Certificate & special programs</a></li>
                                                              <li><a href="{{route('forumsfrontend')}}">forums</a></li>
