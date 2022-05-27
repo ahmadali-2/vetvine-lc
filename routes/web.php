@@ -19,7 +19,6 @@ use App\Http\Controllers\Admins\Forum\ForumController;
 use App\Http\Controllers\Admins\Forum\ForumPostController;
 use App\Http\Controllers\Admins\Generalsettings\AdminProfileController;
 use App\Http\Controllers\Admins\Generalsettings\ManageUserController;
-use App\Http\Controllers\Admins\Members\MemberTypeController;
 use App\Http\Controllers\Admins\Memberships\MemberShipPlanCategoryController;
 use App\Http\Controllers\Admins\Memberships\MemberShipPlansController;
 use App\Http\Controllers\Admins\Webinar\EventCategoryController;
@@ -118,9 +117,6 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
     Route::get('network', [AdminDashboardController::class, 'network'])->name('network');
     Route::get('unapproved-users', [ManageUserController::class, 'unapprovedUsers'])->name('unapproved');
     Route::post('approved-user', [ManageUserController::class, 'approvedUsers'])->name('approveuser');
-    Route::post('member-permission', [MemberTypeController::class, 'MemberStatus'])->name('memberstatus');
-    Route::get('member-type', [MemberTypeController::class, 'MemberTypes'])->name('membertype');
-    Route::get('member-permissions/{id}', [MemberTypeController::class, 'MemberPermissions'])->name('memberpermissions');
     Route::delete('delete-users/{id}', [ManageUserController::class, 'deleteUser']);
 
     Route::resource('forums-category', ForumCategoryController::class);
@@ -157,9 +153,7 @@ Route::get('upcoming-webinars-details/{id}',[HomeController::class,'upcomingWebi
 Route::get('past-event',[HomeController::class,'pastevent'])->name('pastevent');
 Route::get('upcoming-event',[HomeController::class,'upcomingevent'])->name('upcomingevent');
 // Route::get('payement',[HomeController::class,'payementwebinars'])->name('payementwebinars');
-Route::get('payement',[EventPaymentController::class,'index'])->name('payementwebinars');
-Route::post('payement',[EventPaymentController::class,'store'])->name('payementwebinars');
-
+Route::post('payement',[EventPaymentController::class,'index'])->name('payementwebinars');
 Route::get('publications',[HomeController::class,'publications'])->name('upcoming_publications');
 Route::post('educations',[HomeController::class,'searceducations'])->name('search_educations');
 Route::resource('eventpayments',EventPaymentController::class);

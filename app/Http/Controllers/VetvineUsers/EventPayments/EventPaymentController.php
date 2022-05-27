@@ -49,14 +49,15 @@ class EventPaymentController extends Controller
      */
     public function store(Request $request)
     {
-
-        $checkUser =BuyEventPlan::where('user_id',$request->user_id)->where('event_id', $request->event_id)->first();
+        $checkUser =BuyEventPlan::where('user_id',$request->user_id)->first();
         if(!empty($checkUser)){
             parent::warningMessage("You Already Purchased An Event");
             parent::warningMessage("Please Contact With Admin To Proceed Your Query");
             return redirect()->back();
         }
         try{
+
+
 
             Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
             $stripeResponse =Stripe\Charge::create ([
@@ -76,7 +77,6 @@ class EventPaymentController extends Controller
         parent::successMessage("Your Transaction Id " .$stripeResponse->id);
         return redirect()->route('usermemberships.index');
         } catch(Exception $e) {
-            dd($e->getMessage());
             parent::dangerMessage("Something Went Wrong Payment Does Not Proceed");
             parent::dangerMessage("Please Try Again ");
             return redirect()->back();
