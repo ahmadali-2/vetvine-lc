@@ -178,5 +178,5 @@ Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetv
     Route::post('/comment/store', [CommentController::class,'store'])->name('comment.add');
     Route::delete('comment-destroy/{id}', [CommentController::class,'destroy'])->name('comment.destroy');
     Route::post('/reply/store', [CommentController::class,'replyStore'])->name('reply.add');
-
+    Route::post('savelike', [PostController::class,'likeSave'])->name('likesave');
 });

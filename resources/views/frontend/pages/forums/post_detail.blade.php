@@ -1,7 +1,27 @@
 @extends('frontend.master')
 @section('content')
+<style>
+
+</style>
       <section class="video-section-wrapper mb-4">
          <div class="container">
+            <section class="become_member_area">
+                <div class="container">
+                    <h2>
+                        <span>Posts</span>
+                    </h2>
+                </div>
+            </section>
+            <section class="container">
+                <div class="row mb-2">
+                    <div class="col-sm-12 text-right">
+                        <div class="icon_post">
+                        <a href="" class="mx-2"><i class="fa fa-edit" aria-hidden="true"></i>Edit</a>
+                        <a href=""><i class="fa fa-trash" aria-hidden="true"></i>Delete</a>
+                    </div>
+                    </div>
+                </div>
+        </section>
             <div class="public-detail-inner">
                <div class="public-cat">
                 <img src="img/public-cat.png" alt="">
@@ -16,7 +36,7 @@
                      <h2>Leave A Comment </h2>
 
                      <form action="">
-                     <input type="text" class="form-control my-2">
+                     <input type="text" class="form-control my-2 comment_input">
 
                      <button class="btn_post my-2">Submit</button>
                   </form>
