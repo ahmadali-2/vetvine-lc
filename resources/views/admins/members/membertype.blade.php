@@ -31,11 +31,15 @@
                                         <tr>
                                             <th scope="row">{{$loop->iteration}}</th>
                                             <td>{{$mt->member_type ?? '' }}</td>
-                                            <td>{{$mt->members ?? '0'}}</td>
-
+                                            <td>{{$mt->userTypeCheck->count() ?? '0'}}</td>
                                             <td>
-                                            <a href="{{route('memberpermissions', $mt->id)}}"><i class="fas fa-edit text-primary"></i></a>
-                                            </a>
+                                                @if ($mt->member_type === 1)
+
+                                                @else
+
+                                                <a href="{{route('memberpermissions', $mt->id)}}"><i class="fas fa-edit text-primary"></i></a>
+                                                </a>
+                                                @endif
 
                                             </td>
                                         </tr>
