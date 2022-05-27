@@ -2,6 +2,7 @@
 
 namespace App\Models\Admins\Webinar;
 
+use App\Models\Admins\Webinar\BuyEventPlan as WebinarBuyEventPlan;
 use App\Models\User;
 use App\Models\Webinar\BuyEventPlan;
 use App\Models\Sponser;
@@ -53,5 +54,10 @@ class Event extends Model
     public function user()
     {
         return $this->belongsTo(User::class,'user_id');
+    }
+
+    public function buyeventplan()
+    {
+        return $this->hasMany(WebinarBuyEventPlan::class);
     }
 }
