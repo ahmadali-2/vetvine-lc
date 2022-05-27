@@ -93,6 +93,17 @@
 </ul>
 
 </li>
+<li class="menu-item-has-children dropdown">
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Member Level</a>
+
+    <ul class="sub-menu children dropdown-menu">
+
+    <li><i class="menu-icon fa fa-sign-in"></i><a href="{{route('membertype')}}">Member Type</a></li>
+
+    </ul>
+
+    </li>
 
 <li>
 
