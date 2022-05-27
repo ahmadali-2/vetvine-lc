@@ -1,26 +1,34 @@
 <?php
 
-namespace App\Http\Controllers\VetvineUsers\MemberShips;
+namespace App\Http\Controllers\VetvineUsers\EventPayments;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Admins\Memberships\MemberShipPlan;
-use App\Models\Admins\Memberships\BuyMemberShipPlan;
-
+use App\Models\Admins\Webinar\BuyEventPlan;
+use App\Models\Admins\Webinar\Event;
 use Session;
 use Stripe;
 use Exception;
-class StripePaymentController extends Controller
+use Illuminate\Support\Facades\Auth;
+class EventPaymentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $plans =MemberShipPlan::with('plancategory')->get();
-        return view('vetvineUsers.memberships.index',compact('plans'));
+        $event_price = $request->event_price;
+        $event_id = $request->event_id;
+        $user = Auth::user();
+        if($user){
+            return view('frontend.pages.webinars.payementwebinars',compact('event_price','event_id'));
+        }
+        else{
+            parent::dangerMessage("Your Are Not Logged in, Please Login And Try  Again");
+            return redirect('login');
+        }
     }
 
     /**
@@ -39,41 +47,39 @@ class StripePaymentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function paymentWebinars(Request $request)
     {
-        $checkUser =BuyMemberShipPlan::where('user_id',$request->user_id)->first();
+        $checkUser =BuyEventPlan::where('user_id',$request->user_id)->where('event_id', $request->event_id)->first();
         if(!empty($checkUser)){
-            parent::warningMessage("You Already Subscribed A Member Ship Plan");
+            parent::warningMessage("You Already Purchased An Event");
             parent::warningMessage("Please Contact With Admin To Proceed Your Query");
-            return redirect()->back();
+            return route('upcoming_webinars');
         }
         try{
 
-
-
-            Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+            Stripe\Stripe::setApiKey('sk_test_51L43BqKuqsAISa0ttkLpNjhOiJPwPK4KjychhTSoNof5g0WHg8uppTYHqpqEz4yQFaNbEcxbnQW0jabEqno6GQn200dm5rjGm1');
             $stripeResponse =Stripe\Charge::create ([
-                    "amount" => $request->plan_price,
-                    "currency" => "usd",
-                    "source" => $request->stripeToken,
-                    "description" => "Vetvine Payment Subscription"
+                    "amount" => $request->event_price*100,
+                    "currency" => "USD",
+                    // "source" => $request->stripeToken,
+                    "source" => 'tok_visa',
+                    "description" => "Vetvine Event Payment Subscription"
             ]);
 
-            BuyMemberShipPlan::create([
+            BuyEventPlan::create([
                 'transaction_id' => $stripeResponse->id,
                 'user_id' => $request->user_id,
-                'member_ship_plan_id' => $request->membershipplan_id,
-                'amount' => $request->plan_price,
+                'event_id' => $request->event_id,
+                'amount' => $request->event_price,
             ]);
         parent::successMessage("Your Plan Subscribed Successfully");
         parent::successMessage("Your Transaction Id " .$stripeResponse->id);
-        return redirect()->route('usermemberships.index');
+        return redirect()->route('upcoming_webinars');
         } catch(Exception $e) {
             parent::dangerMessage("Something Went Wrong Payment Does Not Proceed");
             parent::dangerMessage("Please Try Again ");
             return redirect()->back();
         }
-
     }
 
     /**
@@ -84,9 +90,7 @@ class StripePaymentController extends Controller
      */
     public function show($id)
     {
-
-        $plan =MemberShipPlan::with('plancategory')->find($id);
-        return view('vetvineUsers.memberships.buymembershipform',compact('plan'));
+        //
     }
 
     /**

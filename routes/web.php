@@ -34,6 +34,7 @@ use App\Http\Controllers\Frontend\ContactUsController;
 // Vetvine Frontend Routes;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Auth\UsersRegistrationController;
+use App\Http\Controllers\VetvineUsers\EventPayments\EventPaymentController;
 use App\Http\Controllers\VetvineUsers\MemberShips\StripePaymentController;
 use App\Http\Controllers\VetvineUsers\MyProfile\EditPhotoController;
 // User profile Skills And Expertise Controller
@@ -156,10 +157,13 @@ Route::get('upcoming-webinars',[HomeController::class,'upcomingWebinars'])->name
 Route::get('upcoming-webinars-details/{id}',[HomeController::class,'upcomingWebinarsdetails'])->name('upcoming_details');
 Route::get('past-event',[HomeController::class,'pastevent'])->name('pastevent');
 Route::get('upcoming-event',[HomeController::class,'upcomingevent'])->name('upcomingevent');
-Route::get('payement',[HomeController::class,'payementwebinars'])->name('payementwebinars');
+// Route::get('payement',[HomeController::class,'payementwebinars'])->name('payementwebinars');
+Route::post('submit-payment',[EventPaymentController::class,'index'])->name('submitPayment');
+Route::post('payment',[EventPaymentController::class,'paymentWebinars'])->name('payementwebinars');
 
 Route::get('publications',[HomeController::class,'publications'])->name('upcoming_publications');
 Route::post('educations',[HomeController::class,'searceducations'])->name('search_educations');
+Route::resource('eventpayments',EventPaymentController::class);
 
 Route::get('faqs',[HomeController::class,'faqs'])->name('faqs');
 Route::get('frontend-news',[NewsController::class,'frontIndex'])->name('newsfrontend');

@@ -28,6 +28,7 @@ class ForumController extends Controller
 
     public function frontendIndex()
     {
+        // dd('hjkds');
         $user=Auth::user();
         if($user)
         {
