@@ -9,9 +9,8 @@
                 <div class="card-body">
                     <div id="pay-invoice">
                         <div class="card-body">
-                            <form action="" method="post" id="editusertype">
+                            <form action="{{ route('updateusertype', $user->id) }}" method="POST" id="editusertype">
                                 @csrf
-                                @method('PUT')
                                 <div class="row">
                                     <div class=" col-6">
                                         <div class="form-group">
@@ -20,8 +19,9 @@
                                                 class="form-control cc-number identified visa" value="" data-val="true">
                                                 <option selected value="">Open this select level</option>
                                                 @foreach ($memberTypes as $mt)
-                                                
-                                                    <option value="{{ $mt->id }}" {{$user->type == $mt->id  ? 'selected' : ''}}>{{$mt->member_type}}</option>
+                                                    <option value="{{ $mt->id }}"
+                                                        {{ $user->type == $mt->id ? 'selected' : '' }}>
+                                                        {{ $mt->member_type }}</option>
                                                 @endforeach
 
                                             </select>

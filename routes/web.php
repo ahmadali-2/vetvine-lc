@@ -123,6 +123,7 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
     Route::get('member-permissions/{id}', [MemberTypeController::class, 'MemberPermissions'])->name('memberpermissions');
     Route::delete('delete-users/{id}', [ManageUserController::class, 'deleteUser']);
     Route::get('change-users-type/{id}', [ManageUserController::class, 'changeUserType'])->name('changeusertype');
+    Route::post('update-users-type/{id}', [ManageUserController::class, 'updateUserType'])->name('updateusertype');
 
     Route::resource('forums-category', ForumCategoryController::class);
     Route::resource('forums', ForumController::class);
