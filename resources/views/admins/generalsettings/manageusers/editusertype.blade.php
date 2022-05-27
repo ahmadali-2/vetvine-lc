@@ -13,9 +13,7 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
-                                    {{-- @dd($membertype->userTypeCheck) --}}
                                     <div class=" col-6">
-                                        {{-- @dd($user) --}}
                                         <div class="form-group">
                                             <label for="type" class="control-label mb-1 form-select">User Type</label>
                                             <select id="type" name="type" aria-label="Default select example"
