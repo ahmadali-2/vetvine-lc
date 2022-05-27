@@ -153,7 +153,9 @@ Route::get('upcoming-webinars-details/{id}',[HomeController::class,'upcomingWebi
 Route::get('past-event',[HomeController::class,'pastevent'])->name('pastevent');
 Route::get('upcoming-event',[HomeController::class,'upcomingevent'])->name('upcomingevent');
 // Route::get('payement',[HomeController::class,'payementwebinars'])->name('payementwebinars');
-Route::post('payement',[EventPaymentController::class,'index'])->name('payementwebinars');
+Route::post('submit-payment',[EventPaymentController::class,'index'])->name('submitPayment');
+Route::post('payment',[EventPaymentController::class,'paymentWebinars'])->name('payementwebinars');
+
 Route::get('publications',[HomeController::class,'publications'])->name('upcoming_publications');
 Route::post('educations',[HomeController::class,'searceducations'])->name('search_educations');
 Route::resource('eventpayments',EventPaymentController::class);

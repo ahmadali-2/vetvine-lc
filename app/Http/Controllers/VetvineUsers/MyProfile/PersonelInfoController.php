@@ -82,12 +82,16 @@ class PersonelInfoController extends Controller
                     'city'                  => $request->city,
                     'work_phone'            => $request->work_phone
                 ]);
-            parent::successMessage("Profile Info Saved Successfully!");
+
+                //check either user has been complete his profile or not?
+                UserEmploymentInfo::where('user_id',$user->id)->update(['profile_status' => 'completed']
+                );
+                parent::successMessage("Profile Info Saved Successfully!");
             return redirect(route('member_home'));
         }
         catch(Exception $e)
         {
-            dd($e->getMessage());
+            // dd($e->getMessage());
             parent::dangerMessage("Profile Info Not Saved! Please Try Again.");
             return redirect()->back();
         }

@@ -84,7 +84,7 @@ $socialLinks = vetvineHelper::vetvineGeneralSetting();
 
                 <ul class="p-0">
 
-                    <li><a href="#">Upcoming Webinars</a></li>
+                    <li><a href="{{ route('upcoming_webinars') }}">Upcoming Webinars</a></li>
 
                     <li><a href="#">CE/Videos On Demand</a></li>
 
@@ -98,33 +98,17 @@ $socialLinks = vetvineHelper::vetvineGeneralSetting();
             </div>
 
             <div class="w3-col l1 m1 s1 w3-left-align one">
-
-
-
                 <h3>Pet Loss <br>
-
                     Support</h3>
-
                 <ul class="p-0">
-
                     <li><a href="#">About Pet Loss Support</a></li>
-
                     <li><a href="#">Schedule & Registration</a></li>
-
                     <li><a href="#">Group & Session Facilitators </a></li>
-
                     <li><a href="#">Additional Resources </a></li>
-
                     <li><a href="#">Pet Loss & Grief Resources</a></li>
-
                 </ul>
-
             </div>
-
             <div class="w3-col l1 m1 s1 w3-left-align one">
-
-
-
                 <h3>Wellness for Professionals</h3>
 
                 <ul class="p-0">

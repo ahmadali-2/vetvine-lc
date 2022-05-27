@@ -44,16 +44,19 @@
                     </li>
                 </ul>
             </form>
+            {{-- @dd(ROUTE::current()->uri); --}}
             <ul class="page-link-list">
-                <li class="active">
+                <li @if(ROUTE::current()->uri == 'upcoming-webinars') class="active"  @endif>
                     <a href="{{ route('upcoming_webinars') }}">Continuing Education</a>
                 </li>
-                <li>
+                @if(Auth::user())
+                <li @if(ROUTE::current()->uri == 'past-event') class="active"  @endif>
                     <a href="{{ route('pastevent') }}">My Past Events</a>
                 </li>
-                <li>
+                <li @if(ROUTE::current()->uri == 'upcoming-event') class="active"  @endif>
                     <a href="{{ route('upcomingevent') }}">My Upcoming Events</a>
                 </li>
+                @endif
             </ul>
 
             <div class="row w-100 video-cat-main m-0">
@@ -95,7 +98,6 @@
                                     $timeZone       =   $showevents->user->timezone->name;
 
                                     $today          =   new DateTime($showevents->time, new DateTimeZone($timeZone));
-                                    // $today->format('Y-m-d H:i').'<br>';
                                     $userTimeZone   =  Auth::user()->timezone->name;
                                     $userEventTime  =  new DateTimeZone($userTimeZone);
                                     $convertedTime  =  $today->setTimeZone($userEventTime);
