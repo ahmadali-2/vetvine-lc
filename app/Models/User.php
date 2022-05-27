@@ -99,6 +99,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
 
     //check user network level
+    public function userMemberType()
+    {
+        return $this->belongsTo(MemberTypes::class,'type');
+    }
     public function userNetworkLevel()
     {
         return $this->belongsTo(UserMemberAndNetworkLevel::class, 'network_id');

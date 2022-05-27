@@ -12,7 +12,8 @@ class MemberTypeController extends Controller
 {
     public function MemberTypes(){
 
-        $membertype = MemberTypes::all();
+        $membertype = MemberTypes::with('userTypeCheck')->get();
+        // dd($membertype[0]->userTypeCheck->count());
         return view('admins.members.membertype',compact('membertype'));
     }
     public function MemberPermissions($id){

@@ -16,4 +16,8 @@ class MemberTypes extends Model
     {
         return $this->hasMany(MemberPermission::class);
     }
+    public function userTypeCheck()
+    {
+        return $this->hasMany(User::class,'type','id');
+    }
 }
