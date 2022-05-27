@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Admins\Forum\Like;
 use App\Models\Admins\Forum\Post as ForumPost;
 use App\Models\Admins\Memberships\BuyMemberShipPlan;
 use App\Models\Admins\Webinar\Event;
@@ -99,6 +100,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
 
     //check user network level
+    public function userMemberType()
+    {
+        return $this->belongsTo(MemberTypes::class,'type','id');
+    }
     public function userNetworkLevel()
     {
         return $this->belongsTo(UserMemberAndNetworkLevel::class, 'network_id');
@@ -142,6 +147,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function events()
     {
         return $this->hasMany(Event::class);
+    }
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
     }
     public function generateTwoFactorCode()
     {

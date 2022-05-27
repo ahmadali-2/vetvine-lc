@@ -11,7 +11,7 @@ class UpdateColumnTypeMakeForeignKeyInUsersTable extends Migration
 class AddNewColumnProfileStatusInUserEmploymentInfosTable extends Migration
 >>>>>>>> 8a459ae30e29b780cb8c65f68a56b65bec5fe6c9:database/migrations/2022_05_25_120647_add_new_column_profile_status_in_user_employment_infos_table.php
 =======
-class AddNewColumnProfileStatusInUserEmploymentInfosTable extends Migration
+class UpdateColumnTypeMakeForeignKeyInUsersTable extends Migration
 >>>>>>> 74f3c4a7ebb63c39d2199e6ad70d6f804345147d
 {
     /**
@@ -27,15 +27,15 @@ class AddNewColumnProfileStatusInUserEmploymentInfosTable extends Migration
             $table->unSignedBigInteger('type')->change();
             $table->foreign('type')->references('id')->on('member_types');
 ========
-=======
->>>>>>> 74f3c4a7ebb63c39d2199e6ad70d6f804345147d
         Schema::table('user_employment_infos', function (Blueprint $table) {
             //
 
             $table->string('profile_status')->nullable();
-<<<<<<< HEAD
 >>>>>>>> 8a459ae30e29b780cb8c65f68a56b65bec5fe6c9:database/migrations/2022_05_25_120647_add_new_column_profile_status_in_user_employment_infos_table.php
 =======
+        Schema::table('users', function (Blueprint $table) {
+            $table->unSignedBigInteger('type')->change();
+            $table->foreign('type')->references('id')->on('member_types');
 >>>>>>> 74f3c4a7ebb63c39d2199e6ad70d6f804345147d
         });
     }
@@ -54,7 +54,7 @@ class AddNewColumnProfileStatusInUserEmploymentInfosTable extends Migration
         Schema::table('user_employment_infos', function (Blueprint $table) {
 >>>>>>>> 8a459ae30e29b780cb8c65f68a56b65bec5fe6c9:database/migrations/2022_05_25_120647_add_new_column_profile_status_in_user_employment_infos_table.php
 =======
-        Schema::table('user_employment_infos', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
 >>>>>>> 74f3c4a7ebb63c39d2199e6ad70d6f804345147d
             //
         });

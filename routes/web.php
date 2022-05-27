@@ -118,6 +118,8 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
     Route::get('unapproved-users', [ManageUserController::class, 'unapprovedUsers'])->name('unapproved');
     Route::post('approved-user', [ManageUserController::class, 'approvedUsers'])->name('approveuser');
     Route::delete('delete-users/{id}', [ManageUserController::class, 'deleteUser']);
+    Route::get('change-users-type/{id}', [ManageUserController::class, 'changeUserType'])->name('changeusertype');
+    Route::post('update-users-type/{id}', [ManageUserController::class, 'updateUserType'])->name('updateusertype');
 
     Route::resource('forums-category', ForumCategoryController::class);
     Route::resource('forums', ForumController::class);
@@ -184,5 +186,5 @@ Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetv
     Route::post('/comment/store', [CommentController::class,'store'])->name('comment.add');
     Route::delete('comment-destroy/{id}', [CommentController::class,'destroy'])->name('comment.destroy');
     Route::post('/reply/store', [CommentController::class,'replyStore'])->name('reply.add');
-
+    Route::post('savelike', [PostController::class,'likeSave'])->name('likesave');
 });

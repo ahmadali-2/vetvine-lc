@@ -28,19 +28,21 @@
                                             <th scope="col">Name</th>
                                             <th scope="col">Email</th>
                                             <th scope="col">Network</th>
+                                            <th scope="col">User Type</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                       
+
                                    @forelse($allUsers->where('status',1) as $approveuser)
                                         <tr>
                                             <th scope="row">{{$loop->iteration}}</th>
                                             <td>{{$approveuser->name ?? '' }}</td>
                                             <td>{{$approveuser->email ?? ''}}</td>
                                             <td>{{$approveuser->userNetworkLevel->name}}</td>
+                                            <td>{{$approveuser->userMemberType->member_type}}</td>
                                             <td>
-                                            <a href=""><i class="fas fa-edit text-primary"></i></a>
+                                            <a href="{{route('changeusertype',$approveuser->id )}}"><i class="fas fa-edit text-primary"></i></a>
                                             <a href="{{route('userhistory', $approveuser->id)}}"> <i class="far fa-eye text-info"></i></a>
                                             <a href="javascript:void(0);" class="text-decoration-none" onclick="deleteRecord('{{$approveuser->id}}', '/superadmin/manageuser/')">
                                                 <i class="fa fa-trash text-danger" aria-hidden="true"></i>
@@ -53,7 +55,7 @@
                                             <td>No Record Found</td>
                                         </tr>
                                         @endforelse
-                                      
+
                                     </tbody>
                                 </table>
                             </div>
