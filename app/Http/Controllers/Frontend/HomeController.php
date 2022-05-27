@@ -52,18 +52,18 @@ class HomeController extends Controller
     {
         return view('frontend.pages.faqs');
     }
-    public function payementwebinars()
-    {
-        $user = Auth::user();
-        if($user){
-            return view('frontend.pages.webinars.payementwebinars');
-        }
-        else{
-            parent::dangerMessage("Your Are Not Logged in, Please Login And Try  Again");
-            return redirect('login');
-        }
+    // public function payementwebinars()
+    // {
+    //     $user = Auth::user();
+    //     if($user){
+    //         return view('frontend.pages.webinars.payementwebinars');
+    //     }
+    //     else{
+    //         parent::dangerMessage("Your Are Not Logged in, Please Login And Try  Again");
+    //         return redirect('login');
+    //     }
 
-    }
+    // }
     public function forums()
     {
         $forums     =   Forum::all();
@@ -99,8 +99,7 @@ class HomeController extends Controller
     }
     public function upcomingWebinarsdetails($id)
     {
-
-        $eventdetail = Event::with('events', 'sponsers' ,'members' ,'user')->where('id',$id)->get();
+        $eventdetail = Event::with('events', 'sponsers' ,'members' ,'user','buyeventplan')->where('id',$id)->get();
         $category = CategoryEvent::all();
         return view('frontend.pages.webinars.upcoming-eventsdetails',compact('eventdetail','category'));
 
