@@ -15,14 +15,15 @@
                                 <div class="row">
                                     {{-- @dd($membertype->userTypeCheck) --}}
                                     <div class=" col-6">
+                                        {{-- @dd($user) --}}
                                         <div class="form-group">
                                             <label for="type" class="control-label mb-1 form-select">User Type</label>
                                             <select id="type" name="type" aria-label="Default select example"
                                                 class="form-control cc-number identified visa" value="" data-val="true">
                                                 <option selected value="">Open this select level</option>
-
-                                                @foreach ($membertype as $mt)
-                                                    <option value="{{ $mt->id }}" {{$mt->member_type == $mt->member_type  ? 'selected' : ''}}>{{$mt->member_type}}</option>
+                                                @foreach ($memberTypes as $mt)
+                                                
+                                                    <option value="{{ $mt->id }}" {{$user->type == $mt->id  ? 'selected' : ''}}>{{$mt->member_type}}</option>
                                                 @endforeach
 
                                             </select>
