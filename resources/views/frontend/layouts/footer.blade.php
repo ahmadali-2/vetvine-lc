@@ -84,7 +84,7 @@ $socialLinks = vetvineHelper::vetvineGeneralSetting();
 
                 <ul class="p-0">
 
-                    <li><a href="#">Upcoming Webinars</a></li>
+                    <li><a href="{{ route('upcoming_webinars') }}">Upcoming Webinars</a></li>
 
                     <li><a href="#">CE/Videos On Demand</a></li>
 

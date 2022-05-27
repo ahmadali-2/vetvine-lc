@@ -98,7 +98,6 @@
                                     $timeZone       =   $showevents->user->timezone->name;
 
                                     $today          =   new DateTime($showevents->time, new DateTimeZone($timeZone));
-                                    // $today->format('Y-m-d H:i').'<br>';
                                     $userTimeZone   =  Auth::user()->timezone->name;
                                     $userEventTime  =  new DateTimeZone($userTimeZone);
                                     $convertedTime  =  $today->setTimeZone($userEventTime);
