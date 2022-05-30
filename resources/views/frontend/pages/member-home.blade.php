@@ -85,7 +85,7 @@
                   <div class="feed-comment">
                     <img src="{{ asset('frontend/img/post.png')}}" alt="post icon">
                     <p>{{ $post->created_at->format('d M Y') }}
-                    <a href="javascript:void(0)" class="like" id="like" data-post-id="{{$post->id}}" data-user-id="{{Auth::user()->id}}">
+                    <a href="javascript:void(0)" class="like" id="like{{ $post->id }}" data-post-id="{{$post->id}}" data-user-id="{{Auth::user()->id}}">
                        {{$post->isAuthUserLikedPost() ? 'Liked' : 'Like' }}
                     </a> - <a href=""> Comment </a> - <a href="">Share</a> </p>
                 </div>
@@ -130,7 +130,9 @@ $(document).ready(function(e){
         e.preventDefault();
         var postid  = $(this).attr('data-post-id');
         var userid  = $(this).attr('data-user-id');
-    $.ajaxSetup({
+        var id  = $(this).attr('id');
+
+        $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
@@ -146,12 +148,11 @@ $(document).ready(function(e){
                console.log(response.like.like);
                if (response.like.like == 1)
                {
-                $("#like").html('Liked');
+                $("#"+id).html('Liked');
                }
                else if(response.like.like == 0)
                {
-               $("#like").html('Like');
-
+               $("#"+id).html('Like');
                }
            },
            error:function(error){
