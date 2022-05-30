@@ -102,10 +102,10 @@
                             </div>
                             <div class="public2-info d-flex justify-content-around">
                                 <div class="public2-title">
-                                    <input type="checkbox" class="check_class" name="event_price" value="{{ $item->pet_owner_fee }}"> Pet Owner Fee :
+                                    <input type="checkbox" id="first_price" class="check_class" name="event_price" value="{{ $item->pet_owner_fee }}"> Pet Owner Fee :
                                 </div>
                                 <div class="public2-description">
-                                    ${{ $item->pet_owner_fee }}
+                                   <label for="first_price">${{ $item->pet_owner_fee }}</label>
                                 </div>
                                 <div class="public2-title">
                                     <input type="checkbox" class="check_class" name="event_price" value="{{ $item->pet_owner_premium_fee }}"> Pet Owner Premium Fee
