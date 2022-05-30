@@ -219,25 +219,10 @@ $timezones = vetvineHelper::timezones();
 
 
 
-                                                <div class="col-sm-12 text-center">
+                                                <div class="offset-sm-3 my-3 col-sm-4 text-center">
                                                     <div class="g-recaptcha" data-sitekey="{{ env('GOOGLE_RECAPTCHA_SITE_KEY') }}">
                                                         </div>
-                                                    {{-- <div class="form-group{{ $errors->has('CaptchaCode') ? ' has-error' : '' }}">
-
-                                                        <div class="col-md-6 captcha_top mx-auto">
-                                                            {!! captcha_image_html('ContactCaptcha') !!}
-                                                            <input class="form-control" type="text" id="CaptchaCode"
-                                                                name="CaptchaCode">
-
-                                                            @if ($errors->has('CaptchaCode'))
-                                                                <span class="help-block">
-                                                                    <strong
-                                                                        style="color:red">{{ $errors->first('CaptchaCode') }}</strong>
-                                                                </span>
-                                                            @endif
-
-                                                     </div>
-                                                   </div> --}}
+                                                   
 
 
                                             </div>

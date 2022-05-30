@@ -118,9 +118,9 @@ class HomeController extends Controller
         if ($request->presenter) {
             $this->dashboard['filters'] = $this->applyFilters('presenter_one', $request->presenter);
         }
-        if ($request->sponser) {
-            $this->dashboard['filters'] = $this->applyFilters('sponser_one', $request->sponser);
-        }
+        // if ($request->sponser) {
+        //     $this->dashboard['filters'] = $this->applyFilters('sponser_one', $request->sponser);
+        // }
         if ($request->from && $request->to) {
             $this->dashboard['filters'] = $this->aplyDateFilters($request->from, $request->to);
         }
@@ -152,4 +152,12 @@ class HomeController extends Controller
             return $this->dashboard['filters'];
         }
     }
+
+    public function videosOnDemand(){
+        return view('frontend.pages.videos-on-demand');
+    }
+    public function ceArchives(){
+        return view('frontend.pages.ce-archives');
+    }
+    
 }
