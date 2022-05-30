@@ -170,6 +170,10 @@ Route::get('faqs',[HomeController::class,'faqs'])->name('faqs');
 Route::get('frontend-news',[NewsController::class,'frontIndex'])->name('newsfrontend');
 Route::get('frontend-forums',[ForumController::class,'frontendIndex'])->name('forumsfrontend');
 
+//videos on demand
+Route::get('videos-on-demand',[HomeController::class,'videosOnDemand'])->name('videosOnDemand');
+Route::get('ce-archives',[HomeController::class,'ceArchives'])->name('ceArchives');
+
 });
 Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetvineUserRole']], function(){
     Route::get('dashboard',[PersonelInfoController::class,'userdashboard'])->name('userdashboard');

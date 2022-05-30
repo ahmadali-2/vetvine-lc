@@ -33,9 +33,10 @@ class PostController extends Controller
     public function likeSave(Request $request)
     {
            $liked= Like::where('user_id',Auth::id())->where('post_id',$request->likepostid)->first();
-           if($liked == null )
+           if(!$liked)
             {
-                Like::create([
+                
+                $liked = Like::create([
                     "post_id"       =>  $request->likepostid,
                     "user_id"       =>  $request->likeuserid,
                     "like"          => 1

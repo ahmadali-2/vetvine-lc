@@ -25,6 +25,7 @@
 			<p> <b>Name :</b></p>
 			<p> <b>Email :</b></p>
 			<p> <b>Network :</b></p>
+			<p> <b>User Type :</b></p>
 			<p> <b>Profession :</b></p>
 			<p> <b>TimeZone :</b></p>
             <p> <b>Account Created :</b></p>
@@ -43,6 +44,7 @@
 			<p> <b>{{$userHistory->name}}</b></p>
 			<p> <b>{{$userHistory->email}}</b></p>
 			<p> <b>{{vetvineHelper::networkName($userHistory->userNetworkLevel->parent_id)}}</b></p>
+			<p> <b>{{$userHistory->userMemberType->member_type ?? ''}}</b></p>
 			<p> <b>{{$userHistory->userNetworkLevel->name}}</b></p>
             <p> <b>{{$userHistory->timezone->name ?? 'Null'}}</b></p>
             <p><b>{{ date('M-d-Y', strtotime($userHistory->created_at))}}</b></p>
