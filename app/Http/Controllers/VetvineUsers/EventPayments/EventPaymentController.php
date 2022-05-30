@@ -90,7 +90,7 @@ class EventPaymentController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
