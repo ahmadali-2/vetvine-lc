@@ -19,6 +19,10 @@ class EventPaymentController extends Controller
      */
     public function index(Request $request)
     {
+        if($request->event_price == ''){
+            parent::warningMessage('Please select payment first');
+            return redirect()->back();
+        }
         $event_price = $request->event_price;
         $event_id = $request->event_id;
         $user = Auth::user();
@@ -49,6 +53,8 @@ class EventPaymentController extends Controller
      */
     public function paymentWebinars(Request $request)
     {
+        
+        
         $checkUser =BuyEventPlan::where('user_id',$request->user_id)->where('event_id', $request->event_id)->first();
         if(!empty($checkUser)){
             parent::warningMessage("You Already Purchased An Event");
@@ -78,7 +84,7 @@ class EventPaymentController extends Controller
         } catch(Exception $e) {
             parent::dangerMessage("Something Went Wrong Payment Does Not Proceed");
             parent::dangerMessage("Please Try Again ");
-            return redirect()->back();
+            return redirect()->route('upcoming_webinars');
         }
     }
 
