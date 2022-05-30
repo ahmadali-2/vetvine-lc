@@ -6,7 +6,7 @@
                 <div class="col-sm-6">
                     <h1> Users / History</h1>
                 </div>
-               
+
             </div>
         </div>
     </section>
@@ -19,7 +19,7 @@
                             </div>
                             <div class="card-body">
                             <div class="row">
-		
+
 		<div class="col-lg-6">
 			<h6> Information</h6>
 			<p> <b>Name :</b></p>
@@ -34,9 +34,9 @@
 			<p> <b>MemberShip Plan :</b></p>
 			<p> <b>Registered By :</b></p>
 			<p> <b>Status :</b></p>
-		
-			
-				
+
+
+
 		</div>
 		<div class="col-lg-6">
 			<h6> Detail</h6>
@@ -60,7 +60,7 @@
                 @endif
 
             </p>
-		
+
 		</div>
 		</div>
                             </div>
