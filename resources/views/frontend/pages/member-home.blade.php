@@ -144,13 +144,12 @@ $(document).ready(function(e){
                 },
            success:function(response){
                console.log(response.like.like);
-               if (response.like.like = 1 || $('#like').html() == "Like")
+               if (response.like.like == 1 || $('#like').html() == "Like")
                {
                 $("#like").html("Liked");
                }
-               else if(response.like.like = 0 || $('#like').html() == "Liked")
+               else if(response.like.like == 0 || $('#like').html() == "Liked")
                {
-
                 $("#like").html("Like");
                }
            },
