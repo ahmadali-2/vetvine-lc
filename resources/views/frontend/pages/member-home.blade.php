@@ -26,7 +26,7 @@
                     My Social DNA
                   </li>
                   <li>
-                    <div class="icon" style="margin-left: 5px;"><a href="{{ route('userdashboard') }}">Profile</a></div>
+                    <div class="icon" style="margin-left: 5px;"><a href="{{ route('userdashboard') }}">My Profile</a></div>
                  </li>
                 </ul>
               </div>
@@ -66,7 +66,7 @@
               <ul>
                   @foreach ($posts as $post)
                 <li>
-                    {{ $post->id}}
+                    {{-- {{ $post->id}} --}}
                   <div class="feed-photo">
                     <img src="@if($post->user->profile_photo ?? '') {{ asset('/frontend/images/Profile-Images/'.$post->user->profile_photo)}} @else {{asset('frontend/images/thumbnail.jfif')}} @endif" alt="feed 1 pic">
                       {{-- <img src="{{ asset('frontend/img/feed-img-1.png')}}" alt="feed 1 pic"> --}}
@@ -85,7 +85,7 @@
                   <div class="feed-comment">
                     <img src="{{ asset('frontend/img/post.png')}}" alt="post icon">
                     <p>{{ $post->created_at->format('d M Y') }}
-                    <a href="javascript:void(0)" class="like" id="like" data-post-id="{{$post->id}}" data-user-id="{{Auth::user()->id}}">
+                    <a href="javascript:void(0)" class="like" id="like{{ $post->id }}" data-post-id="{{$post->id}}" data-user-id="{{Auth::user()->id}}">
                        {{$post->isAuthUserLikedPost() ? 'Liked' : 'Like' }}
                     </a> - <a href=""> Comment </a> - <a href="">Share</a> </p>
                 </div>
@@ -130,7 +130,9 @@ $(document).ready(function(e){
         e.preventDefault();
         var postid  = $(this).attr('data-post-id');
         var userid  = $(this).attr('data-user-id');
-    $.ajaxSetup({
+        var id  = $(this).attr('id');
+
+        $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
@@ -144,13 +146,13 @@ $(document).ready(function(e){
                 },
            success:function(response){
                console.log(response.like.like);
-               if (response.like.like == 1 || $('#like').html() == "Like")
+               if (response.like.like == 1)
                {
-                $("#like").html("Liked");
+                $("#"+id).html('Liked');
                }
-               else if(response.like.like == 0 || $('#like').html() == "Liked")
+               else if(response.like.like == 0)
                {
-                $("#like").html("Like");
+               $("#"+id).html('Like');
                }
            },
            error:function(error){

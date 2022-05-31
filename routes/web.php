@@ -123,6 +123,7 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
     Route::get('member-permissions/{id}', [MemberTypeController::class, 'MemberPermissions'])->name('memberpermissions');
     Route::delete('delete-users/{id}', [ManageUserController::class, 'deleteUser']);
     Route::get('change-users-type/{id}', [ManageUserController::class, 'changeUserType'])->name('changeusertype');
+    Route::post('update-users-type/{id}', [ManageUserController::class, 'updateUserType'])->name('updateusertype');
 
     Route::resource('forums-category', ForumCategoryController::class);
     Route::resource('forums', ForumController::class);
@@ -168,6 +169,10 @@ Route::resource('eventpayments',EventPaymentController::class);
 Route::get('faqs',[HomeController::class,'faqs'])->name('faqs');
 Route::get('frontend-news',[NewsController::class,'frontIndex'])->name('newsfrontend');
 Route::get('frontend-forums',[ForumController::class,'frontendIndex'])->name('forumsfrontend');
+
+//videos on demand
+Route::get('videos-on-demand',[HomeController::class,'videosOnDemand'])->name('videosOnDemand');
+Route::get('ce-archives',[HomeController::class,'ceArchives'])->name('ceArchives');
 
 });
 Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetvineUserRole']], function(){
