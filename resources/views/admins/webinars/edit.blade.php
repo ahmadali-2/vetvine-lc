@@ -49,7 +49,7 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="main_photo" class="control-label mb-1">Main Photo</label>
-                                            <input id="main_photo" placeholder="Enter Name" name="photo" type="file"
+                                            <input id="main_photo" placeholder="Enter Name" name="main_photo_update" type="file"
                                                 class="form-control" value="{{ $event->main_photo }}">
                                         </div>
                                     </div>

@@ -41,11 +41,11 @@
       <li>
         <a href="{{route('post.index')}}" class="profile"><i class="fa fa-angle-right" aria-hidden="true"></i> Show Post</a>
       </li> --}}
-      {{-- <li>
+      <li>
 
         <a href="{{route('usermemberships.index')}}"><i class="fa fa-angle-right" aria-hidden="true"></i> MemberShip Plans</a>
 
-      </li> --}}
+      </li>
 
     </ul>
     </aside>

@@ -27,7 +27,7 @@ use App\Http\Controllers\Admins\Webinar\EventController;
 use App\Http\Controllers\Auth\SuperAdminRegistrationController;
 use App\Http\Controllers\Admins\Memberships\BuyMemberShipPlanController;
 use App\Http\Controllers\Admins\News\NewsController;
-use App\Http\Controllers\Admins\VideosOnDemand\VideosOnDemandController;
+use App\Http\Controllers\Admins\Webinar\BuyEventController;
 use App\Http\Controllers\Admins\Webinar\SponserController;
 // Vetvine Without Auth Routes;
 use App\Http\Controllers\Frontend\ContactUsController;
@@ -139,6 +139,9 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
     Route::resource('sponsors',SponserController::class);
     Route::resource('videos-on-demand',VideosOnDemandController::class);
     Route::post('videodata',[VideosOnDemandController::class,'videodata'])->name('videoajaxdata');
+    Route::resource('buyevent-users',BuyEventController::class);
+    Route::get('userevent-history/{id}', [BuyEventController::class, 'usereventHistory'])->name('usereventhistory');
+
 });
 
 
@@ -164,10 +167,13 @@ Route::get('upcoming-event',[HomeController::class,'upcomingevent'])->name('upco
 // Route::get('payement',[HomeController::class,'payementwebinars'])->name('payementwebinars');
 Route::post('submit-payment',[EventPaymentController::class,'index'])->name('submitPayment');
 Route::post('payment',[EventPaymentController::class,'paymentWebinars'])->name('payementwebinars');
+Route::post('review-store',[HomeController::class, 'reviewstore'])->name('reviewstore');
+
 
 Route::get('publications',[HomeController::class,'publications'])->name('upcoming_publications');
 Route::post('educations',[HomeController::class,'searceducations'])->name('search_educations');
 Route::resource('eventpayments',EventPaymentController::class);
+
 
 Route::get('faqs',[HomeController::class,'faqs'])->name('faqs');
 Route::get('frontend-news',[NewsController::class,'frontIndex'])->name('newsfrontend');

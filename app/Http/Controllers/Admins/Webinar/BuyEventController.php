@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admins\Memberships;
+namespace App\Http\Controllers\Admins\Webinar;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admins\Memberships\BuyMemberShipPlan;
-use App\Models\Admins\Memberships\MemberShipPlan;
-use Illuminate\Http\Request;
+use App\Models\Admins\Webinar\BuyEventPlan;
+use App\Models\Admins\Webinar\Event;
 use App\Models\User;
+use Illuminate\Http\Request;
 
-class BuyMemberShipPlanController extends Controller
+class BuyEventController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,14 +17,13 @@ class BuyMemberShipPlanController extends Controller
      */
     public function index()
     {
-        $memberships =MemberShipPlan::with('plancategory')->get();
-        $results =$memberships->map(function($plan){
-            $plan->totalUsersInPlans =BuyMemberShipPlan::where('member_ship_plan_id', $plan->id)->count('user_id');
-            return $plan;
+
+        $memberships =Event::with('events')->get();
+        $results =$memberships->map(function($event){
+            $event->totalUsersInPlans =BuyEventPlan::where('event_id', $event->id)->count('user_id');
+            return $event;
         });
-
-
-        return view('admins.memberships.buymembership.index',compact('memberships'));
+        return view('admins.webinars.buyevent.index',compact('memberships'));
     }
 
     /**
@@ -34,7 +33,7 @@ class BuyMemberShipPlanController extends Controller
      */
     public function create()
     {
-        return view('admins.memberships.buymembership.viewallusers',compact('memberships'));
+        //
     }
 
     /**
@@ -56,8 +55,8 @@ class BuyMemberShipPlanController extends Controller
      */
     public function show($id)
     {
-        $membership =MemberShipPlan::with('buymemberships')->find($id);
-        return view('admins.memberships.buymembership.viewallusers',compact('membership'));
+         $membership =Event::with('buyeventplan','user')->find($id);
+        return view('admins.webinars.buyevent.viewalleventusers',compact('membership'));
     }
 
     /**
@@ -93,10 +92,9 @@ class BuyMemberShipPlanController extends Controller
     {
         //
     }
-
-    public function userHistory($id)
+    public function userEventHistory($id)
     {
-        $userHistory =User::find($id);
-        return view('admins.memberships.buymembership.userhistory',compact('userHistory'));
+        $userHistory =User::with('buyevents')->find($id);
+        return view('admins.webinars.buyevent.eventuserhistory',compact('userHistory'));
     }
 }
