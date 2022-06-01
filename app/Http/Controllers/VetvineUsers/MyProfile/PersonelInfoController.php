@@ -28,8 +28,18 @@ class PersonelInfoController extends Controller
     {
         $countries      = Country::all();
         $employmentInfo = Auth::user()->employmentInfo;
-        return view('vetvineUsers.MyProfile.userdashboard',compact('countries','employmentInfo'));
+        return view('vetvineUsers.layouts.pages.user_profile',compact('countries','employmentInfo'));
+
+        // return view('vetvineUsers.MyProfile.userdashboard',compact('countries','employmentInfo'));
     }
+
+    public function userProfile(){
+        return view('vetvineUsers.layouts.pages.user_profile');
+    }
+    public function chat(){
+        return view('vetvineUsers.layouts.pages.chat');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

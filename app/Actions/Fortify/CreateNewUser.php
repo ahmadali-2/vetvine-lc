@@ -2,6 +2,7 @@
 
 namespace App\Actions\Fortify;
 
+use App\Events\UserRegistered;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -35,8 +36,14 @@ class CreateNewUser implements CreatesNewUsers
             'type'              => 2,
             'status'            => 1
         ]);
+
          $this->checkUserDetail($user->email, $user->type);
          Auth::login($user);
+         try {
+            event(new UserRegistered($user));
+        } catch (\Throwable $th) {
+             return $user;
+         }
          return $user ;
 
     }

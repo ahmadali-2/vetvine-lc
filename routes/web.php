@@ -185,7 +185,12 @@ Route::get('ce-archives',[HomeController::class,'ceArchives'])->name('ceArchives
 Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetvineUserRole']], function(){
     Route::get('dashboard',[PersonelInfoController::class,'userdashboard'])->name('userdashboard');
     Route::get('member-home',[PostController::class,'memberHome'])->name('member_home');
+    //User dashboard routes
     Route::resource('personelinfo',PersonelInfoController::class);
+    Route::get('/profile-info',[PersonelInfoController::class,'userProfile'])->name('vetvineUserProfile');
+    Route::get('/chat',[PersonelInfoController::class,'chat'])->name('vetvineUserChat');
+
+
     Route::resource('updateprofile',ProfileController::class);
     Route::resource('usermemberships',StripePaymentController::class);
     //User setting routes
