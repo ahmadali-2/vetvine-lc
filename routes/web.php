@@ -27,6 +27,7 @@ use App\Http\Controllers\Admins\Webinar\EventController;
 use App\Http\Controllers\Auth\SuperAdminRegistrationController;
 use App\Http\Controllers\Admins\Memberships\BuyMemberShipPlanController;
 use App\Http\Controllers\Admins\News\NewsController;
+use App\Http\Controllers\Admins\VideosOnDemand\VideosOnDemandController;
 use App\Http\Controllers\Admins\Webinar\SponserController;
 // Vetvine Without Auth Routes;
 use App\Http\Controllers\Frontend\ContactUsController;
@@ -135,7 +136,9 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
     Route::get('naveed-testing', [AdminDashboardController::class, 'testing'])->name('testing');
     Route::resource('webinars-category', EventCategoryController::class);
     Route::resource('webinars', EventController::class);
-    route::resource('sponsors',SponserController::class);
+    Route::resource('sponsors',SponserController::class);
+    Route::resource('videos-on-demand',VideosOnDemandController::class);
+    Route::post('videodata',[VideosOnDemandController::class,'videodata'])->name('videoajaxdata');
 });
 
 
