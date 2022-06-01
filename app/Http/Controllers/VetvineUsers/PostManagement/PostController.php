@@ -35,7 +35,7 @@ class PostController extends Controller
            $liked= Like::where('user_id',Auth::id())->where('post_id',$request->likepostid)->first();
            if(!$liked)
             {
-                
+
                 $liked = Like::create([
                     "post_id"       =>  $request->likepostid,
                     "user_id"       =>  $request->likeuserid,

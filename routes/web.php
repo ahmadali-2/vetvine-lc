@@ -136,7 +136,9 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
     Route::get('naveed-testing', [AdminDashboardController::class, 'testing'])->name('testing');
     Route::resource('webinars-category', EventCategoryController::class);
     Route::resource('webinars', EventController::class);
-    route::resource('sponsors',SponserController::class);
+    Route::resource('sponsors',SponserController::class);
+    Route::resource('videos-on-demand',VideosOnDemandController::class);
+    Route::post('videodata',[VideosOnDemandController::class,'videodata'])->name('videoajaxdata');
     Route::resource('buyevent-users',BuyEventController::class);
     Route::get('userevent-history/{id}', [BuyEventController::class, 'usereventHistory'])->name('usereventhistory');
 

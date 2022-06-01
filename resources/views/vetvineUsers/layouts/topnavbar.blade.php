@@ -49,8 +49,9 @@
                   data-toggle="dropdown" aria-expanded="false">
 
                   <div class="loggedin-user">
-
-                    <img src="{{asset('frontend/img/profile-avatar.png')}}" alt="avatar" />
+                    <img src="@if(Auth::user()->profile_photo) {{ asset('/frontend/images/Profile-Images/'.Auth::user()->profile_photo)}} @else
+                    {{asset('frontend/img/profile-avatar.png')}} @endif" alt="" id="user-image" height="200px">
+                    {{-- <img src="{{asset('frontend/img/profile-avatar.png')}}" alt="avatar" /> --}}
 
                   </div>
 

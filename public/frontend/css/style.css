@@ -255,14 +255,18 @@ font-face {
 .serch-section select {
     width: 50%;
     background: white;
-    border: 1px solid #5c7c85;
-    padding: 12px;
+    border: 1px solid #5c7c85 !important;
+    padding: 4px;
     margin-bottom: 0px;
     text-transform: none;
-    font-family: 'museo 300';
-    color: #97b0b7;
+    font-family: 'museo 500';
+    color: #2877c9;
     font-size: 14px;
-    height: 50px
+    height: 50px;
+    margin-left: 10px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    /* font-weight: 600; */
 }
 
 .Register_box_banner {

@@ -33,6 +33,9 @@
         <a href="#" class="profile"><i class="fa fa-angle-right" aria-hidden="true"></i> Edit My Photo</a>
       </li>
       {{-- <li>
+        <a href="{{route('userdelete',Auth::user()->id)}}" class="profile"><i class="fa fa-angle-right" aria-hidden="true"></i> Delete My Account</a>
+      </li> --}}
+      {{-- <li>
         <a href="{{route('post.create')}}" class="profile"><i class="fa fa-angle-right" aria-hidden="true"></i> Create Post</a>
       </li>
       <li>
