@@ -122,7 +122,7 @@
                   Messaging</a>
               </li>
               <li class="nav-item nav_res_3" style="text-align: center">
-                <a class="nav-link mm-editdb-text" href="#"> <i class="fas fa-bell mrg_top_edit"></i> <br>
+                <a class="nav-link mm-editdb-text" href="{{ route('vetvineUserNotifications') }}"> <i class="fas fa-bell mrg_top_edit"></i> <br>
                   Notifications</a>
               </li>
               <li class="nav-item nav_res_3" style="text-align: center">

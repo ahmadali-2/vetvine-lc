@@ -39,6 +39,9 @@ class PersonelInfoController extends Controller
     public function chat(){
         return view('vetvineUsers.layouts.pages.chat');
     }
+    public function notifications(){
+        return view('vetvineUsers.layouts.pages.notifications');
+    }
 
     /**
      * Show the form for creating a new resource.

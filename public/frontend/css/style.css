@@ -6629,34 +6629,40 @@ table tbody .count td {
 /*  post detail style */
 
 .sposer_name {
-width: 70%;
+    width: 70%;
 }
 
 .sposer_name a {
     text-align: left;
 }
-.video-box-main img{
-    height: 250px;;
+
+.video-box-main img {
+    height: 250px;
+    ;
 }
-.parent_sponser{
+
+.parent_sponser {
     display: flex;
     /* align-items: center; */
 }
-.parent_sponser a{
+
+.parent_sponser a {
     margin: 0px 10px;
 }
-.parent_sponser .sposer_name{
+
+.parent_sponser .sposer_name {
     display: flex;
     flex-wrap: wrap;
 }
-.parent_sponser strong{
-font-family: 'Museo Sans 700';
+
+.parent_sponser strong {
+    font-family: 'Museo Sans 700';
     font-size: 13px;
     color: #507f87;
     margin-top: 6px;
-
 }
-.parent_sponser .sposer_name a{
+
+.parent_sponser .sposer_name a {
     /* margin-bottom: 2rem; */
 }
 
@@ -7161,4 +7167,104 @@ ul {
 .logo-dashbaord {
     margin-left: -27px;
     margin-top: -20px;
+}
+
+
+/* Notifications extra styling */
+
+.dropdown-list-image {
+    position: relative;
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.dropdown-list-image img {
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.btn-light {
+    color: #2cdd9b;
+    background-color: #e5f7f0;
+    border-color: #d8f7eb;
+}
+
+.noti_parent .content {
+    display: flex;
+    border: 1px solid #ced4da;
+    padding: 5px;
+    /* align-items: center; */
+}
+
+.noti_parent .para_pad {
+    padding: 10px;
+}
+
+.noti_parent .text-truncate {
+    color: #507f87;
+    margin-bottom: 5px;
+}
+
+.chat_content .small a {
+    color: #f27222;
+}
+
+.chat_content {
+    padding: 50px 0px;
+}
+
+.chat_content .content_img img {
+    width: 140px;
+    height: 110px;
+    object-fit: contain;
+}
+
+.chat_content .btn-outline-danger {
+    color: #507f87;
+    border-color: #507f87;
+    border: 1px solid #507f87 !important
+}
+
+.chat_content .btn-outline-danger:hover {
+    color: #fff;
+    background-color: #f27222;
+    border-color: #f27222;
+}
+
+.chat_content .small {
+    display: -webkit-box;
+    max-width: 300px;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.parent_pagination_row li a {
+    color: #507f87;
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #507f87;
+    border-color: #507f87;
+}
+
+.chat_content {
+    font-family: "Museo 500";
+}
+
+.chat_content .small {
+    font-family: "Museo 500";
+    color: #507f87;
+}
+
+.chat_content .page-link {
+    border: 1px solid #dee2e6 !important;
+}
+
+@media (max-width:400px) {
+    .chat_content .osahan-post-header {
+        display: block !important;
+    }
 }
