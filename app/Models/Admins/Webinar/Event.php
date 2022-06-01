@@ -3,8 +3,8 @@
 namespace App\Models\Admins\Webinar;
 
 use App\Models\Admins\Webinar\BuyEventPlan as WebinarBuyEventPlan;
+use App\Models\Admins\Webinar\ReviewRating;
 use App\Models\User;
-use App\Models\Webinar\BuyEventPlan;
 use App\Models\Sponser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -59,5 +59,10 @@ class Event extends Model
     public function buyeventplan()
     {
         return $this->hasMany(WebinarBuyEventPlan::class);
+    }
+
+    public function ReviewData()
+    {
+    return $this->hasMany(ReviewRating::class,'event_id');
     }
 }

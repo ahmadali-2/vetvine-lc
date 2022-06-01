@@ -29,7 +29,7 @@ class CreatePlanRequest extends FormRequest
             'plancategoryid'        => ['required'],
             'expiry_date'           => ['required'],
             'plan_description'      => ['required','string'],
-            'network_id'            => ['required'],
+            'member_id'             => ['required'],
             'plan_features'         => ['required','string'],
 
         ];
@@ -42,7 +42,7 @@ class CreatePlanRequest extends FormRequest
             'plancategoryid.required'            => 'Category Field Is Required',
             'expiry_date.required'               => 'Date Field Is Required',
             'plan_description.required'          => 'Description Field Is Required',
-            'network_id.required'                => 'Network Field Is Required',
+            'member_id.required'                 => 'Member Level Is Required',
             'plan_features.required'             => 'Plan Features Field Is Required',
         ];
 

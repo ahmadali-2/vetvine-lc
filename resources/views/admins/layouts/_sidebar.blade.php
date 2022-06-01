@@ -41,6 +41,7 @@
             <li><i class="fa fa-table"></i><a href="{{ route('webinars-category.index') }}">Add Category</a></li>
             <li><i class="fa fa-table"></i><a href="{{ route('sponsors.index') }}">Add Sponsor</a></li>
             <li><i class="fa fa-table"></i><a href="{{ route('webinars.index') }}">Post New Webinar</a></li>
+            <li><i class="fa fa-table"></i><a href="{{ route('buyevent-users.index') }}">Event Buy History</a></li>
         </ul>
     </li>
 
