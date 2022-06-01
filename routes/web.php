@@ -19,6 +19,7 @@ use App\Http\Controllers\Admins\Forum\ForumController;
 use App\Http\Controllers\Admins\Forum\ForumPostController;
 use App\Http\Controllers\Admins\Generalsettings\AdminProfileController;
 use App\Http\Controllers\Admins\Generalsettings\ManageUserController;
+use App\Http\Controllers\Admins\Members\MemberTypeController;
 use App\Http\Controllers\Admins\Memberships\MemberShipPlanCategoryController;
 use App\Http\Controllers\Admins\Memberships\MemberShipPlansController;
 use App\Http\Controllers\Admins\Webinar\EventCategoryController;
@@ -26,6 +27,7 @@ use App\Http\Controllers\Admins\Webinar\EventController;
 use App\Http\Controllers\Auth\SuperAdminRegistrationController;
 use App\Http\Controllers\Admins\Memberships\BuyMemberShipPlanController;
 use App\Http\Controllers\Admins\News\NewsController;
+use App\Http\Controllers\Admins\Webinar\BuyEventController;
 use App\Http\Controllers\Admins\Webinar\SponserController;
 // Vetvine Without Auth Routes;
 use App\Http\Controllers\Frontend\ContactUsController;
@@ -117,6 +119,9 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
     Route::get('network', [AdminDashboardController::class, 'network'])->name('network');
     Route::get('unapproved-users', [ManageUserController::class, 'unapprovedUsers'])->name('unapproved');
     Route::post('approved-user', [ManageUserController::class, 'approvedUsers'])->name('approveuser');
+    Route::post('member-permission', [MemberTypeController::class, 'MemberStatus'])->name('memberstatus');
+    Route::get('member-type', [MemberTypeController::class, 'MemberTypes'])->name('membertype');
+    Route::get('member-permissions/{id}', [MemberTypeController::class, 'MemberPermissions'])->name('memberpermissions');
     Route::delete('delete-users/{id}', [ManageUserController::class, 'deleteUser']);
     Route::get('change-users-type/{id}', [ManageUserController::class, 'changeUserType'])->name('changeusertype');
     Route::post('update-users-type/{id}', [ManageUserController::class, 'updateUserType'])->name('updateusertype');
@@ -132,6 +137,9 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
     Route::resource('webinars-category', EventCategoryController::class);
     Route::resource('webinars', EventController::class);
     route::resource('sponsors',SponserController::class);
+    Route::resource('buyevent-users',BuyEventController::class);
+    Route::get('userevent-history/{id}', [BuyEventController::class, 'usereventHistory'])->name('usereventhistory');
+
 });
 
 
@@ -157,10 +165,13 @@ Route::get('upcoming-event',[HomeController::class,'upcomingevent'])->name('upco
 // Route::get('payement',[HomeController::class,'payementwebinars'])->name('payementwebinars');
 Route::post('submit-payment',[EventPaymentController::class,'index'])->name('submitPayment');
 Route::post('payment',[EventPaymentController::class,'paymentWebinars'])->name('payementwebinars');
+Route::post('review-store',[HomeController::class, 'reviewstore'])->name('reviewstore');
+
 
 Route::get('publications',[HomeController::class,'publications'])->name('upcoming_publications');
 Route::post('educations',[HomeController::class,'searceducations'])->name('search_educations');
 Route::resource('eventpayments',EventPaymentController::class);
+
 
 Route::get('faqs',[HomeController::class,'faqs'])->name('faqs');
 Route::get('frontend-news',[NewsController::class,'frontIndex'])->name('newsfrontend');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Exception;
 use vetvineHelper;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admins\Forum\CategoryForum;
@@ -12,6 +13,7 @@ use App\Models\Admins\Forum\Forum;
 use App\Models\Admins\Forum\ForumPost;
 use App\Models\Admins\Webinar\CategoryEvent;
 use App\Models\Admins\Webinar\Event;
+use App\Models\Admins\Webinar\ReviewRating;
 use App\Models\Admins\Webinar\SponserTable;
 use DB;
 class HomeController extends Controller
@@ -52,18 +54,7 @@ class HomeController extends Controller
     {
         return view('frontend.pages.faqs');
     }
-    // public function payementwebinars()
-    // {
-    //     $user = Auth::user();
-    //     if($user){
-    //         return view('frontend.pages.webinars.payementwebinars');
-    //     }
-    //     else{
-    //         parent::dangerMessage("Your Are Not Logged in, Please Login And Try  Again");
-    //         return redirect('login');
-    //     }
 
-    // }
     public function forums()
     {
         $forums     =   Forum::all();
@@ -99,11 +90,30 @@ class HomeController extends Controller
     }
     public function upcomingWebinarsdetails($id)
     {
-        $eventdetail = Event::with('events', 'sponsers' ,'members' ,'user','buyeventplan')->where('id',$id)->get();
+        $eventdetail = Event::with('events', 'sponsers' ,'members' ,'user','buyeventplan','ReviewData')->where('id',$id)->get();
+        $reviews = ReviewRating::where('event_id',$id)->get();
         $category = CategoryEvent::all();
-        return view('frontend.pages.webinars.upcoming-eventsdetails',compact('eventdetail','category'));
+        return view('frontend.pages.webinars.upcoming-eventsdetails',compact('eventdetail','category', 'reviews'));
 
     }
+    public function reviewstore(Request $request)
+    {
+        try{
+        $review = new ReviewRating();
+        $review->event_id = $request->event_id;
+        $review->user_id = $request->user_id;
+        $review->star_rating = $request->rating;
+        $review->comments= $request->comment;
+        $review->save();
+        parent::successMessage('Your Review Has Been Submitted Successfully.');
+        return redirect()->back();
+      } catch(Exception $e) {
+          dd($e->getMessage());
+        parent::dangerMessage("Review Does Not Submitted, Please Try  Again");
+        return redirect()->back();      }
+    }
+
+
     public function searceducations(Request $request)
     {
         $this->dashboard['filters'] = Event::with('events');
@@ -159,5 +169,5 @@ class HomeController extends Controller
     public function ceArchives(){
         return view('frontend.pages.ce-archives');
     }
-    
+
 }

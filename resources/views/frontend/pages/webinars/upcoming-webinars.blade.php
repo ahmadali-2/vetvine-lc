@@ -64,7 +64,7 @@
                     <div class="col-md-6 col-lg-4">
                         <div class="video-box-main">
                             @if ($showevents->main_photo)
-                                <div class="col-6">
+                                <div class="col-6   pl-0">
                                     <img src="{{ asset('/admin/eventss/' . $showevents->main_photo) }} " alt=""
                                         id="user-image" height="100px">
                                 </div>
@@ -109,8 +109,11 @@
                                @if (Auth::user())
                                 <h5>Start Time : {{ date('g:i a', strtotime($formattedTime)) }}</h5>
                                @endif
-                                <p><span>Presented by:</span> <a href="{{ $showevents->presenter_one_url }}"
+                                <p><strong>Presented by:</strong> <a href="{{ $showevents->presenter_one_url }}"
                                         class="vetvine_a" target="_blank">{{ $showevents->presenter_one }}</a><br>
+
+                                        <div class="parent_sponser">
+
 
                                         <strong>Sponsored by:</strong>
                                         <div class="sposer_name">
@@ -121,6 +124,8 @@
                                         @endforeach
 
                                     </div>
+
+                                </div>
                                 </p>
 
 

@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Subscribed Users / Plans</h1>
+                    <h1>Buy Events / Users</h1>
                 </div>
 
             </div>
@@ -15,29 +15,30 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title">Subscribed Users of <b style="color: #f27222;"> {{$membership->plan_name}} </b>Plan</strong>
+                                <strong class="card-title">Buy Events</strong>
                             </div>
                             <div class="card-body">
                                 <table class="table">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col"> Price</th>
-                                            <th scope="col">Expiry</th>
+                                            <th scope="col">Event Name</th>
+                                            <th scope="col">Event Category</th>
+                                            <th scope="col">Event Buy Users</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($membership->buymemberships as $plans)
+                                        @foreach($memberships as $buyevent)
+
                                         <tr>
                                             <th scope="row">{{$loop->iteration}}</th>
-                                            <td>{{$plans->user->email}}</td>
-                                            <td>{{$membership->plan_price . '.00' ?? ''}}</td>
-                                            <td>{{$membership->expiry_date}}</td>
+                                            <td>{{$buyevent->event_title ?? ''}}</td>
+                                            <td>{{$buyevent->events->category_title ?? ''}}</td>
+                                            <td>{{$buyevent->totalUsersInPlans ?? ''}}</td>
 
                                             <td>
-                                            <a href="{{route('userhistory',$plans->user->id)}}"> <i class="far fa-eye text-info"></i></a>
+                                            <a href="{{route('buyevent-users.show',$buyevent->id)}}"> <i class="far fa-eye text-info"></i></a>
                                             </td>
                                         </tr>
                                         @endforeach

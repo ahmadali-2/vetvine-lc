@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Admins\Forum\Like;
 use App\Models\Admins\Forum\Post as ForumPost;
 use App\Models\Admins\Memberships\BuyMemberShipPlan;
+use App\Models\Admins\Webinar\BuyEventPlan;
 use App\Models\Admins\Webinar\Event;
 use App\Models\Generals\TimeZone;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -147,6 +148,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function events()
     {
         return $this->hasMany(Event::class);
+    }
+    public function buyevents()
+    {
+        return $this->hasMany(BuyEventPlan::class);
     }
     public function likes()
     {
