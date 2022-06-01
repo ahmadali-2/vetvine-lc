@@ -53,8 +53,8 @@ class EventPaymentController extends Controller
      */
     public function paymentWebinars(Request $request)
     {
-        
-        
+
+
         $checkUser =BuyEventPlan::where('user_id',$request->user_id)->where('event_id', $request->event_id)->first();
         if(!empty($checkUser)){
             parent::warningMessage("You Already Purchased An Event");
@@ -96,7 +96,7 @@ class EventPaymentController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**

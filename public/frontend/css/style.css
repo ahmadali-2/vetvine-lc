@@ -6036,6 +6036,8 @@ select#fav_show:focus>option:checked {
     background: #fff;
     color: #507f87;
     width: 210px;
+    text-align: left;
+    margin-left: 10px;
 }
 
 
@@ -6627,13 +6629,35 @@ table tbody .count td {
 /*  post detail style */
 
 .sposer_name {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
+width: 70%;
 }
 
 .sposer_name a {
     text-align: left;
+}
+.video-box-main img{
+    height: 250px;;
+}
+.parent_sponser{
+    display: flex;
+    /* align-items: center; */
+}
+.parent_sponser a{
+    margin: 0px 10px;
+}
+.parent_sponser .sposer_name{
+    display: flex;
+    flex-wrap: wrap;
+}
+.parent_sponser strong{
+font-family: 'Museo Sans 700';
+    font-size: 13px;
+    color: #507f87;
+    margin-top: 6px;
+
+}
+.parent_sponser .sposer_name a{
+    /* margin-bottom: 2rem; */
 }
 
 
