@@ -22,7 +22,7 @@
                                 </div>
                             </div>
                         </div>
-                        <form action="{{ route('forums.store') }}" method="post" id="forumform" novalidate="novalidate">
+                        <form action="{{ route('forums.store') }}" method="post" id="forumform"  novalidate="novalidate">
                             @csrf
                             <div class="row">
                                 <div class="col-6">

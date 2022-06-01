@@ -26,7 +26,7 @@
                     My Social DNA
                   </li>
                   <li>
-                    <div class="icon" style="margin-left: 5px;"><a href="{{ route('userdashboard') }}">Profile</a></div>
+                    <div class="icon" style="margin-left: 5px;"><a href="{{ route('userdashboard') }}">My Profile</a></div>
                  </li>
                 </ul>
               </div>
