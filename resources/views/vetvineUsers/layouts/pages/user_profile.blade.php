@@ -11,15 +11,15 @@
           <h4>Sheri Berger</h4>
 
         </div>
-        <div class="nav-bg">
+        <div class="nav-bg tabs_li">
           <ul class=" nav navs-tabs " role="tablist">
-            <li class="listItemA "><a href="#tabs-1" role="tab" data-toggle="pill" class="active"><i class="fas fa-chevron-right"></i>
+            <li class="listItemA "><a href="#tabs-1" class="new_active click_show_1" role="tab" data-toggle="pill" class="active"><i class="fas fa-chevron-right"></i>
                 Personal Information</a>
             </li>
-            <li class="listItemA"><a href="#tabs-2" role="tab" data-toggle="pill"><i
+            <li class="listItemA"><a href=".tabs-2" class="tab_2_click" role="tab" data-toggle="pill"><i
                   class="fas fa-chevron-right"></i>
                 Contact Information</a></li>
-            <li class="listItemA"><a href="#tabs-3" role="tab" data-toggle="pill"><i class="fas fa-chevron-right"></i>
+            <li class="listItemA"><a href=".tabs-3" class="tab_3_click" role="tab" data-toggle="pill"><i class="fas fa-chevron-right"></i>
                 Edit My Photo</a></li>
           </ul>
         </div>
@@ -32,23 +32,31 @@
                 <div class="general-area placeholder2_label">
 
                   <div class="serch-section ">
-                    <div class="inner-input ">
+                    <div class="inner-input">
                       <label>First Name*</label>
+
+                      <div class="input_field">
+
                       <input type="text" placeholder="" required class="form-control" name="firstname" id="firstname" value="@php $str = Auth::user()->name;$arr = explode(' ',$str);echo $arr[0]; @endphp"/>
                       <span class="asteric" id ="error1"></span>
+                    </div>
+
                     </div>
 
                   </div>
                   <div class="serch-section">
                     <div class="inner-input">
                       <label>Last Name*</label>
+                      <div class="input_field">
                       <input type="text" placeholder="" required class="form-control" name="lastname" id="lastname" value="@php $str = Auth::user()->name;$arr = explode(' ',$str);echo $arr[1]; @endphp" />
                         <span class="asteric" id ="error2"></span>
+                      </div>
                     </div>
                   </div>
-                  <div class="serch-section">
+                  <div class="serch-section mb-4">
                     <div class="inner-input">
                       <label>I am a*</label>
+                      <div class="input_field">
                       <select class="form-control" name="usernetwork" id="usernetwork">
                         <option value="">Select Network</option>
                         @foreach ($usernetworks as $usernetwork)
@@ -59,12 +67,14 @@
                             @endif
                         @endforeach
                     </select>
+                      </div>
                       <span class="asteric" id ="error3"></span>
                     </div>
                   </div>
                   <div class="serch-section">
                     <div class="inner-input">
                       <label>Licensure State(s) & Numbers (s)*</label>
+                       <div class="input_field">
                       <input placeholder="" class="form-control" name="licensure" id="licensure" value="{{Auth::user()->licence_no}} ">
                       <span class="asteric" id ="error4"></span>
                     </div>
@@ -72,6 +82,8 @@
                   <div class="serch-section">
                     <div class="inner-input">
                       <label>Timezone*</label>
+                      <div class="input_field">
+
                       <select class="form-control" name="timezone" id="timezone">
                         <option value="">Select Timezone</option>
                         @foreach ($timezones as $timezone)
@@ -82,12 +94,14 @@
                             @endif
                         @endforeach
                     </select>
+                      </div>
                     <span class="asteric" id ="error5"></span>
                     </div>
                   </div>
                   <div class="button col-sm-12 text-center"><button type="button" id="personal_btn" class="btn btn-Continue">Save & Continue</button></div>
 
 
+                </div>
                 </div>
 
 
@@ -99,8 +113,9 @@
 
           </div>
 
+
         </div>
-        <div class="tab-pane" id="tabs-2">
+        <div class="tab-pane" id="tabs-2" >
           <div class="general-area">
             <div class="row no-gutters">
               <div class="col-md-9 profile">
@@ -224,106 +239,107 @@
 <script>
     $('#firstname').on('keyup', function () {
         if ($(this).val().length > 0) {
-            $(this).closest('div').find('#error1').hide();
+            $(this).closest('div').find('#error1').css("visibility", "hidden");
         }
         else {
             $("#error1").html("First name field can't be left blank.");
 
-            $(this).closest('div').find('#error1').show();
+            $(this).closest('div').find('#error1').css("visibility", "visible");
         }
     });
     $('#lastname').on('keyup', function () {
         if ($(this).val().length > 0) {
-            $(this).closest('div').find('#error2').hide();
+            $(this).closest('div').find('#error2').css("visibility", "hidden");
         }
         else {
             $("#error2").html("Last name field can't be left blank.");
-            $(this).closest('div').find('#error2').show();
+            $(this).closest('div').find('#error2').css("visibility", "visible");
         }
     });
     $('#usernetwork').on('click', function () {
         if ($(this).val().length > 0) {
-            $(this).closest('div').find('#error3').hide();
+            $(this).closest('div').find('#error3').css("visibility", "hidden");
         }
         else {
 
             $("#error3").html("Network field can't be left blank.");
-            $(this).closest('div').find('#error3').show();
+            $(this).closest('div').find('#error3').css("visibility", "visible");
         }
     });
     $('#licensure').on('keyup', function () {
         if ($(this).val().length > 0) {
-            $(this).closest('div').find('#error4').hide();
+            $(this).closest('div').find('#error4').css("visibility", "hidden");
         }
         else {
             $("#error4").html("Licensure field can't be left blank.");
-            $(this).closest('div').find('#error4').show();
+            $(this).closest('div').find('#error4').css("visibility", "visible");
         }
     });
     $('#timezone').on('click', function () {
         if ($(this).val().length > 0) {
-            $(this).closest('div').find('#error5').hide();
+            $(this).closest('div').find('#error5').css("visibility", "hidden");
         }
         else {
 
             $("#error5").html("Timezone field can't be left blank.");
-            $(this).closest('div').find('#error5').show();
+            $(this).closest('div').find('#error5').css("visibility", "visible");
         }
     });
     $('#work_phone').on('keyup', function () {
         if ($(this).val().length > 0) {
-            $(this).closest('div').find('#error7').hide();
+            $(this).closest('div').find('#error7').css("visibility", "hidden");
         }
         else {
             $("#error7").html("Work phone field can't be left blank.");
-            $(this).closest('div').find('#error7').show();
+            $(this).closest('div').find('#error7').css("visibility", "visible");
         }
     });
     $('#country').on('click', function () {
         if ($(this).val().length > 0) {
-            $(this).closest('div').find('#error9').hide();
+            $(this).closest('div').find('#error9').css("visibility", "hidden");
         }
         else {
 
             $("#error9").html("Country field can't be left blank.");
-            $(this).closest('div').find('#error9').show();
+            $(this).closest('div').find('#error9').css("visibility", "visible");
         }
     });
     $('#street_address').on('keyup', function () {
         if ($(this).val().length > 0) {
-            $(this).closest('div').find('#error10').hide();
+            $(this).closest('div').find('#error10').css("visibility", "hidden");
         }
         else {
             $("#error10").html("Street address field can't be left blank.");
-            $(this).closest('div').find('#error10').show();
+            $(this).closest('div').find('#error10').css("visibility", "visible");
         }
     });
     $('#city').on('keyup', function () {
         if ($(this).val().length > 0) {
-            $(this).closest('div').find('#error11').hide();
+            $(this).closest('div').find('#error11').css("visibility", "hidden");
         }
         else {
             $("#error11").html("City field can't be left blank.");
-            $(this).closest('div').find('#error11').show();
+            $(this).closest('div').find('#error11').css("visibility", "visible");
         }
     });
     $(document).ready(function(e){
         $("#personal_btn").on("click",function(e){
+
     if($.trim($('#firstname').val()) == '' || $.trim($('#lastname').val()) == '' || $.trim($('#licensure').val()) == '' || $.trim($('#usernetwork').val()) == '' || $.trim($('#timezone').val()) == '')
     {
         toastr.error('Make sure compulsory fields are not empty.');
       return;
    }
    else{
-     $("#personal").addClass('d-none');
-     $("#employe").removeClass('d-none');
-     $("#employe").removeClass('hide_form');
-     $(".nav_ul li .active").removeClass("active");
-     $(".nav_ul li .employe").addClass("active");
-     $(".personal").addClass("personal_show");
+    $("#tabs-2").addClass("tabs-2");
+    $(".tab_2_click").trigger("click");
+    $('.tabs_li').find('.new_active').removeClass('new_active');
+    $(".tab_2_click").addClass('new_active');
+    $(".tab_2_click").addClass('click_show_2');
    }
     })
     $("#employe_btn").on("click",function(e){
+
 
 if( $.trim($('#street_address').val()) == '' || $.trim($('#business_name').val()) == '' || $.trim($('#business_email').val()) == ''
 || $('#country option:selected').val() == '' || $.trim($('#city').val()) == ''
@@ -333,12 +349,13 @@ if( $.trim($('#street_address').val()) == '' || $.trim($('#business_name').val()
   return;
 }
 else{
- $("#employe").addClass('d-none');
- $(".employe").addClass('employee_show');
- $("#profile").removeClass('d-none');
- $("#profile").removeClass('hide_form');
- $(".nav_ul li .active").removeClass("active");
- $(".nav_ul li .profile").addClass("active");
+    $("#tabs-3").addClass("tabs-3");
+    $(".tabs-3").trigger("click");
+    $(".tab_3_click").trigger("click");
+    $('.tabs_li').find('.new_active').removeClass('new_active');
+    $(".tab_3_click").addClass('new_active')
+    $(".tab_3_click").addClass('click_show_3');
+
 }
 })
  $("#submit_btn").on("click",function(e){
@@ -346,5 +363,33 @@ else{
   $("#profile_form").submit();
  })
     })
+
+
+$(document).ready(function(){
+
+$(".listItemA a").on("click",function(e){
+   $(this).parent('li').find('a').removeClass('active');
+})
+})
+
+
+
+$(document).on("click",".click_show_2",function(e){
+    // alert("hi");
+$('.tabs_li').find('.new_active').removeClass('new_active');
+$(this).addClass('new_active');
+
+})
+$(document).on("click",".click_show_3",function(e){
+    // alert("hi");
+$('.tabs_li').find('.new_active').removeClass('new_active');
+$(this).addClass('new_active');
+
+})
+$(document).on("click",".click_show_1",function(e){
+$('.tabs_li').find('.new_active').removeClass('new_active');
+$(this).addClass('new_active');
+
+})
 </script>
 @endsection
