@@ -90,25 +90,29 @@ class HomeController extends Controller
     }
     public function upcomingWebinarsdetails($id)
     {
-        $eventdetail = Event::with('events', 'sponsers' ,'members' ,'user','buyeventplan','ReviewData')->where('id',$id)->get();
-        $reviews = ReviewRating::where('event_id',$id)->get();
+        $eventdetail = Event::with('events', 'sponsers' ,'members' ,'user','buyeventplan','ReviewData')->find($id);
         $category = CategoryEvent::all();
-        return view('frontend.pages.webinars.upcoming-eventsdetails',compact('eventdetail','category', 'reviews'));
+        return view('frontend.pages.webinars.upcoming-eventsdetails',compact('eventdetail','category'));
 
     }
     public function reviewstore(Request $request)
     {
+        $checkUser =ReviewRating::where('user_id',Auth()->user()->id)->where('event_id', $request->event_id)->first();
+        if(!empty($checkUser)){
+            parent::warningMessage("You Already Posted A Review On This Event");
+            return redirect()->route('upcoming_webinars');
+        }
         try{
         $review = new ReviewRating();
         $review->event_id = $request->event_id;
-        $review->user_id = $request->user_id;
+        $review->user_id = Auth()->user()->id;
         $review->star_rating = $request->rating;
         $review->comments= $request->comment;
         $review->save();
         parent::successMessage('Your Review Has Been Submitted Successfully.');
         return redirect()->back();
       } catch(Exception $e) {
-          dd($e->getMessage());
+
         parent::dangerMessage("Review Does Not Submitted, Please Try  Again");
         return redirect()->back();      }
     }

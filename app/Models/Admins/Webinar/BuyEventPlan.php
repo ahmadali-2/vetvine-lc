@@ -19,7 +19,7 @@ class BuyEventPlan extends Model
     ];
     public function buyevents()
     {
-        return $this->belongsTo(Event::class,'event_id');
+        return $this->belongsTo(Event::class,'event_id' ,'id');
     }
 
     public function user()

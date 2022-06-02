@@ -151,7 +151,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     public function buyevents()
     {
-        return $this->hasMany(BuyEventPlan::class);
+        return $this->hasOne(BuyEventPlan::class);
     }
     public function likes()
     {
@@ -163,5 +163,9 @@ class User extends Authenticatable implements MustVerifyEmail
     $this->two_factor_code = rand(100000, 999999);
     $this->two_factor_expires_at = now()->addMinutes(10);
     $this->save();
+    }
+    public function userrating()
+    {
+        return $this->belongsTo(ReviewRating::class,'id');
     }
 }

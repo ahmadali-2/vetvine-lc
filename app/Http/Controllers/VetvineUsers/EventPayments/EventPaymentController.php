@@ -59,7 +59,7 @@ class EventPaymentController extends Controller
         if(!empty($checkUser)){
             parent::warningMessage("You Already Purchased An Event");
             parent::warningMessage("Please Contact With Admin To Proceed Your Query");
-            return route('upcoming_webinars');
+            return redirect()->route('upcoming_webinars');
         }
         try{
 
