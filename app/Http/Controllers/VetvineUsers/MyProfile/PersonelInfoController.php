@@ -42,8 +42,8 @@ class PersonelInfoController extends Controller
         $countries      = Country::all();
         $employmentInfo = Auth::user()->employmentInfo;
         $timezones      = TimeZone::all();
-        $usernetworks   = UserMemberAndNetworkLevel::all();
-
+        $usernetworks   = UserMemberAndNetworkLevel::where('parent_id','!=',null)->get();
+        // dd($usernetworks);
         return view('vetvineUsers.layouts.pages.user_profile',compact('countries','employmentInfo','timezones','usernetworks'));
     }
     public function chat(){

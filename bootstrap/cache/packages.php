@@ -144,6 +144,17 @@
       'Notify' => 'Mckenziearts\\Notify\\Facades\\LaravelNotify',
     ),
   ),
+  'munafio/chatify' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Chatify\\ChatifyServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Chatify' => 'Chatify\\Facades\\ChatifyMessenger',
+    ),
+  ),
   'nesbot/carbon' => 
   array (
     'providers' => 

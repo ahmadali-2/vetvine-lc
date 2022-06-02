@@ -7,7 +7,8 @@
     <div class="row no-gutters">
       <div class="col-12 col-sm-12 col-lg-3 col-xl-2 sidebar-new-bg pt-4">
         <div class="user-img">
-          <img src="{{ asset('frontend/img/profile-pic.png') }}" alt="hi">
+            <img src="@if(Auth::user()->profile_photo) {{ asset('/frontend/images/Profile-Images/'.Auth::user()->profile_photo)}} @else {{asset('frontend/images/thumbnail.jfif')}} @endif" alt="" id="user-image">
+          {{-- <img src="{{ asset('frontend/img/profile-pic.png') }}" alt="hi"> --}}
           <h4>Sheri Berger</h4>
 
         </div>
