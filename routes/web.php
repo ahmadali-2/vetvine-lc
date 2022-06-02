@@ -194,6 +194,8 @@ Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetv
     Route::get("/chatify", function(){
         return view("vendor.chatify.pages.app");
      });
+    Route::get('/notifications',[PersonelInfoController::class,'notifications'])->name('vetvineUserNotifications');
+
 
     Route::resource('updateprofile',ProfileController::class);
     Route::resource('usermemberships',StripePaymentController::class);
