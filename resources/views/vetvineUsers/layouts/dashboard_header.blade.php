@@ -36,7 +36,7 @@
     <div class="container-fluid p-0">
       <div class="container">
         <nav class=" bg-header navbar navbar-expand-md" style="margin-top: -45px;">
-          <a class="navbar-brand" href="index.html"><span class="header-logo"><img src="{{asset('frontend/img/logo.png')  }}"
+          <a class="navbar-brand" href="{{ url('/') }}"><span class="header-logo"><img src="{{asset('frontend/img/logo.png')  }}"
                 class="img-fluid logo-dashbaord" alt="" srcset=""></span></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,9 +44,10 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav nav-wrapper-one edit-profile-list">
+                {{-- @include('frontend.layouts.main_sub_menu') --}}
 
               <li class="nav-item droplink  ">
-                <a class="nav-link nav-anchor" href="grow.html" aria-haspopup="true"
+                <a class="nav-link nav-anchor" href="{{ route('grow') }}" aria-haspopup="true"
                   style="font-weight: bold">GROW <i class="fas fa-chevron-down droplink1"></i> <br> <span
                     class="nav-sub-hed">Education</span></a>
                 <div class="subdrop subdrop1" aria-label="Main Links Sub Navigation">
@@ -59,10 +60,10 @@
                             <div class="flexrow1">
                               <!-- <u>Vet / Pet Professionals</u> -->
                               <ul>
-                                <li><a href="#">Upcoming  Webinars</a></li>
-                                <li><a href="#">videos on demand</a></li>
+                                <li><a href="{{ route('upcoming_webinars') }}">Upcoming  Webinars</a></li>
+                                <li><a href="{{ route('videosOnDemand') }}">videos on demand</a></li>
                                 <li><a href="#">Certificate & special programs</a></li>
-                                <li><a href="#">forums</a></li>
+                                <li><a href="{{route('forumsfrontend')}}">forums</a></li>
                                 <li><a href="#">Pet Health Articles </a></li>
                               </ul>
 
@@ -82,7 +83,7 @@
                 </div>
               </li>
               <li class="nav-item droplink  ">
-                <a class="nav-link nav-anchor" href="thrive.html" style="font-weight: bold">THRIVE <i
+                <a class="nav-link nav-anchor" href="{{ route('thrive') }}" style="font-weight: bold">THRIVE <i
                     class="fas fa-chevron-down droplink2"></i>
                   <br> <span class="nav-sub-hed">Wellness</span>
                 </a>
@@ -96,7 +97,7 @@
                 </div>
               </li>
               <li class="nav-item droplink ">
-                <a class="nav-link nav-anchor" href="heal.html" style="font-weight: bold">HEAL <i
+                <a class="nav-link nav-anchor" href="{{ route('heal') }}" style="font-weight: bold">HEAL <i
                     class="fas fa-chevron-down droplink3"></i>
                   <br>
                   <span class="nav-sub-hed">Pet Loss Support</span>
@@ -117,11 +118,11 @@
               </li>
 
               <li class="nav-item nav_res_3" style="text-align: center">
-                <a class="nav-link mm-editdb-text" href="{{ route('vetvineUserChat') }}"> <i class="fas fa-comment-dots mrg_top_edit"></i><br>
+                <a class="nav-link mm-editdb-text" href="{{ url('/chatify') }}"> <i class="fas fa-comment-dots mrg_top_edit"></i><br>
                   Messaging</a>
               </li>
               <li class="nav-item nav_res_3" style="text-align: center">
-                <a class="nav-link mm-editdb-text" href="#"> <i class="fas fa-bell mrg_top_edit"></i> <br>
+                <a class="nav-link mm-editdb-text" href="{{ route('vetvineUserNotifications') }}"> <i class="fas fa-bell mrg_top_edit"></i> <br>
                   Notifications</a>
               </li>
               <li class="nav-item nav_res_3" style="text-align: center">

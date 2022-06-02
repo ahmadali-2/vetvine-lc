@@ -3,8 +3,10 @@
 namespace App\VetvineHelpers;
 use App\Models\Generals\TimeZone;
 use App\Models\Admins\GeneralSetting\GeneralSetting;
+use App\Models\User;
 use App\Models\UserMemberAndNetworkLevel;
 use File;
+use Illuminate\Support\Facades\Auth;
 
 class VetVineHelperClass
 {
@@ -81,5 +83,10 @@ class VetVineHelperClass
     public function networkName($memberId)
     {
        return UserMemberAndNetworkLevel::find($memberId)->value('name');
+    }
+
+    public function allUsers(){
+        return  User::where('id','!=',Auth::id())->get();
+
     }
 }

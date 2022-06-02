@@ -72,7 +72,7 @@ class ForumPostController extends Controller
     public function show($id)
     {
         $posts = Post::with('user')->where('forum_id','!=','Null')->find($id);
-        return view('frontend.pages.forums.posts',compact('posts'));
+        return view('frontend.pages.forums.post_detail',compact('posts'));
     }
 
     public function createPost($id)

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\VetvineUsers\MyProfile;
 
 use App\Http\Controllers\Controller;
+use App\Models\Generals\TimeZone;
 use App\Models\User;
+use App\Models\UserMemberAndNetworkLevel;
 use Illuminate\Http\Request;
 use vetvineHelper;
 use App\Models\VetvineUsers\Settings\Country;
@@ -28,16 +30,27 @@ class PersonelInfoController extends Controller
     {
         $countries      = Country::all();
         $employmentInfo = Auth::user()->employmentInfo;
-        return view('vetvineUsers.layouts.pages.user_profile',compact('countries','employmentInfo'));
+        $timezones      = TimeZone::all();
+        $usernetworks   = UserMemberAndNetworkLevel::all();
+
+        return view('vetvineUsers.layouts.pages.user_profile',compact('countries','employmentInfo','timezones','usernetworks'));
 
         // return view('vetvineUsers.MyProfile.userdashboard',compact('countries','employmentInfo'));
     }
 
     public function userProfile(){
-        return view('vetvineUsers.layouts.pages.user_profile');
+        $countries      = Country::all();
+        $employmentInfo = Auth::user()->employmentInfo;
+        $timezones      = TimeZone::all();
+        $usernetworks   = UserMemberAndNetworkLevel::where('parent_id','!=',null)->get();
+        // dd($usernetworks);
+        return view('vetvineUsers.layouts.pages.user_profile',compact('countries','employmentInfo','timezones','usernetworks'));
     }
     public function chat(){
         return view('vetvineUsers.layouts.pages.chat');
+    }
+    public function notifications(){
+        return view('vetvineUsers.layouts.pages.notifications');
     }
 
     /**
@@ -67,17 +80,22 @@ class PersonelInfoController extends Controller
                 $result = vetvineHelper::saveImage($request->profile_photo, $path);
                 User::find($user->id)->update([
                     'profile_photo' => $result,
-                    'referred_by'   => $request->referredby,
+                    // 'referred_by'   => $request->referredby,
                     'name'          => $request->firstname.' '.$request->lastname,
-                    'licence_no'    => $request->licensure
+                    'licence_no'    => $request->licensure,
+                    'timezone_id'  => $request->timezone,
+                    'network_id'   => $request->usernetwork,
+
                 ]);
             }
             else
             {
                 User::find($user->id)->update([
-                    'referred_by'   => $request->referredby,
+                    // 'referred_by'   => $request->referredby,
                     'name'          => $request->firstname.' '.$request->lastname,
                     'licence_no'    => $request->licensure,
+                    'timezone_id'  => $request->timezone,
+                    'network_id'   => $request->usernetwork,
                 ]);
             }
             UserEmploymentInfo::updateOrCreate(
@@ -101,7 +119,7 @@ class PersonelInfoController extends Controller
         }
         catch(Exception $e)
         {
-            // dd($e->getMessage());
+              dd($e->getMessage());
             parent::dangerMessage("Profile Info Not Saved! Please Try Again.");
             return redirect()->back();
         }

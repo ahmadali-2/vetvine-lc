@@ -60,9 +60,7 @@
                     <input type="hidden" name="post_id" value="{{ $posts->id }}" />
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary"" id="comment_btn">Add Comment</button>
-
-                    {{-- <input type="submit" id="comment_btn" class="btn btn-sm btn-outline-danger py-0" style="font-size: 0.8em;" value="Add Comment" /> --}}
+                    <button type="submit" class="btn btn-primary" id="comment_btn">Add Comment</button>
                 </div>
             </form>
            </div>
