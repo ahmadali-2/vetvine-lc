@@ -266,6 +266,7 @@ font-face {
     margin-left: 10px;
     margin-bottom: 15px;
     font-size: 1rem;
+    height: 41px;
     /* font-weight: 600; */
 }
 
@@ -7271,4 +7272,33 @@ ul {
     .chat_content .osahan-post-header {
         display: block !important;
     }
+}
+
+.input_field {
+    width: 303px;
+}
+
+.input_field input,
+.input_field select {
+    width: 100%;
+    /* margin-top: 20px; */
+    margin-bottom: 0px;
+}
+
+.asteric {
+    color: red;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.sidebar-new ul li .active {
+    background-color: #fff;
+    width: 100%;
+    color: #66858c;
+}
+
+.sidebar-new ul li .new_active {
+    background-color: #f27222;
+    width: 100%;
+    color: #fff;
 }
