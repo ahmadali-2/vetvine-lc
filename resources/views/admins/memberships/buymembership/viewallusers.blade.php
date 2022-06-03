@@ -6,7 +6,7 @@
                 <div class="col-sm-6">
                     <h1>Subscribed Users / Plans</h1>
                 </div>
-               
+
             </div>
         </div>
     </section>
@@ -35,7 +35,7 @@
                                             <td>{{$plans->user->email}}</td>
                                             <td>{{$membership->plan_price . '.00' ?? ''}}</td>
                                             <td>{{$membership->expiry_date}}</td>
-                                           
+
                                             <td>
                                             <a href="{{route('userhistory',$plans->user->id)}}"> <i class="far fa-eye text-info"></i></a>
                                             </td>

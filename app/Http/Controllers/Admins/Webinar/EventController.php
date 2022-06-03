@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admins\Webinar\Event;
 use App\Models\Admins\Webinar\CategoryEvent;
+use App\Models\Admins\Webinar\ReviewRating;
 use App\Models\Admins\Webinar\SponserTable;
 use App\Models\Sponser;
 use Exception;
@@ -139,7 +140,7 @@ class EventController extends Controller
             $user   = Auth::user()->id;
             $event  = Event::find($id);
             $path   = public_path('admin/eventss/');
-            $result = vetvineHelper::updateImage($request->main_photo, $event->main_photo, $path);
+            $result = vetvineHelper::updateImage($request->main_photo_update, $event->main_photo, $path);
             $event->update([
                     "category_id"                   =>   $request->input('category_id'),
                     "user_id"                       =>   $user,
@@ -191,11 +192,12 @@ class EventController extends Controller
         try{
             $event = Event::find($id);
             $event->delete();
-            parent::successMessage('Event deleted successfully.');
+            parent::successMessage('Event Deleted Successfully.');
             return redirect()->route('webinars.index');
         }catch(Exception $e) {
             parent::dangerMessage("Event Does Not Deleted, Please Try  Again");
             return redirect()->back();
         }
     }
+   
 }

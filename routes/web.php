@@ -27,6 +27,7 @@ use App\Http\Controllers\Admins\Webinar\EventController;
 use App\Http\Controllers\Auth\SuperAdminRegistrationController;
 use App\Http\Controllers\Admins\Memberships\BuyMemberShipPlanController;
 use App\Http\Controllers\Admins\News\NewsController;
+use App\Http\Controllers\Admins\Webinar\BuyEventController;
 use App\Http\Controllers\Admins\Webinar\SponserController;
 // Vetvine Without Auth Routes;
 use App\Http\Controllers\Frontend\ContactUsController;
@@ -135,7 +136,12 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
     Route::get('naveed-testing', [AdminDashboardController::class, 'testing'])->name('testing');
     Route::resource('webinars-category', EventCategoryController::class);
     Route::resource('webinars', EventController::class);
-    route::resource('sponsors',SponserController::class);
+    Route::resource('sponsors',SponserController::class);
+    Route::resource('videos-on-demand',VideosOnDemandController::class);
+    Route::post('videodata',[VideosOnDemandController::class,'videodata'])->name('videoajaxdata');
+    Route::resource('buyevent-users',BuyEventController::class);
+    Route::get('userevent-history/{id}', [BuyEventController::class, 'usereventHistory'])->name('usereventhistory');
+
 });
 
 
@@ -161,10 +167,13 @@ Route::get('upcoming-event',[HomeController::class,'upcomingevent'])->name('upco
 // Route::get('payement',[HomeController::class,'payementwebinars'])->name('payementwebinars');
 Route::post('submit-payment',[EventPaymentController::class,'index'])->name('submitPayment');
 Route::post('payment',[EventPaymentController::class,'paymentWebinars'])->name('payementwebinars');
+Route::post('review-store',[HomeController::class, 'reviewstore'])->name('reviewstore');
+
 
 Route::get('publications',[HomeController::class,'publications'])->name('upcoming_publications');
 Route::post('educations',[HomeController::class,'searceducations'])->name('search_educations');
 Route::resource('eventpayments',EventPaymentController::class);
+
 
 Route::get('faqs',[HomeController::class,'faqs'])->name('faqs');
 Route::get('frontend-news',[NewsController::class,'frontIndex'])->name('newsfrontend');
@@ -178,7 +187,16 @@ Route::get('ce-archives',[HomeController::class,'ceArchives'])->name('ceArchives
 Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetvineUserRole']], function(){
     Route::get('dashboard',[PersonelInfoController::class,'userdashboard'])->name('userdashboard');
     Route::get('member-home',[PostController::class,'memberHome'])->name('member_home');
+    //User dashboard routes
     Route::resource('personelinfo',PersonelInfoController::class);
+    Route::get('/profile-info',[PersonelInfoController::class,'userProfile'])->name('vetvineUserProfile');
+    Route::get('/chat',[PersonelInfoController::class,'chat'])->name('vetvineUserChat');
+    Route::get("/chatify", function(){
+        return view("vendor.chatify.pages.app");
+     });
+    Route::get('/notifications',[PersonelInfoController::class,'notifications'])->name('vetvineUserNotifications');
+
+
     Route::resource('updateprofile',ProfileController::class);
     Route::resource('usermemberships',StripePaymentController::class);
     //User setting routes

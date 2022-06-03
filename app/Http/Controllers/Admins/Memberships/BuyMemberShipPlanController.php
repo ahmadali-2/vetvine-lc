@@ -22,7 +22,7 @@ class BuyMemberShipPlanController extends Controller
             $plan->totalUsersInPlans =BuyMemberShipPlan::where('member_ship_plan_id', $plan->id)->count('user_id');
             return $plan;
         });
-        
+
 
         return view('admins.memberships.buymembership.index',compact('memberships'));
     }
@@ -35,8 +35,6 @@ class BuyMemberShipPlanController extends Controller
     public function create()
     {
         return view('admins.memberships.buymembership.viewallusers',compact('memberships'));
-
-
     }
 
     /**
@@ -58,12 +56,8 @@ class BuyMemberShipPlanController extends Controller
      */
     public function show($id)
     {
-        
         $membership =MemberShipPlan::with('buymemberships')->find($id);
         return view('admins.memberships.buymembership.viewallusers',compact('membership'));
-
-       
-
     }
 
     /**

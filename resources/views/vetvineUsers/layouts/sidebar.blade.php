@@ -33,16 +33,19 @@
         <a href="#" class="profile"><i class="fa fa-angle-right" aria-hidden="true"></i> Edit My Photo</a>
       </li>
       {{-- <li>
+        <a href="{{route('userdelete',Auth::user()->id)}}" class="profile"><i class="fa fa-angle-right" aria-hidden="true"></i> Delete My Account</a>
+      </li> --}}
+      {{-- <li>
         <a href="{{route('post.create')}}" class="profile"><i class="fa fa-angle-right" aria-hidden="true"></i> Create Post</a>
       </li>
       <li>
         <a href="{{route('post.index')}}" class="profile"><i class="fa fa-angle-right" aria-hidden="true"></i> Show Post</a>
       </li> --}}
-      {{-- <li>
+      <li>
 
         <a href="{{route('usermemberships.index')}}"><i class="fa fa-angle-right" aria-hidden="true"></i> MemberShip Plans</a>
 
-      </li> --}}
+      </li>
 
     </ul>
     </aside>

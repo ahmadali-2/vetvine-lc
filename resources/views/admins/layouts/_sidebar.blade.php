@@ -41,6 +41,7 @@
             <li><i class="fa fa-table"></i><a href="{{ route('webinars-category.index') }}">Add Category</a></li>
             <li><i class="fa fa-table"></i><a href="{{ route('sponsors.index') }}">Add Sponsor</a></li>
             <li><i class="fa fa-table"></i><a href="{{ route('webinars.index') }}">Post New Webinar</a></li>
+            <li><i class="fa fa-table"></i><a href="{{ route('buyevent-users.index') }}">Event Buy History</a></li>
         </ul>
     </li>
 
@@ -52,6 +53,15 @@
             <li><i class="fa fa-table"></i><a href="{{ route('forums-category.index') }}">Forums Category</a></li>
             <li><i class="fa fa-table"></i><a href="{{ route('forums.index') }}">Manage Forums</a></li>
 
+        </ul>
+
+    </li>
+    <li class="menu-item-has-children dropdown">
+
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Videos</a>
+
+        <ul class="sub-menu children dropdown-menu">
+            <li><i class="fa fa-table"></i><a href="{{ route('videos-on-demand.index') }}">Manage Videos</a></li>
         </ul>
 
     </li>

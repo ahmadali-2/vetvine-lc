@@ -38,6 +38,8 @@ class CreateContinueEducationRequest extends FormRequest
             'pet_owner_premium_fee'              => ['required','numeric','min:0'],
             'pet_owner_fee'                      => ['required','numeric','min:0'],
             'vet_pet_prof_premium_fee'           => ['required','numeric','min:0'],
+            'sponser_id'                         => ['required'],
+
         ];
     }
     public function messages()
@@ -51,7 +53,7 @@ class CreateContinueEducationRequest extends FormRequest
             'time.required'                      => 'Time Field Is Required',
             'presenter_one.required'             => 'Presenter One Field Is Required',
             'presenter_one_url.required'         => 'Presenter One URL Field Is Required',
-            'event_description.required'         => 'Event Description Field Is Required',
+            'event_description.required'         => 'Event Details Field Is Required',
             'main_photo.required'                => 'Photo Field Is Required',
             'vet_pet_prof_fee.required'          => 'Vet Pet Prof Fee Field Is Required',
             'vet_pet_prof_fee.min'               => 'The Vet Pet Prof Fee Must Be At Least 0.',
@@ -61,6 +63,7 @@ class CreateContinueEducationRequest extends FormRequest
             'pet_owner_fee.min'                  => 'The Pet Owner Fee Must Be At Least 0.',
             'vet_pet_prof_premium_fee.required'  => 'Vet Pet Prof Premium Fee Field Is Required',
             'vet_pet_prof_premium_fee.min'       => 'The Vet Pet Prof Premium Fee Must Be At Least 0.',
+            'sponser_id.required'                => 'Select Sponser Field Is Required',
         ];
 
     }
