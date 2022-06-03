@@ -6635,3 +6635,102 @@ table tbody .count td {
 .sposer_name a {
     text-align: left;
 }
+
+/* User Dashboard Style 31-05-2022 */
+
+.drop_down_user_dash {
+    position: absolute;
+    top: 100%;
+    left: -74px;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 16rem;
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1pxsolidrgba(0, 0, 0, .15);
+    border-radius: 0.25rem;
+  }
+
+  .drop_down_user_dash li a,
+  .my_ce_drop_down li a {
+    font-size: 13px;
+    color: #5c7c85;
+  }
+
+  .drop_down_user_dash b {
+    font-size: 14px;
+  }
+
+  .drop_down_user_dash .content {
+    display: flex;
+    padding-left: 30px;
+  }
+
+  .drop_down_user_dash .content .img_box {
+    width: 60px;
+    height: 60px;
+  }
+
+  .drop_down_user_dash .content .img_box img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    object-fit: contain;
+  }
+
+  .drop_down_user_dash .view_profile {
+    padding: 0px !important;
+    margin-top: 5px;
+  }
+
+  .drop_down_user_dash .content_box {
+    padding-left: 6px;
+
+  }
+
+  .my_ce_drop_down {
+    position: absolute;
+    top: 100%;
+    left: -95px;
+    z-index: 1000;
+    display: none;
+    min-width: 15rem;
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1pxsolidrgba(0, 0, 0, .15);
+    border-radius: 0.25rem;
+  }
+
+  @media(max-width:767px) {
+
+    .drop_down_user_dash .content_box {
+      padding-left: 6px;
+      width: 20rem;
+    }
+  }
+
+  .nav-wrapper-one .padding_top_0 {
+    padding-top: 0px !important;
+  }
+
+  .logout {
+    margin-right: 42px;
+  }
+
+  .edit_profile_banner {
+    background-color: #5c7c85;
+    padding: 1px 30px;
+  }
