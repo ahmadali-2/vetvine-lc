@@ -175,6 +175,7 @@ class EventController extends Controller
                 parent::successMessage('Event updated successfully.');
                 return redirect(route('webinars.index'));
             } catch (Exception $e) {
+                // dd($e->getMessage());
                 parent::dangerMessage("Continue Education Event Does Not Updated, Please Try  Again");
                 return redirect()->back();
             }

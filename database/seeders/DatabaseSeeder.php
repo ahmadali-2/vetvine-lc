@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             TimeZoneSeeder::class,
             CountriesSeeder::class,
             LocaleSeeder::class,
+            MemberTypeSeeder::class,
         ]);
     }
 }
