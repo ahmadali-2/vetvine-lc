@@ -86,7 +86,7 @@ class VetVineHelperClass
     }
 
     public function allUsers(){
-        return  User::where('id','!=',Auth::id())->get();
+        return  User::with('toMessage','fromMessage')->where('id','!=',Auth::id())->get();
 
     }
 }
