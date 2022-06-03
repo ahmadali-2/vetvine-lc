@@ -14,6 +14,7 @@
 
     </div>
     @yield('dashboardcontent')
+    {{-- @include('vetvineUsers.layouts.footer') --}}
     @include('vetvineUsers.layouts.dashboard_footer_scripts')
 </body>
 </html>

@@ -164,4 +164,16 @@ class User extends Authenticatable implements MustVerifyEmail
     $this->two_factor_expires_at = now()->addMinutes(10);
     $this->save();
     }
+
+    public function toMessage(){
+        return $this->hasMany(ChMessage::class,'to_id','id');
+    }
+
+    public function fromMessage(){
+        return $this->hasMany(ChMessage::class,'from_id','id');
+    }
+
+    public function unreadMessage(){
+        return $this->hasMany(ChMessage::class,'from_id','id')->where('from_id',$this->id)->where('seen',0)->count();
+    }
 }
