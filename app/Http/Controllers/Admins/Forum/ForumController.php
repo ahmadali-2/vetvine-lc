@@ -26,6 +26,12 @@ class ForumController extends Controller
         return view('admins.forums.index',compact('categories','forums'));
     }
 
+    public function getForums($categoryId){
+        $forums = Forum::with('category')->where('category_id',$categoryId)->get();
+        return view('frontend.pages.forums.forum',compact('forums'));
+    }
+
+
     public function frontendIndex()
     {
         // dd('hjkds');
