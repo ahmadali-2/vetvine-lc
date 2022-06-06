@@ -22,8 +22,10 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
+                                            <th scope="col">Name</th>
                                             <th scope="col">Email</th>
                                             <th scope="col">Event Price</th>
+                                            <th scope="col">Date & Time</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
@@ -32,8 +34,10 @@
 
                                         <tr>
                                             <th scope="row">{{$loop->iteration}}</th>
+                                            <td>{{$plans->user->name}}</td>
                                             <td>{{$plans->user->email}}</td>
-                                            <td>$ {{$plans->amount . '.00' ?? ''}}</td>
+                                            <td>${{$plans->amount . '.00' ?? ''}}</td>
+                                            <td>{{date('M-d-Y', strtotime($plans->created_at))}}</td>
                                             <td>
                                             <a href="{{route('usereventhistory',$plans->user->id)}}"> <i class="far fa-eye text-info"></i></a>
                                             </td>

@@ -102,13 +102,12 @@
             <form action="{{ route('submitPayment') }}" method="POST">
                 <div class="public-detail-inner">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    @foreach ($eventdetail as $item)
-                        <input type="hidden" name="event_id" value="{{ $item->id }}">
-                        <input type="hidden" name="user_id" value="{{ $item->user_id }}">
+                        <input type="hidden" name="event_id" value="{{ $eventdetail->id }}">
+                        <input type="hidden" name="user_id" value="{{ $eventdetail->user_id }}">
                         <div class="public-cat">
-                            <img src="{{ asset('/admin/eventss/' . $item->main_photo) }}" alt="">
+                            <img src="{{ asset('/admin/eventss/' . $eventdetail->main_photo) }}" alt="">
                         </div>
-                        <h2>{{ $item->event_title }}</h2>
+                        <h2>{{ $eventdetail->event_title }}</h2>
 
                         <div class="publication-detail">
                             <div class="publication-arrow-icon">
@@ -119,7 +118,7 @@
                                     DESCRIPTION:
                                 </div>
                                 <div class="public2-description">
-                                    {{ $item->event_description }}
+                                    {{ $eventdetail->event_description }}
                                 </div>
                             </div>
                         </div>
@@ -132,7 +131,7 @@
                                     Date:
                                 </div>
                                 <div class="public2-description">
-                                    {{ $item->date }}
+                                    {{ $eventdetail->date }}
                                 </div>
                             </div>
                         </div>
@@ -147,9 +146,9 @@
                                         Time:
                                     </div>
                                     @php
-                                        $eventTime = $item->time;
-                                        $timeZone = $item->user->timezone->name;
-                                        $today = new DateTime($item->time, new DateTimeZone($timeZone));
+                                        $eventTime = $eventdetail->time;
+                                        $timeZone = $eventdetail->user->timezone->name;
+                                        $today = new DateTime($eventdetail->time, new DateTimeZone($timeZone));
                                         // $today->format('Y-m-d H:i').'<br>';
                                         $userTimeZone = Auth::user()->timezone->name;
                                         $userEventTime = new DateTimeZone($userTimeZone);
@@ -170,7 +169,7 @@
                                 <div class="public2-title">
                                     Sponsor:
                                 </div>
-                                @foreach ($item->members as $items)
+                                @foreach ($eventdetail->members as $items)
                                     <div class="public2-description">
                                         {{ $items->sponser_name }}
 
@@ -188,7 +187,7 @@
 
                                 </div>
                                 <div class="public2-description">
-                                    {{ $item->presenter_one }}
+                                    {{ $eventdetail->presenter_one }}
                                 </div>
                             </div>
                         </div>
@@ -199,25 +198,25 @@
                             <div class="public2-info d-flex justify-content-around">
                                 <div class="public2-title">
                                     <input type="checkbox" class="check_class" id="first_price" name="event_price"
-                                        value="{{ $item->pet_owner_fee }}"> Pet Owner Fee :
-                                    <label for="first_price"> ${{ $item->pet_owner_fee }} </label>
+                                        value="{{ $eventdetail->pet_owner_fee }}"> Pet Owner Fee :
+                                    <label for="first_price"> ${{ $eventdetail->pet_owner_fee }} </label>
                                 </div>
                                 <div class="public2-title">
                                     <input type="checkbox" id="second_price" class="check_class" name="event_price"
-                                        value="{{ $item->pet_owner_premium_fee }}"> Pet Owner Premium Fee
+                                        value="{{ $eventdetail->pet_owner_premium_fee }}"> Pet Owner Premium Fee
                                     :
-                                    <label for="second_price"> ${{ $item->pet_owner_premium_fee }} </label>
+                                    <label for="second_price"> ${{ $eventdetail->pet_owner_premium_fee }} </label>
                                 </div>
                                 <div class="public2-title">
                                     <input type="checkbox" id="third_price" class="check_class" name="event_price"
-                                        value="{{ $item->vet_pet_prof_fee }}"> Vet/Pet Prof. Fee :
-                                        <label for="third_price"> ${{ $item->vet_pet_prof_fee }}</label>
+                                        value="{{ $eventdetail->vet_pet_prof_fee }}"> Vet/Pet Prof. Fee :
+                                        <label for="third_price"> ${{ $eventdetail->vet_pet_prof_fee }}</label>
                                 </div>
                                 <div class="public2-title">
                                     <input type="checkbox" id="fourth_price" class="check_class" name="event_price"
-                                        value="{{ $item->vet_pet_prof_premium_fee }}"> Vet/Pet Prof. Premium
+                                        value="{{ $eventdetail->vet_pet_prof_premium_fee }}"> Vet/Pet Prof. Premium
                                     Fee :
-                                    <label for="fourth_price"> ${{ $item->vet_pet_prof_premium_fee }}</label>
+                                    <label for="fourth_price"> ${{ $eventdetail->vet_pet_prof_premium_fee }}</label>
                                 </div>
                             </div>
                         </div>
@@ -227,7 +226,7 @@
                                     Join</button>
                             </div>
                         </div>
-                    @endforeach
+
                 </div>
             </form>
 
@@ -242,11 +241,11 @@
                             <div class="row mt-5">
                                <h4>Comment Section :</h4>
                                <div class="col-sm-12 mt-5">
-                                  @foreach($reviews as $review)
+                                  @foreach($eventdetail->ReviewData as $review)
 
                                   <div class=" review-content">
                                      <img src="https://www.w3schools.com/howto/img_avatar.png" class="avatar ">
-                                     {{-- <span class="font-weight-bold ml-2">{{$review->name}}</span> --}}
+                                     <span class="font-weight-bold ml-2"> {{ $review->users->name ? $review->users->name : 'Annonyomus'}}</span>{{$review->created_at->diffForHumans()}}
                                      <p class="mt-1">
                                         @for($i=1; $i<=$review->star_rating; $i++)
                                         <span><i class="fa fa-star text-warning"></i></span>
@@ -269,10 +268,9 @@
                             <div class="col-sm-10 mt-4 ">
                                <form class="py-2 px-4" action="{{route('reviewstore')}}" style="box-shadow: 0 0 10px 0 #ddd;" method="POST" autocomplete="off">
                                   @csrf
-
-                                  <input type="hidden" name="event_id" value="{{$item->id}}">
-                                    <input type="hidden" name="user_id" value="{{$item->user_id}}">
-                                  <div class="row justify-content-end mb-1">
+                                  <input type="hidden" name="event_id" value="{{$eventdetail->id}}">
+                                    <input type="hidden" name="user_id" value="{{$eventdetail->user_id}}">
+                                  {{-- <div class="row justify-content-end mb-1">
                                      <div class="col-sm-8 float-right">
                                         @if(Session::has('flash_msg_success'))
                                         <div class="alert alert-success alert-dismissible p-2">
@@ -281,7 +279,7 @@
                                         </div>
                                         @endif
                                      </div>
-                                  </div>
+                                  </div> --}}
                                   <p class="font-weight-bold ">Review</p>
                                   <div class="form-group row">
                                      <div class="col-sm-6">

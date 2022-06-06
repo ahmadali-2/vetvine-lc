@@ -51,7 +51,7 @@
             <p><b>{{ date('M-d-Y', strtotime($userHistory->last_login_date))}}</b></p>
             <p> <b>{{$userHistory->creation_ip ?? 'Null'}}</b></p>
             <p> <b>{{$userHistory->last_login_ip ?? 'Null'}}</b></p>
-            <p> <b>{{$userHistory->buyevents[0]->amount ?? 'Null'}}</b></p>
+            <p> <b>{{$userHistory->buyevents->amount ?? 'Null'}}</b></p>
             <p> <b>{{$userHistory->provider ?? 'Manually'}}</b></p>
 
 			<p>

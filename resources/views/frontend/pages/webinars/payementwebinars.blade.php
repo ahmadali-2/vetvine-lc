@@ -51,7 +51,7 @@
                                             <form action="{{ route('payementwebinars') }}" method="POST"
                                                 class="require-validation" data-cc-on-file="false"
                                                 data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
-                                               
+
                                                 @csrf
                                                 <input type="hidden" value="{{ $event_price }}" name="event_price">
                                                 <input type="hidden" value="{{ $event_id }}" name="event_id">
@@ -81,7 +81,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="billing-btn">
-                                                    <button type="submit" value="{{ $event_price }}">Pay {{ $event_price }} $</button>
+                                                    <button type="submit" value="{{ $event_price }}">Pay ${{ $event_price }}</button>
                                                 </div>
                                             </form>
                                         </div>
