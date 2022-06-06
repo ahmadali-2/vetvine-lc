@@ -63,6 +63,7 @@ class Event extends Model
 
     public function ReviewData()
     {
-    return $this->hasMany(ReviewRating::class,'event_id');
+    return $this->hasMany(ReviewRating::class);
     }
+
 }
