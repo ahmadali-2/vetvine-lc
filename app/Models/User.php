@@ -166,6 +166,17 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     public function userrating()
     {
-        return $this->belongsTo(ReviewRating::class,'id');
+        return $this->belongsTo(ReviewRating::class, 'id');
+    }
+    public function toMessage(){
+        return $this->hasMany(ChMessage::class,'to_id','id');
+    }
+
+    public function fromMessage(){
+        return $this->hasMany(ChMessage::class,'from_id','id');
+    }
+
+    public function unreadMessage(){
+        return $this->hasMany(ChMessage::class,'from_id','id')->where('from_id',$this->id)->where('seen',0)->count();
     }
 }
