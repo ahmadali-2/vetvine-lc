@@ -12,8 +12,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="{{ asset('vendor/select2/dist/css/select2.min.css') }}" />
-
+  <link rel="stylesheet" href="{{ asset('css/bootstrap-notifications.min.css') }}">
 
   @toastr_css
   <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}" />
-
+    {{-- <!--[if lt IE 9]> --}}
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    {{-- <![endif]--> --}}
