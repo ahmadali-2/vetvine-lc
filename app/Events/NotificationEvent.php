@@ -24,6 +24,7 @@ class NotificationEvent implements ShouldBroadcast
      */
     public function __construct($userName)
     {
+        // dd($userName);
         $this->userName = $userName;
         $this->message = 'Hello '.$userName;
     }
@@ -35,6 +36,10 @@ class NotificationEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['notification-event'];
+        return ['my-channel'];
+    }
+    public function broadcastAs()
+    {
+        return 'notification-event';
     }
 }

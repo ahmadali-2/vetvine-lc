@@ -182,6 +182,7 @@ Route::get('faqs',[HomeController::class,'faqs'])->name('faqs');
 Route::get('frontend-news',[NewsController::class,'frontIndex'])->name('newsfrontend');
 Route::get('frontend-forums',[ForumController::class,'frontendIndex'])->name('forumsfrontend');
 Route::get('forums/{id}',[ForumController::class,'getForums'])->name('getForums');
+Route::get('forum/posts/{id}',[ForumController::class,'getForumPosts'])->name('getForumPosts');
 
 //videos on demand
 Route::get('videos-on-demand',[HomeController::class,'videosOnDemand'])->name('videosOnDemand');

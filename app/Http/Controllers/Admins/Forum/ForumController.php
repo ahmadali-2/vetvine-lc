@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admins\Forum\CategoryForum;
 use App\Models\Admins\Advertisement\Ad;
 use App\Models\Admins\Forum\Forum;
+use App\Models\Admins\Forum\Post;
 use App\Models\Generals\Member;
 use App\Models\UserMemberAndNetworkLevel;
 use Exception;
@@ -31,7 +32,11 @@ class ForumController extends Controller
         return view('frontend.pages.forums.forum',compact('forums'));
     }
 
+    public function getForumPosts($forumId){
+        $posts = Post::where('forum_id',$forumId)->get();
+        return view('frontend.pages.forums.forum_detail',compact('posts'));
 
+    }
     public function frontendIndex()
     {
         // dd('hjkds');

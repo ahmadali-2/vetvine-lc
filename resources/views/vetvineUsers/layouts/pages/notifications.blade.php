@@ -258,8 +258,7 @@
 
 @endsection
 @section('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pusher/7.1.1-beta/pusher.min.js"></script>
-
+<script src="https://js.pusher.com/7.1/pusher.min.js"></script>
 <script type="text/javascript">
 var notificationsWrapper   = $('.dropdown-notifications');
       var notificationsToggle    = notificationsWrapper.find('a[data-toggle]');
@@ -274,17 +273,20 @@ var notificationsWrapper   = $('.dropdown-notifications');
       // Pusher.logToConsole = true;
 
       var pusher = new Pusher('6e28b8146a38abf8bcc7', {
-        encrypted: true
+        cluster:'ap2',
+        // encrypted: true
       });
+    //   console.log(pusher);
       // Subscribe to the channel we specified in our Laravel Event
-      var channel = pusher.subscribe('notification-event');
-
+      var channel = pusher.subscribe('my-channel');
+      console.log(channel);
       // Bind a function to a Event (the full Laravel class)
-      channel.bind('App\\Events\\NotificationEvent', function(data) {
+      channel.bind('notification-event', function(data) {
+         console.log(data);
 
         var existingNotifications = notifications.html();
         var avatar = Math.floor(Math.random() * (71 - 20 + 1)) + 20;
-        var newNotificationHtml = `
+        var newNotificationHtml =`
           <li class="notification active">
               <div class="media">
                 <div class="media-left">

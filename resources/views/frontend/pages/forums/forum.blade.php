@@ -89,7 +89,7 @@
             @forelse ($forums as $forum )
 
             <tr>
-                <td> <h4>{{ $forum->forum_title ?? '' }}</h4></td>
+                <td>    <a href="{{ route('getForumPosts',$forum->id) }}"><h4>{{ $forum->forum_title ?? '' }}</h4></a> </td>
 
                 <td>0</td>
                 <td>0</td>
