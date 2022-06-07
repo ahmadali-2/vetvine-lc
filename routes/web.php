@@ -28,6 +28,7 @@ use App\Http\Controllers\Auth\SuperAdminRegistrationController;
 use App\Http\Controllers\Admins\Memberships\BuyMemberShipPlanController;
 use App\Http\Controllers\Admins\News\NewsController;
 use App\Http\Controllers\Admins\Webinar\BuyEventController;
+use App\Http\Controllers\Admins\Webinar\ReviewController;
 use App\Http\Controllers\Admins\Webinar\SponserController;
 // Vetvine Without Auth Routes;
 use App\Http\Controllers\Frontend\ContactUsController;
@@ -164,10 +165,9 @@ Route::get('upcoming-webinars',[HomeController::class,'upcomingWebinars'])->name
 Route::get('upcoming-webinars-details/{id}',[HomeController::class,'upcomingWebinarsdetails'])->name('upcoming_details');
 Route::get('past-event',[HomeController::class,'pastevent'])->name('pastevent');
 Route::get('upcoming-event',[HomeController::class,'upcomingevent'])->name('upcomingevent');
-// Route::get('payement',[HomeController::class,'payementwebinars'])->name('payementwebinars');
 Route::post('submit-payment',[EventPaymentController::class,'index'])->name('submitPayment');
 Route::post('payment',[EventPaymentController::class,'paymentWebinars'])->name('payementwebinars');
-Route::post('review-store',[HomeController::class, 'reviewstore'])->name('reviewstore');
+
 
 
 Route::get('publications',[HomeController::class,'publications'])->name('upcoming_publications');
@@ -213,4 +213,15 @@ Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetv
     Route::delete('comment-destroy/{id}', [CommentController::class,'destroy'])->name('comment.destroy');
     Route::post('/reply/store', [CommentController::class,'replyStore'])->name('reply.add');
     Route::post('savelike', [PostController::class,'likeSave'])->name('likesave');
+
+
+    //User events Routes
+    Route::post('review-store',[ReviewController::class, 'reviewstore'])->name('reviewstore');
+    Route::post('review-delete',[HomeController::class, 'reviewdelete'])->name('review.delete');
+
+
+    Route::post('update-comment', [ReviewController::class, 'commentupdate'])->name('comment.update');
+    Route::post('edit-comment', [ReviewController::class, 'edit'])->name('comment.edit');
+
+
 });
