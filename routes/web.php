@@ -2,7 +2,7 @@
 
 // use App\Http\Controllers\;
 
-
+use App\Events\NotificationEvent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\SocialController;
 use App\Http\Controllers\Auth\UserTypeController;
@@ -88,8 +88,11 @@ Route::get('contactusschedule', function(){
     return 'Contact Us Cron Job Schedule Run Successfully';
 });
 
-
-
+//notification testing route
+Route::get('test', function () {
+    event(new NotificationEvent('Omar Hayat'));
+    return "Event has been sent!";
+});
 
 /**
  * Social Registeration and  Login  Routes
@@ -178,6 +181,8 @@ Route::resource('eventpayments',EventPaymentController::class);
 Route::get('faqs',[HomeController::class,'faqs'])->name('faqs');
 Route::get('frontend-news',[NewsController::class,'frontIndex'])->name('newsfrontend');
 Route::get('frontend-forums',[ForumController::class,'frontendIndex'])->name('forumsfrontend');
+Route::get('forums/{id}',[ForumController::class,'getForums'])->name('getForums');
+Route::get('forum/posts/{id}',[ForumController::class,'getForumPosts'])->name('getForumPosts');
 
 //videos on demand
 Route::get('videos-on-demand',[HomeController::class,'videosOnDemand'])->name('videosOnDemand');

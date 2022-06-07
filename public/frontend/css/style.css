@@ -7302,3 +7302,543 @@ ul {
     width: 100%;
     color: #fff;
 }
+
+.forum_bg {
+    background-image: url(../forums/img/forum_header.png) !important;
+    /* background-position: center top; */
+    background-size: cover;
+    background-position: right 35% bottom 76%;
+}
+
+.forum_top_section .search_forum {
+    width: 100%;
+    display: inline-block;
+    color: #5c7c85;
+    font-size: 17px;
+    font-family: "Museo Sans 500";
+    border: 2px solid #68868e !important;
+    padding: 20px;
+    /* margin-bottom: 35px; */
+    height: 47.5px;
+    border-radius: 0px;
+}
+
+#fav_show_wrapper,
+#fav_show {
+    width: 100%;
+}
+
+#fav_show {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: relative;
+    background: transparent;
+    padding: 9px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+
+.filter-div select {
+    width: 100%;
+    display: inline-block;
+    color: #5c7c85;
+    font-size: 17px;
+    font-family: "Museo Sans 500";
+    border: 2px solid #68868e !important;
+    padding: 20px;
+    margin-bottom: 35px;
+    height: 49px;
+    padding-left: 10px !important;
+}
+
+.topi {
+    display: none;
+}
+
+.comment_forum img {
+    width: 20px !important;
+    height: 20px !important;
+    margin-right: 5px;
+}
+
+.behavior-img-2 {
+    display: flex;
+    align-items: center;
+}
+
+.combine {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 767px) {
+    .topi {
+        padding-top: 10px;
+        margin-bottom: 0 !important;
+        display: block;
+        font-weight: 600;
+    }
+    .specialty-detail h2 {
+        display: none;
+    }
+    .forum_category_div {
+        max-width: 100% !important;
+    }
+    .behavior-img-2 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .behavior-img-2 .topi {
+        margin-bottom: 30px;
+    }
+    .combine_2 {
+        display: flex;
+        flex-direction: column;
+    }
+    .topics-section .behavior-card {
+        display: flex;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-top: 19px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .specialty-detail h2 {
+        color: #105965;
+        font-family: "Museo 500";
+        font-size: 1.3rem;
+        font-style: normal;
+        letter-spacing: normal;
+        line-height: normal;
+        text-align: center;
+        text-transform: uppercase;
+    }
+}
+
+@media (max-width:575px) {
+    .max_width_screen {
+        max-width: 50%;
+    }
+}
+
+@media (max-width: 345px) {
+    .topi,
+    .behavior-img-2 span {
+        font-size: 12px;
+    }
+    .behavior-card-right .behavior-img-2 img {
+        width: 50px;
+        height: 70px;
+    }
+}
+
+.forum-activity {
+    padding-bottom: 0.7rem !important;
+}
+
+.forum-activity .comment_forum {
+    display: flex;
+    align-items: center;
+}
+
+.forum_table img {
+    width: 20px !important;
+    height: 20px !important;
+    /* margin-right: 5px; */
+}
+
+.forum_table {
+    max-width: 100%;
+}
+
+.forum_table tr {
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+.forum_table h4 {
+    color: #105965;
+    font-family: "Museo Sans 500";
+    font-size: 20px;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    margin-bottom: 0 !important;
+}
+
+.forum_table tr td {
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+}
+
+.recent_activity {
+    font-family: "Museo 500";
+}
+
+@media(max-width:991px) and (min-width:767px) {
+    .recent_activity {
+        font-size: 12px;
+    }
+    .title_th {
+        width: 40%;
+    }
+}
+
+@media(max-width:767px) {
+    .title_th {
+        width: 30%;
+    }
+    .forum_table h4 {
+        color: #105965;
+        font-family: "Museo Sans 500";
+        font-size: 11px;
+        font-style: normal;
+        letter-spacing: normal;
+        line-height: normal;
+        margin-bottom: 0 !important;
+    }
+    .forum_table img {
+        width: 15px !important;
+        height: 15px !important;
+        /* margin-right: 5px; */
+    }
+}
+
+.user-pro {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-family: "Museo 500";
+}
+
+.chat-details {
+    padding-top: 20px;
+    font-family: "Museo 500";
+}
+
+.chat-title h3 {
+    color: #105965;
+    font-size: 24px;
+    font-family: "Museo 500";
+}
+
+.chat-title h6 {
+    color: #5e7c85;
+    font-size: 14px;
+    font-family: "Museo 500";
+}
+
+.chat-like-comments {
+    width: 350px;
+    margin: -10px auto;
+    font-family: "Museo 500";
+}
+
+.icons-like {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e7f0ef;
+    padding-bottom: 7px;
+    padding-left: 10px;
+    font-family: "Museo 500";
+}
+
+.like-name p {
+    font-size: 15px;
+    color: #5e7c85;
+    font-weight: 500;
+    padding-left: 7px;
+    font-family: "Museo 500";
+}
+
+.chat-like-comments {
+    width: 350px;
+    margin: -10px auto;
+    font-family: "Museo 500";
+}
+
+.icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 15px;
+}
+
+.like-btn img {
+    width: 20px;
+}
+
+.chat-textarea {
+    display: flex;
+    margin-top: 30px;
+    font-family: "Museo 500";
+}
+
+.comment_forum img {
+    width: 20px;
+    height: 20px;
+}
+
+.chat-textarea textarea {
+    width: 90%;
+    padding: 10px;
+    position: relative;
+    font-family: "Museo 500";
+}
+
+.chat-textarea textarea {
+    border: 1px solid grey !important;
+}
+
+.emajo {
+    display: flex;
+    position: absolute;
+    justify-content: space-between;
+    bottom: 10px;
+    left: 50px;
+    width: 51px;
+    align-items: center;
+    font-family: "Museo 500";
+}
+
+.emajo img {
+    width: 15px;
+}
+
+.text-btn {
+    display: flex;
+    float: right;
+    position: absolute;
+    right: 70px;
+    bottom: 15px;
+    font-family: "Museo 500";
+}
+
+.btn-cancel a {
+    background-color: transparent !important;
+    color: orangered !important;
+    border: none !important;
+    font-family: "Museo 500";
+}
+
+.text-btn a {
+    width: 100px;
+    height: 60px;
+    border-radius: 10px;
+    color: white;
+    padding: 10px 20px;
+    background-color: orangered;
+    border: 1px solid orangered;
+    font-family: "Museo 500";
+}
+
+.similar h4 {
+    font-size: 24px;
+    color: #105965;
+    margin-top: 30px;
+    font-family: "Museo 500";
+}
+
+.chat-title {
+    margin-bottom: 20px;
+}
+
+.chat-description p {
+    font-family: "Museo 500";
+    color: #105965;
+}
+
+.chat-side-detail {
+    font-family: "Museo 500";
+    color: #105965;
+}
+
+.left-pro {
+    font-family: "Museo 500";
+    color: #105965;
+}
+
+.similar h4 {
+    font-size: 24px;
+    color: #105965;
+    margin-top: 30px;
+    font-family: "Museo 500";
+    margin-bottom: 15px;
+}
+
+.specialty-detail h2 {
+    color: #105965;
+    font-family: "Museo 500";
+    font-size: 25px;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.topics-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 30px;
+    margin-bottom: 20px !important;
+    -webkit-box-shadow: 0px 2px 5px 0px rgb(230 214 230);
+    -moz-box-shadow: 0px 2px 5px 0px rgba(230, 214, 230, 1);
+    box-shadow: 0px 2px 5px 0px rgb(230 214 230);
+    background-color: #ffffff;
+}
+
+.topics-section .behavior-card {
+    display: flex;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.topics-section .behavior-card .behavior-img img {
+    width: 76px;
+    height: 40px;
+}
+
+.topics-section .behavior-card .behavior-details {
+    padding-left: 20px;
+}
+
+.behavior-img-2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.topics-section .behavior-card .behavior-details a h2 {
+    color: #105965;
+    font-family: "Museo Sans 700";
+    font-size: 20px;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    margin-bottom: 0 !important;
+}
+
+.forum_desc {
+    font-weight: 700;
+    color: #5e7c85;
+    margin-bottom: 0 !important;
+}
+
+@media(max-width:767px) {
+    .chat-box-a {
+        flex-direction: column;
+    }
+    .small_screen {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 10px;
+    }
+    .similar {
+        padding-left: 20px;
+    }
+    .comment_forum {
+        /* width: 100%; */
+        margin-bottom: 7px;
+    }
+    .topics-section {
+        flex-direction: column;
+    }
+}
+
+@media(max-width:400px) {
+    .chat-textarea {
+        display: flex;
+        margin-top: 30px;
+        font-family: "Museo 500";
+        flex-direction: column;
+    }
+    .chat-textarea textarea {
+        width: 100%;
+        padding: 10px;
+        position: relative;
+        font-family: "Museo 500";
+    }
+    .emajo {
+        display: flex;
+        position: absolute;
+        justify-content: space-between;
+        bottom: 10px;
+        left: 27px;
+        width: 51px;
+        align-items: center;
+        font-family: "Museo 500";
+    }
+    .text-btn {
+        display: flex;
+        float: right;
+        position: absolute;
+        right: 22px;
+        bottom: 15px;
+        font-family: "Museo 500";
+    }
+    .text-btn a {
+        width: 94px;
+        /* height: 51px; */
+        border-radius: 10px;
+        color: white;
+        padding: 10px 13px;
+        background-color: orangered;
+        border: 1px solid orangered;
+        font-family: "Museo 500";
+    }
+}
+
+@media (max-width: 991px) {
+    .forum_bg {
+        background-position: 28%, 100%;
+        background-size: cover !important;
+    }
+}
+
+.advertising-sec {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 0;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 991px) and (min-width:767px) {
+    .droplink {
+        margin: 0px 15px;
+    }
+}
+
+@media (max-width:1200px) {
+    .specialty-detail h2 {
+        color: #105965;
+        font-family: "Museo 500";
+        font-size: 20px;
+    }
+}
+
+@media (max-width:992px) {
+    .specialty-detail h2 {
+        color: #105965;
+        font-family: "Museo 500";
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 365px) {
+    .topi {
+        padding-top: 10px;
+        margin-bottom: 0 !important;
+        display: block;
+        font-weight: 600;
+        font-size: 12px;
+    }
+}

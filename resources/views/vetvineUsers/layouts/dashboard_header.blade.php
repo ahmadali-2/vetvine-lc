@@ -2,9 +2,9 @@
     <div class="top_Wrapper">
         <div class="container-fluid">
 
-
             <div class="container">
                 <div class="top-social">
+
                     <ul class="list__icons dash-top-list">
                         <li>
                             <div class="input-group mb-3">
@@ -138,6 +138,7 @@
                                     class="fas fa-bell mrg_top_edit"></i> <br>
                                 Notifications</a>
                         </li>
+
                         <li class="nav-item nav_res_3" style="text-align: center">
 
                             <a class="nav-link padding_top_0" href="contact.html" style="text-align: center"></a>
