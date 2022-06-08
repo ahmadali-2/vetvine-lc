@@ -184,6 +184,8 @@ Route::get('frontend-forums',[ForumController::class,'frontendIndex'])->name('fo
 Route::get('forums/{id}',[ForumController::class,'getForums'])->name('getForums');
 Route::get('forum/posts/{id}',[ForumController::class,'getForumPosts'])->name('getForumPosts');
 
+Route::get('category/forum/posts/{id}',[ForumController::class,'getForumcategoryPosts'])->name('getForumcategoryPosts');
+
 //videos on demand
 Route::get('videos-on-demand',[HomeController::class,'videosOnDemand'])->name('videosOnDemand');
 Route::get('ce-archives',[HomeController::class,'ceArchives'])->name('ceArchives');

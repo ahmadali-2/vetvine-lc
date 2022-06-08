@@ -56,7 +56,7 @@ class ForumPostController extends Controller
                 "post_add_video"             =>  $video,
             ]);
             parent::successMessage('Post saved successfully.');
-            return redirect(route('forumpostlist',$request->forum_id));
+            return redirect(route('getForumPosts',$request->forum_id));
         } catch (Exception $e) {
             parent::dangerMessage("Post Does Not Created, Please Try  Again");
             return redirect()->back();
@@ -77,6 +77,7 @@ class ForumPostController extends Controller
 
     public function createPost($id)
     {
+        // dd($id);
         $forum = Forum::find($id);
         return view('frontend.pages.forums.create_post',compact('forum'));
     }
