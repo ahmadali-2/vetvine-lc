@@ -2277,10 +2277,11 @@ input:focus {
     font-size: 21px;
     color: #5c7c85;
     text-transform: uppercase;
-    font-family: "Museo 700";
+    font-family: "Museo 500";
     display: inline-block;
     padding-right: 54px;
     margin-bottom: 20px;
+    font-weight: 800;
 }
 
 .view-all-webinners {
@@ -2455,6 +2456,7 @@ select#fav_show:focus>option:checked {
     text-transform: capitalize;
     margin-bottom: 14px;
     line-height: 13px;
+    font-weight: bold;
 }
 
 .filter_list li input,
@@ -6643,7 +6645,7 @@ table tbody .count td {
 
 .video-box-main img {
     height: 250px;
-    ;
+    width: 100%;
 }
 
 .parent_sponser {
@@ -6707,6 +6709,9 @@ table tbody .count td {
     background-clip: padding-box;
     border: 1pxsolidrgba(0, 0, 0, .15);
     border-radius: 0.25rem;
+    box-shadow: 10px 10px 5px -1px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 10px 10px 5px -1px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 5px -1px rgba(0, 0, 0, 0.75);
 }
 
 .drop_down_user_dash li a,
@@ -6762,6 +6767,9 @@ table tbody .count td {
     background-clip: padding-box;
     border: 1pxsolidrgba(0, 0, 0, .15);
     border-radius: 0.25rem;
+    box-shadow: 10px 10px 5px -1px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 10px 10px 5px -1px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 5px -1px rgba(0, 0, 0, 0.75);
 }
 
 @media(max-width:767px) {
@@ -7840,5 +7848,48 @@ ul {
         display: block;
         font-weight: 600;
         font-size: 12px;
+    }
+}
+
+.upcoming_filter li {
+    width: 20% !important;
+}
+
+.upcoming_filter .first_li {
+    width: 8% !important;
+}
+
+.upcoming_filter .last_li {
+    width: 20% !important;
+}
+
+.upcoming_content {
+    width: 95%;
+}
+
+.upcoming_view_all {
+    color: #f27222;
+    font-weight: bold;
+}
+
+@media (max-width: 767px) {
+    .logo-dashbaord {
+        margin-left: 26px;
+        margin-top: 3px;
+    }
+    .upcoming_filter li {
+        width: 100% !important;
+    }
+    .upcoming_filter .first_li {
+        width: 100% !important;
+    }
+    .upcoming_filter .last_li {
+        width: 100% !important;
+    }
+    .upcoming_content {
+        width: 100%;
+    }
+    .filter_list li:nth-child(5) {
+        width: 100% !important;
     }
 }

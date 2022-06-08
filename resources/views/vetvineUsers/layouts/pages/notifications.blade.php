@@ -225,7 +225,7 @@
                 </div>
 
                 <!-- pagination start  -->
-                <div class="row parent_pagination_row">
+                <div class="row parent_pagination_row mb-3">
                   <div class="col-md-12 text-right">
                     <nav aria-label="..."  class="d-flex justify-content-end">
                       <ul class="pagination">
@@ -279,7 +279,7 @@ var notificationsWrapper   = $('.dropdown-notifications');
     //   console.log(pusher);
       // Subscribe to the channel we specified in our Laravel Event
       var channel = pusher.subscribe('my-channel');
-      console.log(channel);
+    //   console.log(channel);
       // Bind a function to a Event (the full Laravel class)
       channel.bind('notification-event', function(data) {
          console.log(data);
@@ -304,7 +304,6 @@ var notificationsWrapper   = $('.dropdown-notifications');
               </div>
           </li>
         `;
-        alert(newNotificationHtml)
         notifications.html(newNotificationHtml + existingNotifications);
 
         notificationsCount += 1;

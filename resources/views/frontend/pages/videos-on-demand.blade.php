@@ -31,12 +31,26 @@
                   </select>
               </div>
               </div> -->
+
+
+
+              {{-- comment  --}}
+
+
+
            <h1 class="Upcoming-webinars mt-2">Videos on Demand</h1>
-           <ul class="filter_list">
-              <li class="top-three-input">
-                 <label>Title / Keyword</label>
-                 <input type="text" class=" form-control">
-              </li>
+           <ul class="filter_list upcoming_filter">
+
+
+            <li class="top-three-input first_li">
+                <label>Search By :</label>
+                {{-- <input type="text" class=" form-control" name="name"> --}}
+            </li>
+
+            <li class="top-three-input">
+                <label>Title / Keyword</label>
+                <input type="text" class=" form-control" name="name">
+            </li>
               <li>
                  <div id="fav_show_wrapper mt-0">
                     <label for="fav_Show" id="fav_show_label">Category:</label>
@@ -76,38 +90,38 @@
                     </select>
                  </div>
               </li>
+
               <li class="top-three-input">
-                 <label> Presenter </label>
-                 <input type="text" class=" form-control">
-              </li>
-              <li>
-                 <label>Sponsor</label>
-                 <input type="text" class=" form-control">
-              </li>
-              <li>
-                 <label>From</label>
-                 <input type="date" class=" form-control">
-              </li>
-              <li>
-                 <label>To</label>
-                 <input type="date" class=" form-control">
-              </li>
+                <label> Presenter </label>
+                <input type="text" class=" form-control" name="presenter">
+            </li>
+            <li class="last_li">
+                <label>Sponsor</label>
+                <input type="text" class=" form-control" name="sponser">
+            </li>
+
+
               <li>
                  <button class="btn filter-searchBtn" type="button">Search</button>
               </li>
            </ul>
            <ul class="page-link-list">
-            <li @if(ROUTE::current()->uri == 'upcoming-webinars') class="active"  @endif>
+            {{-- <li @if(ROUTE::current()->uri == 'upcoming-webinars') class="active"  @endif>
                <a href="{{ route('upcoming_webinars') }}">Upcoming webinars</a>
             </li>
             <li @if(ROUTE::current()->uri == 'videos-on-demand') class="active"  @endif>
                <a href="{{ route('videosOnDemand') }}">ce/videos on demand</a>
             </li>
-            
+
             <li @if(ROUTE::current()->uri == 'ce-archives') class="active"  @endif>
                <a href="{{ route('ceArchives') }}">ce archives</a>
-            </li>
+            </li> --}}
          </ul>
+         <div class="row mb-2">
+            <div class="col-md-4 ml-auto text-right">
+                <a href="" class="upcoming_view_all">View All >></a>
+            </div>
+        </div>
            <div class="row w-100 video-cat-main m-0">
               <div class="col-md-6 col-lg-4">
                  <div class="video-box-main">

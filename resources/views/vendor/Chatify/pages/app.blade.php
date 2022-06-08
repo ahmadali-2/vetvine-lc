@@ -1,8 +1,9 @@
 @extends('vetvineUsers.dashboard_master')
+
 @section('dashboardcontent')
   <!-------sidbar------>
-@include('Chatify::layouts.headLinks')
 <div class="container my-5">
+
 <div class="messenger">
     {{-- ----------------------Users/Groups lists side---------------------- --}}
     <div class="messenger-listView">

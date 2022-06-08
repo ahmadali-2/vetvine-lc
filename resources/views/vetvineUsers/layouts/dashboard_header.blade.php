@@ -69,13 +69,15 @@
                                                     <div class="flexrow1">
                                                         <!-- <u>Vet / Pet Professionals</u> -->
                                                         <ul>
-                                                            <li><a href="{{ route('upcoming_webinars') }}">Upcoming
-                                                                    Webinars</a></li>
-                                                            <li><a href="{{ route('videosOnDemand') }}">videos on
-                                                                    demand</a></li>
-                                                            <li><a href="#">Certificate & special programs</a></li>
-                                                            <li><a href="{{ route('forumsfrontend') }}">forums</a></li>
-                                                            <li><a href="#">Pet Health Articles </a></li>
+
+                                                            <li><a href="{{ route('upcoming_webinars') }}">Upcoming Webinars</a></li>
+
+                                  <li><a href="{{ route('videosOnDemand') }}">videos on demand</a></li>
+
+                                                             <li><a href="#">Certificate & special programs</a></li>
+                                                             <li><a href="{{route('forumsfrontend')}}">forums</a></li>
+                                                             <li><a href="#">Pet Health Articles </a></li>
+
                                                         </ul>
 
                                                     </div>
