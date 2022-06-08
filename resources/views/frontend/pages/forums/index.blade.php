@@ -8,7 +8,7 @@
             <div class="container">
                 <div class="flex-box-banner">
                     <div class="grow_banner_box grow_banner_box_web">
-                        <div class="grow-heading">Forum</div>
+                        <div class="grow-heading">Forum sadsadsadasdas</div>
                         <img src="{{ asset('frontend/forums/img/sep-line-2.jpg') }}" width="250" height="2" alt=""
                             class="line_image">
                         <p class="mb-0">A BETTER LIFE FOR ANIMALS AND THE HUMANS
@@ -27,7 +27,7 @@
     <section class="become_member_area">
         <div class="container">
             <h2>
-                <span>Forums
+                <span>Forums Categroy
                 </span>
             </h2>
         </div>
