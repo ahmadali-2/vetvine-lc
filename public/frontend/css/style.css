@@ -334,6 +334,8 @@ input:focus {
     /* z-index: 99; */
 }
 
+
+
 .nav-wrapper-one .droplink .subdrop li {
     padding-bottom: 0;
     margin-top: 0;
@@ -2871,6 +2873,7 @@ select#fav_show:focus>option:checked {
     }
     .nav_res_3 {
         float: left;
+
     }
     .ptg_meber_rightbox {
         padding-left: 30px;
@@ -3776,6 +3779,7 @@ select#fav_show:focus>option:checked {
     .nav-wrapper-one a.mm-editdb-text {
         font-size: 14px;
         padding: 5px 7px 5px !important;
+        width: 100%;
     }
     .edit-profile-list li {
         line-height: 25px;
@@ -7913,4 +7917,12 @@ ul {
 
 .upcoming_view_all:hover {
     color: #f27222;
+}
+.a-position {
+    position: relative ;
+
+}
+.a-ab{
+    position: absolute;
+    top: 0px;
 }
