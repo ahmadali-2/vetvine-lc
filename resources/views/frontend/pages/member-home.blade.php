@@ -134,7 +134,6 @@ $(document).ready(function(e){
         var postid  = $(this).attr('data-post-id');
         var userid  = $(this).attr('data-user-id');
         var id  = $(this).attr('id');
-
         $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -162,7 +161,6 @@ $(document).ready(function(e){
               console.log(error)
            }
         });
-
     })
 })
 </script>
