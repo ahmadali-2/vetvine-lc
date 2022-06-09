@@ -52,6 +52,7 @@ use App\Http\Controllers\VetvineUsers\Settings\GeneralSettingController;
 use App\Http\Controllers\VetvineUsers\Settings\PrivacySettingController;
 // user side post controller
 use App\Http\Controllers\VetvineUsers\PostManagement\PostController;
+use App\Http\Controllers\VideoDescriptionController;
 // us
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -184,7 +185,7 @@ Route::get('forum/posts/{id}',[ForumController::class,'getForumPosts'])->name('g
 Route::get('category/forum/posts/{id}',[ForumController::class,'getForumcategoryPosts'])->name('getForumcategoryPosts');
 
 //videos on demand
-Route::get('videos-on-demachatifynd',[HomeController::class,'videosOnDemand'])->name('videosOnDemand');
+Route::get('videos-on-demand',[HomeController::class,'videosOnDemand'])->name('videosOnDemand');
 Route::get('ce-archives',[HomeController::class,'ceArchives'])->name('ceArchives');
 
 });
@@ -234,3 +235,5 @@ Route::get('testing', function () {
     event(new TestEvent('irtaza imran'));
     return "working!";
 });
+
+Route::get('/video-description', [VideoDescriptionController::class, 'video_desc'])->name('video_desc');

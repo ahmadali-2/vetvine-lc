@@ -84,10 +84,65 @@
                                                 alt="feed 1 pic">
                                             {{-- <img src="{{ asset('frontend/img/feed-img-1.png')}}" alt="feed 1 pic"> --}}
                                         </div>
+                                        <div class="feed-body">
+                                            <div class="feed-items-details">
+                                                <p><a href="">{{ $post->user->name }}</a> posted a <a href="">topic</a> in
+                                                    the forum <a href="">testing forum</a>:</p>
+                                            </div>
+                                            <div class="feed-testing">
+                                                <span><a href="">{{ $post->post_title }}</a></span>
+                                                <p>{!! $post->post_description !!}</p>
+                                            </div>
+                                            {{-- @php
+                        $likedpost  =   Auth::user()->likes()->where('post_id',$post->id)->first();
+                  @endphp --}}
+                                            <div class="feed-comment">
+                                                <img src="{{ asset('frontend/img/post.png') }}" alt="post icon">
+                                                <p>{{ $post->created_at->format('d M Y') }}
+                                                    <a href="javascript:void(0)" class="like"
+                                                        id="like{{ $post->id }}" data-post-id="{{ $post->id }}"
+                                                        data-user-id="{{ Auth::user()->id }}">
+                                                        {{ $post->isAuthUserLikedPost() ? 'Liked' : 'Like' }}
+                                                    </a> - <a href=""> Comment </a> - <a href="">Share</a>
+                                                </p>
+                                            </div>
+                                            <div class="comment">
+                                                <div class="comment-photo"><img
+                                                        src="{{ asset('frontend/img/feed-img-2.jpeg') }}" alt=""></div>
+                                                <div class="comment-info">
+                                                    <div class="comment-aurther">
+                                                        <p><span><a href="">Tayyab Hassan</a></span> tesing comment</p>
+                                                    </div>
+                                                    <div class="comment-description">
+                                                        <p>Mon at 3:00 AM - <a href="">like</a></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                            <div class="veiw-more">
+                                <img src="{{ asset('frontend/img/viewmore.png') }}" alt="">
+                                <a href="">View More</a>
+                            </div>
                         </div>
                     </div>
+                    <div class="generic_layout_right">
+                        <div class="right-block-img">
+                            <div class="advertising-img-1"><img src="{{ asset('frontend/img/add-1.png') }}" alt=""></div>
+                            <div class="advertising-img-2"><img src="{{ asset('frontend/img/visbio.png') }}" alt=""></div>
+
+                        </div>
+
+
+                    </div>
                 </div>
+            </div>
+        </div>
     </section>
+
     <!-- member home end -->
 @endsection
 @section('scripts')
@@ -97,9 +152,7 @@
                 e.preventDefault();
                 var postid = $(this).attr('data-post-id');
                 var userid = $(this).attr('data-user-id');
-                var postUserId = $(this).attr('data-user-post-id');
                 var id = $(this).attr('id');
-
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -110,12 +163,10 @@
                     method: 'POST',
                     data: {
                         likeuserid: userid,
-                        likepostid: postid,
-                        postUserId: postUserId
+                        likepostid: postid
                     },
                     success: function(response) {
-                        // console.log(response);
-                        // console.log(response.like.like);
+                        console.log(response.like.like);
                         if (response.like.like == 1) {
                             $("#" + id).html('Liked');
                         } else if (response.like.like == 0) {
@@ -126,7 +177,6 @@
                         console.log(error)
                     }
                 });
-
             })
         })
     </script>
