@@ -8,7 +8,7 @@
             <div class="container">
                 <div class="flex-box-banner">
                     <div class="grow_banner_box grow_banner_box_web">
-                        <div class="grow-heading">Forum</div>
+                        <div class="grow-heading">Forum </div>
                         <img src="{{ asset('frontend/forums/img/sep-line-2.jpg') }}" width="250" height="2" alt=""
                             class="line_image">
                         <p class="mb-0">A BETTER LIFE FOR ANIMALS AND THE HUMANS
@@ -27,13 +27,23 @@
     <section class="become_member_area">
         <div class="container">
             <h2>
-                <span>Forums 
+                <span>Forums Posts
                 </span>
             </h2>
         </div>
     </section>
 
-
+    <section class="content-header">
+    <div class="container">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <a class="btn btn-primary " href="{{ route('createforumpost',$forumId ) }}">
+                        Create Post
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
     <section>
         <div class="container">
             <div class="col-md-3">
@@ -86,10 +96,11 @@
         <tbody>
 
 
-            @forelse ($forums as $forum )
+            @forelse ($posts as $forumpost )
+
 
             <tr>
-                <td>    <a href="{{ route('getForumPosts',$forum->id) }}"><h4>{{ $forum->forum_title ?? '' }}</h4></a> </td>
+                <td>    <a href="{{ route('getForumcategoryPosts',$forumpost->id) }}"><h4>{{ $forumpost->post_title ?? '' }}</h4></a> </td>
 
                 <td>0</td>
                 <td>0</td>
