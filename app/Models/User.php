@@ -22,6 +22,7 @@ use App\Models\VetvineUsers\UserSkillsAndExpertise;
 use App\Models\VetvineUsers\UserEducation;
 use Carbon\Carbon;
 use App\Models\UserEducationDegree;
+use App\Http\Controllers\PushNotificationController;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
@@ -132,6 +133,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(TimeZone::class, 'timezone_id');
 
     }
+
+        public function push_notification(){
+            return $this->hasMany(PushNotification::class, 'user_id');
+        }
 
     public function usermembership()
     {

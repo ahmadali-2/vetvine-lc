@@ -2,10 +2,12 @@
 
 namespace App\Models\Admins\Forum;
 
+use App\Models\PushNotification;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
-
+// use App\Http\Controllers\PushNotificationController
+// use App\Models\PushNotification;
 
 class Post extends Model
 {
@@ -27,7 +29,7 @@ class Post extends Model
     }
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function comments()
@@ -42,7 +44,13 @@ class Post extends Model
     {
         return $this->hasMany(Like::class);
     }
-    public function isAuthUserLikedPost(){
-        return $this->likes()->where('user_id', auth()->id())->where('like',1)->exists();
-     }
+    public function isAuthUserLikedPost()
+    {
+        return $this->likes()->where('user_id', auth()->id())->where('like', 1)->exists();
+    }
+
+    public function push_notifications()
+    {
+        return $this->hasMany(PushNotification::class, 'post_id');
+    }
 }

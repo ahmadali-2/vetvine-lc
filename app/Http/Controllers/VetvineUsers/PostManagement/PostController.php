@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\VetvineUsers\PostManagement;
 
+use App\Events\NotificationEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Admins\Forum\Like;
 use App\Models\Admins\Forum\Post;
 use App\Models\Admins\News\News;
-use Illuminate\Http\Request;
+use App\Models\PushNotification;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use vetvineHelper;
+use App\Models\User;
 
 class PostController extends Controller
 {
@@ -26,55 +29,62 @@ class PostController extends Controller
 
     public function memberHome()
     {
-        $news       =   News::all();
-        $posts      =   Post::with('user','likes')->get();
-        return view('frontend.pages.member-home',compact('posts','news'));
+        $news = News::all();
+        $posts = Post::with('user', 'likes')->get();
+        return view('frontend.pages.member-home', compact('posts', 'news'));
     }
     public function likeSave(Request $request)
     {
-           $liked= Like::where('user_id',Auth::id())->where('post_id',$request->likepostid)->first();
-           if(!$liked)
-            {
+        $liked = Like::where('user_id', Auth::id())->where('post_id', $request->likepostid)->first();
+        if (!$liked) {
 
-                $liked = Like::create([
-                    "post_id"       =>  $request->likepostid,
-                    "user_id"       =>  $request->likeuserid,
-                    "like"          => 1
-                ]);
-                return response()->json(
-                    [
-                        'success' => true,
-                        'message' => 'Data inserted successfully',
-                        'like'    => $liked
-                    ]
-                );
-            }
-            elseif($liked->like == 0)
-            {
-                $liked->update([
-                    "like"          => '1'
-                ]);
-                return response()->json(
-                    [
-                        'success' => true,
-                        'message' => 'Data inserted successfully',
-                        'like'    => $liked
-                    ]
-                );
-            }
-            else
-            {
-                $liked->update([
-                    "like"          => '0'
-                ]);
-                return response()->json(
-                    [
-                        'success' => true,
-                        'message' => 'Data inserted successfully',
-                        'like'    => $liked
-                    ]
-                );
-            }
+            $push_notifications = event(new NotificationEvent(Auth::id(), (int) $request->likepostid));
+            PushNotification::create([
+                'user_id' => Auth::id(),
+                'post_id' => $request->likepostid,
+                'post_by' => $request->postUserId,
+                'type' => '0',
+            ]);
+
+            $liked = Like::create([
+                "post_id" => $request->likepostid,
+                "user_id" => $request->likeuserid,
+                "like" => 1,
+            ]);
+
+
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'Data inserted successfully',
+                    'like' => $liked,
+                ]
+            );
+
+        } elseif ($liked->like == 0) {
+            $liked->update([
+                "like" => '1',
+            ]);
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'Data inserted successfully',
+                    'like' => $liked,
+                ]
+            );
+        } else {
+            $liked->update([
+                "like" => '0',
+            ]);
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'Data inserted successfully',
+                    'like' => $liked,
+                ]
+            );
+        }
     }
     /**
      * Show the form for creating a new resource.
@@ -94,20 +104,20 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $user   = Auth::user()->id;
-        $path   = public_path('vetvineUsers/posts/');
+        $user = Auth::user()->id;
+        $path = public_path('vetvineUsers/posts/');
         $result = vetvineHelper::saveImage($request->post_photo, $path);
-        $path   = public_path('vetvineUsers/videos/');
-        $video  = vetvineHelper::saveImage($request->post_add_video, $path);
-        $input  = $request->all();
+        $path = public_path('vetvineUsers/videos/');
+        $video = vetvineHelper::saveImage($request->post_add_video, $path);
+        $input = $request->all();
         try {
             Post::create([
-                "post_title"                 =>  $request->post_title,
-                "post_photo"                 =>  $result,
-                "user_id"                    =>  $user,
-                "post_description"           =>  $request->description,
-                "post_link"                  =>  $request->post_link,
-                "post_add_video"             =>  $video,
+                "post_title" => $request->post_title,
+                "post_photo" => $result,
+                "user_id" => $user,
+                "post_description" => $request->description,
+                "post_link" => $request->post_link,
+                "post_add_video" => $video,
             ]);
             parent::successMessage('Post saved successfully.');
             return redirect(route('post.index'));
@@ -150,19 +160,19 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $user   = Auth::user()->id;
-            $post   = Post::find($id);
-            $path   = public_path('vetvineUsers/posts/');
+            $user = Auth::user()->id;
+            $post = Post::find($id);
+            $path = public_path('vetvineUsers/posts/');
             $result = vetvineHelper::updateImage($request->post_photo, $post->post_photo, $path);
-            $path   = public_path('vetvineUsers/videos/');
-            $video  = vetvineHelper::saveImage($request->post_add_video, $path);
+            $path = public_path('vetvineUsers/videos/');
+            $video = vetvineHelper::saveImage($request->post_add_video, $path);
             $post->update([
-                'post_title'             =>  $request->input('post_title'),
-                'post_photo'             =>  $result,
-                "user_id"                =>  $user,
-                'post_description'       =>  $request->input('description'),
-                'post_link'              =>  $request->input('post_link'),
-                'post_add_video'         =>  $video,
+                'post_title' => $request->input('post_title'),
+                'post_photo' => $result,
+                "user_id" => $user,
+                'post_description' => $request->input('description'),
+                'post_link' => $request->input('post_link'),
+                'post_add_video' => $video,
             ]);
             parent::successMessage('Post updated successfully.');
             return redirect(route('post.index'));
