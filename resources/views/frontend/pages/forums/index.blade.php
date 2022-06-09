@@ -107,6 +107,7 @@
             </div>
             <div class="container">
                 @forelse ($categories as $category)
+                {{-- @dd($category) --}}
                 <div class="specialty-info">
 
                     <div class="topics-section col-lg-12 ">
@@ -117,9 +118,9 @@
                                     <a href="{{ route('getForums',$category->id) }}"><h2 class="uppercase">{{ $category->category_title ?? '' }}</h2></a>
                                 </div>
 
-                                <p class="forum_desc">Description
+                                {{-- <p class="forum_desc">
 
-                                </p>
+                                </p> --}}
 
 
 

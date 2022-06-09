@@ -28,14 +28,14 @@ class ForumController extends Controller
     }
 
     public function getForums($categoryId){
-// dd('sdf');
+
         $forums = Forum::with('category')->where('category_id',$categoryId)->get();
         return view('frontend.pages.forums.forum',compact('forums'));
     }
 
     public function getForumPosts($forumId){
-// dd('kjfd');
-        $posts = Post::where('forum_id',$forumId)->get();
+        $posts = Post::with('user')->where('forum_id',$forumId)->get();
+        // $posts = Post::where('forum_id',$forumId)->get();
         return view('frontend.pages.forums.forumscategory_post',compact('posts','forumId'));
 
     }
@@ -46,7 +46,6 @@ class ForumController extends Controller
         $forums       =   Forum::all();
         $forumcatgeorypost = Post::with('forum')->where('id',$forumcategorypostId)->first();
         $relatedposts=Post::where('forum_id',$forumcatgeorypost->forum_id)->where('id', "!=" ,$forumcatgeorypost->id)->get();
-        // dd($relatedposts);
         return view('frontend.pages.forums.forum_detail',compact('forumcatgeorypost','relatedposts','categories','forums','ads'));
 
     }

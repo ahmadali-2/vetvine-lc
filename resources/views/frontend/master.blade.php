@@ -53,7 +53,7 @@ padding: 0px 30px 0px !important;
 
   </style>
 
-@notifyCss
+{{-- @notifyCss --}}
 
 @toastr_css
 
@@ -67,13 +67,15 @@ padding: 0px 30px 0px !important;
 
 
 
-
 @include('common.deletemodal')
+@if(Auth::user())
+@include('vetvineUsers.layouts.dashboard_header')
+
+@else
 
 @include('frontend.layouts.header')
-
+@endif
 @yield('content')
-
 @include('frontend.layouts.footer')
 
 
@@ -110,6 +112,7 @@ padding: 0px 30px 0px !important;
 <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 
 {!! JsValidator::formRequest('App\Http\Requests\Frontend\RegistrationRequest', '#regform') !!}
+{!! JsValidator::formRequest('App\Http\Requests\Frontend\ContactUsRequest', '#conatctusform') !!}
 
 @yield('scripts')
 

@@ -10,6 +10,9 @@
   <script src="https://kit.fontawesome.com/b8867474d2.js" crossorigin="anonymous"></script>
 
   <script src="{{ asset('frontend/js/fontawesome.js')}}"></script>
+  @toastr_js
+
+  @toastr_render
 
 
   {{-- updated new dashboard --}}

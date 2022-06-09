@@ -37,7 +37,7 @@
     <div class="container">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <a class="btn btn-primary " href="{{ route('createforumpost',$forumId ) }}">
+                <a class="btn btn-primary " href="{{ route('createforumpost',$forumId) }}">
                         Create Post
                 </a>
             </div>
@@ -57,7 +57,6 @@
                             <option title="Anesthesia" value="72" selected label="Anesthesia">Anesthesia</option>
                             <option title="Behavior" value="83" label="Behavior">Behavior</option>
                             <option title="Cardiology" value="49" label="Cardiology">Cardiology</option>
-
                             <option title="Neurology" value="87" label="Neurology">Neurology</option>
                             <option title="Oncology" value="59" label="Oncology">Oncology</option>
 
