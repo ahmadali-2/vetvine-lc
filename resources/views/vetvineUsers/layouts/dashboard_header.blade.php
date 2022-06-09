@@ -70,13 +70,15 @@
                                                         <!-- <u>Vet / Pet Professionals</u> -->
                                                         <ul>
 
-                                                            <li><a href="{{ route('upcoming_webinars') }}">Upcoming Webinars</a></li>
+                                                            <li><a href="{{ route('upcoming_webinars') }}">Upcoming
+                                                                    Webinars</a></li>
 
-                                  <li><a href="{{ route('videosOnDemand') }}">videos on demand</a></li>
+                                                            <li><a href="{{ route('videosOnDemand') }}">videos on
+                                                                    demand</a></li>
 
-                                                             <li><a href="#">Certificate & special programs</a></li>
-                                                             <li><a href="{{route('forumsfrontend')}}">forums</a></li>
-                                                             <li><a href="#">Pet Health Articles </a></li>
+                                                            <li><a href="#">Certificate & special programs</a></li>
+                                                            <li><a href="{{ route('forumsfrontend') }}">forums</a></li>
+                                                            <li><a href="#">Pet Health Articles </a></li>
 
                                                         </ul>
 
@@ -104,8 +106,8 @@
                             <div class="subdrop subdrop2" aria-label="Main Links Sub Navigation">
 
                                 <ul class="wallnes-ul">
-                                    <li><a href="">wellness Coaching for professionals</a></li>
-                                    <li><a href="">wellness Wisdom</a></li>
+                                    <li><a href="#">wellness Coaching for professionals</a></li>
+                                    <li><a href="#">wellness Wisdom</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -120,10 +122,10 @@
 
                                 <ul style="display: inline-block;">
 
-                                    <li><a href="">about Virtual pet loss support</a></li>
-                                    <li><a href="">Schedule & Registration</a></li>
-                                    <li><a href="">our Facilitators</a></li>
-                                    <li><a href="">pet loss & grief Resources</a></li>
+                                    <li><a href="#">about Virtual pet loss support</a></li>
+                                    <li><a href="#">Schedule & Registration</a></li>
+                                    <li><a href="#">our Facilitators</a></li>
+                                    <li><a href="#">pet loss & grief Resources</a></li>
                                 </ul>
 
                             </div>
@@ -140,7 +142,9 @@
                                     class="fas fa-bell mrg_top_edit"></i> <br>
                                 Notifications</a>
                         </li>
-
+                        @php
+                            $currentUser = vetvineHelper::currentUserProfile();
+                        @endphp
                         <li class="nav-item nav_res_3" style="text-align: center">
 
                             <a class="nav-link padding_top_0" href="contact.html" style="text-align: center"></a>
@@ -148,18 +152,34 @@
                             <div class="dropdown" style="padding: 0px 10px 0px 10px ">
                                 <a class="btn btn-primary dropdown-toggle btn-ce padding_top_0" type="button"
                                     data-toggle="dropdown">
-                                    <i class="employe"><img src="{{ asset('frontend/img/profile-pic.png') }}"
-                                            style="width:30px;"></i><br>
+                                    <i class="employe">
+                                        @if (Auth::user()->profile_photo)
+                                            <img style="width: 30px;"
+                                                src="{{ asset('/frontend/images/Profile-Images/' . $currentUser->profile_photo) }}"
+                                                alt="" id="user-image">
+                                        @else
+                                            <img style="width: 30px;" src="{{ asset('frontend/images/dummy.png') }}"
+                                                alt="" id="user-image"">
+                                        @endif
+
+                                    </i><br>
                                     Me
                                     <span class="caret"></span></a>
                                 <ul class="dropdown-menu  drop_down_user_dash btn_me3">
                                     <li class="mb-4">
                                         <div class="content">
                                             <div class="img_box">
-                                                <img src="{{ asset('frontend/img/profile-pic.png') }}" alt="">
+                                                @if (Auth::user()->profile_photo)
+                                            <img
+                                                src="{{ asset('/frontend/images/Profile-Images/' . $currentUser->profile_photo) }}"
+                                                alt="" id="user-image">
+                                        @else
+                                            <img src="{{ asset('frontend/images/dummy.png') }}"
+                                                alt="" id="user-image"">
+                                        @endif
                                             </div>
                                             <div class="content_box">
-                                                <b>Sheri Berger</b>
+                                                <b>{{ Auth::user()->name ?? '' }}</b>
                                                 <a href="{{ route('vetvineUserProfile') }}"
                                                     class="view_profile">View Your Profile</a>
                                             </div>
@@ -186,7 +206,7 @@
                                     My CE
                                     <span class="caret"></span></button>
                                 <ul class="dropdown-menu my_ce_drop_down btn_me3">
-                                    <li><a href="{{ route('member_home') }}">   Dashboard</a></li>
+                                    <li><a href="{{ route('member_home') }}"> Dashboard</a></li>
                                     <li><a href="#">CE Certificates / Documents</a></li>
                                     <li><a href="#">My Upcoming Events</a></li>
                                     <li><a href="#">My Past Events</a></li>
