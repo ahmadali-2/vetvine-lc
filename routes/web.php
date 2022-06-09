@@ -2,6 +2,7 @@
 
 // use App\Http\Controllers\;
 
+use App\Events\TestEvent;
 use App\Events\NotificationEvent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\SocialController;
@@ -51,18 +52,11 @@ use App\Http\Controllers\VetvineUsers\Settings\GeneralSettingController;
 use App\Http\Controllers\VetvineUsers\Settings\PrivacySettingController;
 // user side post controller
 use App\Http\Controllers\VetvineUsers\PostManagement\PostController;
+use App\Http\Controllers\VideoDescriptionController;
+// us
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
 Route::get('/clear', function () {
     Artisan::call('route:clear');
     Artisan::call('cache:clear');
@@ -182,7 +176,6 @@ Route::get('publications',[HomeController::class,'publications'])->name('upcomin
 Route::post('educations',[HomeController::class,'searceducations'])->name('search_educations');
 Route::resource('eventpayments',EventPaymentController::class);
 
-
 Route::get('faqs',[HomeController::class,'faqs'])->name('faqs');
 Route::get('frontend-news',[NewsController::class,'frontIndex'])->name('newsfrontend');
 Route::get('frontend-forums',[ForumController::class,'frontendIndex'])->name('forumsfrontend');
@@ -237,3 +230,10 @@ Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetv
 
 
 });
+
+Route::get('testing', function () {
+    event(new TestEvent('irtaza imran'));
+    return "working!";
+});
+
+Route::get('/video-description', [VideoDescriptionController::class, 'video_desc'])->name('video_desc');

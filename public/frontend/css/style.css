@@ -230,13 +230,29 @@ font-face {
     font-family: 'museo 500';
     color: #5c7c85;
     padding-top: 5px
-}
+} 
 
 .serch-section {
     width: 100%;
     display: inline-block;
 }
 
+.video-title{
+    font-family: "Museo Sans 500";
+    font-size: 18px;
+    line-height: 21.6px;
+    text-decoration: none;
+    color: rgb(92, 124, 133);
+    text-align: left;
+    text-transform: uppercase;
+    word-spacing: 0px;
+    margin-bottom: 0px;
+    max-width: 182px;
+}
+
+.video-title:hover{
+    color: rgb(92, 124, 133);
+}
 .serch-section input {
     width: 50%;
     background: white;

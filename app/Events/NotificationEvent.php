@@ -9,6 +9,8 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use App\Models\Admins\Forum\Post;
+use App\Models\User;
 
 class NotificationEvent implements ShouldBroadcast
 {
@@ -16,17 +18,31 @@ class NotificationEvent implements ShouldBroadcast
 
 
     public $userName;
-    public $message;
+    public $userDesc;
+
+    public $postTitle;
+
+    public $userPhoto;
+
+    public $postImg;
+
+    // public $likes;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($userName)
+    public function __construct($user_id, $post_id)
     {
-        // dd($userName);
-        $this->userName = $userName;
-        $this->message = 'Hello '.$userName;
+        // dd($likes);
+        $post = Post::find($post_id);
+        $user = User::find($user_id);
+        $this->userPhoto = $user->profile_photo;
+        $this->userName = $post->user->name;
+        $this->postImg = $post->post_photo;
+        $this->userDesc = $post->post_description;
+        $this->postTitle = $post->post_title;
+        // $this->likes = $likes;
     }
 
     /**
