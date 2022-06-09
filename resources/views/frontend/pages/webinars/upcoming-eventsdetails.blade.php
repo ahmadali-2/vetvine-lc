@@ -1,16 +1,15 @@
 @extends('frontend.master')
 @section('content')
     <style>
+
+
         * {
             box-sizing: border-box;
+            font-family: "Museo 500";
         }
 
         /* Add a gray background color with some padding */
-        body {
-            font-family: Arial;
-            padding: 20px;
-            background: #f1f1f1;
-        }
+
 
         /* Header/Blog Title */
         .header {
@@ -115,6 +114,35 @@
             color: #000;
         }
 
+
+        #ajax-book-model .form-control{
+
+    border: 1px solid #ced4da !important;
+        }
+        #ajax-book-model .btn-primary {
+    color: #fff;
+    background-color: #f27222;
+    border-color: #f27222;
+}
+        #ajax-book-model h4 {
+            padding-left: 15px;
+}
+
+.public-detail-inner h2 {
+    font-size: 24px;
+    letter-spacing: 1px;
+    color: #5c7c85;
+    font-family: "Museo 500";
+    padding: 30px 0px 0px 0px;
+    margin-bottom: 0 !important;
+    font-family: 'Museo 500';
+}
+
+.leftcolumn h4 {
+    padding-left: 1rem;
+    margin-top: 10px;
+    font-family: 'Museo 500';
+}
         /* End */
     </style>
     <section class="video-section-wrapper mb-4">
@@ -255,11 +283,17 @@
             @if (Auth::user())
                 <div class="row">
                     <div class="leftcolumn">
-                        <div class="card">
+                        <div class="card pt-0">
                             <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
                                 <div>
+
+                                    <div class="row header_row">
+                                        <div class="col-lg-4">
+                                            <h4>Comment Section </h4>
+                                        </div>
+                                    </div>
                                     <div class="row mt-5">
-                                        <h4>Comment Section :</h4>
+
                                         <div class="col-sm-12 mt-5">
 
                                             @foreach ($eventdetail->ReviewData as $review)
@@ -300,7 +334,7 @@
                             <!-- Review store Section -->
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-sm-10 mt-4 ">
+                                    <div class="col-sm-10 mt-4  inner_box_chat">
                                         <form class="py-2 px-4" action="{{ route('reviewstore') }}"
                                             style="box-shadow: 0 0 10px 0 #ddd;" method="POST" autocomplete="off">
                                             @csrf
@@ -308,7 +342,7 @@
                                             <input type="hidden" name="user_id" value="{{ $eventdetail->user_id }}">
                                             <p class="font-weight-bold ">Review</p>
                                             <div class="form-group row">
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-6 rating_box">
                                                     <div class="rate">
                                                         <input type="radio" id="star5" class="rate" name="rating"
                                                             value="5" />

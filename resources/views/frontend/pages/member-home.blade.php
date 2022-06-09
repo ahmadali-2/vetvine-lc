@@ -17,7 +17,7 @@
             </div>
             <div class="quicky-link">
               <div class="user-link">
-                <ul>
+                {{-- <ul>
                   <li><div class="icon"><img src="{{ asset('frontend/img/search.png')}}" alt=""></div>
                   Browse Members</li>
                   <li>
@@ -31,7 +31,7 @@
                   <li>
                     <div class="icon" style="margin-left: 5px;"><a href="{{ route('userdashboard') }}">My Profile</a></div>
                  </li>
-                </ul>
+                </ul> --}}
               </div>
             </div>
             <div class="upcoming-CE">

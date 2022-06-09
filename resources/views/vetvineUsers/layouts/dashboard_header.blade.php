@@ -40,7 +40,7 @@
     </div>
 
     <div class="container-fluid p-0">
-        <div class="container">
+        <div class="container user_dashbaord_container">
             <nav class=" bg-header navbar navbar-expand-md" style="margin-top: -45px;">
                 <a class="navbar-brand" href="{{ url('/') }}"><span class="header-logo"><img
                             src="{{ asset('frontend/img/logo.png') }}" class="img-fluid logo-dashbaord" alt=""
@@ -110,7 +110,7 @@
                             </div>
                         </li>
                         <li class="nav-item droplink ">
-                            <a class="nav-link nav-anchor" href="{{ route('heal') }}" style="font-weight: bold">HEAL
+                            <a class="nav-link nav-anchor mt-1 pb-0" href="{{ route('heal') }}" style="font-weight: bold">HEAL
                                 <i class="fas fa-chevron-down droplink3"></i>
                                 <br>
                                 <span class="nav-sub-hed">Pet Loss Support</span>
@@ -152,7 +152,7 @@
                                             style="width:30px;"></i><br>
                                     Me
                                     <span class="caret"></span></a>
-                                <ul class="dropdown-menu  drop_down_user_dash btn_me3">
+                                <ul class="dropdown-menu  drop_down_user_dash btn_me3 pro-a">
                                     <li class="mb-4">
                                         <div class="content">
                                             <div class="img_box">
@@ -185,7 +185,7 @@
                                             style="width:35px;"></i><br>
                                     My CE
                                     <span class="caret"></span></button>
-                                <ul class="dropdown-menu my_ce_drop_down btn_me3">
+                                <ul class="dropdown-menu my_ce_drop_down btn_me3 pro-a">
                                     <li><a href="{{ route('member_home') }}">   Dashboard</a></li>
                                     <li><a href="#">CE Certificates / Documents</a></li>
                                     <li><a href="#">My Upcoming Events</a></li>
