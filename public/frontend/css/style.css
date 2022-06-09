@@ -1546,7 +1546,7 @@ input:focus {
 .btn-Continue:hover {
     background-color: #fff !important;
     color: #f27222;
-    border: solid 1px #f27222;
+    border: solid 1px #f27222 !important;
     transition: all 0.5s ease;
     -webkit-box-shadow: 5px 5px 3px 0px rgba(240, 240, 240, 1);
     -moz-box-shadow: 5px 5px 3px 0px rgba(240, 240, 240, 1);
@@ -2277,10 +2277,11 @@ input:focus {
     font-size: 21px;
     color: #5c7c85;
     text-transform: uppercase;
-    font-family: "Museo 700";
+    font-family: "Museo 500";
     display: inline-block;
     padding-right: 54px;
     margin-bottom: 20px;
+    font-weight: 800;
 }
 
 .view-all-webinners {
@@ -2455,6 +2456,7 @@ select#fav_show:focus>option:checked {
     text-transform: capitalize;
     margin-bottom: 14px;
     line-height: 13px;
+    font-weight: bold;
 }
 
 .filter_list li input,
@@ -2634,7 +2636,7 @@ select#fav_show:focus>option:checked {
     font-family: 'Museo Sans 700';
     font-size: 13px;
     color: #507f87;
-    margin-bottom: 0.5rem !important;
+    margin-bottom: 0rem !important;
 }
 
 .video-bottom-description p {
@@ -2642,7 +2644,7 @@ select#fav_show:focus>option:checked {
     font-size: 11px;
     color: #507f87;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin-bottom: -7px;
 }
 
 .video-bottom-description .para-decription {
@@ -2651,6 +2653,7 @@ select#fav_show:focus>option:checked {
     color: #507f87;
     text-transform: initial;
     margin-bottom: 18px;
+    margin-top: 8px;
 }
 
 .video-bottom-description p span {
@@ -2660,7 +2663,7 @@ select#fav_show:focus>option:checked {
 .video-bottom-description a {
     text-decoration: none;
     font-family: "Museo 700";
-    border: 1px solid #f27222;
+    border: 1px solid #f27222 !important;
     text-align: center;
     color: #fff;
     border-radius: 30px;
@@ -6043,6 +6046,7 @@ select#fav_show:focus>option:checked {
     width: 210px;
     text-align: left;
     margin-left: 10px;
+    border: none !important
 }
 
 
@@ -6643,7 +6647,7 @@ table tbody .count td {
 
 .video-box-main img {
     height: 250px;
-    ;
+    width: 100%;
 }
 
 .parent_sponser {
@@ -6707,6 +6711,9 @@ table tbody .count td {
     background-clip: padding-box;
     border: 1pxsolidrgba(0, 0, 0, .15);
     border-radius: 0.25rem;
+    box-shadow: 10px 10px 5px -1px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 10px 10px 5px -1px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 5px -1px rgba(0, 0, 0, 0.75);
 }
 
 .drop_down_user_dash li a,
@@ -6762,6 +6769,9 @@ table tbody .count td {
     background-clip: padding-box;
     border: 1pxsolidrgba(0, 0, 0, .15);
     border-radius: 0.25rem;
+    box-shadow: 10px 10px 5px -1px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 10px 10px 5px -1px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 5px -1px rgba(0, 0, 0, 0.75);
 }
 
 @media(max-width:767px) {
@@ -7841,4 +7851,61 @@ ul {
         font-weight: 600;
         font-size: 12px;
     }
+}
+
+.upcoming_filter li {
+    width: 20% !important;
+}
+
+.upcoming_filter .first_li {
+    width: 8% !important;
+}
+
+.upcoming_filter .last_li {
+    width: 20% !important;
+}
+
+.upcoming_content {
+    width: 95%;
+}
+
+.upcoming_view_all {
+    color: #f27222;
+    font-weight: bold;
+}
+
+@media (max-width: 767px) {
+    .logo-dashbaord {
+        margin-left: 26px;
+        margin-top: 3px;
+    }
+    .upcoming_filter li {
+        width: 100% !important;
+    }
+    .upcoming_filter .first_li {
+        width: 100% !important;
+    }
+    .upcoming_filter .last_li {
+        width: 100% !important;
+    }
+    .upcoming_content {
+        width: 100%;
+    }
+    .filter_list li:nth-child(5) {
+        width: 100% !important;
+    }
+}
+
+
+/* //omar */
+
+.search_btn_hover:hover {
+    color: #f27222;
+    text-decoration: none;
+    background-color: white;
+    border: 1px solid #f27222 !important;
+}
+
+.upcoming_view_all:hover {
+    color: #f27222;
 }

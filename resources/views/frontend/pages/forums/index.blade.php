@@ -27,7 +27,7 @@
     <section class="become_member_area">
         <div class="container">
             <h2>
-                <span>Forums
+                <span>Forums Categroy
                 </span>
             </h2>
         </div>

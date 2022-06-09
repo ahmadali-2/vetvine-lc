@@ -69,13 +69,15 @@
                                                     <div class="flexrow1">
                                                         <!-- <u>Vet / Pet Professionals</u> -->
                                                         <ul>
-                                                            <li><a href="{{ route('upcoming_webinars') }}">Upcoming
-                                                                    Webinars</a></li>
-                                                            <li><a href="{{ route('videosOnDemand') }}">videos on
-                                                                    demand</a></li>
-                                                            <li><a href="#">Certificate & special programs</a></li>
-                                                            <li><a href="{{ route('forumsfrontend') }}">forums</a></li>
-                                                            <li><a href="#">Pet Health Articles </a></li>
+
+                                                            <li><a href="{{ route('upcoming_webinars') }}">Upcoming Webinars</a></li>
+
+                                  <li><a href="{{ route('videosOnDemand') }}">videos on demand</a></li>
+
+                                                             <li><a href="#">Certificate & special programs</a></li>
+                                                             <li><a href="{{route('forumsfrontend')}}">forums</a></li>
+                                                             <li><a href="#">Pet Health Articles </a></li>
+
                                                         </ul>
 
                                                     </div>
@@ -185,10 +187,12 @@
                                     My CE
                                     <span class="caret"></span></button>
                                 <ul class="dropdown-menu my_ce_drop_down btn_me3">
+                                    <li><a href="{{ route('member_home') }}">   Dashboard</a></li>
                                     <li><a href="#">CE Certificates / Documents</a></li>
                                     <li><a href="#">My Upcoming Events</a></li>
                                     <li><a href="#">My Past Events</a></li>
                                     <li><a href="#">Help & Support</a></li>
+                                    {{-- <li><a href="#">Help & Support</a></li> --}}
                                 </ul>
                             </div>
                         </li>

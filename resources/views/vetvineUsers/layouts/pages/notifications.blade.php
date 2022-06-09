@@ -25,7 +25,8 @@
                             @foreach ($notifications as $notification)
                                 <div class="notification p-3 d-flex bg-light border-bottom osahan-post-header">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="{{ asset('frontend/images/Profile-Images/' . $notification->user->profile_photo)}}"
+                                        <img class="rounded-circle"
+                                            src="{{ asset('frontend/images/Profile-Images/' . $notification->user->profile_photo) }}"
                                             alt="" />
                                     </div>
                                     <div class="font-weight-bold mr-3 noti_parent">
@@ -76,68 +77,64 @@
                 </div>
                 <!-- pagination end  -->
 
-                <div class="col-md-3">
-                    <img src="{{ asset('frontend/img/add-img.png') }}" alt="">
-                </div>
             </div>
+
+
         </div>
+    @endsection
+    @section('scripts')
+        <script src="https://js.pusher.com/7.1/pusher.min.js"></script>
+        <script type="text/javascript">
+            var notificationsWrapper = $('.dropdown-notifications');
+            var notificationsToggle = notificationsWrapper.find('a[data-toggle]');
+            var notificationsCountElem = notificationsToggle.find('i[data-count]');
+            var notificationsCount = parseInt(notificationsCountElem.data('count'));
+            var notifications = notificationsWrapper.find('ul.dropdown-menu');
 
+            if (notificationsCount <= 0) {
+                notificationsWrapper.hide();
+            }
 
-    </div>
-@endsection
-@section('scripts')
-    <script src="https://js.pusher.com/7.1/pusher.min.js"></script>
-    <script type="text/javascript">
-        var notificationsWrapper = $('.dropdown-notifications');
-        var notificationsToggle = notificationsWrapper.find('a[data-toggle]');
-        var notificationsCountElem = notificationsToggle.find('i[data-count]');
-        var notificationsCount = parseInt(notificationsCountElem.data('count'));
-        var notifications = notificationsWrapper.find('ul.dropdown-menu');
+            var pusher = new Pusher('6e28b8146a38abf8bcc7', {
+                cluster: 'ap2',
+            });
 
-        if (notificationsCount <= 0) {
-            notificationsWrapper.hide();
-        }
+            var channel = pusher.subscribe('my-channel');
 
-        var pusher = new Pusher('6e28b8146a38abf8bcc7', {
-            cluster: 'ap2',
-        });
-
-        var channel = pusher.subscribe('my-channel');
-
-        channel.bind('notification-event', function(data) {
-            // console.log(data);
-            $(data).each(function() {
-                var postDesc = data.userDesc;
-                var postTitle = data.postTitle;
-                var userPhoto = data.userPhoto;
-                var postImg = data.postImg;
-                var desc = $(postDesc).text();
-                var img = "{{ asset('vetvineUsers/posts') }}" + '/' +   postImg;
-                var profileImg = "{{ asset('frontend/images/Profile-Images') }}" + '/' + userPhoto;
-                var likes = data.likes;
-                var html = $(`
+            channel.bind('notification-event', function(data) {
+                // console.log(data);
+                $(data).each(function() {
+                    var postDesc = data.userDesc;
+                    var postTitle = data.postTitle;
+                    var userPhoto = data.userPhoto;
+                    var postImg = data.postImg;
+                    var desc = $(postDesc).text();
+                    var img = "{{ asset('vetvineUsers/posts') }}" + '/' + postImg;
+                    var profileImg = "{{ asset('frontend/images/Profile-Images') }}" + '/' + userPhoto;
+                    var likes = data.likes;
+                    var html = $(`
                 <div class="notification p-3 d-flex bg-light border-bottom osahan-post-header">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="`+ profileImg +`"
+                                        <img class="rounded-circle" src="` + profileImg + `"
                                             alt="" />
                                     </div>
                                     <div class="font-weight-bold mr-3 noti_parent">
-                                        <div class="post-title" class="text-truncate">` + postTitle +  `</div>
+                                        <div class="post-title" class="text-truncate">` + postTitle + `</div>
                                         <div class="content">
                                             <div class="content_img">
                                                 <img class="profile-img" src="` + img + `"
                                                     alt="">
                                             </div>
-                                            <div class="small para_pad">`+ desc + `</div>
+                                            <div class="small para_pad">` + desc + `</div>
                                         </div>
                                     </div>
                                 </div>
                 `);
-                $("#notif-board").append(html);
-            })
-            var count = parseInt($("#countnotif").text());
-            count += 1;
-            $("#countnotif").html(count);
-        });
-    </script>
-@endsection
+                    $("#notif-board").append(html);
+                })
+                var count = parseInt($("#countnotif").text());
+                count += 1;
+                $("#countnotif").html(count);
+            });
+        </script>
+    @endsection

@@ -63,7 +63,7 @@ class CommentController extends Controller
             parent::successMessage('Comment Deleted successfully.');
             return redirect()->back();
         } catch(Exception $e) {
-        //    dd( $e->getMessage());
+      
             parent::dangerMessage("Comment Does Not Deleted, Please Try  Again");
             return redirect()->back();
         }
