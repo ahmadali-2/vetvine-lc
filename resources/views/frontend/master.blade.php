@@ -67,7 +67,6 @@ padding: 0px 30px 0px !important;
 
 
 
-
 @include('common.deletemodal')
 
 @include('frontend.layouts.header')
@@ -110,6 +109,7 @@ padding: 0px 30px 0px !important;
 <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 
 {!! JsValidator::formRequest('App\Http\Requests\Frontend\RegistrationRequest', '#regform') !!}
+{!! JsValidator::formRequest('App\Http\Requests\Frontend\ContactUsRequest', '#conatctusform') !!}
 
 @yield('scripts')
 

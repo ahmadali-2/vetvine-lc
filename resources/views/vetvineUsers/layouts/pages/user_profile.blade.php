@@ -9,7 +9,7 @@
         <div class="user-img">
                      <img src="@if(Auth::user()->profile_photo) {{ asset('/frontend/images/Profile-Images/'.Auth::user()->profile_photo)}} @else {{asset('frontend/images/thumbnail.jfif')}} @endif" alt="" id="user-image">
           {{-- <img src="{{ asset('frontend/img/profile-pic.png') }}" alt="hi"> --}}
-<h4>Sheri Berger</h4>
+           <h4>{{ Auth::user()->name }}</h4>
 
         </div>
         <div class="nav-bg tabs_li">

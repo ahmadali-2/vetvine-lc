@@ -30,6 +30,7 @@ class PersonelInfoController extends Controller
     {
         $countries      = Country::all();
         $employmentInfo = Auth::user()->employmentInfo;
+        
         $timezones      = TimeZone::all();
         $usernetworks   = UserMemberAndNetworkLevel::all();
 
@@ -41,6 +42,7 @@ class PersonelInfoController extends Controller
     public function userProfile(){
         $countries      = Country::all();
         $employmentInfo = Auth::user()->employmentInfo;
+
         $timezones      = TimeZone::all();
         $usernetworks   = UserMemberAndNetworkLevel::where('parent_id','!=',null)->get();
         // dd($usernetworks);

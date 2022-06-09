@@ -17,7 +17,7 @@
 
                 <div class="popup-body">
                     <h2><span>Contact Us</span></h2>
-                    <form action="{{ route('contactus.submit') }}" method="POST" class="custom_form">
+                    <form action="{{ route('contactus.submit') }}" method="POST" class="custom_form" id="conatctusform">
                         @csrf
                         <div class="row">
                             <div class="col-12">
@@ -44,7 +44,7 @@
                                     <textarea name="message" id="" class="my-custom_textarea"></textarea>
                                 </div>
                             </div>
-                            
+
                         </div>
 
 
