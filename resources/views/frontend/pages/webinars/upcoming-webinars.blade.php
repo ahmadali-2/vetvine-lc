@@ -2,7 +2,7 @@
 @section('content')
     <section class="video-section-wrapper mb-4">
         <div class="container">
-            <h1 class="Upcoming-webinars mt-2">Find an Upcoming Event</h1>
+            <h1 class="Upcoming-webinars mt-2">Upcoming Webinars</h1>
             <form action="{{ route('search_educations') }}" method="post">
                 @csrf
                 <ul class="filter_list upcoming_filter">
@@ -40,7 +40,7 @@
                     </li>
 
                     <li>
-                        <button class="btn filter-searchBtn" type="submit" value="search">Search</button>
+                        <button class="btn filter-searchBtn search_btn_hover" type="submit" value="search">Search</button>
                     </li>
                 </ul>
             </form>
@@ -62,7 +62,7 @@
 
             <div class="row mb-2">
                 <div class="col-md-4 ml-auto text-right">
-                    <a href="" class="upcoming_view_all">View All >></a>
+                    <a href="#" class="upcoming_view_all">View All >></a>
                 </div>
             </div>
             <div class="row w-100 video-cat-main m-0">
@@ -111,7 +111,7 @@
                                 <h5>Start Time : {{ date('g:i a', strtotime($formattedTime)) }}</h5>
                                @endif --}}
                                 <p><strong>Presented by:</strong> <a href="{{ $showevents->presenter_one_url }}"
-                                        class="vetvine_a" target="_blank">{{ $showevents->presenter_one }}</a><br>
+                                        class="vetvine_a" target="_blank">{{ $showevents->presenter_one }}</a>
 
                                         <div class="parent_sponser">
 

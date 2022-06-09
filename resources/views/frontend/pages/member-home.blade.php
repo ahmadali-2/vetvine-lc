@@ -1,5 +1,8 @@
-@extends('frontend.master')
-@section('content')
+{{-- @extends('frontend.master')
+@section('content') --}}
+@extends('vetvineUsers.dashboard_master')
+@section('dashboardcontent')
+
 <!-- member home start -->
 <section>
     <div class="member-home">

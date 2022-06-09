@@ -102,7 +102,7 @@
 
 
               <li>
-                 <button class="btn filter-searchBtn" type="button">Search</button>
+                 <button class="btn filter-searchBtn search_btn_hover" type="button">Search</button>
               </li>
            </ul>
            <ul class="page-link-list">

@@ -43,20 +43,21 @@
    <style>
     .messenger-sendCard {
     background: #fff;
-    border-top: 3px solid #5c7c85 !important;
+
 }
 .messenger-sendCard form {
     width: 100%;
     display: inline-flex;
     margin: 0;
+    padding: 0px 10px;
     /* background: #5c7c85; */
-    border-bottom: 3px solid #5c7c85 !important;
+    border: 3px solid #5c7c85 !important;
 }
 .messenger-sendCard form  span{
     color: #f27222;
     font-size: 25px;
 }
-.messenger-listView-tabs a, .messenger-listView-tabs a:hover, .messenger-listView-tabs a:focus {
+ .messenger-listView-tabs a:hover, .messenger-listView-tabs a:focus {
     color: #f27222 !important;
 }
 .mc-sender p {
@@ -64,7 +65,8 @@
     color: #fff !important;
 }
 .m-list-active{
-    background: #f27222 !important;
+    background: #507f87 !important;
+    border-left: 10px solid  #f27222 !important;
 
 }
 .m-header-messaging .avatar {

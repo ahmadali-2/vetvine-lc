@@ -186,10 +186,12 @@
                                     My CE
                                     <span class="caret"></span></button>
                                 <ul class="dropdown-menu my_ce_drop_down btn_me3">
+                                    <li><a href="{{ route('member_home') }}">   Dashboard</a></li>
                                     <li><a href="#">CE Certificates / Documents</a></li>
                                     <li><a href="#">My Upcoming Events</a></li>
                                     <li><a href="#">My Past Events</a></li>
                                     <li><a href="#">Help & Support</a></li>
+                                    {{-- <li><a href="#">Help & Support</a></li> --}}
                                 </ul>
                             </div>
                         </li>
