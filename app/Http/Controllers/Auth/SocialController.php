@@ -25,7 +25,7 @@ class SocialController extends Controller
         $this->setCommaSeparatedValues = implode(",", $this->setUserAndNetwork);
         session(['comma_separated' => $this->setCommaSeparatedValues]);
 
-       return  $this->redirectToProvider($provider);
+        return  $this->redirectToProvider($provider);
     }
 
     private function redirectToProvider($provider)
@@ -61,7 +61,7 @@ class SocialController extends Controller
             $network_type = $userAndNetworkType[1];
 
             if ($provider == 'twitter') {
-               $user = $this->authenticateWithTwitter();
+            $user = $this->authenticateWithTwitter();
             } else {
                 $user = Socialite::driver($provider)->stateless()->user();
             }

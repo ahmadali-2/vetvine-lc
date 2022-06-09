@@ -4,15 +4,15 @@ namespace App\Http\Controllers\VetvineUsers\MyProfile;
 
 use App\Http\Controllers\Controller;
 use App\Models\Generals\TimeZone;
+use App\Models\PushNotification;
 use App\Models\User;
 use App\Models\UserMemberAndNetworkLevel;
-use Illuminate\Http\Request;
-use vetvineHelper;
 use App\Models\VetvineUsers\Settings\Country;
-use App\Models\VetvineUsers\PersonelInfo;
 use App\Models\VetvineUsers\UserEmploymentInfo;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use vetvineHelper;
 
 class PersonelInfoController extends Controller
 {
@@ -28,31 +28,37 @@ class PersonelInfoController extends Controller
 
     public function userdashboard()
     {
-        $countries      = Country::all();
+        $countries = Country::all();
         $employmentInfo = Auth::user()->employmentInfo;
-        
+
         $timezones      = TimeZone::all();
         $usernetworks   = UserMemberAndNetworkLevel::all();
 
-        return view('vetvineUsers.layouts.pages.user_profile',compact('countries','employmentInfo','timezones','usernetworks'));
+        return view('vetvineUsers.layouts.pages.user_profile', compact('countries', 'employmentInfo', 'timezones', 'usernetworks'));
 
         // return view('vetvineUsers.MyProfile.userdashboard',compact('countries','employmentInfo'));
     }
 
-    public function userProfile(){
-        $countries      = Country::all();
+    public function userProfile()
+    {
+        $countries = Country::all();
         $employmentInfo = Auth::user()->employmentInfo;
 
         $timezones      = TimeZone::all();
         $usernetworks   = UserMemberAndNetworkLevel::where('parent_id','!=',null)->get();
         // dd($usernetworks);
-        return view('vetvineUsers.layouts.pages.user_profile',compact('countries','employmentInfo','timezones','usernetworks'));
+        return view('vetvineUsers.layouts.pages.user_profile', compact('countries', 'employmentInfo', 'timezones', 'usernetworks'));
     }
-    public function chat(){
+    public function chat()
+    {
         return view('vetvineUsers.layouts.pages.chat');
     }
-    public function notifications(){
-        return view('vetvineUsers.layouts.pages.notifications');
+    public function notifications()
+    {
+        $notifications = PushNotification::with('posts', 'user')->where('post_user_id', '1')->get();
+        return view('vetvineUsers.layouts.pages.notifications', [
+            'notifications' => $notifications,
+        ]);
     }
 
     /**
@@ -75,53 +81,48 @@ class PersonelInfoController extends Controller
     {
         try
         {
-            $user   = Auth::user();
-            if (request()->hasFile('profile_photo'))
-            {
-                $path   = public_path('/frontend/images/Profile-Images/');
+            $user = Auth::user();
+            if (request()->hasFile('profile_photo')) {
+                $path = public_path('/frontend/images/Profile-Images/');
                 $result = vetvineHelper::saveImage($request->profile_photo, $path);
                 User::find($user->id)->update([
                     'profile_photo' => $result,
                     // 'referred_by'   => $request->referredby,
-                    'name'          => $request->firstname.' '.$request->lastname,
-                    'licence_no'    => $request->licensure,
-                    'timezone_id'  => $request->timezone,
-                    'network_id'   => $request->usernetwork,
+                    'name' => $request->firstname . ' ' . $request->lastname,
+                    'licence_no' => $request->licensure,
+                    'timezone_id' => $request->timezone,
+                    'network_id' => $request->usernetwork,
 
                 ]);
-            }
-            else
-            {
+            } else {
                 User::find($user->id)->update([
                     // 'referred_by'   => $request->referredby,
-                    'name'          => $request->firstname.' '.$request->lastname,
-                    'licence_no'    => $request->licensure,
-                    'timezone_id'  => $request->timezone,
-                    'network_id'   => $request->usernetwork,
+                    'name' => $request->firstname . ' ' . $request->lastname,
+                    'licence_no' => $request->licensure,
+                    'timezone_id' => $request->timezone,
+                    'network_id' => $request->usernetwork,
                 ]);
             }
             UserEmploymentInfo::updateOrCreate(
                 [
-                    'user_id' => Auth::user()->id
+                    'user_id' => Auth::user()->id,
                 ],
                 [
-                    'street_address'        => $request->street_address,
-                    'business_name'         => $request->business_name,
-                    'business_email'        => $request->business_email,
-                    'country'               => $request->country,
-                    'city'                  => $request->city,
-                    'work_phone'            => $request->work_phone
+                    'street_address' => $request->street_address,
+                    'business_name' => $request->business_name,
+                    'business_email' => $request->business_email,
+                    'country' => $request->country,
+                    'city' => $request->city,
+                    'work_phone' => $request->work_phone,
                 ]);
 
-                //check either user has been complete his profile or not?
-                UserEmploymentInfo::where('user_id',$user->id)->update(['profile_status' => 'completed']
-                );
-                parent::successMessage("Profile Info Saved Successfully!");
+            //check either user has been complete his profile or not?
+            UserEmploymentInfo::where('user_id', $user->id)->update(['profile_status' => 'completed']
+            );
+            parent::successMessage("Profile Info Saved Successfully!");
             return redirect(route('member_home'));
-        }
-        catch(Exception $e)
-        {
-              dd($e->getMessage());
+        } catch (Exception $e) {
+            dd($e->getMessage());
             parent::dangerMessage("Profile Info Not Saved! Please Try Again.");
             return redirect()->back();
         }

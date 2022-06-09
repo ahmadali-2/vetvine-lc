@@ -137,9 +137,10 @@
                                     class="fas fa-comment-dots mrg_top_edit"></i><br>
                                 Messaging</a>
                         </li>
-                        <li class="nav-item nav_res_3" style="text-align: center">
+                        <li class="nav-item nav_res_3 d-flex" style="text-align: center">
                             <a class="nav-link mm-editdb-text" href="{{ route('vetvineUserNotifications') }}"> <i
                                     class="fas fa-bell mrg_top_edit"></i> <br>
+                                    <span class="badge badge-danger" id="countnotif" >0</span>
                                 Notifications</a>
                         </li>
                         @php
