@@ -1,8 +1,9 @@
 @extends('vetvineUsers.dashboard_master')
+
 @section('dashboardcontent')
   <!-------sidbar------>
-@include('Chatify::layouts.headLinks')
 <div class="container my-5">
+
 <div class="messenger">
     {{-- ----------------------Users/Groups lists side---------------------- --}}
     <div class="messenger-listView">
@@ -19,7 +20,7 @@
             {{-- Search input --}}
             <input type="text" class="messenger-search" placeholder="Search" />
             {{-- Tabs --}}
-            <div class="messenger-listView-tabs">
+            <div class="messenger-listView-tabs people-head">
                 <a href="javascript:void" @if($type == 'user') class="active-tab" @endif data-view="users">
                     <span class="far fa-user"></span> People</a>
                 {{-- <a href="#" @if($type == 'group') class="active-tab" @endif data-view="groups">

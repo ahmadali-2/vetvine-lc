@@ -133,15 +133,19 @@
                   <div class="serch-section">
                     <div class="inner-input">
                       <label>Business Email</label>
+                      <div class="input_field">
                       <input type="email" name="business_email" id="business_email" value="{{$employmentInfo->business_email ?? ''}}" placeholder=""  class="form-control" />
                       <span class="asteric" id ="error6"></span>
+                      </div>
                     </div>
                   </div>
                   <div class="serch-section">
                     <div class="inner-input">
                       <label>Primary Phone Number*</label>
+                      <div class="input_field">
                       <input type="number" name="work_phone" id="work_phone" value="{{$employmentInfo->work_phone ?? ''}}" placeholder=""  class="form-control" />
                     <span class="asteric" id ="error7"></span>
+                      </div>
                     </div>
                   </div>
 
@@ -152,13 +156,16 @@
                   <div class="serch-section">
                     <div class="inner-input">
                       <label>Hospital or Business Name</label>
+                      <div class="input_field">
                       <input type="text" name="business_name" id="business_name" value="{{$employmentInfo->business_name ?? ''}}" placeholder=""  class="form-control" />
                 <span class="asteric" id ="error8"></span>
+                      </div>
                     </div>
                   </div>
                   <div class="serch-section">
                     <div class="inner-input">
                       <label>Country*</label>
+                      <div class="input_field">
                       <select class="form-control" name="country" id="country">
                         <option value="">Select Country</option>
                         @foreach($countries as $country)
@@ -170,20 +177,25 @@
                         @endforeach
                       </select>
                       <span class="asteric" id ="error9"></span>
+                      </div>
                     </div>
                   </div>
                   <div class="serch-section">
                     <div class="inner-input">
                       <label>Address*</label>
+                      <div class="input_field">
                       <input name="street_address" id="street_address" placeholder="" class="form-control" value="{{$employmentInfo->street_address ?? ''}}">
                 <span class="asteric" id ="error10"></span>
+                      </div>
                     </div>
                   </div>
                   <div class="serch-section">
                     <div class="inner-input">
                       <label>City*</label>
+                      <div class="input_field">
                       <input type="text" name="city" id="city" value="{{$employmentInfo->city ?? ''}}" placeholder=""  class="form-control" />
                 <span class="asteric" id ="error11"></span>
+                      </div>
                     </div>
                   </div>
                   {{-- <div class="serch-section">
@@ -238,13 +250,14 @@
 @endsection
 @section('scripts')
 <script>
+
+
     $('#firstname').on('keyup', function () {
         if ($(this).val().length > 0) {
             $(this).closest('div').find('#error1').css("visibility", "hidden");
         }
         else {
             $("#error1").html("First name field can't be left blank.");
-
             $(this).closest('div').find('#error1').css("visibility", "visible");
         }
     });
@@ -262,7 +275,6 @@
             $(this).closest('div').find('#error3').css("visibility", "hidden");
         }
         else {
-
             $("#error3").html("Network field can't be left blank.");
             $(this).closest('div').find('#error3').css("visibility", "visible");
         }
@@ -281,7 +293,6 @@
             $(this).closest('div').find('#error5').css("visibility", "hidden");
         }
         else {
-
             $("#error5").html("Timezone field can't be left blank.");
             $(this).closest('div').find('#error5').css("visibility", "visible");
         }
@@ -300,7 +311,6 @@
             $(this).closest('div').find('#error9').css("visibility", "hidden");
         }
         else {
-
             $("#error9").html("Country field can't be left blank.");
             $(this).closest('div').find('#error9').css("visibility", "visible");
         }
@@ -325,7 +335,6 @@
     });
     $(document).ready(function(e){
         $("#personal_btn").on("click",function(e){
-
     if($.trim($('#firstname').val()) == '' || $.trim($('#lastname').val()) == '' || $.trim($('#licensure').val()) == '' || $.trim($('#usernetwork').val()) == '' || $.trim($('#timezone').val()) == '')
     {
         toastr.error('Make sure compulsory fields are not empty.');
@@ -340,8 +349,6 @@
    }
     })
     $("#employe_btn").on("click",function(e){
-
-
 if( $.trim($('#street_address').val()) == '' || $.trim($('#business_name').val()) == '' || $.trim($('#business_email').val()) == ''
 || $('#country option:selected').val() == '' || $.trim($('#city').val()) == ''
 || $.trim($('#work_phone').val()) == '')
@@ -356,41 +363,32 @@ else{
     $('.tabs_li').find('.new_active').removeClass('new_active');
     $(".tab_3_click").addClass('new_active')
     $(".tab_3_click").addClass('click_show_3');
-
 }
 })
  $("#submit_btn").on("click",function(e){
     e.preventDefault();
+
   $("#profile_form").submit();
  })
     })
-
-
 $(document).ready(function(){
-
 $(".listItemA a").on("click",function(e){
    $(this).parent('li').find('a').removeClass('active');
 })
 })
-
-
-
 $(document).on("click",".click_show_2",function(e){
     // alert("hi");
 $('.tabs_li').find('.new_active').removeClass('new_active');
 $(this).addClass('new_active');
-
 })
 $(document).on("click",".click_show_3",function(e){
     // alert("hi");
 $('.tabs_li').find('.new_active').removeClass('new_active');
 $(this).addClass('new_active');
-
 })
 $(document).on("click",".click_show_1",function(e){
 $('.tabs_li').find('.new_active').removeClass('new_active');
 $(this).addClass('new_active');
-
 })
 </script>
 @endsection
