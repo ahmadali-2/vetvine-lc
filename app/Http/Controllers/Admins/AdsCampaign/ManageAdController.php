@@ -45,7 +45,7 @@ class ManageAdController extends Controller
         $result = vetvineHelper::saveImage($request->ad_media, $path);
         $input  = $request->all();
         try{
-              Ad::create([
+            Ad::create([
                 "ad_name"                  =>  ucwords($input['ad_name']),
                 "ad_media"                 =>  $result,
                 "banner_image_url"         =>  $input['banner_image_url'],

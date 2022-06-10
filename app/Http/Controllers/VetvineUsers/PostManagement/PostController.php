@@ -37,12 +37,11 @@ class PostController extends Controller
     {
         $liked = Like::where('user_id', Auth::id())->where('post_id', $request->likepostid)->first();
         if (!$liked) {
-
             $push_notifications = event(new NotificationEvent(Auth::id(), (int) $request->likepostid));
             PushNotification::create([
                 'user_id' => Auth::id(),
                 'post_id' => $request->likepostid,
-                'post_by' => $request->postUserId,
+                'post_user_id' => $request->postUserId,
                 'type' => '0',
             ]);
 
