@@ -53,4 +53,5 @@ class Post extends Model
     {
         return $this->hasMany(PushNotification::class, 'post_id');
     }
+
 }

@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Admins\Forum\CategoryForum;
 use App\Models\Admins\Advertisement\Ad;
 use App\Models\Admins\Forum\Forum;
+use App\Models\Admins\Forum\Like;
 use App\Models\Admins\Forum\Post;
 use App\Models\Generals\Member;
+use App\Models\Likes;
 use App\Models\UserMemberAndNetworkLevel;
 use Exception;
 use Illuminate\Http\Request;
@@ -29,15 +31,17 @@ class ForumController extends Controller
 
     public function getForums($categoryId){
 
-        $forums = Forum::with('category')->where('category_id',$categoryId)->get();
-        return view('frontend.pages.forums.forum',compact('forums'));
+        $forums = Forum::with('category','posts','likecount')->where('category_id',$categoryId)->get();
+        $data = [];
+        // dd($forums[0]->likecount->sum('like'));
+        // $sumnlike = Post::with('likes')->where('forum_id',$categoryId)->first();
+        // $sumcount = Like::where('post_id',$sumnlike->id)->get();
+        return view('frontend.pages.forums.forum',compact('forums','data'));
     }
 
     public function getForumPosts($forumId){
         $posts = Post::with('user')->where('forum_id',$forumId)->get();
-        // $posts = Post::where('forum_id',$forumId)->get();
         return view('frontend.pages.forums.forumscategory_post',compact('posts','forumId'));
-
     }
     public function getForumcategoryPosts($forumcategorypostId){
 
@@ -51,11 +55,11 @@ class ForumController extends Controller
     }
     public function frontendIndex()
     {
-        // dd('hjkds');
+
         $user=Auth::user();
         if($user)
         {
-        $categories   =   CategoryForum::all();
+        $categories   =   CategoryForum::with('forums')->get();
         $ads          =   Ad::all();
         $forums       =   Forum::all();
         return view('frontend.pages.forums.index',compact('categories','forums','ads'));
