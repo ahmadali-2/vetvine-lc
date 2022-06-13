@@ -27,7 +27,7 @@
                                 @csrf
                                 <a href="{{ route('logout') }}" class="toggle-contact" onclick="event.preventDefault();
 
-              this.closest('form').submit();"><span class="mail-logo"></span> LogOut</a>
+              this.closest('form').submit();"><span class="mail-logo"></span> Log Out</a>
                             </form>
                         </li>
 
@@ -40,7 +40,7 @@
     </div>
 
     <div class="container-fluid p-0">
-        <div class="container">
+        <div class="container user_dashbaord_container">
             <nav class=" bg-header navbar navbar-expand-md" style="margin-top: -45px;">
                 <a class="navbar-brand" href="{{ url('/') }}"><span class="header-logo"><img
                             src="{{ asset('frontend/img/logo.png') }}" class="img-fluid logo-dashbaord" alt=""

@@ -2,7 +2,6 @@
 
 namespace App\Events;
 
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -26,6 +25,7 @@ class NotificationEvent implements ShouldBroadcast
 
     public $postImg;
 
+
     // public $likes;
     /**
      * Create a new event instance.
@@ -34,7 +34,6 @@ class NotificationEvent implements ShouldBroadcast
      */
     public function __construct($user_id, $post_id)
     {
-        // dd($likes);
         $post = Post::find($post_id);
         $user = User::find($user_id);
         $this->userPhoto = $user->profile_photo;

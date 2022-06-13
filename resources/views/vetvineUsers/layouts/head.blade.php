@@ -66,7 +66,7 @@
 }
 .m-list-active{
     background: #507f87 !important;
-    border-left: 10px solid  #f27222 !important;
+    border-left: 5px solid  #f27222 !important;
 
 }
 .m-header-messaging .avatar {

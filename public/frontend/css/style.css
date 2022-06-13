@@ -7363,7 +7363,10 @@ ul {
     /* margin-bottom: 35px; */
     height: 47.5px;
     border-radius: 0px;
+    position: relative;
 }
+
+
 
 #fav_show_wrapper,
 #fav_show {
@@ -7947,6 +7950,7 @@ ul {
     .rating_box {
         min-width: 100%;
     }
+<<<<<<< HEAD
 
     .droplink:hover .nav-anchor,
 .droplink:hover .nav-sub-hed {
@@ -7955,6 +7959,8 @@ ul {
     text-decoration: none;
 
 }
+=======
+>>>>>>> a570d2bd0e3ddedabafa2be9fba005df62be1523
 }
 
 
@@ -8108,4 +8114,3 @@ ul {
 
 
     }
-

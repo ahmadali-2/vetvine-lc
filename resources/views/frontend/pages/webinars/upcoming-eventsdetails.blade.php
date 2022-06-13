@@ -1,6 +1,8 @@
 @extends('frontend.master')
 @section('content')
     <style>
+
+
         * {
             box-sizing: border-box;
             font-family: "Museo 500";
@@ -144,6 +146,34 @@
             font-family: 'Museo 500';
         }
 
+        #ajax-book-model .form-control{
+
+    border: 1px solid #ced4da !important;
+        }
+        #ajax-book-model .btn-primary {
+    color: #fff;
+    background-color: #f27222;
+    border-color: #f27222;
+}
+        #ajax-book-model h4 {
+            padding-left: 15px;
+}
+
+.public-detail-inner h2 {
+    font-size: 24px;
+    letter-spacing: 1px;
+    color: #5c7c85;
+    font-family: "Museo 500";
+    padding: 30px 0px 0px 0px;
+    margin-bottom: 0 !important;
+    font-family: 'Museo 500';
+}
+
+.leftcolumn h4 {
+    padding-left: 1rem;
+    margin-top: 10px;
+    font-family: 'Museo 500';
+}
         /* End */
     </style>
     <section class="video-section-wrapper mb-4">
