@@ -43,7 +43,7 @@
                         <select name="fav_show" id="fav_show" class="filter-slect mb-0 border-0 select-before">
                             <option title="" value="Matal" label=""></option>
                             @forelse ($forums as $item)
-                            <option title="Anesthesia" value="72" label="Anesthesia">{{ $forums->category->category_title }}</option>
+                            <option title="Anesthesia" value="72" label="Anesthesia"></option>
                             @empty
 
                             @endforelse
