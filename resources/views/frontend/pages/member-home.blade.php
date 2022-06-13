@@ -85,20 +85,28 @@
                   {{-- @php
                         $likedpost  =   Auth::user()->likes()->where('post_id',$post->id)->first();
                   @endphp --}}
-                  <div class="feed-comment">
-                    <img src="{{ asset('frontend/img/post.png')}}" alt="post icon">
-                    <p>{{ $post->created_at->format('d M Y') }}
-                    <a href="javascript:void(0)" class="like" id="like{{ $post->id }}" data-post-id="{{$post->id}}" data-user-id="{{Auth::user()->id}}">
-                       {{$post->isAuthUserLikedPost() ? 'Liked' : 'Like' }}
-                    </a> - <a href=""> Comment </a> - <a href="">Share</a> </p>
-                </div>
-                  <div class="comment">
-                    <div class="comment-photo"><img src="{{ asset('frontend/img/feed-img-2.jpeg')}}" alt=""></div>
-                    <div class="comment-info">
-                  <div class="comment-aurther"><p><span><a href="">Tayyab Hassan</a></span> tesing comment</p></div>
-                  <div class="comment-description"><p>Mon at 3:00 AM - <a href="">like</a></p></div>
-                </div>
-                  </div>
+                                            <div class="feed-comment">
+                                                <img src="{{ asset('frontend/img/post.png') }}" alt="post icon">
+                                                <p>{{ $post->created_at->format('d M Y') }}
+                                                    <a href="javascript:void(0)" class="like"
+                                                        id="like{{ $post->id }}" data-post-user-id="{{ $post->user_id }}" data-post-id="{{ $post->id }}"
+                                                        data-user-id="{{ Auth::user()->id }}">
+                                                        {{ $post->isAuthUserLikedPost() ? 'Liked' : 'Like' }}
+                                                    </a> - <a href=""> Comment </a> - <a href="">Share</a>
+                                                </p>
+                                            </div>
+                                            <div class="comment">
+                                                <div class="comment-photo"><img
+                                                        src="{{ asset('frontend/img/feed-img-2.jpeg') }}" alt=""></div>
+                                                <div class="comment-info">
+                                                    <div class="comment-aurther">
+                                                        <p><span><a href="">Tayyab Hassan</a></span> tesing comment</p>
+                                                    </div>
+                                                    <div class="comment-description">
+                                                        <p>Mon at 3:00 AM - <a href="">like</a></p>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                 </div>
                 </li>
@@ -127,43 +135,41 @@
 <!-- member home end -->
 @endsection
 @section('scripts')
-<script>
-$(document).ready(function(e){
-    $(".like").on("click",function(e){
-        e.preventDefault();
-        var postid  = $(this).attr('data-post-id');
-        var userid  = $(this).attr('data-user-id');
-        var id  = $(this).attr('id');
-
-        $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-        $.ajax({
-           url:"{{route('likesave')}}",
-           method:'POST',
-           data:{
-                  likeuserid:userid,
-                  likepostid:postid
-                },
-           success:function(response){
-               console.log(response.like.like);
-               if (response.like.like == 1)
-               {
-                $("#"+id).html('Liked');
-               }
-               else if(response.like.like == 0)
-               {
-               $("#"+id).html('Like');
-               }
-           },
-           error:function(error){
-              console.log(error)
-           }
-        });
-
-    })
-})
-</script>
+    <script>
+        $(document).ready(function(e) {
+            $(".like").on("click", function(e) {
+                e.preventDefault();
+                var postid = $(this).attr('data-post-id');
+                var userid = $(this).attr('data-user-id');
+                var postUserid = $(this).attr('data-post-user-id');
+                // console.log(postUserid);
+                var id = $(this).attr('id');
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "{{ route('likesave') }}",
+                    method: 'POST',
+                    data: {
+                        likeuserid: userid,
+                        likepostid: postid,
+                        postUserid: postUserid
+                    },
+                    success: function(response) {
+                        // console.log(response.like.like);
+                        if (response.like.like == 1) {
+                            $("#" + id).html('Liked');
+                        } else if (response.like.like == 0) {
+                            $("#" + id).html('Like');
+                        }
+                    },
+                    error: function(error) {
+                        console.log(error)
+                    }
+                });
+            })
+        })
+    </script>
 @endsection

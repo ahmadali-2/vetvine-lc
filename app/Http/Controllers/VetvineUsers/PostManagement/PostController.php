@@ -35,10 +35,11 @@ class PostController extends Controller
     }
     public function likeSave(Request $request)
     {
-        // dd($request->all());
+        // dd($request->likepostid);
         $liked = Like::where('user_id', Auth::id())->where('post_id', $request->likepostid)->first();
+        // dd($liked);
         if (!$liked) {
-
+            // dd('running');
             $push_notifications = event(new NotificationEvent(Auth::id(), (int) $request->likepostid));
             PushNotification::create([
                 'user_id' => Auth::id(),
@@ -64,6 +65,7 @@ class PostController extends Controller
             );
 
         } elseif ($liked->like == 0) {
+
             $liked->update([
                 "like" => '1',
             ]);
@@ -75,6 +77,13 @@ class PostController extends Controller
                 ]
             );
         } else {
+            $push_notifications = event(new NotificationEvent(Auth::id(), (int) $request->likepostid));
+            PushNotification::create([
+                'user_id' => Auth::id(),
+                'post_id' => $request->likepostid,
+                'post_user_id' => $request->postUserid,
+                'type' => '0',
+            ]);
             $liked->update([
                 "like" => '0',
             ]);

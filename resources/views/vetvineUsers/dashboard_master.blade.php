@@ -17,36 +17,19 @@
     {{-- @include('vetvineUsers.layouts.footer') --}}
     @include('vetvineUsers.layouts.dashboard_footer_scripts')
 </body>
+
 </html>
 
+<!-- footer start  -->
+
+@include('notify::components.notify')
+@include('frontend.layouts.footer')
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <!-- footer start  -->
-
-  @include('notify::components.notify')
-  @include('frontend.layouts.footer')
-
-
-  @yield('scripts')
+@yield('scripts')
 
 </body>
 
 
 
 </html>
-

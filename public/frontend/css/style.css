@@ -7363,7 +7363,10 @@ ul {
     /* margin-bottom: 35px; */
     height: 47.5px;
     border-radius: 0px;
+    position: relative;
 }
+
+
 
 #fav_show_wrapper,
 #fav_show {

@@ -14,7 +14,6 @@
                             <button type="button" class="btn btn-outline-danger btn-sm pl-4 pr-4">View settings</button>
                         </div>
                     </div>
-
                 </div>
                 <div class="col-lg-6 right">
                     <div class="box shadow-sm rounded bg-white mb-3">
@@ -22,7 +21,7 @@
                             <h6 class="m-0">Recent</h6>
                         </div>
                         <div class="box-body p-0" id="notif-board">
-                            {{-- @foreach ($notifications as $notification) --}}
+                            @foreach ($notifications as $notification)
                                 <div class="notification p-3 d-flex bg-light border-bottom osahan-post-header">
                                     <div class="dropdown-list-image mr-3">
                                         <img class="rounded-circle"
@@ -35,10 +34,10 @@
                                         <div class="content">
                                             <div class="content_img">
                                                 <img class="profile-img"
-                                                    src=""
+                                                    src="{{ asset('vetvineUsers/posts/' . $notification->posts->post_photo) }}"
                                                     alt="">
                                             </div>
-                                            <div class="small para_pad"></div>
+                                            <div class="small para_pad">{!! $notification->posts->post_description !!}</div>
                                         </div>
 
                                         {{-- <div class="comment mt-2">
@@ -50,7 +49,7 @@
                                         </div> --}}
                                     </div>
                                 </div>
-                            {{-- @endforeach --}}
+                            @endforeach
                         </div>
                     </div>
                     <!-- pagination start  -->
@@ -76,43 +75,47 @@
                     </div>
                 </div>
                 <!-- pagination end  -->
-
+                <div class="col-md-3">
+                    <img src="https://vetvine.leadconcept.business/frontend/img/add-img.png" alt="">
+                </div>
             </div>
-
-
         </div>
-    @endsection
-    @section('scripts')
-        <script src="https://js.pusher.com/7.1/pusher.min.js"></script>
-        <script type="text/javascript">
-            var notificationsWrapper = $('.dropdown-notifications');
-            var notificationsToggle = notificationsWrapper.find('a[data-toggle]');
-            var notificationsCountElem = notificationsToggle.find('i[data-count]');
-            var notificationsCount = parseInt(notificationsCountElem.data('count'));
-            var notifications = notificationsWrapper.find('ul.dropdown-menu');
 
-            if (notificationsCount <= 0) {
-                notificationsWrapper.hide();
-            }
 
-            var pusher = new Pusher('6e28b8146a38abf8bcc7', {
-                cluster: 'ap2',
-            });
 
-            var channel = pusher.subscribe('my-channel');
+    </div>
+@endsection
+@section('scripts')
+    <script src="https://js.pusher.com/7.1/pusher.min.js"></script>
+    <script type="text/javascript">
+        var notificationsWrapper = $('.dropdown-notifications');
+        var notificationsToggle = notificationsWrapper.find('a[data-toggle]');
+        var notificationsCountElem = notificationsToggle.find('i[data-count]');
+        var notificationsCount = parseInt(notificationsCountElem.data('count'));
+        var notifications = notificationsWrapper.find('ul.dropdown-menu');
 
-            channel.bind('notification-event', function(data) {
-                // console.log(data);
-                $(data).each(function() {
-                    var postDesc = data.userDesc;
-                    var postTitle = data.postTitle;
-                    var userPhoto = data.userPhoto;
-                    var postImg = data.postImg;
-                    var desc = $(postDesc).text();
-                    var img = "{{ asset('vetvineUsers/posts') }}" + '/' + postImg;
-                    var profileImg = "{{ asset('frontend/images/Profile-Images') }}" + '/' + userPhoto;
-                    var likes = data.likes;
-                    var html = $(`
+        if (notificationsCount <= 0) {
+            notificationsWrapper.hide();
+        }
+
+        var pusher = new Pusher('6e28b8146a38abf8bcc7', {
+            cluster: 'ap2',
+        });
+
+        var channel = pusher.subscribe('my-channel');
+
+        channel.bind('notification-event', function(data) {
+            console.log(data);
+            $(data).each(function() {
+                var postDesc = data.userDesc;
+                var postTitle = data.postTitle;
+                var userPhoto = data.userPhoto;
+                var postImg = data.postImg;
+                var desc = $(postDesc).text();
+                var img = "{{ asset('vetvineUsers/posts') }}" + '/' + postImg;
+                var profileImg = "{{ asset('frontend/images/Profile-Images') }}" + '/' + userPhoto;
+                var likes = data.likes;
+                var html = $(`
                 <div class="notification p-3 d-flex bg-light border-bottom osahan-post-header">
                                     <div class="dropdown-list-image mr-3">
                                         <img class="rounded-circle" src="` + profileImg + `"
@@ -130,11 +133,11 @@
                                     </div>
                                 </div>
                 `);
-                    $("#notif-board").append(html);
-                })
-                var count = parseInt($("#countnotif").text());
-                count += 1;
-                $("#countnotif").html(count);
-            });
-        </script>
-    @endsection
+                $("#notif-board").append(html);
+            })
+            var count = parseInt($("#countnotif").text());
+            count += 1;
+            $("#countnotif").html(count);
+        });
+    </script>
+@endsection

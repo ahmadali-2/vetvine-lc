@@ -56,7 +56,7 @@ class PersonelInfoController extends Controller
     public function notifications()
     {
         $notifications = PushNotification::with('posts', 'user')->where('post_user_id', Auth::id())->get();
-        dd($notifications);
+        // dd($notifications);
         return view('vetvineUsers.layouts.pages.notifications', [
             'notifications' => $notifications,
         ]);
@@ -93,7 +93,6 @@ class PersonelInfoController extends Controller
                     'licence_no' => $request->licensure,
                     'timezone_id' => $request->timezone,
                     'network_id' => $request->usernetwork,
-
                 ]);
             } else {
                 User::find($user->id)->update([
@@ -170,6 +169,7 @@ class PersonelInfoController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
 }
+
