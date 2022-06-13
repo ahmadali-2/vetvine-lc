@@ -222,7 +222,7 @@ $timezones = vetvineHelper::timezones();
                                                 <div class="offset-sm-3 my-3 col-sm-4 text-center">
                                                     <div class="g-recaptcha" data-sitekey="{{ env('GOOGLE_RECAPTCHA_SITE_KEY') }}">
                                                         </div>
-                                                   
+
 
 
                                             </div>

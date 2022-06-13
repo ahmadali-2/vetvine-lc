@@ -14,7 +14,7 @@ class PushNotification extends Model
         'post_id',
         'user_id',
         'type',
-        'post_by'
+        'post_user_id'
     ];
 
     public function user(){

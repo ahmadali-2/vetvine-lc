@@ -232,7 +232,7 @@ font-face {
     font-family: 'museo 500';
     color: #5c7c85;
     padding-top: 5px
-} 
+}
 
 .serch-section {
     width: 100%;
@@ -7356,7 +7356,10 @@ ul {
     /* margin-bottom: 35px; */
     height: 47.5px;
     border-radius: 0px;
+    position: relative;
 }
+
+
 
 #fav_show_wrapper,
 #fav_show {
