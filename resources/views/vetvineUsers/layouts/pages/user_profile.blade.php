@@ -74,7 +74,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="serch-section mb-4">
+                                        <div class="serch-section ">
                                             <div class="inner-input">
                                                 <label>I am a*</label>
                                                 <div class="input_field">
@@ -90,8 +90,9 @@
                                                             @endif
                                                         @endforeach
                                                     </select>
-                                                </div>
+
                                                 <span class="asteric" id="error3"></span>
+                                            </div>
                                             </div>
                                         </div>
                                         <div class="serch-section">
@@ -120,8 +121,9 @@
                                                                 @endif
                                                             @endforeach
                                                         </select>
-                                                    </div>
+
                                                     <span class="asteric" id="error5"></span>
+                                                </div>
                                                 </div>
                                             </div>
                                             <div class="button col-sm-12 text-center"><button type="button"

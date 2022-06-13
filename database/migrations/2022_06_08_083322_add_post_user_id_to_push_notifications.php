@@ -14,7 +14,7 @@ class AddPostUserIdToPushNotifications extends Migration
     public function up()
     {
         Schema::table('push_notifications', function (Blueprint $table) {
-            $table->bigInteger('post_user_id')->after('post_id');
+            $table->bigInteger('post_user_id')->after('post_id')->nullable();
 
         });
     }

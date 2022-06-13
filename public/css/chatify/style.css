@@ -703,7 +703,7 @@ body {
     from {
         transform: scale(0);
     }
-    
+
     to {
         transform: scale(1);
     }
@@ -782,7 +782,7 @@ div.loadingPlaceholder-date {
     from {
         -webkit-transform: scale(0);
     }
-    
+
     to {
         -webkit-transform: scale(1);
     }
@@ -791,7 +791,7 @@ div.loadingPlaceholder-date {
     from {
         transform: scale(0);
     }
-    
+
     to {
         transform: scale(1);
     }
@@ -844,11 +844,11 @@ div.loadingPlaceholder-date {
     0% {
         bottom: 0px;
     }
-    
+
     20% {
         bottom: 5px;
     }
-    
+
     40% {
         bottom: 0px;
     }
@@ -980,7 +980,7 @@ div.loadingPlaceholder-date {
     .messenger {
         flex-direction: column;
     }
-    
+
     .messenger-listView {
         position: relative;
         top: 0px;
@@ -992,7 +992,7 @@ div.loadingPlaceholder-date {
         min-width: 200px;
         overflow: auto;
     }
-    
+
     .messages {
         height: 300px;
     }

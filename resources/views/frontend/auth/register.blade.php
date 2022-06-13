@@ -224,7 +224,6 @@ $timezones = vetvineHelper::timezones();
                                                         </div>
 
 
-
                                             </div>
 
 
@@ -297,7 +296,7 @@ $timezones = vetvineHelper::timezones();
                     <div class="register-in-login">new to VETVINE?
                         <a class="Register-Now" href="#" id="register_show_modal_login">Register now</a>
                     </div>
-                    <form action="{{ route('login') }}" method="post" class="custom_form">
+                    <form action="{{ route('login') }}" method="post" class="custom_form" id="loginRequest">
                         @csrf
                         <div class="row">
                             <div class="col-12">

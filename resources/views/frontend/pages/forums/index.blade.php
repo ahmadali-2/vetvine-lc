@@ -27,7 +27,7 @@
     <section class="become_member_area">
         <div class="container">
             <h2>
-                <span>Forums Category
+                <span>Forums
                 </span>
             </h2>
         </div>
@@ -41,7 +41,7 @@
                     <div class="col-lg-3 col-md-3">
                         <div class="filter-div category-div forum_category_div">
                             <div id="fav_show_wrapper">
-                                <label for="fav_Show" id="fav_show_label">Category:</label>
+                                <label for="fav_Show" id="fav_show_label">Category</label>
                                 <select name="fav_show" id="fav_show" class="filter-slect border select-m">
                                     <option title="" value="" label=""></option>
                                     <option title="Anesthesia" value="72" label="Anesthesia">Anesthesia</option>
@@ -83,7 +83,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="" style="visibility:hidden ;">dd</label>
-                            <input type="text" placeholder=" 🔍 Search Here ....." class="form-control search_forum">
+                            <input type="text" placeholder="🔍 Search Here ....." class="form-control search_forum">
                         </div>
                     </div>
 
@@ -93,13 +93,13 @@
                         <div class="specialty-detail w-100">
 
 
-                            <h2 class="text-center text-capitalize ">Topics</h2>
-                        </div>
+                                <h2 class="text-center text-capitalize">Topics</h2>
+                            </div>
 
                     </div>
                     <div class="col-lg-3  col-md-3">
                         <div class="specialty-detail">
-                            <h2 class="text-center text-capitalize ">Recent Activity</h2>
+                            <h2 class="text-center text-capitalize">Recent Activity</h2>
                         </div>
                     </div>
 
