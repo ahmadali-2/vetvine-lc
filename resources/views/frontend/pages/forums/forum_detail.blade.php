@@ -83,10 +83,7 @@
                                         <img src=" {{ asset('frontend/forums/img/thumb-up.png') }}" alt="">
                                         <p class="mb-0 pl-2">Like</p>
                                     </div>
-                                    <div class="like-btn d-flex align-items-center">
-                                        <img src="{{ asset('frontend/forums/img/curve-arrow.png') }}" alt="">
-                                        <p class="">Share</p>
-                                    </div>
+
                                     <div class="like-btn d-flex align-items-center">
                                         <img src="{{ asset('frontend/forums/img/chat-box.png') }}" alt="">
                                         <p class="mb-0 pl-2">Comment</p>
@@ -96,6 +93,11 @@
                                         ])
                                         <hr /> --}}
                                     </div>
+                                    <div class="like-btn d-flex align-items-center">
+                                        <img src="{{ asset('frontend/forums/img/curve-arrow.png') }}" alt="">
+                                        <p class="mb-0 pl-2">Share</p>
+                                    </div>
+
 
                                 </div>
 
@@ -132,7 +134,7 @@
                                 </div>
                             </div>
                             <div class="similar">
-                                <h4>Similars Post</h4>
+                                <h4>Similar Post</h4>
                                 @foreach ($relatedposts as $relatedpost)
                                     <a href="{{ $relatedpost->id }}">
                                         {{ $relatedpost->post_title }}

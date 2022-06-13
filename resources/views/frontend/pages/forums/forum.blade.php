@@ -27,7 +27,7 @@
     <section class="become_member_area">
         <div class="container">
             <h2>
-                <span>Forums 
+                <span>Forums
                 </span>
             </h2>
         </div>
@@ -70,7 +70,7 @@
                                  <th><img src="{{ asset('frontend/forums/img/message.png')}}" alt="behavior img"></th>
                                  <th><img src="{{ asset('frontend/forums/img/heart.png') }}" alt=""></th>
                                  <th><img src="{{ asset('frontend/forums/img/view.png') }}" alt=""></th>
-                                 <th class="recent_activity">Recent Activity</th>
+                                 <th class="recent_activity text-capitalize">Recent Activity</th>
 
                              </tr>
                          </thead>

@@ -28,7 +28,7 @@
         {{-- Avatar side --}}
         <td>
         <div class="avatar av-m"
-        style="background-image: url('@if($user->profile_photo) {{ asset('/frontend/images/Profile-Images/'.Auth::user()->profile_photo)}} @else {{asset('frontend/images/profile-Images/chat_avatar.png')}} @endif');">
+        style="background-image: url('@if($user->profile_photo) {{ asset('/frontend/images/profile-Images/'.Auth::user()->profile_photo)}} @else {{asset('frontend/images/profile-Images/chat_avatar.png')}} @endif');">
         </div>
         </td>
         {{-- center side --}}

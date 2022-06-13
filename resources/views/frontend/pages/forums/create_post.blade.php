@@ -2,7 +2,16 @@
 @section('content')
 <style>
     #createpost input,#createpost textarea{
-        border: 1px solid #ced4da !important;
+        border: 2px solid #5c7c85  !important;
+        border-radius: 0px !important;
+    }
+    .text_editor{
+        border: 2px solid #5c7c85  !important;
+        border-radius: 0px !important;
+    }
+    .post_submit_btn{
+        background:  #5c7c85  !important;
+        color: #fff;
     }
 </style>
 <section class="main_banner_bottob_label"></section>
@@ -40,10 +49,12 @@
                             </div>
                         </div>
                           <div class="row">
+
                             <div class="col-12">
-                                <div class="form-group">
-                                    <label for="forum_description" class="control-label mb-1">Post
-                                        Description</label>
+                                <label for="forum_description" class="control-label mb-1">Post
+                                    Description</label>
+                                <div class="form-group text_editor">
+
                                     <textarea class="form-control ckeditor" id="description" rows="3" name="description" value=""></textarea>
                                 </div>
                             </div>
@@ -66,9 +77,15 @@
                                     </div>
                                 </div>
                           </div>
-                        <div class="form-group text-center">
-                            <input type="submit" class="btn btn-primary mt-3" value="POST">
-                        </div>
+
+                          <div class="row">
+                              <div class="col-md-4 ml-auto text-right">
+
+                                <div class="form-group text-right">
+                                    <input type="submit" class="btn btn-primary mt-3 post_submit_btn" value="POST">
+                                </div>
+                              </div>
+                          </div>
                     </form>
                 </div>
             </div>

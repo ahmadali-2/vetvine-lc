@@ -22,15 +22,15 @@
                         <div class="register-in-login">new to VETVINE?
                             <a class="Register-Now" href="#"  id="register_show_modal_login">Register now</a>
                         </div>
-                        <form action="" method="post" class="custom_form">
-                           
+                        <form action="" method="post" class="custom_form"  >
+
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="" class="my-custom_label">Email</label>
                                         <input type="email" id="useremail" name="useremail" placeholder="" class="my-custom_input">
                                         <span id="emailmsg" style="color: red;"></span>
-                                    
+
                                     </div>
                                 </div>
 
@@ -60,4 +60,3 @@
         </div>
     </div>
 
- 

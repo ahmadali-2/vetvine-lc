@@ -165,10 +165,7 @@ font-face {
 }
 
 .user-img img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
+    width: 30%;
 }
 
 .user-img h4 {
@@ -235,14 +232,14 @@ font-face {
     font-family: 'museo 500';
     color: #5c7c85;
     padding-top: 5px
-}
+} 
 
 .serch-section {
     width: 100%;
     display: inline-block;
 }
 
-.video-title {
+.video-title{
     font-family: "Museo Sans 500";
     font-size: 18px;
     line-height: 21.6px;
@@ -255,10 +252,9 @@ font-face {
     max-width: 182px;
 }
 
-.video-title:hover {
+.video-title:hover{
     color: rgb(92, 124, 133);
 }
-
 .serch-section input {
     width: 50%;
     background: white;
@@ -354,6 +350,8 @@ input:focus {
     /* z-index: 99; */
 }
 
+
+
 .nav-wrapper-one .droplink .subdrop li {
     padding-bottom: 0;
     margin-top: 0;
@@ -362,14 +360,14 @@ input:focus {
 .nav-wrapper-one a:hover {
     background-color: transparent;
     /* color: #f27222; */
-    /* text-decoration: underline;
+    text-decoration: underline;
     text-decoration-line: 2px;
     text-decoration-thickness: 2px;
     text-decoration-skip: ink;
     transition: all 0.3s ease-in-out;
-
+    /* border-bottom-width: 2px; */
     text-underline-position: under;
-    text-underline-offset: 2px; */
+    text-underline-offset: 2px;
 }
 
 
@@ -380,7 +378,7 @@ input:focus {
 .droplink:hover .nav-anchor,
 .droplink:hover .nav-sub-hed {
     background-color: transparent;
-
+    /* color: #f27222; */
     text-decoration: underline;
     text-decoration-line: 2px;
     text-decoration-thickness: 2px;
@@ -2334,7 +2332,7 @@ input:focus {
 .video-bottom-text h3 {
     font-size: 18px;
     color: #5c7c85;
-    font-family: "Museo 500";
+    font-family: "Museo Sans 500";
     margin-bottom: 0;
     text-transform: uppercase;
     max-width: 182px;
@@ -2375,7 +2373,7 @@ select#fav_show:focus>option:checked {
 .video-detail-inner h2 {
     font-size: 30px;
     color: #5c7c85;
-    font-family: "Museo 500";
+    font-family: "Museo 700";
     text-transform: uppercase;
     margin-bottom: 20px;
 }
@@ -2442,7 +2440,7 @@ select#fav_show:focus>option:checked {
     text-align: center;
     line-height: 44px;
     display: inline-block;
-    border: 2px solid #f27222 !important;
+    border: 2px solid #f27222;
     transition: all 0.5s;
 }
 
@@ -2846,7 +2844,7 @@ select#fav_show:focus>option:checked {
         color: #507f87;
         font-size: 36px;
         font-family: "Museo 500";
-        padding-top: 0px;
+        padding-top: 75px;
         width: 70%;
         text-align: left;
         padding-left: 30px;
@@ -2884,13 +2882,14 @@ select#fav_show:focus>option:checked {
         color: #507f87;
         font-size: 36px;
         font-family: "Museo 500";
-        padding-top: 0px;
+        padding-top: 47px;
         width: 70%;
         text-align: left;
         padding-left: 30px;
     }
     .nav_res_3 {
         float: left;
+
     }
     .ptg_meber_rightbox {
         padding-left: 30px;
@@ -5656,8 +5655,8 @@ select#fav_show:focus>option:checked {
         margin-left: 20px;
     }
     .form-vet-section .input_click {
-        margin-left: 0px;
-        width: 100%;
+        margin-left: 20px;
+        width: 87%;
     }
     .form-vet-section .form-check-input {
         margin-left: 0px !important;
@@ -5726,9 +5725,7 @@ select#fav_show:focus>option:checked {
 
 .generic_layout_left .user-profile .profile-img img {
     border: 1px solid #ddd !important;
-    width: 100%;
-    height: 25vh;
-    object-fit: cover;
+    margin: 10px;
 }
 
 .generic_layout_left .user-profile h3 {
@@ -6546,13 +6543,9 @@ table tbody tr td {
     text-transform: capitalize;
 }
 
-@media (max-width:992px) {
+@media (max:992px) {
     table tbody tr td {
         font-size: 12px !important;
-    }
-    .leftcolumn {
-        float: left;
-        width: 100% !important;
     }
 }
 
@@ -6635,7 +6628,7 @@ table tbody .count td {
 }
 
 .public-detail-inner .public-cat {
-    border: 5px solid #5c7c85 !important;
+    border: 5px solid #5c7c85;
 }
 
 .btn_post {
@@ -6743,9 +6736,9 @@ table tbody .count td {
     background-clip: padding-box;
     border: 1pxsolidrgba(0, 0, 0, .15);
     border-radius: 0.25rem;
-    -webkit-box-shadow: 0px 0px 5px 0px rgba(84, 84, 84, 1);
-    -moz-box-shadow: 0px 0px 5px 0px rgba(84, 84, 84, 1);
-    box-shadow: 0px 0px 5px 0px rgba(84, 84, 84, 1);
+    box-shadow: 10px 10px 5px -1px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 10px 10px 5px -1px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 5px -1px rgba(0, 0, 0, 0.75);
 }
 
 .drop_down_user_dash li a,
@@ -6801,9 +6794,9 @@ table tbody .count td {
     background-clip: padding-box;
     border: 1pxsolidrgba(0, 0, 0, .15);
     border-radius: 0.25rem;
-    -webkit-box-shadow: 0px 0px 5px 0px rgba(84, 84, 84, 1);
-    -moz-box-shadow: 0px 0px 5px 0px rgba(84, 84, 84, 1);
-    box-shadow: 0px 0px 5px 0px rgba(84, 84, 84, 1);
+    box-shadow: 10px 10px 5px -1px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 10px 10px 5px -1px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 5px -1px rgba(0, 0, 0, 0.75);
 }
 
 @media(max-width:767px) {
@@ -7926,35 +7919,6 @@ ul {
     .filter_list li:nth-child(5) {
         width: 100% !important;
     }
-    .profile .inner-input {
-        flex-direction: column;
-    }
-    .profile .serch-section label {
-        /* width: 33%; */
-        width: 100%;
-        margin-left: 10px;
-    }
-    .profile .input_field {
-        width: 96%;
-    }
-    .leftcolumn {
-        float: left;
-        width: 100%;
-    }
-    .inner_box_chat {
-        min-width: 100%;
-    }
-    .rating_box {
-        min-width: 100%;
-    }
-
-    .droplink:hover .nav-anchor,
-.droplink:hover .nav-sub-hed {
-    background-color: transparent;
-
-    text-decoration: none;
-
-}
 }
 
 
@@ -7970,142 +7934,11 @@ ul {
 .upcoming_view_all:hover {
     color: #f27222;
 }
-
-@media only screen and (max-width: 500px) {
-    .g-recaptcha {
-        margin-right: -26px !important;
-        transform: scale(0.77) !important;
-        transform-origin: 0 0 !important;
-    }
-}
-
-.pro-a a {
-    padding: 5px 30px 5px !important;
-}
-
-.leftcolumn textarea {
-    border: 1px solid #ced4da !important;
-}
-
-.leftcolumn h4 {
-    padding-left: 1rem;
-    margin-top: 10px;
-}
-
-.leftcolumn .header_row {
-    background-color: #f27222;
-    color: #fff;
-    font-weight: bold;
-    box-shadow: -5px 6px 5px 0px rgba(0, 0, 0, 0.75);
-    -webkit-box-shadow: -5px 6px 5px 0px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: -5px 6px 5px 0px rgba(0, 0, 0, 0.75);
-}
-
-.review-content {
-    padding-left: 1rem;
-}
-
-.review-content .text-primary {
-    color: #5c7c85 !important;
-}
-
-@media (max-width:1400px) and (min-width:768px) {
-    .user_dashbaord_container {
-        max-width: 90%;
-    }
-}
-
-@media (max-width:770px) and (min-width:768px) {
-    .header-logo {
-        margin-top: 64px;
-        width: 155px;
-        height: 70px;
-        max-width: 245px;
-        display: inline-block;
-    }
-}
-
-.post_btn {
-    background-color: #5c7c85;
-    color: #fff;
-    border: 1px solid #5c7c85;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.post_btn:hover {
-    background-color: transparent;
-    color: #5c7c85;
-    border: 1px solid #5c7c85 !important;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-#createpost input,
-#createpost textarea {
-    border: 2px solid #5c7c85 !important;
-}
-
 .a-position {
-    position: relative;
-}
+    position: relative ;
 
-.a-ab {
+}
+.a-ab{
     position: absolute;
     top: 0px;
 }
-
-.employe img {
-    border-radius: 50%;
-}
-
-@media(max-width:850px) and  (min-width:768px){
-
-    .top-social{
-        min-width: 91%;
-    margin-left: 120px;
-    }
-}
-@media(max-width:1260px) and  (min-width:1200px){
-
-
-
-    .user_dashbaord_container {
-        max-width: 95%;
-    }
-}
-
-
-@media (min-width: 320px) and (max-width: 767px){
-    .nav-wrapper-one .droplink {
-        border-bottom: 1px solid #507f87 !important;
-        padding-bottom: 5px;
-    }
-
-    }
-
-    @media only screen and (max-width: 767px){
-.edit-profile-list .subdrop {
-    top: 59px;
-}
-
-
-
-    }
-
-    @media only screen and (max-width: 991px){
-        .navbar-nav .dropdown-menu {
-            position: static;
-            float: none;
-            padding-left: 10px;
-        }
-
-
-    }
-

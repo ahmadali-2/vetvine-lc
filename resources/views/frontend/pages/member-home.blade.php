@@ -100,7 +100,7 @@
                                                 <img src="{{ asset('frontend/img/post.png') }}" alt="post icon">
                                                 <p>{{ $post->created_at->format('d M Y') }}
                                                     <a href="javascript:void(0)" class="like"
-                                                        id="like{{ $post->id }}" data-post-id="{{ $post->id }}"
+                                                        id="like{{ $post->id }}" post-user-id="{{ $post->user_id }}" data-post-id="{{ $post->id }}"
                                                         data-user-id="{{ Auth::user()->id }}">
                                                         {{ $post->isAuthUserLikedPost() ? 'Liked' : 'Like' }}
                                                     </a> - <a href=""> Comment </a> - <a href="">Share</a>
@@ -152,6 +152,7 @@
                 e.preventDefault();
                 var postid = $(this).attr('data-post-id');
                 var userid = $(this).attr('data-user-id');
+                var postuserid = $(this).attr('post-user-id');
                 var id = $(this).attr('id');
                 $.ajaxSetup({
                     headers: {
@@ -163,10 +164,11 @@
                     method: 'POST',
                     data: {
                         likeuserid: userid,
-                        likepostid: postid
+                        likepostid: postid,
+                        likepostuserid: postuserid
                     },
                     success: function(response) {
-                        console.log(response.like.like);
+                        // console.log(response.like.like);
                         if (response.like.like == 1) {
                             $("#" + id).html('Liked');
                         } else if (response.like.like == 0) {

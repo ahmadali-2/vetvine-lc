@@ -113,6 +113,8 @@ padding: 0px 30px 0px !important;
 
 {!! JsValidator::formRequest('App\Http\Requests\Frontend\RegistrationRequest', '#regform') !!}
 {!! JsValidator::formRequest('App\Http\Requests\Frontend\ContactUsRequest', '#conatctusform') !!}
+{!! JsValidator::formRequest('App\Http\Requests\Frontend\LoginInRequest', '#loginRequest') !!}
+
 
 @yield('scripts')
 

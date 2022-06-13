@@ -24,7 +24,7 @@ class RegistrationRequest extends FormRequest
     public function rules()
     {
         return [
-            
+
             'first_name'         => ['required'],
             'last_name'          => ['required'],
             'email'              => ['required','email', 'string',  'max:255', 'unique:users'],
@@ -33,7 +33,7 @@ class RegistrationRequest extends FormRequest
             'confirm_password'   => ['same:password','required'],
             'timezone'           => ['required'],
             'termsofservice'     => ['required'],
-          
+
         ];
     }
 
@@ -45,9 +45,9 @@ class RegistrationRequest extends FormRequest
             'email.string'               => 'Email Must Be In String Format',
             'email.max'                  => 'Email Max Length 255',
             'first_name.required'        => 'First Name Field Is Required',
-            'termsofservice.required'    => 'Terms Of Servicec Field Is Required',
+            'termsofservice.required'    => 'Terms Of Service Field Is Required',
             'timezone.required'          => 'Time Zone Field Is Required',
-            'last_name.required'         => 'Name Field Is Required',
+            'last_name.required'         => 'Last Name Field Is Required',
             'networklevel.required'      => 'Network Level Field Is Required',
             'networklevel.required'      => 'Network Level Field Is Required',
             'password.required'          => 'Password Field Is Required',
