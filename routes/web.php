@@ -82,16 +82,16 @@ Route::get('contactusschedule', function(){
     return 'Contact Us Cron Job Schedule Run Successfully';
 });
 
-// Route::get('run-queue',function(){
-//     Artisan::call('queue:listen');
-//     return 'Queue Listening';
-// });
+Route::get('run-queue',function(){
+    Artisan::call('queue:listen');
+    return 'Queue Listening';
+});
 
 //notification testing route
-Route::get('test', function () {
-    event(new NotificationEvent('Omar Hayat'));
-    return "Event has been sent!";
-});
+// Route::get('test', function () {
+//     event(new NotificationEvent('Omar Hayat'));
+//     return "Event has been sent!";
+// });
 
 /**
  * Social Registeration and  Login  Routes

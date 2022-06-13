@@ -89,4 +89,8 @@ class VetVineHelperClass
         return  User::with('toMessage','fromMessage')->where('id','!=',Auth::id())->get();
 
     }
+
+    public function currentUserProfile(){
+        return User::find(Auth::id());
+    }
 }

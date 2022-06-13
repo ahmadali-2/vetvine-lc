@@ -14,7 +14,6 @@
                             <button type="button" class="btn btn-outline-danger btn-sm pl-4 pr-4">View settings</button>
                         </div>
                     </div>
-
                 </div>
                 <div class="col-lg-6 right">
                     <div class="box shadow-sm rounded bg-white mb-3">
@@ -102,7 +101,7 @@
             var channel = pusher.subscribe('my-channel');
 
             channel.bind('notification-event', function(data) {
-                // console.log(data);
+                console.log(data);
                 $(data).each(function() {
                     var postDesc = data.userDesc;
                     var postTitle = data.postTitle;
