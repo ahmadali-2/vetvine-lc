@@ -40,17 +40,13 @@
                 <div class="filter-div category-div">
                     <div id="fav_show_wrapper show-d">
 
-
-
                         <select name="fav_show" id="fav_show" class="filter-slect mb-0 border-0 select-before">
                             <option title="" value="Matal" label=""></option>
-                            <option title="Anesthesia" value="72" selected label="Anesthesia">Anesthesia</option>
-                            <option title="Behavior" value="83" label="Behavior">Behavior</option>
-                            <option title="Cardiology" value="49" label="Cardiology">Cardiology</option>
+                            @forelse ($forums as $item)
+                            <option title="Anesthesia" value="72" label="Anesthesia">{{ $forums->category->category_title }}</option>
+                            @empty
 
-                            <option title="Neurology" value="87" label="Neurology">Neurology</option>
-                            <option title="Oncology" value="59" label="Oncology">Oncology</option>
-
+                            @endforelse
                         </select>
                     </div>
                 </div>
@@ -85,14 +81,13 @@
 
         <tbody>
 
+            {{-- @dd($forums) --}}
 
             @forelse ($forums as $forum )
-
             <tr>
-                <td>    <a href="{{ route('getForumPosts',$forum->id) }}"><h4>{{ $forum->forum_title ?? '' }}</h4></a> </td>
-
-                <td>0</td>
-                <td>0</td>
+                <td><a href="{{ route('getForumPosts',$forum->id) }}"><h4>{{ $forum->forum_title ?? '' }}</h4></a> </td>
+                <td>{{ $forum->posts->count() }}</td>
+                <td> {{ $forum->likecount->sum('like')}}</td>
                 <td>0</td>
                 <td class="d-flex align-items-center"><img src={{ asset('frontend/forums/img/user.png') }}  class="mr-1" alt="">Nov 22,202</td>
                 <td><img src="{{ asset('frontend/forums/img/dots.png') }}" alt=""></td>
