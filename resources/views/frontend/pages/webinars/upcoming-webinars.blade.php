@@ -19,7 +19,7 @@
                     </li>
                     <li>
                         <div id="fav_show_wrapper mt-0">
-                            <label for="fav_Show" id="fav_show_label">Category:</label>
+                            <label for="fav_Show" id="fav_show_label">Category</label>
                             <select id="category" name="category" class="form-control filter-slect" value="" data-val="true">
                                 <option title="" value="" label=""></option>
                                 @foreach ($category as $search)

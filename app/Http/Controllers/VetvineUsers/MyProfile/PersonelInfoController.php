@@ -30,8 +30,9 @@ class PersonelInfoController extends Controller
     {
         $countries = Country::all();
         $employmentInfo = Auth::user()->employmentInfo;
-        $timezones = TimeZone::all();
-        $usernetworks = UserMemberAndNetworkLevel::all();
+
+        $timezones      = TimeZone::all();
+        $usernetworks   = UserMemberAndNetworkLevel::all();
 
         return view('vetvineUsers.layouts.pages.user_profile', compact('countries', 'employmentInfo', 'timezones', 'usernetworks'));
 
@@ -42,8 +43,9 @@ class PersonelInfoController extends Controller
     {
         $countries = Country::all();
         $employmentInfo = Auth::user()->employmentInfo;
-        $timezones = TimeZone::all();
-        $usernetworks = UserMemberAndNetworkLevel::where('parent_id', '!=', null)->get();
+
+        $timezones      = TimeZone::all();
+        $usernetworks   = UserMemberAndNetworkLevel::where('parent_id','!=',null)->get();
         // dd($usernetworks);
         return view('vetvineUsers.layouts.pages.user_profile', compact('countries', 'employmentInfo', 'timezones', 'usernetworks'));
     }
@@ -53,7 +55,8 @@ class PersonelInfoController extends Controller
     }
     public function notifications()
     {
-        $notifications = PushNotification::with('posts', 'user')->where('post_user_id', '1')->get();
+        $notifications = PushNotification::with('posts', 'user')->where('post_user_id', Auth::id())->get();
+        dd($notifications);
         return view('vetvineUsers.layouts.pages.notifications', [
             'notifications' => $notifications,
         ]);

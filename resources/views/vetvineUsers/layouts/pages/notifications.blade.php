@@ -22,7 +22,7 @@
                             <h6 class="m-0">Recent</h6>
                         </div>
                         <div class="box-body p-0" id="notif-board">
-                            @foreach ($notifications as $notification)
+                            {{-- @foreach ($notifications as $notification) --}}
                                 <div class="notification p-3 d-flex bg-light border-bottom osahan-post-header">
                                     <div class="dropdown-list-image mr-3">
                                         <img class="rounded-circle"
@@ -35,10 +35,10 @@
                                         <div class="content">
                                             <div class="content_img">
                                                 <img class="profile-img"
-                                                    src="{{ asset('vetvineUsers/posts/' . $notification->posts->post_photo) }}"
+                                                    src=""
                                                     alt="">
                                             </div>
-                                            <div class="small para_pad">{!! $notification->posts->post_description !!}</div>
+                                            <div class="small para_pad"></div>
                                         </div>
 
                                         {{-- <div class="comment mt-2">
@@ -50,7 +50,7 @@
                                         </div> --}}
                                     </div>
                                 </div>
-                            @endforeach
+                            {{-- @endforeach --}}
                         </div>
                     </div>
                     <!-- pagination start  -->
