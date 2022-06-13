@@ -33,19 +33,19 @@
         </div>
     </section>
 
-    <section class="content-header">
+    {{-- <section class="content-header">
     <div class="container">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <a class="btn btn-primary " href="{{ route('createforumpost',$forumId) }}">
-                        Create Post
-                </a>
             </div>
         </div>
     </div>
-</section>
+</section> --}}
     <section>
         <div class="container">
+            <div class="row">
+
+
             <div class="col-md-3">
                 <div class="filter-div category-div">
                     <div id="fav_show_wrapper show-d">
@@ -63,6 +63,13 @@
                         </select>
                     </div>
                 </div>
+            </div>
+
+            <div class="col-md-3 ml-auto text-right ">
+                <a class="btn btn-primary post_btn " href="{{ route('createforumpost',$forumId ) }}">
+                    Create Post
+            </a>
+            </div>
             </div>
         </div>
         <div class="container">

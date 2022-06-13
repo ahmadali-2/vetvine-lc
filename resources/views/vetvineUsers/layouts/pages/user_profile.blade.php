@@ -386,8 +386,7 @@
                 }
             })
             $("#employe_btn").on("click", function(e) {
-                if ($.trim($('#street_address').val()) == '' || $.trim($('#business_name').val()) == '' || $
-                    .trim($('#business_email').val()) == '' ||
+                if ($.trim($('#street_address').val()) == '' ||
                     $('#country option:selected').val() == '' || $.trim($('#city').val()) == '' ||
                     $.trim($('#work_phone').val()) == '') {
                     toastr.error('Make sure compulsory fields are not empty.');

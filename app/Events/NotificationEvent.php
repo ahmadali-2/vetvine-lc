@@ -34,7 +34,6 @@ class NotificationEvent implements ShouldBroadcast
      */
     public function __construct($user_id, $post_id)
     {
-        // dd($likes);
         $post = Post::find($post_id);
         $user = User::find($user_id);
         $this->userPhoto = $user->profile_photo;

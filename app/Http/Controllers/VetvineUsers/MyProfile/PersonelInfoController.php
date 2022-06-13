@@ -55,7 +55,8 @@ class PersonelInfoController extends Controller
     }
     public function notifications()
     {
-        $notifications = PushNotification::with('posts', 'user')->where('user_id', '3')->get();
+        $notifications = PushNotification::with('posts', 'user')->where('post_user_id', Auth::id())->get();
+        // dd($notifications);
         return view('vetvineUsers.layouts.pages.notifications', [
             'notifications' => $notifications,
         ]);

@@ -27,7 +27,7 @@
                                 @csrf
                                 <a href="{{ route('logout') }}" class="toggle-contact" onclick="event.preventDefault();
 
-              this.closest('form').submit();"><span class="mail-logo"></span> LogOut</a>
+              this.closest('form').submit();"><span class="mail-logo"></span> Log Out</a>
                             </form>
                         </li>
 
@@ -40,7 +40,7 @@
     </div>
 
     <div class="container-fluid p-0">
-        <div class="container">
+        <div class="container user_dashbaord_container">
             <nav class=" bg-header navbar navbar-expand-md" style="margin-top: -45px;">
                 <a class="navbar-brand" href="{{ url('/') }}"><span class="header-logo"><img
                             src="{{ asset('frontend/img/logo.png') }}" class="img-fluid logo-dashbaord" alt=""
@@ -109,7 +109,7 @@
                             </div>
                         </li>
                         <li class="nav-item droplink ">
-                            <a class="nav-link nav-anchor" href="{{ route('heal') }}" style="font-weight: bold">HEAL
+                            <a class="nav-link nav-anchor mt-1 pb-0" href="{{ route('heal') }}" style="font-weight: bold">HEAL
                                 <i class="fas fa-chevron-down droplink3"></i>
                                 <br>
                                 <span class="nav-sub-hed">Pet Loss Support</span>
@@ -235,7 +235,7 @@
                                     </i><br>
                                     Me
                                     <span class="caret"></span></a>
-                                <ul class="dropdown-menu  drop_down_user_dash btn_me3">
+                                <ul class="dropdown-menu  drop_down_user_dash btn_me3 pro-a">
                                     <li class="mb-4">
                                         <div class="content">
                                             <div class="img_box">
