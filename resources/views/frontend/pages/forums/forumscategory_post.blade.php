@@ -1,6 +1,11 @@
 @extends('frontend.master')
 @section('extra_css')
     <link rel="stylesheet" href="{{ asset('frontend/forums/css/style.css') }}" />
+    <style>
+        .forum_table button{
+            background: transparent !important
+        }
+    </style>
 @endsection
 @section('content')
     <main>
@@ -105,14 +110,31 @@
             @forelse ($posts as $forumpost )
 
 
+
             <tr>
                 <td>    <a href="{{ route('getForumcategoryPosts',$forumpost->id) }}"><h4>{{ $forumpost->post_title ?? '' }}</h4></a> </td>
 
                 <td>0</td>
+                <td>{{ $forumpost->likes->sum('like')}}</td>
                 <td>0</td>
-                <td>0</td>
-                <td class="d-flex align-items-center"><img src={{ asset('frontend/forums/img/user.png') }}  class="mr-1" alt="">Nov 22,202</td>
-                <td><img src="{{ asset('frontend/forums/img/dots.png') }}" alt=""></td>
+                <td class="d-flex align-items-center"><img src={{ asset('frontend/forums/img/user.png') }}  class="mr-1" alt="">{{  date('M d ,Y', strtotime($forumpost->created_at)) }}</td>
+                <td>
+                    <button type="button dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="{{ asset('frontend/forums/img/dots.png') }}" alt="" >
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="box-shadow: 0px 0px 5px 0px rgb(84 84 84);">
+
+                        <a class="btn btn-primary dropdown-item" href="{{ route('forums-posts.edit', $forumpost->id) }}">Edit</a>
+                         
+                        <a href="javascript:void(0);" class="btn btn-primary dropdown-item"
+                            onclick="deleteRecord('{{ $forumpost->id }}', '/vetvine-member/forums-posts/')">Delete</a>
+
+                      </div>
+                    <div class="col-sm-12 text-right" id="third">
+
+                    </div>
+
+                </td>
             </tr>
 
             @empty
@@ -135,3 +157,26 @@
 
 
 @endsection
+
+@section('scripts')
+<script>
+
+// function btnClicked(id){
+//     console.log(id);
+// }
+
+    // const targetDiv = document.getElementById("toggle");
+    // const btn = document.getElementById("toggle");
+    // btn.onclick = function () {
+    //   if (targetDiv.style.display !== "none") {
+    //     targetDiv.style.display = "none";
+    //   } else {
+    //     targetDiv.style.display = "block";
+    //   }
+    // };
+  </script>
+
+@endsection
+
+
+

@@ -8114,3 +8114,9 @@ ul {
 
 
     }
+
+    .modal-content .btn-danger{
+
+        background-color: #f27222 !important
+    }
+
