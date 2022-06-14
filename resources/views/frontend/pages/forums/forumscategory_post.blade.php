@@ -44,24 +44,29 @@
     <section>
         <div class="container">
             <div class="row">
+            <div class="col-lg-3 col-md-3">
+                <div class="filter-div category-div forum_category_div">
+                    <div id="fav_show_wrapper">
+                        <label for="fav_Show" id="fav_show_label">Category</label>
+                        <select name="fav_Show" id="form_search_dropdown" class="filter-slect border select-m">
+                            <option title="" value="0" label="Select Forum"></option>
+                            @foreach($forums as $forum)
+                                @if($forum->id == $forumId)
+                                    <option title="{{$forum->forum_title}}" value="{{$forum->id}}" label="{{$forum->forum_title}}" selected>{{$forum->forum_title}}</option>
+                                @else
+                                    <option title="{{$forum->forum_title}}" value="{{$forum->id}}" label="{{$forum->forum_title}}">{{$forum->forum_title}}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
 
 
             <div class="col-md-3">
-                <div class="filter-div category-div">
-                    <div id="fav_show_wrapper show-d">
-
-
-
-                        <select name="fav_show" id="fav_show" class="filter-slect mb-0 border-0 select-before">
-                            <option title="" value="Matal" label=""></option>
-                            <option title="Anesthesia" value="72" selected label="Anesthesia">Anesthesia</option>
-                            <option title="Behavior" value="83" label="Behavior">Behavior</option>
-                            <option title="Cardiology" value="49" label="Cardiology">Cardiology</option>
-                            <option title="Neurology" value="87" label="Neurology">Neurology</option>
-                            <option title="Oncology" value="59" label="Oncology">Oncology</option>
-
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label for="" style="visibility:hidden ;">dd</label>
+                    <input id="form_search_field" type="text" placeholder="🔍 Search Here ....." class="form-control search_forum">
                 </div>
             </div>
 
@@ -75,14 +80,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-
-
-
-                     <table class="table  forum_table table-bordered" >
+                    
+                     <table class="table  forum_table table-bordered" id="form_posts_view_table">
                          <thead>
                              <tr>
-<th class="title_th" width="50%"></th>
-
+                                 <th class="title_th" width="50%"></th>
                                  <th><img src="{{ asset('frontend/forums/img/message.png')}}" alt="behavior img"></th>
                                  <th><img src="{{ asset('frontend/forums/img/heart.png') }}" alt=""></th>
                                  <th><img src="{{ asset('frontend/forums/img/view.png') }}" alt=""></th>
@@ -91,47 +93,58 @@
                              </tr>
                          </thead>
 
+                        {{-- start loop  --}}
+                    {{-- @dd($forums) --}}
 
-
-
-
-
-            {{-- start loop  --}}
-        {{-- @dd($forums) --}}
-
-        <tbody>
-
-
-            @forelse ($posts as $forumpost )
-
-
-            <tr>
-                <td>    <a href="{{ route('getForumcategoryPosts',$forumpost->id) }}"><h4>{{ $forumpost->post_title ?? '' }}</h4></a> </td>
-
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td class="d-flex align-items-center"><img src={{ asset('frontend/forums/img/user.png') }}  class="mr-1" alt="">Nov 22,202</td>
-                <td><img src="{{ asset('frontend/forums/img/dots.png') }}" alt=""></td>
-            </tr>
-
-            @empty
-               <h3>Not Found</h3>
-            @endforelse
-
-        </tbody>
-    </table>
-
-
-
-
+                    <tbody id="form_posts_render">
+                        @if(count($posts) > 0)
+                            @include('frontend.pages.forums.form_posts_view')
+                            <h3 id="form_posts_render_notFound" style="display: none;">Not Found!</h3>
+                        @else
+                            <h3 id="form_posts_render_notFound">Not Found!</h3>
+                        @endif
+                    </tbody>
+                </table>
             {{-- end loop row  --}}
-
         </div>
     </div>
 </div>
 
     </section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+        var originalFormId = '<?php echo $forumId ?>';
 
+        $('#form_search_dropdown').on('change',function(){
+            filterForm();
+        });
+
+        $('#form_search_field').on('keyup',function(){
+            filterForm();
+        });
+
+        function filterForm(){
+            var form = $('#form_search_dropdown').val();
+            var form_search_field = $('#form_search_field').val();
+
+			$.ajax({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+			},
+			type: "POST",
+			url: '/search-form-post',
+			data: {form: form, title_text: form_search_field, originalFormId: originalFormId},
+			success: function(response){
+                if(response.count > 0){
+                    $('#form_posts_render_notFound').css("display","none");
+                }else{
+                    $('#form_posts_render_notFound').css("display","block");
+                }
+                $('#form_posts_render').empty();
+                $('#form_posts_render').append(response.html);
+			}
+			});
+        }
+</script>
 
 @endsection

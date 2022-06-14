@@ -35,23 +35,29 @@
 
 
     <section>
-        <div class="container">
-            <div class="col-md-3">
-                <div class="filter-div category-div">
-                    <div id="fav_show_wrapper show-d">
-
-
-
-                        <select name="fav_show" id="fav_show" class="filter-slect mb-0 border-0 select-before">
-                            <option title="" value="Matal" label=""></option>
-                            <option title="Anesthesia" value="72" selected label="Anesthesia">Anesthesia</option>
-                            <option title="Behavior" value="83" label="Behavior">Behavior</option>
-                            <option title="Cardiology" value="49" label="Cardiology">Cardiology</option>
-
-                            <option title="Neurology" value="87" label="Neurology">Neurology</option>
-                            <option title="Oncology" value="59" label="Oncology">Oncology</option>
-
-                        </select>
+        <div class="specialty-topics">
+            <div class="container forum_top_section">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-3" style="padding-top: 16px;">
+                        <div class="filter-div category-div">
+                            <div id="fav_show_wrapper show-d">
+                                <select name="form_search_dropdown" id="form_search_dropdown" class="filter-slect border select-m">
+                                    <option title="" value="0" label="Select Category"></option>
+                                    @foreach($categories as $category)
+                                        @if($category->id == $categoryId)
+                                            <option title="{{$category->category_title}}" value="{{$category->id}}" label="{{$category->category_title}}" selected>{{$category->category_title}}</option>
+                                        @else
+                                            <option title="{{$category->category_title}}" value="{{$category->id}}" label="{{$category->category_title}}">{{$category->category_title}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3">
+                        <div class="form-group">
+                            <input id="form_search_field" type="text" placeholder="🔍 Search Here ....." class="form-control search_forum">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -65,8 +71,7 @@
                      <table class="table  forum_table table-bordered" >
                          <thead>
                              <tr>
-<th class="title_th" width="50%"></th>
-
+                                 <th class="title_th" width="50%"></th>
                                  <th><img src="{{ asset('frontend/forums/img/message.png')}}" alt="behavior img"></th>
                                  <th><img src="{{ asset('frontend/forums/img/heart.png') }}" alt=""></th>
                                  <th><img src="{{ asset('frontend/forums/img/view.png') }}" alt=""></th>
@@ -83,25 +88,8 @@
             {{-- start loop  --}}
         {{-- @dd($forums) --}}
 
-        <tbody>
-
-
-            @forelse ($forums as $forum )
-
-            <tr>
-                <td>    <a href="{{ route('getForumPosts',$forum->id) }}"><h4>{{ $forum->forum_title ?? '' }}</h4></a> </td>
-
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td class="d-flex align-items-center"><img src={{ asset('frontend/forums/img/user.png') }}  class="mr-1" alt="">Nov 22,202</td>
-                <td><img src="{{ asset('frontend/forums/img/dots.png') }}" alt=""></td>
-            </tr>
-
-            @empty
-               <h3>Not Found</h3>
-            @endforelse
-
+        <tbody id="render-category-form-table">
+            @include('frontend.pages.forums.category_wise_form')
         </tbody>
     </table>
 
@@ -116,5 +104,38 @@
 
     </section>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+        var originalCategoryId = '<?php echo $categoryId ?>';
+
+        $('#form_search_dropdown').on('change',function(){
+            filterForm();
+        });
+
+        $('#form_search_field').on('keyup',function(){
+            filterForm();
+        });
+
+        function filterForm(){
+            var category = $('#form_search_dropdown').val();
+            var category_search_field = $('#form_search_field').val();
+
+			$.ajax({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+			},
+			type: "POST",
+			url: '/search-category-form',
+			data: {category: category, title_text: category_search_field, originalCategoryId: originalCategoryId},
+			success: function(response){
+                if($('#category_wise_notFound').length){
+                    $('#category_wise_notFound').remove();
+                }
+                $('#render-category-form-table').empty();
+                $('#render-category-form-table').append(response.html);
+			}
+			});
+        }
+</script>
 
 @endsection
