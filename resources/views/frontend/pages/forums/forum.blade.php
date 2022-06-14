@@ -40,13 +40,12 @@
                 <div class="filter-div category-div">
                     <div id="fav_show_wrapper show-d">
 
-                        <select name="fav_show" id="fav_show" class="filter-slect mb-0 border-0 select-before">
-                            <option title="" value="Matal" label=""></option>
-                            @forelse ($forums as $item)
-                            <option title="Anesthesia" value="72" label="Anesthesia"></option>
-                            @empty
-
-                            @endforelse
+                        <select name="fav_show" id="fav_show" class="filter-slect border select-m">
+                            <option title="" value="" label=""></option>
+                            @foreach ($category as $item)
+                            <option value="{{ $item->id }}">{{ $item->category_title }}
+                            </option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -89,7 +88,7 @@
                 <td>{{ $forum->posts->count() }}</td>
                 <td> {{ $forum->likecount->sum('like')}}</td>
                 <td>0</td>
-                <td class="d-flex align-items-center"><img src={{ asset('frontend/forums/img/user.png') }}  class="mr-1" alt="">Nov 22,202</td>
+                <td class="d-flex align-items-center"><img src={{ asset('frontend/forums/img/user.png') }}  class="mr-1" alt="">{{ date('M d ,Y', strtotime($forum->created_at)) }}</td>
                 <td><img src="{{ asset('frontend/forums/img/dots.png') }}" alt=""></td>
             </tr>
 
