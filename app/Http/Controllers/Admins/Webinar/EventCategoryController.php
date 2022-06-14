@@ -38,6 +38,7 @@ class EventCategoryController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
         $input = $request->all();
         try{
             CategoryEvent::create([
