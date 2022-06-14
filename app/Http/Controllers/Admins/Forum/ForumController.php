@@ -32,15 +32,16 @@ class ForumController extends Controller
     public function getForums($categoryId){
 
         $forums = Forum::with('category','posts','likecount')->where('category_id',$categoryId)->get();
+        $category = CategoryForum::all();
         $data = [];
         // dd($forums[0]->likecount->sum('like'));
         // $sumnlike = Post::with('likes')->where('forum_id',$categoryId)->first();
         // $sumcount = Like::where('post_id',$sumnlike->id)->get();
-        return view('frontend.pages.forums.forum',compact('forums','data'));
+        return view('frontend.pages.forums.forum',compact('forums','data','category'));
     }
 
     public function getForumPosts($forumId){
-        $posts = Post::with('user')->where('forum_id',$forumId)->get();
+        $posts = Post::with('user','likes')->where('forum_id',$forumId)->get();
         return view('frontend.pages.forums.forumscategory_post',compact('posts','forumId'));
     }
     public function getForumcategoryPosts($forumcategorypostId){
