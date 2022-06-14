@@ -33,6 +33,7 @@ use App\Http\Controllers\Admins\Webinar\ReviewController;
 use App\Http\Controllers\Admins\Webinar\SponserController;
 // Vetvine Without Auth Routes;
 use App\Http\Controllers\Frontend\ContactUsController;
+use App\Http\Controllers\PushNotificationController; // push notifications
 
 // Vetvine Frontend Routes;
 use App\Http\Controllers\Frontend\HomeController;
@@ -53,6 +54,7 @@ use App\Http\Controllers\VetvineUsers\Settings\PrivacySettingController;
 // user side post controller
 use App\Http\Controllers\VetvineUsers\PostManagement\PostController;
 use App\Http\Controllers\VideoDescriptionController;
+use App\Http\Controllers\StaticPageController; // for static pages
 // us
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -144,6 +146,9 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
     Route::post('videodata',[VideosOnDemandController::class,'videodata'])->name('videoajaxdata');
     Route::resource('buyevent-users',BuyEventController::class);
     Route::get('userevent-history/{id}', [BuyEventController::class, 'usereventHistory'])->name('usereventhistory');
+    Route::get('terms-and-conditions', [StaticPageController::class, 'TermsAndConditions'])->name('TermsAndConditions');
+    Route::get('terms-and-conditions/add', [StaticPageController::class, 'TermsAndConditionsAdd'])->name('TermsCondition.create');
+    Route::post('terms-and-conditions/add-terms', [StaticPageController::class, 'TermsAndConditionsAddDb'])->name('TermsCondition.create.db');
 
 });
 
@@ -237,3 +242,4 @@ Route::get('testing', function () {
 });
 
 Route::get('/video-description', [VideoDescriptionController::class, 'video_desc'])->name('video_desc');
+Route::post('/mark-as-read',     [PushNotificationController::class, 'mark_as_read'])->name('read.notification');
