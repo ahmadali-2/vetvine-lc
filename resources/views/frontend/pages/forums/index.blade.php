@@ -87,10 +87,7 @@
     </section>
 
 
-
-    {{-- ============================================================================ --}}
-
-    {{-- <section class="main_banner_bottob_label"></section>
+    <section class="main_banner_bottob_label"></section>
 
     <section class="become_member_area">
         <div class="container">
@@ -149,7 +146,6 @@
                                 </div>
                             </div>
                         @endforeach
-                    @endforeach
                     <div class="page-num col-lg-7">
                         <ul>
                             <li><a href="#">previous</a></li>

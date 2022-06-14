@@ -12,11 +12,7 @@
                         </a>
                     </div>
 
-                    <p class="forum_desc">Description
-
-                    </p>
-
-
+                    <p class="forum_desc">{{ Str::limit($category->category_description , 100) }}</p>
 
                 </div>
 
@@ -35,7 +31,7 @@
                                 <p class="topi">Topics</p>
                                 <div class="combine">
                                     <img src="{{ asset('frontend/forums/img/message.png') }}"
-                                        alt="behavior img"><span>34</span>
+                                        alt="behavior img"><span>{{ $category->forums->count() }}</span>
                                 </div>
                             </div>
                         </div>
@@ -45,7 +41,8 @@
 
                         <div class="behavior-card-right  text-center comment_forum combine_2">
                             <p class="topi">Recent Activity</p>
-                            <div class="behavior-img-2"><span>Nov 22, 2021</span></div>
+
+                            <div class="behavior-img-2"><span>{{ date('M d ,Y', strtotime($category->created_at)) }}</span></div>
 
                         </div>
                     </div>

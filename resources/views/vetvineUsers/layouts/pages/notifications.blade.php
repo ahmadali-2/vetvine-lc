@@ -1,5 +1,10 @@
 @extends('vetvineUsers.dashboard_master')
 @section('dashboardcontent')
+<style>
+    .read-hide{
+        display: none !important;
+    }
+</style>
     <div class="chat_content">
         <div class="container">
             <div class="row">
@@ -22,7 +27,7 @@
                         </div>
                         <div class="box-body p-0" id="notif-board">
                             @foreach ($notifications as $notification)
-                                <div class="notification p-3 d-flex bg-light border-bottom osahan-post-header">
+                                <div class="notification hide{{ $notification->id }} p-3 d-flex bg-light border-bottom osahan-post-header">
                                     <div class="dropdown-list-image mr-3">
                                         <img class="rounded-circle"
                                             src="{{ asset('frontend/images/Profile-Images/' . $notification->user->profile_photo) }}"
@@ -30,7 +35,9 @@
                                     </div>
                                     <div class="font-weight-bold mr-3 noti_parent">
                                         <div class="post-title" class="text-truncate">
-                                            {{ $notification->posts->post_title }}</div>
+                                            {{ $notification->posts->post_title }}
+                                            <button data-id="{{ $notification->id }}" class="read-btn" >Mark as read</b>
+                                        </div>
                                         <div class="content">
                                             <div class="content_img">
                                                 <img class="profile-img"
@@ -39,14 +46,9 @@
                                             </div>
                                             <div class="small para_pad">{!! $notification->posts->post_description !!}</div>
                                         </div>
-
-                                        {{-- <div class="comment mt-2">
-                                            <div class="small mr-3"> <a href=""> <span>{{ $count_likes }}</span> <i
-                                                        class="fa fa-thumbs-up" aria-hidden="true"></i>
-                                                </a> </div>
-                                            <div class="small"> <a href=""> <span>3</span> <i
-                                                        class="fa fa-comments-o" aria-hidden="true"></i></a> </div>
-                                        </div> --}}
+                                        <div>
+                                            <p>{{ $notification->created_at->diffForHumans() }}</p>
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
@@ -80,9 +82,6 @@
                 </div>
             </div>
         </div>
-
-
-
     </div>
 @endsection
 @section('scripts')
@@ -128,6 +127,7 @@
                                                 <img class="profile-img" src="` + img + `"
                                                     alt="">
                                             </div>
+                                            div
                                             <div class="small para_pad">` + desc + `</div>
                                         </div>
                                     </div>
@@ -139,5 +139,24 @@
             count += 1;
             $("#countnotif").html(count);
         });
+
+        $(document).ready(function(){
+            $(".read-btn").click(function(){
+                let id = $(this).data('id');
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "{{ route('read.notification') }}",
+                    type: "post",
+                    data: {
+                        id: id
+                    },
+                    success: function(response){
+                        $(".hide"+id).addClass('read-hide');
+                    }
+                })
+            })
+        })
     </script>
 @endsection

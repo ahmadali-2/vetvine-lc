@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Admins\Forum\CategoryForum;
 use App\Models\Admins\Advertisement\Ad;
 use App\Models\Admins\Forum\Forum;
+use App\Models\Admins\Forum\Like;
 use App\Models\Admins\Forum\Post;
 use App\Models\Generals\Member;
+use App\Models\Likes;
 use App\Models\UserMemberAndNetworkLevel;
 use Exception;
 use Illuminate\Http\Request;
@@ -116,11 +118,11 @@ class ForumController extends Controller
     }
     public function frontendIndex()
     {
-        // dd('hjkds');
+
         $user=Auth::user();
         if($user)
         {
-        $categories   =   CategoryForum::all();
+        $categories   =   CategoryForum::with('forums')->get();
         $ads          =   Ad::all();
         $forums       =   Forum::all();
         return view('frontend.pages.forums.index',compact('categories','forums','ads'));

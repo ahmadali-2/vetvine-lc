@@ -1,9 +1,21 @@
 @extends('frontend.master')
 @section('content')
 <style>
-    #createpost input,#createpost textarea{
-        border: 1px solid #ced4da !important;
+    #createpost input,#createpost textarea , .textarea_border{
+        border: 2px solid #5c7c85 !important;
+
     }
+    #createpost .edit_post_btn{
+    border: none !important;
+    border-radius: 0px;
+    background: #f27222;
+    outline: none;
+}
+#createpost .edit_post_btn:hover{
+    background: transparent;
+    border: 2px solid #f27222 !important;
+    color:#f27222;
+}
 </style>
 <section class="main_banner_bottob_label"></section>
 <section class="become_member_area">
@@ -23,7 +35,7 @@
                         @method('put')
                         <input type="hidden" name="forum_id" value="{{$post->forum_id}}">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-12">
                                 <div class="form-group">
                                     <label for="post_title" class="control-label mb-1">Post Title</label>
                                     <input id="post_title" placeholder="Enter Title" name="post_title"
@@ -31,23 +43,14 @@
                                         value="{{ $post->post_title }}">
                                 </div>
                             </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <img src="@if($post->post_photo) {{ asset('/vetvineUsers/posts/'.$post->post_photo)}} @else {{asset('frontend/images/thumbnail.jfif')}} @endif" alt="" id="post-image" style="height: 200px;">
-                                    <button type="button" class="btn btn-dark mt-3" onclick="document.getElementById('post_photo').click()">Choose File</button>
-                                    <input type="file" style="visibility:hidden" name="post_photo" id="post_photo" onchange="document.getElementById('post-image').src = window.URL.createObjectURL(this.files[0])">
-                                    {{-- <label for="post_photo" class="control-label mb-1">Add Photo</label>
-                                    <input id="post_photo" placeholder="" name="post_photo"
-                                        type="file" class="form-control" aria-required="true" aria-invalid="false"
-                                        value="{{ $post->post_photo }}"> --}}
-                                </div>
-                            </div>
+
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <div class="form-group">
-                                    <label for="forum_description" class="control-label mb-1">Post
-                                        Description</label>
+                                <label for="forum_description" class="control-label mb-1">Post
+                                    Description</label>
+                                <div class="form-group textarea_border">
+
                                     <textarea class="form-control ckeditor" id="description" rows="3" name="description" value="{{ $post->post_description }}">{{ $post->post_description }}</textarea>
                                 </div>
                             </div>
@@ -69,9 +72,22 @@
                                             value="{{ $post->post_add_video }}">
                                     </div>
                                 </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group" style="    display: flex;
+                                    flex-direction: column;">
+                                        <img src="@if($post->post_photo) {{ asset('/vetvineUsers/posts/'.$post->post_photo)}} @else {{asset('frontend/images/thumbnail.jfif')}} @endif" alt="" id="post-image" style="height: 250px;">
+                                        <button type="button" class="btn btn-dark mt-3" onclick="document.getElementById('post_photo').click()">Choose File</button>
+                                        <input type="file" style="visibility:hidden" name="post_photo" id="post_photo" onchange="document.getElementById('post-image').src = window.URL.createObjectURL(this.files[0])">
+                                        {{-- <label for="post_photo" class="control-label mb-1">Add Photo</label>
+                                        <input id="post_photo" placeholder="" name="post_photo"
+                                            type="file" class="form-control" aria-required="true" aria-invalid="false"
+                                            value="{{ $post->post_photo }}"> --}}
+                                    </div>
+                                </div>
                             </div>
                         <div class="form-group text-center">
-                            <input type="submit" class="btn btn-primary mt-3" value="POST">
+                            <input type="submit" class="btn btn-primary mt-3 edit_post_btn" value="POST">
                         </div>
                     </form>
                 </div>

@@ -1,6 +1,11 @@
 @extends('frontend.master')
 @section('extra_css')
     <link rel="stylesheet" href="{{ asset('frontend/forums/css/style.css') }}" />
+    <style>
+        .forum_table button{
+            background: transparent !important
+        }
+    </style>
 @endsection
 @section('content')
     <main>
@@ -148,3 +153,26 @@
 </script>
 
 @endsection
+
+@section('scripts')
+<script>
+
+// function btnClicked(id){
+//     console.log(id);
+// }
+
+    // const targetDiv = document.getElementById("toggle");
+    // const btn = document.getElementById("toggle");
+    // btn.onclick = function () {
+    //   if (targetDiv.style.display !== "none") {
+    //     targetDiv.style.display = "none";
+    //   } else {
+    //     targetDiv.style.display = "block";
+    //   }
+    // };
+  </script>
+
+@endsection
+
+
+

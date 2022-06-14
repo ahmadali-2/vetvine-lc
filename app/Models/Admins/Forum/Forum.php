@@ -31,4 +31,9 @@ class Forum extends Model
     {
         return $this->belongsTo(CategoryForum::class,'category_id','id');
     }
+    public function likecount()
+    {
+        return $this->hasManyThrough(Like::class, Post::class);
+    }
+
 }

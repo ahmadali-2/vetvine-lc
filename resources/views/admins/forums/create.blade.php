@@ -85,6 +85,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="category_description" class="control-label mb-1">Category Description</label>
+                                        <textarea class="form-control" id="category_description" rows="3" name="category_description" value=""></textarea>
+                                    </div>
+                                </div>
+                            </div>
                             <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
                                 <span id="payment-button-amount">Submit</span>
                                 <span id="payment-button-sending" style="display:none;">Sending…</span>
