@@ -42,11 +42,10 @@
                         <div class="filter-div category-div forum_category_div">
                             <div id="fav_show_wrapper">
                                 <label for="fav_Show" id="fav_show_label">Category</label>
-                                <select name="fav_show" id="fav_show" class="filter-slect border select-m">
-                                    <option title="" value="" label=""></option>
-                                    @foreach ($categories as $item)
-                                    <option value="{{ $item->id }}">{{ $item->category_title }}
-                                    </option>
+                                <select name="fav_Show" id="fav_Show" class="filter-slect border select-m">
+                                    <option title="" value="0" label="Select Category" selected></option>
+                                    @foreach($categories as $category)
+                                        <option title="{{$category->category_title}}" value="{{$category->id}}" label="{{$category->category_title}}">{{$category->category_title}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -57,7 +56,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="" style="visibility:hidden ;">dd</label>
-                            <input type="text" placeholder="🔍 Search Here ....." class="form-control search_forum">
+                            <input id="category_search_field" type="text" placeholder="🔍 Search Here ....." class="form-control search_forum">
                         </div>
                     </div>
 
@@ -80,78 +79,15 @@
                 </div>
             </div>
             <div class="container">
-                @forelse ($categories as $category)
-                    <div class="specialty-info">
-
-                        <div class="topics-section col-lg-12 ">
-                            <div class="behavior-card col-lg-6 col-md-6">
-                                <div class="behavior-img"><img src="{{ asset('frontend/forums/img/heal-icon-1.png') }}"
-                                        alt="behavior img"></div>
-                                <div class="behavior-details ">
-                                    <div class="behavior-title">
-                                        <a href="{{ route('getForums', $category->id) }}">
-                                            <h2 class="uppercase">{{ $category->category_title ?? '' }}</h2>
-                                        </a>
-                                    </div>
-
-                                    <p class="forum_desc">{{ Str::limit($category->category_description , 100) }}</p>
-
-                                </div>
-
-                                {{-- <p class="forum_desc">
-
-                                </p> --}}
-
-
-
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="row">
-                                    <div class="date-ms  col-lg-6 col-md-6 col-sm-6 max_width_screen">
-                                        <div class="behavior-card-right  text-center comment_forum">
-                                            <div class="behavior-img-2">
-                                                <p class="topi">Topics</p>
-                                                <div class="combine">
-                                                    <img src="{{ asset('frontend/forums/img/message.png') }}"
-                                                        alt="behavior img"><span>{{ $category->forums->count() }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="date-ms  col-lg-6 col-md-6 col-sm-6 max_width_screen">
-
-                                        <div class="behavior-card-right  text-center comment_forum combine_2">
-                                            <p class="topi">Recent Activity</p>
-
-                                            <div class="behavior-img-2"><span>{{ date('M d ,Y', strtotime($category->created_at)) }}</span></div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-
-                    </div>
-                @empty
-                    <h3>Not Found!</h3>
-                @endforelse
-
-
-
+                <div id="render-form-category-div">
+                    @include('frontend.pages.forums.form_category_data')
+                </div>
             </div>
         </div>
     </section>
 
 
-
-    {{-- ============================================================================ --}}
-
-    {{-- <section class="main_banner_bottob_label"></section>
+    <section class="main_banner_bottob_label"></section>
 
     <section class="become_member_area">
         <div class="container">
@@ -210,7 +146,6 @@
                                 </div>
                             </div>
                         @endforeach
-                    @endforeach
                     <div class="page-num col-lg-7">
                         <ul>
                             <li><a href="#">previous</a></li>
@@ -258,4 +193,32 @@
         </div>
     </div>
 </section> --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+        $('#fav_Show').on('change',function(){
+            filterFormCategory();
+        });
+
+        $('#category_search_field').on('keyup',function(){
+            filterFormCategory();
+        });
+
+        function filterFormCategory(){
+            var category = $('#fav_Show').val();
+            var category_search_field = $('#category_search_field').val();
+
+			$.ajax({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+			},
+			type: "POST",
+			url: '/search-form-category',
+			data: {category: category, category_title_text: category_search_field},
+			success: function(response){
+                $('#render-form-category-div').empty();
+                $('#render-form-category-div').append(response.html);
+			}
+			});
+        }
+</script>
 @endsection
