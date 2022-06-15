@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Admins\Forum\CategoryForum;
 use App\Models\Admins\Forum\Forum;
 use App\Models\Admins\Forum\ForumPost;
+use App\Models\Admins\VideosonDemand\VideosOnDemand;
 use App\Models\Admins\Webinar\CategoryEvent;
 use App\Models\Admins\Webinar\Event;
 use App\Models\Admins\Webinar\ReviewRating;
@@ -95,7 +96,7 @@ class HomeController extends Controller
         return view('frontend.pages.webinars.upcoming-eventsdetails',compact('eventdetail','category'));
 
     }
-    
+
     public function searceducations(Request $request)
     {
         $this->dashboard['filters'] = Event::with('events');
@@ -146,7 +147,10 @@ class HomeController extends Controller
     }
 
     public function videosOnDemand(){
-        return view('frontend.pages.videos-on-demand');
+        return view('frontend.pages.videos-on-demand', [
+            'videos'   => VideosOnDemand::all(),
+            'category' => CategoryEvent::all()
+        ]);
     }
     public function ceArchives(){
         return view('frontend.pages.ce-archives');
