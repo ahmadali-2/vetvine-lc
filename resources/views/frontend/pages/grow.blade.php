@@ -71,7 +71,7 @@
   <section class="become_member_area become_member_area_bottom">
     <div class="container">
       <h2>
-        <span>FORUMS</span>
+        <span>Educational Resources</span>
       </h2>
       <div class="row">
         <div class="col-sm-6 col-md-6 line_member_box">

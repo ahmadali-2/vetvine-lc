@@ -97,7 +97,7 @@
                                         </div>
                                         <div class="serch-section">
                                             <div class="inner-input">
-                                                <label>Licensure State(s) & Numbers (s)*</label>
+                                                <label>Licensure*</label>
                                                 <div class="input_field">
                                                     <input placeholder="" class="form-control" name="licensure"
                                                         id="licensure" value="{{ Auth::user()->licence_no }} ">
