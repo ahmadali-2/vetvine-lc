@@ -380,7 +380,6 @@ input:focus {
 .droplink:hover .nav-anchor,
 .droplink:hover .nav-sub-hed {
     background-color: transparent;
-
     text-decoration: underline;
     text-decoration-line: 2px;
     text-decoration-thickness: 2px;
@@ -2659,14 +2658,14 @@ select#fav_show:focus>option:checked {
 
 .video-bottom-description h5 {
     font-family: 'Museo Sans 700';
-    font-size: 13px;
+    font-size: 14px;
     color: #507f87;
     margin-bottom: 0rem !important;
 }
 
 .video-bottom-description p {
     font-family: "Museo Sans 500";
-    font-size: 11px;
+    font-size: 14px;
     color: #507f87;
     text-transform: uppercase;
     margin-bottom: -7px;
@@ -2674,7 +2673,7 @@ select#fav_show:focus>option:checked {
 
 .video-bottom-description .para-decription {
     font-family: "Museo Sans 500";
-    font-size: 13px;
+    font-size: 14px;
     color: #507f87;
     text-transform: initial;
     margin-bottom: 18px;
@@ -3572,7 +3571,7 @@ select#fav_show:focus>option:checked {
 }
 
 .registration-tab .form-check label {
-    font-size: 16px;
+    font-size: 17px;
 }
 
 .form-vet-section h6 {
@@ -6011,7 +6010,7 @@ select#fav_show:focus>option:checked {
 
 .registraion_form_pop_up ul li:hover {
     background: #f27222;
-    color: #fff !important;
+    color: #f27222 !important;
 }
 
 .registraion_form_pop_up ul li label:hover {
@@ -6074,7 +6073,8 @@ select#fav_show:focus>option:checked {
     width: 210px;
     text-align: left;
     margin-left: 10px;
-    border: none !important
+    border: none !important;
+    font-size: 14px;
 }
 
 
@@ -7340,9 +7340,9 @@ ul {
 }
 
 .sidebar-new ul li .new_active {
-    background-color: #f27222;
+    background-color: #f8f8f8;
     width: 100%;
-    color: #fff;
+    color: #f27222;
 }
 
 .forum_bg {
@@ -7365,8 +7365,6 @@ ul {
     border-radius: 0px;
     position: relative;
 }
-
-
 
 #fav_show_wrapper,
 #fav_show {
@@ -7907,6 +7905,7 @@ ul {
 .upcoming_view_all {
     color: #f27222;
     font-weight: bold;
+    font-size: 20px;
 }
 
 @media (max-width: 767px) {
@@ -7950,17 +7949,11 @@ ul {
     .rating_box {
         min-width: 100%;
     }
-<<<<<<< HEAD
-
     .droplink:hover .nav-anchor,
-.droplink:hover .nav-sub-hed {
-    background-color: transparent;
-
-    text-decoration: none;
-
-}
-=======
->>>>>>> a570d2bd0e3ddedabafa2be9fba005df62be1523
+    .droplink:hover .nav-sub-hed {
+        background-color: transparent;
+        text-decoration: none;
+    }
 }
 
 
@@ -8071,52 +8064,78 @@ ul {
     border-radius: 50%;
 }
 
-@media(max-width:850px) and  (min-width:768px){
-
-    .top-social{
+@media(max-width:850px) and (min-width:768px) {
+    .top-social {
         min-width: 91%;
-    margin-left: 120px;
+        margin-left: 120px;
     }
 }
-@media(max-width:1260px) and  (min-width:1200px){
 
-
-
+@media(max-width:1260px) and (min-width:1200px) {
     .user_dashbaord_container {
         max-width: 95%;
     }
 }
 
-
-@media (min-width: 320px) and (max-width: 767px){
+@media (min-width: 320px) and (max-width: 767px) {
     .nav-wrapper-one .droplink {
         border-bottom: 1px solid #507f87 !important;
         padding-bottom: 5px;
     }
-
-    }
-
-    @media only screen and (max-width: 767px){
-.edit-profile-list .subdrop {
-    top: 59px;
 }
 
-
-
+@media only screen and (max-width: 767px) {
+    .edit-profile-list .subdrop {
+        top: 59px;
     }
+}
 
-    @media only screen and (max-width: 991px){
-        .navbar-nav .dropdown-menu {
-            position: static;
-            float: none;
-            padding-left: 10px;
-        }
-
-
+@media only screen and (max-width: 991px) {
+    .navbar-nav .dropdown-menu {
+        position: static;
+        float: none;
+        padding-left: 10px;
     }
+}
 
-    .modal-content .btn-danger{
+.modal-content .btn-danger {
+    background-color: #f27222 !important
+}
 
-        background-color: #f27222 !important
-    }
+.listItemA a:hover {
+    color: #f27222 !important;
+}
 
+.registraion_form_pop_up .tab_1_section li:hover {
+    background: #f8f8f8 !important;
+}
+
+.registraion_form_pop_up .tab_2_section li:hover {
+    background: #f8f8f8 !important;
+}
+
+.registraion_form_pop_up .tab_3_section li:hover {
+    background: #f8f8f8 !important;
+}
+
+.registraion_form_pop_up .tab_4_section li:hover {
+    background: #f8f8f8 !important;
+}
+
+.registraion_form_pop_up ul li label:hover {
+    color: #f27222 !important;
+}
+
+.active_li {
+    background: #f8f8f8 !important;
+}
+
+.registraion_form_pop_up ul .active_li label {
+    color: #f27222 !important;
+}
+
+.registraion_form_pop_up ul .form-check {
+    position: relative;
+    display: block;
+    padding-left: 0.5rem;
+}
