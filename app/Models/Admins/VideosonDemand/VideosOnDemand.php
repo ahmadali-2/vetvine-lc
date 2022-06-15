@@ -2,14 +2,15 @@
 
 namespace App\Models\Admins\VideosonDemand;
 
+use App\Models\Admins\Webinar\CategoryEvent;
+use App\Models\Admins\Webinar\SponserTable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Admins\Webinar\CategoryEvent;
 
 class VideosOnDemand extends Model
 {
     use HasFactory;
-    protected $fillable =[
+    protected $fillable = [
         'user_id',
         'video_title',
         'video_description',
@@ -18,12 +19,17 @@ class VideosOnDemand extends Model
         'presented_by',
         'status',
         'category_id',
-        'sponser_id'
+        'sponser_id',
     ];
 
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(CategoryEvent::class, 'category_id');
     }
 
-    
+    public function sponsers()
+    {
+        return $this->belongsToMany(SponserTable::class, 'videos_on_demands_sponser_tables', 'video_id', 'sponsers_id');
+    }
+
 }

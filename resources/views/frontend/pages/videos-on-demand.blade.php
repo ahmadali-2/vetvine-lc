@@ -70,7 +70,16 @@
                     </li>
                     <li class="last_li">
                         <label>Sponsor</label>
-                        <input type="text" class=" form-control sponser" name="sponser" id="sponser">
+                        <div class="form-group">
+                            <select name="sponser_id" id="sponser_id" class="form-control filter-slect mt-3 sponser_id ">
+                                <option value="" selected disabled >Select Sponsor</option>
+                                @forelse ($sponsor as $item)
+                                    <option value="{{ $item->id }}">{{ $item->sponser_name }}</option>
+                                @empty
+                                    <h5>No Data found1</h5>
+                                @endforelse
+                            </select>
+                        </div>
                     </li>
                     <li>
                         <button class="btn filter-searchBtn search_btn_hover" id="search" type="button">Search</button>
@@ -149,10 +158,14 @@
                                 title: $("#title").val(),
                                 category: $("#category_id").val(),
                                 presenter: $("#presenter").val(),
-                                sponser: $("#sponser").val(),
+                                sponser: $("#sponser_id").val(),
                             },
                             success: function(response){
                                 console.table(response);
+                                // $(response).each(function(){
+                                //     console.table(response);
+                                //     // console.table(response.sponser_name);
+                                // })
                             }
                         })
                     })
