@@ -184,6 +184,9 @@ Route::resource('eventpayments',EventPaymentController::class);
 Route::get('faqs',[HomeController::class,'faqs'])->name('faqs');
 Route::get('frontend-news',[NewsController::class,'frontIndex'])->name('newsfrontend');
 Route::get('frontend-forums',[ForumController::class,'frontendIndex'])->name('forumsfrontend');
+Route::post('search-form-category',[ForumController::class,'searchFormCategory'])->name('searchFormCategory');
+Route::post('search-category-form',[ForumController::class,'searchCategoryForm'])->name('searchCategoryForm');
+Route::post('search-form-post',[ForumController::class,'searchFormPosts'])->name('searchFormPosts');
 Route::get('forums/{id}',[ForumController::class,'getForums'])->name('getForums');
 Route::get('forum/posts/{id}',[ForumController::class,'getForumPosts'])->name('getForumPosts');
 
