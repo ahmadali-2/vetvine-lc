@@ -30,19 +30,81 @@ class ForumController extends Controller
     }
 
     public function getForums($categoryId){
+        $forums = Forum::with('category')->where('category_id',$categoryId)->get();
+        $categories   =   CategoryForum::all();
+        return view('frontend.pages.forums.forum',compact('forums','categories','categoryId'));
+    }
 
-        $forums = Forum::with('category','posts','likecount')->where('category_id',$categoryId)->get();
-        $category = CategoryForum::all();
-        $data = [];
-        // dd($forums[0]->likecount->sum('like'));
-        // $sumnlike = Post::with('likes')->where('forum_id',$categoryId)->first();
-        // $sumcount = Like::where('post_id',$sumnlike->id)->get();
-        return view('frontend.pages.forums.forum',compact('forums','data','category'));
+    public function searchFormCategory(Request $request){
+        $categories = null;
+        if($request->category > 0 && isset($request->category_title_text)){
+            $categories = CategoryForum::where('id',$request->category) ->where('category_title', 'LIKE', '%' . $request->category_title_text . '%')->get();
+        }elseif($request->category > 0){
+            $categories = CategoryForum::where('id',$request->category)->get();
+        }
+        elseif($request->category == 0 && isset($request->category_title_text)){
+            $categories = CategoryForum::where('category_title', 'LIKE', '%' . $request->category_title_text . '%')->get();
+        }
+        elseif(isset($request->category_title_text) == false){
+            $categories = CategoryForum::get();
+        }
+        return response()->json([
+            'html' => view('frontend.pages.forums.form_category_data',compact('categories'))->render(),
+        ]);
+    }
+    
+    public function searchCategoryForm(Request $request){
+        $forums = null;
+        if($request->category > 0 && isset($request->title_text)){
+            $forums = Forum::with('category')->where('category_id',$request->category)->where('forum_title', 'LIKE', '%' . $request->title_text . '%')->get();
+        }elseif($request->category > 0){
+            $forums = Forum::with('category')->where('category_id',$request->category)->get();
+        }
+        elseif($request->category == 0 && isset($request->title_text)){
+            $forums= Forum::with('category')->where('category_id',$request->originalCategoryId)->where('forum_title', 'LIKE', '%' . $request->title_text . '%')->get();
+        }
+        elseif(isset($request->title_text) == false){
+            $category_id = $request->category;
+            if($category_id == 0){
+                $category_id = $request->originalCategoryId;
+            }
+            $forums = Forum::with('category')->where('category_id',$category_id)->get();
+        }
+        return response()->json([
+            'html' => view('frontend.pages.forums.category_wise_form',compact('forums'))->render(),
+            'count' => count($forums),
+        ]);
+    }
+
+    public function searchFormPosts(Request $request){
+        $posts = null;
+        if($request->form > 0 && isset($request->title_text)){
+            $posts = Post::with('user')->where('forum_id',$request->form)->where('post_title', 'LIKE', '%' . $request->title_text . '%')->where('post_description', 'LIKE', '%' . $request->title_text . '%')->get();
+        }elseif($request->form > 0){
+            $posts = Post::with('user')->where('forum_id',$request->form)->get();
+        }
+        elseif($request->form == 0 && isset($request->title_text)){
+            $posts = Post::with('user')->where('forum_id',$request->originalFormId)->where('post_title', 'LIKE', '%' . $request->title_text . '%')->where('post_description', 'LIKE', '%' . $request->title_text . '%')->get();
+        }
+        elseif(isset($request->title_text) == false){
+            $form_id = $request->form;
+            if($form_id == 0){
+                $form_id = $request->originalFormId;
+            }
+            $posts = Post::with('user')->where('forum_id',$form_id)->get();
+        }
+
+        return response()->json([
+            'html' => view('frontend.pages.forums.form_posts_view',compact('posts'))->render(),
+            'count' => count($posts),
+        ]);
     }
 
     public function getForumPosts($forumId){
-        $posts = Post::with('user','likes')->where('forum_id',$forumId)->get();
-        return view('frontend.pages.forums.forumscategory_post',compact('posts','forumId'));
+        $forums = Forum::with('category')->get();
+        $posts = Post::with('user')->where('forum_id',$forumId)->get();
+        // $posts = Post::where('forum_id',$forumId)->get();
+        return view('frontend.pages.forums.forumscategory_post',compact('posts','forums','forumId'));
     }
     public function getForumcategoryPosts($forumcategorypostId){
 
@@ -71,7 +133,6 @@ class ForumController extends Controller
             return redirect('login');
         }
     }
-
     /**
      * Show the form for creating a new resource.
      *

@@ -127,7 +127,7 @@
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i
             class="menu-icon fa fa-table"></i>Static Pages</a>
     <ul class="sub-menu children dropdown-menu">
-        <li><i class="fa fa-table"></i><a href="{{ route('TermsAndConditions') }}">Terms & Conditions</a></li>
+        <li><i class="fa fa-table"></i><a href="{{ route('TermsCondition.create') }}">Terms & Conditions</a></li>
     </ul>
 </li>
 </ul>

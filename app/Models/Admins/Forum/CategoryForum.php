@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CategoryForum extends Model
 {
     use HasFactory;
-    protected $fillable=['category_title','category_description'];
+    protected $fillable=['id','category_title','category_description'];
 
     public function forums()
     {

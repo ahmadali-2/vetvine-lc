@@ -7,6 +7,7 @@ use App\Events\NotificationEvent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\SocialController;
 use App\Http\Controllers\Auth\UserTypeController;
+use App\Http\Controllers\Admins\VideosOnDemand\VideosOnDemandController; // videos on demands
 
 // Admin And Super Admin Routes;
 use App\Http\Controllers\Admins\AdminDashboardController;
@@ -146,7 +147,7 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
     Route::post('videodata',[VideosOnDemandController::class,'videodata'])->name('videoajaxdata');
     Route::resource('buyevent-users',BuyEventController::class);
     Route::get('userevent-history/{id}', [BuyEventController::class, 'usereventHistory'])->name('usereventhistory');
-    Route::get('terms-and-conditions', [StaticPageController::class, 'TermsAndConditions'])->name('TermsAndConditions');
+    // Route::get('terms-and-conditions', [StaticPageController::class, 'TermsAndConditions'])->name('TermsAndConditions');
     Route::get('terms-and-conditions/add', [StaticPageController::class, 'TermsAndConditionsAdd'])->name('TermsCondition.create');
     Route::post('terms-and-conditions/add-terms', [StaticPageController::class, 'TermsAndConditionsAddDb'])->name('TermsCondition.create.db');
 
@@ -184,6 +185,9 @@ Route::resource('eventpayments',EventPaymentController::class);
 Route::get('faqs',[HomeController::class,'faqs'])->name('faqs');
 Route::get('frontend-news',[NewsController::class,'frontIndex'])->name('newsfrontend');
 Route::get('frontend-forums',[ForumController::class,'frontendIndex'])->name('forumsfrontend');
+Route::post('search-form-category',[ForumController::class,'searchFormCategory'])->name('searchFormCategory');
+Route::post('search-category-form',[ForumController::class,'searchCategoryForm'])->name('searchCategoryForm');
+Route::post('search-form-post',[ForumController::class,'searchFormPosts'])->name('searchFormPosts');
 Route::get('forums/{id}',[ForumController::class,'getForums'])->name('getForums');
 Route::get('forum/posts/{id}',[ForumController::class,'getForumPosts'])->name('getForumPosts');
 
@@ -241,5 +245,6 @@ Route::get('testing', function () {
     return "working!";
 });
 
-Route::get('/video-description', [VideoDescriptionController::class, 'video_desc'])->name('video_desc');
+Route::get('/video-description/{id}{category}', [VideoDescriptionController::class, 'video_desc'])->name('video_desc');
+Route::post('/videos-search', [VideoDescriptionController::class, 'video_search'])->name('videos.search');
 Route::post('/mark-as-read',     [PushNotificationController::class, 'mark_as_read'])->name('read.notification');

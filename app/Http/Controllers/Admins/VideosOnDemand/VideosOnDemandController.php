@@ -4,10 +4,14 @@ namespace App\Http\Controllers\Admins\VideosOnDemand;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admins\VideosonDemand\VideosOnDemand;
+use App\Models\Admins\Webinar\CategoryEvent;
 use Exception;
 use vetvineHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Admins\Webinar\SponserTable;
+// use App\Models\Sponser;
+// use Sponser
 
 class VideosOnDemandController extends Controller
 {
@@ -29,7 +33,11 @@ class VideosOnDemandController extends Controller
      */
     public function create()
     {
-        return view('admins.videosondemand.create');
+        $category = CategoryEvent::all();
+        return view('admins.videosondemand.create', [
+            'category' => $category,
+            'sponsor'  => SponserTable::all()
+        ]);
     }
 
     /**
@@ -40,10 +48,13 @@ class VideosOnDemandController extends Controller
      */
     public function store(Request $request)
     {
+        return $request;
         $input  = $request->all();
+        // dd( $input);
         $user   = Auth::user()->id;
         $path   = public_path('vetvineUsers/videos/');
         $video  = vetvineHelper::saveImage($request->post_add_video, $path);
+        // return $video;
         try{
             $videos  = VideosOnDemand::create([
             "user_id"            => $user,
@@ -52,7 +63,14 @@ class VideosOnDemandController extends Controller
             "video_description"  => ucfirst($input['video_description']),
             "post_add_video"     => $video,
             "presented_by"       => $input['presented_by'],
+            'category_id'        => $input['category']
             ]);
+            // foreach
+            if($videos->wasRecentlyCreated){
+                foreach($request->sponser_id as $item){
+                    $video->
+                }
+            }
         parent::successMessage('Video saved successfully.');
         return redirect(route('videos-on-demand.index'));
         } catch(Exception $e) {
