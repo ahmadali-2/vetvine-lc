@@ -49,6 +49,18 @@ class MemberTypeController extends Controller
                             ]);
                         }
                     }
+                    if($request->name == 'licensure'){
+
+                        if($request->checkbox3 == 'true'){
+                       MemberPermission::where('membertype_id',$id)->update([
+                           'licensure'  => '1',
+                       ]);
+                       }else if($request->checkbox3 == 'false'){
+                           MemberPermission::where('membertype_id',$id)->update([
+                               'licensure'  => '0',
+                           ]);
+                       }
+                   }
                 }else{
                     // dd('j');
                     $newMember = new MemberPermission();
@@ -68,6 +80,15 @@ class MemberTypeController extends Controller
                         }
                         else if($request->checkbox2 == 'false'){
                             $newMember->comments = '0';
+                        }
+                    }
+                    if($request->name == 'licensure'){
+                        if($request->checkbox3 == 'true'){
+
+                            $newMember->licensure = '1';
+                        }
+                        else if($request->checkbox3 == 'false'){
+                            $newMember->licensure = '0';
                         }
                     }
                     $newMember->membertype_id = $id;

@@ -18,7 +18,7 @@ class CreatePushNotificationsTable extends Migration
             $table->unsignedbigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedbigInteger('post_id');
-            $table->foreign('post_id')->references('id')->on('posts');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->timestamps();
         });
     }

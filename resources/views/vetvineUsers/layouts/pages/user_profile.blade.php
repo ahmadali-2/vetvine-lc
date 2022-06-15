@@ -33,6 +33,9 @@
                         </ul>
                     </div>
                 </div>
+                @php
+                    $permissions  = vetvineHelper::getUserTypePermissions(Auth::user()->type);
+               @endphp
                 <div class="col-12 col-sm-12 col-lg-9 col-xl-10 tab-content">
                     <div class="tab-pane active in" id="tabs-1">
                         <div class="general-area">
@@ -74,6 +77,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        {{-- @dd($usernetworks) --}}
                                         <div class="serch-section ">
                                             <div class="inner-input">
                                                 <label>I am a*</label>
@@ -96,6 +100,7 @@
                                             </div>
                                         </div>
                                         <div class="serch-section">
+                                            @if($permissions->licensure)
                                             <div class="inner-input">
                                                 <label>Licensure State(s) & Numbers (s)*</label>
                                                 <div class="input_field">
@@ -104,6 +109,7 @@
                                                     <span class="asteric" id="error4"></span>
                                                 </div>
                                             </div>
+                                            @endif
                                             <div class="serch-section">
                                                 <div class="inner-input">
                                                     <label>Timezone*</label>

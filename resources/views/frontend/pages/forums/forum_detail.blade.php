@@ -46,7 +46,7 @@
                             <div class="left-pro d-flex">
                                 <div class="comment_forum  pr-1"><img src="{{ asset('frontend/forums/img/user.png') }}"
                                         alt=""></div>
-                                <p class="mb-0 pl-2 pr-2">Admin</p>
+                                <p class="mb-0 pl-2 pr-2">{{ $forumcatgeorypost->user->name }}</p>
                                 <div class="comment_forum pl-1 "><img src="{{ asset('frontend/forums/img/crown.png') }}"
                                         alt=""></div>
                             </div>
@@ -130,7 +130,7 @@
                                 </div>
                                 <div class="comment_forum  d-flex align-items-center"><img
                                         src="{{ asset('frontend/forums/img/message.png') }}" alt="">
-                                    <div class="chat-veiw">0 comments</div>
+                                    <div class="chat-veiw">{{ $forumcatgeorypost->comments->count('comments')}} comments</div>
                                 </div>
                             </div>
                             <div class="similar">
