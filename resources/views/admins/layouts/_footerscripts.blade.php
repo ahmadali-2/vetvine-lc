@@ -52,7 +52,8 @@
     {!! JsValidator::formRequest('App\Http\Requests\Admin\Membership\CreatePlanCategoryRequest','#plancategory') !!}
     {!! JsValidator::formRequest('App\Http\Requests\Admin\Membership\CreatePlanRequest','#plan') !!}
     {!! JsValidator::formRequest('App\Http\Requests\Admin\Webinar\CreateSponserRequest','#createsponser') !!}
-   r
+    {!! JsValidator::formRequest('App\Http\Requests\TermsRequest','#terms-form') !!}
+
 
     @toastr_js
 
