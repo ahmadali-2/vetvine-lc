@@ -100,6 +100,7 @@
                                             </div>
                                         </div>
                                         <div class="serch-section">
+                                            @dd($permissions)
                                             @if($permissions->licensure)
                                             <div class="inner-input">
                                                 <label>Licensure*</label>

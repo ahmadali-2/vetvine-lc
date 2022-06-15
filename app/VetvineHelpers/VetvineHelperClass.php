@@ -4,6 +4,7 @@ namespace App\VetvineHelpers;
 use App\Models\Generals\TimeZone;
 use App\Models\Admins\GeneralSetting\GeneralSetting;
 use App\Models\MemberPermission;
+use App\Models\NewTimezone;
 use App\Models\User;
 use App\Models\UserMemberAndNetworkLevel;
 use File;
@@ -31,6 +32,11 @@ class VetVineHelperClass
      {
         return $timezones =TimeZone::all();
      }
+
+     public function newTimeZones(){
+        return $timezones = NewTimezone::all();
+     }
+     
      public function vetvineGeneralSetting(){
         return $vetvineGeneralSetting = GeneralSetting::where('id' , 1)->first();
      }
