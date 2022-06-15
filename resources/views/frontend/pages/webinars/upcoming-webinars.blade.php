@@ -94,16 +94,30 @@
                             ); --}}
                             @if (Auth::user())
                             @php
-                                // Time Convert Acoording to timezone
+                                    // Time Convert Acoording to timezone
                                     $eventTime      =   $showevents->time;
-                                    $timeZone       =   $showevents->user->timezone->name;
+                                    $timeZone       =   $showevents->user->timezone->timezone;
+                                
+                                    // Fetching timezone UTC code : Please don't screw it
+                                    $pieces = explode("(", $timeZone);
+                                    $pieces = explode("C", $pieces[1]);
+                                    $pieces = explode(")", $pieces[1]);
+                                    
+                                    // Formatting the time
+                                    $today          =  new DateTime($showevents->time, new DateTimeZone($pieces[0]));
 
-                                    $today          =   new DateTime($showevents->time, new DateTimeZone($timeZone));
-                                    $userTimeZone   =  Auth::user()->timezone->name;
-                                    $userEventTime  =  new DateTimeZone($userTimeZone);
+                                    $userTimeZone   =  Auth::user()->timezone->timezone;
+
+                                    // Fetching timezone UTC code : Please don't screw it
+                                    $pieces = explode("(", $userTimeZone);
+                                    $pieces = explode("C", $pieces[1]);
+                                    $pieces = explode(")", $pieces[1]);
+
+                                    $userEventTime  =  new DateTimeZone($pieces[0]);
                                     $convertedTime  =  $today->setTimeZone($userEventTime);
+
                                     $formattedTime  =  $convertedTime->format('H:i');
-                                @endphp
+                            @endphp
                              @endif
                             <div class="video-bottom-description">
                                 <h5 class="my-3">{{ date('m/d/Y', strtotime($showevents->date)) }}</h5>

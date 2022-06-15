@@ -26,6 +26,7 @@ class UserTypeController extends Controller
         }
 
         switch ($userType->type) {
+            
             case 1:
                 parent::successMessage("Super Admin Login Successfully");
                 return redirect('superadmin/dashboard');

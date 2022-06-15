@@ -21,7 +21,6 @@ class DatabaseSeeder extends Seeder
             LocaleSeeder::class,
             MemberTypeSeeder::class,
             MemberPermissionsSeeder::class,
-            NewTimezoneSeeder::class,
         ]);
     }
 }

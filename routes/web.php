@@ -107,7 +107,7 @@ Route::get('login', function(){
     return view('frontend.home');
 })->name('login');
 
-
+Route::get('must-verify',[UsersRegistrationController::class,'verifyEmailPopup'])->name('verifyEmailPopup');
 /**
  * Admin Routes
  */

@@ -33,10 +33,6 @@ class VetVineHelperClass
         return $timezones =TimeZone::all();
      }
 
-     public function newTimeZones(){
-        return $timezones = NewTimezone::all();
-     }
-     
      public function vetvineGeneralSetting(){
         return $vetvineGeneralSetting = GeneralSetting::where('id' , 1)->first();
      }

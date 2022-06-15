@@ -1,6 +1,5 @@
 @php
 $timezones = vetvineHelper::timezones();
-$newTimeZones = vetvineHelper::newTimeZones();
 @endphp
 
 <!-- Registeration Modal Form  Start-->
@@ -188,14 +187,14 @@ $newTimeZones = vetvineHelper::newTimeZones();
                                                     <select name="timezone" class="form-control input_click">
                                                         <option disabled selected>Select TimeZone</option>
 
-                                                        @foreach ($newTimeZones as $newTimeZone)
-                                                            @if (strpos($newTimeZone->timezone, 'Eastern') !== false)
-                                                                <option value="{{ $newTimeZone->id }}" selected>
-                                                                    {{ $newTimeZone->timezone }}
+                                                        @foreach ($timezones as $timezone)
+                                                            @if (strpos($timezone->timezone, 'Eastern') !== false)
+                                                                <option value="{{ $timezone->id }}" selected>
+                                                                    {{ $timezone->timezone }}
                                                                 </option>
                                                             @else
-                                                                <option value="{{ $newTimeZone->id }}">
-                                                                    {{ $newTimeZone->timezone }}
+                                                                <option value="{{ $timezone->id }}">
+                                                                    {{ $timezone->timezone }}
                                                                 </option>    
                                                             @endif
 
