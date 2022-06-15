@@ -126,7 +126,7 @@
                             <div class="small_screen">
                                 <div class="comment_forum  d-flex align-items-center"><img
                                         src="{{ asset('frontend/forums/img/view.png') }}" alt="">
-                                    <div class="chat-veiw">16 views</div>
+                                    <div class="chat-veiw">{{ str_pad( $forumcatgeorypost->postView->count('view_count'),2,"0",STR_PAD_LEFT)}} views</div>
                                 </div>
                                 <div class="comment_forum  d-flex align-items-center"><img
                                         src="{{ asset('frontend/forums/img/message.png') }}" alt="">
