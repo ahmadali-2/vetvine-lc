@@ -19,6 +19,7 @@ class CreateMemberPermissionsTable extends Migration
             $table->foreign('membertype_id')->references('id')->on('member_types')->onDelete('cascade');
             $table->enum('view_ads', ['0', '1'])->default(0);
             $table->enum('comments', ['0', '1'])->default(0);
+            $table->enum('licensure', ['0', '1'])->default(0);
             $table->timestamps();
         });
     }

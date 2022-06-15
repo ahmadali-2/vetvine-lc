@@ -101,17 +101,18 @@ class ForumController extends Controller
     }
 
     public function getForumPosts($forumId){
+
+        $posts = Post::with('user','likes','comments')->where('forum_id',$forumId)->get();
         $forums = Forum::with('category')->get();
-        $posts = Post::with('user')->where('forum_id',$forumId)->get();
-        // $posts = Post::where('forum_id',$forumId)->get();
         return view('frontend.pages.forums.forumscategory_post',compact('posts','forums','forumId'));
+
     }
     public function getForumcategoryPosts($forumcategorypostId){
 
         $categories   =   CategoryForum::all();
         $ads          =   Ad::all();
         $forums       =   Forum::all();
-        $forumcatgeorypost = Post::with('forum')->where('id',$forumcategorypostId)->first();
+        $forumcatgeorypost = Post::with('forum','comments','user')->where('id',$forumcategorypostId)->first();
         $relatedposts=Post::where('forum_id',$forumcatgeorypost->forum_id)->where('id', "!=" ,$forumcatgeorypost->id)->get();
         return view('frontend.pages.forums.forum_detail',compact('forumcatgeorypost','relatedposts','categories','forums','ads'));
 

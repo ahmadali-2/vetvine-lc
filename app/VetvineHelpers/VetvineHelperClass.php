@@ -3,6 +3,7 @@
 namespace App\VetvineHelpers;
 use App\Models\Generals\TimeZone;
 use App\Models\Admins\GeneralSetting\GeneralSetting;
+use App\Models\MemberPermission;
 use App\Models\User;
 use App\Models\UserMemberAndNetworkLevel;
 use File;
@@ -92,5 +93,9 @@ class VetVineHelperClass
 
     public function currentUserProfile(){
         return User::find(Auth::id());
+    }
+
+    public function getUserTypePermissions($type){
+       return MemberPermission::where('membertype_id',$type)->first();
     }
 }
