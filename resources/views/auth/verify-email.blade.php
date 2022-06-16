@@ -1,41 +1,25 @@
-<style>
-    .forgot_container{
-        padding: 30px 0px 50px 0px;
-    }
-    .box{
-        background-color: #e6e6e6;
-        padding: 30px;
-    }
-    </style>
 @extends('frontend.master')
 @section('content')
+    <main>
+        <section class="Section_top">
+            <div class="container">
+                <div class="flex-box-banner">
+                    <div class="grow_banner_box grow_banner_box_web home_box">
+                        <div class="grow-heading">
+                            <!-- </div> <img src="img/sep-line-2.jpg" width="250" height="2" alt="" class="line_image"> -->
 
-<div class="container forgot_container" style="margin-top:50px; margin-bottom:30px">
-    <div class="row">
+                            <p> A better life for animals and the humans <br> who care for them.</p>
 
-        <div class="col-md-6 mx-auto box">
-        <div class="mb-4 text-sm text-gray-600">
-        {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
-        </div>
-
-        @if (session('status') == 'verification-link-sent')
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ __('A new verification link has been sent to the email address you provided during registration.') }}
+                            <div class="line"></div>
+                            <a href="{{ route('why_vetvine') }}" class="btn btn-warning home_banner_btn">WHY VETVINE?</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-        @endif
-
-        <x-jet-validation-errors class="mb-4" />
-        <form method="POST" action="{{ route('verification.send') }}">
-                @csrf
-            <div class="flex items-center justify-center mt-4">
-                <x-jet-button type="submit">
-                    {{ __('Resend Verification Email') }}
-                </x-jet-button>
-            </div>
-        </form>
-        </div>
-</div>
-</div>
-
-
+        </section>
+    </main>
+    <script>
+        path = "{{route('verifyEmailPopup')}}";
+        window.location.href = path;
+    </script>
 @endsection

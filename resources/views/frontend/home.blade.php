@@ -18,6 +18,57 @@
         </div>
     </section>
 </main>
+@if(isset($verifyEmail))
+<div class="modal fade show" id="verify-email-modal" style="display: block;" aria-modal="true">
+        <div class="modal-dialog custum_popup">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+
+                    <div class="popup-header">
+                        <span class="popup-logo"><img src="{{ asset('frontend/images/popup-logo.png') }}" alt="logo"></span>
+                        <span class="close" id="email_verify_modal_close" data-dismiss="modal">&times;</span>
+                    </div>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="popup-body">
+                        <div class="row">
+                            <h2 style="border-bottom: 1px solid transparent !important;">Email Verification</h2>
+                            <div class="col-sm-12 mx-auto box" style="background-color: transparent;">
+                            <div class="mb-4 text-sm text-gray-600">
+                            {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
+                            </div>
+
+                            @if (session('status') == 'verification-link-sent')
+                                <div class="mb-4 font-medium text-sm text-green-600">
+                                    {{ __('A new verification link has been sent to the email address you provided during registration.') }}
+                                </div>
+                            @endif
+
+                            <x-jet-validation-errors class="mb-4" />
+                            <form method="POST" action="{{ route('verification.send') }}">
+                                    @csrf
+                                <div class="flex items-center justify-center mt-4">
+                                    <x-jet-button type="submit" style="margin-left: 20%;">
+                                        {{ __('Resend Verification Email') }}
+                                    </x-jet-button>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="popup-footer">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+</div>
+@endif
 <section class="main_banner_bottob_label">
     <div class="container">
         REGISTER TO ACCESS PET HEALTH EDUCATIONAL RESOURCES AND OTHER MEMBER BENEFITS
@@ -168,4 +219,13 @@
         </div>
     </div>
 </section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        if($('#email_verify_modal_close').length){
+            $('#email_verify_modal_close').on('click', function(){
+            $('#verify-email-modal').removeClass('show');
+            $('#verify-email-modal').css('display','none');
+        });
+        }
+    </script>
 @endsection
