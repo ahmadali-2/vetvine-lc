@@ -9,9 +9,7 @@ class TimeZone extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name',
-        'offset',
-        'diff_from_gtm',
-        
+        'id',
+        'timezone',
     ];
 }
