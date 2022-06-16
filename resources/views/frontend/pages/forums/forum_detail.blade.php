@@ -149,23 +149,56 @@
             {{-- @empty
         <h3>Not Found</h3>
         @endforelse --}}
-
     </section>
-    <section>
-        <div class="container">
-            <div class="advertising-sec">
-                <a href="{{ $ads[0]->banner_image_url}}" target="_blank">
-                    <div class="advertising-img-1"><img src="{{ asset('admin/advertisement/' . $ads[0]->ad_media) }}" alt=""></div>
-                </a>
-                <a href="{{ $ads[1]->banner_image_url}}" target="_blank">
-                    <div class="advertising-img-1"><img src="{{ asset('admin/advertisement/' . $ads[1]->ad_media) }}" alt=""></div>
-                </a>
-                <a href="{{ $ads[2]->banner_image_url}}" target="_blank">
-                    <div class="advertising-img-1"><img src="{{ asset('admin/advertisement/' . $ads[2]->ad_media) }}" alt=""></div>
-                </a>
+        <section>
+            <div class="container">
+                <div class="advertising-sec">
+                @if(count($ads) > 0)
+                    <a href="{{ $ads[0]->banner_image_url}}" target="_blank">
+                        <div class="advertising-img-1">
+                                @if(isset($ads[0]))
+                                    <img src="{{ asset('admin/advertisement/' . $ads[0]->ad_media) }}" alt="">
+                                @else
+                                    <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
+                                @endif
+                        </div>
+                    </a>
+                @else
+                        <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
+                @endif
+                @if(count($ads) > 0)
+                    <a href="{{ $ads[1]->banner_image_url}}" target="_blank">
+                        <div class="advertising-img-1">
+                            @if(count($ads) > 0)
+                                @if(isset($ads[1]))
+                                    <img src="{{ asset('admin/advertisement/' . $ads[1]->ad_media) }}" alt="">
+                                @else
+                                    <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
+                                @endif
+                            @else
+                                    <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
+                            @endif
+                        </div>
+                    </a>
+                @else
+                    <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
+                @endif
+                @if(count($ads) > 0)
+                    <a href="{{ $ads[2]->banner_image_url}}" target="_blank">
+                        <div class="advertising-img-1">
+                                @if(isset($ads[2]))
+                                    <img src="{{ asset('admin/advertisement/' . $ads[2]->ad_media) }}" alt="">
+                                @else
+                                    <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
+                                @endif
+                        </div>
+                    </a>
+                @else
+                        <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
+                @endif
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
     {{-- <div class="container">
         <div class="advertising-sec">
             <div class="advertising-img-1"><img src="{{ asset('frontend/forums/img/add-1.png') }}" alt=""></div>

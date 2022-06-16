@@ -159,6 +159,8 @@ Route::get("/page", function(){
  });
 
 Route::get('frontend-forums',[ForumController::class,'frontendIndex'])->name('forumsfrontend');
+Route::get('forums/{id}',[ForumController::class,'getForums'])->name('getForums');
+Route::resource('forums-posts',ForumPostController::class);
 
 Route::group(['middleware'=>['frontendUserRole']], function(){
     Route::get('/',function(){
@@ -190,7 +192,6 @@ Route::get('frontend-news',[NewsController::class,'frontIndex'])->name('newsfron
 Route::post('search-form-category',[ForumController::class,'searchFormCategory'])->name('searchFormCategory');
 Route::post('search-category-form',[ForumController::class,'searchCategoryForm'])->name('searchCategoryForm');
 Route::post('search-form-post',[ForumController::class,'searchFormPosts'])->name('searchFormPosts');
-Route::get('forums/{id}',[ForumController::class,'getForums'])->name('getForums');
 Route::get('forum/posts/{id}',[ForumController::class,'getForumPosts'])->name('getForumPosts');
 
 Route::get('category/forum/posts/{id}',[ForumController::class,'getForumcategoryPosts'])->name('getForumcategoryPosts');
@@ -223,7 +224,6 @@ Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetv
     //forum posts
     Route::get('create-forumpost/{id}',[ForumPostController::class,'createPost'])->name('createforumpost');
     Route::get('forumpostlist/{id}',[ForumPostController::class,'forumPostList'])->name('forumpostlist');
-    Route::resource('forums-posts',ForumPostController::class);
     //Forum-posts Comments Routes
     Route::post('/comment/store', [CommentController::class,'store'])->name('comment.add');
     Route::delete('comment-destroy/{id}', [CommentController::class,'destroy'])->name('comment.destroy');

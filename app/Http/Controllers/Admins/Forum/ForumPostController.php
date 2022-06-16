@@ -115,7 +115,6 @@ class ForumPostController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         try {
             $user   = Auth::user()->id;
             Post::find($id)->update([
