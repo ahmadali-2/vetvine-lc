@@ -201,6 +201,10 @@ Route::get('videos-on-demand',[HomeController::class,'videosOnDemand'])->name('v
 Route::get('ce-archives',[HomeController::class,'ceArchives'])->name('ceArchives');
 
 });
+    //Forum-posts Comments Routes
+    Route::post('/comment/store', [CommentController::class,'store'])->name('comment.add');
+    Route::post('savelike', [PostController::class,'likeSave'])->name('likesave');
+
 Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetvineUserRole']], function(){
     Route::get('dashboard',[PersonelInfoController::class,'userdashboard'])->name('userdashboard');
     Route::get('member-home',[PostController::class,'memberHome'])->name('member_home');
@@ -224,12 +228,8 @@ Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetv
     //forum posts
     Route::get('create-forumpost/{id}',[ForumPostController::class,'createPost'])->name('createforumpost');
     Route::get('forumpostlist/{id}',[ForumPostController::class,'forumPostList'])->name('forumpostlist');
-    //Forum-posts Comments Routes
-    Route::post('/comment/store', [CommentController::class,'store'])->name('comment.add');
     Route::delete('comment-destroy/{id}', [CommentController::class,'destroy'])->name('comment.destroy');
     Route::post('/reply/store', [CommentController::class,'replyStore'])->name('reply.add');
-    Route::post('savelike', [PostController::class,'likeSave'])->name('likesave');
-
 
     //User events Routes
     Route::post('review-store',[ReviewController::class, 'reviewstore'])->name('reviewstore');
