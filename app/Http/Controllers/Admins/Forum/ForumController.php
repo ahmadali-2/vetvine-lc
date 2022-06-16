@@ -8,6 +8,7 @@ use App\Models\Admins\Advertisement\Ad;
 use App\Models\Admins\Forum\Forum;
 use App\Models\Admins\Forum\Like;
 use App\Models\Admins\Forum\Post;
+use App\Models\Admins\Forum\PostView;
 use App\Models\Generals\Member;
 use App\Models\Likes;
 use App\Models\UserMemberAndNetworkLevel;
@@ -111,12 +112,29 @@ class ForumController extends Controller
     }
     public function getForumcategoryPosts($forumcategorypostId){
 
+
         $categories   =   CategoryForum::all();
         $ads          =   Ad::all();
         $forums       =   Forum::all();
-        $forumcatgeorypost = Post::with('forum','comments','user')->where('id',$forumcategorypostId)->first();
+        $forumcatgeorypost = Post::with('forum','comments','user','postView')->where('id',$forumcategorypostId)->first();
         $relatedposts=Post::where('forum_id',$forumcatgeorypost->forum_id)->where('id', "!=" ,$forumcatgeorypost->id)->get();
+        $this->createViewLog($forumcatgeorypost);
         return view('frontend.pages.forums.forum_detail',compact('forumcatgeorypost','relatedposts','categories','forums','ads'));
+
+    }
+    public function createViewLog($forumcatgeorypost) {
+        // dd($forumcatgeorypost);
+        $checkView =PostView::where('user_id',Auth()->user()->id)->where('post_id', $forumcatgeorypost->id)->first();
+        if($checkView == null){
+            $postViews= new PostView();
+            $postViews->post_id = $forumcatgeorypost->id;
+            $postViews->post_title = $forumcatgeorypost->post_title;
+            $postViews->view_count = 1;
+            $postViews->user_id = (auth()->check())?auth()->id():null;
+            $postViews->ip_address = request()->ip();
+            $postViews->agent = request()->header('User-Agent');
+            $postViews->save();
+        }
 
     }
     public function frontendIndex()
@@ -264,4 +282,5 @@ class ForumController extends Controller
             return redirect()->back();
         }
     }
+
 }
