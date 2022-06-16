@@ -19,7 +19,6 @@ class ManageUserController extends Controller
     public function index()
     {
         $allUsers =User::with('userMemberType')->where('type','!=','1')->get();
-
         return view('admins.generalsettings.manageusers.index',compact('allUsers'));
     }
 
