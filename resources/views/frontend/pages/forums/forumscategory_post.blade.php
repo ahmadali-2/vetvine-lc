@@ -48,8 +48,8 @@
 </section> --}}
     <section>
         <div class="container">
-            <div class="row">
-            <div class="col-lg-3 col-md-3">
+            <div class="row align-items-center mb-5">
+            <div class="col-lg-3 col-md-4">
                 <div class="filter-div category-div forum_category_div">
                     <div id="fav_show_wrapper">
                         <label for="fav_Show" id="fav_show_label">Category</label>
@@ -68,14 +68,29 @@
             </div>
 
 
-            <div class="col-md-3">
-                <div class="form-group">
+            <div class="col-md-4 col-lg-3 search_filter  search_bottom">
+                <label for="">Search </label>
+                <div class="input-group">
+
+
+
+                       <input type="text" class="form-control top-search" placeholder="" aria-label="Recipient's username" aria-describedby="basic-addon2">
+
+                       <div class="input-group-append">
+
+                           <button class="btn search_btn" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+
+                       </div>
+
+                   </div>
+                {{-- <div class="form-group">
                     <label for="" style="visibility:hidden ;">dd</label>
                     <input id="form_search_field" type="text" placeholder="🔍 Search Here ....." class="form-control search_forum">
-                </div>
+                </div> --}}
+
             </div>
 
-            <div class="col-md-3 ml-auto text-right ">
+            <div class="col-md-4 col-lg-3 ml-auto text-right ">
                 <a class="btn btn-primary post_btn " href="{{ route('createforumpost',$forumId ) }}">
                     Create Post
             </a>
@@ -85,7 +100,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    
+
                      <table class="table  forum_table table-bordered" id="form_posts_view_table">
                          <thead>
                              <tr>
