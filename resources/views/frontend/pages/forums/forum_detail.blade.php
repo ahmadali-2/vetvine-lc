@@ -66,7 +66,7 @@
                             <div class="chat-description">
                                 <p class="">{!! $forumcatgeorypost->post_description !!} </p>
                             </div>
-                            <div class="chat-like-comments">
+                            <div class="chat-like-comments" id="chat-like-comments">
                                 {{-- <div class="icons-like">
                                     <div class="comments-icon">
                                         <img src="img/like.png" alt="">
@@ -79,26 +79,29 @@
                                     </div>
                                 </div> --}}
                                 <div class="icon-btn my-3">
-                                    <div class="like-btn d-flex align-items-center">
-                                        <img src=" {{ asset('frontend/forums/img/thumb-up.png') }}" alt="">
-                                        <p class="mb-0 pl-2">Like</p>
-                                    </div>
-
-                                    <div class="like-btn d-flex align-items-center">
-                                        <img src="{{ asset('frontend/forums/img/chat-box.png') }}" alt="">
-                                        <p class="mb-0 pl-2">Comment</p>
-                                        {{-- @include('frontend.pages.forums.replies', [
-                                            'comments' => $forumcatgeorypost->comments,
-                                            'post_id' => $forumcatgeorypost->id,
-                                        ])
-                                        <hr /> --}}
-                                    </div>
-                                    <div class="like-btn d-flex align-items-center">
-                                        <img src="{{ asset('frontend/forums/img/curve-arrow.png') }}" alt="">
-                                        <p class="mb-0 pl-2">Share</p>
-                                    </div>
-
-
+                                    <a id="like_post" style="cursor: pointer;">
+                                        <div class="like-btn d-flex align-items-center">
+                                            <img src=" {{ asset('frontend/forums/img/thumb-up.png') }}" alt="">
+                                            <p class="mb-0 pl-2" id="like_text">Like</p>
+                                        </div>
+                                    </a>
+                                    <a id="comment_post" style="cursor: pointer;">
+                                        <div class="like-btn d-flex align-items-center">
+                                            <img src="{{ asset('frontend/forums/img/chat-box.png') }}" alt="">
+                                            <p class="mb-0 pl-2">Comment</p>
+                                            {{-- @include('frontend.pages.forums.replies', [
+                                                'comments' => $forumcatgeorypost->comments,
+                                                'post_id' => $forumcatgeorypost->id,
+                                            ])
+                                            <hr /> --}}
+                                        </div>
+                                    </a>
+                                     <a id="share_post" style="cursor: pointer;">
+                                        <div class="like-btn d-flex align-items-center">
+                                            <img src="{{ asset('frontend/forums/img/curve-arrow.png') }}" alt="">
+                                            <p class="mb-0 pl-2">Share</p>
+                                        </div>
+                                     </a>
                                 </div>
 
                             </div>
@@ -206,4 +209,44 @@
             <div class="advertising-img-3"><img src="{{ asset('frontend/forums/img/add-3.png') }}" alt=""></div>
         </div>
     </div> --}}
+    @section('scripts')
+        <script>
+            if('<?php echo $liked ?>' == true){
+                $('#like_post').css('color','#4886C8');
+                $('#like_text').html('<b>Liked</b>');
+            }
+            var postData = JSON.parse('<?php echo $forumcatgeorypost ?>');
+            $('#like_post').on('click', function(){
+                console.log(postData);
+                likePost();
+            });
+            
+            function likePost(){
+                $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                type: "POST",
+                url: '/savelike',
+                data: {likepostid: postData.id, postUserid: postData.user.id},
+                success: function(response){
+                    console.log(response.code);
+                    if(response.code == 200){
+                        $('#like_post').css('color','#4886C8');
+                        $('#like_text').html('<b>Liked</b>');
+                        toastr.success(response.message);
+                    }
+                    else if(response.code == 201){
+                        $('#like_post').css('color','black');
+                        $('#like_text').html('Like');
+                        toastr.success(response.message);
+                    }
+                    else if(response.code == 400){
+                        toastr.error(response.message);
+                    }
+                }
+                });
+            }
+        </script>
+    @endsection
 @endsection
