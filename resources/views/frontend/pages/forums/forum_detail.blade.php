@@ -220,7 +220,9 @@
                 console.log(postData);
                 likePost();
             });
-            
+            $('#comment_post').on('click', function(){
+                $('#comment').focus();
+            });
             function likePost(){
                 $.ajax({
                 headers: {
