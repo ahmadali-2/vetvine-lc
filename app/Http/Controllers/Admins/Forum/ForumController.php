@@ -139,20 +139,10 @@ class ForumController extends Controller
     }
     public function frontendIndex()
     {
-
-        $user=Auth::user();
-        if($user)
-        {
         $categories   =   CategoryForum::with('forums')->get();
         $ads          =   Ad::all();
         $forums       =   Forum::all();
         return view('frontend.pages.forums.index',compact('categories','forums','ads'));
-        }
-        else
-        {
-            parent::dangerMessage("Your Are Not Logged in, Please Login And Try  Again");
-            return redirect('login');
-        }
     }
     /**
      * Show the form for creating a new resource.
