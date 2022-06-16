@@ -55,8 +55,22 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3">
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <input id="form_search_field" type="text" placeholder="🔍 Search Here ....." class="form-control search_forum">
+                        </div> --}}
+
+                        <div class="input-group">
+
+                         {{-- <label for="">Search </label> --}}
+
+                            <input type="text" class="form-control top-search" placeholder="" aria-label="Recipient's username" aria-describedby="basic-addon2">
+
+                            <div class="input-group-append">
+
+                                <button class="btn search_btn" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+
+                            </div>
+
                         </div>
                     </div>
                 </div>
