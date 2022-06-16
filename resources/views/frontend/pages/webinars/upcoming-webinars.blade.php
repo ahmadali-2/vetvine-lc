@@ -92,17 +92,18 @@
                             {{-- @dd(
                                 $showevents
                             ); --}}
+                            {{-- @dd($showevents->user->timezone->timezone) --}}
                             @if (Auth::user())
                             @php
                                     // Time Convert Acoording to timezone
                                     $eventTime      =   $showevents->time;
-                                    $timeZone       =   $showevents->user->timezone->timezone;
-                                
+                                    $timeZone       = $showevents->user->timezone->timezone;
+
                                     // Fetching timezone UTC code : Please don't screw it
                                     $pieces = explode("(", $timeZone);
                                     $pieces = explode("C", $pieces[1]);
                                     $pieces = explode(")", $pieces[1]);
-                                    
+
                                     // Formatting the time
                                     $today          =  new DateTime($showevents->time, new DateTimeZone($pieces[0]));
 

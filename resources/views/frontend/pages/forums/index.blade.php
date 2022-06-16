@@ -53,17 +53,27 @@
                     </div>
 
 
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="" style="visibility:hidden ;">dd</label>
-                            <input id="category_search_field" type="text" placeholder="🔍 Search Here ....." class="form-control search_forum">
+                    <div class="col-md-3 index_forum_search">
+                        <label for="">Search</label>
+                        <div class="input-group">
+
+
+
+                            <input type="text" class="form-control top-search" placeholder="" aria-label="Recipient's username" aria-describedby="basic-addon2">
+
+                            <div class="input-group-append">
+
+                                <button class="btn search_btn" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+
+                            </div>
+
                         </div>
                     </div>
 
 
                     <div class="spci-title col-lg-3  col-md-3 d-flex justify-content-between pl-0 pr-0 text-center">
 
-                        <div class="specialty-detail w-100">
+                        <div class="specialty-detail w-100 justify-content-center">
 
 
                                 <h2 class="text-center text-capitalize">Topics</h2>

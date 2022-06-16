@@ -174,6 +174,7 @@
     margin-top: 10px;
     font-family: 'Museo 500';
 }
+
         /* End */
     </style>
     <section class="video-section-wrapper mb-4">
@@ -258,7 +259,7 @@
                     </div>
                     <div class="publication-detail">
                         <div class="publication-arrow-icon">
-                            <img src="{{ asset('frontend/img/arrow-right.png') }}"" alt=" arrow-right icon">
+                            <img src="{{ asset('frontend/img/arrow-right.png') }}" alt=" arrow-right icon">
                         </div>
                         <div class="public2-info">
                             <div class="public2-title">
@@ -276,26 +277,26 @@
                         </div>
                         <div class="public2-info d-flex justify-content-around">
                             <div class="public2-title">
-                                <input type="checkbox" class="check_class" id="first_price" name="event_price"
-                                    value="{{ $eventdetail->pet_owner_fee }}"> Pet Owner Fee :
-                                <label for="first_price"> ${{ $eventdetail->pet_owner_fee }} </label>
+                                <input type="radio" class="check_class" id="first_price" name="event_price"
+                                    value="{{ $eventdetail->pet_owner_fee }}">
+                                <label for="first_price">Pet Owner Fee : ${{ $eventdetail->pet_owner_fee }} </label>
                             </div>
                             <div class="public2-title">
-                                <input type="checkbox" id="second_price" class="check_class" name="event_price"
-                                    value="{{ $eventdetail->pet_owner_premium_fee }}"> Pet Owner Premium Fee
-                                :
-                                <label for="second_price"> ${{ $eventdetail->pet_owner_premium_fee }} </label>
+                                <input type="radio" id="second_price" class="check_class" name="event_price"
+                                    value="{{ $eventdetail->pet_owner_premium_fee }}">
+                                <label for="second_price">Pet Owner Premium Fee
+                                    : ${{ $eventdetail->pet_owner_premium_fee }} </label>
                             </div>
                             <div class="public2-title">
-                                <input type="checkbox" id="third_price" class="check_class" name="event_price"
-                                    value="{{ $eventdetail->vet_pet_prof_fee }}"> Vet/Pet Prof. Fee :
-                                <label for="third_price"> ${{ $eventdetail->vet_pet_prof_fee }}</label>
+                                <input type="radio" id="third_price" class="check_class" name="event_price"
+                                    value="{{ $eventdetail->vet_pet_prof_fee }}">
+                                <label for="third_price">Vet/Pet Prof. Fee : ${{ $eventdetail->vet_pet_prof_fee }}</label>
                             </div>
                             <div class="public2-title">
-                                <input type="checkbox" id="fourth_price" class="check_class" name="event_price"
-                                    value="{{ $eventdetail->vet_pet_prof_premium_fee }}"> Vet/Pet Prof. Premium
-                                Fee :
-                                <label for="fourth_price"> ${{ $eventdetail->vet_pet_prof_premium_fee }}</label>
+                                <input style="width: 20px;height:20px;" type="radio" id="fourth_price" class="check_class" name="event_price"
+                                    value="{{ $eventdetail->vet_pet_prof_premium_fee }}">
+                                <label for="fourth_price">Vet/Pet Prof. Premium
+                                    Fee : ${{ $eventdetail->vet_pet_prof_premium_fee }}</label>
                             </div>
                         </div>
                     </div>

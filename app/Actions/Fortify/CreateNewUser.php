@@ -41,8 +41,8 @@ class CreateNewUser implements CreatesNewUsers
 
          $this->checkUserDetail($user->email, $user->type);
          Auth::login($user);
+         event(new UserRegistered($user));
          try {
-            event(new UserRegistered($user));
         } catch (\Throwable $th) {
              return $user;
          }
