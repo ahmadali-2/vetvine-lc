@@ -8,6 +8,7 @@ use App\Models\Admins\Advertisement\Ad;
 use App\Models\Admins\Forum\Forum;
 use App\Models\Admins\Forum\Like;
 use App\Models\Admins\Forum\Post;
+use App\Models\Admins\Forum\PostView;
 use App\Models\Generals\Member;
 use App\Models\Likes;
 use App\Models\UserMemberAndNetworkLevel;
@@ -111,30 +112,41 @@ class ForumController extends Controller
     }
     public function getForumcategoryPosts($forumcategorypostId){
 
+
         $categories   =   CategoryForum::all();
         $ads          =   Ad::all();
         $forums       =   Forum::all();
-        $forumcatgeorypost = Post::with('forum','comments','user')->where('id',$forumcategorypostId)->first();
+        $forumcatgeorypost = Post::with('forum','comments','user','postView','likes')->where('id',$forumcategorypostId)->first();
+        $liked = false;
+        $like = Post::whereHas('likes', function($q) use($forumcategorypostId){
+            $q->where('id', $forumcategorypostId)->where('like',1);
+        })->first();
+        if(isset($like)){
+            $liked = true;
+        }
         $relatedposts=Post::where('forum_id',$forumcatgeorypost->forum_id)->where('id', "!=" ,$forumcatgeorypost->id)->get();
-        return view('frontend.pages.forums.forum_detail',compact('forumcatgeorypost','relatedposts','categories','forums','ads'));
+        $this->createViewLog($forumcatgeorypost);
+        return view('frontend.pages.forums.forum_detail',compact('forumcatgeorypost','relatedposts','categories','forums','ads','liked'));
 
+    }
+    public function createViewLog($forumcatgeorypost) {
+        // dd($forumcatgeorypost);
+        $checkView =PostView::where('ip_address',request()->ip())->where('post_id', $forumcatgeorypost->id)->first();
+        if($checkView == null){
+            $postViews= new PostView();
+            $postViews->post_id = $forumcatgeorypost->id;
+            $postViews->view_count = 1;
+            $postViews->ip_address = request()->ip();
+            $postViews->agent = request()->header('User-Agent');
+            $postViews->save();
+        }
     }
     public function frontendIndex()
     {
-
-        $user=Auth::user();
-        if($user)
-        {
         $categories   =   CategoryForum::with('forums')->get();
         $ads          =   Ad::all();
         $forums       =   Forum::all();
         return view('frontend.pages.forums.index',compact('categories','forums','ads'));
-        }
-        else
-        {
-            parent::dangerMessage("Your Are Not Logged in, Please Login And Try  Again");
-            return redirect('login');
-        }
     }
     /**
      * Show the form for creating a new resource.
@@ -266,4 +278,5 @@ class ForumController extends Controller
             return redirect()->back();
         }
     }
+
 }

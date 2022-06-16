@@ -35,11 +35,9 @@ class PostController extends Controller
     }
     public function likeSave(Request $request)
     {
-        // dd($request->likepostid);
+        if(auth()->user() && isset(auth()->user()->email_verified_at)){
         $liked = Like::where('user_id', Auth::id())->where('post_id', $request->likepostid)->first();
-        // dd($liked);
         if (!$liked) {
-            // dd('running');
             $push_notifications = event(new NotificationEvent(Auth::id(), (int) $request->likepostid));
             PushNotification::create([
                 'user_id' => Auth::id(),
@@ -50,16 +48,15 @@ class PostController extends Controller
 
             $liked = Like::create([
                 "post_id" => $request->likepostid,
-                "user_id" => $request->likeuserid,
+                "user_id" => Auth::id(),
                 "like" => 1,
             ]);
-
-
 
             return response()->json(
                 [
                     'success' => true,
                     'message' => 'Data inserted successfully',
+                    'code' => 200,
                     'like' => $liked,
                 ]
             );
@@ -72,7 +69,8 @@ class PostController extends Controller
             return response()->json(
                 [
                     'success' => true,
-                    'message' => 'Data inserted successfully',
+                    'message' => 'Post liked successfully!',
+                    'code' => 200,
                     'like' => $liked,
                 ]
             );
@@ -90,10 +88,18 @@ class PostController extends Controller
             return response()->json(
                 [
                     'success' => true,
-                    'message' => 'Data inserted successfully',
+                    'message' => 'Post unliked successfully',
+                    'code' => 201,
                     'like' => $liked,
                 ]
             );
+        }
+        }
+        else{
+            return response()->json([
+                'code' => 400,
+                'message' => 'Please login first!',
+            ]);
         }
     }
     /**

@@ -188,10 +188,16 @@ $timezones = vetvineHelper::timezones();
                                                         <option disabled selected>Select TimeZone</option>
 
                                                         @foreach ($timezones as $timezone)
-                                                            <option value="{{ $timezone->id }}">(
-                                                                {{ $timezone->diff_from_gtm }} )
-                                                                {{ $timezone->name . ' - ' . $timezone->offset }}
-                                                            </option>
+                                                            @if (strpos($timezone->timezone, 'Eastern') !== false)
+                                                                <option value="{{ $timezone->id }}" selected>
+                                                                    {{ $timezone->timezone }}
+                                                                </option>
+                                                            @else
+                                                                <option value="{{ $timezone->id }}">
+                                                                    {{ $timezone->timezone }}
+                                                                </option>    
+                                                            @endif
+
                                                         @endforeach
 
                                                     </select>

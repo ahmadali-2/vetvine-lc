@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,6 +20,7 @@ class DatabaseSeeder extends Seeder
             CountriesSeeder::class,
             LocaleSeeder::class,
             MemberTypeSeeder::class,
+            MemberPermissionsSeeder::class,
         ]);
     }
 }

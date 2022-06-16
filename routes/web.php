@@ -108,7 +108,7 @@ Route::get('login', function(){
     return view('frontend.home');
 })->name('login');
 
-
+Route::get('must-verify',[UsersRegistrationController::class,'verifyEmailPopup'])->name('verifyEmailPopup');
 /**
  * Admin Routes
  */
@@ -158,6 +158,11 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
 Route::get("/page", function(){
     return view("frontend.pages.forums.post_detail");
  });
+
+Route::get('frontend-forums',[ForumController::class,'frontendIndex'])->name('forumsfrontend');
+Route::get('forums/{id}',[ForumController::class,'getForums'])->name('getForums');
+Route::resource('forums-posts',ForumPostController::class);
+
 Route::group(['middleware'=>['frontendUserRole']], function(){
     Route::get('/',function(){
         return view('frontend.home');
@@ -186,11 +191,9 @@ Route::resource('eventpayments',EventPaymentController::class);
 
 Route::get('faqs',[HomeController::class,'faqs'])->name('faqs');
 Route::get('frontend-news',[NewsController::class,'frontIndex'])->name('newsfrontend');
-Route::get('frontend-forums',[ForumController::class,'frontendIndex'])->name('forumsfrontend');
 Route::post('search-form-category',[ForumController::class,'searchFormCategory'])->name('searchFormCategory');
 Route::post('search-category-form',[ForumController::class,'searchCategoryForm'])->name('searchCategoryForm');
 Route::post('search-form-post',[ForumController::class,'searchFormPosts'])->name('searchFormPosts');
-Route::get('forums/{id}',[ForumController::class,'getForums'])->name('getForums');
 Route::get('forum/posts/{id}',[ForumController::class,'getForumPosts'])->name('getForumPosts');
 
 Route::get('category/forum/posts/{id}',[ForumController::class,'getForumcategoryPosts'])->name('getForumcategoryPosts');
@@ -200,6 +203,10 @@ Route::get('videos-on-demand',[HomeController::class,'videosOnDemand'])->name('v
 Route::get('ce-archives',[HomeController::class,'ceArchives'])->name('ceArchives');
 
 });
+    //Forum-posts Comments Routes
+    Route::post('/comment/store', [CommentController::class,'store'])->name('comment.add');
+    Route::post('savelike', [PostController::class,'likeSave'])->name('likesave');
+
 Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetvineUserRole']], function(){
     Route::get('dashboard',[PersonelInfoController::class,'userdashboard'])->name('userdashboard');
     Route::get('member-home',[PostController::class,'memberHome'])->name('member_home');
@@ -223,13 +230,8 @@ Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetv
     //forum posts
     Route::get('create-forumpost/{id}',[ForumPostController::class,'createPost'])->name('createforumpost');
     Route::get('forumpostlist/{id}',[ForumPostController::class,'forumPostList'])->name('forumpostlist');
-    Route::resource('forums-posts',ForumPostController::class);
-    //Forum-posts Comments Routes
-    Route::post('/comment/store', [CommentController::class,'store'])->name('comment.add');
     Route::delete('comment-destroy/{id}', [CommentController::class,'destroy'])->name('comment.destroy');
     Route::post('/reply/store', [CommentController::class,'replyStore'])->name('reply.add');
-    Route::post('savelike', [PostController::class,'likeSave'])->name('likesave');
-
 
     //User events Routes
     Route::post('review-store',[ReviewController::class, 'reviewstore'])->name('reviewstore');

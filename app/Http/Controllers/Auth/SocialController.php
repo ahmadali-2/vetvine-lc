@@ -89,7 +89,7 @@ class SocialController extends Controller
                     'network_id'     => $network_type,
                     'password'       => Hash::make($newpassword),
                     'status'         => 1,
-                    'timezone_id'    => 133,
+                    'timezone_id'    => 16,
                 ]);
                 $newuser->markEmailAsVerified();
                 $this->checkUserDetail($newuser->email, $newuser->type);

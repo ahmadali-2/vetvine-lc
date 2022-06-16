@@ -103,12 +103,7 @@
                     {{-- @dd($forums) --}}
 
                     <tbody id="form_posts_render">
-                        @if(count($posts) > 0)
-                            @include('frontend.pages.forums.form_posts_view')
-                            <h3 id="form_posts_render_notFound" style="display: none;">Not Found!</h3>
-                        @else
-                            <h3 id="form_posts_render_notFound">Not Found!</h3>
-                        @endif
+                        @include('frontend.pages.forums.form_posts_view')
                     </tbody>
                 </table>
 
@@ -118,8 +113,9 @@
 </div>
 
     </section>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
+    @endsection
+    @section('scripts')
+    <script>
         var originalFormId = '<?php echo $forumId ?>';
 
         $('#form_search_dropdown').on('change',function(){
@@ -142,39 +138,14 @@
 			url: '/search-form-post',
 			data: {form: form, title_text: form_search_field, originalFormId: originalFormId},
 			success: function(response){
-                if(response.count > 0){
-                    $('#form_posts_render_notFound').css("display","none");
-                }else{
-                    $('#form_posts_render_notFound').css("display","block");
-                }
                 $('#form_posts_render').empty();
                 $('#form_posts_render').append(response.html);
 			}
 			});
         }
 </script>
-
 @endsection
 
-@section('scripts')
-<script>
-
-// function btnClicked(id){
-//     console.log(id);
-// }
-
-    // const targetDiv = document.getElementById("toggle");
-    // const btn = document.getElementById("toggle");
-    // btn.onclick = function () {
-    //   if (targetDiv.style.display !== "none") {
-    //     targetDiv.style.display = "none";
-    //   } else {
-    //     targetDiv.style.display = "block";
-    //   }
-    // };
-  </script>
-
-@endsection
 
 
 

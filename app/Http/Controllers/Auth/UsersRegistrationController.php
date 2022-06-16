@@ -11,6 +11,11 @@ use Validator;
 class UsersRegistrationController extends Controller
 {
 
+    public function verifyEmailPopup(){
+        $verifyEmail = true;
+        return view('frontend.home', compact('verifyEmail'));
+    }
+
     public function userRegisterationForm()
     {
         return view('frontend.auth.register');
@@ -32,8 +37,5 @@ class UsersRegistrationController extends Controller
         } else {
 
         }
-
     }
-
-
 }

@@ -120,10 +120,10 @@
                                                             @foreach ($timezones as $timezone)
                                                                 @if (isset(Auth::user()->timezone_id) && Auth::user()->timezone_id == $timezone->id)
                                                                     <option value='{{ $timezone->id }}' selected>
-                                                                        {{ $timezone->name }}</option>;
+                                                                        {{ $timezone->timezone }}</option>;
                                                                 @else
                                                                     <option value="{{ $timezone->id }}">
-                                                                        {{ $timezone->name }}</option>
+                                                                        {{ $timezone->timezone }}</option>
                                                                 @endif
                                                             @endforeach
                                                         </select>

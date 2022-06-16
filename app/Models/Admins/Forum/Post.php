@@ -4,6 +4,7 @@ namespace App\Models\Admins\Forum;
 
 use App\Models\PushNotification;
 use App\Models\User;
+use App\Models\Admins\Forum\PostView;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 // use App\Http\Controllers\PushNotificationController
@@ -52,6 +53,10 @@ class Post extends Model
     public function push_notifications()
     {
         return $this->hasMany(PushNotification::class, 'post_id');
+    }
+    public function postView()
+    {
+        return $this->hasMany(PostView::class);
     }
 
 }

@@ -18,9 +18,9 @@
                 <option value="">Select Time Zone</option>
                 @foreach ($timezones as $timezone )
                     @if (isset($user->timezone_id) && $user->timezone_id == $timezone->id)
-                        <option value="{{ $timezone->id }}" selected> {{ $timezone->diff_from_gtm}} ) {{$timezone->name .' - '. $timezone->offset }}</option>
+                        <option value="{{ $timezone->id }}" selected> {{ $timezone->timezone}}</option>
                     @else
-                        <option value="{{ $timezone->id }}"> {{ $timezone->diff_from_gtm}} ) {{$timezone->name .' - '. $timezone->offset }}</option>
+                        <option value="{{ $timezone->id }}"> {{ $timezone->timezone}}</option>
                     @endif
                     @endforeach
             </select>

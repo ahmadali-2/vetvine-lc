@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTimeZonesTable extends Migration
+class CreatePostViewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateTimeZonesTable extends Migration
      */
     public function up()
     {
-        Schema::create('time_zones', function (Blueprint $table) {
+        Schema::create('post_views', function (Blueprint $table) {
             $table->id();
-            $table->text('timezone');
+            $table->string("ip_address");
+            $table->string("agent");
+            $table->bigInteger("view_count");
+            $table->unsignedbigInteger('post_id');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ class CreateTimeZonesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('time_zones');
+        Schema::dropIfExists('post_views');
     }
 }

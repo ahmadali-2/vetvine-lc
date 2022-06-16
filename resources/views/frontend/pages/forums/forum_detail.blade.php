@@ -66,7 +66,7 @@
                             <div class="chat-description">
                                 <p class="">{!! $forumcatgeorypost->post_description !!} </p>
                             </div>
-                            <div class="chat-like-comments">
+                            <div class="chat-like-comments" id="chat-like-comments">
                                 {{-- <div class="icons-like">
                                     <div class="comments-icon">
                                         <img src="img/like.png" alt="">
@@ -79,26 +79,29 @@
                                     </div>
                                 </div> --}}
                                 <div class="icon-btn my-3">
-                                    <div class="like-btn d-flex align-items-center">
-                                        <img src=" {{ asset('frontend/forums/img/thumb-up.png') }}" alt="">
-                                        <p class="mb-0 pl-2">Like</p>
-                                    </div>
-
-                                    <div class="like-btn d-flex align-items-center">
-                                        <img src="{{ asset('frontend/forums/img/chat-box.png') }}" alt="">
-                                        <p class="mb-0 pl-2">Comment</p>
-                                        {{-- @include('frontend.pages.forums.replies', [
-                                            'comments' => $forumcatgeorypost->comments,
-                                            'post_id' => $forumcatgeorypost->id,
-                                        ])
-                                        <hr /> --}}
-                                    </div>
-                                    <div class="like-btn d-flex align-items-center">
-                                        <img src="{{ asset('frontend/forums/img/curve-arrow.png') }}" alt="">
-                                        <p class="mb-0 pl-2">Share</p>
-                                    </div>
-
-
+                                    <a id="like_post" style="cursor: pointer;">
+                                        <div class="like-btn d-flex align-items-center">
+                                            <img src=" {{ asset('frontend/forums/img/thumb-up.png') }}" alt="">
+                                            <p class="mb-0 pl-2" id="like_text">Like</p>
+                                        </div>
+                                    </a>
+                                    <a id="comment_post" style="cursor: pointer;">
+                                        <div class="like-btn d-flex align-items-center">
+                                            <img src="{{ asset('frontend/forums/img/chat-box.png') }}" alt="">
+                                            <p class="mb-0 pl-2">Comment</p>
+                                            {{-- @include('frontend.pages.forums.replies', [
+                                                'comments' => $forumcatgeorypost->comments,
+                                                'post_id' => $forumcatgeorypost->id,
+                                            ])
+                                            <hr /> --}}
+                                        </div>
+                                    </a>
+                                     <a id="share_post" style="cursor: pointer;">
+                                        <div class="like-btn d-flex align-items-center">
+                                            <img src="{{ asset('frontend/forums/img/curve-arrow.png') }}" alt="">
+                                            <p class="mb-0 pl-2">Share</p>
+                                        </div>
+                                     </a>
                                 </div>
 
                             </div>
@@ -126,7 +129,7 @@
                             <div class="small_screen">
                                 <div class="comment_forum  d-flex align-items-center"><img
                                         src="{{ asset('frontend/forums/img/view.png') }}" alt="">
-                                    <div class="chat-veiw">16 views</div>
+                                    <div class="chat-veiw">{{ str_pad( $forumcatgeorypost->postView->count('view_count'),2,"0",STR_PAD_LEFT)}} views</div>
                                 </div>
                                 <div class="comment_forum  d-flex align-items-center"><img
                                         src="{{ asset('frontend/forums/img/message.png') }}" alt="">
@@ -149,23 +152,56 @@
             {{-- @empty
         <h3>Not Found</h3>
         @endforelse --}}
-
     </section>
-    <section>
-        <div class="container">
-            <div class="advertising-sec">
-                <a href="{{ $ads[0]->banner_image_url}}" target="_blank">
-                    <div class="advertising-img-1"><img src="{{ asset('admin/advertisement/' . $ads[0]->ad_media) }}" alt=""></div>
-                </a>
-                <a href="{{ $ads[1]->banner_image_url}}" target="_blank">
-                    <div class="advertising-img-1"><img src="{{ asset('admin/advertisement/' . $ads[1]->ad_media) }}" alt=""></div>
-                </a>
-                <a href="{{ $ads[2]->banner_image_url}}" target="_blank">
-                    <div class="advertising-img-1"><img src="{{ asset('admin/advertisement/' . $ads[2]->ad_media) }}" alt=""></div>
-                </a>
+        <section>
+            <div class="container">
+                <div class="advertising-sec">
+                @if(count($ads) > 0)
+                    <a href="{{ $ads[0]->banner_image_url}}" target="_blank">
+                        <div class="advertising-img-1">
+                                @if(isset($ads[0]))
+                                    <img src="{{ asset('admin/advertisement/' . $ads[0]->ad_media) }}" alt="">
+                                @else
+                                    <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
+                                @endif
+                        </div>
+                    </a>
+                @else
+                        <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
+                @endif
+                @if(count($ads) > 0)
+                    <a href="{{ $ads[1]->banner_image_url}}" target="_blank">
+                        <div class="advertising-img-1">
+                            @if(count($ads) > 0)
+                                @if(isset($ads[1]))
+                                    <img src="{{ asset('admin/advertisement/' . $ads[1]->ad_media) }}" alt="">
+                                @else
+                                    <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
+                                @endif
+                            @else
+                                    <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
+                            @endif
+                        </div>
+                    </a>
+                @else
+                    <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
+                @endif
+                @if(count($ads) > 0)
+                    <a href="{{ $ads[2]->banner_image_url}}" target="_blank">
+                        <div class="advertising-img-1">
+                                @if(isset($ads[2]))
+                                    <img src="{{ asset('admin/advertisement/' . $ads[2]->ad_media) }}" alt="">
+                                @else
+                                    <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
+                                @endif
+                        </div>
+                    </a>
+                @else
+                        <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
+                @endif
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
     {{-- <div class="container">
         <div class="advertising-sec">
             <div class="advertising-img-1"><img src="{{ asset('frontend/forums/img/add-1.png') }}" alt=""></div>
@@ -173,4 +209,44 @@
             <div class="advertising-img-3"><img src="{{ asset('frontend/forums/img/add-3.png') }}" alt=""></div>
         </div>
     </div> --}}
+    @section('scripts')
+        <script>
+            if('<?php echo $liked ?>' == true){
+                $('#like_post').css('color','#4886C8');
+                $('#like_text').html('<b>Liked</b>');
+            }
+            var postData = JSON.parse('<?php echo $forumcatgeorypost ?>');
+            $('#like_post').on('click', function(){
+                console.log(postData);
+                likePost();
+            });
+            
+            function likePost(){
+                $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                type: "POST",
+                url: '/savelike',
+                data: {likepostid: postData.id, postUserid: postData.user.id},
+                success: function(response){
+                    console.log(response.code);
+                    if(response.code == 200){
+                        $('#like_post').css('color','#4886C8');
+                        $('#like_text').html('<b>Liked</b>');
+                        toastr.success(response.message);
+                    }
+                    else if(response.code == 201){
+                        $('#like_post').css('color','black');
+                        $('#like_text').html('Like');
+                        toastr.success(response.message);
+                    }
+                    else if(response.code == 400){
+                        toastr.error(response.message);
+                    }
+                }
+                });
+            }
+        </script>
+    @endsection
 @endsection
