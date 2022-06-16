@@ -21,6 +21,7 @@
         "laravelcollective/html": "^6.2",
         "livewire/livewire": "^2.5",
         "mailchimp/mailchimp": "^2.0",
+        "mailchimp/marketing": "^3.0",
         "mckenziearts/laravel-notify": "^2.2",
         "munafio/chatify": "^1.4",
         "proengsoft/laravel-jsvalidation": "^4.7",

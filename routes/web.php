@@ -157,6 +157,9 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
 Route::get("/page", function(){
     return view("frontend.pages.forums.post_detail");
  });
+
+Route::get('frontend-forums',[ForumController::class,'frontendIndex'])->name('forumsfrontend');
+
 Route::group(['middleware'=>['frontendUserRole']], function(){
     Route::get('/',function(){
         return view('frontend.home');
@@ -184,7 +187,6 @@ Route::resource('eventpayments',EventPaymentController::class);
 
 Route::get('faqs',[HomeController::class,'faqs'])->name('faqs');
 Route::get('frontend-news',[NewsController::class,'frontIndex'])->name('newsfrontend');
-Route::get('frontend-forums',[ForumController::class,'frontendIndex'])->name('forumsfrontend');
 Route::post('search-form-category',[ForumController::class,'searchFormCategory'])->name('searchFormCategory');
 Route::post('search-category-form',[ForumController::class,'searchCategoryForm'])->name('searchCategoryForm');
 Route::post('search-form-post',[ForumController::class,'searchFormPosts'])->name('searchFormPosts');

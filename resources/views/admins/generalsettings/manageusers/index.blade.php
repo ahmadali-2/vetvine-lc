@@ -21,7 +21,16 @@
                                 <strong class="card-title"> Table</strong>
                             </div>
                             <div class="card-body">
-                                <table class="table">
+                                <table class="table" style="width: 100%;">
+                                <colgroup>
+                                    <col span="1" style="width: 5%;">
+                                    <col span="1" style="width: 10%;">
+                                    <col span="1" style="width: 15%;">
+                                    <col span="1" style="width: 15%;">
+                                    <col span="1" style="width: 15%;">
+                                    <col span="1" style="width: 15%;">
+                                    <col span="1" style="width: 0%;">
+                                </colgroup>
                                     <thead>
                                         <tr>
                                             <th scope="col">No #</th>
@@ -29,6 +38,7 @@
                                             <th scope="col">Email</th>
                                             <th scope="col">Network</th>
                                             <th scope="col">User Type</th>
+                                            <th scope="col">Verification Status</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
@@ -41,6 +51,11 @@
                                             <td>{{$approveuser->email ?? ''}}</td>
                                             <td>{{$approveuser->userNetworkLevel->name}}</td>
                                             <td>{{$approveuser->userMemberType->member_type}}</td>
+                                            @if(isset($approveuser->email_verified_at))
+                                                <td><span class="badge badge-pill badge-success">Verified</span></td>
+                                            @else
+                                                <td><span class="badge badge-pill badge-primary">Pending</span></td>
+                                            @endif
                                             <td>
                                             <a href="{{route('changeusertype',$approveuser->id )}}"><i class="fas fa-edit text-primary"></i></a>
                                             <a href="{{route('userhistory', $approveuser->id)}}"> <i class="far fa-eye text-info"></i></a>
