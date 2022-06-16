@@ -17,9 +17,7 @@ class CreatePostViewsTable extends Migration
             $table->id();
             $table->string("ip_address");
             $table->string("agent");
-            $table->string("post_title");
-            $table->unsignedbigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->bigInteger("view_count");
             $table->unsignedbigInteger('post_id');
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->timestamps();
