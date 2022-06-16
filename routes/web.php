@@ -56,6 +56,7 @@ use App\Http\Controllers\VetvineUsers\Settings\PrivacySettingController;
 use App\Http\Controllers\VetvineUsers\PostManagement\PostController;
 use App\Http\Controllers\VideoDescriptionController;
 use App\Http\Controllers\StaticPageController; // for static pages
+use App\Http\Controllers\TermsController; // for terms of services
 // us
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -167,6 +168,7 @@ Route::get('thrive',[HomeController::class,'thrive'])->name('thrive');
 Route::get('heal',[HomeController::class,'heal'])->name('heal');
 Route::get('terms-of-service',[HomeController::class,'termsOfService'])->name('termsofservice');
 Route::post('contact-us',[ContactUsController::class,'submitContactForm'])->name('contactus.submit');
+Route::get('/Terms-of-serives', [TermsController::class, 'indexTerms'])->name('terms.index');
 
 // upcoming webinars
 Route::get('upcoming-webinars',[HomeController::class,'upcomingWebinars'])->name('upcoming_webinars');

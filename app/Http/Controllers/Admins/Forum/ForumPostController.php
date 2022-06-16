@@ -152,7 +152,8 @@ class ForumPostController extends Controller
                 ]);
             }
             parent::successMessage('Post Updated successfully.');
-            return redirect(route('forumpostlist',$request->forum_id));
+            return redirect(route('getForumPosts',$request->forum_id));
+            // return redirect(route('forumpostlist',$request->forum_id));
         } catch(Exception $e) {
             parent::dangerMessage("Post Does Not Updated, Please Try  Again");
             return redirect()->back();
@@ -170,7 +171,8 @@ class ForumPostController extends Controller
         try{
             Post::find($id)->delete();
             parent::successMessage('Post Deleted successfully.');
-            return redirect(route('forumsfrontend'));
+            return redirect()->back();
+            // return redirect(route('forumsfrontend'));
         } catch(Exception $e) {
             parent::dangerMessage("Post Does Not Deleted, Please Try  Again");
             return redirect()->back();

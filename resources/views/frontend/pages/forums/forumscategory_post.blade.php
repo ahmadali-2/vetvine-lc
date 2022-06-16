@@ -98,6 +98,7 @@
                              </tr>
                          </thead>
 
+
                         {{-- start loop  --}}
                     {{-- @dd($forums) --}}
 
@@ -110,6 +111,7 @@
                         @endif
                     </tbody>
                 </table>
+
             {{-- end loop row  --}}
         </div>
     </div>

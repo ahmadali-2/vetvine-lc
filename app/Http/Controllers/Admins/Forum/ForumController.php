@@ -30,9 +30,11 @@ class ForumController extends Controller
     }
 
     public function getForums($categoryId){
-        $forums = Forum::with('category')->where('category_id',$categoryId)->get();
+
+        $forums = Forum::with('category','posts','likecount')->where('category_id',$categoryId)->get();
         $categories   =   CategoryForum::all();
         return view('frontend.pages.forums.forum',compact('forums','categories','categoryId'));
+
     }
 
     public function searchFormCategory(Request $request){
@@ -52,7 +54,7 @@ class ForumController extends Controller
             'html' => view('frontend.pages.forums.form_category_data',compact('categories'))->render(),
         ]);
     }
-    
+
     public function searchCategoryForm(Request $request){
         $forums = null;
         if($request->category > 0 && isset($request->title_text)){
@@ -101,17 +103,18 @@ class ForumController extends Controller
     }
 
     public function getForumPosts($forumId){
+
+        $posts = Post::with('user','likes','comments')->where('forum_id',$forumId)->get();
         $forums = Forum::with('category')->get();
-        $posts = Post::with('user')->where('forum_id',$forumId)->get();
-        // $posts = Post::where('forum_id',$forumId)->get();
         return view('frontend.pages.forums.forumscategory_post',compact('posts','forums','forumId'));
+
     }
     public function getForumcategoryPosts($forumcategorypostId){
 
         $categories   =   CategoryForum::all();
         $ads          =   Ad::all();
         $forums       =   Forum::all();
-        $forumcatgeorypost = Post::with('forum')->where('id',$forumcategorypostId)->first();
+        $forumcatgeorypost = Post::with('forum','comments','user')->where('id',$forumcategorypostId)->first();
         $relatedposts=Post::where('forum_id',$forumcatgeorypost->forum_id)->where('id', "!=" ,$forumcatgeorypost->id)->get();
         return view('frontend.pages.forums.forum_detail',compact('forumcatgeorypost','relatedposts','categories','forums','ads'));
 

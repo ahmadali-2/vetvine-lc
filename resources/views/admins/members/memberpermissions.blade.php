@@ -57,6 +57,25 @@
                                                 data-off="<i class='fa fa-lock'></i> Not Allowed"></span>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th>Licesnsure</th>
+                                    <td>
+                                        <span id="changememberstatus" data-permissiontypeId="{{ $id }}"
+                                            data-permissiontypeName="licensure">
+
+                                            <input id="chkPermission3" name="licensure" type="checkbox" @php
+                                                if ($data) {
+                                                    if ($data->licensure == '1') {
+                                                        echo 'checked=true';
+                                                    }
+                                                }
+                                            @endphp
+                                                data-toggle="toggle" data-onstyle="outline-success" data-size="xs"
+                                                data-offstyle="outline-danger"
+                                                data-on="<i class='fa fa-unlock'></i> Allowed"
+                                                data-off="<i class='fa fa-lock'></i> Not Allowed"></span>
+                                    </td>
+                                </tr>
 
                             </tbody>
                         </table>
@@ -73,11 +92,15 @@
                 // console.log($(this));
                 var checkbox1 = false;
                 var checkbox2 = false;
+                var checkbox3 = false;
                 if ($('#chkPermission1').is(":checked")) {
                     checkbox1 = true;
                 }
                 if ($('#chkPermission2').is(":checked")) {
                     checkbox2 = true;
+                }
+                if ($('#chkPermission3').is(":checked")) {
+                    checkbox3 = true;
                 }
                 // alert(checkbox1)
                 $.ajaxSetup({
@@ -92,7 +115,9 @@
                         memberId: memberId,
                         checkbox1: checkbox1,
                         checkbox2: checkbox2,
+                        checkbox3: checkbox3,
                         name: name,
+                        
                     },
                     url: "{{ route('memberstatus') }}",
                     type: "POST",
