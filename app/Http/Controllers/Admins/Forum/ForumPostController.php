@@ -9,6 +9,7 @@ use Exception;
 use vetvineHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 
 class ForumPostController extends Controller
 {
@@ -77,7 +78,6 @@ class ForumPostController extends Controller
 
     public function createPost($id)
     {
-        // dd($id);
         $forum = Forum::find($id);
         return view('frontend.pages.forums.create_post',compact('forum'));
     }

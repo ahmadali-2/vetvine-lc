@@ -35,7 +35,6 @@ class SubscribeToMailChimp
 
         $mailchimp->lists->subscribe(env('MAILCHIMP_LIST_ID'),
            ['email'=>$event->user->email],
-           ['first_name'=>$event->user->name],
            null,
            null,
            false);

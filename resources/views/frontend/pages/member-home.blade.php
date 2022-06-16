@@ -2,137 +2,289 @@
 @section('content') --}}
 @extends('vetvineUsers.dashboard_master')
 @section('dashboardcontent')
-
-<!-- member home start -->
-<section>
-    <div class="member-home">
-      <div class="container">
-        <div class="generic_layout-main">
-          <div class="generic_layout_left">
-            <div class="user-profile">
-              <h3>Welcome Colleague!</h3>
-              <div class="profile-img">
-                <img src="@if(Auth()->user()->profile_photo ?? '') {{ asset('/frontend/images/Profile-Images/'.Auth()->user()->profile_photo)}} @else {{asset('frontend/images/thumbnail.jfif')}} @endif" alt="">
-              </div>
-            </div>
-            <div class="quicky-link">
-              <div class="user-link">
-                {{-- <ul>
-                  <li><div class="icon"><img src="{{ asset('frontend/img/search.png')}}" alt=""></div>
-                  Browse Members</li>
-                  <li>
-                    <div class="icon"><img src="{{ asset('frontend/img/invite.png')}}" alt=""></div>
-                    Invite your Colleagues
-                  </li>
-                  <li>
-                     <div class="icon"><img src="{{ asset('frontend/img/socialdna.png')}}" alt=""></div>
-                    My Social DNA
-                  </li>
-                  <li>
-                    <div class="icon" style="margin-left: 5px;"><a href="{{ route('userdashboard') }}">My Profile</a></div>
-                 </li>
-                </ul> --}}
-              </div>
-            </div>
-            <div class="upcoming-CE">
-              <h3>Upcoming CE</h3>
-              <ul>
-                <li>
-                  <div class="list-details">
-                    <div class="img"><img src="{{ asset('frontend/img/upcoming-ce.jpg')}}" alt=""></div>
-                    <div class="description"><p >Common and uncommon diseases in horses t..</p></div>
-                  </div>
-                </li>
-                <li>
-                  <a href="">More CE events</a>
-                </li>
-              </ul>
-            </div>
-
-            <div class="News-sources">
-                <h3>News Sources</h3>
-                @foreach ($news as $new)
-                <marquee behavior="" direction="up" >
-                    <a href="{{$new->news_link}}">
-                        <p>{{$new->news_title}}</p>
-                    </a>
-                </marquee>
-                @endforeach
-              </div>
-          </div>
-          <div class="generic_layout_middle">
-            <h3>What's Buzzing</h3>
-            <div class="activty-post">
-              <p>post something</p>
-            </div>
-            <div class="activty-feed">
-              <ul>
-                  @foreach ($posts as $post)
-                <li>
-                    {{-- {{ $post->id}} --}}
-                  <div class="feed-photo">
-                    <img src="@if($post->user->profile_photo ?? '') {{ asset('/frontend/images/Profile-Images/'.$post->user->profile_photo)}} @else {{asset('frontend/images/thumbnail.jfif')}} @endif" alt="feed 1 pic">
-                      {{-- <img src="{{ asset('frontend/img/feed-img-1.png')}}" alt="feed 1 pic"> --}}
-                    </div>
-                  <div class="feed-body">
-                    <div class="feed-items-details">
-                    <p><a href="">{{$post->user->name}}</a> posted a <a href="">topic</a> in the forum <a href="">testing forum</a>:</p>
-                  </div>
-                  <div class="feed-testing">
-                    <span><a href="">{{$post->post_title}}</a></span>
-                    <p>{!! $post->post_description !!}</p>
-                  </div>
-                  {{-- @php
-                        $likedpost  =   Auth::user()->likes()->where('post_id',$post->id)->first();
-                  @endphp --}}
-                                            <div class="feed-comment">
-                                                <img src="{{ asset('frontend/img/post.png') }}" alt="post icon">
-                                                <p>{{ $post->created_at->format('d M Y') }}
-                                                    <a href="javascript:void(0)" class="like"
-                                                        id="like{{ $post->id }}" data-post-user-id="{{ $post->user_id }}" data-post-id="{{ $post->id }}"
-                                                        data-user-id="{{ Auth::user()->id }}">
-                                                        {{ $post->isAuthUserLikedPost() ? 'Liked' : 'Like' }}
-                                                    </a> - <a href=""> Comment </a> - <a href="">Share</a>
-                                                </p>
-                                            </div>
-                                            <div class="comment">
-                                                <div class="comment-photo"><img
-                                                        src="{{ asset('frontend/img/feed-img-2.jpeg') }}" alt=""></div>
-                                                <div class="comment-info">
-                                                    <div class="comment-aurther">
-                                                        <p><span><a href="">Tayyab Hassan</a></span> tesing comment</p>
-                                                    </div>
-                                                    <div class="comment-description">
-                                                        <p>Mon at 3:00 AM - <a href="">like</a></p>
-                                                    </div>
-                                                </div>
-                                            </div>
+    <!-- member home start -->
+    {{-- <link rel="stylesheet" href="{{ asset('frontend/css/member-home-new-css.css') }}" /> --}}
+    <section class="main_banner post_bg">
+        <div class="container">
+            <div class="flex-box-banner">
+                <div class="grow_banner_box grow_banner_box_web">
+                    <div class="grow-heading">MEMBERS</div>
+                    <img src="{{ asset('frontend/img/sep-line-2.jpg') }}" width="250" height="2" alt=""
+                        class="line_image">
+                    <p class="mb-0">A BETTER LIFE FOR ANIMALS
+                        AND THE HUMANS
+                    </p>
 
                 </div>
-                </li>
-                @endforeach
-              </ul>
-              <div class="veiw-more">
-                  <img src="{{ asset('frontend/img/viewmore.png')}}" alt="">
-                  <a href="">View More</a>
-                </div>
             </div>
-          </div>
-          <div class="generic_layout_right">
-      <div class="right-block-img">
-  <div class="advertising-img-1"><img src="{{ asset('frontend/img/add-1.png')}}" alt=""></div>
-  <div class="advertising-img-2"><img src="{{ asset('frontend/img/visbio.png')}}" alt=""></div>
-
-</div>
-
-
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
+    </main>
 
-<!-- member home end -->
+    <section class="main_banner_bottob_label"></section>
+
+    <section class="become_member_area">
+        <div class="container">
+            <h2>
+                <span>What's Buzzing
+                </span>
+            </h2>
+        </div>
+    </section>
+
+    <section>
+        <div class="specialty-topics">
+            <div class="container">
+                <div class="specialty-info">
+                    <div class="specialty-detail">
+
+                        <div class="search-feild float-left">
+                            <input type="search" required>
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class=" col-lg-3 col-md-3 text-center">
+                            <div class="img_post_left"><img src="@if(Auth()->user()->profile_photo ?? '') {{ asset('/frontend/images/Profile-Images/'.Auth()->user()->profile_photo)}} @else {{asset('frontend/images/thumbnail.jfif')}} @endif" width="262"
+                                    height="198" alt="" />
+                                <label>{{ Auth::user()->name }}</label>
+                            </div>
+                            <img src="{{ asset('frontend/img/add-img.png') }}" width="100%" class="add_left_post"
+                                alt="" />
+
+
+
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            @foreach ($posts as $post)
+                                <div class="post_center_box">
+                                    <div class="row">
+                                        <div class=" col-lg-6">
+                                            <img src="@if ($post->user->profile_photo ?? '') {{ asset('/frontend/images/Profile-Images/' . $post->user->profile_photo) }} @else {{ asset('frontend/images/thumbnail.jfif') }} @endif"
+                                                class="post_box_small_img" width="262" height="198" alt="" />
+                                            <div class="pull-left box_center_small_label">
+                                                <label>{{ $post->user->name }} posted a new
+                                                    Continuing Education item:</label>
+
+                                                <p>March 3, 2021</p>
+                                            </div>
+
+
+
+                                        </div>
+                                        <div class=" col-lg-6">
+
+                                            <div class="pull-left">
+                                                <label class="post_right_box_heading">{{ $post->post_title }}</label>
+                                                <h6 class="h6_post_label">
+                                                    {!! $post->post_description !!}
+                                                </h6>
+                                                <p>March 3, 2021</p>
+                                            </div>
+
+
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="col-sm-12 text-center post_share_button">
+                                        <a href="#"><img src="{{ asset('frontend/img/like-label.png') }}" width="56"
+                                                height="21" alt="" /></a>
+                                        <a href="#"><img src="{{ asset('frontend/img/comment-label.png') }}" alt="" /></a>
+                                        <a href="#"><img src="{{ asset('frontend/img/share_label.png') }}" alt="" /></a>
+
+
+
+                                    </div>
+
+
+                                </div>
+                                @endforeach
+
+
+                                {{--Following are without dynamic data -remove later --}}
+                                <div class="post_center_box">
+                                    <div class="row">
+                                        <div class=" col-lg-6">
+                                            <img src="{{ asset('frontend/img/img-1.png') }}" class="post_box_small_img"
+                                                width="262" height="198" alt="" />
+                                            <div class="pull-left box_center_small_label">
+                                                <label>naveed55ow posted a new
+                                                    Continuing Education item:</label>
+
+                                                <p>March 3, 2021</p>
+                                            </div>
+
+
+
+                                        </div>
+                                        <div class=" col-lg-6">
+
+                                            <div class="pull-left">
+                                                <label class="post_right_box_heading">Test event post by fahad</label>
+                                                <h6 class="h6_post_label">
+                                                    test post by Fahad for Petowners.test post by Fahad for Petownerstest
+                                                    post
+                                                    by Fahad for Petownerstest post by Fahad for Petownerstest post by Fahad
+                                                    for
+                                                    Petownerstest post by Fahad for Petownerstest post by Fahad for
+                                                    Petowners.
+                                                </h6>
+                                                <p>March 3, 2021</p>
+                                            </div>
+
+
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="col-sm-12 text-center post_share_button">
+                                        <a href="#"><img src="{{ asset('frontend/img/like-label.png') }}" width="56"
+                                                height="21" alt="" /></a>
+                                        <a href="#"><img src="{{ asset('frontend/img/comment-label.png') }}"
+                                                alt="" /></a>
+                                        <a href="#"><img src="{{ asset('frontend/img/share_label.png') }}" alt="" /></a>
+
+
+
+                                    </div>
+
+
+                                </div>
+                                <div class="post_center_box">
+                                    <div class="row">
+                                        <div class=" col-lg-6">
+                                            <img src="{{ asset('frontend/img/img-1.png') }}" class="post_box_small_img"
+                                                width="262" height="198" alt="" />
+                                            <div class="pull-left box_center_small_label">
+                                                <label>naveed55ow posted a new
+                                                    Continuing Education item:</label>
+
+                                                <p>March 3, 2021</p>
+                                            </div>
+
+
+
+                                        </div>
+                                        <div class=" col-lg-6">
+
+                                            <div class="pull-left">
+                                                <label class="post_right_box_heading">Test event post by fahad</label>
+                                                <h6 class="h6_post_label">
+                                                    test post by Fahad for Petowners.test post by Fahad for Petownerstest
+                                                    post
+                                                    by Fahad for Petownerstest post by Fahad for Petownerstest post by Fahad
+                                                    for
+                                                    Petownerstest post by Fahad for Petownerstest post by Fahad for
+                                                    Petowners.
+                                                </h6>
+                                                <p>March 3, 2021</p>
+                                            </div>
+
+
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="col-sm-12 text-center post_share_button">
+                                        <a href="#"><img src="{{ asset('frontend/img/like-label.png') }}" width="56"
+                                                height="21" alt="" /></a>
+                                        <a href="#"><img src="{{ asset('frontend/img/comment-label.png') }}"
+                                                alt="" /></a>
+                                        <a href="#"><img src="{{ asset('frontend/img/share_label.png') }}" alt="" /></a>
+
+
+
+                                    </div>
+
+
+                                </div>
+                                <div class="post_center_box">
+                                    <div class="row">
+                                        <div class=" col-lg-6">
+                                            <img src="{{ asset('frontend/img/img-1.png') }}" class="post_box_small_img"
+                                                width="262" height="198" alt="" />
+                                            <div class="pull-left box_center_small_label">
+                                                <label>naveed55ow posted a new
+                                                    Continuing Education item:</label>
+
+                                                <p>March 3, 2021</p>
+                                            </div>
+
+
+
+                                        </div>
+                                        <div class=" col-lg-6">
+
+                                            <div class="pull-left">
+                                                <label class="post_right_box_heading">Test event post by fahad</label>
+                                                <h6 class="h6_post_label">
+                                                    test post by Fahad for Petowners.test post by Fahad for Petownerstest
+                                                    post
+                                                    by Fahad for Petownerstest post by Fahad for Petownerstest post by Fahad
+                                                    for
+                                                    Petownerstest post by Fahad for Petownerstest post by Fahad for
+                                                    Petowners.
+                                                </h6>
+                                                <p>March 3, 2021</p>
+                                            </div>
+
+
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="col-sm-12 text-center post_share_button">
+                                        <a href="#"><img src="{{ asset('frontend/img/like-label.png') }}" width="56"
+                                                height="21" alt="" /></a>
+                                        <a href="#"><img src="{{ asset('frontend/img/comment-label.png') }}"
+                                                alt="" /></a>
+                                        <a href="#"><img src="{{ asset('frontend/img/share_label.png') }}" alt="" /></a>
+
+
+
+                                    </div>
+
+
+                                </div>
+
+
+
+
+                        </div>
+                        <div class="col-lg-3 col-md-3">
+                            <img src="{{ asset('frontend/img/add-img.png') }}" width="100%" alt="" />
+                        </div>
+                    </div>
+
+                    <div class="page-num col-lg-7">
+                        <ul>
+                            <li><a href="#">previous</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">6</a></li>
+                            <li><a href="#">7</a></li>
+                            <li><a href="#">Next</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+    </section>
+
+    <!-- member home end -->
 @endsection
 @section('scripts')
     <script>

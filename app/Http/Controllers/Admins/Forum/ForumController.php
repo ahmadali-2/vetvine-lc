@@ -123,15 +123,13 @@ class ForumController extends Controller
     {
 
         $user=Auth::user();
-        if($user)
-        {
+        if($user){
         $categories   =   CategoryForum::with('forums')->get();
         $ads          =   Ad::all();
         $forums       =   Forum::all();
         return view('frontend.pages.forums.index',compact('categories','forums','ads'));
         }
-        else
-        {
+        else{
             parent::dangerMessage("Your Are Not Logged in, Please Login And Try  Again");
             return redirect('login');
         }
@@ -236,7 +234,7 @@ class ForumController extends Controller
             foreach($input['member_id'] as $member)
             {
                 Member::create([
-                    "memberable_id"   =>  $forum->id,
+                    "memberable_id"   => $forum->id,
                     "memberable_type" => 'App\Models\Admins\Forum\Forum',
                     'member_id'       => $member,
                 ]);
