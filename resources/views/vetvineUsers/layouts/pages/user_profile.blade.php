@@ -8,14 +8,14 @@
                 <div class="col-12 col-sm-12 col-lg-3 col-xl-2 sidebar-new-bg pt-4">
                     <div class="user-img">
                         @if (Auth::user()->profile_photo)
-                            <img src="{{ asset('/frontend/images/Profile-Images/' . Auth::user()->profile_photo) }}" alt=""
-                                id="user-image">
+                            <img src="{{ asset('/frontend/images/Profile-Images/' . Auth::user()->profile_photo) }}"
+                                alt="" id="user-image">
                         @else
                             <img src="{{ asset('frontend/images/dummy.png') }}" alt="" id="user-image"">
                         @endif
 
-                            {{-- <img src="{{ asset('frontend/img/profile-pic.png') }}" alt="hi"> --}}
-                            <h4>{{ Auth::user()->name }}</h4>
+                        {{-- <img src="{{ asset('frontend/img/profile-pic.png') }}" alt="hi"> --}}
+                        <h4>{{ Auth::user()->name }}</h4>
 
                     </div>
                     <div class="nav-bg tabs_li">
@@ -24,18 +24,18 @@
                                     data-toggle="pill" class="active"><i class="fas fa-chevron-right"></i>
                                     Personal Information</a>
                             </li>
-                            <li class="listItemA"><a href=".tabs-2" class="tab_2_click" role="tab"
-                                    data-toggle="pill"><i class="fas fa-chevron-right"></i>
+                            <li class="listItemA"><a href=".tabs-2" class="tab_2_click" role="tab" data-toggle="pill"><i
+                                        class="fas fa-chevron-right"></i>
                                     Contact Information</a></li>
-                            <li class="listItemA"><a href=".tabs-3" class="tab_3_click" role="tab"
-                                    data-toggle="pill"><i class="fas fa-chevron-right"></i>
+                            <li class="listItemA"><a href=".tabs-3" class="tab_3_click" role="tab" data-toggle="pill"><i
+                                        class="fas fa-chevron-right"></i>
                                     Edit My Photo</a></li>
                         </ul>
                     </div>
                 </div>
                 @php
-                    $permissions  = vetvineHelper::getUserTypePermissions(Auth::user()->type);
-               @endphp
+                    $permissions = vetvineHelper::getUserTypePermissions(Auth::user()->type);
+                @endphp
                 <div class="col-12 col-sm-12 col-lg-9 col-xl-10 tab-content">
                     <div class="tab-pane active in" id="tabs-1">
                         <div class="general-area">
@@ -50,7 +50,8 @@
                                                 <div class="input_field">
 
                                                     <input type="text" placeholder="" required class="form-control"
-                                                        name="firstname" id="firstname" value="@php
+                                                        name="firstname" id="firstname"
+                                                        value="@php
                                                             $str = Auth::user()->name;
                                                             $arr = explode(' ', $str);
                                                             echo $arr[0];
@@ -66,7 +67,8 @@
                                                 <label>Last Name*</label>
                                                 <div class="input_field">
                                                     <input type="text" placeholder="" required class="form-control"
-                                                        name="lastname" id="lastname" value="@php
+                                                        name="lastname" id="lastname"
+                                                        value="@php
                                                             $str = Auth::user()->name;
                                                             $arr = explode(' ', $str);
                                                             if (count($arr) > 1) {
@@ -95,20 +97,21 @@
                                                         @endforeach
                                                     </select>
 
-                                                <span class="asteric" id="error3"></span>
-                                            </div>
+                                                    <span class="asteric" id="error3"></span>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="serch-section">
-                                            @if($permissions->licensure)
-                                            <div class="inner-input">
-                                                <label>Licensure*</label>
-                                                <div class="input_field">
-                                                    <input placeholder="" class="form-control" name="licensure"
-                                                        id="licensure" value="{{ Auth::user()->licence_no }} ">
-                                                    <span class="asteric" id="error4"></span>
+                                            {{-- @dd($permissions->licensure) --}}
+                                            @if ($permissions->licensure)
+                                                <div class="inner-input" id="license-div" >
+                                                    <label>Licensure*</label>
+                                                    <div class="input_field">
+                                                        <input placeholder="" class="form-control" name="licensure"
+                                                            id="licensure" value="{{ Auth::user()->licence_no }} ">
+                                                        <span class="asteric" id="error4"></span>
+                                                    </div>
                                                 </div>
-                                            </div>
                                             @endif
                                             <div class="serch-section">
                                                 <div class="inner-input">
@@ -128,8 +131,8 @@
                                                             @endforeach
                                                         </select>
 
-                                                    <span class="asteric" id="error5"></span>
-                                                </div>
+                                                        <span class="asteric" id="error5"></span>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="button col-sm-12 text-center"><button type="button"
@@ -162,10 +165,12 @@
                                         <div class="serch-section">
                                             <div class="inner-input">
                                                 <label>Email Address</label>
+                                                <div class="input_field">
                                                 <input type="email" name="email" id="email" readonly
                                                     value="{{ Auth::user()->email ?? '' }}" placeholder=""
                                                     class="form-control" />
-                                                {{-- <span class="asteric" id ="error6"></span> --}}
+                                                <span class="asteric" id ="error6"></span>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="serch-section">
@@ -173,8 +178,8 @@
                                                 <label>Confirm Email Address</label>
                                                 <div class="input_field">
                                                     <input type="email" name="business_email" id="business_email"
-                                                        value="{{ $employmentInfo->business_email ?? '' }}" placeholder=""
-                                                        class="form-control" />
+                                                        value="{{ $employmentInfo->business_email ?? '' }}"
+                                                        placeholder="" class="form-control" />
                                                     <span class="asteric" id="error6"></span>
                                                 </div>
                                             </div>
@@ -200,8 +205,8 @@
                                                 <label>Hospital or Business Name</label>
                                                 <div class="input_field">
                                                     <input type="text" name="business_name" id="business_name"
-                                                        value="{{ $employmentInfo->business_name ?? '' }}" placeholder=""
-                                                        class="form-control" />
+                                                        value="{{ $employmentInfo->business_name ?? '' }}"
+                                                        placeholder="" class="form-control" />
                                                     <span class="asteric" id="error8"></span>
                                                 </div>
                                             </div>
@@ -287,7 +292,8 @@
                                         alt="" id="user-image" height="200px"> <br>
                                     <button type="button" class="btn btn-dark mt-3"
                                         onclick="document.getElementById('profile_photo').click()">Choose File</button>
-                                    <input type="file" style="visibility:hidden" name="profile_photo" id="profile_photo"
+                                    <input type="file" style="visibility:hidden" name="profile_photo"
+                                        id="profile_photo"
                                         onchange="document.getElementById('user-image').src = window.URL.createObjectURL(this.files[0])">
                                 </div>
                             </div>
@@ -306,6 +312,14 @@
 @endsection
 @section('scripts')
     <script>
+        // $(document).ready(function() {
+        //     if ($("#licensure").length === 0) {
+        //         alert('running');
+        //     } else {
+        //         alert('not running');
+        //     }
+        // };
+        // });
         $('#firstname').on('keyup', function() {
             if ($(this).val().length > 0) {
                 $(this).closest('div').find('#error1').css("visibility", "hidden");
@@ -380,19 +394,38 @@
         });
         $(document).ready(function(e) {
             $("#personal_btn").on("click", function(e) {
+                if($("#licensure").length != 0){
+                // console.log($.trim($('#licensure').val()));
                 if ($.trim($('#firstname').val()) == '' || $.trim($('#lastname').val()) == '' || $.trim($(
                         '#licensure').val()) == '' || $.trim($('#usernetwork').val()) == '' || $.trim($(
                         '#timezone').val()) == '') {
                     toastr.error('Make sure compulsory fields are not empty.');
                     return;
                 } else {
+                    // alert('running');
                     $("#tabs-2").addClass("tabs-2");
                     $(".tab_2_click").trigger("click");
                     $('.tabs_li').find('.new_active').removeClass('new_active');
                     $(".tab_2_click").addClass('new_active');
                     $(".tab_2_click").addClass('click_show_2');
                 }
-            })
+
+            }else{
+                if ($.trim($('#firstname').val()) == '' || $.trim($('#lastname').val()) == '' ||
+                        $.trim($('#usernetwork').val()) == '' || $.trim($(
+                        '#timezone').val()) == '') {
+                    toastr.error('Make sure compulsory fields are not empty.');
+                    return;
+                } else {
+                    // alert('running');
+                    $("#tabs-2").addClass("tabs-2");
+                    $(".tab_2_click").trigger("click");
+                    $('.tabs_li').find('.new_active').removeClass('new_active');
+                    $(".tab_2_click").addClass('new_active');
+                    $(".tab_2_click").addClass('click_show_2');
+                }
+            }
+            });
             $("#employe_btn").on("click", function(e) {
                 if ($.trim($('#street_address').val()) == '' ||
                     $('#country option:selected').val() == '' || $.trim($('#city').val()) == '' ||

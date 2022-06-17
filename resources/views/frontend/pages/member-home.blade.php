@@ -157,16 +157,16 @@
 
                                     </div>
 
-                                    <div class="col-sm-12 text-center post_share_button">
+                                    <div class="col-sm-12 text-center post_share_button d-flex justify-content-center like_section_parent">
                                         <div class="likeButtons">
                                             @foreach($post->likes as $like)
                                                 @if(($like->post_id == $post->id) && ($like->ce == 1) && ($like->like == 1))
                                                     <?php $displayLike = true ?>
-                                                <a member_home_post_id="{{$post->id}}" member_home_user_id="{{$post->user->id}}" member_home_like_type="1" style="cursor: pointer;"><b style="color: #4886C8;">Liked</b></a>
+                                                <a class="like" member_home_post_id="{{$post->id}}" member_home_user_id="{{$post->user->id}}" member_home_like_type="1" style="cursor: pointer;"><b style="color: #4886C8;"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Liked</b></a>
                                                 @endif
                                             @endforeach
                                             @if($displayLike == false)
-                                            <a member_home_post_id="{{$post->id}}" member_home_user_id="{{$post->user->id}}" member_home_like_type="1" style="cursor: pointer;" style="color: black;">Like</a>
+                                            <a class="dislike" member_home_post_id="{{$post->id}}" member_home_user_id="{{$post->user->id}}" member_home_like_type="1" style="cursor: pointer;" style="color: black;"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like</a>
                                             @endif
                                             <?php $displayLike = false ?>
                                         </div>
@@ -268,17 +268,18 @@
                 data: {likepostid: likepostid, postUserid: postUserid, likeType: likeType, ce:1},
                 success: function(response){
                     if(response.code == 200){
-                        component.css('color','#4886C8');
-                        component.html('<b>Liked</b>');
+                        component.css('color','#5c7c85');
+                        component.html("<b>Liked</b>");
                         toastr.success('Post Liked Successfully!');
+
                     }
                     else if(response.code == 201){
-                        component.css('color','#4886C8');
+                        component.css('color','#f27222');
                         component.html('Like');
                         toastr.success('Post unliked Successfully!');
                     }
                     else if(response.code == 400){
-                        component.css('color','#4886C8');
+                        component.css('color','#f27222');
                         component.html('Like');
                         toastr.success('Please verify email first!');
                     }
@@ -319,6 +320,16 @@
         //             }
         //         });
         //     })
+        // })
+
+        // $(document).ready(function(){
+        //    $(document).on("click",".dislike",function(){
+
+        //  let a = $(this).closest('.row').find('.dislike_icon').css("color","#5c7c85");
+
+        //  console.log(a);
+        //    })
+
         // })
     </script>
 @endsection
