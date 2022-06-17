@@ -30,7 +30,9 @@ class PostController extends Controller
     public function memberHome()
     {
         $news = News::all();
+
         $posts = Post::with('user', 'likes')->get();
+        // dd($posts);
         return view('frontend.pages.member-home', compact('posts', 'news'));
     }
     public function likeSave(Request $request)

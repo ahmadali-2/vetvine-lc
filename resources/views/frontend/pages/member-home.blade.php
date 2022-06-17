@@ -2,6 +2,9 @@
 @section('content') --}}
 @extends('vetvineUsers.dashboard_master')
 @section('dashboardcontent')
+<?php
+    $displayLike = false;
+?>
     <!-- member home start -->
     {{-- <link rel="stylesheet" href="{{ asset('frontend/css/member-home-new-css.css') }}" /> --}}
     <section class="main_banner post_bg">
@@ -92,7 +95,16 @@
 
                                     <div class="col-sm-12 text-center post_share_button">
                                         <div class="likeButtons">
-                                        <a member_home_post_id="{{$post->id}}" member_home_user_id="{{$post->user->id}}" style="cursor: pointer;" ><img src="{{ asset('frontend/img/like-label.png') }}" width="56" height="21" alt="" /></a>
+                                            @foreach($post->likes as $like)
+                                                @if(($like->post_id == $post->id) && ($like->ce == 1) && ($like->like == 1))
+                                                    <?php $displayLike = true ?>
+                                                <a member_home_post_id="{{$post->id}}" member_home_user_id="{{$post->user->id}}" style="cursor: pointer;"><b style="color: #4886C8;">Liked</b></a>
+                                                @endif
+                                            @endforeach
+                                            @if($displayLike == false)
+                                            <a member_home_post_id="{{$post->id}}" member_home_user_id="{{$post->user->id}}" style="cursor: pointer;" style="color: black;">Like</a>
+                                            @endif
+                                            <?php $displayLike = false ?>
                                         </div>
                                         <a style="cursor: pointer;"><img src="{{ asset('frontend/img/comment-label.png') }}" alt="" /></a>
                                         <a style="cursor: pointer;"><img src="{{ asset('frontend/img/share_label.png') }}" alt="" /></a>
@@ -292,21 +304,9 @@
                 likepostid = $(this).attr('member_home_post_id');
                 postUserid = $(this).attr('member_home_user_id');
                 likePost($(this));
-                if(response == 0){
-
-                }else if(response == 1){
-                    $(this).css('color','black');
-                    $(this).html('Like');
-                    toastr.success('Post Unliked Successfully!');
-                }else{
-                    $(this).css('color','black');
-                    $(this).html('Like');
-                    toastr.success('Please verify email before liking!');
-                }
             });
 
         function likePost(component){
-                var response = 0;
                 $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -315,27 +315,23 @@
                 url: '/savelike',
                 data: {likepostid: likepostid, postUserid: postUserid, ce:1},
                 success: function(response){
-                    console.log(response);
-                    console.log(response.code);
                     if(response.code == 200){
-                        $(this).css('color','#4886C8');
-                        $(this).html('<b>Liked</b>');
+                        component.css('color','#4886C8');
+                        component.html('<b>Liked</b>');
                         toastr.success('Post Liked Successfully!');
                     }
                     else if(response.code == 201){
-                        $(this).css('color','#4886C8');
-                        $(this).html('<b>Liked</b>');
-                        toastr.success('Post Liked Successfully!');
+                        component.css('color','#4886C8');
+                        component.html('Like');
+                        toastr.success('Post unliked Successfully!');
                     }
                     else if(response.code == 400){
-                        $(this).css('color','#4886C8');
-                        $(this).html('<b>Liked</b>');
-                        toastr.success('Post Liked Successfully!');
+                        component.css('color','#4886C8');
+                        component.html('Like');
+                        toastr.success('Please verify email first!');
                     }
                 }
                 });
-
-                return response;
             }
         // $(document).ready(function(e) {
         //     $(".like").on("click", function(e) {
