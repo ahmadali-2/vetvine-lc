@@ -77,25 +77,27 @@
         <div class="col-sm-6 col-md-6 line_member_box">
           <h3>CERTIFICATE</h3>
           <img src="{{ asset('frontend/images/sep-line-3.jpg')}}" width="150" height="2" class="mrargine_sep_line" alt="">
-          <p> Presented by: Quisque commodo quam ligula
-            Sponsored by: Cras posuere dolor sagittis</p>
-            <p class="certificate_para">Cras vulputate viverra urna. Vivamus non mauris velit.
-              Cras nunc lorem, pellentesque nec tempor fermentum
-              vel nisi. Integer ac dui hendrerit sem elementum lacinia.
-              Cras posuere dolor sagittis tellus egestas non convallis
-              neque ultrices. Proin accumsan leo quod non eget...</p>
+          {{-- <p> Presented by: Quisque commodo quam ligula
+            Sponsored by: Cras posuere dolor sagittis</p> --}}
+            <p class="certificate_para">Our mission is to provide guidance, support,
+                and wisdom to those who care for animals. <br> <br>
+                Forum discussions on animal health and vet
+                med trending topics are moderated by
+                specialists and industry experts.</p>
           <a href="#" class="btn_join_thepet">LINK TEXT GOES HERE > </a>
         </div>
         <div class="col-sm-6 col-md-6 ptg_meber_rightbox">
           <h3>SPECIAL PROGRAMS </h3>
           <img src="{{ asset('frontend/images/sep-line-3.jpg')}}" width="150" height="2" class="mrargine_sep_line" alt="">
-          <p> Presented by: Quisque commodo quam ligula
-            Sponsored by: Cras posuere dolor sagittis</p>
-            <p class="special_para">Cras vulputate viverra urna. Vivamus non mauris velit.
-              Cras nunc lorem, pellentesque nec tempor fermentum
-              vel nisi. Integer ac dui hendrerit sem elementum lacinia.
-              Cras posuere dolor sagittis tellus egestas non convallis
-              neque ultrices. Proin accumsan leo quod non eget...</p>
+          {{-- <p> Presented by: Quisque commodo quam ligula
+            Sponsored by: Cras posuere dolor sagittis</p> --}}
+            <p class="special_para">Caregivers deserve reassurance that they are doing what is
+                best for the animals in their care. Empower yourself with
+                trusted, expert-driven information. <br>
+                <br>
+                Our articles on pet health diseases and conditions help
+                caregivers make informed decisions and provide the best
+                life for animals.</p>
           <a href="#" class="btn_join_thepet">LINK TEXT GOES HERE ></a>
         </div>
       </div>

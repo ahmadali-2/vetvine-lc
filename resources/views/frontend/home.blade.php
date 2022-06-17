@@ -163,7 +163,7 @@
                     help busy
                     professionals stay current and grow in their career.
                 </p>
-                <a href="http://vetvine.leadconcept.business/grow" class="btn_why_vetvine">LEARN MORE</a>
+                <a href="{{ route('grow') }}" class="btn_why_vetvine">LEARN MORE</a>
             </div>
         </div>
 

@@ -180,6 +180,17 @@
     <section class="video-section-wrapper mb-4">
         {{-- @dd($eventdetail->event_title) --}}
         <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav aria-label="breadcrumb" class="breadcrumbs large-font">
+                        <ol class="breadcrumb">
+                          <li class="breadcrumb-item"><a href="{{ url('/') }}" role="button" tabindex="0">Home</a></li>
+                          <li class="breadcrumb-item"><a onclick="history.back()" href="javascript::void();">UPCOMING WEBINARS</a></li>
+                          <li class="breadcrumb-item active" aria-current="page">Et Irure Nostrum Dol</li>
+                        </ol>
+                      </nav>
+                </div>
+            </div>
             <form action="{{ route('submitPayment') }}" method="POST">
                 <div class="public-detail-inner">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -196,7 +207,7 @@
                         </div>
                         <div class="public2-info">
                             <div class="public2-title">
-                                DESCRIPTION:
+                                {{-- DESCRIgdgPTION: --}}
                             </div>
                             <div class="public2-description">
                                 {{ $eventdetail->event_description }}
