@@ -225,11 +225,11 @@
                                     data-toggle="dropdown" aria-expanded="true">
                                     <i class="employe">
                                         @if (Auth::user()->profile_photo)
-                                            <img style="width: 30px;"
+                                            <img style="width: 30px; height:30px;"
                                                 src="{{ asset('/frontend/images/Profile-Images/' . $currentUser->profile_photo) }}"
                                                 alt="" id="user-image">
                                         @else
-                                            <img style="width: 30px;" src="{{ asset('frontend/images/dummy.png') }}"
+                                            <img style="width: 30px; height:30px;" src="{{ asset('frontend/images/dummy.png') }}"
                                                 alt="" id="user-image"">
                                         @endif
 
