@@ -3,6 +3,8 @@
     <link rel="stylesheet" href="{{ asset('frontend/forums/css/style.css') }}" />
 @endsection
 @section('content')
+    <input id="liked_post_id" type="number" value="{{$forumcatgeorypost->id}}" hidden>
+    <input id="post_user_id" type="number" value="{{$forumcatgeorypost->user->id}}" hidden>
     <main>
         <section class="main_banner  forum_bg">
             <div class="container">
@@ -215,11 +217,13 @@
                 $('#like_post').css('color','#4886C8');
                 $('#like_text').html('<b>Liked</b>');
             }
-            var postData = JSON.parse('<?php echo $forumcatgeorypost ?>');
+
             $('#like_post').on('click', function(){
-                console.log(postData);
                 likePost();
             });
+            
+            var likepostid = $('#liked_post_id').val();
+            var postUserid = $('#post_user_id').val();
             
             function likePost(){
                 $.ajax({
@@ -228,7 +232,7 @@
                 },
                 type: "POST",
                 url: '/savelike',
-                data: {likepostid: postData.id, postUserid: postData.user.id},
+                data: {likepostid: likepostid, postUserid: postUserid, ce: 0},
                 success: function(response){
                     console.log(response.code);
                     if(response.code == 200){

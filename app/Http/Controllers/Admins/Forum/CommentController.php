@@ -13,27 +13,32 @@ class CommentController extends Controller
 {
     public function store(Request $request)
     {
-        if(auth()->user() && isset(auth()->user()->email_verified_at)){
-            if($request->comment == '')
-            {
+        if(auth()->user()){
+            if(isset(auth()->user()->email_verified_at)){
+                if($request->comment == '')
+                {
+                    return back();
+                }
+                else
+                {
+                $comment = new Comment;
+        
+                $comment->comment = $request->comment;
+        
+                $comment->user()->associate($request->user());
+        
+                $post = Post::find($request->post_id);
+        
+                $post->comments()->save($comment);
+        
+                return back();
+                }
+            }else{
+                parent::dangerMessage("Please verify your email to comment");
                 return back();
             }
-            else
-            {
-            $comment = new Comment;
-    
-            $comment->comment = $request->comment;
-    
-            $comment->user()->associate($request->user());
-    
-            $post = Post::find($request->post_id);
-    
-            $post->comments()->save($comment);
-    
-            return back();
-            }
         }else{
-            parent::dangerMessage("User not login, Please login to comment");
+            parent::dangerMessage("User not login, Please login first!");
             return back();
         }
     }
