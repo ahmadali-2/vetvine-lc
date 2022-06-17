@@ -100,7 +100,7 @@
                                             </div>
                                         </div>
                                         <div class="serch-section">
-                                            @if($permissions->licensure)
+                                            {{-- @if($permissions->licensure) --}}
                                             <div class="inner-input">
                                                 <label>Licensure*</label>
                                                 <div class="input_field">
@@ -109,7 +109,7 @@
                                                     <span class="asteric" id="error4"></span>
                                                 </div>
                                             </div>
-                                            @endif
+                                            {{-- @endif --}}
                                             <div class="serch-section">
                                                 <div class="inner-input">
                                                     <label>Timezone*</label>
@@ -162,10 +162,12 @@
                                         <div class="serch-section">
                                             <div class="inner-input">
                                                 <label>Email Address</label>
+                                                <div class="input_field">
                                                 <input type="email" name="email" id="email" readonly
                                                     value="{{ Auth::user()->email ?? '' }}" placeholder=""
                                                     class="form-control" />
-                                                {{-- <span class="asteric" id ="error6"></span> --}}
+                                                <span class="asteric" id ="error6"></span>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="serch-section">

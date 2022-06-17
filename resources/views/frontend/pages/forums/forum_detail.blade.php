@@ -11,7 +11,8 @@
                         <div class="grow-heading">Forum</div>
                         <img src="{{ asset('frontend/forums/img/sep-line-2.jpg') }}" width="250" height="2" alt=""
                             class="line_image">
-                        <p class="mb-0">A BETTER LIFE FOR ANIMALS AND THE HUMANS
+                        <p class="mb-0">Guidance, support and wisdom to benefit and maximize the life and
+                            longevity of animals.
                         </p>
 
                     </div>
@@ -89,11 +90,7 @@
                                         <div class="like-btn d-flex align-items-center">
                                             <img src="{{ asset('frontend/forums/img/chat-box.png') }}" alt="">
                                             <p class="mb-0 pl-2">Comment</p>
-                                            {{-- @include('frontend.pages.forums.replies', [
-                                                'comments' => $forumcatgeorypost->comments,
-                                                'post_id' => $forumcatgeorypost->id,
-                                            ])
-                                            <hr /> --}}
+
                                         </div>
                                     </a>
                                      <a id="share_post" style="cursor: pointer;">
@@ -118,12 +115,18 @@
                                 </div>
 
                                 <div class="text-btn">
-                                    {{-- <div class="btn-cancel"><a href="#">Cancel</a></div> --}}
+
                                     <button type="submit" class="btn btn-primary" id="comment_btn">Submit</button>
                                 </div>
+
+
+
                             </form>
                         </div>
+
                     </div>
+
+
                     <div class="chat-side col-lg-4 col-md-2  pl-0 pr-0">
                         <div class="chat-side-detail">
                             <div class="small_screen">
@@ -148,7 +151,13 @@
                         </div>
                     </div>
                 </div>
+
             </div>
+            @include('frontend.pages.forums.replies', [
+                'comments' => $forumcatgeorypost->comments,
+                'post_id' => $forumcatgeorypost->id,
+            ])
+            <hr />
             {{-- @empty
         <h3>Not Found</h3>
         @endforelse --}}
@@ -220,7 +229,7 @@
                 console.log(postData);
                 likePost();
             });
-            
+
             function likePost(){
                 $.ajax({
                 headers: {

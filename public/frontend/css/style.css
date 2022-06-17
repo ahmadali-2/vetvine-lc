@@ -8218,9 +8218,10 @@ ul {
     margin-right: 30px;
 }
 
-.specialty-topics {
+
+/* .specialty-topics {
     margin-bottom: 52px;
-}
+} */
 
 @media (min-width: 300px) and (max-width: 767px) {
     .add_left_post {
@@ -8338,6 +8339,9 @@ line-height: 31px;
     .pagination {
         flex-wrap: wrap;
     }
+    .general-area .serch-section input {
+        width: 96%;
+    }
 }
 
 .specialty-detail {
@@ -8452,4 +8456,44 @@ line-height: 31px;
 
 .search_bottom {
     margin-bottom: 20px;
+}
+
+.breadcrumbs ol li a {
+    color: #f27222;
+    cursor: pointer;
+}
+
+.publication-detail input {
+    height: 20px;
+    width: 20px;
+}
+
+.public2-title {
+    display: flex;
+    align-items: center;
+}
+
+.publication-detail form label {
+    color: #5c7c85;
+    font-family: "Museo 500";
+    font-size: 16px;
+    margin-bottom: 0 !important;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 26px;
+    text-align: left;
+    padding-top: 5px;
+}
+
+.my_ce_drop_down li:hover {
+    background-color: #f8f8f8;
+}
+
+.drop_down_user_dash li:hover {
+    background-color: #f8f8f8;
+}
+
+#comment_btn {
+    background-color: #f27222 !important;
+    outline: none;
 }
