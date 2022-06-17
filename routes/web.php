@@ -243,7 +243,9 @@ Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetv
     Route::post('update-comment', [ReviewController::class, 'commentupdate'])->name('comment.update');
     Route::post('edit-comment', [ReviewController::class, 'edit'])->name('comment.edit');
 
+    Route::get('change-password',[HomeController::class,'changePassword'])->name('change_password');
 
+    Route::post('update-password',[HomeController::class,'updateUserPassword'])->name('updateUserPassword');
 });
 });
 
@@ -258,7 +260,4 @@ Route::post('/rating-videos', [VideoDescriptionController::class, 'rating_videos
 Route::post('/mark-as-read',     [PushNotificationController::class, 'mark_as_read'])->name('read.notification');
 
 
-Route::get('change_password',function(){
 
- return view('vetvineUsers\layouts\pages\user_change_password');
-});

@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Sponser;
 use DB;
+use Illuminate\Support\Facades\Hash;
+
+use function Ramsey\Uuid\v1;
+
 class HomeController extends Controller
 {
     protected $dashboard;
@@ -183,6 +187,40 @@ class HomeController extends Controller
                     'code' => 400,
                 ]
             );
+        }
+    }
+
+    public function changePassword(){
+        return view('vetvineUsers.layouts.pages.user_change_password');
+    }
+
+    public function updateUserPassword(Request $request){
+        $request->validate([
+            'current_password' => 'required',
+            'password' => 'required|min:8',
+            'confirmpassword' => 'required|same:password',
+        ]);
+       $currentUser =  User::find(Auth::id());
+        if($request->current_password){
+            if (Hash::check($request->current_password, $currentUser->password)){
+
+                if ($request->password == $request->confirmpassword) {
+                    try {
+                        $currentUser->update([
+                            'password' => Hash::make($request->password),
+                        ]);
+                        parent::successMessage('Password Updated Successfully');
+                        return redirect()->back();
+                    } catch (\Exception $e) {
+                        return redirect()->back();
+                    }
+                }else{
+                    parent::dangerMessage('New password and confirm password does not match');
+                    }
+            }else{
+                parent::dangerMessage('Current password is incorrect');
+                return redirect()->back();
+            }
         }
     }
 }

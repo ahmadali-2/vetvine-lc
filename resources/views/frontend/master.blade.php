@@ -155,6 +155,7 @@
     {!! JsValidator::formRequest('App\Http\Requests\Frontend\RegistrationRequest', '#regform') !!}
     {!! JsValidator::formRequest('App\Http\Requests\Frontend\ContactUsRequest', '#conatctusform') !!}
     {!! JsValidator::formRequest('App\Http\Requests\Frontend\LoginInRequest', '#loginRequest') !!}
+    // {!! JsValidator::formRequest('App\Http\Requests\UpdateUserPasswordRequest', '#changeUserPasswordForm') !!}
 
 
 
@@ -169,14 +170,12 @@
     @notifyJs
 
 
-
     <x:notify-messages />
+
 
     @if (Route::currentRouteName() === 'login')
         <script>
             $(document).ready(function() {
-
-
                 $('.js-example-basic-multiple').select2();
 
                 $('#login-modal').modal('show');
