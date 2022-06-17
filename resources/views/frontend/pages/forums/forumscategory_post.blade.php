@@ -16,7 +16,8 @@
                         <div class="grow-heading">Forum </div>
                         <img src="{{ asset('frontend/forums/img/sep-line-2.jpg') }}" width="250" height="2" alt=""
                             class="line_image">
-                        <p class="mb-0">A BETTER LIFE FOR ANIMALS AND THE HUMANS
+                        <p class="mb-0">Guidance, support and wisdom to benefit and maximize the life and
+                            longevity of animals.
                         </p>
 
                     </div>
@@ -48,7 +49,7 @@
 </section> --}}
     <section>
         <div class="container">
-            <div class="row align-items-center mb-5">
+            <div class="row align-items-center">
             <div class="col-lg-3 col-md-4">
                 <div class="filter-div category-div forum_category_div">
                     <div id="fav_show_wrapper">

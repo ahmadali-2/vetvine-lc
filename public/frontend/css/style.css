@@ -8218,9 +8218,10 @@ ul {
     margin-right: 30px;
 }
 
-.specialty-topics {
+
+/* .specialty-topics {
     margin-bottom: 52px;
-}
+} */
 
 @media (min-width: 300px) and (max-width: 767px) {
     .add_left_post {
@@ -8338,6 +8339,9 @@ line-height: 31px;
     .pagination {
         flex-wrap: wrap;
     }
+    .general-area .serch-section input {
+        width: 96%;
+    }
 }
 
 .specialty-detail {
@@ -8452,4 +8456,190 @@ line-height: 31px;
 
 .search_bottom {
     margin-bottom: 20px;
+}
+
+.breadcrumbs ol li a {
+    color: #f27222;
+    cursor: pointer;
+}
+
+.publication-detail input {
+    height: 20px;
+    width: 20px;
+}
+
+.public2-title {
+    display: flex;
+    align-items: center;
+}
+
+.publication-detail form label {
+    color: #5c7c85;
+    font-family: "Museo 500";
+    font-size: 16px;
+    margin-bottom: 0 !important;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 26px;
+    text-align: left;
+    padding-top: 5px;
+}
+
+.my_ce_drop_down li:hover {
+    background-color: #f8f8f8;
+}
+
+.drop_down_user_dash li:hover {
+    background-color: #f8f8f8;
+}
+
+#comment_btn {
+    background-color: #f27222 !important;
+    outline: none;
+}
+
+.change_password .content input {
+    border: 1px solid #5c7c85 !important;
+    width: 60%;
+    width: 50%;
+    /* background: white; */
+    /* padding: 5px; */
+    height: 38px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    color: #2877c9;
+    border-radius: 5px;
+}
+
+.change_password .content label {
+    width: 35%;
+    color: #5c7c85;
+    font-family: "Museo 500";
+    font-size: 14px;
+    margin-bottom: 0 !important;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 26px;
+    text-align: left;
+    padding-top: 5px;
+}
+
+.change_password .content h2 {
+    font-size: 30px;
+    color: #5c7c85;
+    font-family: 'museo 500';
+    padding-bottom: 24px;
+    text-transform: uppercase;
+}
+
+.btn_change button {
+    width: 229px;
+    height: 51px;
+    border-radius: 20px;
+    font-size: 18px;
+    color: #ffffff;
+    font-family: 'museo 300';
+    text-transform: uppercase;
+    background-color: #f27222;
+    margin: 30px 0px 38px 92px;
+}
+
+.btn_change button:hover {
+    background-color: #fff !important;
+    color: #f27222;
+    border: solid 1px #f27222 !important;
+    transition: all 0.5s ease;
+    -webkit-box-shadow: 5px 5px 3px 0px rgb(240 240 240);
+    -moz-box-shadow: 5px 5px 3px 0px rgba(240, 240, 240, 1);
+    box-shadow: 5px 5px 3px 0px rgb(240 240 240);
+}
+
+@media(max-width:991px) {
+    .field_none {
+        display: none;
+    }
+    .btn_change button {
+        width: 229px;
+        height: 51px;
+        border-radius: 20px;
+        font-size: 18px;
+        color: #ffffff;
+        font-family: 'museo 300';
+        text-transform: uppercase;
+        background-color: #f27222;
+        margin: 30px 0px 38px 51px;
+    }
+}
+
+@media (max-width: 767px) {
+    .btn_change button {
+        width: 229px;
+        height: 51px;
+        border-radius: 20px;
+        font-size: 18px;
+        color: #ffffff;
+        font-family: 'museo 300';
+        text-transform: uppercase;
+        background-color: #f27222;
+        margin: 30px 0px 38px 99px;
+    }
+}
+
+@media(max-width:550px) {
+    .change_password .content h2 {
+        font-size: 22px;
+        color: #5c7c85;
+        font-family: 'museo 500';
+        padding-bottom: 24px;
+        text-transform: uppercase;
+    }
+    .change_password .content label {
+        width: 100%;
+        color: #5c7c85;
+        font-family: "Museo 500";
+        font-size: 14px;
+        margin-bottom: 0 !important;
+        font-style: normal;
+        letter-spacing: normal;
+        line-height: 26px;
+        text-align: left;
+        padding-top: 5px;
+    }
+    .change_password .content input {
+        border: 1px solid #5c7c85 !important;
+        width: 60%;
+        width: 96%;
+        /* background: white; */
+        /* padding: 5px; */
+        height: 38px;
+        margin-bottom: 20px;
+        margin-left: 0px;
+        color: #2877c9;
+        border-radius: 5px;
+    }
+    .btn_change button {
+        width: 229px;
+        height: 51px;
+        border-radius: 20px;
+        font-size: 18px;
+        color: #ffffff;
+        font-family: 'museo 300';
+        text-transform: uppercase;
+        background-color: #f27222;
+        margin: 30px 0px 38px 0px;
+    }
+}
+
+.like_section_parent .likeButtons .dislike {
+    color: #f27222;
+    font-weight: bold;
+    font-family: "Museo 500";
+}
+
+.like_section_parent .likeButtons .dislike_icon {
+    color: #f27222;
+}
+
+.like_section_parent .likeButtons .like_icon {
+    color: #f27222;
 }
