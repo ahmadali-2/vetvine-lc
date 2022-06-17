@@ -14,6 +14,7 @@ class Post extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'id',
         'forum_id',
         'user_id',
         'post_title',
