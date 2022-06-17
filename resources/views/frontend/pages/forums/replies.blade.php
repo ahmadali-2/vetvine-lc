@@ -1,5 +1,13 @@
+@php
+    $padding = 10;
+@endphp
+
 @foreach($comments as $comment)
-<div class="display-comment">
+
+@php
+     $padding + 40;
+@endphp
+<div class="display-comment" style="padding-left: {{$padding}}px;">
     <strong>{{ $comment->user->name }}</strong>
     <p class="m-3">{{ $comment->comment }}
         <a href="javascript:void(0);"  onclick="deleteRecord('{{$comment->id}}', '/vetvine-member/comment-destroy/')">

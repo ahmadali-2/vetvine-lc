@@ -35,7 +35,7 @@
     </section>
 
     <section>
-        <div class="specialty-topics">
+        <div class="specialty-topics margin_bottom_special">
             <div class="container">
                 <div class="specialty-info">
                     <div class="specialty-detail">
@@ -98,13 +98,13 @@
                                             @foreach($post->likes as $like)
                                                 @if(($like->post_id == $post->id) && ($like->ce == 1) && ($like->like == 1))
                                                     <?php $displayLike = true ?>
-                                                    <i class="fa fa-thumbs-up like_icon" aria-hidden="true"></i>
-                                                <a class="like" member_home_post_id="{{$post->id}}" member_home_user_id="{{$post->user->id}}" style="cursor: pointer;"><b style="color:#5c7c85;">Liked</b></a>
+
+                                                <a class="like" member_home_post_id="{{$post->id}}" member_home_user_id="{{$post->user->id}}" style="cursor: pointer;"><b style="color:#5c7c85;">    <i class="fa fa-thumbs-up" aria-hidden="true"></i> Liked</b></a>
                                                 @endif
                                             @endforeach
                                             @if($displayLike == false)
-                                            <i class="fa fa-thumbs-up dislike_icon" aria-hidden="true"></i>
-                                            <a class="dislike" member_home_post_id="{{$post->id}}" member_home_user_id="{{$post->user->id}}" style="cursor: pointer;">Like</a>
+
+                                            <a class="dislike" member_home_post_id="{{$post->id}}" member_home_user_id="{{$post->user->id}}" style="cursor: pointer;"> <i class="fa fa-thumbs-up" aria-hidden="true"></i> Like</a>
                                             @endif
                                             <?php $displayLike = false ?>
                                         </div>
@@ -319,13 +319,13 @@
                 success: function(response){
                     if(response.code == 200){
                         component.css('color','#5c7c85');
-                        component.html("<b>Liked</b>");
+                        component.html("<b>  <i class='fa fa-thumbs-up' aria-hidden='true'></i> Liked</b>");
                         toastr.success('Post Liked Successfully!');
 
                     }
                     else if(response.code == 201){
                         component.css('color','#f27222');
-                        component.html('Like');
+                        component.html( ' <i class="fa fa-thumbs-up" aria-hidden="true"></i> Like');
                         toastr.success('Post unliked Successfully!');
                     }
                     else if(response.code == 400){
