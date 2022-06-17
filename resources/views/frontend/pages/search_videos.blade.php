@@ -9,7 +9,7 @@
             </div>
             <div class="video-bottom-text">
                 <a class="video-title"
-                    href="{{ route('video_desc', [$item->id, $item->category_id]) }}">{{ $item->video_title }}
+                    >{{ $item->video_title }}
 
                 </a>
                 <div>
@@ -35,7 +35,7 @@
                 <p class="para-decription">
                     {{ $item->video_description }}
                 </p>
-                <a href="#">Read More</a>
+                <a href="{{ route('video_desc', [$item->id, $item->category_id]) }}">Read More</a>
             </div>
         </div>
     </div>

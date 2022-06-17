@@ -11,6 +11,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use vetvineHelper;
+use App\Models\VideoRating;
 
 // use App\Models\Sponser;
 // use Sponser

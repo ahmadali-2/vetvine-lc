@@ -3,41 +3,6 @@
     <main>
         <section class="video-section-wrapper mb-4">
             <div class="container">
-                <!-- <div class="filter-div category-div">
-                          <div id="fav_show_wrapper">
-                              <label for="fav_Show" id="fav_show_label">Category:</label>
-                              <select name="fav_show" id="fav_show" class="filter-slect">
-                                  <option title="" value="" label=""></option>
-                                  <option title="Anesthesia" value="72" label="Anesthesia">Anesthesia</option>
-                                  <option title="Behavior" value="83" label="Behavior">Behavior</option>
-                                  <option title="Cardiology" value="49" label="Cardiology">Cardiology</option>
-                                  <option title="Dentistry" value="51" label="Dentistry">Dentistry</option>
-                                  <option title="Dermatology" value="31" label="Dermatology">Dermatology</option>
-                                  <option title="Emergency &amp; Critical Care" value="33" label="Emergency &amp; Critical Care">Emergency &amp; Critical Care</option>
-                                  <option title="Equine" value="71" label="Equine">Equine</option>
-                                  <option title="Euthanasia" value="92" label="Euthanasia">Euthanasia</option>
-                                  <option title="Evidence Based / Specialty Updates" value="84" label="Evidence Based / Specialty Updates">Evidence Based / Specialty Updates</option>
-                                  <option title="Human-Animal Bond" value="93" label="Human-Animal Bond">Human-Animal Bond</option>
-                                  <option title="Integrative Care &amp; Pain Management" value="85" label="Integrative Care &amp; Pain Management">Integrative Care &amp; Pain Management</option>
-                                  <option title="Internal Medicine - Small Animal" value="34" label="Internal Medicine - Small Animal">Internal Medicine - Small Animal</option>
-                                  <option title="Neurology" value="87" label="Neurology">Neurology</option>
-                                  <option title="Oncology" value="59" label="Oncology">Oncology</option>
-                                  <option title="Ophthalmology" value="36" label="Ophthalmology">Ophthalmology</option>
-                                  <option title="Parasitology" value="89" label="Parasitology">Parasitology</option>
-                                  <option title="Pet Owners" value="47" label="Pet Owners">Pet Owners</option>
-                                  <option title="Professional Development / Practice Management" value="38" label="Professional Development / Practice Management">Professional Development / Practice Management</option>
-                                  <option title="Surgery " value="55" label="Surgery ">Surgery </option>
-                                  <option title="Wildlife Conservation" value="91" label="Wildlife Conservation">Wildlife Conservation</option>
-                              </select>
-                          </div>
-                          </div> -->
-
-
-
-                {{-- comment --}}
-
-
-
                 <h1 class="Upcoming-webinars mt-2">Videos on Demand</h1>
                 <ul class="filter_list upcoming_filter">
 
@@ -113,7 +78,7 @@
                                 </div>
                                 <div class="video-bottom-text">
                                     <a class="video-title"
-                                        href="{{ route('video_desc', [$item->id, $item->category_id]) }}">{{ $item->video_title }}
+                                        >{{ $item->video_title }}
 
                                     </a>
                                     <div>
@@ -133,7 +98,7 @@
                                     <p class="para-decription">
                                         {{ $item->video_description }}
                                     </p>
-                                    <a href="#">Read More</a>
+                                    <a href="{{ route('video_desc', [$item->id, $item->category_id]) }}">Read More</a>
                                 </div>
                             </div>
                         </div>

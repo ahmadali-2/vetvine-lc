@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admins\VideosonDemand\VideosOnDemand;
+use App\Models\VideoRating;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VideoDescriptionController extends Controller
 {
@@ -11,7 +13,8 @@ class VideoDescriptionController extends Controller
     {
         return view('frontend.video_detail', [
             'videos' => VideosOnDemand::find($id),
-            'more_info' => VideosOnDemand::where('category_id', $category)->get(),
+            'more_info' => VideosOnDemand::where('category_id', $category)->where('id', '!=', $id)->get(),
+            'rating' => VideoRating::where('video_id', $id)->where('user_id', Auth::id())->first(),
         ]);
     }
 
@@ -69,5 +72,27 @@ class VideoDescriptionController extends Controller
         return response()->json([
             'html' => view('frontend.pages.search_videos', compact('data'))->render(),
         ]);
+    }
+
+    public function rating_videos(Request $request)
+    {
+        // return $request->all();
+        $length = $request->length;
+        $user_id = $request->user_id;
+        $video_id = $request->video_id;
+
+        $exists = VideoRating::where('user_id', Auth::id())->where('video_id', $video_id)->count();
+
+        if ($exists > 0) {
+            VideoRating::where('user_id', Auth::id())->where('video_id', $video_id)->update([
+                'rating' => $length,
+            ]);
+        } else {
+            VideoRating::create([
+                'video_id' => $video_id,
+                'user_id' => Auth::id(),
+                'rating' => $length,
+            ]);
+        }
     }
 }

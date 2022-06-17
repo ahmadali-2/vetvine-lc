@@ -251,4 +251,5 @@ Route::get('testing', function () {
 
 Route::get('/video-description/{id}{category}', [VideoDescriptionController::class, 'video_desc'])->name('video_desc');
 Route::post('/videos-search', [VideoDescriptionController::class, 'video_search'])->name('videos.search');
+Route::post('/rating-videos', [VideoDescriptionController::class, 'rating_videos'])->name('rating.videos');
 Route::post('/mark-as-read',     [PushNotificationController::class, 'mark_as_read'])->name('read.notification');
