@@ -178,6 +178,7 @@
         /* End */
     </style>
     <section class="video-section-wrapper mb-4">
+        {{-- @dd($eventdetail->event_title) --}}
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -238,16 +239,17 @@
                                 </div>
                                 @php
                                     $eventTime = $eventdetail->time;
-                                    $timeZone = $eventdetail->user->timezone->name;
-                                    $today = new DateTime($eventdetail->time, new DateTimeZone($timeZone));
-                                    // $today->format('Y-m-d H:i').'<br>';
-                                    $userTimeZone = Auth::user()->timezone->name;
-                                    $userEventTime = new DateTimeZone($userTimeZone);
-                                    $convertedTime = $today->setTimeZone($userEventTime);
-                                    $formattedTime = $convertedTime->format('H:i');
+                                    // $timeZone = $eventdetail->user->timezone->timezone;
+                                    // $today = new DateTime($eventdetail->time, new DateTimeZone($timeZone));
+
+                                    // $userTimeZone = Auth::user()->timezone->timezone;
+                                    // $userEventTime = new DateTimeZone($userTimeZone);
+                                    // $convertedTime = $today->setTimeZone($userEventTime);
+                                    // $formattedTime = $convertedTime->format('H:i');
                                 @endphp
+                                {{-- @dd($timezoone) --}}
                                 <div class="public2-description">
-                                    {{ date('g:i a', strtotime($formattedTime)) }}
+                                    {{-- {{ date('g:i a', strtotime($formattedTime)) }} --}}
                                 </div>
                             </div>
                         </div>

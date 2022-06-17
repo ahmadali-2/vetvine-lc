@@ -30,7 +30,7 @@ class PersonelInfoController extends Controller
     {
         $countries = Country::all();
         $employmentInfo = Auth::user()->employmentInfo;
-
+        // $permissions = Auth::user()->permissions;
         $timezones      = TimeZone::all();
         $usernetworks   = UserMemberAndNetworkLevel::all();
 

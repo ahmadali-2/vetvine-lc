@@ -16,6 +16,7 @@ use App\Models\Admins\Webinar\CategoryEvent;
 use App\Models\Admins\Webinar\Event;
 use App\Models\Admins\Webinar\ReviewRating;
 use App\Models\Admins\Webinar\SponserTable;
+use App\Models\Sponser;
 use DB;
 class HomeController extends Controller
 {
@@ -149,7 +150,10 @@ class HomeController extends Controller
     public function videosOnDemand(){
         return view('frontend.pages.videos-on-demand', [
             'videos'   => VideosOnDemand::all(),
-            'category' => CategoryEvent::all()
+            'category' => CategoryEvent::all(),
+            'sponsor'  => SponserTable::all(
+                
+            )
         ]);
     }
     public function ceArchives(){

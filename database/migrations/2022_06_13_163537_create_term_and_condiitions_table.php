@@ -16,7 +16,7 @@ class CreateTermAndCondiitionsTable extends Migration
         Schema::create('term_and_condiitions', function (Blueprint $table) {
             $table->id();
             $table->string('page_title');
-            $table->string('page_desc');
+            $table->longText('page_desc');
             $table->timestamps();
         });
     }
