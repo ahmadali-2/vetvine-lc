@@ -151,6 +151,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(ForumPost::class);
     }
+    public function shares(){
+        return $this->hasMany(Share::class);
+    }
     public function events()
     {
         return $this->hasMany(Event::class);
@@ -162,6 +165,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public function likes()
     {
         return $this->hasMany(Like::class);
+    }
+    public function shareLikes(){
+        return $this->hasMany(ShareLike::class);
     }
     public function generateTwoFactorCode()
     {
