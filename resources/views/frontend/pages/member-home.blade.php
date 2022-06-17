@@ -20,7 +20,6 @@
         </div>
     </section>
     </main>
-
     <section class="main_banner_bottob_label"></section>
 
     <section class="become_member_area">
@@ -56,7 +55,9 @@
 
                         </div>
                         <div class="col-lg-6 col-md-6">
-                            @foreach ($posts as $post)
+                            @foreach ($posts as $key=>$post)
+                                <input id="member_home_post_id_{{$key}}" type="number" value="{{$post->id}}" hidden>
+                                <input id="member_home_user_id_{{$key}}" type="number" value="{{$post->user->id}}" hidden>
                                 <div class="post_center_box">
                                     <div class="row">
                                         <div class=" col-lg-6">
@@ -90,12 +91,11 @@
                                     </div>
 
                                     <div class="col-sm-12 text-center post_share_button">
-                                        <a href="#"><img src="{{ asset('frontend/img/like-label.png') }}" width="56"
-                                                height="21" alt="" /></a>
-                                        <a href="#"><img src="{{ asset('frontend/img/comment-label.png') }}" alt="" /></a>
-                                        <a href="#"><img src="{{ asset('frontend/img/share_label.png') }}" alt="" /></a>
-
-
+                                        <div class="likeButtons">
+                                        <a member_home_post_id="{{$post->id}}" member_home_user_id="{{$post->user->id}}" style="cursor: pointer;" ><img src="{{ asset('frontend/img/like-label.png') }}" width="56" height="21" alt="" /></a>
+                                        </div>
+                                        <a style="cursor: pointer;"><img src="{{ asset('frontend/img/comment-label.png') }}" alt="" /></a>
+                                        <a style="cursor: pointer;"><img src="{{ asset('frontend/img/share_label.png') }}" alt="" /></a>
 
                                     </div>
 
@@ -143,16 +143,13 @@
                                     </div>
 
                                     <div class="col-sm-12 text-center post_share_button">
-                                        <a href="#"><img src="{{ asset('frontend/img/like-label.png') }}" width="56"
+                                        <a id="" href="#"><img src="{{ asset('frontend/img/like-label.png') }}" width="56"
                                                 height="21" alt="" /></a>
-                                        <a href="#"><img src="{{ asset('frontend/img/comment-label.png') }}"
+                                        <a id="" href="#"><img src="{{ asset('frontend/img/comment-label.png') }}"
                                                 alt="" /></a>
-                                        <a href="#"><img src="{{ asset('frontend/img/share_label.png') }}" alt="" /></a>
-
-
+                                        <a id="" href="#"><img src="{{ asset('frontend/img/share_label.png') }}" alt="" /></a>
 
                                     </div>
-
 
                                 </div>
                                 <div class="post_center_box">
@@ -243,11 +240,11 @@
                                     </div>
 
                                     <div class="col-sm-12 text-center post_share_button">
-                                        <a href="#"><img src="{{ asset('frontend/img/like-label.png') }}" width="56"
+                                        <a style="cursor: pointer;" id="member_home_like"><img src="{{ asset('frontend/img/like-label.png') }}" width="56"
                                                 height="21" alt="" /></a>
-                                        <a href="#"><img src="{{ asset('frontend/img/comment-label.png') }}"
+                                        <a style="cursor: pointer;" id="member_home_comment"><img src="{{ asset('frontend/img/comment-label.png') }}"
                                                 alt="" /></a>
-                                        <a href="#"><img src="{{ asset('frontend/img/share_label.png') }}" alt="" /></a>
+                                        <a style="cursor: pointer;" id="member_home_share"><img src="{{ asset('frontend/img/share_label.png') }}" alt="" /></a>
 
 
 
@@ -288,40 +285,92 @@
 @endsection
 @section('scripts')
     <script>
-        $(document).ready(function(e) {
-            $(".like").on("click", function(e) {
-                e.preventDefault();
-                var postid = $(this).attr('data-post-id');
-                var userid = $(this).attr('data-user-id');
-                var postUserid = $(this).attr('data-post-user-id');
-                // console.log(postUserid);
-                var id = $(this).attr('id');
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
+            var likepostid;
+            var postUserid;
+
+            $('.likeButtons a').on("click", function() {
+                likepostid = $(this).attr('member_home_post_id');
+                postUserid = $(this).attr('member_home_user_id');
+                likePost($(this));
+                if(response == 0){
+
+                }else if(response == 1){
+                    $(this).css('color','black');
+                    $(this).html('Like');
+                    toastr.success('Post Unliked Successfully!');
+                }else{
+                    $(this).css('color','black');
+                    $(this).html('Like');
+                    toastr.success('Please verify email before liking!');
+                }
+            });
+
+        function likePost(component){
+                var response = 0;
                 $.ajax({
-                    url: "{{ route('likesave') }}",
-                    method: 'POST',
-                    data: {
-                        likeuserid: userid,
-                        likepostid: postid,
-                        postUserid: postUserid
-                    },
-                    success: function(response) {
-                        // console.log(response.like.like);
-                        if (response.like.like == 1) {
-                            $("#" + id).html('Liked');
-                        } else if (response.like.like == 0) {
-                            $("#" + id).html('Like');
-                        }
-                    },
-                    error: function(error) {
-                        console.log(error)
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                type: "POST",
+                url: '/savelike',
+                data: {likepostid: likepostid, postUserid: postUserid, ce:1},
+                success: function(response){
+                    console.log(response);
+                    console.log(response.code);
+                    if(response.code == 200){
+                        $(this).css('color','#4886C8');
+                        $(this).html('<b>Liked</b>');
+                        toastr.success('Post Liked Successfully!');
                     }
+                    else if(response.code == 201){
+                        $(this).css('color','#4886C8');
+                        $(this).html('<b>Liked</b>');
+                        toastr.success('Post Liked Successfully!');
+                    }
+                    else if(response.code == 400){
+                        $(this).css('color','#4886C8');
+                        $(this).html('<b>Liked</b>');
+                        toastr.success('Post Liked Successfully!');
+                    }
+                }
                 });
-            })
-        })
+
+                return response;
+            }
+        // $(document).ready(function(e) {
+        //     $(".like").on("click", function(e) {
+        //         e.preventDefault();
+        //         var postid = $(this).attr('data-post-id');
+        //         var userid = $(this).attr('data-user-id');
+        //         var postUserid = $(this).attr('data-post-user-id');
+        //         // console.log(postUserid);
+        //         var id = $(this).attr('id');
+        //         $.ajaxSetup({
+        //             headers: {
+        //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //             }
+        //         });
+        //         $.ajax({
+        //             url: "{{ route('likesave') }}",
+        //             method: 'POST',
+        //             data: {
+        //                 likeuserid: userid,
+        //                 likepostid: postid,
+        //                 postUserid: postUserid
+        //             },
+        //             success: function(response) {
+        //                 // console.log(response.like.like);
+        //                 if (response.like.like == 1) {
+        //                     $("#" + id).html('Liked');
+        //                 } else if (response.like.like == 0) {
+        //                     $("#" + id).html('Like');
+        //                 }
+        //             },
+        //             error: function(error) {
+        //                 console.log(error)
+        //             }
+        //         });
+        //     })
+        // })
     </script>
 @endsection
