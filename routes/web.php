@@ -173,7 +173,7 @@ Route::group(['middleware'=>['frontendUserRole', 'emailVerification']], function
         return view('frontend.home');
     });
 
-    Route::post('delete-user/{id}', [HomeController::class, 'delete_user'])->name('delete.user');
+Route::post('delete-user', [HomeController::class, 'delete_user'])->name('delete.user');
 
 Route::get('why-vetvine',[HomeController::class,'whyVetvine'])->name('why_vetvine');
 Route::get('grow',[HomeController::class,'grow'])->name('grow');

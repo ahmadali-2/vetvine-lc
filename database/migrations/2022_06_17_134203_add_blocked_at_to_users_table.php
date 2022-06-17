@@ -14,7 +14,7 @@ class AddBlockedAtToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->enum('blocked_user', ['1', '0'])->default('0');
         });
     }
 
