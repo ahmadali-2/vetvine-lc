@@ -14,6 +14,7 @@ class Like extends Model
         'post_id',
         'user_id',
         'like',
+        'ce',
     ];
     public function posts()
     {

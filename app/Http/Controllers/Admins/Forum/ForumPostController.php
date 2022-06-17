@@ -78,12 +78,17 @@ class ForumPostController extends Controller
 
     public function createPost($id)
     {
-        if(auth()->user() && auth()->user()->email_verified_at){
-            $forum = Forum::find($id);
-            return view('frontend.pages.forums.create_post',compact('forum'));
+        if(auth()->user()){
+            if(auth()->user()->email_verified_at){
+                $forum = Forum::find($id);
+                return view('frontend.pages.forums.create_post',compact('forum'));
+            }else{
+                parent::dangerMessage('Please verify your email first!');
+                return back();
+            }
         }
         else{
-            parent::dangerMessage('Please verify your email first!');
+            parent::dangerMessage('User not login, Please login first!');
             return back();
         }
     }

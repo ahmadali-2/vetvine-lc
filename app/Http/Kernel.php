@@ -71,6 +71,7 @@ class Kernel extends HttpKernel
         'adminRole' => \App\Http\Middleware\AdminRole::class,
         'vetvineUserRole' => \App\Http\Middleware\VetvineUsersRole::class,
         'frontendUserRole' => \App\Http\Middleware\FrontendUser::class,
+        'emailVerification' => \App\Http\Middleware\CheckEmailVerification::class,
 
     ];
 }
