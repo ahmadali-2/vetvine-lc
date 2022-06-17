@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admins\VideosOnDemand;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\VideoRequest;
 use App\Models\Admins\VideosonDemand\VideosOnDemand;
 use App\Models\Admins\Webinar\CategoryEvent;
 use App\Models\Admins\Webinar\SponserTable;
@@ -47,9 +48,11 @@ class VideosOnDemandController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(VideoRequest $request)
     {
         // return $request;
+        // return $request;
+        $request->validated();
         $input = $request->all();
         // dd( $input);
         $user = Auth::user()->id;
