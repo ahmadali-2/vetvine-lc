@@ -39,8 +39,10 @@ class ForumController extends Controller
     }
 
     public function searchFormCategory(Request $request){
+
         $categories = null;
         if($request->category > 0 && isset($request->category_title_text)){
+
             $categories = CategoryForum::where('id',$request->category) ->where('category_title', 'LIKE', '%' . $request->category_title_text . '%')->get();
         }elseif($request->category > 0){
             $categories = CategoryForum::where('id',$request->category)->get();
