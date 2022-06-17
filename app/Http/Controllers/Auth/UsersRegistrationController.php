@@ -12,8 +12,10 @@ class UsersRegistrationController extends Controller
 {
 
     public function verifyEmailPopup(){
-        $verifyEmail = true;
-        return view('frontend.home', compact('verifyEmail'));
+        if(isset(auth()->user()->email_verified_at) == false){
+            $verifyEmail = true;
+            return view('frontend.home', compact('verifyEmail'));
+        }
     }
 
     public function userRegisterationForm()
