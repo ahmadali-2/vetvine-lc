@@ -83,7 +83,6 @@ class AdminProfileController extends Controller
         ? parent::successMessage("Your Profile Updated Successfully")
         : parent::dangerMessage("Your Profile Does Not Updated , Please Try Again");
         return redirect()->back();
-
     }
 
     /**

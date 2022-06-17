@@ -79,6 +79,10 @@
     <!-- </footer> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+    <script src="{{ asset('bootstrap/jquery/popper.min.js') }}"></script>
+
     <script>
         $(document).ready(function() {
 
@@ -91,16 +95,38 @@
                 }
             });
 
-            $(document).on('click', '.ce-toggle-btn', function(event) {
-                count2++;
 
-                if (count2 == 1) {
-                    $('.ce-toggle-btn').trigger('click');
-                }
-            });
-        });
+
+
+    <script src="{{ asset('frontend/js/bootstrap.js') }}"></script>
+
+    <script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
+
+
+
+    <script src="https://kit.fontawesome.com/b8867474d2.js" crossorigin="anonymous"></script>
+
+    <script src="{{ asset('frontend/js/fontawesome.js') }}"></script>
+
+    <script src="{{ asset('frontend/js/frontend.js') }}"></script>
+
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+
     </script>
-    {{-- <script src="{{ asset('bootstrap/jquery/popper.min.js') }}"></script> --}}
+
+    <script>
+        CKEDITOR.replace('description');
+    </script>
+    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js') }}"></script>
+
+    {!! JsValidator::formRequest('App\Http\Requests\Frontend\RegistrationRequest', '#regform') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\Frontend\ContactUsRequest', '#conatctusform') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\Frontend\LoginInRequest', '#loginRequest') !!}
+
+
+
+    </script>
+    <script src="{{ asset('bootstrap/jquery/popper.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 
 
@@ -131,6 +157,7 @@
     {!! JsValidator::formRequest('App\Http\Requests\Frontend\LoginInRequest', '#loginRequest') !!}
 
 
+
     @yield('scripts')
 
 
@@ -149,6 +176,9 @@
         <script>
             $(document).ready(function() {
 
+
+                $('.js-example-basic-multiple').select2();
+
                 $('#login-modal').modal('show');
 
             });
@@ -160,6 +190,9 @@
         @if (count($errors) > 0)
 
             @if ($errors->has('email') || $errors->has('password'))
+
+            <script src="{{ asset('vendor/select2/dist/js/select2.min.js')}}"></script>
+
                 <script type="text/javascript">
                     $(document).ready(function() {
 
@@ -180,13 +213,20 @@
         @endif
 
     @endif
+
     <script>
-        const deleteRecord = (id, uri) => {
+
+    <script>
+{{-- >>>>>>> 9dfc0a53a4a417dcde1741615c8d5db4851facb4 --}}
+        {{-- const deleteRecord = (id, uri) => {
             document.getElementById('identity').value;
             let route = window.location.origin + uri + id;
             document.getElementById('deleteForm').setAttribute('action', route)
             $('#deleteModal').modal('show')
-        }
+        } --}}
+{{-- <<<<<<< HEAD --}}
+    </script>
+
     </script>
 </body>
 
