@@ -111,6 +111,7 @@ Route::get('must-verify',[UsersRegistrationController::class,'verifyEmailPopup']
 /**
  * Admin Routes
  */
+// Auth::routes(['verify'=>true]);
 Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRole']], function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('admindashboard');
     Route::get('sample-form', [AdminDashboardController::class, 'sampleForm'])->name('sampleform');
@@ -161,8 +162,13 @@ Route::get("/page", function(){
 Route::get('frontend-forums',[ForumController::class,'frontendIndex'])->name('forumsfrontend');
 Route::get('forums/{id}',[ForumController::class,'getForums'])->name('getForums');
 Route::resource('forums-posts',ForumPostController::class);
+Route::post('search-form-category',[ForumController::class,'searchFormCategory'])->name('searchFormCategory');
+Route::post('search-category-form',[ForumController::class,'searchCategoryForm'])->name('searchCategoryForm');
+Route::post('search-form-post',[ForumController::class,'searchFormPosts'])->name('searchFormPosts');
+Route::get('forum/posts/{id}',[ForumController::class,'getForumPosts'])->name('getForumPosts');
+Route::get('category/forum/posts/{id}',[ForumController::class,'getForumcategoryPosts'])->name('getForumcategoryPosts');
 
-Route::group(['middleware'=>['frontendUserRole']], function(){
+Route::group(['middleware'=>['frontendUserRole', 'emailVerification']], function(){
     Route::get('/',function(){
         return view('frontend.home');
     });
@@ -189,18 +195,11 @@ Route::resource('eventpayments',EventPaymentController::class);
 
 Route::get('faqs',[HomeController::class,'faqs'])->name('faqs');
 Route::get('frontend-news',[NewsController::class,'frontIndex'])->name('newsfrontend');
-Route::post('search-form-category',[ForumController::class,'searchFormCategory'])->name('searchFormCategory');
-Route::post('search-category-form',[ForumController::class,'searchCategoryForm'])->name('searchCategoryForm');
-Route::post('search-form-post',[ForumController::class,'searchFormPosts'])->name('searchFormPosts');
-Route::get('forum/posts/{id}',[ForumController::class,'getForumPosts'])->name('getForumPosts');
-
-Route::get('category/forum/posts/{id}',[ForumController::class,'getForumcategoryPosts'])->name('getForumcategoryPosts');
 
 //videos on demand
 Route::get('videos-on-demand',[HomeController::class,'videosOnDemand'])->name('videosOnDemand');
 Route::get('ce-archives',[HomeController::class,'ceArchives'])->name('ceArchives');
 
-});
     //Forum-posts Comments Routes
     Route::post('/comment/store', [CommentController::class,'store'])->name('comment.add');
     Route::post('savelike', [PostController::class,'likeSave'])->name('likesave');
@@ -241,6 +240,7 @@ Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetv
 
 
 });
+});
 
 Route::get('testing', function () {
     event(new TestEvent('irtaza imran'));
@@ -250,3 +250,9 @@ Route::get('testing', function () {
 Route::get('/video-description/{id}{category}', [VideoDescriptionController::class, 'video_desc'])->name('video_desc');
 Route::post('/videos-search', [VideoDescriptionController::class, 'video_search'])->name('videos.search');
 Route::post('/mark-as-read',     [PushNotificationController::class, 'mark_as_read'])->name('read.notification');
+
+
+Route::get('change_password',function(){
+
+ return view('vetvineUsers\layouts\pages\user_change_password');
+});
