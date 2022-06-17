@@ -78,8 +78,9 @@ class EventPaymentController extends Controller
                 'event_id' => $request->event_id,
                 'amount' => $request->event_price,
             ]);
-        parent::successMessage("Your Plan Subscribed Successfully");
-        parent::successMessage("Your Transaction Id " .$stripeResponse->id);
+        parent::successMessage("Payment Successful");
+        parent::successMessage("Event Subscribed Successfully");
+        // parent::successMessage("Your Transaction Id " .$stripeResponse->id);
         return redirect()->route('upcoming_webinars');
         } catch(Exception $e) {
             parent::dangerMessage("Something Went Wrong Payment Does Not Proceed");

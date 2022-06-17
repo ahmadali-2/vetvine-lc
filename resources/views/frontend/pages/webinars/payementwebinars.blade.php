@@ -58,8 +58,8 @@
                                                 <input type="hidden" value="{{ Auth::user()->id }}" name="user_id">
                                                 <div class="num-feild required">
                                                     <label for="num">Credit Card Number</label>
-                                                    <input autocomplete='off' type="text" name="card_number" id="num"  class='form-control card-number'
-                                                        size='20'>
+                                                    <input autocomplete='off' type="text" name="card_number" id="num"
+                                                        class='form-control card-number' size='20'>
                                                 </div>
                                                 <div class="name-feild">
                                                     <div class="fname">
@@ -71,17 +71,34 @@
                                                 <div class="expiry-feild required">
                                                     <div class="month">
                                                         <label for="ex-month">Expiration Month</label>
-                                                        <input type="text" name="exp_month" placeholder='MM' size='2'
-                                                            id="ex-month"  class='form-control card-expiry-month'>
+                                                        <select name="exp_month" id="ex-month" class="form-control card-expiry-month">
+                                                            @for ($i = 1; $i <= 12; $i++)
+                                                                <option value="{{ $i }}">{{date('F', mktime(0, 0, 0, $i, 10)) }}
+                                                                </option>
+                                                            @endfor
+                                                        </select>
+                                                        {{-- <input type="text" name="exp_month" placeholder='MM' size='2'
+                                                            id="ex-month"  class='form-control card-expiry-month'> --}}
                                                     </div>
+                                                    @php
+                                                        $year = date('Y');
+                                                    @endphp
+
                                                     <div class="year">
                                                         <label for="year">Expiration Year</label>
-                                                        <input type="text" name="exp_year" class='form-control card-expiry-year' placeholder='YYYY' size='4'
-                                                            id="year">
+                                                        <select name="exp_year" id="exp_year" class="form-control card-expiry-year">
+                                                            @for ($i = $year; $i <= $year + 10; $i++)
+                                                                <option value="{{ $i }}">{{ $i }}
+                                                                </option>
+                                                            @endfor
+                                                        </select>
+                                                        {{-- <input type="text" name="exp_year" class='form-control card-expiry-year' placeholder='YYYY' size='4'
+                                                            id="year"> --}}
                                                     </div>
                                                 </div>
                                                 <div class="billing-btn">
-                                                    <button type="submit" value="{{ $event_price }}">Pay ${{ $event_price }}</button>
+                                                    <button type="submit" value="{{ $event_price }}">Pay
+                                                        ${{ number_format($event_price, 2) }}</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -96,117 +113,114 @@
     </section>
 @endsection
 @section('scripts')
-
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-
-
-
-<script type="text/javascript">
-
-$(function() {
-
-    var $form         = $(".require-validation");
-
-  $('form.require-validation').bind('submit', function(e) {
-
-    var $form         = $(".require-validation"),
-
-        inputSelector = ['input[type=email]', 'input[type=password]',
-
-                         'input[type=text]', 'input[type=file]',
-
-                         'textarea'].join(', '),
-
-        $inputs       = $form.find('.required').find(inputSelector),
-
-        $errorMessage = $form.find('div.error'),
-
-        valid         = true;
-
-        $errorMessage.addClass('hide');
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 
 
 
-        $('.has-error').removeClass('has-error');
+    <script type="text/javascript">
+        $(function() {
 
-    $inputs.each(function(i, el) {
+            var $form = $(".require-validation");
 
-      var $input = $(el);
+            $('form.require-validation').bind('submit', function(e) {
 
-      if ($input.val() === '') {
+                var $form = $(".require-validation"),
 
-        $input.parent().addClass('has-error');
+                    inputSelector = ['input[type=email]', 'input[type=password]',
 
-        $errorMessage.removeClass('hide');
+                        'input[type=text]', 'input[type=file]',
 
-        e.preventDefault();
+                        'textarea'
+                    ].join(', '),
 
-      }
+                    $inputs = $form.find('.required').find(inputSelector),
 
-    });
+                    $errorMessage = $form.find('div.error'),
 
+                    valid = true;
 
-
-    if (!$form.data('cc-on-file')) {
-
-      e.preventDefault();
-
-      Stripe.setPublishableKey($form.data('stripe-publishable-key'));
-
-      Stripe.createToken({
-
-        number: $('.card-number').val(),
-
-        cvc: $('.card-cvc').val(),
-
-        exp_month: $('.card-expiry-month').val(),
-
-        exp_year: $('.card-expiry-year').val()
-
-      }, stripeResponseHandler);
-
-    }
+                $errorMessage.addClass('hide');
 
 
 
-  });
+                $('.has-error').removeClass('has-error');
+
+                $inputs.each(function(i, el) {
+
+                    var $input = $(el);
+
+                    if ($input.val() === '') {
+
+                        $input.parent().addClass('has-error');
+
+                        $errorMessage.removeClass('hide');
+
+                        e.preventDefault();
+
+                    }
+
+                });
 
 
 
-  function stripeResponseHandler(status, response) {
+                if (!$form.data('cc-on-file')) {
 
-        if (response.error) {
-            toastr.error(response.error.message)
-            $('.error')
+                    e.preventDefault();
 
-                .removeClass('hide')
+                    Stripe.setPublishableKey($form.data('stripe-publishable-key'));
 
-                .find('.alert')
+                    Stripe.createToken({
 
-                .text(response.error.message);
+                        number: $('.card-number').val(),
 
-        } else {
+                        cvc: $('.card-cvc').val(),
 
-            // token contains id, last4, and card type
-            // alert(response);
-            var token = response['id'];
+                        exp_month: $('.card-expiry-month').val(),
 
-            // insert the token into the form so it gets submitted to the server
+                        exp_year: $('.card-expiry-year').val()
 
-            $form.find('input[type=text]').empty();
+                    }, stripeResponseHandler);
 
-            $form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
-
-            $form.get(0).submit();
-
-        }
-
-    }
+                }
 
 
 
-});
+            });
 
-</script>
 
+
+            function stripeResponseHandler(status, response) {
+
+                if (response.error) {
+                    toastr.error(response.error.message)
+                    $('.error')
+
+                        .removeClass('hide')
+
+                        .find('.alert')
+
+                        .text(response.error.message);
+
+                } else {
+
+                    // token contains id, last4, and card type
+                    // alert(response);
+                    var token = response['id'];
+
+                    // insert the token into the form so it gets submitted to the server
+
+                    $form.find('input[type=text]').empty();
+
+                    $form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
+
+                    $form.get(0).submit();
+
+                }
+
+            }
+
+
+
+        });
+    </script>
 @endsection

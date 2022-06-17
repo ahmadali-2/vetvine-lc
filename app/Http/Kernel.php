@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\PreventBackBrowserHistory;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -37,6 +38,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\PreventBackBrowserHistory::class,
         ],
 
         'api' => [
@@ -69,6 +71,7 @@ class Kernel extends HttpKernel
         'adminRole' => \App\Http\Middleware\AdminRole::class,
         'vetvineUserRole' => \App\Http\Middleware\VetvineUsersRole::class,
         'frontendUserRole' => \App\Http\Middleware\FrontendUser::class,
+        'emailVerification' => \App\Http\Middleware\CheckEmailVerification::class,
 
     ];
 }

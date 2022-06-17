@@ -35,8 +35,7 @@ class PostController extends Controller
     }
     public function likeSave(Request $request)
     {
-        if(auth()->user() && isset(auth()->user()->email_verified_at)){
-        $liked = Like::where('user_id', Auth::id())->where('post_id', $request->likepostid)->first();
+        $liked = Like::where('user_id', Auth::id())->where('post_id', $request->likepostid)->where('ce',$request->ce)->first();
         if (!$liked) {
             $push_notifications = event(new NotificationEvent(Auth::id(), (int) $request->likepostid));
             PushNotification::create([
@@ -50,6 +49,7 @@ class PostController extends Controller
                 "post_id" => $request->likepostid,
                 "user_id" => Auth::id(),
                 "like" => 1,
+                "ce" => $request->ce,
             ]);
 
             return response()->json(
@@ -93,13 +93,6 @@ class PostController extends Controller
                     'like' => $liked,
                 ]
             );
-        }
-        }
-        else{
-            return response()->json([
-                'code' => 400,
-                'message' => 'Please login first!',
-            ]);
         }
     }
     /**
