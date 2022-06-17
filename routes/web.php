@@ -89,6 +89,7 @@ Route::get('run-queue',function(){
     Artisan::call('queue:listen');
     return 'Queue Listening';
 });
+Route::get('must-verify',[UsersRegistrationController::class,'verifyEmailPopup'])->name('verifyEmailPopup');
 
 //notification testing route
 // Route::get('test', function () {
@@ -107,7 +108,6 @@ Route::get('login', function(){
     return view('frontend.home');
 })->name('login');
 
-Route::get('must-verify',[UsersRegistrationController::class,'verifyEmailPopup'])->name('verifyEmailPopup');
 /**
  * Admin Routes
  */
@@ -172,6 +172,9 @@ Route::group(['middleware'=>['frontendUserRole', 'emailVerification']], function
     Route::get('/',function(){
         return view('frontend.home');
     });
+
+    Route::post('delete-user/{id}', [HomeController::class, 'delete_user'])->name('delete.user');
+
 Route::get('why-vetvine',[HomeController::class,'whyVetvine'])->name('why_vetvine');
 Route::get('grow',[HomeController::class,'grow'])->name('grow');
 Route::get('thrive',[HomeController::class,'thrive'])->name('thrive');

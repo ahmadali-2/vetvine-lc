@@ -155,5 +155,15 @@ class HomeController extends Controller
     public function ceArchives(){
         return view('frontend.pages.ce-archives');
     }
+    
+    public function delete_user($id)
+    {
+        User::where('id', $id)->update(['status' => 0, 'deleted_user' => 0, 'deleted_at' => now()]);
+        Post::where('user_id', $id)->delete();
+        // User::find($id)->delete();
+        Auth::logout();
+        return redirect('login')->with('message', 'The account has been Deleted. Email customer support with any questions');
+
+    }
 
 }

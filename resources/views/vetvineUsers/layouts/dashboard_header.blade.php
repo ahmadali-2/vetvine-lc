@@ -259,7 +259,16 @@
                                     <li><a href="#">Settings</a></li>
                                     <li><a href="#">Notification Preferences</a></li>
                                     <li><a href="#">Change Password</a></li>
-                                    <li><a href="#">Delete Account</a></li>
+                                    <li>
+                                        @php
+                                        $data = Auth::user()->id;
+                                        @endphp
+                                    <form method="post" action="{{route('delete.user', [$data])}}">
+                                        @csrf
+                                        <a type="submit" href="#"  class=" show_confirm" data-toggle="tooltip" title='Delete'>Delete Account</a>
+                                        <input type="hidden" name="id" value="{{ $data }}">
+                                      </form>
+                                    </li>
                                     <li><a href="#">Help & Support</a></li>
                                 </ul>
                             </div>
@@ -293,4 +302,5 @@
         </div>
 </header>
 @include('frontend.pages.general.contactus')
+section
 

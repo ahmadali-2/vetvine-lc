@@ -22,7 +22,7 @@
    * Remove extra space added to tables and cells in Outlook.
    */
       table,
-         
+
           /**
    * Better fluid images in Internet Explorer.
    */

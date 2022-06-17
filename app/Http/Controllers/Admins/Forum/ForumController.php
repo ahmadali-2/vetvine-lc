@@ -39,10 +39,8 @@ class ForumController extends Controller
     }
 
     public function searchFormCategory(Request $request){
-
         $categories = null;
         if($request->category > 0 && isset($request->category_title_text)){
-
             $categories = CategoryForum::where('id',$request->category) ->where('category_title', 'LIKE', '%' . $request->category_title_text . '%')->get();
         }elseif($request->category > 0){
             $categories = CategoryForum::where('id',$request->category)->get();
@@ -118,37 +116,43 @@ class ForumController extends Controller
         $categories   =   CategoryForum::all();
         $ads          =   Ad::all();
         $forums       =   Forum::all();
-        $forumcatgeorypost = Post::with('forum','comments','user','postView','likes')->where('id',$forumcategorypostId)->first();
-        $liked = false;
-        $like = Post::whereHas('likes', function($q) use($forumcategorypostId){
-            $q->where('id', $forumcategorypostId)->where('like',1);
-        })->first();
-        if(isset($like)){
-            $liked = true;
-        }
+        $forumcatgeorypost = Post::with('forum','comments','user','postView')->where('id',$forumcategorypostId)->first();
         $relatedposts=Post::where('forum_id',$forumcatgeorypost->forum_id)->where('id', "!=" ,$forumcatgeorypost->id)->get();
         $this->createViewLog($forumcatgeorypost);
-        return view('frontend.pages.forums.forum_detail',compact('forumcatgeorypost','relatedposts','categories','forums','ads','liked'));
+        return view('frontend.pages.forums.forum_detail',compact('forumcatgeorypost','relatedposts','categories','forums','ads'));
 
     }
     public function createViewLog($forumcatgeorypost) {
         // dd($forumcatgeorypost);
-        $checkView =PostView::where('ip_address',request()->ip())->where('post_id', $forumcatgeorypost->id)->first();
+        $checkView =PostView::where('user_id',Auth()->user()->id)->where('post_id', $forumcatgeorypost->id)->first();
         if($checkView == null){
             $postViews= new PostView();
             $postViews->post_id = $forumcatgeorypost->id;
+            $postViews->post_title = $forumcatgeorypost->post_title;
             $postViews->view_count = 1;
+            $postViews->user_id = (auth()->check())?auth()->id():null;
             $postViews->ip_address = request()->ip();
             $postViews->agent = request()->header('User-Agent');
             $postViews->save();
         }
+
     }
     public function frontendIndex()
     {
+
+        $user=Auth::user();
+        if($user)
+        {
         $categories   =   CategoryForum::with('forums')->get();
         $ads          =   Ad::all();
         $forums       =   Forum::all();
         return view('frontend.pages.forums.index',compact('categories','forums','ads'));
+        }
+        else
+        {
+            parent::dangerMessage("Your Are Not Logged in, Please Login And Try  Again");
+            return redirect('login');
+        }
     }
     /**
      * Show the form for creating a new resource.
