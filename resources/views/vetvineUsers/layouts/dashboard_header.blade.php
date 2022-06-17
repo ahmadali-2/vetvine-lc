@@ -56,7 +56,7 @@
                     <ul class="navbar-nav nav-wrapper-one edit-profile-list">
                         {{-- @include('frontend.layouts.main_sub_menu') --}}
                         <li class="nav-item droplink  ">
-                            <a class="nav-link nav-anchor" href="{{ route('grow') }}" aria-haspopup="true"
+                            <a class="nav-link nav-anchor mt-1" href="{{ route('grow') }}" aria-haspopup="true"
                                 style="font-weight: bold">GROW <i class="fas fa-chevron-down droplink1"></i> <br> <span
                                     class="nav-sub-hed">Education</span></a>
                             <div class="subdrop subdrop1" aria-label="Main Links Sub Navigation">
@@ -96,7 +96,7 @@
                             </div>
                         </li>
                         <li class="nav-item droplink  ">
-                            <a class="nav-link nav-anchor" href="{{ route('thrive') }}"
+                            <a class="nav-link nav-anchor mt-1" href="{{ route('thrive') }}"
                                 style="font-weight: bold">THRIVE <i class="fas fa-chevron-down droplink2"></i>
                                 <br> <span class="nav-sub-hed">Wellness</span>
                             </a>
@@ -225,11 +225,11 @@
                                     data-toggle="dropdown" aria-expanded="true">
                                     <i class="employe">
                                         @if (Auth::user()->profile_photo)
-                                            <img style="width: 30px;"
+                                            <img style="width: 30px; height:30px;"
                                                 src="{{ asset('/frontend/images/Profile-Images/' . $currentUser->profile_photo) }}"
                                                 alt="" id="user-image">
                                         @else
-                                            <img style="width: 30px;" src="{{ asset('frontend/images/dummy.png') }}"
+                                            <img style="width: 30px; height:30px;" src="{{ asset('frontend/images/dummy.png') }}"
                                                 alt="" id="user-image"">
                                         @endif
 

@@ -11,7 +11,8 @@
                         <div class="grow-heading">Forum</div>
                         <img src="{{ asset('frontend/forums/img/sep-line-2.jpg') }}" width="250" height="2" alt=""
                             class="line_image">
-                        <p class="mb-0">A BETTER LIFE FOR ANIMALS AND THE HUMANS
+                        <p class="mb-0">Guidance, support and wisdom to benefit and maximize the life and
+                            longevity of animals.
                         </p>
 
                     </div>

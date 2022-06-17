@@ -253,3 +253,9 @@ Route::get('/video-description/{id}{category}', [VideoDescriptionController::cla
 Route::post('/videos-search', [VideoDescriptionController::class, 'video_search'])->name('videos.search');
 Route::post('/rating-videos', [VideoDescriptionController::class, 'rating_videos'])->name('rating.videos');
 Route::post('/mark-as-read',     [PushNotificationController::class, 'mark_as_read'])->name('read.notification');
+
+
+Route::get('change_password',function(){
+
+ return view('vetvineUsers\layouts\pages\user_change_password');
+});
