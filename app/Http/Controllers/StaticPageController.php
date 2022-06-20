@@ -18,6 +18,7 @@ class StaticPageController extends Controller
 
     public function TermsAndConditionsAddDb(TermsRequest $request)
     {
+        // return $request;
         $request->validated();
 
         $exists = TermAndCondiition::count();
