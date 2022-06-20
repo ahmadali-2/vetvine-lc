@@ -8680,3 +8680,134 @@ line-height: 31px;
     font-family: "Museo 500";
     cursor: pointer;
 }
+
+.term_policy,
+p {
+    font-family: "Museo 500";
+    color: #5c7c85 !important;
+}
+
+.term_policy u {
+    margin-bottom: 40px !important;
+    color: #5c7c85;
+}
+
+.term_policy strong {
+    margin-top: 30px !important;
+}
+
+.term_policy span a {
+    color: #f27222 !important;
+}
+
+.heading_term h3 {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    color: #5c7c85;
+    font-family: "Museo 500";
+}
+
+.heading_term h3::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    height: 2px;
+    width: 37%;
+    top: 50%;
+    background-color: #f27222;
+}
+
+.heading_term h3::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    height: 2px;
+    width: 37%;
+    top: 50%;
+    background-color: #f27222;
+}
+
+@media (max-width:1200px) {
+    .heading_term h3::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        height: 2px;
+        width: 30%;
+        top: 50%;
+        background-color: #f27222;
+    }
+    .heading_term h3::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        height: 2px;
+        width: 30%;
+        top: 50%;
+        background-color: #f27222;
+    }
+}
+
+@media (max-width:767px) {
+    .heading_term h3::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        height: 2px;
+        width: 20%;
+        top: 50%;
+        background-color: #f27222;
+    }
+    .heading_term h3::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        height: 2px;
+        width: 20%;
+        top: 50%;
+        background-color: #f27222;
+    }
+}
+
+@media (max-width:500px) {
+    .heading_term h3::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        height: 2px;
+        width: 10%;
+        top: 50%;
+        background-color: #f27222;
+    }
+    .heading_term h3::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        height: 2px;
+        width: 10%;
+        top: 50%;
+        background-color: #f27222;
+    }
+}
+
+@media (max-width:355px) {
+    .heading_term h3::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        height: 2px;
+        width: 5%;
+        top: 50%;
+        background-color: #f27222;
+    }
+    .heading_term h3::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        height: 2px;
+        width: 5%;
+        top: 50%;
+        background-color: #f27222;
+    }
+}

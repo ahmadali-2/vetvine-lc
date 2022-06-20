@@ -120,6 +120,7 @@ class MessagesController extends Controller
      */
     public function send(Request $request)
     {
+
         // dd($request);
         // default variables
         $error = (object) [
@@ -128,7 +129,7 @@ class MessagesController extends Controller
         ];
         $attachment = null;
         $attachment_title = null;
-
+        dd($request->id);
         // if there is attachment [file]
         if ($request->hasFile('file')) {
             // allowed extensions
@@ -157,6 +158,7 @@ class MessagesController extends Controller
 
         if (!$error->status) {
             // send to database
+            // dd($request);
             $messageID = mt_rand(9, 999999999) + time();
             $msg = Chatify::newMessage([
                 'id' => $messageID,

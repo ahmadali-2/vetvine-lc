@@ -38,6 +38,26 @@
                                                 data-off="<i class='fa fa-lock'></i> Not Allowed"></span>
                                     </td>
                                 </tr>
+
+                                <tr>
+                                    <th>Licesnsure</th>
+                                    <td>
+                                        <span id="changememberstatus" data-permissiontypeId="{{ $id }}"
+                                            data-permissiontypeName="licensure">
+
+                                            <input id="chkPermission3" name="licensure" type="checkbox" @php
+                                                if ($data) {
+                                                    if ($data->licensure == '1') {
+                                                        echo 'checked=true';
+                                                    }
+                                                }
+                                            @endphp
+                                                data-toggle="toggle" data-onstyle="outline-success" data-size="xs"
+                                                data-offstyle="outline-danger"
+                                                data-on="<i class='fa fa-unlock'></i> Allowed"
+                                                data-off="<i class='fa fa-lock'></i> Not Allowed"></span>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <th>Comments</th>
                                     <td>
@@ -58,14 +78,33 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Licesnsure</th>
+                                    <th>Likes</th>
                                     <td>
                                         <span id="changememberstatus" data-permissiontypeId="{{ $id }}"
-                                            data-permissiontypeName="licensure">
+                                            data-permissiontypeName="likes">
 
-                                            <input id="chkPermission3" name="licensure" type="checkbox" @php
+                                            <input id="chkPermission4" name="likes" type="checkbox" @php
                                                 if ($data) {
-                                                    if ($data->licensure == '1') {
+                                                    if ($data->likes == '1') {
+                                                        echo 'checked=true';
+                                                    }
+                                                }
+                                            @endphp
+                                                data-toggle="toggle" data-onstyle="outline-success" data-size="xs"
+                                                data-offstyle="outline-danger"
+                                                data-on="<i class='fa fa-unlock'></i> Allowed"
+                                                data-off="<i class='fa fa-lock'></i> Not Allowed"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Shares</th>
+                                    <td>
+                                        <span id="changememberstatus" data-permissiontypeId="{{ $id }}"
+                                            data-permissiontypeName="shares">
+
+                                            <input id="chkPermission5" name="shares" type="checkbox" @php
+                                                if ($data) {
+                                                    if ($data->shares == '1') {
                                                         echo 'checked=true';
                                                     }
                                                 }
@@ -89,10 +128,11 @@
     <script>
         $(document).ready(function() {
             $(document).on('click', '#changememberstatus', function() {
-                // console.log($(this));
                 var checkbox1 = false;
                 var checkbox2 = false;
                 var checkbox3 = false;
+                var checkbox4 = false;
+                var checkbox5 = false;
                 if ($('#chkPermission1').is(":checked")) {
                     checkbox1 = true;
                 }
@@ -101,6 +141,12 @@
                 }
                 if ($('#chkPermission3').is(":checked")) {
                     checkbox3 = true;
+                }
+                if ($('#chkPermission4').is(":checked")) {
+                    checkbox4 = true;
+                }
+                if ($('#chkPermission5').is(":checked")) {
+                    checkbox5 = true;
                 }
                 // alert(checkbox1)
                 $.ajaxSetup({
@@ -116,8 +162,10 @@
                         checkbox1: checkbox1,
                         checkbox2: checkbox2,
                         checkbox3: checkbox3,
+                        checkbox4: checkbox4,
+                        checkbox5: checkbox5,
                         name: name,
-                        
+
                     },
                     url: "{{ route('memberstatus') }}",
                     type: "POST",

@@ -7,9 +7,9 @@
 @forelse($posts as $key=>$post)
     @if($post->getTable() == "shares")
         <?php $share = $post ?>
-        <input id="member_home_post_id_{{$key}}" type="number" value="{{$share->post_id}}" hidden>
-        <input id="member_home_user_id_{{$key}}" type="number" value="{{$share->user_id}}" hidden>
-        <div class="post_center_box">
+        <input id="member_home_post_id_{{$key}}" data-key={{$key}} type="number" value="{{$share->post_id}}" hidden>
+        <input id="member_home_user_id_{{$key}}" data-key={{$key}} type="number" value="{{$share->user_id}}" hidden>
+        <div class="post_center_box" data-key={{$key}}>
             <div class="row">
                 <div class=" col-lg-6">
                     <img src="@if ($post->users[0]->profile_photo ?? '') {{ asset('/frontend/images/Profile-Images/' . $post->users[0]->profile_photo) }} @else {{ asset('frontend/images/user.png') }} @endif"
@@ -59,17 +59,21 @@
                     @endif
                     <?php $displayLike = false ?>
                 </div>
-                <a style="cursor: pointer;"><img src="{{ asset('frontend/img/comment-label.png') }}" alt="" /></a>
-
+                <div class="shareCommentButtons">
+                    <a style="cursor: pointer;" data-key={{$key}}><img src="{{ asset('frontend/img/comment-label.png') }}" alt="" /></a>
+                </div>
                 <div class="shareButtons">
                     <a class="share_btn" style="cursor: pointer;" data-user-id="{{$share->user_id}}" data-post-id="{{$share->post_id}}"> <i class="fa fa-share" aria-hidden="true"></i>
                         Share</a>
                 </div>
             </div>
         </div>
+        <div id="comment_{{$key}}" class="post_center_box" data-key={{$key}} style="display: none;">
+            <textarea name="comment" id="comment_{{$key}}" placeholder="Enter comment here" rows="1" style="outline: none; width: 100%;"></textarea>
+        </div>
     @else
-        <input id="member_home_post_id_{{$key}}" type="number" value="{{$post->id}}" hidden>
-        <input id="member_home_user_id_{{$key}}" type="number" value="{{$post->user->id}}" hidden>
+        <input id="member_home_post_id_{{$key}}" data-key={{$key}} type="number" value="{{$post->id}}" hidden>
+        <input id="member_home_user_id_{{$key}}" data-key={{$key}} type="number" value="{{$post->user->id}}" hidden>
         <div class="post_center_box">
             <div class="row">
                 <div class=" col-lg-6">
@@ -115,8 +119,9 @@
                     @endif
                     <?php $displayLike = false ?>
                 </div>
-                <a style="cursor: pointer;"><img src="{{ asset('frontend/img/comment-label.png') }}" alt="" /></a>
-
+                <div class="commentButtons">
+                    <a style="cursor: pointer;"><img src="{{ asset('frontend/img/comment-label.png') }}" alt="" /></a>
+                </div>
                 <div class="shareButtons">
                     <a class="share_btn" style="cursor: pointer;" data-user-id="{{$post->user->id}}" data-post-id="{{$post->id}}"> <i class="fa fa-share" aria-hidden="true"></i>
                         Share</a>
@@ -140,6 +145,7 @@
             var sharePostId;
             var shareUserId
             var likeType;
+            var commentPostId;
 
             $('.likeButtons a').on("click", function() {
                 likepostid = $(this).attr('member_home_post_id');
@@ -160,6 +166,22 @@
                 sharePost();
             });
 
+            $('.shareCommentButtons a').on("click", function() {
+                var commentId = '#comment_'+$(this).attr('data-key');
+                if($(commentId).is(":visible")){
+                    $(commentId).hide();
+                }
+                else{
+                    $(commentId).show();
+                }
+                // commentPostId = $(this).attr('data-post-id');
+                // displayCommentSection();
+            });
+
+        function displayCommentSection(){
+
+        }
+
         function sharePost(){
             console.log(sharePostId, shareUserId);
             $.ajax({
@@ -179,6 +201,9 @@
                     }
                     else if(response.code == 401){
                         toastr.error('Please verify email first!');
+                    }
+                    else if(response.code == 402){
+                        toastr.error(response.message);
                     }
                 }
                 });
@@ -203,6 +228,7 @@
                     else if(response.code == 400){
 
                         component.html("<b class='like_color'> <i class='fa fa-thumbs-up'></i> Like</b>");
+                        toastr.error(response.message);
                     }
                 }
                 });
