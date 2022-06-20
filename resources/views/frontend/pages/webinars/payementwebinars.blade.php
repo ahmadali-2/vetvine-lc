@@ -72,10 +72,10 @@
                                                     <div class="month">
                                                         <label for="ex-month">Expiration Month</label>
                                                         <select name="exp_month" id="ex-month" class="form-control card-expiry-month">
-                                                            <option value="" disabled selected>MM</option>
+                                                            <option value="" disabled selected>Select Month</option>
                                                             @for ($i = 1; $i <= 12; $i++)
                                                                 <option value="{{ $i }}">
-                                                                    {{ $i }} - {{date('F', mktime(0, 0, 0, $i, 10)) }}
+                                                                     {{date('F', mktime(0, 0, 0, $i, 10)) }}
                                                                 </option>
                                                             @endfor
                                                         </select>
@@ -89,7 +89,7 @@
                                                     <div class="year">
                                                         <label for="year">Expiration Year</label>
                                                         <select name="exp_year" id="exp_year" class="form-control card-expiry-year">
-                                                            <option value="" disabled selected>YY</option>
+                                                            <option value="" disabled selected>Select Year</option>
                                                             @for ($i = $year; $i <= $year + 10; $i++)
                                                                 <option value="{{ $i }}">{{ $i }}
                                                                 </option>

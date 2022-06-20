@@ -45,23 +45,25 @@
                 </div>
             </div>
 
-            <div class="col-sm-12 text-center post_share_button">
+
+            <div class="col-sm-12 text-center post_share_button  d-flex justify-content-center">
                 <div class="shareLikeButtons">
                     @foreach($share->likes as $like)
                         @if(($like->share_id == $share->id) && ($like->ce == 1) && ($like->like == 1) && ($like->user_id == auth()->user()->id))
                             <?php $displayLike = true ?>
-                        <a member_home_post_id="{{$share->id}}" member_home_user_id="{{$share->user_id}}" member_home_like_type="0" style="cursor: pointer;"><b style="color: #4886C8;">Liked</b></a>
+                        <a class="liked" member_home_post_id="{{$share->id}}" member_home_user_id="{{$share->user_id}}" member_home_like_type="0" style="cursor: pointer;"><b class="liked"> <i class='fa fa-thumbs-up'></i> Liked</b></a>
                         @endif
                     @endforeach
                     @if($displayLike == false)
-                    <a member_home_post_id="{{$share->id}}" member_home_user_id="{{$share->user_id}}" member_home_like_type="0" style="cursor: pointer;" style="color: black;">Like</a>
+                    <a class="like_color" member_home_post_id="{{$share->id}}" member_home_user_id="{{$share->user_id}}" member_home_like_type="0"> <i class='fa fa-thumbs-up'></i> Like</a>
                     @endif
                     <?php $displayLike = false ?>
                 </div>
                 <a style="cursor: pointer;"><img src="{{ asset('frontend/img/comment-label.png') }}" alt="" /></a>
 
                 <div class="shareButtons">
-                    <a style="cursor: pointer;" data-user-id="{{$share->user_id}}" data-post-id="{{$share->post_id}}">Share</a>
+                    <a class="share_btn" style="cursor: pointer;" data-user-id="{{$share->user_id}}" data-post-id="{{$share->post_id}}"> <i class="fa fa-share" aria-hidden="true"></i>
+                        Share</a>
                 </div>
             </div>
         </div>
@@ -105,18 +107,19 @@
                     @foreach($post->likes as $like)
                         @if(($like->post_id == $post->id) && ($like->ce == 1) && ($like->like == 1)  && ($like->user_id == auth()->user()->id))
                             <?php $displayLike = true ?>
-                        <a class="like" member_home_post_id="{{$post->id}}" member_home_user_id="{{$post->user->id}}" member_home_like_type="1" style="cursor: pointer;"><b style="color: #4886C8;"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Liked</b></a>
+                        <a  class="liked" member_home_post_id="{{$post->id}}" member_home_user_id="{{$post->user->id}}" member_home_like_type="1" style="cursor: pointer;"><b class="liked"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Liked</b></a>
                         @endif
                     @endforeach
                     @if($displayLike == false)
-                    <a class="dislike" member_home_post_id="{{$post->id}}" member_home_user_id="{{$post->user->id}}" member_home_like_type="1" style="cursor: pointer;" style="color: black;"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like</a>
+                    <a class="like_color" member_home_post_id="{{$post->id}}" member_home_user_id="{{$post->user->id}}" member_home_like_type="1"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like</a>
                     @endif
                     <?php $displayLike = false ?>
                 </div>
                 <a style="cursor: pointer;"><img src="{{ asset('frontend/img/comment-label.png') }}" alt="" /></a>
 
                 <div class="shareButtons">
-                    <a style="cursor: pointer;" data-user-id="{{$post->user->id}}" data-post-id="{{$post->id}}">Share</a>
+                    <a class="share_btn" style="cursor: pointer;" data-user-id="{{$post->user->id}}" data-post-id="{{$post->id}}"> <i class="fa fa-share" aria-hidden="true"></i>
+                        Share</a>
                 </div>
 
             </div>
@@ -190,16 +193,16 @@
                 data: {likepostid: likepostid, postUserid: postUserid, likeType: likeType, ce:1},
                 success: function(response){
                     if(response.code == 200){
-                        component.css('color','#5c7c85');
-                        component.html("<b>Liked</b>");
+
+                        component.html("<b class='liked'> <i class='fa fa-thumbs-up'></i> Liked</b>");
                     }
                     else if(response.code == 201){
-                        component.css('color','#f27222');
-                        component.html('Like');
+
+                        component.html("<b class='like_color'> <i class='fa fa-thumbs-up'></i> Like</b>");
                     }
                     else if(response.code == 400){
-                        component.css('color','#f27222');
-                        component.html('Like');
+
+                        component.html("<b class='like_color'> <i class='fa fa-thumbs-up'></i> Like</b>");
                     }
                 }
                 });
