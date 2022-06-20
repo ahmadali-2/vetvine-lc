@@ -157,12 +157,8 @@
             </div>
             <div class="container mt-5">
                 <div class="row">
-                    <div class="col-md-6">
-                        @include('frontend.pages.forums.replies', [
-                            'comments' => $forumcatgeorypost->comments,
-                            'post_id' => $forumcatgeorypost->id,
-                        ])
-                        <hr />
+                    <div class="col-md-6" id="comment_view_{{$key}}">
+                        
                     </div>
                 </div>
             </div>
