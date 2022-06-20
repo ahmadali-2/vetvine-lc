@@ -11,7 +11,6 @@ class StaticPageController extends Controller
 
     public function TermsAndConditionsAdd()
     {
-        // return  'working';
         return view('admins.staticpages.termscondition.add',[
             'terms' => TermAndCondiition::where('page_title', '!=', '')->orWhere('page_desc', '!=', '')->first()
         ]);
@@ -32,12 +31,10 @@ class StaticPageController extends Controller
             TermAndCondiition::create([
                 'page_title' => $request->page_title,
                 'page_desc'  => $request->pageDesc
-            ]);`
+            ]);
         }
 
-
-
-        parent::successMessage(' Data added successfully.');
+        parent::successMessage('Data added successfully.');
         return redirect()->back();
     }
 

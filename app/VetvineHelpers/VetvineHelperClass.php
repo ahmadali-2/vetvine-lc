@@ -1,10 +1,10 @@
 <?php
 
 namespace App\VetvineHelpers;
-use App\Models\Generals\TimeZone;
+
 use App\Models\Admins\GeneralSetting\GeneralSetting;
+use App\Models\Generals\TimeZone;
 use App\Models\MemberPermission;
-use App\Models\NewTimezone;
 use App\Models\User;
 use App\Models\UserMemberAndNetworkLevel;
 use File;
@@ -24,80 +24,83 @@ class VetVineHelperClass
      * providers.
      */
 
+    /**
+     * get all timezones
+     */
+    public function timezones()
+    {
+        return $timezones = TimeZone::all();
+    }
 
-     /**
-      * get all timezones
-      */
-     public function timezones()
-     {
-        return $timezones =TimeZone::all();
-     }
-
-     public function vetvineGeneralSetting(){
-        return $vetvineGeneralSetting = GeneralSetting::where('id' , 1)->first();
-     }
-      /**
-      * save image for all types of members, network-levels and admins
-      */
-     public function saveImage($image, $path)
-     {
-        $getImgPath =$this->checkImagePath($path);
-        if(empty($image)) {
-           $newImage = '';
-        } else {
-         $fileName = time().'.'.$image->clientExtension();
-         $image->move($getImgPath, $fileName);
-         $newImage = $fileName;
-        }
-        return $newImage;
-     }
-
-      /**
-      * update image for all types of members, network-levels and admins
-      */
-     public function updateImage($formImage ,$dbImage, $path)
+    public function vetvineGeneralSetting()
+    {
+        return $vetvineGeneralSetting = GeneralSetting::where('id', 1)->first();
+    }
+    /**
+     * save image for all types of members, network-levels and admins
+     */
+    public function saveImage($image, $path)
     {
         $getImgPath = $this->checkImagePath($path);
-        if(empty($formImage)) {
+        if (empty($image)) {
+            $newImage = '';
+        } else {
+            $fileName = time() . '.' . $image->clientExtension();
+            $image->move($getImgPath, $fileName);
+            $newImage = $fileName;
+        }
+        return $newImage;
+    }
+
+    /**
+     * update image for all types of members, network-levels and admins
+     */
+    public function updateImage($formImage, $dbImage, $path)
+    {
+        $getImgPath = $this->checkImagePath($path);
+        if (empty($formImage)) {
             $newImage = $dbImage;
         } else {
-            $prepareImgForDelete =  $getImgPath.$dbImage;
-            if(File::exists($prepareImgForDelete)) {
+            $prepareImgForDelete = $getImgPath . $dbImage;
+            if (File::exists($prepareImgForDelete)) {
                 File::delete($prepareImgForDelete);
             }
-            $fileName = time().'.'.$formImage->clientExtension();
+            $fileName = time() . '.' . $formImage->clientExtension();
             $formImage->move($getImgPath, $fileName);
             $newImage = $fileName;
         }
         return $newImage;
     }
 
-     /**
-      * check image path . create directory if not exist
-      */
+    /**
+     * check image path . create directory if not exist
+     */
     public function checkImagePath($imgpath)
     {
-        if(!File::isDirectory($imgpath)){
-           File::makeDirectory($imgpath, 0777, true, true);
+        if (!File::isDirectory($imgpath)) {
+            File::makeDirectory($imgpath, 0777, true, true);
         }
         return $imgpath;
     }
 
     public function networkName($memberId)
     {
-       return UserMemberAndNetworkLevel::find($memberId)->value('name');
+        return UserMemberAndNetworkLevel::find($memberId)->value('name');
     }
 
-    public function allUsers(){
-        return  User::with('toMessage','fromMessage')->where('id','!=',Auth::id())->get();
+    public function allUsers()
+    {
+        return User::with('toMessage', 'fromMessage')->where('id', '!=', Auth::id())->get();
 
     }
 
-    public function currentUserProfile(){
+    public function currentUserProfile()
+    {
         return User::find(Auth::id());
     }
 
-    public function getUserTypePermissions($type){
-       return MemberPermission::where('membertype_id',$type)->first();
+    public function getUserTypePermissions($type)
+    {
+        return MemberPermission::where('membertype_id', $type)->first();
     }
 }

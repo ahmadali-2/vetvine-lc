@@ -151,9 +151,7 @@ class HomeController extends Controller
         return view('frontend.pages.videos-on-demand', [
             'videos'   => VideosOnDemand::all(),
             'category' => CategoryEvent::all(),
-            'sponsor'  => SponserTable::all(
-                
-            )
+            'sponsor'  => SponserTable::all()
         ]);
     }
     public function ceArchives(){

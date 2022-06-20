@@ -57,7 +57,6 @@ use App\Http\Controllers\VetvineUsers\PostManagement\PostController;
 use App\Http\Controllers\VideoDescriptionController;
 use App\Http\Controllers\StaticPageController; // for static pages
 use App\Http\Controllers\TermsController; // for terms of services
-// us
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 
