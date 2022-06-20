@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class CheckEmailVerification
 {
     public function __construct(){
-        
+
     }
     /**
      * Handle an incoming request.
@@ -20,6 +20,7 @@ class CheckEmailVerification
      */
     public function handle(Request $request, Closure $next)
     {
+        // dd('hj');
         $message = new Controller();
         if(auth()->user()){
             if(isset(auth()->user()->email_verified_at) == false){
