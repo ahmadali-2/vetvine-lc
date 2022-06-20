@@ -32,7 +32,7 @@
     </section>
 
     <section>
-        <div class="specialty-topics">
+        <div class="specialty-topics margin_bottom_special">
             <div class="container">
                 <div class="specialty-info">
                     <div class="specialty-detail">
@@ -68,12 +68,13 @@
     @section('scripts')
     <script>
         $(document).on('click', '.pagination a', function(event){
-            event.preventDefault(); 
+            event.preventDefault();
             var page = $(this).attr('href').split('page=')[1];
             fetch_posts(page);
         });
 
         function fetch_posts(page)
+
         {
             $.ajax({
             headers: {

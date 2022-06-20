@@ -128,24 +128,20 @@ class ForumController extends Controller
         }
         $relatedposts=Post::where('forum_id',$forumcatgeorypost->forum_id)->where('id', "!=" ,$forumcatgeorypost->id)->get();
         $this->createViewLog($forumcatgeorypost);
-        
+
         return view('frontend.pages.forums.forum_detail',compact('forumcatgeorypost','relatedposts','categories','forums','ads','liked'));
 
     }
     public function createViewLog($forumcatgeorypost) {
-        // dd($forumcatgeorypost);
-        $checkView =PostView::where('user_id',Auth()->user()->id)->where('post_id', $forumcatgeorypost->id)->first();
+        $checkView =PostView::where('ip_address',request()->ip())->where('post_id', $forumcatgeorypost->id)->first();
         if($checkView == null){
             $postViews= new PostView();
             $postViews->post_id = $forumcatgeorypost->id;
-            $postViews->post_title = $forumcatgeorypost->post_title;
             $postViews->view_count = 1;
-            $postViews->user_id = (auth()->check())?auth()->id():null;
             $postViews->ip_address = request()->ip();
             $postViews->agent = request()->header('User-Agent');
             $postViews->save();
         }
-
     }
     public function frontendIndex()
     {
