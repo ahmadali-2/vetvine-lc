@@ -290,6 +290,9 @@
                     else if(response.code == 401){
                         toastr.error('Please verify email first!');
                     }
+                    else if(response.code == 402){
+                        toastr.error(response.message);
+                    }
                 }
                 });
         }

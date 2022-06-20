@@ -10,6 +10,7 @@ class MemberPermission extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'membertype_id',
         'view_ads',
         'comments',

@@ -9,6 +9,7 @@ class MemberTypes extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'id',
         'member_type',
         'members',
     ];
