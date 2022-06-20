@@ -4,7 +4,7 @@
 <?php
     $displayLike = false;
 ?>
-@foreach($posts as $key=>$post)
+@forelse($posts as $key=>$post)
     @if($post->getTable() == "shares")
         <?php $share = $post ?>
         <input id="member_home_post_id_{{$key}}" type="number" value="{{$share->post_id}}" hidden>
@@ -124,7 +124,9 @@
 
         </div>
     @endif
-@endforeach
+    @empty
+    <img src="{{ url('frontend/images/no-result.gif') }}" style="width: 100%;"/>
+@endforelse
 <div class="pagination_div">
     {{ $postActivities->links() }}
 </div>
