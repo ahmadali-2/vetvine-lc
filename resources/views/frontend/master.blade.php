@@ -95,8 +95,8 @@
                 }
             });
 
-
-
+        });
+</script>
 
     <script src="{{ asset('frontend/js/bootstrap.js') }}"></script>
 
@@ -112,8 +112,6 @@
 
     <script src="https://www.google.com/recaptcha/api.js"></script>
 
-    </script>
-
     <script>
         CKEDITOR.replace('description');
     </script>
@@ -125,7 +123,6 @@
 
 
 
-    </script>
     <script src="{{ asset('bootstrap/jquery/popper.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 
@@ -155,7 +152,6 @@
     {!! JsValidator::formRequest('App\Http\Requests\Frontend\RegistrationRequest', '#regform') !!}
     {!! JsValidator::formRequest('App\Http\Requests\Frontend\ContactUsRequest', '#conatctusform') !!}
     {!! JsValidator::formRequest('App\Http\Requests\Frontend\LoginInRequest', '#loginRequest') !!}
-    // {!! JsValidator::formRequest('App\Http\Requests\UpdateUserPasswordRequest', '#changeUserPasswordForm') !!}
 
 
 
@@ -212,21 +208,6 @@
         @endif
 
     @endif
-
-    <script>
-
-    <script>
-{{-- >>>>>>> 9dfc0a53a4a417dcde1741615c8d5db4851facb4 --}}
-        {{-- const deleteRecord = (id, uri) => {
-            document.getElementById('identity').value;
-            let route = window.location.origin + uri + id;
-            document.getElementById('deleteForm').setAttribute('action', route)
-            $('#deleteModal').modal('show')
-        } --}}
-{{-- <<<<<<< HEAD --}}
-    </script>
-
-    </script>
 </body>
 
 </html>
