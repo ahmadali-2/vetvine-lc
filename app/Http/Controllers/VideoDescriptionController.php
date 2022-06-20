@@ -11,6 +11,7 @@ class VideoDescriptionController extends Controller
 {
     public function video_desc($id, $category)
     {
+        // return $rating;
         return view('frontend.video_detail', [
             'videos' => VideosOnDemand::find($id),
             'more_info' => VideosOnDemand::where('category_id', $category)->where('id', '!=', $id)->get(),
