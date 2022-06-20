@@ -20,7 +20,6 @@ class StaticPageController extends Controller
     {
         // return $request;
         $request->validated();
-
         $exists = TermAndCondiition::count();
 
         if($exists === 1){
