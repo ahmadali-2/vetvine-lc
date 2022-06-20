@@ -11,8 +11,24 @@ use Exception;
 
 class CommentController extends Controller
 {
+    public function showComments(Request $request){
+        // dd($request->all());
+        $comments = null;
+        if($request->type == 'post'){
+            $post = Post::with('comments')->where('id',$request->post_id)->first();
+            $comments = $post->comments;
+        }
+        return response()->json([
+            'html' => view('frontend.pages.forums.replies', [
+                'comments' => $comments,
+                'post_id' => $request->post_id,
+            ])->render(),
+        ]);
+    }
+
     public function store(Request $request)
     {
+        // dd($request->all());
         if(auth()->user()){
             if(isset(auth()->user()->email_verified_at)){
                 if($request->comment == '')
@@ -30,8 +46,15 @@ class CommentController extends Controller
                 $post = Post::find($request->post_id);
         
                 $post->comments()->save($comment);
-        
-                return back();
+                if($request->ajax()){
+                    return response()->json([
+                        'code' => 200,
+                        'message' => 'Comment added successfully!',
+                    ]);
+                }else{
+                    return back();
+                }
+
                 }
             }else{
                 parent::dangerMessage("Please verify your email to comment");
