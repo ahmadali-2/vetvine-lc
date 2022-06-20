@@ -57,14 +57,14 @@
                     </div>
                     <div class="col-lg-3 col-md-3">
                         {{-- <div class="form-group">
-                            <input id="form_search_field" type="text" placeholder="🔍 Search Here ....." class="form-control search_forum">
+                            <input  type="text" placeholder="🔍 Search Here ....." class="form-control search_forum">
                         </div> --}}
 
                         <div class="input-group">
 
                          {{-- <label for="">Search </label> --}}
 
-                            <input type="text" class="form-control top-search" placeholder="" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <input id="form_search_field" placeholder="Search Forum" type="text" class="form-control top-search" placeholder="" aria-label="Recipient's username" aria-describedby="basic-addon2">
 
                             <div class="input-group-append">
 

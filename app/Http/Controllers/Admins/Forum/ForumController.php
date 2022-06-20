@@ -116,10 +116,20 @@ class ForumController extends Controller
         $categories   =   CategoryForum::all();
         $ads          =   Ad::all();
         $forums       =   Forum::all();
-        $forumcatgeorypost = Post::with('forum','comments','user','postView')->where('id',$forumcategorypostId)->first();
+
+        $forumcatgeorypost = Post::with('forum','comments','user','postView','likes')->where('id',$forumcategorypostId)->first();
+        $liked = false;
+        $like = null;
+        if((auth()->user())){
+            $like = Like::where('post_id', $forumcatgeorypost->id)->where('ce',0)->where('like',1)->where('user_id', auth()->user()->id)->first();
+        }
+        if(isset($like)){
+            $liked = true;
+        }
         $relatedposts=Post::where('forum_id',$forumcatgeorypost->forum_id)->where('id', "!=" ,$forumcatgeorypost->id)->get();
         $this->createViewLog($forumcatgeorypost);
-        return view('frontend.pages.forums.forum_detail',compact('forumcatgeorypost','relatedposts','categories','forums','ads'));
+        
+        return view('frontend.pages.forums.forum_detail',compact('forumcatgeorypost','relatedposts','categories','forums','ads','liked'));
 
     }
     public function createViewLog($forumcatgeorypost) {
