@@ -8811,3 +8811,8 @@ p {
         background-color: #f27222;
     }
 }
+
+.display-comment strong {
+    color: #5c7c85;
+    font-family: "Museo 500";
+}

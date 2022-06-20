@@ -33,23 +33,30 @@ class PostController extends Controller
 
     public function memberHome()
     {
-        $posts = array();
+        $user = auth()->user();
+        if($user){
+            $permissions = MemberPermission::where('membertype_id', $user->userMemberType->id)->first();
+            $likesPermission = $permissions->likes;
+            $commentsPermission = $permissions->comments;
+            $sharesPermission = $permissions->shares;
+            $posts = array();
 
-        $news = News::all();
-
-        $postActivities = PostActivity::orderBy('id','desc')->paginate(3);
-
-        foreach($postActivities as $postActivity){
-            if(isset($postActivity->post_id)){
-                $post = Post::with('user', 'likes')->where('id', $postActivity->post_id)->first();
-                array_push($posts, $post);
-            }else{
-                $share = Share::with('users', 'posts', 'likes')->where('id', $postActivity->share_id)->first();
-                array_push($posts, $share);
+            $news = News::all();
+    
+            $postActivities = PostActivity::orderBy('id','desc')->paginate(3);
+    
+            foreach($postActivities as $postActivity){
+                if(isset($postActivity->post_id)){
+                    $post = Post::with('user', 'likes')->where('id', $postActivity->post_id)->first();
+                    array_push($posts, $post);
+                }else{
+                    $share = Share::with('users', 'posts', 'likes')->where('id', $postActivity->share_id)->first();
+                    array_push($posts, $share);
+                }
             }
         }
 
-        return view('frontend.pages.member-home', compact('posts', 'news', 'postActivities'));
+        return view('frontend.pages.member-home', compact('posts', 'news', 'postActivities','likesPermission','commentsPermission','sharesPermission'));
     }
 
     public function paginateMemberHomePost(){
