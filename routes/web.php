@@ -155,6 +155,7 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
 
 });
 
+Route::get('member-home-paginate',[PostController::class,'paginateMemberHomePost'])->name('member_home_paginate');
 
 Route::get("/page", function(){
     return view("frontend.pages.forums.post_detail");
