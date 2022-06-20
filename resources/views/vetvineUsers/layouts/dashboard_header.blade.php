@@ -1,4 +1,3 @@
-
 <header class="main-wrapper">
     <div class="top_Wrapper">
         <div class="container-fluid">
@@ -26,9 +25,11 @@
                             <form method="POST" action="{{ route('logout') }}">
 
                                 @csrf
-                                <a href="{{ route('logout') }}" class="toggle-contact" onclick="event.preventDefault();
+                                <a href="{{ route('logout') }}" class="toggle-contact"
+                                    onclick="event.preventDefault();
 
-              this.closest('form').submit();"><span class="mail-logo"></span> Log Out</a>
+              this.closest('form').submit();"><span
+                                        class="mail-logo"></span> Log Out</a>
                             </form>
                         </li>
 
@@ -49,8 +50,8 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"><img src="{{ asset('frontend/img/menu-icon.png') }}" width="25"
-                            height="18" alt=""></span>
+                    <span class="navbar-toggler-icon"><img src="{{ asset('frontend/img/menu-icon.png') }}"
+                            width="25" height="18" alt=""></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav nav-wrapper-one edit-profile-list">
@@ -207,7 +208,8 @@
                                 Messaging</a>
                         </li>
                         <li class="nav-item nav_res_3 d-flex" style="text-align: center">
-                            <a class="nav-link mm-editdb-text a-position" href="{{ route('vetvineUserNotifications') }}"> <i
+                            <a class="nav-link mm-editdb-text a-position"
+                                href="{{ route('vetvineUserNotifications') }}"> <i
                                     class="fas fa-bell mrg_top_edit"></i>
                                 <span class="badge badge-danger a-ab" id="countnotif">0</span>
                                 <br>
@@ -221,16 +223,17 @@
                             <a class="nav-link padding_top_0" style="text-align: center"></a>
 
                             <div class="dropdown" id="dropdown-caret" style="padding: 0px 10px 0px 10px ">
-                                <a class="btn btn-primary dropdown-toggle btn-ce padding_top_0 dropdown-cart"  type="button"
-                                    data-toggle="dropdown" aria-expanded="true">
+                                <a class="btn btn-primary dropdown-toggle btn-ce padding_top_0 dropdown-cart"
+                                    type="button" data-toggle="dropdown" aria-expanded="true">
                                     <i class="employe">
                                         @if (Auth::user()->profile_photo)
                                             <img style="width: 30px; height:30px;"
                                                 src="{{ asset('/frontend/images/Profile-Images/' . $currentUser->profile_photo) }}"
                                                 alt="" id="user-image">
                                         @else
-                                            <img style="width: 30px; height:30px;" src="{{ asset('frontend/images/dummy.png') }}"
-                                                alt="" id="user-image"">
+                                            <img style="width: 30px;"
+                                                src="{{ asset('frontend/images/dummy.png') }}" alt=""
+                                                id="user-image"">
                                         @endif
 
                                     </i><br>
@@ -244,9 +247,9 @@
                                                     <img src="{{ asset('/frontend/images/Profile-Images/' . $currentUser->profile_photo) }}"
                                                         alt="" id="user-image">
                                                 @else
-                                                    <img src="{{ asset('frontend/images/dummy.png') }}" alt=""
-                                                        id="user-image"">
-                                            @endif
+                                                    <img src="{{ asset('frontend/images/dummy.png') }}"
+                                                        alt="" id="user-image"">
+                                                @endif
                                             </div>
                                             <div class="content_box">
                                                 <b>{{ Auth::user()->name ?? '' }}</b>
@@ -258,8 +261,17 @@
                                     <li><a href="#">Membership</a></li>
                                     <li><a href="#">Settings</a></li>
                                     <li><a href="#">Notification Preferences</a></li>
-                                    <li><a href="#">Change Password</a></li>
-                                    <li><a href="#">Delete Account</a></li>
+                                    <li><a href="{{ route('change_password') }}">Change Password</a></li>
+                                    <li>
+                                        <a type="submit" class="show_confirm" data-id={{ Auth::id() }}>Delete
+                                            Account</a>
+                                    </li>
+
+                                    {{-- <a href="javascript:void(0);" class="btn btn-primary dropdown-item"
+                                    onclick="deleteRecord('{{ $forumpost->id }}', '/vetvine-member/forums-posts/')">Delete</a> --}}
+
+
+
                                     <li><a href="#">Help & Support</a></li>
                                 </ul>
                             </div>
@@ -293,4 +305,4 @@
         </div>
 </header>
 @include('frontend.pages.general.contactus')
-
+@include('common.deletemodal')

@@ -58,9 +58,14 @@
                     @endif
                     <?php $displayLike = false ?>
                 </div>
+<<<<<<< HEAD
                 <div class="shareCommentButtons">
                     <a style="cursor: pointer;" data-key={{$key}}><img src="{{ asset('frontend/img/comment-label.png') }}" alt="" /></a>
                 </div>
+=======
+                <a style="cursor: pointer;"><img src="{{ asset('frontend/img/comment-label.png') }}" alt="" /></a>
+
+>>>>>>> 20494963d390d07ad1eb3235f1334e67f7b6eb01
                 <div class="shareButtons">
                     <a style="cursor: pointer;" data-user-id="{{$share->user_id}}" data-post-id="{{$share->post_id}}">Share</a>
                 </div>
@@ -123,7 +128,7 @@
                 <div class="shareButtons">
                     <a style="cursor: pointer;" data-user-id="{{$post->user->id}}" data-post-id="{{$post->id}}">Share</a>
                 </div>
-            
+
             </div>
 
 

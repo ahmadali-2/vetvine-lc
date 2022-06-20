@@ -116,6 +116,7 @@ class ForumController extends Controller
         $categories   =   CategoryForum::all();
         $ads          =   Ad::all();
         $forums       =   Forum::all();
+
         $forumcatgeorypost = Post::with('forum','comments','user','postView','likes')->where('id',$forumcategorypostId)->first();
         $liked = false;
         $like = null;
@@ -127,12 +128,11 @@ class ForumController extends Controller
         }
         $relatedposts=Post::where('forum_id',$forumcatgeorypost->forum_id)->where('id', "!=" ,$forumcatgeorypost->id)->get();
         $this->createViewLog($forumcatgeorypost);
-        
+
         return view('frontend.pages.forums.forum_detail',compact('forumcatgeorypost','relatedposts','categories','forums','ads','liked'));
 
     }
     public function createViewLog($forumcatgeorypost) {
-        // dd($forumcatgeorypost);
         $checkView =PostView::where('ip_address',request()->ip())->where('post_id', $forumcatgeorypost->id)->first();
         if($checkView == null){
             $postViews= new PostView();
@@ -145,10 +145,20 @@ class ForumController extends Controller
     }
     public function frontendIndex()
     {
+
+        $user=Auth::user();
+        if($user)
+        {
         $categories   =   CategoryForum::with('forums')->get();
         $ads          =   Ad::all();
         $forums       =   Forum::all();
         return view('frontend.pages.forums.index',compact('categories','forums','ads'));
+        }
+        else
+        {
+            parent::dangerMessage("Your Are Not Logged in, Please Login And Try  Again");
+            return redirect('login');
+        }
     }
     /**
      * Show the form for creating a new resource.

@@ -60,6 +60,24 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="status" class="control-label mb-1 form-select">Status</label>
+                                            <select id="status" name="status" aria-label="Default select example"
+                                                class="form-control cc-number identified visa" value="" data-val="true">
+                                                <option value="1" {{ $ad->status == 1 ? 'selected' : '' }}>
+                                                    Active
+                                                </option>
+                                                <option value="0" {{ $ad->status == 0 ? 'selected' : '' }}>
+                                                    Inactive
+                                                </option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
                                 <div>
                                     <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
                                         <span id="payment-button-amount">Update</span>

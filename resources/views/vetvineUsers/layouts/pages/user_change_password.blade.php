@@ -12,26 +12,26 @@
                <div class="content">
                 <h2>Change Your Password</h2>
 
-                <form action="">
-
+                <form action="{{ route('updateUserPassword') }}" method="POST" id="changeUserPasswordForm">
+                        @csrf
                       <div class="form-group">
                         <label for="">Enter Your Old Password</label>
-                        <input type="password">
+                        <input type="password" name="current_password">
                       </div>
                       <div class="form-group">
                         <label for="">Enter Your New Password</label>
-                        <input type="password">
+                        <input type="password" name="password">
                       </div>
                       <div class="form-group">
                         <label for="">Confirm  Password</label>
-                        <input type="password">
+                        <input type="password" name="confirmpassword">
                       </div>
-
+                      <div class="btn_change text-center">
+                        <button type="submit" class="btn btn-warning">Change Password</button>
+                    </div>
                 </form>
 
-                <div class="btn_change text-center">
-                    <button class="btn btn-warning">Change Password</button>
-                </div>
+
                </div>
           </div>
 
@@ -46,3 +46,6 @@
 
 
 @endsection
+
+
+
