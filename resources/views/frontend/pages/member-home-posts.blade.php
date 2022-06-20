@@ -226,7 +226,7 @@
                 var commentKey = '#comment_value_'+$(this).attr('data-key'); 
                 postComment = $(commentKey).val();
                 var postId = $(this).attr('data-post-id');
-
+                var component = $(this);
                 $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -236,7 +236,7 @@
                 data: {post_id: postId, comment: postComment},
                 success: function(response){
                     if(response.code == 200){
-                        refreshComments($(this), 'post');
+                        refreshComments(component, 'post');
                         toastr.success(response.message);
                     }
                 }
@@ -245,6 +245,7 @@
 
         function refreshComments(component, type){
             postId = component.attr('data-post-id');
+            console.log('here here '+postId);
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
