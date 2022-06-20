@@ -155,7 +155,7 @@
                 </div>
 
             </div>
-            <div class="container">
+            <div class="container mt-5">
                 <div class="row">
                     <div class="col-md-6">
                         @include('frontend.pages.forums.replies', [
@@ -248,18 +248,16 @@
                 },
                 type: "POST",
                 url: '/savelike',
-                data: {likepostid: likepostid, postUserid: postUserid, ce: 0},
+                data: {likepostid: likepostid, postUserid: postUserid, likeType: 1, ce: 0},
                 success: function(response){
                     console.log(response.code);
                     if(response.code == 200){
                         $('#like_post').css('color','#4886C8');
                         $('#like_text').html('<b>Liked</b>');
-                        toastr.success(response.message);
                     }
                     else if(response.code == 201){
                         $('#like_post').css('color','black');
                         $('#like_text').html('Like');
-                        toastr.success(response.message);
                     }
                     else if(response.code == 400){
                         toastr.error(response.message);
@@ -267,6 +265,34 @@
                 }
                 });
             }
+
+            $('#share_post').on("click", function() {
+                sharePostId = $(this).attr('data-post-id');
+                shareUserid = $(this).attr('data-user-id');
+                sharePost();
+            });
+
+        function sharePost(){
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                type: "POST",
+                url: '/share-post',
+                data: {sharePostId: likepostid, shareUserId: postUserid, ce: 0},
+                success: function(response){
+                    if(response.code == 200){
+                        toastr.success('Post shared Successfully!');
+                    }
+                    else if(response.code == 400){
+                        toastr.error('Please login to continue!');
+                    }
+                    else if(response.code == 401){
+                        toastr.error('Please verify email first!');
+                    }
+                }
+                });
+        }
         </script>
     @endsection
 @endsection

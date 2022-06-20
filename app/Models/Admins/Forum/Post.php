@@ -51,6 +51,10 @@ class Post extends Model
         return $this->likes()->where('user_id', auth()->id())->where('like', 1)->exists();
     }
 
+    public function shares(){
+        return $this->hasMany(Share::class);
+    }
+
     public function push_notifications()
     {
         return $this->hasMany(PushNotification::class, 'post_id');

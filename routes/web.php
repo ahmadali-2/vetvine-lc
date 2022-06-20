@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\SocialController;
 use App\Http\Controllers\Auth\UserTypeController;
 use App\Http\Controllers\Admins\VideosOnDemand\VideosOnDemandController; // videos on demands
-
 // Admin And Super Admin Routes;
 use App\Http\Controllers\Admins\AdminDashboardController;
 use App\Http\Controllers\Admins\AdsCampaign\CampaignController;
@@ -89,6 +88,7 @@ Route::get('run-queue',function(){
     Artisan::call('queue:listen');
     return 'Queue Listening';
 });
+Route::get('must-verify',[UsersRegistrationController::class,'verifyEmailPopup'])->name('verifyEmailPopup');
 
 //notification testing route
 // Route::get('test', function () {
@@ -107,7 +107,6 @@ Route::get('login', function(){
     return view('frontend.home');
 })->name('login');
 
-Route::get('must-verify',[UsersRegistrationController::class,'verifyEmailPopup'])->name('verifyEmailPopup');
 /**
  * Admin Routes
  */
@@ -154,11 +153,12 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
 
 });
 
+Route::get('member-home-paginate',[PostController::class,'paginateMemberHomePost'])->name('member_home_paginate');
 
 Route::get("/page", function(){
     return view("frontend.pages.forums.post_detail");
  });
-
+Route::post('share-post',[PostController::class,'sharePost'])->name('share.post');
 Route::get('frontend-forums',[ForumController::class,'frontendIndex'])->name('forumsfrontend');
 Route::get('forums/{id}',[ForumController::class,'getForums'])->name('getForums');
 Route::resource('forums-posts',ForumPostController::class);
@@ -172,6 +172,9 @@ Route::group(['middleware'=>['frontendUserRole', 'emailVerification']], function
     Route::get('/',function(){
         return view('frontend.home');
     });
+
+Route::post('delete-user', [HomeController::class, 'delete_user'])->name('delete.user');
+
 Route::get('why-vetvine',[HomeController::class,'whyVetvine'])->name('why_vetvine');
 Route::get('grow',[HomeController::class,'grow'])->name('grow');
 Route::get('thrive',[HomeController::class,'thrive'])->name('thrive');
@@ -239,7 +242,9 @@ Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetv
     Route::post('update-comment', [ReviewController::class, 'commentupdate'])->name('comment.update');
     Route::post('edit-comment', [ReviewController::class, 'edit'])->name('comment.edit');
 
+    Route::get('change-password',[HomeController::class,'changePassword'])->name('change_password');
 
+    Route::post('update-password',[HomeController::class,'updateUserPassword'])->name('updateUserPassword');
 });
 });
 
@@ -254,7 +259,4 @@ Route::post('/rating-videos', [VideoDescriptionController::class, 'rating_videos
 Route::post('/mark-as-read',     [PushNotificationController::class, 'mark_as_read'])->name('read.notification');
 
 
-Route::get('change_password',function(){
 
- return view('vetvineUsers\layouts\pages\user_change_password');
-});

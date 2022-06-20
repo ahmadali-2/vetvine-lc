@@ -60,7 +60,7 @@
 
 
 
-                            <input type="text" class="form-control top-search" placeholder="" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <input id="category_search_field" type="text" class="form-control top-search" placeholder="Search category" aria-label="Recipient's username" aria-describedby="basic-addon2">
 
                             <div class="input-group-append">
 

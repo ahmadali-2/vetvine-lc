@@ -75,7 +75,7 @@
 
 
 
-                       <input type="text" class="form-control top-search" placeholder="" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                       <input type="text" id="form_search_field" class="form-control top-search" placeholder="Search forum post" aria-label="Recipient's username" aria-describedby="basic-addon2">
 
                        <div class="input-group-append">
 
@@ -86,7 +86,7 @@
                    </div>
                 {{-- <div class="form-group">
                     <label for="" style="visibility:hidden ;">dd</label>
-                    <input id="form_search_field" type="text" placeholder="🔍 Search Here ....." class="form-control search_forum">
+                    <input  type="text" placeholder="🔍 Search Here ....." class="form-control search_forum">
                 </div> --}}
 
             </div>

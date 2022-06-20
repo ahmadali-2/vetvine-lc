@@ -2,22 +2,25 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\AppBaseController;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Exception;
-use vetvineHelper;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Admins\Forum\CategoryForum;
 use App\Models\Admins\Forum\Forum;
 use App\Models\Admins\Forum\ForumPost;
+use App\Models\Admins\Forum\Post;
 use App\Models\Admins\VideosonDemand\VideosOnDemand;
 use App\Models\Admins\Webinar\CategoryEvent;
 use App\Models\Admins\Webinar\Event;
-use App\Models\Admins\Webinar\ReviewRating;
 use App\Models\Admins\Webinar\SponserTable;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\Sponser;
 use DB;
+use Illuminate\Support\Facades\Hash;
+
+use function Ramsey\Uuid\v1;
+
 class HomeController extends Controller
 {
     protected $dashboard;
@@ -26,20 +29,25 @@ class HomeController extends Controller
         return view('frontend.home');
     }
 
-    public function whyVetvine(){
+    public function whyVetvine()
+    {
         return view('frontend.pages.why-vetvine');
     }
 
-    public function contactUs(){
+    public function contactUs()
+    {
         return view('frontend.pages.contact-us');
     }
-    public function grow(){
+    public function grow()
+    {
         return view('frontend.pages.grow');
     }
-    public function thrive(){
+    public function thrive()
+    {
         return view('frontend.pages.thrive');
     }
-    public function heal(){
+    public function heal()
+    {
         return view('frontend.pages.heal');
     }
 
@@ -59,42 +67,42 @@ class HomeController extends Controller
 
     public function forums()
     {
-        $forums     =   Forum::all();
-        $categories =   CategoryForum::all();
-        return view('frontend.pages.forums.index',compact('forums','categories'));
+        $forums = Forum::all();
+        $categories = CategoryForum::all();
+        return view('frontend.pages.forums.index', compact('forums', 'categories'));
     }
     public function forumposts($id)
     {
-        $posts = ForumPost::where('forum_id',$id)->get();
+        $posts = Post::where('forum_id', $id)->get();
         $forum = Forum::find($id);
-        return view('frontend.pages.forums.forums_post',compact('posts','forum'));
+        return view('frontend.pages.forums.forums_post', compact('posts', 'forum'));
     }
     public function upcomingWebinars()
     {
-        $showevent = Event::with('events', 'sponsers' ,'members','user')->get();
-        $sponser  = SponserTable::all();
+        $showevent = Event::with('events', 'sponsers', 'members', 'user')->get();
+        $sponser = SponserTable::all();
         $category = CategoryEvent::all();
-        return view('frontend.pages.webinars.upcoming-webinars',compact('showevent', 'sponser', 'category'));
+        return view('frontend.pages.webinars.upcoming-webinars', compact('showevent', 'sponser', 'category'));
     }
     public function pastevent()
     {
         $showevent = Event::with('events')->where('date', '<=', date('Y-m-d'))
-        ->orderBy('date')->get();
+            ->orderBy('date')->get();
         $category = CategoryEvent::all();
-        return view('frontend.pages.webinars.upcoming-webinars',compact('showevent','category'));
+        return view('frontend.pages.webinars.upcoming-webinars', compact('showevent', 'category'));
     }
     public function upcomingevent()
     {
         $showevent = Event::with('events')->where('date', '>=', date('Y-m-d'))
-        ->orderBy('date')->get();
+            ->orderBy('date')->get();
         $category = CategoryEvent::all();
-        return view('frontend.pages.webinars.upcoming-webinars',compact('showevent','category'));
+        return view('frontend.pages.webinars.upcoming-webinars', compact('showevent', 'category'));
     }
     public function upcomingWebinarsdetails($id)
     {
-        $eventdetail = Event::with('events', 'sponsers' ,'members' ,'user','buyeventplan','ReviewData')->find($id);
+        $eventdetail = Event::with('events', 'sponsers', 'members', 'user', 'buyeventplan', 'ReviewData')->find($id);
         $category = CategoryEvent::all();
-        return view('frontend.pages.webinars.upcoming-eventsdetails',compact('eventdetail','category'));
+        return view('frontend.pages.webinars.upcoming-eventsdetails', compact('eventdetail', 'category'));
 
     }
 
@@ -118,18 +126,16 @@ class HomeController extends Controller
         if ($request->from && $request->to) {
             $this->dashboard['filters'] = $this->aplyDateFilters($request->from, $request->to);
         }
-        $showevent =$this->dashboard['filters']->get();
-        return view('frontend.pages.webinars.upcoming-webinars',compact('showevent','category'));
+        $showevent = $this->dashboard['filters']->get();
+        return view('frontend.pages.webinars.upcoming-webinars', compact('showevent', 'category'));
     }
-
 
     public function applyFilters($dbColumn, $formElement)
     {
-        if(isset($this->dashboard['filters']) && !empty($this->dashboard['filters']))
-        {
-            $this->dashboard['filters'] =$this->dashboard['filters']->where(function($query) use($dbColumn,$formElement){
-                foreach((array) $formElement as $key=> $value){
-                    $query->orWhere($dbColumn,'like','%'.$formElement[$key].'%');
+        if (isset($this->dashboard['filters']) && !empty($this->dashboard['filters'])) {
+            $this->dashboard['filters'] = $this->dashboard['filters']->where(function ($query) use ($dbColumn, $formElement) {
+                foreach ((array) $formElement as $key => $value) {
+                    $query->orWhere($dbColumn, 'like', '%' . $formElement[$key] . '%');
                 }
             });
             return $this->dashboard['filters'];
@@ -138,24 +144,81 @@ class HomeController extends Controller
 
     public function aplyDateFilters($from, $to)
     {
-        if(isset($this->dashboard['filters']) && !empty($this->dashboard['filters']))
-        {
-            $this->dashboard['filters'] =$this->dashboard['filters']->where(function($query) use($from, $to){
+        if (isset($this->dashboard['filters']) && !empty($this->dashboard['filters'])) {
+            $this->dashboard['filters'] = $this->dashboard['filters']->where(function ($query) use ($from, $to) {
                 $query->whereBetween('date', [$from, $to]);
             });
             return $this->dashboard['filters'];
         }
     }
 
-    public function videosOnDemand(){
+    public function videosOnDemand()
+    {
         return view('frontend.pages.videos-on-demand', [
             'videos'   => VideosOnDemand::all(),
             'category' => CategoryEvent::all(),
             'sponsor'  => SponserTable::all()
         ]);
     }
-    public function ceArchives(){
+    public function ceArchives()
+    {
         return view('frontend.pages.ce-archives');
     }
 
+    public function delete_user(Request $request)
+    {
+        try {
+            User::where('id', $request->id)->update(['blocked_user' => 1]);
+            Auth::logout();
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'Account Deleted successfully',
+                    'code' => 200,
+                ]
+            );
+        } catch (\Throwable $th) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'Something went wrong!',
+                    'code' => 400,
+                ]
+            );
+        }
+    }
+
+    public function changePassword(){
+        return view('vetvineUsers.layouts.pages.user_change_password');
+    }
+
+    public function updateUserPassword(Request $request){
+        $request->validate([
+            'current_password' => 'required',
+            'password' => 'required|min:8',
+            'confirmpassword' => 'required|same:password',
+        ]);
+       $currentUser =  User::find(Auth::id());
+        if($request->current_password){
+            if (Hash::check($request->current_password, $currentUser->password)){
+
+                if ($request->password == $request->confirmpassword) {
+                    try {
+                        $currentUser->update([
+                            'password' => Hash::make($request->password),
+                        ]);
+                        parent::successMessage('Password Updated Successfully');
+                        return redirect()->back();
+                    } catch (\Exception $e) {
+                        return redirect()->back();
+                    }
+                }else{
+                    parent::dangerMessage('New password and confirm password does not match');
+                    }
+            }else{
+                parent::dangerMessage('Current password is incorrect');
+                return redirect()->back();
+            }
+        }
+    }
 }
