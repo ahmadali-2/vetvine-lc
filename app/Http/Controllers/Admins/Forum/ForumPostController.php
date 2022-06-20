@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admins\Forum;
 use App\Http\Controllers\Controller;
 use App\Models\Admins\Forum\Forum;
 use App\Models\Admins\Forum\Post;
+use App\Models\PostActivity;
 use Exception;
 use vetvineHelper;
 use Illuminate\Http\Request;
@@ -47,15 +48,20 @@ class ForumPostController extends Controller
         $path   = public_path('vetvineUsers/videos/');
         $video  = vetvineHelper::saveImage($request->post_add_video, $path);
         try {
-            Post::create([
-                "forum_id"                   =>  $request->forum_id,
-                "user_id"                    =>  $user,
-                "post_title"                 =>  ucwords($request->post_title),
-                "post_photo"                 =>  $result,
-                "post_description"           =>  ucfirst($request->description),
-                "post_link"                  =>  $request->post_link,
-                "post_add_video"             =>  $video,
+            $post = new Post();
+            $post->forum_id = $request->forum_id;
+            $post->post_title = ucwords($request->post_title);
+            $post->post_photo = $result;
+            $post->user_id = $user;
+            $post->post_description = ucfirst($request->description);
+            $post->post_link = $request->post_link;
+            $post->post_add_video = $video;
+            $post->save();
+
+            PostActivity::create([
+                'post_id' => $post->id,
             ]);
+            
             parent::successMessage('Post saved successfully.');
             return redirect(route('getForumPosts',$request->forum_id));
         } catch (Exception $e) {
