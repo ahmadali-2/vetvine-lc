@@ -307,7 +307,8 @@
 
                 </div>
             </nav>
-        </div>
+            </div>
+    </div>
 </header>
 @include('frontend.pages.general.contactus')
 @include('common.deletemodal')
