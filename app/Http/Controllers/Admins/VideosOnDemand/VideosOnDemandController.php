@@ -51,8 +51,6 @@ class VideosOnDemandController extends Controller
      */
     public function store(VideoRequest $request)
     {
-        // return $request;
-        // return $request;
         $request->validated();
         $input = $request->all();
         // dd( $input);
@@ -72,7 +70,6 @@ class VideosOnDemandController extends Controller
             ]);
 
             $videos->sponsers()->attach($request->sponser_id);
-
             parent::successMessage('Video saved successfully.');
             return redirect(route('videos-on-demand.index'));
         } catch (Exception $e) {

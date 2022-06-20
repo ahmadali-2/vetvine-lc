@@ -13,9 +13,9 @@ class VideoDescriptionController extends Controller
     {
         // return $rating;
         return view('frontend.video_detail', [
-            'videos' => VideosOnDemand::find($id),
+            'videos'    => VideosOnDemand::find($id),
             'more_info' => VideosOnDemand::where('category_id', $category)->where('id', '!=', $id)->get(),
-            'rating' => VideoRating::where('video_id', $id)->where('user_id', Auth::id())->first(),
+            'rating'    => VideoRating::where('video_id', $id)->where('user_id', Auth::id())->first(),
         ]);
     }
 
@@ -77,7 +77,6 @@ class VideoDescriptionController extends Controller
 
     public function rating_videos(Request $request)
     {
-        // return $request->all();
         $length = $request->length;
         $user_id = $request->user_id;
         $video_id = $request->video_id;

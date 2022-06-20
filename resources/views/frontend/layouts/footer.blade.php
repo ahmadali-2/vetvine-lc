@@ -60,7 +60,7 @@ $socialLinks = vetvineHelper::vetvineGeneralSetting();
 
                 <ul class="p-0 mrg_top30_f">
 
-                    <li><a href="#">Why VetVine?</a></li>
+                    <li><a href="{{ route('why_vetvine') }}">Why VetVine?</a></li>
 
                     <li><a href="#">Membership</a></li>
 
@@ -86,7 +86,7 @@ $socialLinks = vetvineHelper::vetvineGeneralSetting();
 
                     <li><a href="{{ route('upcoming_webinars') }}">Upcoming Webinars</a></li>
 
-                    <li><a href="#">CE/Videos On Demand</a></li>
+                    <li><a href="{{ route('videosOnDemand') }}">CE/Videos On Demand</a></li>
 
                     <li><a href="#">Certificate & Special Programs</a></li>
 
@@ -135,7 +135,7 @@ $socialLinks = vetvineHelper::vetvineGeneralSetting();
 
 
 
-                    <li><a href="#">Upcoming Webinars</a></li>
+                    <li><a href="{{ route('upcoming_webinars') }}">Upcoming Webinars</a></li>
 
                     <li><a href="#">Webinars On Demand</a></li>
 

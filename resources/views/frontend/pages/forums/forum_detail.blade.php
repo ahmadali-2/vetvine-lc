@@ -3,16 +3,16 @@
     <link rel="stylesheet" href="{{ asset('frontend/forums/css/style.css') }}" />
 @endsection
 @section('content')
-    <input id="liked_post_id" type="number" value="{{$forumcatgeorypost->id}}" hidden>
-    <input id="post_user_id" type="number" value="{{$forumcatgeorypost->user->id}}" hidden>
+    <input id="liked_post_id" type="number" value="{{ $forumcatgeorypost->id }}" hidden>
+    <input id="post_user_id" type="number" value="{{ $forumcatgeorypost->user->id }}" hidden>
     <main>
         <section class="main_banner  forum_bg">
             <div class="container">
                 <div class="flex-box-banner">
                     <div class="grow_banner_box grow_banner_box_web">
                         <div class="grow-heading">Forum</div>
-                        <img src="{{ asset('frontend/forums/img/sep-line-2.jpg') }}" width="250" height="2" alt=""
-                            class="line_image">
+                        <img src="{{ asset('frontend/forums/img/sep-line-2.jpg') }}" width="250" height="2"
+                            alt="" class="line_image">
                         <p class="mb-0">Guidance, support and wisdom to benefit and maximize the life and
                             longevity of animals.
                         </p>
@@ -55,7 +55,8 @@
                             </div>
                             <div class="date-icon d-flex align-items-center">
                                 <div class="comment_forum">
-                                    <span>{{ date('M d, Y', strtotime($forumcatgeorypost->created_at)) }}</span></div>
+                                    <span>{{ date('M d, Y', strtotime($forumcatgeorypost->created_at)) }}</span>
+                                </div>
                                 <div class="comment_forum pl-1 "><img src="{{ asset('frontend/forums/img/dots.png') }}"
                                         alt="">
                                 </div>
@@ -95,12 +96,12 @@
 
                                         </div>
                                     </a>
-                                     <a id="share_post" style="cursor: pointer;">
+                                    <a id="share_post" style="cursor: pointer;">
                                         <div class="like-btn d-flex align-items-center">
                                             <img src="{{ asset('frontend/forums/img/curve-arrow.png') }}" alt="">
                                             <p class="mb-0 pl-2">Share</p>
                                         </div>
-                                     </a>
+                                    </a>
                                 </div>
 
                             </div>
@@ -117,28 +118,24 @@
                                 </div>
 
                                 <div class="text-btn">
-
                                     <button type="submit" class="btn btn-primary" id="comment_btn">Submit</button>
                                 </div>
-
-
-
                             </form>
                         </div>
-
                     </div>
-
-
                     <div class="chat-side col-lg-4 col-md-2  pl-0 pr-0">
                         <div class="chat-side-detail">
                             <div class="small_screen">
                                 <div class="comment_forum  d-flex align-items-center"><img
                                         src="{{ asset('frontend/forums/img/view.png') }}" alt="">
-                                    <div class="chat-veiw">{{ str_pad( $forumcatgeorypost->postView->count('view_count'),2,"0",STR_PAD_LEFT)}} views</div>
+                                    <div class="chat-veiw">
+                                        {{ str_pad($forumcatgeorypost->postView->count('view_count'), 2, '0', STR_PAD_LEFT) }}
+                                        views</div>
                                 </div>
                                 <div class="comment_forum  d-flex align-items-center"><img
                                         src="{{ asset('frontend/forums/img/message.png') }}" alt="">
-                                    <div class="chat-veiw">{{ $forumcatgeorypost->comments->count('comments')}} comments</div>
+                                    <div class="chat-veiw">{{ $forumcatgeorypost->comments->count('comments') }} comments
+                                    </div>
                                 </div>
                             </div>
                             <div class="similar">
@@ -166,60 +163,56 @@
                     </div>
                 </div>
             </div>
-
-            {{-- @empty
-        <h3>Not Found</h3>
-        @endforelse --}}
     </section>
-        <section>
-            <div class="container">
-                <div class="advertising-sec">
-                @if(count($ads) > 0)
-                    <a href="{{ $ads[0]->banner_image_url}}" target="_blank">
+    <section>
+        <div class="container">
+            <div class="advertising-sec">
+                @if (count($ads) > 0)
+                    <a href="{{ $ads[0]->banner_image_url }}" target="_blank">
                         <div class="advertising-img-1">
-                                @if(isset($ads[0]))
-                                    <img src="{{ asset('admin/advertisement/' . $ads[0]->ad_media) }}" alt="">
-                                @else
-                                    <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
-                                @endif
-                        </div>
-                    </a>
-                @else
-                        <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
-                @endif
-                @if(count($ads) > 0)
-                    <a href="{{ $ads[1]->banner_image_url}}" target="_blank">
-                        <div class="advertising-img-1">
-                            @if(count($ads) > 0)
-                                @if(isset($ads[1]))
-                                    <img src="{{ asset('admin/advertisement/' . $ads[1]->ad_media) }}" alt="">
-                                @else
-                                    <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
-                                @endif
+                            @if (isset($ads[0]))
+                                <img src="{{ asset('admin/advertisement/' . $ads[0]->ad_media) }}" alt="">
                             @else
-                                    <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
+                                <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
                             @endif
                         </div>
                     </a>
                 @else
                     <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
                 @endif
-                @if(count($ads) > 0)
-                    <a href="{{ $ads[2]->banner_image_url}}" target="_blank">
+                @if (count($ads) > 0)
+                    <a href="{{ $ads[0]->banner_image_url }}" target="_blank">
                         <div class="advertising-img-1">
-                                @if(isset($ads[2]))
-                                    <img src="{{ asset('admin/advertisement/' . $ads[2]->ad_media) }}" alt="">
+                            @if (count($ads) > 0)
+                                @if (isset($ads[1]))
+                                    <img src="{{ asset('admin/advertisement/' . $ads[1]->ad_media) }}" alt="">
                                 @else
                                     <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
                                 @endif
+                            @else
+                                <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
+                            @endif
                         </div>
                     </a>
                 @else
-                        <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
+                    <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
                 @endif
-                </div>
+                @if (count($ads) > 0)
+                    <a href="{{ $ads[2]->banner_image_url }}" target="_blank">
+                        <div class="advertising-img-1">
+                            @if (isset($ads[2]))
+                                <img src="{{ asset('admin/advertisement/' . $ads[2]->ad_media) }}" alt="">
+                            @else
+                                <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
+                            @endif
+                        </div>
+                    </a>
+                @else
+                    <img src="{{ asset('admin/advertisement/defaultAd.png') }}" alt="">
+                @endif
             </div>
-        </section>
+        </div>
+    </section>
     {{-- <div class="container">
         <div class="advertising-sec">
             <div class="advertising-img-1"><img src="{{ asset('frontend/forums/img/add-1.png') }}" alt=""></div>
@@ -227,75 +220,79 @@
             <div class="advertising-img-3"><img src="{{ asset('frontend/forums/img/add-3.png') }}" alt=""></div>
         </div>
     </div> --}}
-    @section('scripts')
-        <script>
-            if('<?php echo $liked ?>' == true){
-                $('#like_post').css('color','#4886C8');
-                $('#like_text').html('<b>Liked</b>');
-            }
+@section('scripts')
+    <script>
+        if ('<?php echo $liked; ?>' == true) {
+            $('#like_post').css('color', '#4886C8');
+            $('#like_text').html('<b>Liked</b>');
+        }
 
-            $('#like_post').on('click', function(){
-                likePost();
-            });
+        $('#like_post').on('click', function() {
+            likePost();
+        });
 
-            var likepostid = $('#liked_post_id').val();
-            var postUserid = $('#post_user_id').val();
+        var likepostid = $('#liked_post_id').val();
+        var postUserid = $('#post_user_id').val();
 
-            function likePost(){
-                $.ajax({
+        function likePost() {
+            $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 },
                 type: "POST",
                 url: '/savelike',
-                data: {likepostid: likepostid, postUserid: postUserid, likeType: 1, ce: 0},
-                success: function(response){
+                data: {
+                    likepostid: likepostid,
+                    postUserid: postUserid,
+                    likeType: 1,
+                    ce: 0
+                },
+                success: function(response) {
                     console.log(response.code);
-                    if(response.code == 200){
-                        $('#like_post').css('color','#4886C8');
+                    if (response.code == 200) {
+                        $('#like_post').css('color', '#4886C8');
                         $('#like_text').html('<b>Liked</b>');
-                    }
-                    else if(response.code == 201){
-                        $('#like_post').css('color','black');
+                    } else if (response.code == 201) {
+                        $('#like_post').css('color', 'black');
                         $('#like_text').html('Like');
-                    }
-                    else if(response.code == 400){
+                    } else if (response.code == 400) {
                         toastr.error(response.message);
                     }
                 }
-                });
-            }
-
-            $('#share_post').on("click", function() {
-                sharePostId = $(this).attr('data-post-id');
-                shareUserid = $(this).attr('data-user-id');
-                sharePost();
             });
+        }
 
-        function sharePost(){
+        $('#share_post').on("click", function() {
+            sharePostId = $(this).attr('data-post-id');
+            shareUserid = $(this).attr('data-user-id');
+            sharePost();
+        });
+
+        function sharePost() {
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 },
                 type: "POST",
                 url: '/share-post',
-                data: {sharePostId: likepostid, shareUserId: postUserid, ce: 0},
-                success: function(response){
-                    if(response.code == 200){
+                data: {
+                    sharePostId: likepostid,
+                    shareUserId: postUserid,
+                    ce: 0
+                },
+                success: function(response) {
+                    if (response.code == 200) {
                         toastr.success('Post shared Successfully!');
-                    }
-                    else if(response.code == 400){
+                    } else if (response.code == 400) {
                         toastr.error('Please login to continue!');
-                    }
-                    else if(response.code == 401){
+                    } else if (response.code == 401) {
                         toastr.error('Please verify email first!');
-                    }
-                    else if(response.code == 402){
+                    } else if (response.code == 402) {
                         toastr.error(response.message);
                     }
                 }
-                });
+            });
         }
-        </script>
-    @endsection
+    </script>
+@endsection
 @endsection
