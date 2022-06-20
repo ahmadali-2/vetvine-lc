@@ -63,18 +63,27 @@ class PostController extends Controller
         $posts = array();
         $postActivities = PostActivity::orderBy('id','desc')->paginate(3);
 
-        foreach($postActivities as $postActivity){
-            if(isset($postActivity->post_id)){
-                $post = Post::with('user', 'likes')->where('id', $postActivity->post_id)->first();
-                array_push($posts, $post);
-            }else{
-                $share = Share::with('users', 'posts', 'likes')->where('id', $postActivity->share_id)->first();
-                array_push($posts, $share);
+        $user = auth()->user();
+        if($user){
+            $permissions = MemberPermission::where('membertype_id', $user->userMemberType->id)->first();
+            $likesPermission = $permissions->likes;
+            $commentsPermission = $permissions->comments;
+            $sharesPermission = $permissions->shares;
+            
+            foreach($postActivities as $postActivity){
+                if(isset($postActivity->post_id)){
+                    $post = Post::with('user', 'likes')->where('id', $postActivity->post_id)->first();
+                    array_push($posts, $post);
+                }else{
+                    $share = Share::with('users', 'posts', 'likes')->where('id', $postActivity->share_id)->first();
+                    array_push($posts, $share);
+                }
             }
+            
         }
 
         return response()->json([
-            'html' =>  view('frontend.pages.member-home-posts', compact('posts', 'postActivities'))->render(),
+            'html' =>  view('frontend.pages.member-home-posts', compact('posts', 'postActivities', 'likesPermission', 'commentsPermission', 'sharesPermission'))->render(),
             'code' => 200,
         ]);
     }
