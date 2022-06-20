@@ -199,6 +199,8 @@ Route::resource('eventpayments',EventPaymentController::class);
 
 Route::get('faqs',[HomeController::class,'faqs'])->name('faqs');
 Route::get('frontend-news',[NewsController::class,'frontIndex'])->name('newsfrontend');
+Route::post('show-comments',[CommentController::class,'showComments'])->name('showComments');
+
 
 //videos on demand
 Route::get('videos-on-demand',[HomeController::class,'videosOnDemand'])->name('videosOnDemand');
