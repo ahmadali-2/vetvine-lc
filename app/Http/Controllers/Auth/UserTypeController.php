@@ -24,9 +24,13 @@ class UserTypeController extends Controller
             parent::warningMessage('Your Account Approval Is Pending From Admin Side');
             return redirect('/');
         }
-
+        if($userType->blocked_user){
+            Auth::logout();
+            parent::dangerMessage('Your Account has been Deleted.Please Contact with Administrator!');
+            return redirect('/');
+        }
         switch ($userType->type) {
-            
+
             case 1:
                 parent::successMessage("Super Admin Login Successfully");
                 return redirect('superadmin/dashboard');
@@ -36,8 +40,11 @@ class UserTypeController extends Controller
 
                 if($userType->employmentInfo){
                     if($userType->employmentInfo->profile_status == 'completed'){
-                        return redirect()->route('member_home');
-                        break;
+
+                            return redirect()->route('member_home');
+                            break;
+
+
                     }else{
                         return redirect('vetvine-member/dashboard');
                         break;

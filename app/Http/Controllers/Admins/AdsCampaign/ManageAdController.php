@@ -101,6 +101,8 @@ class ManageAdController extends Controller
              'ad_media'                     =>  $result,
              'banner_image_url'             =>  $request->input('banner_image_url'),
              'campaign_id'                  =>  $request->input('campaign_id'),
+             "status"                       =>  $request->input('status'),
+
             ]);
              parent::successMessage('Advertisement updated successfully.');
              return redirect(route('ads-manage.index'));
