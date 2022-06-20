@@ -159,7 +159,7 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
 Route::get("/page", function(){
     return view("frontend.pages.forums.post_detail");
  });
-
+Route::post('share-post',[PostController::class,'sharePost'])->name('share.post');
 Route::get('frontend-forums',[ForumController::class,'frontendIndex'])->name('forumsfrontend');
 Route::get('forums/{id}',[ForumController::class,'getForums'])->name('getForums');
 Route::resource('forums-posts',ForumPostController::class);

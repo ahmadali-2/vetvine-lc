@@ -248,7 +248,7 @@
                 },
                 type: "POST",
                 url: '/savelike',
-                data: {likepostid: likepostid, postUserid: postUserid, ce: 0},
+                data: {likepostid: likepostid, postUserid: postUserid, likeType: 1, ce: 0},
                 success: function(response){
                     console.log(response.code);
                     if(response.code == 200){
@@ -267,6 +267,35 @@
                 }
                 });
             }
+
+            $('#share_post').on("click", function() {
+                sharePostId = $(this).attr('data-post-id');
+                shareUserid = $(this).attr('data-user-id');
+                sharePost();
+            });
+
+        function sharePost(){
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                type: "POST",
+                url: '/share-post',
+                data: {sharePostId: likepostid, shareUserId: postUserid, ce: 0},
+                success: function(response){
+                    if(response.code == 200){
+                        window.location.reload();
+                        toastr.success('Post shared Successfully!');
+                    }
+                    else if(response.code == 400){
+                        toastr.error('Please login to continue!');
+                    }
+                    else if(response.code == 401){
+                        toastr.error('Please verify email first!');
+                    }
+                }
+                });
+        }
         </script>
     @endsection
 @endsection
