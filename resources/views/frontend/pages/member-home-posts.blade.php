@@ -225,7 +225,7 @@
             $('.send_comment a').on("click", function(){
                 var commentKey = '#comment_value_'+$(this).attr('data-key'); 
                 postComment = $(commentKey).val();
-                postId = $(this).attr('data-post-id');
+                var postId = $(this).attr('data-post-id');
 
                 $.ajax({
                 headers: {
@@ -236,7 +236,7 @@
                 data: {post_id: postId, comment: postComment},
                 success: function(response){
                     if(response.code == 200){
-                        // refreshComments($(this), 'post');
+                        refreshComments($(this), 'post');
                         toastr.success(response.message);
                     }
                 }
