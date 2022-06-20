@@ -71,17 +71,13 @@
                                                         <!-- <u>Vet / Pet Professionals</u> -->
                                                         <ul>
 
-                                                            <li><a href="{{ route('upcoming_webinars') }}">Upcoming
-                                                                    Webinars</a></li>
+                                                            <li><a href="{{ route('upcoming_webinars') }}">Upcoming Webinars</a></li>
 
-                                                            <li><a href="{{ route('videosOnDemand') }}">videos on
-                                                                    demand</a></li>
+                                  <li><a href="{{ route('videosOnDemand') }}">videos on demand</a></li>
 
-                                                            <li><a href="#">Certificate & special programs</a>
-                                                            </li>
-                                                            <li><a href="{{ route('forumsfrontend') }}">forums</a>
-                                                            </li>
-                                                            <li><a href="#">Pet Health Articles </a></li>
+                                                             <li><a href="#">Certificate & special programs</a></li>
+                                                             <li><a href="{{route('forumsfrontend')}}">forums</a></li>
+                                                             <li><a href="#">Pet Health Articles </a></li>
 
                                                         </ul>
 
@@ -115,8 +111,7 @@
                             </div>
                         </li>
                         <li class="nav-item droplink ">
-                            <a class="nav-link nav-anchor mt-1 pb-0" href="{{ route('heal') }}"
-                                style="font-weight: bold">HEAL
+                            <a class="nav-link nav-anchor mt-1 pb-0" href="{{ route('heal') }}" style="font-weight: bold">HEAL
                                 <i class="fas fa-chevron-down droplink3"></i>
                                 <br>
                                 <span class="nav-sub-hed">Pet Loss Support</span>

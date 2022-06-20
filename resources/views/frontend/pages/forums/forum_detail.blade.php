@@ -155,7 +155,7 @@
                 </div>
 
             </div>
-            <div class="container">
+            <div class="container mt-5">
                 <div class="row">
                     <div class="col-md-6">
                         @include('frontend.pages.forums.replies', [
@@ -254,12 +254,10 @@
                     if(response.code == 200){
                         $('#like_post').css('color','#4886C8');
                         $('#like_text').html('<b>Liked</b>');
-                        toastr.success(response.message);
                     }
                     else if(response.code == 201){
                         $('#like_post').css('color','black');
                         $('#like_text').html('Like');
-                        toastr.success(response.message);
                     }
                     else if(response.code == 400){
                         toastr.error(response.message);
@@ -284,7 +282,6 @@
                 data: {sharePostId: likepostid, shareUserId: postUserid, ce: 0},
                 success: function(response){
                     if(response.code == 200){
-                        window.location.reload();
                         toastr.success('Post shared Successfully!');
                     }
                     else if(response.code == 400){
