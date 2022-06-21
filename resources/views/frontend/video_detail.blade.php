@@ -197,6 +197,7 @@
                                 <div class="form-group row">
                                     <div class="col-sm-6 rating_box">
                                         <div class="rate">
+                                            @if (isset($rating->rating))
                                             @for ($i = 1; $i <= $rating->rating; $i++)
                                                 <label for="star{{ $i }}" title="text">{{{ $i }}} stars</label>
                                                 <input type="radio" id="star{{ $i }}" data-stars="{{ $i }}"class="rate"
@@ -207,7 +208,26 @@
                                                     name="rating" value="{{ $i }}" />
                                                 <label for="star{{ $i  }}" title="text">{{ $i  }} stars</label>
                                                 <div class="d-none">{{ $i = $i+ 1 }}</div>
-                                                @endfor
+                                            @endfor
+                                    @else
+                                        <div class="rate">
+                                            <input type="radio" id="star5" class="rate" data-stars="5"  name="rating"
+                                                value="5" />
+                                            <label for="star5" title="text">5 stars</label>
+                                            <input type="radio" checked id="star4"  data-stars="4" class="rate"
+                                                name="rating" value="4" />
+                                            <label for="star4" title="text">4 stars</label>
+                                            <input type="radio" id="star3" class="rate" data-stars="3"  name="rating"
+                                                value="3" />
+                                            <label for="star3" title="text">3 stars</label>
+                                            <input type="radio" id="star2" class="rate"  data-stars="2" name="rating"
+                                                value="2">
+                                            <label for="star2" title="text">2 stars</label>
+                                            <input type="radio" id="star1" class="rate" data-stars="1"  name="rating"
+                                                value="1" />
+                                            <label for="star1" title="text">1 star</label>
+                                        </div>
+                                    @endif
                                         </div>
                                     </div>
                                 </div>

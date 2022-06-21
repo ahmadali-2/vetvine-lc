@@ -14,7 +14,7 @@ class AddSponserIdToVideosOnDemandTable extends Migration
     public function up()
     {
         Schema::table('videos_on_demands', function (Blueprint $table) {
-            $table->bigInteger('sponser_id')->after('status');
+            $table->bigInteger('sponser_id')->after('status')->nullable();
         });
     }
 
