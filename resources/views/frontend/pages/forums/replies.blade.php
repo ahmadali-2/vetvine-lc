@@ -1,8 +1,7 @@
 @php
     $padding = 10;
 @endphp
-
-@foreach($comments as $comment)
+@foreach($comments as $key=>$comment)
 
 @php
      $padding + 40;
@@ -14,19 +13,19 @@
             <i class="fa fa-trash text-danger ml-2" aria-hidden="true"></i></a>
     </p>
     <a href="" id="reply"></a>
-    <form method="post" id="replyfrm" action="{{ route('reply.add') }}">
-        @csrf
+    <form id="replyfrm_{{$key}}">
         <div class="form-group">
             <input type="text" name="reply" id="reply" class="form-control" style="border: 1px solid #ced4da !important;"/>
             <span class="asteric" id ="error2"></span>
-            <input type="hidden" name="post_id" value="{{ $post_id }}" />
+            <input type="hidden" id="reply_post_id" name="post_id" value="{{ $post_id }}" />
             <input type="hidden" name="comment_id" value="{{ $comment->id }}" />
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary" id="reply_btn">Reply</button>
-            {{-- <input type="submit" class="btn btn-sm btn-outline-danger py-0" style="font-size: 0.8em;" value="Reply" /> --}}
+            <button type="button" class="btn btn-primary" data-key="{{$key}}">Reply</button>
         </div>
     </form>
-    @include('frontend.pages.forums.replies', ['comments' => $comment->replies])
+    <div id="comment_replies">
+        @include('frontend.pages.forums.replies', ['comments' => $comment->replies])
+    </div>
 </div>
 @endforeach
