@@ -74,7 +74,6 @@
         });
 
         function fetch_posts(page)
-
         {
             $.ajax({
             headers: {

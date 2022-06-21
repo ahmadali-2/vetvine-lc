@@ -114,7 +114,6 @@
 
 
         #ajax-book-model .form-control {
-
             border: 1px solid #ced4da !important;
         }
 
@@ -197,7 +196,7 @@
                                 <div class="form-group row">
                                     <div class="col-sm-6 rating_box">
                                         <div class="rate">
-                                            @if (isset($rating->rating))
+                                    @if (isset($rating->rating))
                                             @for ($i = 1; $i <= $rating->rating; $i++)
                                                 <label for="star{{ $i }}" title="text">{{{ $i }}} stars</label>
                                                 <input type="radio" id="star{{ $i }}" data-stars="{{ $i }}"class="rate"
@@ -262,16 +261,14 @@
                                                 allowfullscreen></iframe>
                                         </div>
                                         <div class="video-bottom-text">
-                                            <h3>
+                                            <a style="color: #869799;" href="{{ route('video_desc', [$item->id, $item->category_id]) }}"  >
                                                 {{ $item->video_title }}
-                                            </h3>
-
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                             @empty
                             @endforelse
-
                         </div>
                     </div>
                 </section>

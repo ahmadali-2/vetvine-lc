@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\SocialController;
 use App\Http\Controllers\Auth\UserTypeController;
 use App\Http\Controllers\Admins\VideosOnDemand\VideosOnDemandController; // videos on demands
-
 // Admin And Super Admin Routes;
 use App\Http\Controllers\Admins\AdminDashboardController;
 use App\Http\Controllers\Admins\AdsCampaign\CampaignController;
@@ -57,7 +56,6 @@ use App\Http\Controllers\VetvineUsers\PostManagement\PostController;
 use App\Http\Controllers\VideoDescriptionController;
 use App\Http\Controllers\StaticPageController; // for static pages
 use App\Http\Controllers\TermsController; // for terms of services
-// us
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 
@@ -201,6 +199,8 @@ Route::resource('eventpayments',EventPaymentController::class);
 
 Route::get('faqs',[HomeController::class,'faqs'])->name('faqs');
 Route::get('frontend-news',[NewsController::class,'frontIndex'])->name('newsfrontend');
+Route::post('show-comments',[CommentController::class,'showComments'])->name('showComments');
+
 
 //videos on demand
 Route::get('videos-on-demand',[HomeController::class,'videosOnDemand'])->name('videosOnDemand');
