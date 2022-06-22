@@ -20,7 +20,7 @@ class CheckEmailVerification
      */
     public function handle(Request $request, Closure $next)
     {
-        // dd('hj');
+       
         $message = new Controller();
         if(auth()->user()){
             if(isset(auth()->user()->email_verified_at) == false){

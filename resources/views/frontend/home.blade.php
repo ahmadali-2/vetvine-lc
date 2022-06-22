@@ -19,7 +19,7 @@
     </section>
 </main>
 @if(isset($verifyEmail))
-<div class="modal fade show" id="verify-email-modal" style="display: block;" aria-modal="true">
+{{-- <div class="modal fade show" id="verify-email-modal" style="display: block;" aria-modal="true">
         <div class="modal-dialog custum_popup">
             <div class="modal-content">
 
@@ -67,6 +67,75 @@
 
             </div>
         </div>
+</div> --}}
+<div class="modal fade show" id="verify-email-modal" style="display: block;" aria-modal="true">
+    <div class="modal-dialog custum_popup">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+
+                <div class="popup-header">
+                    <span class="popup-logo"><img src="{{ asset('frontend/images/popup-logo.png') }}"
+                            alt="logo"></span>
+                    <span class="close" id="email_verify_modal_close" data-dismiss="modal">&times;</span>
+                </div>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="popup-body">
+                    <div class="row">
+                        <h2 class="email_heading" style="border-bottom: 1px solid transparent !important; ">Verify
+                            Your Email</h2>
+                        <div class="col-sm-12 mx-auto box" style="background-color: transparent;">
+                            <div class="mb-4 text-sm text-gray-600">
+                                {{ __('Welcome! Youre one step away from
+                                                                                                                                                                                                                                        enjoying the benefits of VetVine.') }}
+                            </div>
+
+
+                            <p>We just sent an email to <a href="#"></a>
+                                Click on the link in that email to
+                                complete your registration.</p>
+
+                            <p>
+                                Did’ receive an ema from us? Check your SPAM
+                                folder. til can find i?
+                            </p>
+
+
+
+                            @if (session('status') == 'verification-link-sent')
+                                <div class="mb-4 font-medium text-sm text-green-600">
+                                    {{ __('A new verification link has been sent to the email address you provided during registration.') }}
+                                </div>
+                            @endif
+
+                            <x-jet-validation-errors class="mb-4" />
+                            <form method="POST" action="{{ route('verification.send') }}">
+                                @csrf
+                                <div class="flex items-center justify-center mt-4">
+                                    <x-jet-button class="btn_email_resend" type="submit"
+                                        style="margin-left: 20%;  background-color: #f27222;">
+                                        {{ __('Resend Verification Email') }}
+                                    </x-jet-button>
+                                </div>
+                            </form>
+
+                            <p style="margin-top: 30px;">Need Help or Having Trouble? <a href="#"
+                                    style="text-decoration: none; color:#f27222;"> Contact Us</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="popup-footer">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
 @endif
 <section class="main_banner_bottob_label">
