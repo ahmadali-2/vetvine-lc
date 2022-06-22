@@ -8816,3 +8816,20 @@ p {
     color: #5c7c85;
     font-family: "Museo 500";
 }
+
+.pagination_div .page-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #5c7c85;
+    background-color: #fff;
+    border: 1px solid #dee2e6 !important;
+    font-weight: bold;
+    font-family: "Museo 500";
+}
+
+.pagination_div .page-item {
+    margin: 0px 5px;
+}
