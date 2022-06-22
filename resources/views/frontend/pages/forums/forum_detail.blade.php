@@ -344,6 +344,7 @@
         $('.postCommentReplies button').on('click', function(){
         var formKey = '#replyfrm_'+$(this).attr('data-key');
         var formData = $(formKey).serialize()+'&type='+"post"+'&ce=0';
+        console.log(formData);
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
