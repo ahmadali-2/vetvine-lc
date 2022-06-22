@@ -22,6 +22,8 @@ class CommentController extends Controller
             'html' => view('frontend.pages.forums.replies', [
                 'comments' => $comments,
                 'post_id' => $request->post_id,
+                'type' =>$request->type,
+                'ce' => $request->ce,
             ])->render(),
         ]);
     }

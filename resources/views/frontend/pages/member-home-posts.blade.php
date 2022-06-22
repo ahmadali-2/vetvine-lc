@@ -38,7 +38,7 @@
                         <h6 class="h6_post_label">
                             {!! $post->post_description !!}
                         </h6>
-                        <p>Shared on : {{date("d-m-Y", strtotime($share->created_at))}}</p>
+                        <p>Shared on : {{date("m/d/Y", strtotime($share->created_at))}}</p>
                     </div>
                     @endif
                 @endforeach
@@ -110,7 +110,7 @@
                         <h6 class="h6_post_label">
                             {!! $post->post_description !!}
                         </h6>
-                        <p>Posted on : {{date("d-m-Y", strtotime($post->created_at))}}</p>
+                        <p><b></b>Posted on : {{date("m/d/Y", strtotime($share->created_at))}}</p>
                     </div>
 
 
@@ -238,7 +238,7 @@
                 },
                 type: "POST",
                 url: '/comment/store',
-                data: {post_id: postId, comment: postComment},
+                data: {post_id: postId, comment: postComment, type:'post', ce:1},
                 success: function(response){
                     if(response.code == 200){
                         refreshComments(component, 'post');
@@ -257,13 +257,29 @@
                 },
                 type: "POST",
                 url: '/show-comments',
-                data: {post_id: postId, type: type},
+                data: {post_id: postId, type: type, ce:1},
                 success: function(response){
                     var comment_view = '#comments_view_'+component.attr('data-key');
                     $(comment_view).empty();
                     $(comment_view).append(response.html);
+                        $(comment_view+' button').on('click', function(){
+                            var formKey = '#replyfrm_'+$(this).attr('data-key');
+                            var formData = $(formKey).serialize()+'&type='+type+'&ce=1';
+                            $.ajax({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                                },
+                                type: "POST",
+                                url: 'reply/store',
+                                data: formData,
+                                success: function(){
+                                    refreshComments(component, type);
+                                    toastr.success(response.message);
+                                }
+                            });
+                    });
                 }
-                });
+            });
         }
 
         function sharePost(){

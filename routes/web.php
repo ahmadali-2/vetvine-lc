@@ -234,7 +234,7 @@ Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetv
     Route::get('create-forumpost/{id}',[ForumPostController::class,'createPost'])->name('createforumpost');
     Route::get('forumpostlist/{id}',[ForumPostController::class,'forumPostList'])->name('forumpostlist');
     Route::delete('comment-destroy/{id}', [CommentController::class,'destroy'])->name('comment.destroy');
-    Route::post('/reply/store', [CommentController::class,'replyStore'])->name('reply.add');
+    Route::post('reply/store', [CommentController::class,'replyStore'])->name('reply.add');
 
     //User events Routes
     Route::post('review-store',[ReviewController::class, 'reviewstore'])->name('reviewstore');
