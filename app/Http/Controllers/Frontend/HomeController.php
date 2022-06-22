@@ -208,6 +208,9 @@ class HomeController extends Controller
                             'password' => Hash::make($request->password),
                         ]);
                         parent::successMessage('Password Updated Successfully');
+                        return response()->json([
+                            'html' => view('frontend.pages.forums.form_category_data',compact('categories'))->render(),
+                        ]);
                         return redirect()->back();
                     } catch (\Exception $e) {
                         return redirect()->back();

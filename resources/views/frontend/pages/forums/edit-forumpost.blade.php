@@ -87,7 +87,7 @@
                                 </div>
                             </div>
                         <div class="form-group text-center">
-                            <input type="submit" class="btn btn-primary mt-3 edit_post_btn" value="POST">
+                            <input type="submit" class="btn btn-primary mt-3 edit_post_btn" value="UPDATE">
                         </div>
                     </form>
                 </div>

@@ -31,13 +31,17 @@ class ReviewController extends Controller
     }
     public function commentupdate(Request $request)
     {
+        return $request->id;
 
         try {
             if ($request->ajax()) {
                 ReviewRating::find($request->id)
                 ->update([
+                    'star_rating' => $request->rating,
                     'comments' => $request->comment,
                 ]);
+                return response()->json(['success' => 'Review Updated Successfully.']);
+
 
                 return response()->json(['success' => true]);
             }
@@ -47,9 +51,11 @@ class ReviewController extends Controller
     }
     public function edit(Request $request)
     {
-        $review  = ReviewRating::where('id',$request->id)->find($request->id);
-      
-        return response()->json($review);
+        $review  = ReviewRating::where('id',$request->id)->first();
+        return [
+            'succces' => true,
+            'review' => $review
+        ];
     }
 
     // public function Reviewdelete(Request $request)
