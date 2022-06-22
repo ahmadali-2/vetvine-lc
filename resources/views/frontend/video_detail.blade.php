@@ -180,6 +180,18 @@
     <body>
         <section class="video-section-wrapper mb-4">
             <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav aria-label="breadcrumb" class="breadcrumbs large-font">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ url('/') }}" role="button" tabindex="0">Home</a>
+                                </li>
+                                <li class="breadcrumb-item"><a onclick="history.back()" href="javascript::void();">Videos On Demand</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ $videos->video_title }}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
                 <div class="video-detail-inner">
                     <div class="video-title-he d-flex flex-wrap justify-content-between ">
                         <h2>{{ $videos->video_title }}</h2>

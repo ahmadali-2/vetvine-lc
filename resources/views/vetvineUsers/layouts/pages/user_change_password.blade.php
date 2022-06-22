@@ -25,7 +25,7 @@
                         <input type="password" name="confirmpassword">
                       </div>
                       <div class="btn_change text-center">
-                        <button type="submit" class="btn btn-warning">Change Password</button>
+                        <button type="button" class="btn btn-warning">Change Password</button>
                     </div>
                 </form>
                </div>
