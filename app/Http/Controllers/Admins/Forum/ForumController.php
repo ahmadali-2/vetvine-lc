@@ -116,7 +116,10 @@ class ForumController extends Controller
         $categories   =   CategoryForum::all();
         $ads          =   Ad::all();
         $forums       =   Forum::all();
-
+        $userLoggedIn = 0;
+        if(auth()->user()){
+            $userLoggedIn = 1;
+        }
         $forumcatgeorypost = Post::with('forum','comments','user','postView','likes')->where('id',$forumcategorypostId)->first();
         $liked = false;
         $like = null;
@@ -129,7 +132,7 @@ class ForumController extends Controller
         $relatedposts=Post::where('forum_id',$forumcatgeorypost->forum_id)->where('id', "!=" ,$forumcatgeorypost->id)->get();
         $this->createViewLog($forumcatgeorypost);
 
-        return view('frontend.pages.forums.forum_detail',compact('forumcatgeorypost','relatedposts','categories','forums','ads','liked'));
+        return view('frontend.pages.forums.forum_detail',compact('forumcatgeorypost','relatedposts','categories','forums','ads','liked','userLoggedIn'));
 
     }
     public function createViewLog($forumcatgeorypost) {

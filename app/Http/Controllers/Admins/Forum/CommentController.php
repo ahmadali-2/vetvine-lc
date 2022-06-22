@@ -35,7 +35,10 @@ class CommentController extends Controller
             if(isset(auth()->user()->email_verified_at)){
                 if($request->comment == '')
                 {
-                    return back();
+                    return response()->json([
+                        'code' => 400,
+                        'message' => 'Comment cannot be empty!',
+                    ]);
                 }
                 else
                 {
@@ -53,54 +56,92 @@ class CommentController extends Controller
                         'code' => 200,
                         'message' => 'Comment added successfully!',
                     ]);
-                }else{
-                    return back();
                 }
-
                 }
             }else{
-                parent::dangerMessage("Please verify your email to comment");
-                return back();
+                return response()->json([
+                    'code' => 400,
+                    'message' => 'Please verify your email first!',
+                ]);
             }
         }else{
-            parent::dangerMessage("User not login, Please login first!");
-            return back();
+            return response()->json([
+                'code' => 400,
+                'message' => 'Please login to continue!',
+            ]);
         }
     }
     public function replyStore(Request $request)
     {
-        if($request->reply == '')
-        {
-            return back();
+        if(auth()->user()){
+            if(isset(auth()->user()->email_verified_at)){
+                if($request->reply == '')
+                {
+                    return response()->json([
+                        'code' => 400,
+                        'message' => 'Reply cannot be empty!',
+                    ]);
+                }
+                else
+                {
+                    $reply = new Comment();
+        
+                    $reply->comment = $request->get('reply');
+        
+                    $reply->user()->associate($request->user());
+        
+                    $reply->parent_id = $request->get('comment_id');
+        
+                    $post = Post::find($request->get('post_id'));
+        
+                    $post->comments()->save($reply);
+        
+                    return response()->json([
+                        'code' => 200,
+                        'message' => 'Reply added successfully!',
+                    ]);
+                }
+
+            }else{
+                return response()->json([
+                    'code' => 400,
+                    'message' => 'Please verify your email first!',
+                ]);
+            }
+        }else{
+            return response()->json([
+                'code' => 400,
+                'message' => 'Please login to continue!',
+            ]);
         }
-        else
-        {
-            $reply = new Comment();
-
-            $reply->comment = $request->get('reply');
-
-            $reply->user()->associate($request->user());
-
-            $reply->parent_id = $request->get('comment_id');
-
-            $post = Post::find($request->get('post_id'));
-
-            $post->comments()->save($reply);
-
-            return back();
-        }
-
     }
     public function destroy($id)
     {
-        try{
-            Comment::find($id)->delete();
-            parent::successMessage('Comment Deleted successfully.');
-            return redirect()->back();
-        } catch(Exception $e) {
-      
-            parent::dangerMessage("Comment Does Not Deleted, Please Try  Again");
-            return redirect()->back();
+        if(auth()->user()){
+            if(isset(auth()->user()->email_verified_at)){
+                try{
+                    Comment::find($id)->delete();
+                    return response()->json([
+                        'code' => 200,
+                        'message' => 'Comment deleted successfully!',
+                    ]);
+                } catch(Exception $e) {
+                    return response()->json([
+                        'code' => 400,
+                        'message' => 'Error in operation!',
+                    ]);
+                }
+            }else{
+                return response()->json([
+                    'code' => 400,
+                    'message' => 'Please verify your email first!',
+                ]);
+            }
+        }else{
+            return response()->json([
+                'code' => 400,
+                'message' => 'Please login to continue!',
+            ]);
         }
     }
 }

@@ -70,6 +70,7 @@
                             <div class="chat-description">
                                 <p class="">{!! $forumcatgeorypost->post_description !!} </p>
                             </div>
+                            @if($userLoggedIn == 1)
                             <div class="chat-like-comments" id="chat-like-comments">
                                 {{-- <div class="icons-like">
                                     <div class="comments-icon">
@@ -167,6 +168,7 @@
                     </div>
                 </div>
             </div>
+            @endif
     </section>
     <section>
         <div class="container">
@@ -352,9 +354,18 @@
             type: "POST",
             url: "{{route('reply.add')}}",
             data: formData,
-            success: function(){
-                refreshComments();
-                activateFormEvents();
+            success: function(response){
+                if(response.code == 200){
+                    refreshComments();
+                    activateFormEvents();
+                    toastr.success(response.message);
+                }
+                if(response.code == 400){
+                    toastr.error(response.message);
+                }
+            },
+            error: function(response){
+                toastr.error('Please login to proceed!');
             }
         });
     });
@@ -370,11 +381,18 @@
                 },
                 type: "post",
                 url:deleteUrl,
-                success: function(){
-                    console.log('deleted');
-                    refreshComments();
-                    activateFormEvents();
-                    toastr.success('Comment deleted successfully!');
+                success: function(response){
+                    if(response.code == 200){
+                        refreshComments();
+                        activateFormEvents();
+                        toastr.success(response.message);
+                    }
+                    if(response.code == 400){
+                        toastr.error(response.message);
+                    }
+                },
+                error: function(response){
+                    toastr.error('Please login to proceed!');
                 }
             });
         }else
