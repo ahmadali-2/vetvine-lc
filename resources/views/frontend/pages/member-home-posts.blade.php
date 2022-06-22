@@ -60,8 +60,8 @@
                     @endif
                     <?php $displayLike = false ?>
                 </div>
-                <div class="commentButtons">
-                    <a class="like_color" style="cursor: pointer;" data-share-id="{{$share->id}}" data-key={{$key}} data-type="share"><i class="fa fa-comments" aria-hidden="true"></i>
+                <div class="shareCommentButtons">
+                    <a class="like_color" style="cursor: pointer;" data-post-id="{{$share->id}}" data-key={{$key}} data-type="share"><i class="fa fa-comments" aria-hidden="true"></i>
                         Comment</a>
                 </div>
                 <div class="shareButtons">
@@ -70,18 +70,20 @@
                 </div>
             </div>
         </div>
-        <div id="comment_{{$key}}" class="post_center_box" data-key={{$key}} style="display: none;">
-            <div id="comments_data_{{$key}}">
-                <p>Here is the comment</p>
-                <p>Here is the comment</p>
-                <p>Here is the comment</p>
+        <div id="comment_share_{{$key}}" class="post_center_box" data-key={{$key}} style="display: none;">
+            <div id="comments_share_data_{{$key}}">
+                <div class="col-md-6" id="comments_share_view_{{$key}}" data-key="{{$key}}">
+                    <p>Hello Ahmad</p>
+                    <p>Hello Ahmad</p>
+                    <p>Hello Ahmad</p>
+                </div>
             </div>
             <div class="row" style="background-color: wheat; padding: 10px;">
                 <div class="col-sm-8">
-                    <input style="background-color: wheat; outline: none; width: 100%;" type="text" name="comment" id="comment_value_{{$key}}" placeholder="Type comment here"/>
+                    <input style="background-color: wheat; outline: none; width: 100%;" type="text" name="comment" id="comment_share_value_{{$key}}" placeholder="Type comment here"/>
                 </div>
-                <div class="col-sm-4 send_comment" data-key="{{$key}}">
-                    <a class="like_color" data-post-id="{{$post->id}}" data-share-id="{{$share->id}}" data-key={{$key}} style="cursor: pointer;"><i class="fa fa-paper-plane" aria-hidden="true"></i> Comment</a>
+                <div class="col-sm-4 send_share_comment" data-key="{{$key}}">
+                    <a class="like_color" data-post-id="{{$post->id}}" data-key={{$key}} style="cursor: pointer;"><i class="fa fa-paper-plane" aria-hidden="true"></i> Comment</a>
                 </div>
             </div>
         </div>
@@ -146,10 +148,7 @@
         </div>
         <div id="comment_{{$key}}" class="post_center_box" data-key={{$key}} style="display: none;">
             <div id="comments_data_{{$key}}">
-                <div class="col-md-6" id="comments_view_{{$key}}">
-                        <?php $comments = $post->comments ?>
-                    <hr />
-                </div>
+                <div class="col-md-6" id="comments_view_{{$key}}"></div>
             </div>
             <div class="row" style="background-color: wheat; padding: 10px;">
                 <div class="col-sm-8">
@@ -202,30 +201,34 @@
 
             $('.commentButtons a').on("click", function() {
                 if(commentsPermission == 1){
-                    if($(this).attr('data-type') == 'post'){
-                        var commentId = '#comment_'+$(this).attr('data-key');
-                        if($(commentId).is(":visible")){
-                            $(commentId).hide();
-                        }
-                        else{
-                            refreshComments($(this), $(this).attr('data-type'));
-                            $(commentId).show();
-                        }
-                    }else{
-                        toastr.error('Share post comments are under construction!');
+                    var commentId = '#comment_'+$(this).attr('data-key');
+                    if($(commentId).is(":visible")){
+                        $(commentId).hide();
                     }
-
+                    else{
+                        refreshComments($(this), $(this).attr('data-type'));
+                        $(commentId).show();
+                    }
                 }else{
                     toastr.error('You dont have permission to comment!');
                 }
-
             });
 
-            // $('.send_share_comment a').on("click", function(){
-            //     var comment = '#comment_value_'+$(this).attr('data-key');
-            //     console.log($(comment).val());
-            //     console.log($(this).attr('data-share-id'));
-            // });
+            $('.shareCommentButtons a').on("click", function(){
+                console.log($(this).attr('data-post-id'));
+                if(commentsPermission == 1){
+                    var commentId = '#comment_share_'+$(this).attr('data-key');
+                    if($(commentId).is(":visible")){
+                        $(commentId).hide();
+                    }
+                    else{
+                        //refreshComments($(this), $(this).attr('data-type'));
+                        $(commentId).show();
+                    }
+                }else{
+                    toastr.error('You dont have permission to comment!');
+                }
+            });
 
             $('.send_comment a').on("click", function(){
                 var commentKey = '#comment_value_'+$(this).attr('data-key');
@@ -246,6 +249,28 @@
                     }
                 }
                 });
+            });
+
+            $('.send_share_comment a').on("click", function(){
+                var commentKey = '#comment_share_value_'+$(this).attr('data-key');
+                console.log($(commentKey).val());
+                // postComment = $(commentKey).val();
+                // var postId = $(this).attr('data-post-id');
+                // var component = $(this);
+                // $.ajax({
+                // headers: {
+                //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                // },
+                // type: "POST",
+                // url: '/comment/store',
+                // data: {post_id: postId, comment: postComment, type:'post', ce:1},
+                // success: function(response){
+                //     if(response.code == 200){
+                //         refreshComments(component, 'post');
+                //         toastr.success(response.message);
+                //     }
+                // }
+                // });
             });
 
         function refreshComments(component, type){
@@ -282,7 +307,16 @@
                         $(comment_view+' a').on('click', function(){
                             var commentId = $(this).attr('data-comment-id');
                             // /deleteSpecificRecord(commentId, '/vetvine-member/comment-destroy/');
-                            if (confirm('Are you sure ?')) {
+                            Swal.fire({
+                                title: 'Are you sure?',
+                                text: "You won't be able to revert this!",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Yes, delete it!'
+                                }).then((result) => {
+                                if (result.isConfirmed) {
                                     $.ajax({
                                     headers: {
                                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -293,12 +327,15 @@
                                         console.log('deleted');
                                         refreshComments(component, type);
                                         toastr.success('Comment deleted successfully!');
+                                        Swal.fire(
+                                    'Deleted!',
+                                    'Your file has been deleted.',
+                                    'success'
+                                    )
                                     }
-                                });
-                            }else
-                            {
-                                console.log('cancel'+' '+commentId)
-                            }
+                                }); 
+                                }
+                            });
                         });
                 }
             });

@@ -11,7 +11,7 @@ $vetvineLogo =vetvineHelper::vetvineGeneralSetting()
 <head>
 
     @include('admins.layouts._head')
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>

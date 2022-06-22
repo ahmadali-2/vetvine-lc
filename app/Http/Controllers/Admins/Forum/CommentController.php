@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admins\Forum\Post;
 use App\Models\Admins\Forum\Comment;
+use App\Models\Share;
 use Auth;
 use Exception;
 
@@ -45,10 +46,16 @@ class CommentController extends Controller
                 $comment = new Comment;
         
                 $comment->comment = $request->comment;
-        
+                
+                $comment->ce = $request->ce;
+
                 $comment->user()->associate($request->user());
         
-                $post = Post::find($request->post_id);
+                if($request->type == 'post'){
+                    $post = Post::find($request->post_id);
+                }else{
+                    $post = Share::find($request->share_id);
+                }
         
                 $post->comments()->save($comment);
                 if($request->ajax()){
@@ -91,9 +98,15 @@ class CommentController extends Controller
                     $reply->user()->associate($request->user());
         
                     $reply->parent_id = $request->get('comment_id');
-        
-                    $post = Post::find($request->get('post_id'));
-        
+                    
+                    $reply->ce = $request->ce;
+
+                    if($request->type == 'post'){
+                        $post = Post::find($request->get('post_id'));
+                    }else{
+                        $post = Share::find($request->get('share_id'));
+                    }
+                    
                     $post->comments()->save($reply);
         
                     return response()->json([
