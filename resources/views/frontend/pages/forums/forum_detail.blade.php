@@ -29,7 +29,7 @@
     <section class="become_member_area">
         <div class="container">
             <h2>
-                <span>Post
+                <span id="forum_post_detail">Post
                 </span>
             </h2>
         </div>
@@ -226,125 +226,161 @@
     </div> --}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-$('#comment_btn').on('click', function(){
-                var form = $('#commentform').serialize()+'&type="post"&ce=0';
-                $.ajax({
+        activateFormEvents();
+        $(document).ready(function () {
+        // Handler for .ready() called.
+        $('html, body').animate({
+            scrollTop: $('#forum_post_detail').offset().top
+        }, 'slow');
+    });
+        $('#comment_btn').on('click', function(){
+            var form = $('#commentform').serialize()+'&type="post"&ce=0';
+            $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            },
+            type: "POST",
+            url: '/comment/store',
+            data: form,
+            success: function(response){
+                if(response.code == 200){
+                    refreshComments();
+                    activateFormEvents();
+                    toastr.success(response.message);
+                }
+            }
+            });
+        });
+
+        function refreshComments(){
+            $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 },
                 type: "POST",
-                url: '/comment/store',
-                data: form,
+                url: '/show-comments',
+                data: {post_id: $('#comment_post_id').val(), type: 'post', ce:0},
                 success: function(response){
-                    if(response.code == 200){
-                        refreshComments();
-                        toastr.success(response.message);
-                    }
+                    $('#postCommentReplies').empty();
+                    $('#postCommentReplies').append(response.html);
+                    activateFormEvents();
                 }
                 });
-            });
+        }
 
-            function refreshComments(){
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    },
-                    type: "POST",
-                    url: '/show-comments',
-                    data: {post_id: $('#comment_post_id').val(), type: 'post', ce:0},
-                    success: function(response){
-                        $('#postCommentReplies').empty();
-                        $('#postCommentReplies').append(response.html);
-                    }
-                    });
+    if ('<?php echo $liked; ?>' == true) {
+        $('#like_post').css('color', '#4886C8');
+        $('#like_text').html('<b>Liked</b>');
+    }
+
+    $('#like_post').on('click', function() {
+        likePost();
+    });
+
+    var likepostid = $('#liked_post_id').val();
+    var postUserid = $('#post_user_id').val();
+
+    function likePost() {
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            },
+            type: "POST",
+            url: '/savelike',
+            data: {
+                likepostid: likepostid,
+                postUserid: postUserid,
+                likeType: 1,
+                ce: 0
+            },
+            success: function(response) {
+                console.log(response.code);
+                if (response.code == 200) {
+                    $('#like_post').css('color', '#4886C8');
+                    $('#like_text').html('<b>Liked</b>');
+                } else if (response.code == 201) {
+                    $('#like_post').css('color', 'black');
+                    $('#like_text').html('Like');
+                } else if (response.code == 400) {
+                    toastr.error(response.message);
+                }
             }
-
-        if ('<?php echo $liked; ?>' == true) {
-            $('#like_post').css('color', '#4886C8');
-            $('#like_text').html('<b>Liked</b>');
-        }
-
-        $('#like_post').on('click', function() {
-            likePost();
         });
+    }
 
-        var likepostid = $('#liked_post_id').val();
-        var postUserid = $('#post_user_id').val();
+    $('#share_post').on("click", function() {
+        sharePostId = $(this).attr('data-post-id');
+        shareUserid = $(this).attr('data-user-id');
+        sharePost();
+    });
 
-        function likePost() {
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                },
-                type: "POST",
-                url: '/savelike',
-                data: {
-                    likepostid: likepostid,
-                    postUserid: postUserid,
-                    likeType: 1,
-                    ce: 0
-                },
-                success: function(response) {
-                    console.log(response.code);
-                    if (response.code == 200) {
-                        $('#like_post').css('color', '#4886C8');
-                        $('#like_text').html('<b>Liked</b>');
-                    } else if (response.code == 201) {
-                        $('#like_post').css('color', 'black');
-                        $('#like_text').html('Like');
-                    } else if (response.code == 400) {
-                        toastr.error(response.message);
-                    }
+    function sharePost() {
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            },
+            type: "POST",
+            url: '/share-post',
+            data: {
+                sharePostId: likepostid,
+                shareUserId: postUserid,
+                ce: 0,
+            },
+            success: function(response) {
+                if (response.code == 200) {
+                    toastr.success('Post shared Successfully!');
+                } else if (response.code == 400) {
+                    toastr.error('Please login to continue!');
+                } else if (response.code == 401) {
+                    toastr.error('Please verify email first!');
+                } else if (response.code == 402) {
+                    toastr.error(response.message);
                 }
-            });
-        }
-
-        $('#share_post').on("click", function() {
-            sharePostId = $(this).attr('data-post-id');
-            shareUserid = $(this).attr('data-user-id');
-            sharePost();
+            }
         });
+    }
 
-        function sharePost() {
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                },
-                type: "POST",
-                url: '/share-post',
-                data: {
-                    sharePostId: likepostid,
-                    shareUserId: postUserid,
-                    ce: 0,
-                },
-                success: function(response) {
-                    if (response.code == 200) {
-                        toastr.success('Post shared Successfully!');
-                    } else if (response.code == 400) {
-                        toastr.error('Please login to continue!');
-                    } else if (response.code == 401) {
-                        toastr.error('Please verify email first!');
-                    } else if (response.code == 402) {
-                        toastr.error(response.message);
-                    }
-                }
-            });
-        }
-
+    function activateFormEvents(){
         $('.postCommentReplies button').on('click', function(){
-            var formKey = '#replyfrm_'+$(this).attr('data-key');
-            var formData = $(formKey).serialize()+'&type='+"post"+'&ce=0';
-            $.ajax({
+        var formKey = '#replyfrm_'+$(this).attr('data-key');
+        var formData = $(formKey).serialize()+'&type='+"post"+'&ce=0';
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            },
+            type: "POST",
+            url: "{{route('reply.add')}}",
+            data: formData,
+            success: function(){
+                refreshComments();
+                activateFormEvents();
+            }
+        });
+    });
+
+    $('.postCommentReplies a').on('click', function(){
+        var commentId = $(this).attr('data-comment-id');
+        var deleteUrl = '{{ route("comment.destroy", ":id") }}';
+        deleteUrl = deleteUrl.replace(':id', commentId);
+        if (confirm('Are you sure ?')) {
+                $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 },
-                type: "POST",
-                url: "{{route('reply.add')}}",
-                data: formData,
+                type: "post",
+                url:deleteUrl,
                 success: function(){
+                    console.log('deleted');
                     refreshComments();
+                    activateFormEvents();
+                    toastr.success('Comment deleted successfully!');
                 }
             });
-        });
-    </script>
+        }else
+        {
+            console.log('cancel'+' '+commentId)
+        }
+    });
+    }
+</script>
 @endsection

@@ -272,7 +272,29 @@
                                     toastr.success(response.message);
                                 }
                             });
-                    });
+                        });
+
+                        $(comment_view+' a').on('click', function(){
+                            var commentId = $(this).attr('data-comment-id');
+                            // /deleteSpecificRecord(commentId, '/vetvine-member/comment-destroy/');
+                            if (confirm('Are you sure ?')) {
+                                    $.ajax({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                                    },
+                                    type: "post",
+                                    url: 'comment-destroy/'+commentId,
+                                    success: function(){
+                                        console.log('deleted');
+                                        refreshComments(component, type);
+                                        toastr.success('Comment deleted successfully!');
+                                    }
+                                });
+                            }else
+                            {
+                                console.log('cancel'+' '+commentId)
+                            }
+                        });
                 }
             });
         }
