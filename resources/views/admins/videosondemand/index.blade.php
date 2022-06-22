@@ -90,6 +90,7 @@
     </div>
     @section('scripts')
         <script type="text/javascript">
+            // deleteRecord();
             $(document).ready(function(e) {
                 $(".video").on("click", function(e) {
                     e.preventDefault();

@@ -11,6 +11,13 @@ $vetvineLogo =vetvineHelper::vetvineGeneralSetting()
 <head>
 
     @include('admins.layouts._head')
+    <style>
+        #menuToggle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 
 </head>
 

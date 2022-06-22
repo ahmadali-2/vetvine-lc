@@ -93,7 +93,7 @@
                                 <div class="video-bottom-description">
                                     <h5>02/17/2022</h5>
                                     <p><span>Presented by:</span> {{ $item->presented_by }}<br />
-                                        <strong>Sponsored by:</strong> VetVine
+                                        {{-- <strong>Sponsored by:</strong> VetVine --}}
                                     </p>
                                     <p class="para-decription">
                                         {{ $item->video_description }}

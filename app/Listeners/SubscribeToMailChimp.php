@@ -3,8 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\UserRegistered;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class SubscribeToMailChimp
 {
@@ -30,13 +28,12 @@ class SubscribeToMailChimp
     public function handle(UserRegistered $event)
     {
 
-
         $mailChimpApiKey = env('MAILCHIMP_API_KEY');
         $mailchimp = new \Mailchimp($mailChimpApiKey);
         $mailchimp->lists->subscribe(env('MAILCHIMP_LIST_ID'),
-           ['email'=>$event->user->email],
-           null,
-           null,
-           false);
+            ['email' => $event->user->email],
+            null,
+            null,
+            false);
     }
 }
