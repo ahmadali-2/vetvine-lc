@@ -35,7 +35,7 @@
     </section>
 
     <section>
-        <div class="specialty-topics">
+        <div class="specialty-topics" >
             <div class="container forum_top_section">
                 <div class="row align-items-center">
 

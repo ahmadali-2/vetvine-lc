@@ -8,8 +8,8 @@
 @endphp
 <div class="display-comment" style="padding-left: {{$padding}}px;">
     <strong>{{ $comment->user->name }}</strong>
-    <p class="m-3">{{ $comment->comment }}
-        <a href="javascript:void(0);"  onclick="deleteRecord('{{$comment->id}}', '/vetvine-member/comment-destroy/')">
+    <p class="m-3" id="deleteComment_{{$key}}" data-key={{$key}}>{{ $comment->comment }}
+        <a href="javascript:void(0);" data-comment-id="{{$comment->id}}">
             <i class="fa fa-trash text-danger ml-2" aria-hidden="true"></i></a>
     </p>
     <a href="" id="reply"></a>

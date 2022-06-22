@@ -33,7 +33,7 @@
     <section class="become_member_area">
         <div class="container">
             <h2>
-                <span>Forums Posts
+                <span id="post_top_div">Forums Posts
                 </span>
             </h2>
         </div>
@@ -132,6 +132,12 @@
     @endsection
     @section('scripts')
     <script>
+        $(document).ready(function () {
+            // Handler for .ready() called.
+            $('html, body').animate({
+                scrollTop: $('#post_top_div').offset().top
+            }, 'slow');
+        });
         var originalFormId = '<?php echo $forumId ?>';
 
         $('#form_search_dropdown').on('change',function(){
