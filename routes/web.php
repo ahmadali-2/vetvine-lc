@@ -147,7 +147,7 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
     Route::post('videodata',[VideosOnDemandController::class,'videodata'])->name('videoajaxdata');
     Route::resource('buyevent-users',BuyEventController::class);
     Route::get('userevent-history/{id}', [BuyEventController::class, 'usereventHistory'])->name('usereventhistory');
-    // Route::get('terms-and-conditions', [StaticPageController::class, 'TermsAndConditions'])->name('TermsAndConditions');
+
     Route::get('terms-and-conditions/add', [StaticPageController::class, 'TermsAndConditionsAdd'])->name('TermsCondition.create');
     Route::post('terms-and-conditions/add-terms', [StaticPageController::class, 'TermsAndConditionsAddDb'])->name('TermsCondition.create.db');
 
@@ -181,7 +181,7 @@ Route::get('thrive',[HomeController::class,'thrive'])->name('thrive');
 Route::get('heal',[HomeController::class,'heal'])->name('heal');
 Route::get('terms-of-service',[HomeController::class,'termsOfService'])->name('termsofservice');
 Route::post('contact-us',[ContactUsController::class,'submitContactForm'])->name('contactus.submit');
-Route::get('/Terms-of-serives', [TermsController::class, 'indexTerms'])->name('terms.index');
+Route::get('/terms', [TermsController::class, 'indexTerms'])->name('terms.index');
 
 // upcoming webinars
 Route::get('upcoming-webinars',[HomeController::class,'upcomingWebinars'])->name('upcoming_webinars');
@@ -234,7 +234,7 @@ Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetv
     Route::get('create-forumpost/{id}',[ForumPostController::class,'createPost'])->name('createforumpost');
     Route::get('forumpostlist/{id}',[ForumPostController::class,'forumPostList'])->name('forumpostlist');
     Route::delete('comment-destroy/{id}', [CommentController::class,'destroy'])->name('comment.destroy');
-    Route::post('/reply/store', [CommentController::class,'replyStore'])->name('reply.add');
+    Route::post('reply/store', [CommentController::class,'replyStore'])->name('reply.add');
 
     //User events Routes
     Route::post('review-store',[ReviewController::class, 'reviewstore'])->name('reviewstore');

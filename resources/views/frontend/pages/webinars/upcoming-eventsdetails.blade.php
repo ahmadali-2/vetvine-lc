@@ -183,7 +183,7 @@
                             </li>
                             <li class="breadcrumb-item"><a onclick="history.back()" href="javascript::void();">UPCOMING
                                     WEBINARS</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Et Irure Nostrum Dol</li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ $eventdetail->event_title }}</li>
                         </ol>
                     </nav>
                 </div>
@@ -233,19 +233,30 @@
                             <div class="public2-info">
                                 <div class="public2-title">
                                     Time:
-                                </div>
-                                @php
-                                    $eventTime = $eventdetail->time;
-                                    // $timeZone = $eventdetail->user->timezone->timezone;
-                                    // $today = new DateTime($eventdetail->time, new DateTimeZone($timeZone));
-                                    // $userTimeZone = Auth::user()->timezone->timezone;
-                                    // $userEventTime = new DateTimeZone($userTimeZone);
-                                    // $convertedTime = $today->setTimeZone($userEventTime);
-                                    // $formattedTime = $convertedTime->format('H:i');
+                                    @php
+                                    $eventTime      = $eventdetail->time;
+                                    $timeZone       = $eventdetail->user->timezone->timezone;
+
+                                    // Fetching timezone UTC code : Please don't screw it
+                                    $pieces = explode("(", $timeZone);
+                                    $pieces = explode("C", $pieces[1]);
+                                    $pieces = explode(")", $pieces[1]);
+
+                                    // Formatting the time
+                                    $today          =  new DateTime($eventdetail->time, new DateTimeZone($pieces[0]));
+
+                                    $userTimeZone   =  Auth::user()->timezone->timezone;
+
+                                    // Fetching timezone UTC code : Please don't screw it
+                                    $pieces = explode("(", $userTimeZone);
+                                    $pieces = explode("C", $pieces[1]);
+                                    $pieces = explode(")", $pieces[1]);
+
+                                    $userEventTime  =  new DateTimeZone($pieces[0]);
+                                    $convertedTime  =  $today->setTimeZone($userEventTime);
+
+                                    echo ($convertedTime->format('H:i').' '.$userTimeZone);
                                 @endphp
-                                {{-- @dd($timezoone) --}}
-                                <div class="public2-description">
-                                    {{-- {{ date('g:i a', strtotime($formattedTime)) }} --}}
                                 </div>
                             </div>
                         </div>

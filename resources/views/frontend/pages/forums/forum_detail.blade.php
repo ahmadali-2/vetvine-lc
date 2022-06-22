@@ -105,20 +105,20 @@
                                 </div>
 
                             </div>
-                            <form method="post" id="commentform" action="{{ route('comment.add') }}">
+                            <form id="commentform">
                                 @csrf
                                 <div class="chat-textarea">
                                     <div class="cht-pro">
                                         <div class="comment_forum  pr-1"><img
                                                 src="{{ asset('frontend/forums/img/user.png') }}" alt=""></div>
                                     </div>
-                                    <input type="hidden" name="post_id" value="{{ $forumcatgeorypost->id }}" />
+                                    <input type="hidden" id="comment_post_id" name="post_id" value="{{ $forumcatgeorypost->id }}" />
                                     <textarea type="text" class="form-control" name="comment" id="comment" cols="30" rows="5"
                                         placeholder="write a comment ...."></textarea>
                                 </div>
 
                                 <div class="text-btn">
-                                    <button type="submit" class="btn btn-primary" id="comment_btn">Submit</button>
+                                    <button type="button" class="btn btn-primary" id="comment_btn">Comment</button>
                                 </div>
                             </form>
                         </div>
@@ -154,8 +154,16 @@
             </div>
             <div class="container mt-5">
                 <div class="row">
-                    <div class="col-md-6" id="comment_view_{{$key}}">
-                        
+                    <div class="col-md-6">
+                        <div class="postCommentReplies" id="postCommentReplies">
+                            @include('frontend.pages.forums.replies', [
+                                'comments' => $forumcatgeorypost->comments,
+                                'post_id' => $forumcatgeorypost->id,
+                                'ce' => 0,
+                                'type' => 'post',
+                            ])
+                        </div>     
+                        <hr />
                     </div>
                 </div>
             </div>
@@ -216,8 +224,41 @@
             <div class="advertising-img-3"><img src="{{ asset('frontend/forums/img/add-3.png') }}" alt=""></div>
         </div>
     </div> --}}
-@section('scripts')
-    <script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$('#comment_btn').on('click', function(){
+                var form = $('#commentform').serialize()+'&type="post"&ce=0';
+                $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                type: "POST",
+                url: '/comment/store',
+                data: form,
+                success: function(response){
+                    if(response.code == 200){
+                        refreshComments();
+                        toastr.success(response.message);
+                    }
+                }
+                });
+            });
+
+            function refreshComments(){
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    type: "POST",
+                    url: '/show-comments',
+                    data: {post_id: $('#comment_post_id').val(), type: 'post', ce:0},
+                    success: function(response){
+                        $('#postCommentReplies').empty();
+                        $('#postCommentReplies').append(response.html);
+                    }
+                    });
+            }
+
         if ('<?php echo $liked; ?>' == true) {
             $('#like_post').css('color', '#4886C8');
             $('#like_text').html('<b>Liked</b>');
@@ -274,7 +315,7 @@
                 data: {
                     sharePostId: likepostid,
                     shareUserId: postUserid,
-                    ce: 0
+                    ce: 0,
                 },
                 success: function(response) {
                     if (response.code == 200) {
@@ -289,6 +330,21 @@
                 }
             });
         }
+
+        $('.postCommentReplies button').on('click', function(){
+            var formKey = '#replyfrm_'+$(this).attr('data-key');
+            var formData = $(formKey).serialize()+'&type='+"post"+'&ce=0';
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                type: "POST",
+                url: "{{route('reply.add')}}",
+                data: formData,
+                success: function(){
+                    refreshComments();
+                }
+            });
+        });
     </script>
-@endsection
 @endsection

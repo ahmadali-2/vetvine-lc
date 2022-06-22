@@ -13,16 +13,48 @@
                 <form action="{{ route('updateUserPassword') }}" method="POST" id="changeUserPasswordForm">
                         @csrf
                       <div class="form-group">
-                        <label for="">Enter Your Old Password</label>
-                        <input type="password" name="current_password">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label for="">Enter Your Old Password</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input_field">
+                                    <input type="password" name="current_password">
+                                    </div>
+                            </div>
+                        </div>
+
+
+
                       </div>
                       <div class="form-group">
-                        <label for="">Enter Your New Password</label>
-                        <input type="password" name="password">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label for="">Enter Your New Password</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input_field">
+                                <input type="password" name="password">
+                                </div>
+                            </div>
+                        </div>
+
+
                       </div>
                       <div class="form-group">
-                        <label for="">Confirm  Password</label>
-                        <input type="password" name="confirmpassword">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <label for="">Confirm  Password</label>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="input_field">
+                                <input type="password" name="confirmpassword">
+                                </div>
+                            </div>
+                            </div>
+
+
                       </div>
                       <div class="btn_change text-center">
                         <button type="button" class="btn btn-warning">Change Password</button>
