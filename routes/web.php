@@ -147,7 +147,7 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
     Route::post('videodata',[VideosOnDemandController::class,'videodata'])->name('videoajaxdata');
     Route::resource('buyevent-users',BuyEventController::class);
     Route::get('userevent-history/{id}', [BuyEventController::class, 'usereventHistory'])->name('usereventhistory');
-    // Route::get('terms-and-conditions', [StaticPageController::class, 'TermsAndConditions'])->name('TermsAndConditions');
+
     Route::get('terms-and-conditions/add', [StaticPageController::class, 'TermsAndConditionsAdd'])->name('TermsCondition.create');
     Route::post('terms-and-conditions/add-terms', [StaticPageController::class, 'TermsAndConditionsAddDb'])->name('TermsCondition.create.db');
 
@@ -181,7 +181,7 @@ Route::get('thrive',[HomeController::class,'thrive'])->name('thrive');
 Route::get('heal',[HomeController::class,'heal'])->name('heal');
 Route::get('terms-of-service',[HomeController::class,'termsOfService'])->name('termsofservice');
 Route::post('contact-us',[ContactUsController::class,'submitContactForm'])->name('contactus.submit');
-Route::get('/Terms-of-serives', [TermsController::class, 'indexTerms'])->name('terms.index');
+Route::get('/terms', [TermsController::class, 'indexTerms'])->name('terms.index');
 
 // upcoming webinars
 Route::get('upcoming-webinars',[HomeController::class,'upcomingWebinars'])->name('upcoming_webinars');

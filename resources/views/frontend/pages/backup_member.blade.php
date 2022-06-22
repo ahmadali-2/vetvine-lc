@@ -3,7 +3,6 @@
 </style>
 <?php
     $displayLike = false;
-    $comments = null;
 ?>
 @forelse($posts as $key=>$post)
     @if($post->getTable() == "shares")
@@ -60,9 +59,8 @@
                     @endif
                     <?php $displayLike = false ?>
                 </div>
-                <div class="commentButtons">
-                    <a class="like_color" style="cursor: pointer;" data-share-id="{{$share->id}}" data-key={{$key}} data-type="share"><i class="fa fa-comments" aria-hidden="true"></i>
-                        Comment</a>
+                <div class="shareCommentButtons">
+                    <a style="cursor: pointer;" data-key={{$key}}><img src="{{ asset('frontend/img/comment-label.png') }}" alt="" /></a>
                 </div>
                 <div class="shareButtons">
                     <a class="share_btn" style="cursor: pointer;" data-user-id="{{$share->user_id}}" data-post-id="{{$share->post_id}}"> <i class="fa fa-share" aria-hidden="true"></i>
@@ -71,19 +69,7 @@
             </div>
         </div>
         <div id="comment_{{$key}}" class="post_center_box" data-key={{$key}} style="display: none;">
-            <div id="comments_data_{{$key}}">
-                <p>Here is the comment</p>
-                <p>Here is the comment</p>
-                <p>Here is the comment</p>
-            </div>
-            <div class="row" style="background-color: wheat; padding: 10px;">
-                <div class="col-sm-8">
-                    <input style="background-color: wheat; outline: none; width: 100%;" type="text" name="comment" id="comment_value_{{$key}}" placeholder="Type comment here"/>
-                </div>
-                <div class="col-sm-4 send_comment" data-key="{{$key}}">
-                    <a class="like_color" data-post-id="{{$post->id}}" data-share-id="{{$share->id}}" data-key={{$key}} style="cursor: pointer;"><i class="fa fa-paper-plane" aria-hidden="true"></i> Comment</a>
-                </div>
-            </div>
+            <textarea name="comment" id="comment_{{$key}}" placeholder="Enter comment here" rows="1" style="outline: none; width: 100%;"></textarea>
         </div>
     @else
         <input id="member_home_post_id_{{$key}}" data-key={{$key}} type="number" value="{{$post->id}}" hidden>
@@ -134,8 +120,8 @@
                     <?php $displayLike = false ?>
                 </div>
                 <div class="commentButtons">
-                    <a class="like_color" style="cursor: pointer;" data-post-id="{{$post->id}}" data-key={{$key}} data-type="post"> <i class="fa fa-comments" aria-hidden="true"></i>
-                        Comment</a>                </div>
+                    <a style="cursor: pointer;"><img src="{{ asset('frontend/img/comment-label.png') }}" alt="" /></a>
+                </div>
                 <div class="shareButtons">
                     <a class="share_btn" style="cursor: pointer;" data-user-id="{{$post->user->id}}" data-post-id="{{$post->id}}"> <i class="fa fa-share" aria-hidden="true"></i>
                         Share</a>
@@ -143,22 +129,7 @@
 
             </div>
 
-        </div>
-        <div id="comment_{{$key}}" class="post_center_box" data-key={{$key}} style="display: none;">
-            <div id="comments_data_{{$key}}">
-                <div class="col-md-6" id="comments_view_{{$key}}">
-                        <?php $comments = $post->comments ?>
-                    <hr />
-                </div>
-            </div>
-            <div class="row" style="background-color: wheat; padding: 10px;">
-                <div class="col-sm-8">
-                    <input style="background-color: wheat; outline: none; width: 100%;" type="text" name="comment" id="comment_value_{{$key}}" placeholder="Type comment here"/>
-                </div>
-                <div class="col-sm-4 send_comment" data-key="{{$key}}">
-                    <a data-post-id="{{$post->id}}" data-key={{$key}} style="cursor: pointer;"><i class="fa fa-paper-plane" aria-hidden="true"></i> Comment</a>
-                </div>
-            </div>
+
         </div>
     @endif
     @empty
@@ -175,11 +146,6 @@
             var shareUserId
             var likeType;
             var commentPostId;
-            var postComment;
-            var postId;
-            var likesPermission = '<?php echo $likesPermission ?>';
-            var commentsPermission = '<?php echo $commentsPermission ?>';
-            var sharesPermission = '<?php echo $sharesPermission ?>';
 
             $('.likeButtons a').on("click", function() {
                 likepostid = $(this).attr('member_home_post_id');
@@ -200,70 +166,20 @@
                 sharePost();
             });
 
-            $('.commentButtons a').on("click", function() {
-                if(commentsPermission == 1){
-                    if($(this).attr('data-type') == 'post'){
-                        var commentId = '#comment_'+$(this).attr('data-key');
-                        if($(commentId).is(":visible")){
-                            $(commentId).hide();
-                        }
-                        else{
-                            refreshComments($(this), $(this).attr('data-type'));
-                            $(commentId).show();
-                        }
-                    }else{
-                        toastr.error('Share post comments are under construction!');
-                    }
-
-                }else{
-                    toastr.error('You dont have permission to comment!');
+            $('.shareCommentButtons a').on("click", function() {
+                var commentId = '#comment_'+$(this).attr('data-key');
+                if($(commentId).is(":visible")){
+                    $(commentId).hide();
                 }
-
+                else{
+                    $(commentId).show();
+                }
+                // commentPostId = $(this).attr('data-post-id');
+                // displayCommentSection();
             });
 
-            // $('.send_share_comment a').on("click", function(){
-            //     var comment = '#comment_value_'+$(this).attr('data-key');
-            //     console.log($(comment).val());
-            //     console.log($(this).attr('data-share-id'));
-            // });
+        function displayCommentSection(){
 
-            $('.send_comment a').on("click", function(){
-                var commentKey = '#comment_value_'+$(this).attr('data-key');
-                postComment = $(commentKey).val();
-                var postId = $(this).attr('data-post-id');
-                var component = $(this);
-                $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                },
-                type: "POST",
-                url: '/comment/store',
-                data: {post_id: postId, comment: postComment},
-                success: function(response){
-                    if(response.code == 200){
-                        refreshComments(component, 'post');
-                        toastr.success(response.message);
-                    }
-                }
-                });
-            });
-
-        function refreshComments(component, type){
-            postId = component.attr('data-post-id');
-            console.log('here here '+postId);
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                },
-                type: "POST",
-                url: '/show-comments',
-                data: {post_id: postId, type: type},
-                success: function(response){
-                    var comment_view = '#comments_view_'+component.attr('data-key');
-                    $(comment_view).empty();
-                    $(comment_view).append(response.html);
-                }
-                });
         }
 
         function sharePost(){
@@ -318,3 +234,106 @@
                 });
             }
     </script>
+
+
+
+
+
+{{-- member home backup code  --}}
+{{-- @extends('frontend.master')
+@section('content') --}}
+@extends('vetvineUsers.dashboard_master')
+@section('dashboardcontent')
+    <!-- member home start -->
+    {{-- <link rel="stylesheet" href="{{ asset('frontend/css/member-home-new-css.css') }}" /> --}}
+    <section class="main_banner post_bg">
+        <div class="container">
+            <div class="flex-box-banner">
+                <div class="grow_banner_box grow_banner_box_web">
+                    <div class="grow-heading">MEMBERS</div>
+                    <img src="{{ asset('frontend/img/sep-line-2.jpg') }}" width="250" height="2" alt=""
+                        class="line_image">
+                    <p class="mb-0">A BETTER LIFE FOR ANIMALS
+                        AND THE HUMANS
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
+    <section class="main_banner_bottob_label"></section>
+
+    <section class="become_member_area">
+        <div class="container">
+            <h2>
+                <span>What's Buzzing
+                </span>
+            </h2>
+        </div>
+    </section>
+
+    <section>
+        <div class="specialty-topics margin_bottom_special">
+            <div class="container">
+                <div class="specialty-info">
+                    <div class="specialty-detail">
+
+                        <div class="search-feild float-left">
+                            <input type="search" required>
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class=" col-lg-3 col-md-3 text-center">
+                            <div class="img_post_left"><img src="@if(Auth()->user()->profile_photo ?? '') {{ asset('/frontend/images/Profile-Images/'.Auth()->user()->profile_photo)}} @else {{asset('frontend/images/thumbnail.jfif')}} @endif" width="262"
+                                    height="198" alt="" />
+                                <label>{{ Auth::user()->name }}</label>
+                            </div>
+                            <img src="{{ asset('frontend/img/add-img.png') }}" width="100%" class="add_left_post"
+                                alt="" />
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                        <div id="all_posts">
+                            @include('frontend.pages.member-home-posts')
+                        </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3">
+                            <img src="{{ asset('frontend/img/add-img.png') }}" width="100%" alt="" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+    </section>
+    @section('scripts')
+    <script>
+        $(document).on('click', '.pagination a', function(event){
+            event.preventDefault();
+            var page = $(this).attr('href').split('page=')[1];
+            fetch_posts(page);
+        });
+
+        function fetch_posts(page)
+
+        {
+            $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            },
+            url:"/member-home-paginate?page="+page,
+            type: "GET",
+            success:function(response)
+            {
+                if(response.code == 200){
+                    $('#all_posts').empty();
+                    $('#all_posts').append(response.html);
+                }
+            }
+            });
+        }
+    </script>
+    @endsection
+@endsection
+
