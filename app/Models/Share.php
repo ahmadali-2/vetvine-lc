@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Admins\Forum\Comment;
 use App\Models\Admins\Forum\Like;
 use App\Models\Admins\Forum\Post;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

@@ -17,8 +17,11 @@ class CommentController extends Controller
         $comments = null;
         if($request->type == 'post'){
             $post = Post::with('comments')->where('id',$request->post_id)->first();
-            $comments = $post->comments;
+            
+        }else{
+            $post = Share::with('comments')->where('id',$request->post_id)->first();
         }
+        $comments = $post->comments;
         return response()->json([
             'html' => view('frontend.pages.forums.replies', [
                 'comments' => $comments,
@@ -26,6 +29,7 @@ class CommentController extends Controller
                 'type' =>$request->type,
                 'ce' => $request->ce,
             ])->render(),
+            'count' => count($comments),
         ]);
     }
 
@@ -43,7 +47,7 @@ class CommentController extends Controller
                 }
                 else
                 {
-                $comment = new Comment;
+                $comment = new Comment();
         
                 $comment->comment = $request->comment;
                 
@@ -54,10 +58,11 @@ class CommentController extends Controller
                 if($request->type == 'post'){
                     $post = Post::find($request->post_id);
                 }else{
-                    $post = Share::find($request->share_id);
+                    $post = Share::find($request->post_id);
                 }
         
                 $post->comments()->save($comment);
+                
                 if($request->ajax()){
                     return response()->json([
                         'code' => 200,
@@ -104,7 +109,7 @@ class CommentController extends Controller
                     if($request->type == 'post'){
                         $post = Post::find($request->get('post_id'));
                     }else{
-                        $post = Share::find($request->get('share_id'));
+                        $post = Share::find($request->get('post_id'));
                     }
                     
                     $post->comments()->save($reply);

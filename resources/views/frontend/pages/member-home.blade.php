@@ -20,7 +20,7 @@
         </div>
     </section>
     </main>
-    <section class="main_banner_bottob_label"></section>
+    <section class="main_banner_bottob_label" id="redirect_home_ce_div"></section>
 
     <section class="become_member_area">
         <div class="container">
@@ -67,6 +67,12 @@
     </section>
     @section('scripts')
     <script>
+        $(document).ready(function () {
+            // Handler for .ready() called.
+            $('html, body').animate({
+                scrollTop: $('#redirect_home_ce_div').offset().top
+            }, 'slow');
+        });
         $(document).on('click', '.pagination a', function(event){
             event.preventDefault();
             var page = $(this).attr('href').split('page=')[1];

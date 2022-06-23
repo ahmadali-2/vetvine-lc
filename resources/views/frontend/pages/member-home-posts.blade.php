@@ -62,28 +62,24 @@
                 </div>
                 <div class="shareCommentButtons">
                     <a class="like_color" style="cursor: pointer;" data-post-id="{{$share->id}}" data-key={{$key}} data-type="share"><i class="fa fa-comments" aria-hidden="true"></i>
-                        Comment</a>
+                        Comments</a>
                 </div>
                 <div class="shareButtons">
                     <a class="share_btn" style="cursor: pointer;" data-user-id="{{$share->user_id}}" data-post-id="{{$share->post_id}}"> <i class="fa fa-share" aria-hidden="true"></i>
                         Share</a>
                 </div>
             </div>
-        </div>
-        <div id="comment_share_{{$key}}" class="post_center_box" data-key={{$key}} style="display: none;">
-            <div id="comments_share_data_{{$key}}">
-                <div class="col-md-6" id="comments_share_view_{{$key}}" data-key="{{$key}}">
-                    <p>Hello Ahmad</p>
-                    <p>Hello Ahmad</p>
-                    <p>Hello Ahmad</p>
+            <div id="comment_share_{{$key}}" data-key={{$key}} style="display: none; margin-top: 20px;">
+                <div id="comments_share_data_{{$key}}">
+                    <div class="col-md-6" id="comments_share_view_{{$key}}" data-key="{{$key}}"></div>
                 </div>
-            </div>
-            <div class="row" style="background-color: wheat; padding: 10px;">
-                <div class="col-sm-8">
-                    <input style="background-color: wheat; outline: none; width: 100%;" type="text" name="comment" id="comment_share_value_{{$key}}" placeholder="Type comment here"/>
-                </div>
-                <div class="col-sm-4 send_share_comment" data-key="{{$key}}">
-                    <a class="like_color" data-post-id="{{$post->id}}" data-key={{$key}} style="cursor: pointer;"><i class="fa fa-paper-plane" aria-hidden="true"></i> Comment</a>
+                <div class="row" style="background-color: wheat; padding: 10px;">
+                    <div class="col-sm-8">
+                        <input style="background-color: wheat; outline: none; width: 100%;" type="text" name="comment" id="comment_share_value_{{$key}}" placeholder="Type comment here"/>
+                    </div>
+                    <div class="col-sm-4 send_share_comment" data-key="{{$key}}">
+                        <a class="like_color" data-post-id="{{$share->id}}" data-key={{$key}} style="cursor: pointer;"><i class="fa fa-paper-plane" aria-hidden="true"></i> Comment</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -112,7 +108,7 @@
                         <h6 class="h6_post_label">
                             {!! $post->post_description !!}
                         </h6>
-                        <p><b></b>Posted on : {{date("m/d/Y", strtotime($share->created_at))}}</p>
+                        <p><b></b>Posted on : {{date("m/d/Y", strtotime($post->created_at))}}</p>
                     </div>
 
 
@@ -144,18 +140,17 @@
                 </div>
 
             </div>
-
-        </div>
-        <div id="comment_{{$key}}" class="post_center_box" data-key={{$key}} style="display: none;">
-            <div id="comments_data_{{$key}}">
-                <div class="col-md-6" id="comments_view_{{$key}}"></div>
-            </div>
-            <div class="row" style="background-color: wheat; padding: 10px;">
-                <div class="col-sm-8">
-                    <input style="background-color: wheat; outline: none; width: 100%;" type="text" name="comment" id="comment_value_{{$key}}" placeholder="Type comment here"/>
+            <div id="comment_{{$key}}" data-key={{$key}} style="display: none; margin-top: 20px;">
+                <div id="comments_data_{{$key}}">
+                    <div class="col-md-6" id="comments_view_{{$key}}"></div>
                 </div>
-                <div class="col-sm-4 send_comment" data-key="{{$key}}">
-                    <a data-post-id="{{$post->id}}" data-key={{$key}} style="cursor: pointer;"><i class="fa fa-paper-plane" aria-hidden="true"></i> Comment</a>
+                <div class="row" style="background-color: wheat; padding: 10px;">
+                    <div class="col-sm-8">
+                        <input style="background-color: wheat; outline: none; width: 100%;" type="text" name="comment" id="comment_value_{{$key}}" placeholder="Type comment here"/>
+                    </div>
+                    <div class="col-sm-4 send_comment" data-key="{{$key}}">
+                        <a data-post-id="{{$post->id}}" data-key={{$key}} style="cursor: pointer;"><i class="fa fa-paper-plane" aria-hidden="true"></i> Comment</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -215,14 +210,13 @@
             });
 
             $('.shareCommentButtons a').on("click", function(){
-                console.log($(this).attr('data-post-id'));
                 if(commentsPermission == 1){
                     var commentId = '#comment_share_'+$(this).attr('data-key');
                     if($(commentId).is(":visible")){
                         $(commentId).hide();
                     }
                     else{
-                        //refreshComments($(this), $(this).attr('data-type'));
+                        refreshComments($(this), $(this).attr('data-type'));
                         $(commentId).show();
                     }
                 }else{
@@ -253,24 +247,23 @@
 
             $('.send_share_comment a').on("click", function(){
                 var commentKey = '#comment_share_value_'+$(this).attr('data-key');
-                console.log($(commentKey).val());
-                // postComment = $(commentKey).val();
-                // var postId = $(this).attr('data-post-id');
-                // var component = $(this);
-                // $.ajax({
-                // headers: {
-                //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                // },
-                // type: "POST",
-                // url: '/comment/store',
-                // data: {post_id: postId, comment: postComment, type:'post', ce:1},
-                // success: function(response){
-                //     if(response.code == 200){
-                //         refreshComments(component, 'post');
-                //         toastr.success(response.message);
-                //     }
-                // }
-                // });
+                postComment = $(commentKey).val();
+                var postId = $(this).attr('data-post-id');
+                var component = $(this);
+                $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                type: "POST",
+                url: '/comment/store',
+                data: {post_id: postId, comment: postComment, type:'share', ce:1},
+                success: function(response){
+                    if(response.code == 200){
+                        refreshComments(component, 'share');
+                        toastr.success(response.message);
+                    }
+                }
+                });
             });
 
         function refreshComments(component, type){
@@ -284,7 +277,12 @@
                 url: '/show-comments',
                 data: {post_id: postId, type: type, ce:1},
                 success: function(response){
-                    var comment_view = '#comments_view_'+component.attr('data-key');
+                    var comment_view;
+                    if(type == 'post'){
+                        comment_view = '#comments_view_'+component.attr('data-key');
+                    }else{
+                        comment_view = '#comments_share_view_'+component.attr('data-key');
+                    }
                     $(comment_view).empty();
                     $(comment_view).append(response.html);
                         $(comment_view+' button').on('click', function(){
@@ -326,10 +324,9 @@
                                     success: function(){
                                         console.log('deleted');
                                         refreshComments(component, type);
-                                        toastr.success('Comment deleted successfully!');
                                         Swal.fire(
                                     'Deleted!',
-                                    'Your file has been deleted.',
+                                    'Your comment has been deleted.',
                                     'success'
                                     )
                                     }

@@ -53,6 +53,7 @@
                                 <div class="comment_forum pl-1 "><img src="{{ asset('frontend/forums/img/crown.png') }}"
                                         alt=""></div>
                             </div>
+                            @auth
                             <div class="date-icon d-flex align-items-center">
                                 <div class="comment_forum">
                                     <span>{{ date('M d, Y', strtotime($forumcatgeorypost->created_at)) }}</span>
@@ -61,6 +62,7 @@
                                         alt="">
                                 </div>
                             </div>
+                            @endauth
                         </div>
                         <div class="chat-details">
                             <div class="chat-title">
@@ -135,7 +137,7 @@
                                 </div>
                                 <div class="comment_forum  d-flex align-items-center"><img
                                         src="{{ asset('frontend/forums/img/message.png') }}" alt="">
-                                    <div class="chat-veiw">{{ $forumcatgeorypost->comments->count('comments') }} comments
+                                    <div class="chat-veiw" id="post_detail_comments">{{ $forumcatgeorypost->comments->count('comments') }} comments
                                     </div>
                                 </div>
                             </div>
@@ -226,6 +228,7 @@
             <div class="advertising-img-3"><img src="{{ asset('frontend/forums/img/add-3.png') }}" alt=""></div>
         </div>
     </div> --}}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
         activateFormEvents();
@@ -236,7 +239,7 @@
         }, 'slow');
     });
         $('#comment_btn').on('click', function(){
-            var form = $('#commentform').serialize()+'&type="post"&ce=0';
+            var form = $('#commentform').serialize()+'&type=post&ce=0';
             $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -265,6 +268,8 @@
                 success: function(response){
                     $('#postCommentReplies').empty();
                     $('#postCommentReplies').append(response.html);
+                    $('#post_detail_comments').empty();
+                    $('#post_detail_comments').html(response.count+' comments');
                     activateFormEvents();
                 }
                 });
@@ -374,7 +379,17 @@
         var commentId = $(this).attr('data-comment-id');
         var deleteUrl = '{{ route("comment.destroy", ":id") }}';
         deleteUrl = deleteUrl.replace(':id', commentId);
-        if (confirm('Are you sure ?')) {
+        
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
                 $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -385,7 +400,11 @@
                     if(response.code == 200){
                         refreshComments();
                         activateFormEvents();
-                        toastr.success(response.message);
+                        Swal.fire(
+                        'Deleted!',
+                        'Your comment has been deleted.',
+                        'success'
+                        )
                     }
                     if(response.code == 400){
                         toastr.error(response.message);
@@ -395,10 +414,8 @@
                     toastr.error('Please login to proceed!');
                 }
             });
-        }else
-        {
-            console.log('cancel'+' '+commentId)
-        }
+            }
+        });
     });
     }
 </script>

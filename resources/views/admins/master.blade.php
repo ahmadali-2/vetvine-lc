@@ -83,7 +83,6 @@ $vetvineLogo =vetvineHelper::vetvineGeneralSetting()
                 </div>
 
             </div>
-
             <div class="col-sm-8">
 
                 <div class="page-header float-right">
