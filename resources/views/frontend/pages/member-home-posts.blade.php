@@ -38,7 +38,7 @@
                         <h6 class="h6_post_label">
                             {!! $post->post_description !!}
                         </h6>
-                        <p>Shared on : {{date("m/d/Y", strtotime($share->created_at))}}</p>
+                        <p><u>Shared on</u> : {{date("m/d/Y", strtotime($share->created_at))}}</p>
                     </div>
                     @endif
                 @endforeach
@@ -108,7 +108,7 @@
                         <h6 class="h6_post_label">
                             {!! $post->post_description !!}
                         </h6>
-                        <p><b></b>Posted on : {{date("m/d/Y", strtotime($post->created_at))}}</p>
+                        <p><b></b><u>Posted on</u> : {{date("m/d/Y", strtotime($post->created_at))}}</p>
                     </div>
 
 
@@ -133,7 +133,7 @@
                 </div>
                 <div class="commentButtons">
                     <a class="like_color" style="cursor: pointer;" data-post-id="{{$post->id}}" data-key={{$key}} data-type="post"> <i class="fa fa-comments" aria-hidden="true"></i>
-                        Comment</a>                </div>
+                        Comments</a>                </div>
                 <div class="shareButtons">
                     <a class="share_btn" style="cursor: pointer;" data-user-id="{{$post->user->id}}" data-post-id="{{$post->id}}"> <i class="fa fa-share" aria-hidden="true"></i>
                         Share</a>
@@ -149,7 +149,7 @@
                         <input style="background-color: wheat; outline: none; width: 100%;" type="text" name="comment" id="comment_value_{{$key}}" placeholder="Type comment here"/>
                     </div>
                     <div class="col-sm-4 send_comment" data-key="{{$key}}">
-                        <a data-post-id="{{$post->id}}" data-key={{$key}} style="cursor: pointer;"><i class="fa fa-paper-plane" aria-hidden="true"></i> Comment</a>
+                        <a  class="like_color" data-post-id="{{$post->id}}" data-key={{$key}} style="cursor: pointer;"><i class="fa fa-paper-plane" aria-hidden="true"></i> Comment</a>
                     </div>
                 </div>
             </div>
