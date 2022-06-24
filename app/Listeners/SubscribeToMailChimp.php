@@ -3,7 +3,10 @@
 namespace App\Listeners;
 
 use App\Events\UserRegistered;
+<<<<<<< HEAD
 use App\Http\Controllers\Controller;
+=======
+>>>>>>> 5b12f36c72e86491596503ccd045a98413b00a10
 
 class SubscribeToMailChimp
 {
@@ -28,27 +31,19 @@ class SubscribeToMailChimp
      */
     public function handle(UserRegistered $event)
     {
-
-
-
-        // $exploded = explode('@',$domain);
-        // $exploded = '@'.$exploded[1];
         $email = $event->user->email;
-        $domian = ltrim(stristr($email, '@'),'@');
-        if (checkdnsrr($domian, "ANY") && $domian != 'mailinator.com') {
-            $mailChimpApiKey = env('MAILCHIMP_API_KEY');
-            $mailchimp = new \Mailchimp($mailChimpApiKey);
-            $mailchimp->lists->subscribe(env('MAILCHIMP_LIST_ID'),
-                ['email' => $event->user->email],
-                null,
-                null,
-                false);
-        } else {
-            return true;
-        //    $controller = new Controller();
-        //    $controller->dangerMessage('Email Looks Fake');
-        }
-
+        $domain = ltrim(stristr($email, '@'), '@');
+                if(checkdnsrr($domain,'ANY') && $domain != 'mailinator.com'){
+                    $mailChimpApiKey = env('MAILCHIMP_API_KEY');
+                    $mailchimp = new \Mailchimp($mailChimpApiKey);
+                    $mailchimp->lists->subscribe(env('MAILCHIMP_LIST_ID'),
+                       ['email'=>$event->user->email],
+                       null,
+                       null,
+                       false);
+                }else{
+                    return true;
+                }
 
     }
 }

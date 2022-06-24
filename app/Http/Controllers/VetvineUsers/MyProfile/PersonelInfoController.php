@@ -13,6 +13,8 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use vetvineHelper;
+// use App\Models\VetVineUsers\Settings\Country;
+// use Country
 
 class PersonelInfoController extends Controller
 {
@@ -28,15 +30,15 @@ class PersonelInfoController extends Controller
 
     public function userdashboard()
     {
-        $countries = Country::all();
+        $countries =Country::all();
+        // return $countries;
+        // dd($countries);
         $employmentInfo = Auth::user()->employmentInfo;
-        // $permissions = Auth::user()->permissions;
+        $permissions = Auth::user()->permissions;
         $timezones      = TimeZone::all();
         $usernetworks   = UserMemberAndNetworkLevel::all();
-
-        return view('vetvineUsers.layouts.pages.user_profile', compact('countries', 'employmentInfo', 'timezones', 'usernetworks'));
-
-        // return view('vetvineUsers.MyProfile.userdashboard',compact('countries','employmentInfo'));
+        $licensurePermissions = User::where('id', Auth::id())->first();
+        return view('vetvineUsers.layouts.pages.user_profile', compact('countries', 'employmentInfo', 'timezones', 'usernetworks', 'licensurePermissions'));
     }
 
     public function userProfile()
@@ -45,8 +47,8 @@ class PersonelInfoController extends Controller
         $employmentInfo = Auth::user()->employmentInfo;
         $timezones      = TimeZone::all();
         $usernetworks   = UserMemberAndNetworkLevel::where('parent_id','!=',null)->get();
-        // dd($usernetworks);
-        return view('vetvineUsers.layouts.pages.user_profile', compact('countries', 'employmentInfo', 'timezones', 'usernetworks'));
+        $licensurePermissions = User::where('id', Auth::id())->first();
+        return view('vetvineUsers.layouts.pages.user_profile', compact('countries', 'employmentInfo', 'timezones', 'usernetworks', 'licensurePermissions'));
     }
     public function chat()
     {
