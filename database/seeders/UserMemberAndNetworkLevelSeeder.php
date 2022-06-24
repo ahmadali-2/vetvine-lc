@@ -14,58 +14,60 @@ class UserMemberAndNetworkLevelSeeder extends Seeder
      */
     public function run()
     {
-        
         UserMemberAndNetworkLevel::create([
-                'name' => 'Veterinary Professional',
-        ]);
-        UserMemberAndNetworkLevel::create([
-            'name' => 'Vet / Vet Tech Student'
+            'name' => 'Super Admin',
         ]);
         UserMemberAndNetworkLevel::create([
-            'name' => 'Pet Care Professional'
+            'name' => 'Veterinary Professional',
         ]);
         UserMemberAndNetworkLevel::create([
-            'name' => 'Pet Owner'
+            'name' => 'Vet / Vet Tech Student',
         ]);
         UserMemberAndNetworkLevel::create([
-                'parent_id' => 2,
-                'name' => 'Veterinarian',
+            'name' => 'Pet Care Professional',
         ]);
-            UserMemberAndNetworkLevel::create([
-                'parent_id' => 2,
-                'name' => 'Veterinary Specialist'
+        UserMemberAndNetworkLevel::create([
+            'name' => 'Pet Owner',
         ]);
-            UserMemberAndNetworkLevel::create([
-                'parent_id' => 2,
-                'name' => 'Veterinary Technician'
+        UserMemberAndNetworkLevel::create([
+            'parent_id' => 2,
+            'name' => 'Veterinarian',
         ]);
-            UserMemberAndNetworkLevel::create([
-                'parent_id' => 2,
-                'name' => 'Veterinary Client Care / Hospital Admin'
+        UserMemberAndNetworkLevel::create([
+            'parent_id' => 2,
+            'name' => 'Veterinary Specialist',
         ]);
-            UserMemberAndNetworkLevel::create([
-                'parent_id' => 3,
-                'name' => 'Veterinary Client Care / Hospital Admin'
+        UserMemberAndNetworkLevel::create([
+            'parent_id' => 2,
+            'name' => 'Veterinary Technician',
         ]);
-            UserMemberAndNetworkLevel::create([
-                'parent_id' => 3,
-                'name' => 'Veterinary Technician Student'
+        UserMemberAndNetworkLevel::create([
+            'parent_id' => 2,
+            'name' => 'Veterinary Client Care / Hospital Admin',
         ]);
-            UserMemberAndNetworkLevel::create([
-                'parent_id' => 4,
-                'name' => 'Trainer / Animal Behavior Consultant'
+        UserMemberAndNetworkLevel::create([
+            'parent_id' => 3,
+            'name' => 'Veterinary Client Care / Hospital Admin',
         ]);
-            UserMemberAndNetworkLevel::create([
-                'parent_id' => 4,
-                'name' => 'Breeder'
+        UserMemberAndNetworkLevel::create([
+            'parent_id' => 3,
+            'name' => 'Veterinary Technician Student',
         ]);
-            UserMemberAndNetworkLevel::create([
-                'parent_id' => 4,
-                'name' => 'Other Service Provider'
+        UserMemberAndNetworkLevel::create([
+            'parent_id' => 4,
+            'name' => 'Trainer / Animal Behavior Consultant',
         ]);
-            UserMemberAndNetworkLevel::create([
-                'parent_id' => 5,
-                'name' => 'Pet Owner',
+        UserMemberAndNetworkLevel::create([
+            'parent_id' => 4,
+            'name' => 'Breeder',
+        ]);
+        UserMemberAndNetworkLevel::create([
+            'parent_id' => 4,
+            'name' => 'Other Service Provider',
+        ]);
+        UserMemberAndNetworkLevel::create([
+            'parent_id' => 5,
+            'name' => 'Pet Owner',
         ]);
 
     }

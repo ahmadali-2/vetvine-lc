@@ -57,7 +57,7 @@
 
                       </div>
                       <div class="btn_change text-center">
-                        <button type="button" class="btn btn-warning">Change Password</button>
+                        <button type="submit " class="btn btn-warning">Change Password</button>
                     </div>
                 </form>
                </div>

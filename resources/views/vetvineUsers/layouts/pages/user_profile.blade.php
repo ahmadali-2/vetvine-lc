@@ -102,7 +102,7 @@
                                             </div>
                                         </div>
                                         <div class="serch-section">
-                                            @if ($licensurePermissions->type === 2 || $licensurePermissions->type === 2 || $licensurePermissions->type === 4 || $licensurePermissions->type === 5)
+                                            @if($licensurePermissions->network_id == 6 || $licensurePermissions->network_id == 7 )
                                                 <div class="inner-input" id="license-div">
                                                     <label>Licensure*</label>
                                                     <div class="input_field">
@@ -489,7 +489,7 @@
                 },
                 success: function(response) {
                     console.log(response.network_id);
-                    if(response.network_id === 5 || response.network_id === 6){
+                    if(response.network_id == 6 || response.network_id == 7){
                         $("#license-div").show();
                     }else{
                         $("#license-div").hide();

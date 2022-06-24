@@ -36,7 +36,12 @@ class PersonelInfoController extends Controller
         $employmentInfo = Auth::user()->employmentInfo;
         $permissions = Auth::user()->permissions;
         $timezones      = TimeZone::all();
-        $usernetworks   = UserMemberAndNetworkLevel::all();
+        $usernetworks  = UserMemberAndNetworkLevel::get()->reject(function($q){
+            return  $q->parent_id == Null;
+        })->map(function($q){
+            return $q;
+        });
+        // $usernetworks   = UserMemberAndNetworkLevel::all();
         $licensurePermissions = User::where('id', Auth::id())->first();
         return view('vetvineUsers.layouts.pages.user_profile', compact('countries', 'employmentInfo', 'timezones', 'usernetworks', 'licensurePermissions'));
     }
