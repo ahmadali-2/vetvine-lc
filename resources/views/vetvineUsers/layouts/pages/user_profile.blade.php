@@ -96,24 +96,24 @@
                                                             @endif
                                                         @endforeach
                                                     </select>
-
                                                     <span class="asteric" id="error3"></span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="serch-section">
-                                            @if ($licensurePermissions->type === 2 || $licensurePermissions->type === 2 || $licensurePermissions->type === 4 || $licensurePermissions->type === 5)
+                                            {{-- @dd($licensurePermissions) --}}
+                                            @if ($licensurePermissions->network_id == 5   ||   $licensurePermissions->network_id == 6)
                                                 <div class="inner-input" id="license-div">
                                                     <label>Licensure*</label>
                                                     <div class="input_field">
-                                                        <input placeholder="" class="form-control" name="licensure"
+                                                        <input placeholder="" class="form-control license-inp" name="licensure"
                                                             id="licensure" value="{{ Auth::user()->licence_no }} "
                                                             >
                                                         <span class="asteric" id="error4"></span>
                                                     </div>
                                                 </div>
                                             @endif
-                                                <input type="hidden" name="" id="type" value="{{ Auth::user()->type }}">
+                                                {{-- <input type="hidden" name="" id="type" value="{{ Auth::user()->type }}"> --}}
                                             {{-- @endif --}}
                                             <div class="serch-section">
                                                 <div class="inner-input">
@@ -445,7 +445,6 @@
 
         $(document).on("change", "#usernetwork", function() {
             var networdId = $(this).val();
-            // alert(networdId);
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -456,12 +455,12 @@
                     networkId: networdId
                 },
                 success: function(response) {
-                    console.log(response.network_id);
                     if(response.network_id === 5 || response.network_id === 6){
+                        $('.license-inp').attr('id', 'licensure');
                         $("#license-div").show();
                     }else{
                         $("#license-div").hide();
-                        $()
+                        $('.license-inp').removeAttr('id');
                     }
                 }
             });
