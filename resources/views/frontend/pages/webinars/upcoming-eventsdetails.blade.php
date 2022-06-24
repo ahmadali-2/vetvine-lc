@@ -247,16 +247,18 @@
 
     $userTimeZone = Auth::user()->timezone->timezone;
 
-    // Fetching timezone UTC code : Please don't screw it
-                                        $pieces = explode('(', $userTimeZone);
-                                        $pieces = explode('C', $pieces[1]);
-                                        $pieces = explode(')', $pieces[1]);
-                                        
-                                        $userEventTime = new DateTimeZone($pieces[0]);
-                                        $convertedTime = $today->setTimeZone($userEventTime);
-                                        
-                                        echo $convertedTime->format('H:i') . ' ' . $userTimeZone;
-                                    @endphp
+                                    $userTimeZone   =  Auth::user()->timezone->timezone;
+
+                                    // Fetching timezone UTC code : Please don't screw it
+                                    $pieces = explode("(", $userTimeZone);
+                                    $pieces = explode("C", $pieces[1]);
+                                    $pieces = explode(")", $pieces[1]);
+
+                                    $userEventTime  =  new DateTimeZone($pieces[0]);
+                                    $convertedTime  =  $today->setTimeZone($userEventTime);
+
+                                    echo ($convertedTime->format('H:i A').' '.$userTimeZone);
+                                @endphp
                                 </div>
                             </div>
                         </div>
