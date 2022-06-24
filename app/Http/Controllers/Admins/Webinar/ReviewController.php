@@ -35,14 +35,16 @@ class ReviewController extends Controller
     }
     public function commentupdate(Request $request)
     {
+        $commentData = array();
+        if(isset($request->rating)){
+            $commentData['star_rating'] = $request->rating;
+        }
+        $commentData['comments'] = $request->comment;
+
         try {
             if ($request->ajax()) {
-                ReviewRating::find($request->rating)
-                // return 'running';
-                ->update([
-                    'star_rating' => $request->rating,
-                    'comments' => $request->comment,
-                ]);
+                ReviewRating::find($request->review_id)
+                ->update($commentData);
                 return response()->json([
                     'success' => 'Review Updated Successfully.'
                 ]);
