@@ -43,6 +43,7 @@ class PersonelInfoController extends Controller
         });
         // $usernetworks   = UserMemberAndNetworkLevel::all();
         $licensurePermissions = User::where('id', Auth::id())->first();
+        return $licensurePermissions;
         return view('vetvineUsers.layouts.pages.user_profile', compact('countries', 'employmentInfo', 'timezones', 'usernetworks', 'licensurePermissions'));
     }
 
@@ -53,6 +54,7 @@ class PersonelInfoController extends Controller
         $timezones      = TimeZone::all();
         $usernetworks   = UserMemberAndNetworkLevel::where('parent_id','!=',null)->get();
         $licensurePermissions = User::where('id', Auth::id())->first();
+        // return $licensurePermissions;
         return view('vetvineUsers.layouts.pages.user_profile', compact('countries', 'employmentInfo', 'timezones', 'usernetworks', 'licensurePermissions'));
     }
     public function chat()

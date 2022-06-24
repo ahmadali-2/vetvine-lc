@@ -29,26 +29,28 @@ class ReviewController extends Controller
         $review->save();
         parent::successMessage('Your Review Has Been Submitted Successfully.');
         return redirect()->back();
-      } catch(Exception $e) {
+        } catch(Exception $e) {
         parent::dangerMessage("Review Does Not Submitted, Please Try  Again");
         return redirect()->back();      }
     }
     public function commentupdate(Request $request)
     {
-        // return $request;
+        $commentData = array();
+        if(isset($request->rating)){
+            $commentData['star_rating'] = $request->rating;
+        }
+        $commentData['comments'] = $request->comment;
 
         try {
             if ($request->ajax()) {
                 ReviewRating::find($request->review_id)
-                ->update([
-                    'star_rating' => $request->rating,
-                    'comments' => $request->comment,
-                ]);
+                ->update($commentData);
                 return response()->json([
                     'success' => 'Review Updated Successfully.'
                 ]);
             }
-        }catch(Exception $e) {
+        }
+        catch(Exception $e) {
             return response()->json(['success' => false]);
         }
     }
