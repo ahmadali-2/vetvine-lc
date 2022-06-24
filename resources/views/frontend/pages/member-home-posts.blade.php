@@ -1,5 +1,17 @@
 <style>
     .pagination {justify-content: center;}
+    .post_center_box .btn-primary{
+  background-color: #f27222;
+  height: 25px;
+    line-height: 0px;
+    }
+    .post_center_box .fa-trash{
+  font-size: 13px;    }
+
+  .comment_replies input{
+
+    border: 2px solid #507f87 !important;
+  }
 </style>
 <?php
     $displayLike = false;
@@ -110,7 +122,7 @@
                         <h6 class="h6_post_label">
                             {!! $post->post_description !!}
                         </h6>
-                        <p><b></b>Posted on : {{date("m/d/Y", strtotime($share->created_at))}}</p>
+                        <p><b></b>Posted on : {{date("m/d/Y", strtotime($post->created_at))}}</p>
                     </div>
 
 
@@ -146,17 +158,17 @@
         </div>
         <div id="comment_{{$key}}" class="post_center_box" data-key={{$key}} style="display: none;">
             <div id="comments_data_{{$key}}">
-                <div class="col-md-6" id="comments_view_{{$key}}">
+                <div class="col-md-12" id="comments_view_{{$key}}">
                         <?php $comments = $post->comments ?>
                     <hr />
                 </div>
             </div>
-            <div class="row" style="background-color: wheat; padding: 10px;">
+            <div class="row align-items-center" style="background-color: #f27222; padding: 10px;">
                 <div class="col-sm-8">
-                    <input style="background-color: wheat; outline: none; width: 100%;" type="text" name="comment" id="comment_value_{{$key}}" placeholder="Type comment here"/>
+                    <input style="background-color: #fff; outline: none; width: 100%; padding:10px;" type="text" name="comment" id="comment_value_{{$key}}" placeholder="Type comment here"/>
                 </div>
                 <div class="col-sm-4 send_comment" data-key="{{$key}}">
-                    <a data-post-id="{{$post->id}}" data-key={{$key}} style="cursor: pointer;"><i class="fa fa-paper-plane" aria-hidden="true"></i> Comment</a>
+                    <a data-post-id="{{$post->id}}" data-key={{$key}} style="cursor: pointer; color:#fff;"><i class="fa fa-paper-plane" aria-hidden="true"></i> Comment</a>
                 </div>
             </div>
         </div>

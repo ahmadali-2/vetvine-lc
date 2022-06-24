@@ -34,7 +34,7 @@ class CreateNewUser implements CreatesNewUsers
             'password'          => Hash::make($input['password']),
             'network_id'        => $input['networklevel'],
             'timezone_id'       => $input['timezone'],
-            'type'              => 2,
+            'type'              => $input['memberlevel'],
             'status'            => 1
         ]);
 

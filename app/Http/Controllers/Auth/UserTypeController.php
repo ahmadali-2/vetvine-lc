@@ -35,7 +35,7 @@ class UserTypeController extends Controller
                 parent::successMessage("Super Admin Login Successfully");
                 return redirect('superadmin/dashboard');
                 break;
-            case 2:
+            default:
                 parent::successMessage("Vetvine Member Login Successfully");
 
                 if($userType->employmentInfo){
@@ -54,9 +54,9 @@ class UserTypeController extends Controller
                     break;
                 }
 
-            default:
-                parent::dangerMessage("Your Role Connot be Accessed Please Try Again");
-                return redirect('/');
+            // default:
+            //     parent::dangerMessage("Your Role Connot be Accessed Please Try Again");
+            //     return redirect('/');
         }
     }
 }
