@@ -3,13 +3,13 @@
 namespace App\Actions\Fortify;
 
 use App\Events\UserRegistered;
+use App\Http\VetvineTraits\UserDetailTrait;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
-use Laravel\Jetstream\Jetstream;
-use App\Http\VetvineTraits\UserDetailTrait;
-use Illuminate\Support\Facades\Auth;
+
 class CreateNewUser implements CreatesNewUsers
 {
     use PasswordValidationRules, UserDetailTrait;
@@ -22,31 +22,30 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input)
     {
+        // dd($input);
 
-       Validator::make($input, [
+        Validator::make($input, [
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-         ])->validate();
+        ])->validate();
 
-
-       $user = User::create([
-            'name'              => $input['first_name'] .' '. $input['last_name'] ,
-            'email'             => $input['email'],
-            'password'          => Hash::make($input['password']),
-            'network_id'        => $input['networklevel'],
-            'timezone_id'       => $input['timezone'],
-            'type'              => $input['memberlevel'],
-            'status'            => 1
+        $user = User::create([
+            'name' => $input['first_name'] . ' ' . $input['last_name'],
+            'email' => $input['email'],
+            'password' => Hash::make($input['password']),
+            'network_id' => $input['networklevel'],
+            'timezone_id' => $input['timezone'],
+            'type' => $input['memberlevel'],
+            'status' => 1,
         ]);
 
-
-         $this->checkUserDetail($user->email, $user->type);
-         Auth::login($user);
-         event(new UserRegistered($user));
-         try {
+        $this->checkUserDetail($user->email, $user->type);
+        Auth::login($user);
+        event(new UserRegistered($user));
+        try {
         } catch (\Throwable $th) {
-             return $user;
-         }
-         return $user ;
+            return $user;
+        }
+        return $user;
 
     }
 }

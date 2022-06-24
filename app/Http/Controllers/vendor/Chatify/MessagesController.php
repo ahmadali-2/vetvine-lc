@@ -31,6 +31,7 @@ class MessagesController extends Controller
     public function pusherAuth(Request $request)
     {
         // Auth data
+        // $request->dd();
         $authData = json_encode([
             'user_id' => Auth::user()->id,
             'user_info' => [
@@ -57,10 +58,9 @@ class MessagesController extends Controller
      */
     public function index($id = null)
     {
+        // dd('running');
         $routeName = FacadesRequest::route()->getName();
-        $type = in_array($routeName, ['user', 'group'])
-        ? $routeName
-        : 'user';
+        $type = in_array($routeName, ['user', 'group']) ? $routeName : 'user';
         return view('Chatify::pages.app', [
             'id' => $id ?? 0,
             'type' => $type ?? 'user',
@@ -120,8 +120,8 @@ class MessagesController extends Controller
      */
     public function send(Request $request)
     {
-
-        // dd($request);
+        // return $request;
+        // dd('runniung');
         // default variables
         $error = (object) [
             'status' => 0,
@@ -129,7 +129,7 @@ class MessagesController extends Controller
         ];
         $attachment = null;
         $attachment_title = null;
-        dd($request->id);
+        // dd($request->id);
         // if there is attachment [file]
         if ($request->hasFile('file')) {
             // allowed extensions
@@ -172,7 +172,7 @@ class MessagesController extends Controller
                 ]) : null,
             ]);
 
-            // $push_notifications = event(new NotificationEvent(Auth::id(), '1'));
+            $push_notifications = event(new NotificationEvent(Auth::id(), '1'));
 
             // fetch message to send it with the response
             $messageData = Chatify::fetchMessage($messageID);
@@ -184,6 +184,8 @@ class MessagesController extends Controller
                 'message' => Chatify::messageCard($messageData, 'default'),
             ]);
         }
+
+        // return 'running';
 
         // send the response
         return Response::json([

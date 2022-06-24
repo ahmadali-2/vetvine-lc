@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Auth;
 
 class UserTypeController extends Controller
 {
@@ -14,17 +12,17 @@ class UserTypeController extends Controller
     {
         $this->middleware(['auth', 'verified']);
     }
-     public function checkType()
+    public function checkType()
     {
         $userType = Auth::user();
 
-        if($userType->status != 1) {
+        if ($userType->status != 1) {
             Auth::logout();
             parent::successMessage('Your Account Registered Successfully');
             parent::warningMessage('Your Account Approval Is Pending From Admin Side');
             return redirect('/');
         }
-        if($userType->blocked_user){
+        if ($userType->blocked_user) {
             Auth::logout();
             parent::dangerMessage('Your Account has been Deleted.Please Contact with Administrator!');
             return redirect('/');
@@ -35,21 +33,20 @@ class UserTypeController extends Controller
                 parent::successMessage("Super Admin Login Successfully");
                 return redirect('superadmin/dashboard');
                 break;
-            default:
+                default:
                 parent::successMessage("Vetvine Member Login Successfully");
 
-                if($userType->employmentInfo){
-                    if($userType->employmentInfo->profile_status == 'completed'){
+                if ($userType->employmentInfo) {
+                    if ($userType->employmentInfo->profile_status == 'completed') {
 
-                            return redirect()->route('member_home');
-                            break;
+                        return redirect()->route('member_home');
+                        break;
 
-
-                    }else{
+                    } else {
                         return redirect('vetvine-member/dashboard');
                         break;
                     }
-                }else{
+                } else {
                     return redirect('vetvine-member/dashboard');
                     break;
                 }
