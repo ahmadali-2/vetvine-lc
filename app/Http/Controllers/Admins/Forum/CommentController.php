@@ -17,7 +17,7 @@ class CommentController extends Controller
         $comments = null;
         if($request->type == 'post'){
             $post = Post::with('comments')->where('id',$request->post_id)->first();
-            
+
         }else{
             $post = Share::with('comments')->where('id',$request->post_id)->first();
         }
@@ -48,21 +48,21 @@ class CommentController extends Controller
                 else
                 {
                 $comment = new Comment();
-        
+
                 $comment->comment = $request->comment;
-                
+
                 $comment->ce = $request->ce;
 
                 $comment->user()->associate($request->user());
-        
+
                 if($request->type == 'post'){
                     $post = Post::find($request->post_id);
                 }else{
                     $post = Share::find($request->post_id);
                 }
-        
+
                 $post->comments()->save($comment);
-                
+
                 if($request->ajax()){
                     return response()->json([
                         'code' => 200,
@@ -97,13 +97,13 @@ class CommentController extends Controller
                 else
                 {
                     $reply = new Comment();
-        
+
                     $reply->comment = $request->get('reply');
-        
+
                     $reply->user()->associate($request->user());
-        
+
                     $reply->parent_id = $request->get('comment_id');
-                    
+
                     $reply->ce = $request->ce;
 
                     if($request->type == 'post'){
@@ -111,9 +111,9 @@ class CommentController extends Controller
                     }else{
                         $post = Share::find($request->get('post_id'));
                     }
-                    
+
                     $post->comments()->save($reply);
-        
+
                     return response()->json([
                         'code' => 200,
                         'message' => 'Reply added successfully!',

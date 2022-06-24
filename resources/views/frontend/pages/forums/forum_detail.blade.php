@@ -165,7 +165,7 @@
                                 'ce' => 0,
                                 'type' => 'post',
                             ])
-                        </div>     
+                        </div>
                         <hr />
                     </div>
                 </div>
@@ -379,7 +379,7 @@
         var commentId = $(this).attr('data-comment-id');
         var deleteUrl = '{{ route("comment.destroy", ":id") }}';
         deleteUrl = deleteUrl.replace(':id', commentId);
-        
+
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",

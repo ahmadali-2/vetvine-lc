@@ -104,7 +104,7 @@ class ForumController extends Controller
     }
 
     public function getForumPosts($forumId){
-        
+
         $userLoggedIn = false;
         $posts = Post::with('user','likes','comments','postView')->where('forum_id',$forumId)->get();
         $forums = Forum::with('category')->get();

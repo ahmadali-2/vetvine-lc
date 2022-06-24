@@ -45,7 +45,6 @@ class PersonelInfoController extends Controller
     {
         $countries = Country::all();
         $employmentInfo = Auth::user()->employmentInfo;
-
         $timezones      = TimeZone::all();
         $usernetworks   = UserMemberAndNetworkLevel::where('parent_id','!=',null)->get();
         $licensurePermissions = User::where('id', Auth::id())->first();

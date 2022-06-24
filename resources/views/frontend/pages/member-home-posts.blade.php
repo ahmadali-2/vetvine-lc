@@ -109,9 +109,6 @@
 
                         <p>{{$post->created_at->diffForHumans()}}</p>
                     </div>
-
-
-
                 </div>
                 <div class=" col-lg-6">
 
