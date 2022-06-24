@@ -35,7 +35,7 @@ $timezones = vetvineHelper::timezones();
                                                 <li
                                                     class="ui-state-default ui-corner-top     ui-tabs-active tab_1_section_parent">
                                                     <a href="#" class="ui-tabs-anchor" role="presentation">
-                                                        <span data-memberlevel="1">Veterinary Professional</span>
+                                                        <span data-memberlevel="2">Veterinary Professional</span>
                                                     </a>
                                                     <input type="hidden" id="setmemberlevel" name="memberlevel">
 
@@ -43,7 +43,7 @@ $timezones = vetvineHelper::timezones();
 
                                                         <li class="form-check">
                                                             <input class="form-check-input remove_box" type="radio"
-                                                                name="networklevel" id="exampleRadios7" value="5"
+                                                                name="networklevel" id="exampleRadios7" value="6"
                                                                 checked="">
                                                             <label class="form-check-label" for="exampleRadios7">
                                                                 Veterinarian
@@ -51,21 +51,21 @@ $timezones = vetvineHelper::timezones();
                                                         </li>
                                                         <li class="form-check">
                                                             <input class="form-check-input remove_box" type="radio"
-                                                                name="networklevel" id="exampleRadios8" value="6">
+                                                                name="networklevel" id="exampleRadios8" value="7">
                                                             <label class="form-check-label" for="exampleRadios8">
                                                                 Veterinary Specialist
                                                             </label>
                                                         </li>
                                                         <li class="form-check">
                                                             <input class="form-check-input remove_box" type="radio"
-                                                                name="networklevel" id="exampleRadios9" value="7">
+                                                                name="networklevel" id="exampleRadios9" value="8">
                                                             <label class="form-check-label" for="exampleRadios9">
                                                                 Veterinary Technician
                                                             </label>
                                                         </li>
                                                         <li class="form-check">
                                                             <input class="form-check-input remove_box" type="radio"
-                                                                name="networklevel" id="exampleRadios10" value="8">
+                                                                name="networklevel" id="exampleRadios10" value="9">
                                                             <label class="form-check-label" for="exampleRadios10">
                                                                 Veterinary Client Care / Hospital Admin
                                                             </label>
@@ -76,14 +76,14 @@ $timezones = vetvineHelper::timezones();
 
                                                 <li class="ui-state-default ui-corner-top tab_2_section_parent">
                                                     <a href="#">
-                                                        <span data-memberlevel="2">Vet / Vet Tech Student</span>
+                                                        <span data-memberlevel="3">Vet / Vet Tech Student</span>
                                                     </a>
 
                                                     <ul class="tab_2_section">
 
                                                         <li class="form-check">
                                                             <input class="form-check-input remove_box" type="radio"
-                                                                name="networklevel" id="exampleRadios1" value="9"
+                                                                name="networklevel" id="exampleRadios1" value="10"
                                                                 checked="">
                                                             <label class="form-check-label" for="exampleRadios1">
                                                                 Veterinary Student
@@ -91,7 +91,7 @@ $timezones = vetvineHelper::timezones();
                                                         </li>
                                                         <li class="form-check">
                                                             <input class="form-check-input remove_box" type="radio"
-                                                                name="networklevel" id="exampleRadios2" value="10">
+                                                                name="networklevel" id="exampleRadios2" value="11">
                                                             <label class="form-check-label" for="exampleRadios2">
                                                                 Veterinary Technician Student
                                                             </label>
@@ -103,14 +103,14 @@ $timezones = vetvineHelper::timezones();
                                                 <li class="ui-state-default ui-corner-top tab_3_section_parent"
                                                     role="tab">
                                                     <a href="#ta3" class="ui-tabs-anchor" role="presentation">
-                                                        <span data-memberlevel="3">Pet Care Professional </span>
+                                                        <span data-memberlevel="4">Pet Care Professional </span>
                                                     </a>
 
                                                     <ul class="tab_3_section">
 
                                                         <li class="form-check">
                                                             <input class="form-check-input remove_box" type="radio"
-                                                                name="networklevel" id="exampleRadios3" value="11"
+                                                                name="networklevel" id="exampleRadios3" value="12"
                                                                 checked="">
                                                             <label class="form-check-label" for="exampleRadios3">
                                                                 Trainer / Animal Behavior Consultant
@@ -118,14 +118,14 @@ $timezones = vetvineHelper::timezones();
                                                         </li>
                                                         <li class="form-check">
                                                             <input class="form-check-input remove_box" type="radio"
-                                                                name="networklevel" id="exampleRadios4" value="12">
+                                                                name="networklevel" id="exampleRadios4" value="13">
                                                             <label class="form-check-label" for="exampleRadios4">
                                                                 Breeder
                                                             </label>
                                                         </li>
                                                         <li class="form-check">
                                                             <input class="form-check-input remove_box" type="radio"
-                                                                name="networklevel" id="exampleRadios5" value="13">
+                                                                name="networklevel" id="exampleRadios5" value="14">
                                                             <label class="form-check-label" for="exampleRadios5">
                                                                 Other Service Provider
                                                             </label>
@@ -137,13 +137,13 @@ $timezones = vetvineHelper::timezones();
                                                 <li class="ui-state-default ui-corner-top tab_4_section_parent"
                                                     role="tab">
                                                     <a href="#" class="ui-tabs-anchor" role="presentation">
-                                                        <span data-memberlevel="4">Pet Owner</span>
+                                                        <span data-memberlevel="5">Pet Owner</span>
                                                     </a>
                                                     <ul class="tab_4_section">
 
                                                         <li class="form-check">
                                                             <input class="form-check-input remove_box" type="radio"
-                                                                name="networklevel" id="exampleRadios6" value="14"
+                                                                name="networklevel" id="exampleRadios6" value="15"
                                                                 checked="">
                                                             <label class="form-check-label" for="exampleRadios6">
                                                                 Pet Owner
@@ -195,7 +195,7 @@ $timezones = vetvineHelper::timezones();
                                                             @else
                                                                 <option value="{{ $timezone->id }}">
                                                                     {{ $timezone->timezone }}
-                                                                </option>    
+                                                                </option>
                                                             @endif
 
                                                         @endforeach

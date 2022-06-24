@@ -196,7 +196,7 @@ class HomeController extends Controller
     }
 
     public function updateUserPassword(Request $request){
-        // return $request;
+      
         $request->validate([
             'current_password' => 'required',
             'password' => 'required|min:8',

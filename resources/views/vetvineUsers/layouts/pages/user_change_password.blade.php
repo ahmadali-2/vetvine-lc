@@ -51,17 +51,16 @@
                             </div>
 
 
-                        </div>
-                        <div class="btn_change text-center">
-                            <button type="submit" class="btn btn-warning">Change Password</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <a href="#"><img src="{{ asset('frontend/img/add-img.png') }}">
-                </a>
-            </div>
+                      </div>
+                      <div class="btn_change text-center">
+                        <button type="submit " class="btn btn-warning">Change Password</button>
+                    </div>
+                </form>
+               </div>
+          </div>
+        <div class="col-lg-3">
+            <a href="#"><img src="{{ asset('frontend/img/add-img.png') }}">
+            </a>
         </div>
     </div>
 @endsection
