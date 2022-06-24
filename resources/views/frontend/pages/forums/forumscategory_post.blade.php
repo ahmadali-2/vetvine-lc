@@ -50,31 +50,26 @@
     <section>
         <div class="container">
             <div class="row align-items-center">
-            <div class="col-lg-3 col-md-4">
-                <div class="filter-div category-div forum_category_div">
-                    <div id="fav_show_wrapper">
-                        <label for="fav_Show" id="fav_show_label">Category</label>
-                        <select name="fav_Show" id="form_search_dropdown" class="filter-slect border select-m">
-                            <option title="" value="0" label="Select Forum"></option>
-                            @foreach($forums as $forum)
-                                @if($forum->id == $forumId)
-                                    <option title="{{$forum->forum_title}}" value="{{$forum->id}}" label="{{$forum->forum_title}}" selected>{{$forum->forum_title}}</option>
-                                @else
-                                    <option title="{{$forum->forum_title}}" value="{{$forum->id}}" label="{{$forum->forum_title}}">{{$forum->forum_title}}</option>
-                                @endif
-                            @endforeach
-                        </select>
+                <div class="col-lg-3 col-md-4">
+                    <div class="filter-div category-div forum_category_div">
+                        <div id="fav_show_wrapper">
+                            <label for="fav_Show" id="fav_show_label">Category</label>
+                            <select name="fav_Show" id="form_search_dropdown" class="filter-slect border select-m">
+                                <option title="" value="0" label="Select Forum"></option>
+                                @foreach($forums as $forum)
+                                    @if($forum->id == $forumId)
+                                        <option title="{{$forum->forum_title}}" value="{{$forum->id}}" label="{{$forum->forum_title}}" selected>{{$forum->forum_title}}</option>
+                                    @else
+                                        <option title="{{$forum->forum_title}}" value="{{$forum->id}}" label="{{$forum->forum_title}}">{{$forum->forum_title}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-
             <div class="col-md-4 col-lg-3 search_filter  search_bottom">
                 <label for="">Search </label>
                 <div class="input-group">
-
-
-
                        <input type="text" id="form_search_field" class="form-control top-search" placeholder="Search forum post" aria-label="Recipient's username" aria-describedby="basic-addon2">
 
                        <div class="input-group-append">
@@ -90,12 +85,13 @@
                 </div> --}}
 
             </div>
-
-            <div class="col-md-4 col-lg-3 ml-auto text-right ">
-                <a class="btn btn-primary post_btn " href="{{ route('createforumpost',$forumId ) }}">
-                    Create Post
-            </a>
-            </div>
+            @auth
+                <div class="col-md-4 col-lg-3 ml-auto text-right ">
+                    <a class="btn btn-primary post_btn " href="{{ route('createforumpost',$forumId ) }}">
+                        Create Post
+                    </a>
+                </div>
+            @endauth
             </div>
         </div>
         <div class="container">
@@ -160,8 +156,13 @@
 			url: '/search-form-post',
 			data: {form: form, title_text: form_search_field, originalFormId: originalFormId},
 			success: function(response){
+                $('#formPostDiv').remove();
                 $('#form_posts_render').empty();
                 $('#form_posts_render').append(response.html);
+                $('#commentajax').empty();
+                $('#commentajax').append(response.count);
+                $('#countajax').empty();
+                $('#countajax').append(response.count);
 			}
 			});
         }

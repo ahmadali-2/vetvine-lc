@@ -13,7 +13,9 @@ class AddCommentCeColumn extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('comments', function(Blueprint $table){
+            $table->enum('ce', ['0', '1'])->default(0);
+        });
     }
 
     /**
