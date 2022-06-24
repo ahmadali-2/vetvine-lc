@@ -8,7 +8,7 @@
 @endphp
 <div class="display-comment" style="padding-left: {{$padding}}px;">
     @if($comment->ce == $ce)
-        <img src="{{ asset('/frontend/images/Profile-Images/' . $comment->user->profile_photo) }}" class="post_box_small_img" width="262" height="198" alt=""><strong style="margin-left: 10px;">{{ $comment->user->name }}</strong>
+        <img src="@if(Auth()->user()->profile_photo ?? '') {{ asset('/frontend/images/Profile-Images/' . $comment->user->profile_photo) }} @else {{asset('frontend/images/dummy.png')}} @endif" class="post_box_small_img" width="262" height="198" alt=""><strong style="margin-left: 10px;">{{ $comment->user->name }}</strong>
         <p style="margin:0px; margin-left: 60px; font-size: 13px;"><i class="fa fa-clock-o" aria-hidden="true" style="color: #8ac98a;"></i> {{$comment->created_at->diffForHumans()}}</p>
         <p id="deleteComment_{{$comment->id}}" data-key="{{$comment->id}}" style="margin-top: 5px; margin-left: 60px; margin-bottom: 10px;">{{ $comment->comment }}
             <a href="javascript:void(0);" data-comment-id="{{$comment->id}}">
