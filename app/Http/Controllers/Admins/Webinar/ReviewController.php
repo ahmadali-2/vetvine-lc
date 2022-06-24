@@ -29,7 +29,7 @@ class ReviewController extends Controller
         $review->save();
         parent::successMessage('Your Review Has Been Submitted Successfully.');
         return redirect()->back();
-      } catch(Exception $e) {
+        } catch(Exception $e) {
         parent::dangerMessage("Review Does Not Submitted, Please Try  Again");
         return redirect()->back();      }
     }
@@ -40,7 +40,7 @@ class ReviewController extends Controller
             $commentData['star_rating'] = $request->rating;
         }
         $commentData['comments'] = $request->comment;
-        
+
         try {
             if ($request->ajax()) {
                 ReviewRating::find($request->review_id)
@@ -49,7 +49,8 @@ class ReviewController extends Controller
                     'success' => 'Review Updated Successfully.'
                 ]);
             }
-        }catch(Exception $e) {
+        }
+        catch(Exception $e) {
             return response()->json(['success' => false]);
         }
     }
