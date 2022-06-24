@@ -25,10 +25,10 @@
     {{-- NEW FORUMS SECTION --}}
     <section class="main_banner_bottob_label"></section>
 
-    <section class="become_member_area">
+    <section class="become_member_area" id="">
         <div class="container">
             <h2>
-                <span>Forums
+                <span id="form-special-topics">Forums
                 </span>
             </h2>
         </div>
@@ -122,6 +122,12 @@
 
     @section('scripts')
     <script>
+        $(document).ready(function () {
+            // Handler for .ready() called.
+            $('html, body').animate({
+                scrollTop: $('#form-special-topics').offset().top
+            }, 'slow');
+        });
         var originalCategoryId = '<?php echo $categoryId ?>';
 
         $('#form_search_dropdown').on('change',function(){

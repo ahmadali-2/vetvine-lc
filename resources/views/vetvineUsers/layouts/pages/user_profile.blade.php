@@ -102,17 +102,29 @@
                                             </div>
                                         </div>
                                         <div class="serch-section">
-                                            {{-- @dd($permissions->licensure) --}}
-                                            @if ($permissions->licensure)
-                                                <div class="inner-input" id="license-div" >
+                                            @if ($licensurePermissions->type === 2 || $licensurePermissions->type === 2 || $licensurePermissions->type === 4 || $licensurePermissions->type === 5)
+                                                <div class="inner-input" id="license-div">
                                                     <label>Licensure*</label>
                                                     <div class="input_field">
                                                         <input placeholder="" class="form-control" name="licensure"
-                                                            id="licensure" value="{{ Auth::user()->licence_no }} ">
+                                                            id="licensure" value="{{ Auth::user()->licence_no }} "
+                                                            required>
                                                         <span class="asteric" id="error4"></span>
                                                     </div>
                                                 </div>
+                                                {{-- @else
+                                                <div class="inner-input" id="license-div">
+                                                    <label>Licensure*</label>
+                                                    <div class="input_field">
+                                                        <input placeholder=""  class="form-control" name="licensure"
+                                                            id="licensure" value="{{ Auth::user()->licence_no }} "
+                                                            readonly>
+                                                        <span class="asteric" id="error4"></span>
+                                                    </div>
+                                                </div> --}}
                                             @endif
+                                                <input type="hidden" name="" id="type" value="{{ Auth::user()->type }}">
+                                            {{-- @endif --}}
                                             <div class="serch-section">
                                                 <div class="inner-input">
                                                     <label>Timezone*</label>
@@ -166,10 +178,10 @@
                                             <div class="inner-input">
                                                 <label>Email Address</label>
                                                 <div class="input_field">
-                                                <input type="email" name="email" id="email" readonly
-                                                    value="{{ Auth::user()->email ?? '' }}" placeholder=""
-                                                    class="form-control" />
-                                                <span class="asteric" id ="error6"></span>
+                                                    <input type="email" name="email" id="email" readonly
+                                                        value="{{ Auth::user()->email ?? '' }}" placeholder=""
+                                                        class="form-control" />
+                                                    <span class="asteric" id="error6"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -253,19 +265,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {{-- <div class="serch-section">
-                    <div class="inner-input">
-                      <label>State</label>
-                      <input type="text" placeholder="">
-                    </div>
-                  </div>
-                  <div class="serch-section">
-                    <div class="inner-input">
-                      <label>Zip or Postal Code</label>
-                      <input type="text" placeholder="">
-                    </div>
-                  </div> --}}
-
                                         <div class="button col-sm-12 text-center"><button type="button" id="employe_btn"
                                                 class="btn btn-Continue">Save & Continue</button></div>
                                     </div>
@@ -393,38 +392,46 @@
             }
         });
         $(document).ready(function(e) {
+            // var type = $("#type").val();
+            // if(type === '1' || type === '2' || type === '4' || type === '5'){
+            //     $("#license-div").show();
+            // }else{
+            //     $("#license").hide();
+            // }
             $("#personal_btn").on("click", function(e) {
-                if($("#licensure").length != 0){
-                // console.log($.trim($('#licensure').val()));
-                if ($.trim($('#firstname').val()) == '' || $.trim($('#lastname').val()) == '' || $.trim($(
-                        '#licensure').val()) == '' || $.trim($('#usernetwork').val()) == '' || $.trim($(
-                        '#timezone').val()) == '') {
-                    toastr.error('Make sure compulsory fields are not empty.');
-                    return;
-                } else {
-                    // alert('running');
-                    $("#tabs-2").addClass("tabs-2");
-                    $(".tab_2_click").trigger("click");
-                    $('.tabs_li').find('.new_active').removeClass('new_active');
-                    $(".tab_2_click").addClass('new_active');
-                    $(".tab_2_click").addClass('click_show_2');
-                }
+                if ($("#licensure").length != 0) {
+                    // console.log($.trim($('#licensure').val()));
+                    if ($.trim($('#firstname').val()) == '' || $.trim($('#lastname').val()) == '' || $.trim(
+                            $(
+                                '#licensure').val()) == '' || $.trim($('#usernetwork').val()) == '' || $
+                        .trim($(
+                            '#timezone').val()) == '') {
+                        toastr.error('Make sure compulsory fields are not empty.');
+                        return;
+                    } else {
+                        // alert('running');
+                        $("#tabs-2").addClass("tabs-2");
+                        $(".tab_2_click").trigger("click");
+                        $('.tabs_li').find('.new_active').removeClass('new_active');
+                        $(".tab_2_click").addClass('new_active');
+                        $(".tab_2_click").addClass('click_show_2');
+                    }
 
-            }else{
-                if ($.trim($('#firstname').val()) == '' || $.trim($('#lastname').val()) == '' ||
-                        $.trim($('#usernetwork').val()) == '' || $.trim($(
-                        '#timezone').val()) == '') {
-                    toastr.error('Make sure compulsory fields are not empty.');
-                    return;
                 } else {
-                    // alert('running');
-                    $("#tabs-2").addClass("tabs-2");
-                    $(".tab_2_click").trigger("click");
-                    $('.tabs_li').find('.new_active').removeClass('new_active');
-                    $(".tab_2_click").addClass('new_active');
-                    $(".tab_2_click").addClass('click_show_2');
+                    if ($.trim($('#firstname').val()) == '' || $.trim($('#lastname').val()) == '' ||
+                        $.trim($('#usernetwork').val()) == '' || $.trim($(
+                            '#timezone').val()) == '') {
+                        toastr.error('Make sure compulsory fields are not empty.');
+                        return;
+                    } else {
+                        // alert('running');
+                        $("#tabs-2").addClass("tabs-2");
+                        $(".tab_2_click").trigger("click");
+                        $('.tabs_li').find('.new_active').removeClass('new_active');
+                        $(".tab_2_click").addClass('new_active');
+                        $(".tab_2_click").addClass('click_show_2');
+                    }
                 }
-            }
             });
             $("#employe_btn").on("click", function(e) {
                 if ($.trim($('#street_address').val()) == '' ||
@@ -466,5 +473,29 @@
             $('.tabs_li').find('.new_active').removeClass('new_active');
             $(this).addClass('new_active');
         })
+
+        $(document).on("change", "#usernetwork", function() {
+            // alert($(this).val());
+            var networdId = $(this).val();
+            // alert(networdId);
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ route('licensure.show') }}",
+                type: "post",
+                data: {
+                    networkId: networdId
+                },
+                success: function(response) {
+                    console.log(response.network_id);
+                    if(response.network_id === 5 || response.network_id === 6){
+                        $("#license-div").show();
+                    }else{
+                        $("#license-div").hide();
+                    }
+                }
+            });
+        });
     </script>
 @endsection

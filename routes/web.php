@@ -56,6 +56,7 @@ use App\Http\Controllers\VetvineUsers\PostManagement\PostController;
 use App\Http\Controllers\VideoDescriptionController;
 use App\Http\Controllers\StaticPageController; // for static pages
 use App\Http\Controllers\TermsController; // for terms of services
+use App\Http\Controllers\LicensureController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 
@@ -147,7 +148,7 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
     Route::post('videodata',[VideosOnDemandController::class,'videodata'])->name('videoajaxdata');
     Route::resource('buyevent-users',BuyEventController::class);
     Route::get('userevent-history/{id}', [BuyEventController::class, 'usereventHistory'])->name('usereventhistory');
-    // Route::get('terms-and-conditions', [StaticPageController::class, 'TermsAndConditions'])->name('TermsAndConditions');
+
     Route::get('terms-and-conditions/add', [StaticPageController::class, 'TermsAndConditionsAdd'])->name('TermsCondition.create');
     Route::post('terms-and-conditions/add-terms', [StaticPageController::class, 'TermsAndConditionsAddDb'])->name('TermsCondition.create.db');
 
@@ -181,7 +182,7 @@ Route::get('thrive',[HomeController::class,'thrive'])->name('thrive');
 Route::get('heal',[HomeController::class,'heal'])->name('heal');
 Route::get('terms-of-service',[HomeController::class,'termsOfService'])->name('termsofservice');
 Route::post('contact-us',[ContactUsController::class,'submitContactForm'])->name('contactus.submit');
-Route::get('/Terms-of-serives', [TermsController::class, 'indexTerms'])->name('terms.index');
+Route::get('/terms', [TermsController::class, 'indexTerms'])->name('terms.index');
 
 // upcoming webinars
 Route::get('upcoming-webinars',[HomeController::class,'upcomingWebinars'])->name('upcoming_webinars');
@@ -190,8 +191,6 @@ Route::get('past-event',[HomeController::class,'pastevent'])->name('pastevent');
 Route::get('upcoming-event',[HomeController::class,'upcomingevent'])->name('upcomingevent');
 Route::post('submit-payment',[EventPaymentController::class,'index'])->name('submitPayment');
 Route::post('payment',[EventPaymentController::class,'paymentWebinars'])->name('payementwebinars');
-
-
 
 Route::get('publications',[HomeController::class,'publications'])->name('upcoming_publications');
 Route::post('educations',[HomeController::class,'searceducations'])->name('search_educations');
@@ -233,8 +232,8 @@ Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetv
     //forum posts
     Route::get('create-forumpost/{id}',[ForumPostController::class,'createPost'])->name('createforumpost');
     Route::get('forumpostlist/{id}',[ForumPostController::class,'forumPostList'])->name('forumpostlist');
-    Route::delete('comment-destroy/{id}', [CommentController::class,'destroy'])->name('comment.destroy');
-    Route::post('/reply/store', [CommentController::class,'replyStore'])->name('reply.add');
+    Route::post('comment-destroy/{id}', [CommentController::class,'destroy'])->name('comment.destroy');
+    Route::post('reply/store', [CommentController::class,'replyStore'])->name('reply.add');
 
     //User events Routes
     Route::post('review-store',[ReviewController::class, 'reviewstore'])->name('reviewstore');
@@ -259,6 +258,7 @@ Route::get('/video-description/{id}{category}', [VideoDescriptionController::cla
 Route::post('/videos-search', [VideoDescriptionController::class, 'video_search'])->name('videos.search');
 Route::post('/rating-videos', [VideoDescriptionController::class, 'rating_videos'])->name('rating.videos');
 Route::post('/mark-as-read',  [PushNotificationController::class, 'mark_as_read'])->name('read.notification');
+Route::post('/licensure',     [LicensureController::class, 'licensure'])->name('licensure.show');
 
 
 

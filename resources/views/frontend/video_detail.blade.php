@@ -180,6 +180,18 @@
     <body>
         <section class="video-section-wrapper mb-4">
             <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav aria-label="breadcrumb" class="breadcrumbs large-font">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ url('/') }}" role="button" tabindex="0">Home</a>
+                                </li>
+                                <li class="breadcrumb-item"><a onclick="history.back()" href="javascript::void();">Videos On Demand</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ $videos->video_title }}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
                 <div class="video-detail-inner">
                     <div class="video-title-he d-flex flex-wrap justify-content-between ">
                         <h2>{{ $videos->video_title }}</h2>
@@ -195,7 +207,7 @@
                                 {{-- <p class="font-weight-bold ">Review</p> --}}
                                 <div class="form-group row">
                                     <div class="col-sm-6 rating_box">
-                                        <div class="rate">
+                                        <div class="rate d-flex ">
                                     @if (isset($rating->rating))
                                             @for ($i = 1; $i <= $rating->rating; $i++)
                                                 <label for="star{{ $i }}" title="text">{{{ $i }}} stars</label>
@@ -279,7 +291,6 @@
                 $(document).ready(function() {
                     $('input[name="rating"]').click(function() {
                         var length = $(this).attr('data-stars');
-                        // alert(length);
                         $.ajax({
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -292,7 +303,6 @@
                                 user_id: $('input[name="user_id"]').val()
                             },
                             success: function(response) {
-                                // console.table(response);
                             }
                         });
                     });

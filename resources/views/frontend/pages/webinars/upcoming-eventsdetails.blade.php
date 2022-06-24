@@ -1,16 +1,12 @@
 @extends('frontend.master')
 @section('content')
     <style>
-
-
         * {
             box-sizing: border-box;
             font-family: "Museo 500";
         }
 
         /* Add a gray background color with some padding */
-
-
         /* Header/Blog Title */
         .header {
             padding: 30px;
@@ -114,9 +110,7 @@
             color: #000;
         }
 
-
         #ajax-book-model .form-control {
-
             border: 1px solid #ced4da !important;
         }
 
@@ -146,34 +140,35 @@
             font-family: 'Museo 500';
         }
 
-        #ajax-book-model .form-control{
-
-    border: 1px solid #ced4da !important;
+        #ajax-book-model .form-control {
+            border: 1px solid #ced4da !important;
         }
+
         #ajax-book-model .btn-primary {
-    color: #fff;
-    background-color: #f27222;
-    border-color: #f27222;
-}
+            color: #fff;
+            background-color: #f27222;
+            border-color: #f27222;
+        }
+
         #ajax-book-model h4 {
             padding-left: 15px;
-}
+        }
 
-.public-detail-inner h2 {
-    font-size: 24px;
-    letter-spacing: 1px;
-    color: #5c7c85;
-    font-family: "Museo 500";
-    padding: 30px 0px 0px 0px;
-    margin-bottom: 0 !important;
-    font-family: 'Museo 500';
-}
+        .public-detail-inner h2 {
+            font-size: 24px;
+            letter-spacing: 1px;
+            color: #5c7c85;
+            font-family: "Museo 500";
+            padding: 30px 0px 0px 0px;
+            margin-bottom: 0 !important;
+            font-family: 'Museo 500';
+        }
 
-.leftcolumn h4 {
-    padding-left: 1rem;
-    margin-top: 10px;
-    font-family: 'Museo 500';
-}
+        .leftcolumn h4 {
+            padding-left: 1rem;
+            margin-top: 10px;
+            font-family: 'Museo 500';
+        }
 
         /* End */
     </style>
@@ -184,11 +179,13 @@
                 <div class="col-md-12">
                     <nav aria-label="breadcrumb" class="breadcrumbs large-font">
                         <ol class="breadcrumb">
-                          <li class="breadcrumb-item"><a href="{{ url('/') }}" role="button" tabindex="0">Home</a></li>
-                          <li class="breadcrumb-item"><a onclick="history.back()" href="javascript::void();">UPCOMING WEBINARS</a></li>
-                          <li class="breadcrumb-item active" aria-current="page">Et Irure Nostrum Dol</li>
+                            <li class="breadcrumb-item"><a href="{{ url('/') }}" role="button" tabindex="0">Home</a>
+                            </li>
+                            <li class="breadcrumb-item"><a onclick="history.back()" href="javascript::void();">UPCOMING
+                                    WEBINARS</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ $eventdetail->event_title }}</li>
                         </ol>
-                      </nav>
+                    </nav>
                 </div>
             </div>
             <form action="{{ route('submitPayment') }}" method="POST">
@@ -236,20 +233,30 @@
                             <div class="public2-info">
                                 <div class="public2-title">
                                     Time:
-                                </div>
-                                @php
-                                    $eventTime = $eventdetail->time;
-                                    // $timeZone = $eventdetail->user->timezone->timezone;
-                                    // $today = new DateTime($eventdetail->time, new DateTimeZone($timeZone));
+                                    @php
+                                        $eventTime = $eventdetail->time;
+                                        $timeZone = $eventdetail->user->timezone->timezone;
+                                        
+                                        // Fetching timezone UTC code : Please don't screw it
+    $pieces = explode('(', $timeZone);
+    $pieces = explode('C', $pieces[1]);
+    $pieces = explode(')', $pieces[1]);
 
-                                    // $userTimeZone = Auth::user()->timezone->timezone;
-                                    // $userEventTime = new DateTimeZone($userTimeZone);
-                                    // $convertedTime = $today->setTimeZone($userEventTime);
-                                    // $formattedTime = $convertedTime->format('H:i');
-                                @endphp
-                                {{-- @dd($timezoone) --}}
-                                <div class="public2-description">
-                                    {{-- {{ date('g:i a', strtotime($formattedTime)) }} --}}
+    // Formatting the time
+    $today = new DateTime($eventdetail->time, new DateTimeZone($pieces[0]));
+
+    $userTimeZone = Auth::user()->timezone->timezone;
+
+    // Fetching timezone UTC code : Please don't screw it
+                                        $pieces = explode('(', $userTimeZone);
+                                        $pieces = explode('C', $pieces[1]);
+                                        $pieces = explode(')', $pieces[1]);
+                                        
+                                        $userEventTime = new DateTimeZone($pieces[0]);
+                                        $convertedTime = $today->setTimeZone($userEventTime);
+                                        
+                                        echo $convertedTime->format('H:i') . ' ' . $userTimeZone;
+                                    @endphp
                                 </div>
                             </div>
                         </div>
@@ -303,11 +310,12 @@
                             <div class="public2-title">
                                 <input type="radio" id="third_price" class="check_class" name="event_price"
                                     value="{{ $eventdetail->vet_pet_prof_fee }}">
-                                <label for="third_price">Vet/Pet Prof. Fee : ${{ $eventdetail->vet_pet_prof_fee }}</label>
+                                <label for="third_price">Vet/Pet Prof. Fee :
+                                    ${{ $eventdetail->vet_pet_prof_fee }}</label>
                             </div>
                             <div class="public2-title">
-                                <input style="width: 20px;height:20px;" type="radio" id="fourth_price" class="check_class" name="event_price"
-                                    value="{{ $eventdetail->vet_pet_prof_premium_fee }}">
+                                <input style="width: 20px;height:20px;" type="radio" id="fourth_price" class="check_class"
+                                    name="event_price" value="{{ $eventdetail->vet_pet_prof_premium_fee }}">
                                 <label for="fourth_price">Vet/Pet Prof. Premium
                                     Fee : ${{ $eventdetail->vet_pet_prof_premium_fee }}</label>
                             </div>
@@ -357,9 +365,9 @@
                                                         {{ $review->comments }}
                                                     </p>
                                                     @if (auth()->user()->id == $review->user_id)
-                                                        <a href="javascript:void(0)" class="edit"
-                                                            data-id="{{ $review->id }}"><i
-                                                                class="fas fa-edit text-primary"></i></a>
+                                                        <button class="edit" type="button" data-toggle="modal"
+                                                            data-target="#ajax-book-model" data-id="{{ $review->id }}">
+                                                            <i class="fas fa-edit text-primary"></i></buttont>
                                                     @endif
                                                 </div>
                                                 <hr>
@@ -368,7 +376,6 @@
                                                     <input type="hidden" name="event_id" value="{{ $review->event_id }}">
                                                     <input type="hidden" name="user_id" value="{{ $review->user_id }}">
                                                     <input type="hidden" name="review_id" value="{{ $review->id }}">
-
                                                     <button type="submit" class="click_join">Delete</button>
                                                 </form> --}}
                                             @endforeach
@@ -389,27 +396,30 @@
                                             <div class="form-group row">
                                                 <div class="col-sm-6 rating_box">
                                                     <div class="rate">
-                                                        <input type="radio" id="star5" class="rate" name="rating"
-                                                            value="5" />
+                                                        <input type="radio" id="star5" class="rate"
+                                                            name="rating" value="5" />
                                                         <label for="star5" title="text">5 stars</label>
                                                         <input type="radio" checked id="star4" class="rate"
                                                             name="rating" value="4" />
                                                         <label for="star4" title="text">4 stars</label>
-                                                        <input type="radio" id="star3" class="rate" name="rating"
-                                                            value="3" />
+                                                        <input type="radio" id="star3" class="rate"
+                                                            name="rating" value="3" />
                                                         <label for="star3" title="text">3 stars</label>
-                                                        <input type="radio" id="star2" class="rate" name="rating"
-                                                            value="2">
+                                                        <input type="radio" id="star2" class="rate"
+                                                            name="rating" value="2">
                                                         <label for="star2" title="text">2 stars</label>
-                                                        <input type="radio" id="star1" class="rate" name="rating"
-                                                            value="1" />
+                                                        <input type="radio" id="star1" class="rate"
+                                                            name="rating" value="1" />
                                                         <label for="star1" title="text">1 star</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group row mt-4">
                                                 <div class="col-sm-12 ">
-                                                    <textarea class="form-control" name="comment" rows="6 " placeholder="Comment" maxlength="200"></textarea>
+                                                    <textarea class="form-control" name="comment" rows="6 " placeholder="Comment" maxlength="200" required ></textarea>
+                                                    @error('comment')
+                                                        <p class="alert alert-danger">{{ $message }}</p>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class="mt-3 ">
@@ -423,41 +433,8 @@
                         </div>
                     </div>
                 </div>
-
-
-                <div class="modal fade" id="ajax-book-model" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Edit Comment</h4>
-                            </div>
-                            <div class="modal-body">
-                                <form action="javascript:void(0)" id="addEditBookForm" name="addEditBookForm"
-                                    class="form-horizontal" method="POST">
-                                    <input type="hidden" name="id" value="" id="review-id">
-
-
-                                    <div class="form-group">
-                                        <label for="name" class="col-sm-2 control-label">Comment</label>
-                                        <div class="col-sm-12">
-                                            <input type="text" class="form-control" id="comment" name="comment"
-                                                placeholder="Enter Comment" value="" maxlength="50" required="">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-offset-2 col-sm-10">
-                                        <button type="button" class="btn btn-primary" id="btn-save" value="addNewBook">Save
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endif
+                @include('frontend.pages.webinars.upcoming_eventjquery')
+            @endif
     </section>
 
 @endsection
@@ -465,72 +442,80 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
+
             $(document).on('click', 'input[type="checkbox"]', function() {
                 $('input[type="checkbox"]').not(this).prop('checked', false);
             });
-        });
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+            $(document).on('click', '.edit', function() {
+                var id = $(this).data('id');
+                $("#review-id").val(id);
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "POST",
+                    url: "{{ route('comment.edit') }}",
+                    data: {
+                        id: id,
+                    },
+                    dataType: 'json',
+                    success: function(res) {
+                        var rating = res.review.star_rating;
+                        for (var i = 1; i <= rating; i++) {
+                            $(".rate-modal").append(`
+                        <input type="radio" id="star` + i + `" class="rate review1 " name="review1"  data-stars="` +
+                                i +
+                                `" value="` + i + `" />
+                        <label class="" for="star` + i + `" title="text">` + i + `stars</label>
+                        `);
+                        }
 
-        $('#addNewBook').click(function() {
-
-            $('#ajax-book-model').modal('show');
-        });
-
-        $('body').on('click', '.edit', function() {
-
-            var id = $(this).data('id');
-
-            // ajax
-            $.ajax({
-                type: "POST",
-                url: "{{ route('comment.edit') }}",
-                data: {
-                    id: id,
-                },
-                dataType: 'json',
-                success: function(res) {
-
-                    $('#review-id').val(res.id);
-                    $('#comment').val(res.comments);
-                    $('#ajax-book-model').modal('show');
-                }
+                        for (var j = 1; j <= 5 - rating; j++) {
+                            $(".rate-modal").append(`
+                        <input type="radio" id="star` + i + `" class="rate" name="review1 review1" data-stars="` + i +
+                                `" value="` + i + `" />
+                        <label class="" for="star` + i + `" title="text">` + i + `stars</label>
+                        `);
+                            i += 1;
+                        }
+                    }
+                });
             });
 
-        });
 
+            $('body').on('click', '#btn-save', function(e) {
+                e.preventDefault();
+                var id = $("#review-id").val();
+                var comment = $("#comment").val();
+                $("#btn-save").html('Please Wait...');
+                $("#btn-save").attr("disabled", true);
 
-
-        $('body').on('click', '#btn-save', function(e) {
-            e.preventDefault();
-
-            var id = $("#review-id").val();
-
-            var comment = $("#comment").val();
-
-            $("#btn-save").html('Please Wait...');
-            $("#btn-save").attr("disabled", true);
-
-            // ajax
-            $.ajax({
-                type: "POST",
-                url: "{{ route('comment.update') }}",
-                data: {
-                    id: id,
-                    comment: comment,
-                },
-                dataType: 'json',
-                success: function(res) {
-                    window.location.reload();
-                    $("#btn-save").html('Submit');
-                    $("#btn-save").attr("disabled", false);
-                }
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "POST",
+                    url: "{{ route('comment.update') }}",
+                    data: {
+                        review_id: $("#review-id").val(),
+                        rating: $("#rating").val(),
+                        comment: $("#comment").val()
+                    },
+                    dataType: 'json',
+                    success: function(res) {
+                        window.location.reload();
+                        $("#btn-save").html('Submit');
+                        $("#btn-save").attr("disabled", false);
+                    }
+                });
             });
 
+            $(document).on('click', 'input.rate:radio', function() {
+                var length = $(this).val();
+                $("#rating").val('');
+                $("#rating").val(length);
+            });
         });
     </script>
 @endsection

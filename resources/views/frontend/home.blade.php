@@ -46,12 +46,12 @@
                                     </div>
 
 
-                                    <p>We just sent an email to <a href="#"> ***#*@***.com</a>
+                                    <p>We just sent an email to <a> {{ Str::of(Auth::user()->email)->limit(3) }}@***.com</a>
                                         Click on the link in that email to
                                         complete your registration.</p>
 
                                     <p>
-                                        Did’ receive an ema from us? Check your SPAM
+                                        Did’ receive an email from us? Check your SPAM
                                         folder. til can find i?
                                     </p>
 

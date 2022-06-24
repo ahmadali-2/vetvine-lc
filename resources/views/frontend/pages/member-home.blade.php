@@ -44,7 +44,7 @@
                     </div>
                     <div class="row mt-4">
                         <div class=" col-lg-3 col-md-3 text-center">
-                            <div class="img_post_left"><img src="@if(Auth()->user()->profile_photo ?? '') {{ asset('/frontend/images/Profile-Images/'.Auth()->user()->profile_photo)}} @else {{asset('frontend/images/thumbnail.jfif')}} @endif" width="262"
+                            <div class="img_post_left"><img src="@if(Auth()->user()->profile_photo ?? '') {{ asset('/frontend/images/Profile-Images/'.Auth()->user()->profile_photo)}} @else {{asset('frontend/images/dummy.png')}} @endif" width="262"
                                     height="198" alt="" />
                                 <label>{{ Auth::user()->name }}</label>
                             </div>

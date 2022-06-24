@@ -11,6 +11,10 @@ class ReviewController extends Controller
 {
     public function reviewstore(Request $request)
     {
+        $request->validate([
+            'comment' => 'required'
+        ]);
+
         $checkUser =ReviewRating::where('user_id',Auth()->user()->id)->where('event_id', $request->event_id)->first();
         if(!empty($checkUser)){
             parent::warningMessage("You Already Posted A Review On This Event");
@@ -31,15 +35,18 @@ class ReviewController extends Controller
     }
     public function commentupdate(Request $request)
     {
+        // return $request;
 
         try {
             if ($request->ajax()) {
-                ReviewRating::find($request->id)
+                ReviewRating::find($request->review_id)
                 ->update([
+                    'star_rating' => $request->rating,
                     'comments' => $request->comment,
                 ]);
-
-                return response()->json(['success' => true]);
+                return response()->json([
+                    'success' => 'Review Updated Successfully.'
+                ]);
             }
         }catch(Exception $e) {
             return response()->json(['success' => false]);
@@ -47,9 +54,11 @@ class ReviewController extends Controller
     }
     public function edit(Request $request)
     {
-        $review  = ReviewRating::where('id',$request->id)->find($request->id);
-      
-        return response()->json($review);
+        $review  = ReviewRating::where('id',$request->id)->first();
+        return [
+            'succces' => true,
+            'review' => $review
+        ];
     }
 
     // public function Reviewdelete(Request $request)

@@ -132,6 +132,7 @@ class PostController extends Controller
     public function likeSave(Request $request)
     {
         $user = auth()->user();
+<<<<<<< HEAD
         $permissions = MemberPermission::where('membertype_id', $user->userMemberType->id)->first();
         if($permissions->likes == 1){
             if($request->likeType == 1){
@@ -148,21 +149,17 @@ class PostController extends Controller
                 //     'type' => '0',
                 // ]);
 
+=======
+        if($user){
+            $permissions = MemberPermission::where('membertype_id', $user->userMemberType->id)->first();
+            if($permissions->likes == 1){
+>>>>>>> cf675fa033770238c367009f09a08d8ce19c92e9
                 if($request->likeType == 1){
-                    $liked = Like::create([
-                        "post_id" => $request->likepostid,
-                        "user_id" => Auth::id(),
-                        "like" => 1,
-                        "ce" => $request->ce,
-                    ]);
+                    $liked = Like::where('user_id', Auth::id())->where('post_id', $request->likepostid)->where('ce',$request->ce)->first();
                 }else{
-                    $liked = ShareLike::create([
-                        "share_id" => $request->likepostid,
-                        "user_id" => Auth::id(),
-                        "like" => 1,
-                        "ce" => $request->ce,
-                    ]);
+                    $liked = ShareLike::where('user_id', Auth::id())->where('share_id', $request->likepostid)->where('ce',$request->ce)->first();
                 }
+<<<<<<< HEAD
 
                 return response()->json(
                     [
@@ -203,6 +200,81 @@ class PostController extends Controller
                         'message' => 'Post unliked successfully',
                         'code' => 201,
                         'like' => $liked,
+=======
+                if (!$liked) {
+                    //$push_notifications = event(new NotificationEvent(Auth::id(), (int) $request->likepostid));
+                    // PushNotification::create([
+                    //     'user_id' => Auth::id(),
+                    //     'post_id' => $request->likepostid,
+                    //     'post_user_id' => $request->postUserid,
+                    //     'type' => '0',
+                    // ]);
+        
+                    if($request->likeType == 1){
+                        $liked = Like::create([
+                            "post_id" => $request->likepostid,
+                            "user_id" => Auth::id(),
+                            "like" => 1,
+                            "ce" => $request->ce,
+                        ]);
+                    }else{
+                        $liked = ShareLike::create([
+                            "share_id" => $request->likepostid,
+                            "user_id" => Auth::id(),
+                            "like" => 1,
+                            "ce" => $request->ce,
+                        ]);
+                    }
+        
+                    return response()->json(
+                        [
+                            'success' => true,
+                            'message' => 'Data inserted successfully',
+                            'code' => 200,
+                            'like' => $liked,
+                        ]
+                    );
+        
+                } elseif ($liked->like == 0) {
+        
+                    $liked->update([
+                        "like" => '1',
+                    ]);
+                    return response()->json(
+                        [
+                            'success' => true,
+                            'message' => 'Post liked successfully!',
+                            'code' => 200,
+                            'like' => $liked,
+                        ]
+                    );
+                } else {
+                    // $push_notifications = event(new NotificationEvent(Auth::id(), (int) $request->likepostid));
+                    // PushNotification::create([
+                    //     'user_id' => Auth::id(),
+                    //     'post_id' => $request->likepostid,
+                    //     'post_user_id' => $request->postUserid,
+                    //     'type' => '0',
+                    // ]);
+                    $liked->update([
+                        "like" => '0',
+                    ]);
+                    return response()->json(
+                        [
+                            'success' => true,
+                            'message' => 'Post unliked successfully',
+                            'code' => 201,
+                            'like' => $liked,
+                        ]
+                    );
+                }
+            }else{
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => 'You dont have permission to like!',
+                        'code' => 400,
+>>>>>>> cf675fa033770238c367009f09a08d8ce19c92e9
                     ]
                 );
             }
@@ -210,7 +282,7 @@ class PostController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => 'You dont have permission to like!',
+                    'message' => 'Please login to like!',
                     'code' => 400,
                 ]
             );
