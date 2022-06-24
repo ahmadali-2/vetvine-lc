@@ -56,7 +56,50 @@
             height: 50px;
             border-radius: 50%;
         }
+/* here */
+        .editRate {
+            float: left;
+            height: 46px;
+            padding: 0 10px;
+        }
 
+        .editRate:not(:checked)>input {
+            position: absolute;
+            display: none;
+        }
+
+        .editRate:not(:checked)>label {
+            float: right;
+            width: 1em;
+            overflow: hidden;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 30px;
+            color: #ccc;
+        }
+
+        .editRate:not(:checked)>label:before {
+            content: '★ ';
+        }
+
+        .editRate>input:checked~label {
+            color: #ffc700;
+        }
+
+        .editRate:not(:checked)>label:hover,
+        .editRate:not(:checked)>label:hover~label {
+            color: #deb217;
+        }
+
+        .editRate>input:checked+label:hover,
+        .editRate>input:checked+label:hover~label,
+        .editRate>input:checked~label:hover,
+        .editRate>input:checked~label:hover~label,
+        .editRate>label:hover~input:checked~label {
+            color: #c59b08;
+        }
+
+        /* here */
         .rate {
             float: left;
             height: 46px;
@@ -463,24 +506,26 @@
                     },
                     dataType: 'json',
                     success: function(res) {
+                        $(".edit-rate-modal").empty();
                         var rating = res.review.star_rating;
+                        console.log('actual rating'+rating);
                         for (var i = 1; i <= rating; i++) {
-                            $(".rate-modal").append(`
-                        <input type="radio" id="star` + i + `" class="rate review1 " name="review1"  data-stars="` +
+                            $(".edit-rate-modal").append(`
+                        <input type="radio" id="starEdit` + i + `" class="editRate review1 " name="review1"  data-stars="` +
                                 i +
                                 `" value="` + i + `" />
-                        <label class="" for="star` + i + `" title="text">` + i + `stars</label>
+                        <label id="starLabel` + i + `" class="" for="starEdit` + i + `" title="text" style="color:#ffc107" data-stars=` + i + `>` + i + `stars</label>
                         `);
                         }
 
-                        for (var j = 1; j <= 5 - rating; j++) {
-                            $(".rate-modal").append(`
-                        <input type="radio" id="star` + i + `" class="rate" name="review1 review1" data-stars="` + i +
-                                `" value="` + i + `" />
-                        <label class="" for="star` + i + `" title="text">` + i + `stars</label>
+                        for (var j = rating+1; j <= 5; j++) {
+                            $(".edit-rate-modal").append(`
+                        <input type="radio" id="starEdit` + j + `" class="editRate" name="review1 review1" data-stars="` + j +
+                                `" value="` + j + `" />
+                        <label id="starLabel` + j + `" class="" for="starEdit` + j + `" title="text" style="color:#eee" data-stars=` + j + `>` + j + `stars</label>
                         `);
-                            i += 1;
                         }
+                        activateStarEvents();
                     }
                 });
             });
@@ -518,6 +563,32 @@
                 $("#rating").val('');
                 $("#rating").val(length);
             });
+
+            $(document).on('click', 'input.editRate:radio', function() {
+                var length = $(this).val();
+                $("#rating").val('');
+                $("#rating").val(length);
+            });
         });
+
+        function activateStarEvents(){
+                $('.edit-rate-modal label').on('click', function(){
+                    var star = $(this).attr('data-stars');
+                    var i=1;
+                    var remainingStars = 5-star;
+                    for(i=1;i<=star;i++){
+                        var starId = '#starLabel'+i;
+                        if ($(starId).length) {
+                            $(starId).css('color','#ffc107');
+                        }
+                    }
+                    for(var j=i;j<=5;j++){
+                        var starId = '#starLabel'+j;
+                        if ($(starId).length) {
+                            $(starId).css('color','#ccc');
+                        }
+                    }
+                });
+            }
     </script>
 @endsection
