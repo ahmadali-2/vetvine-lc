@@ -3,10 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\UserRegistered;
-<<<<<<< HEAD
 use App\Http\Controllers\Controller;
-=======
->>>>>>> 5b12f36c72e86491596503ccd045a98413b00a10
 
 class SubscribeToMailChimp
 {

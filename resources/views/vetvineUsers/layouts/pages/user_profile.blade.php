@@ -108,20 +108,10 @@
                                                     <div class="input_field">
                                                         <input placeholder="" class="form-control" name="licensure"
                                                             id="licensure" value="{{ Auth::user()->licence_no }} "
-                                                            required>
+                                                            >
                                                         <span class="asteric" id="error4"></span>
                                                     </div>
                                                 </div>
-                                                {{-- @else
-                                                <div class="inner-input" id="license-div">
-                                                    <label>Licensure*</label>
-                                                    <div class="input_field">
-                                                        <input placeholder=""  class="form-control" name="licensure"
-                                                            id="licensure" value="{{ Auth::user()->licence_no }} "
-                                                            readonly>
-                                                        <span class="asteric" id="error4"></span>
-                                                    </div>
-                                                </div> --}}
                                             @endif
                                                 <input type="hidden" name="" id="type" value="{{ Auth::user()->type }}">
                                             {{-- @endif --}}
@@ -209,9 +199,6 @@
                                         </div>
 
                                         <h2 class="heading_employment">Employment Info</h2>
-
-
-
                                         <div class="serch-section">
                                             <div class="inner-input">
                                                 <label>Hospital or Business Name</label>
@@ -311,14 +298,6 @@
 @endsection
 @section('scripts')
     <script>
-        // $(document).ready(function() {
-        //     if ($("#licensure").length === 0) {
-        //         alert('running');
-        //     } else {
-        //         alert('not running');
-        //     }
-        // };
-        // });
         $('#firstname').on('keyup', function() {
             if ($(this).val().length > 0) {
                 $(this).closest('div').find('#error1').css("visibility", "hidden");
@@ -392,20 +371,10 @@
             }
         });
         $(document).ready(function(e) {
-            // var type = $("#type").val();
-            // if(type === '1' || type === '2' || type === '4' || type === '5'){
-            //     $("#license-div").show();
-            // }else{
-            //     $("#license").hide();
-            // }
             $("#personal_btn").on("click", function(e) {
                 if ($("#licensure").length != 0) {
-                    // console.log($.trim($('#licensure').val()));
                     if ($.trim($('#firstname').val()) == '' || $.trim($('#lastname').val()) == '' || $.trim(
-                            $(
-                                '#licensure').val()) == '' || $.trim($('#usernetwork').val()) == '' || $
-                        .trim($(
-                            '#timezone').val()) == '') {
+                            $('#licensure').val()) == '' || $.trim($('#usernetwork').val()) == '' || $.trim($('#timezone').val()) == '') {
                         toastr.error('Make sure compulsory fields are not empty.');
                         return;
                     } else {
@@ -476,6 +445,7 @@
 
         $(document).on("change", "#usernetwork", function() {
             var networdId = $(this).val();
+            // alert(networdId);
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -491,6 +461,7 @@
                         $("#license-div").show();
                     }else{
                         $("#license-div").hide();
+                        $()
                     }
                 }
             });

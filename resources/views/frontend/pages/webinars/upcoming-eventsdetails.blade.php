@@ -350,7 +350,7 @@
                                         <div class="col-sm-12 mt-5">
 
                                             @foreach ($eventdetail->ReviewData as $review)
-                                                <div class=" review-content">
+                                                <div class=" review-content" id="review-section">
                                                     <img src="https://www.w3schools.com/howto/img_avatar.png"
                                                         class="avatar ">
                                                     <span class="font-weight-bold ml-2">
@@ -442,13 +442,15 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
+            $('html, body').animate({
+                scrollTop: $('#review-section').offset().top
+            }, 'slow');
 
             $(document).on('click', 'input[type="checkbox"]', function() {
                 $('input[type="checkbox"]').not(this).prop('checked', false);
             });
 
             $(document).on('click', '.edit', function() {
-                $("#rate-modal").html('');
                 $("#comments-model").val('');
                 var id = $(this).data('id');
                 $("#review-id").val(id);
@@ -463,20 +465,27 @@
                     },
                     dataType: 'json',
                     success: function(res) {
+                        $("#comments-model").empty();
+                        $(".rate-modal").empty();
+                        var i = 1;
+                        var j = 1;
                         var rating = res.review.star_rating;
-                        var comments = $("#comments").val();
-                        for (var i = 1; i <= rating; i++) {
+                        var comments = res.review.comments;
+                        $("#comments-model").val(comments);
+
+                        for (i = 1; i <= rating; i++) {
+                            
                             $(".rate-modal").append(`
-                        <input type="radio" id="star` + i + `" class="rate review1 " name="review1"  data-stars="` +
+                        <input type="radio" id="star` + i + `" class="rate review1 " name="review1"   data-stars="` +
                                 i +
                                 `" value="` + i + `" />
                         <label class="" for="star` + i + `" title="text">` + i + `stars</label>
                         `);
                         }
 
-                        for (var j = 1; j <= 5 - rating; j++) {
+                        for (j = 1; j <= 5 - rating; j++) {
                             $(".rate-modal").append(`
-                        <input type="radio" id="star` + i + `" class="rate" name="review1 review1" data-stars="` + i +
+                        <input type="radio" id="star` + i + `" class="rate" name="review1" data-stars="` + i +
                                 `" value="` + i + `" />
                         <label class="" for="star` + i + `" title="text">` + i + `stars</label>
                         `);
@@ -490,7 +499,7 @@
             $('body').on('click', '#btn-save', function(e) {
                 e.preventDefault();
                 var id = $("#review-id").val();
-                var comment = $("#comment").val();
+                var comment = $("#comment-model").val();
                 $("#btn-save").html('Please Wait...');
                 $("#btn-save").attr("disabled", true);
 
@@ -502,15 +511,12 @@
                     url: "{{ route('comment.update') }}",
                     data: {
                         review_id: $("#review-id").val(),
-                        rating: $("#rating").val(),
-                        comment: $("#comment").val()
+                        rating: $(".review1").val(),
+                        comment: $("#comments-model").val()
                     },
                     dataType: 'json',
                     success: function(res) {
-                        // window.location.reload();
-                        $('html, body').animate({
-                            scrollTop: $('#comment-section').offset().top
-                        }, 'slow');
+                        window.location.reload();
                         $("#btn-save").html('Submit');
                         $("#btn-save").attr("disabled", false);
                     }
@@ -522,6 +528,10 @@
                 $("#rating").val('');
                 $("#rating").val(length);
             });
+
+            $(document).on('click', '.edit', function() {
+
+            })
         });
     </script>
 @endsection
