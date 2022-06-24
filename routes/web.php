@@ -56,6 +56,7 @@ use App\Http\Controllers\VetvineUsers\PostManagement\PostController;
 use App\Http\Controllers\VideoDescriptionController;
 use App\Http\Controllers\StaticPageController; // for static pages
 use App\Http\Controllers\TermsController; // for terms of services
+use App\Http\Controllers\LicensureController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 
@@ -191,8 +192,6 @@ Route::get('upcoming-event',[HomeController::class,'upcomingevent'])->name('upco
 Route::post('submit-payment',[EventPaymentController::class,'index'])->name('submitPayment');
 Route::post('payment',[EventPaymentController::class,'paymentWebinars'])->name('payementwebinars');
 
-
-
 Route::get('publications',[HomeController::class,'publications'])->name('upcoming_publications');
 Route::post('educations',[HomeController::class,'searceducations'])->name('search_educations');
 Route::resource('eventpayments',EventPaymentController::class);
@@ -258,7 +257,8 @@ Route::get('testing', function () {
 Route::get('/video-description/{id}{category}', [VideoDescriptionController::class, 'video_desc'])->name('video_desc');
 Route::post('/videos-search', [VideoDescriptionController::class, 'video_search'])->name('videos.search');
 Route::post('/rating-videos', [VideoDescriptionController::class, 'rating_videos'])->name('rating.videos');
-Route::post('/mark-as-read',     [PushNotificationController::class, 'mark_as_read'])->name('read.notification');
+Route::post('/mark-as-read',  [PushNotificationController::class, 'mark_as_read'])->name('read.notification');
+Route::post('/licensure',     [LicensureController::class, 'licensure'])->name('licensure.show');
 
 
 

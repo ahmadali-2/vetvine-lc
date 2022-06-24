@@ -21,12 +21,12 @@ class VetvineUsersRole
     {
 
 
-        $user = Auth::check() ? Auth::user() : null;
-        if($user->type !=2) {
-            notify()->error("Your account is not approved by admin. Please try again later");
-            Auth::logout();
-            return redirect('/');
-        }
+        // $user = Auth::check() ? Auth::user() : null;
+        // if($user->type != 2) {
+        //     notify()->error("Your account is not approved by admin. Please try again later");
+        //     // Auth::logout();
+        //     return redirect('/');
+        // }
 
         return $next($request);
     }

@@ -15,9 +15,9 @@ class CreateVideosOnDemandsSponserTablesTable extends Migration
     {
         Schema::create('videos_on_demands_sponser_tables', function (Blueprint $table) {
             $table->unsignedBigInteger('video_id')->nullable();
-            $table->foreign('video_id')->references('id')->on('videos_on_demands');
+            $table->foreign('video_id')->references('id')->on('videos_on_demands')->onDelete('cascade');
             $table->unsignedBigInteger('sponsers_id')->nullable();
-            $table->foreign('sponsers_id')->references('id')->on('sponser_tables');
+            $table->foreign('sponsers_id')->references('id')->on('sponser_tables')->onDelete('cascade');
         });
     }
 
