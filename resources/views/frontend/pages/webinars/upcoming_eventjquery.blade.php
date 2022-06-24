@@ -16,7 +16,7 @@
                     <div class="form-group">
                         <label for="name" class="col-sm-2 control-label">Comment</label>
                         <div class="col-sm-12">
-                            <input type="text" class="form-control" id="comment" name="comment"
+                            <input type="text" class="form-control" id="comments-model" name="comment"
                                 placeholder="Enter Comment" value="" maxlength="50"
                                 required="">
                         </div>

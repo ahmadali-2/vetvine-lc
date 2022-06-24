@@ -29,17 +29,16 @@ class ReviewController extends Controller
         $review->save();
         parent::successMessage('Your Review Has Been Submitted Successfully.');
         return redirect()->back();
-      } catch(Exception $e) {
+        } catch(Exception $e) {
         parent::dangerMessage("Review Does Not Submitted, Please Try  Again");
         return redirect()->back();      }
     }
     public function commentupdate(Request $request)
     {
-        // return $request;
-
         try {
             if ($request->ajax()) {
-                ReviewRating::find($request->review_id)
+                ReviewRating::find($request->rating)
+                // return 'running';
                 ->update([
                     'star_rating' => $request->rating,
                     'comments' => $request->comment,
@@ -48,7 +47,8 @@ class ReviewController extends Controller
                     'success' => 'Review Updated Successfully.'
                 ]);
             }
-        }catch(Exception $e) {
+        }
+        catch(Exception $e) {
             return response()->json(['success' => false]);
         }
     }
