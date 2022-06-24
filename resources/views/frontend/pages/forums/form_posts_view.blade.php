@@ -15,11 +15,11 @@
 
 
 <tr>
-    <td>    <a href="{{ route('getForumcategoryPosts',$forumpost->id) }}"><h4>{{ $forumpost->post_title ?? '' }}</h4></a> </td>
+    <td><a href="{{ route('getForumcategoryPosts',$forumpost->id) }}"><h4>{{ $forumpost->post_title ?? '' }}</h4></a> </td>
 
     <td>{{ $forumpost->comments->count('comments')}}</td>
     <td>{{ $forumpost->likes->sum('like')}}</td>
-    <td>0</td>
+    <td>{{ $forumpost->postView->count('view_count') }}</td>
     <td class="d-flex align-items-center"><img src={{ asset('frontend/forums/img/user.png') }}  class="mr-1" alt="">{{  date('M d ,Y', strtotime($forumpost->created_at)) }}</td>
     <td>
         <button type="button dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -3,8 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\UserRegistered;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
+use App\Http\Controllers\Controller;
 
 class SubscribeToMailChimp
 {
@@ -31,12 +30,25 @@ class SubscribeToMailChimp
     {
 
 
-        $mailChimpApiKey = env('MAILCHIMP_API_KEY');
-        $mailchimp = new \Mailchimp($mailChimpApiKey);
-        $mailchimp->lists->subscribe(env('MAILCHIMP_LIST_ID'),
-           ['email'=>$event->user->email],
-           null,
-           null,
-           false);
+
+        // $exploded = explode('@',$domain);
+        // $exploded = '@'.$exploded[1];
+        $email = $event->user->email;
+        $domian = ltrim(stristr($email, '@'),'@');
+        if (checkdnsrr($domian, "ANY") && $domian != 'mailinator.com') {
+            $mailChimpApiKey = env('MAILCHIMP_API_KEY');
+            $mailchimp = new \Mailchimp($mailChimpApiKey);
+            $mailchimp->lists->subscribe(env('MAILCHIMP_LIST_ID'),
+                ['email' => $event->user->email],
+                null,
+                null,
+                false);
+        } else {
+            return true;
+        //    $controller = new Controller();
+        //    $controller->dangerMessage('Email Looks Fake');
+        }
+
+
     }
 }

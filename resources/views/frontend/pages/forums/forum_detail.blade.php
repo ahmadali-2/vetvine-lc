@@ -134,7 +134,7 @@
                                 </div>
                                 <div class="comment_forum  d-flex align-items-center"><img
                                         src="{{ asset('frontend/forums/img/message.png') }}" alt="">
-                                    <div class="chat-veiw">{{ $forumcatgeorypost->comments->count('comments') }} comments
+                                    <div class="chat-veiw" id="commentajax" >{{ $forumcatgeorypost->comments->count('comments') }} comments
                                     </div>
                                 </div>
                             </div>
@@ -162,7 +162,7 @@
                                 'ce' => 0,
                                 'type' => 'post',
                             ])
-                        </div>     
+                        </div>
                         <hr />
                     </div>
                 </div>

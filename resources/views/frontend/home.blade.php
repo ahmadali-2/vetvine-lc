@@ -94,14 +94,12 @@
                                                                                                                                                                                                                                         enjoying the benefits of VetVine.') }}
                             </div>
 
-
-                            <p>We just sent an email to <a href="#"></a>
+                            <p>We just sent an email to <b style="font-weight: 600; color: #4242fc"><a> {{ Str::of(Auth::user()->email)->limit(3) }}.@<?php $explode = explode('@',Auth::user()->email); $explode = explode('.',$explode[1]); echo ($explode[0]);?>.com</a></b>
                                 Click on the link in that email to
                                 complete your registration.</p>
-
                             <p>
-                                Did’ receive an ema from us? Check your SPAM
-                                folder. til can find i?
+                                Didn’t receive an email from us? Check your SPAM
+                                folder. till cant find it?
                             </p>
 
 

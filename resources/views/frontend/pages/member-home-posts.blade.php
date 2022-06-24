@@ -110,7 +110,7 @@
                         <h6 class="h6_post_label">
                             {!! $post->post_description !!}
                         </h6>
-                        <p><b></b>Posted on : {{date("m/d/Y", strtotime($share->created_at))}}</p>
+                        <p><b></b>Posted on : {{date("m/d/Y", strtotime($post->created_at))}}</p>
                     </div>
 
 

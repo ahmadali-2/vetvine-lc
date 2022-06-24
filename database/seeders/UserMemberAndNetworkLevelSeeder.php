@@ -14,6 +14,7 @@ class UserMemberAndNetworkLevelSeeder extends Seeder
      */
     public function run()
     {
+        
         UserMemberAndNetworkLevel::create([
                 'name' => 'Veterinary Professional',
         ]);
@@ -66,6 +67,6 @@ class UserMemberAndNetworkLevelSeeder extends Seeder
                 'parent_id' => 4,
                 'name' => 'Pet Owner',
         ]);
-        
+
     }
 }

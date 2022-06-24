@@ -40,13 +40,13 @@ class CommentController extends Controller
                 else
                 {
                 $comment = new Comment;
-        
+
                 $comment->comment = $request->comment;
-        
+
                 $comment->user()->associate($request->user());
-        
+
                 $post = Post::find($request->post_id);
-        
+
                 $post->comments()->save($comment);
                 if($request->ajax()){
                     return response()->json([
@@ -98,7 +98,7 @@ class CommentController extends Controller
             parent::successMessage('Comment Deleted successfully.');
             return redirect()->back();
         } catch(Exception $e) {
-      
+
             parent::dangerMessage("Comment Does Not Deleted, Please Try  Again");
             return redirect()->back();
         }

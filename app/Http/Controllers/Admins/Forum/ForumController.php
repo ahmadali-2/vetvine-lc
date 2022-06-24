@@ -133,6 +133,7 @@ class ForumController extends Controller
 
     }
     public function createViewLog($forumcatgeorypost) {
+        // dd($forumcatgeorypost);
         $checkView =PostView::where('ip_address',request()->ip())->where('post_id', $forumcatgeorypost->id)->first();
         if($checkView == null){
             $postViews= new PostView();
