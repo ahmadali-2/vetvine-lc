@@ -475,9 +475,7 @@
         })
 
         $(document).on("change", "#usernetwork", function() {
-            // alert($(this).val());
             var networdId = $(this).val();
-            // alert(networdId);
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

@@ -236,7 +236,7 @@
                                     @php
                                         $eventTime = $eventdetail->time;
                                         $timeZone = $eventdetail->user->timezone->timezone;
-                                        
+
                                         // Fetching timezone UTC code : Please don't screw it
     $pieces = explode('(', $timeZone);
     $pieces = explode('C', $pieces[1]);
@@ -251,10 +251,10 @@
                                         $pieces = explode('(', $userTimeZone);
                                         $pieces = explode('C', $pieces[1]);
                                         $pieces = explode(')', $pieces[1]);
-                                        
+
                                         $userEventTime = new DateTimeZone($pieces[0]);
                                         $convertedTime = $today->setTimeZone($userEventTime);
-                                        
+
                                         echo $convertedTime->format('H:i') . ' ' . $userTimeZone;
                                     @endphp
                                 </div>
@@ -386,7 +386,7 @@
                             <!-- Review store Section -->
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-sm-10 mt-4  inner_box_chat">
+                                    <div class="col-sm-10 mt-4  inner_box_chat" id="comment-section">
                                         <form class="py-2 px-4" action="{{ route('reviewstore') }}"
                                             style="box-shadow: 0 0 10px 0 #ddd;" method="POST" autocomplete="off">
                                             @csrf
@@ -416,7 +416,7 @@
                                             </div>
                                             <div class="form-group row mt-4">
                                                 <div class="col-sm-12 ">
-                                                    <textarea class="form-control" name="comment" rows="6 " placeholder="Comment" maxlength="200" required ></textarea>
+                                                    <textarea class="form-control" name="comment" rows="6 " placeholder="Comment" maxlength="200" required></textarea>
                                                     @error('comment')
                                                         <p class="alert alert-danger">{{ $message }}</p>
                                                     @enderror
@@ -448,6 +448,8 @@
             });
 
             $(document).on('click', '.edit', function() {
+                $("#rate-modal").html('');
+                $("#comments-model").val('');
                 var id = $(this).data('id');
                 $("#review-id").val(id);
                 $.ajax({
@@ -462,6 +464,7 @@
                     dataType: 'json',
                     success: function(res) {
                         var rating = res.review.star_rating;
+                        var comments = $("#comments").val();
                         for (var i = 1; i <= rating; i++) {
                             $(".rate-modal").append(`
                         <input type="radio" id="star` + i + `" class="rate review1 " name="review1"  data-stars="` +
@@ -504,7 +507,10 @@
                     },
                     dataType: 'json',
                     success: function(res) {
-                        window.location.reload();
+                        // window.location.reload();
+                        $('html, body').animate({
+                            scrollTop: $('#comment-section').offset().top
+                        }, 'slow');
                         $("#btn-save").html('Submit');
                         $("#btn-save").attr("disabled", false);
                     }
