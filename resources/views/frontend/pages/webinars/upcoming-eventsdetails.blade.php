@@ -234,16 +234,18 @@
                                 <div class="public2-title">
                                     Time:
                                     @php
-                                    $eventTime      = $eventdetail->time;
-                                    $timeZone       = $eventdetail->user->timezone->timezone;
+                                        $eventTime = $eventdetail->time;
+                                        $timeZone = $eventdetail->user->timezone->timezone;
+                                        
+                                        // Fetching timezone UTC code : Please don't screw it
+    $pieces = explode('(', $timeZone);
+    $pieces = explode('C', $pieces[1]);
+    $pieces = explode(')', $pieces[1]);
 
-                                    // Fetching timezone UTC code : Please don't screw it
-                                    $pieces = explode("(", $timeZone);
-                                    $pieces = explode("C", $pieces[1]);
-                                    $pieces = explode(")", $pieces[1]);
+    // Formatting the time
+    $today = new DateTime($eventdetail->time, new DateTimeZone($pieces[0]));
 
-                                    // Formatting the time
-                                    $today          =  new DateTime($eventdetail->time, new DateTimeZone($pieces[0]));
+    $userTimeZone = Auth::user()->timezone->timezone;
 
                                     $userTimeZone   =  Auth::user()->timezone->timezone;
 
@@ -416,7 +418,10 @@
                                             </div>
                                             <div class="form-group row mt-4">
                                                 <div class="col-sm-12 ">
-                                                    <textarea class="form-control" name="comment" rows="6 " placeholder="Comment" maxlength="200"></textarea>
+                                                    <textarea class="form-control" name="comment" rows="6 " placeholder="Comment" maxlength="200" required ></textarea>
+                                                    @error('comment')
+                                                        <p class="alert alert-danger">{{ $message }}</p>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class="mt-3 ">
@@ -439,78 +444,80 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
-            $(document).on('click', 'input[name="review1"]', function() {
-            var length = $(this).data('stars');
-            alert(length);
-            $("#rating").val('');
-            $("#rating").val(length);
-        });
+
             $(document).on('click', 'input[type="checkbox"]', function() {
                 $('input[type="checkbox"]').not(this).prop('checked', false);
             });
-        });
 
-
-        $(document).on('click', '.edit', function() {
-            var id = $(this).data('id');
-            $("#review-id").val(id);
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: "POST",
-                url: "{{ route('comment.edit') }}",
-                data: {
-                    id: id,
-                },
-                dataType: 'json',
-                success: function(res) {
-                    var rating = res.review.star_rating;
-                    for (let i = 1; i <= rating; i++) {
-                        $(".rate").append(`
-                        <input type="radio" id="star` + i +`" class="rate" name="review1" data-stars="`+i+`" value="`+i+`" />
-                         <label class="" for="star`+i+`" title="text">`+i+`stars</label>
+            $(document).on('click', '.edit', function() {
+                var id = $(this).data('id');
+                $("#review-id").val(id);
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "POST",
+                    url: "{{ route('comment.edit') }}",
+                    data: {
+                        id: id,
+                    },
+                    dataType: 'json',
+                    success: function(res) {
+                        var rating = res.review.star_rating;
+                        for (var i = 1; i <= rating; i++) {
+                            $(".rate-modal").append(`
+                        <input type="radio" id="star` + i + `" class="rate review1 " name="review1"  data-stars="` +
+                                i +
+                                `" value="` + i + `" />
+                        <label class="" for="star` + i + `" title="text">` + i + `stars</label>
                         `);
+                        }
+
+                        for (var j = 1; j <= 5 - rating; j++) {
+                            $(".rate-modal").append(`
+                        <input type="radio" id="star` + i + `" class="rate" name="review1 review1" data-stars="` + i +
+                                `" value="` + i + `" />
+                        <label class="" for="star` + i + `" title="text">` + i + `stars</label>
+                        `);
+                            i += 1;
+                        }
                     }
-                }
-            });
-        });
-
-
-        $('body').on('click', '#btn-save', function(e) {
-            e.preventDefault();
-            var formData = $('#addEditBookForm').serialize();
-            // console.log(formData);
-            var id = $("#review-id").val();
-            var comment = $("#comment").val();
-            $("#btn-save").html('Please Wait...');
-            $("#btn-save").attr("disabled", true);
-            // ajax
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: "POST",
-                url: "{{ route('comment.update') }}",
-                data: {
-                    review_id: $("#review-id").val(),
-                    rating:    $("#rating").val(),
-                    comment:   $("#comment").val( )
-                },
-                dataType: 'json',
-                success: function(res) {
-                    console.log(res);
-                    return false;
-                    window.location.reload();
-                    $("#btn-save").html('Submit');
-                    $("#btn-save").attr("disabled", false);
-                }
+                });
             });
 
-        //     $('input[name="review"]').click(function(){
-        //     alert('running');
-        // });
 
+            $('body').on('click', '#btn-save', function(e) {
+                e.preventDefault();
+                var id = $("#review-id").val();
+                var comment = $("#comment").val();
+                $("#btn-save").html('Please Wait...');
+                $("#btn-save").attr("disabled", true);
+
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "POST",
+                    url: "{{ route('comment.update') }}",
+                    data: {
+                        review_id: $("#review-id").val(),
+                        rating: $("#rating").val(),
+                        comment: $("#comment").val()
+                    },
+                    dataType: 'json',
+                    success: function(res) {
+                        window.location.reload();
+                        $("#btn-save").html('Submit');
+                        $("#btn-save").attr("disabled", false);
+                    }
+                });
+            });
+
+            $(document).on('click', 'input.rate:radio', function() {
+                var length = $(this).val();
+                $("#rating").val('');
+                $("#rating").val(length);
+            });
         });
     </script>
 @endsection

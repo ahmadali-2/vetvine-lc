@@ -1,7 +1,7 @@
 @forelse ($posts as $forumpost )
 
 <tr>
-    <td>    <a href="{{ route('getForumcategoryPosts',$forumpost->id) }}"><h4>{{ $forumpost->post_title ?? '' }}</h4></a> </td>
+    <td><a href="{{ route('getForumcategoryPosts',$forumpost->id) }}"><h4>{{ $forumpost->post_title ?? '' }}</h4></a> </td>
 
     <td>{{ $forumpost->comments->count('comments')}}</td>
     <td id="commentajax">{{ $forumpost->likes->sum('like')}}</td>

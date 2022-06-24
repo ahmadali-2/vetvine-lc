@@ -154,10 +154,13 @@ class HomeController extends Controller
 
     public function videosOnDemand()
     {
+        // $avg = ;
         return view('frontend.pages.videos-on-demand', [
             'videos'   => VideosOnDemand::all(),
             'category' => CategoryEvent::all(),
-            'sponsor'  => SponserTable::all()
+            'sponsor'  => SponserTable::all(),
+            'avg'      => VideosOnDemand::join('video_ratings', 'video_ratings.video_id', 'videos_on_demands.id')
+                                        ->avg('video_ratings.rating')
         ]);
     }
     public function ceArchives()
@@ -198,7 +201,7 @@ class HomeController extends Controller
             'password' => 'required|min:8',
             'confirmpassword' => 'required|same:password',
         ]);
-       $currentUser =  User::find(Auth::id());
+        $currentUser =  User::find(Auth::id());
         if($request->current_password){
             if (Hash::check($request->current_password, $currentUser->password)){
 

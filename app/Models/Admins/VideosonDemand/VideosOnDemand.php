@@ -20,6 +20,7 @@ class VideosOnDemand extends Model
         'status',
         'category_id',
         'sponser_id',
+        'isDeleted'
     ];
 
     public function category()

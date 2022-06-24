@@ -1,5 +1,17 @@
 <style>
     .pagination {justify-content: center;}
+    .post_center_box .btn-primary{
+  background-color: #f27222;
+  height: 25px;
+    line-height: 0px;
+    }
+    .post_center_box .fa-trash{
+  font-size: 13px;    }
+
+  .comment_replies input{
+
+    border: 2px solid #507f87 !important;
+  }
 </style>
 <?php
     $displayLike = false;
@@ -97,9 +109,6 @@
 
                         <p>{{$post->created_at->diffForHumans()}}</p>
                     </div>
-
-
-
                 </div>
                 <div class=" col-lg-6">
 
@@ -140,10 +149,10 @@
                 </div>
 
             </div>
-            <div id="comment_{{$key}}" data-key={{$key}} style="display: none; margin-top: 20px;">
-                <div id="comments_data_{{$key}}">
-                    <div class="col-md-6" id="comments_view_{{$key}}"></div>
-                </div>
+<<<<<<< HEAD
+
+        </div>
+        <div id="comment_{{$key}}" class="post_center_box" data-key={{$key}} style="display: none;">
                 <div class="row" style="background-color: wheat; padding: 10px;">
                     <div class="col-sm-8">
                         <input style="background-color: wheat; outline: none; width: 100%;" type="text" name="comment" id="comment_value_{{$key}}" placeholder="Type comment here"/>
@@ -151,10 +160,10 @@
                     <div class="col-sm-4 send_comment" data-key="{{$key}}">
                         <a  class="like_color" data-post-id="{{$post->id}}" data-key={{$key}} style="cursor: pointer;"><i class="fa fa-paper-plane" aria-hidden="true"></i> Comment</a>
                     </div>
+>>>>>>> 4ba0a96e10729536c09517b31c2853282f7552ad
                 </div>
             </div>
         </div>
-    @endif
     @empty
     <img src="{{ url('frontend/images/no-result.gif') }}" style="width: 100%;"/>
 @endforelse
@@ -332,7 +341,7 @@
                                     'success'
                                     )
                                     }
-                                }); 
+                                });
                                 }
                             });
                         });

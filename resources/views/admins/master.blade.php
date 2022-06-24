@@ -11,6 +11,14 @@ $vetvineLogo =vetvineHelper::vetvineGeneralSetting()
 <head>
 
     @include('admins.layouts._head')
+    <style>
+        #menuToggle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 

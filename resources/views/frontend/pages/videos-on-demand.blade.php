@@ -5,6 +5,8 @@
             <div class="container">
                 
                 <h1 class="Upcoming-webinars mt-2">Videos on Demand</h1>
+                {{-- <input type="text"> --}}
+                {{ $avg }}
                 <ul class="filter_list upcoming_filter">
 
 
@@ -84,17 +86,15 @@
                                     </a>
                                     <div>
                                         <p>55 mins</p>
+                                        @for ($i = 1; $i <= $avg ; $i++)
                                         <span class="fas fa-star"></span>
-                                        <span class="fas fa-star"></span>
-                                        <span class="fas fa-star"></span>
-                                        <span class="fas fa-star"></span>
-                                        <span class="fas fa-star"></span>
+                                        @endfor
                                     </div>
                                 </div>
                                 <div class="video-bottom-description">
                                     <h5>02/17/2022</h5>
                                     <p><span>Presented by:</span> {{ $item->presented_by }}<br />
-                                        <strong>Sponsored by:</strong> VetVine
+                                        {{-- <strong>Sponsored by:</strong> VetVine --}}
                                     </p>
                                     <p class="para-decription">
                                         {{ $item->video_description }}

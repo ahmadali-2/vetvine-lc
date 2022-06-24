@@ -9,7 +9,7 @@
                     class="form-horizontal" method="POST">
                     <input type="hidden" name="id" value="" id="review-id">
                     <input type="hidden" name="rating" value="" id="rating">
-                <div class="rate">
+                <div class="rate rate-modal d-flex ">
 
                 </div>
 

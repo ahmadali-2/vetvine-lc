@@ -3,8 +3,10 @@
 namespace App\Listeners;
 
 use App\Events\UserRegistered;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
+<<<<<<< HEAD
+use App\Http\Controllers\Controller;
+=======
+>>>>>>> 5b12f36c72e86491596503ccd045a98413b00a10
 
 class SubscribeToMailChimp
 {
@@ -29,14 +31,19 @@ class SubscribeToMailChimp
      */
     public function handle(UserRegistered $event)
     {
+        $email = $event->user->email;
+        $domain = ltrim(stristr($email, '@'), '@');
+                if(checkdnsrr($domain,'ANY') && $domain != 'mailinator.com'){
+                    $mailChimpApiKey = env('MAILCHIMP_API_KEY');
+                    $mailchimp = new \Mailchimp($mailChimpApiKey);
+                    $mailchimp->lists->subscribe(env('MAILCHIMP_LIST_ID'),
+                       ['email'=>$event->user->email],
+                       null,
+                       null,
+                       false);
+                }else{
+                    return true;
+                }
 
-
-        $mailChimpApiKey = env('MAILCHIMP_API_KEY');
-        $mailchimp = new \Mailchimp($mailChimpApiKey);
-        $mailchimp->lists->subscribe(env('MAILCHIMP_LIST_ID'),
-           ['email'=>$event->user->email],
-           null,
-           null,
-           false);
     }
 }

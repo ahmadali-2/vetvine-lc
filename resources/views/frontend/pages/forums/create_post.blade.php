@@ -2,17 +2,30 @@
 @section('content')
 <style>
     #createpost input,#createpost textarea{
-        border: 2px solid #5c7c85  !important;
+        /* border: 2px solid #5c7c85  !important; */
         border-radius: 0px !important;
+        color: #fff;
     }
     .text_editor{
         border: 2px solid #5c7c85  !important;
         border-radius: 0px !important;
     }
-    .post_submit_btn{
-        background:  #5c7c85  !important;
-        color: #fff;
+    #createpost .post_submit_btn{
+        background:  #f27222  !important;
+        /* color: #f27222; */
+        border: none !important;
+
     }
+    #createpost .post_submit_btn:hover {
+    /* background-color: transparent; */
+    /* color: #5c7c85; */
+    /* border: 1px solid #5c7c85 !important; */
+    cursor: pointer;
+    background: transparent !important;
+    border: 2px solid #f27222 !important;
+    color: #f27222;
+
+}
 </style>
 <section class="main_banner_bottob_label"></section>
 <section class="become_member_area">
@@ -79,9 +92,9 @@
                           </div>
 
                           <div class="row">
-                              <div class="col-md-4 ml-auto text-right">
+                              <div class="col-md-12 ml-auto text-right">
 
-                                <div class="form-group text-right">
+                                <div class="form-group text-center">
                                     <input type="submit" class="btn btn-primary mt-3 post_submit_btn" value="POST">
                                 </div>
                               </div>

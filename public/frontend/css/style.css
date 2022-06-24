@@ -8025,9 +8025,10 @@ ul {
 }
 
 .post_btn {
-    background-color: #5c7c85;
+    margin-top: 44px;
+    background-color: #f27222;
     color: #fff;
-    border: 1px solid #5c7c85;
+    border: 1px solid #f27222;
     padding: 10px;
     border-radius: 5px;
     font-size: 14px;
@@ -8036,14 +8037,17 @@ ul {
 }
 
 .post_btn:hover {
-    background-color: transparent;
-    color: #5c7c85;
-    border: 1px solid #5c7c85 !important;
+    /* background-color: transparent; */
+    /* color: #5c7c85; */
+    /* border: 1px solid #5c7c85 !important; */
     padding: 10px;
     border-radius: 5px;
     font-size: 14px;
     font-weight: bold;
     cursor: pointer;
+    background: transparent;
+    border: 2px solid #f27222 !important;
+    color: #f27222;
 }
 
 #createpost input,
