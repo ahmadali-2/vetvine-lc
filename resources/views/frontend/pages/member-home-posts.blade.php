@@ -239,6 +239,7 @@
                 success: function(response){
                     if(response.code == 200){
                         refreshComments(component, 'post');
+                        $(this).val('');
                         toastr.success(response.message);
                     }
                 }
@@ -260,6 +261,7 @@
                 success: function(response){
                     if(response.code == 200){
                         refreshComments(component, 'share');
+                        $(this).val('');
                         toastr.success(response.message);
                     }
                 }

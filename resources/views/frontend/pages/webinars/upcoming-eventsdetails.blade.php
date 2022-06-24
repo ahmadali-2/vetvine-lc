@@ -255,7 +255,7 @@
                                     $userEventTime  =  new DateTimeZone($pieces[0]);
                                     $convertedTime  =  $today->setTimeZone($userEventTime);
 
-                                    echo ($convertedTime->format('H:i').' '.$userTimeZone);
+                                    echo ($convertedTime->format('H:i A').' '.$userTimeZone);
                                 @endphp
                                 </div>
                             </div>
