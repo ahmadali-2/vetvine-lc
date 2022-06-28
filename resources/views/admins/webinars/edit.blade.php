@@ -198,6 +198,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Enter Time Zone link</label>
+                                            <input type="url" name="timezone_url" id="timezone_url" value="{{ $event->timezone_url }}" class="form-control timezone_url" placeholder="Enter Url" required>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div>
                                     <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
                                         <span id="payment-button-amount">Submit</span>

@@ -210,9 +210,49 @@ class PostController extends Controller
             }else{
                 return response()->json(
                     [
+<<<<<<< HEAD
+                        'success' => true,
+                        'message' => 'Data inserted successfully',
+                        'code' => 200,
+                        'like' => $liked,
+                    ]
+                );
+
+            } elseif ($liked->like == 0) {
+
+                $liked->update([
+                    "like" => '1',
+                ]);
+                return response()->json(
+                    [
+                        'success' => true,
+                        'message' => 'Post liked successfully!',
+                        'code' => 200,
+                        'like' => $liked,
+                    ]
+                );
+            } else {
+                // $push_notifications = event(new NotificationEvent(Auth::id(), (int) $request->likepostid), );
+                // PushNotification::create([
+                //     'user_id' => Auth::id(),
+                //     'post_id' => $request->likepostid,
+                //     'post_user_id' => $request->postUserid,
+                //     'type' => '0',
+                // ]);
+                $liked->update([
+                    "like" => '0',
+                ]);
+                return response()->json(
+                    [
+                        'success' => true,
+                        'message' => 'Post unliked successfully',
+                        'code' => 201,
+                        'like' => $liked,
+=======
                         'success' => false,
                         'message' => 'You dont have permission to like!',
                         'code' => 400,
+>>>>>>> 46a1b88564ffda21db40007508b51dc0bcb2309b
                     ]
                 );
             }

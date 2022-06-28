@@ -428,12 +428,10 @@
             })
         })
         $(document).on("click", ".click_show_2", function(e) {
-            // alert("hi");
             $('.tabs_li').find('.new_active').removeClass('new_active');
             $(this).addClass('new_active');
         })
         $(document).on("click", ".click_show_3", function(e) {
-            // alert("hi");
             $('.tabs_li').find('.new_active').removeClass('new_active');
             $(this).addClass('new_active');
         })
@@ -454,12 +452,13 @@
                     networkId: networdId
                 },
                 success: function(response) {
+                    console.log(response.network_id);
                     if(response.network_id === 6 || response.network_id === 7){
                         $('.license-inp').attr('id', 'licensure');
                         $("#license-div").show();
                     }else{
-                        $("#license-div").hide();
                         $('.license-inp').removeAttr('id');
+                        $("#license-div").hide();
                     }
                 }
             });

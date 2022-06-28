@@ -8,6 +8,8 @@
             {{-- ----------------------Users/Groups lists side---------------------- --}}
             <div class="messenger-listView">
                 {{-- Header and search bar --}}
+                {{-- <p>runnning</p> --}}
+                {{-- {{ $type }} --}}
                 <div class="m-header">
                     <nav>
                         <a href="#"><i class="fas fa-inbox"></i> <span class="messenger-headTitle">MESSAGES</span> </a>
