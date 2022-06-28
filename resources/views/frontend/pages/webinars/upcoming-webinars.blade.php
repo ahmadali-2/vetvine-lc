@@ -114,9 +114,9 @@
                                     $userEventTime = new DateTimeZone($pieces[0]);
                                     $convertedTime = $today->setTimeZone($userEventTime);
 
-                                    $formattedTime = $convertedTime->format('H:i');
-                                @endphp
-                            @endif
+                                    $formattedTime  =  $convertedTime->format('H:i A');
+                            @endphp
+                             @endif
                             <div class="video-bottom-description">
                                 <h5 class="my-3">{{ date('m/d/Y', strtotime($showevents->date)) }}</h5>
                                 {{-- @if (Auth::user())
