@@ -291,6 +291,7 @@
                 $(document).ready(function() {
                     $('input[name="rating"]').click(function() {
                         var length = $(this).attr('data-stars');
+                        alert(length);
                         $.ajax({
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

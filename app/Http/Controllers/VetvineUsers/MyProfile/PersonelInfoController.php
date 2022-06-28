@@ -41,9 +41,7 @@ class PersonelInfoController extends Controller
         })->map(function($q){
             return $q;
         });
-        // $usernetworks   = UserMemberAndNetworkLevel::all();
         $licensurePermissions = User::where('id', Auth::id())->first();
-        // return $licensurePermissions;
         return view('vetvineUsers.layouts.pages.user_profile', compact('countries', 'employmentInfo', 'timezones', 'usernetworks', 'licensurePermissions'));
     }
 
@@ -133,7 +131,7 @@ class PersonelInfoController extends Controller
             parent::successMessage("Profile Info Saved Successfully!");
             return redirect(route('member_home'));
         } catch (Exception $e) {
-            dd($e->getMessage());
+            // dd($e->getMessage());
             parent::dangerMessage("Profile Info Not Saved! Please Try Again.");
             return redirect()->back();
         }

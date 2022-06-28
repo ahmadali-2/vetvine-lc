@@ -33,7 +33,7 @@ class UserTypeController extends Controller
                 parent::successMessage("Super Admin Login Successfully");
                 return redirect('superadmin/dashboard');
                 break;
-                default:
+            default:
                 parent::successMessage("Vetvine Member Login Successfully");
 
                 if ($userType->employmentInfo) {

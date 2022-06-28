@@ -24,7 +24,7 @@ class VideosOnDemandController extends Controller
      */
     public function index()
     {
-        $videos = VideosOnDemand::where('isDeleted', '0')->get();
+        $videos = VideosOnDemand::all();
         return view('admins.videosondemand.index', compact('videos'));
     }
 

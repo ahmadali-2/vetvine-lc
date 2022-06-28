@@ -224,8 +224,8 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ url('/') }}" role="button" tabindex="0">Home</a>
                             </li>
-                            <li class="breadcrumb-item"><a onclick="history.back()" href="javascript::void();">UPCOMING
-                                    WEBINARS</a></li>
+                            <li class="breadcrumb-item"><a onclick="history.back()" href="javascript::void();">Upcoming
+                                    Webinars</a></li>
                             <li class="breadcrumb-item active" aria-current="page">{{ $eventdetail->event_title }}</li>
                         </ol>
                     </nav>
@@ -279,12 +279,6 @@
                                     @php
                                         $eventTime = $eventdetail->time;
                                         $timeZone = $eventdetail->user->timezone->timezone;
-                                        $pieces = explode('(', $timeZone);
-                                        $pieces = explode('C', $pieces[1]);
-                                        $pieces = explode(')', $pieces[1]);
-                                        $today = new DateTime($eventdetail->time, new DateTimeZone($[pieces0]));
-
-                                        $userTimeZone = Auth::user()->timezone->timezone;
                                         // Fetching timezone UTC code : Please don't screw it
                                         $pieces = explode('(', $timeZone);
                                         $pieces = explode('C', $pieces[1]);
@@ -305,7 +299,6 @@
 
                                         echo $convertedTime->format('H:i A') . ' ' . $userTimeZone;
                                     @endphp
-                                    <span class="ml-3" ><a target="_blank" style="color: #F27222; " href="{{ $eventdetail->timezone_url }}">View Other Time Zones</a></span>
                                 </div>
                             </div>
                         </div>
