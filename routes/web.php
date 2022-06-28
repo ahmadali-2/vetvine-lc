@@ -38,6 +38,7 @@ use App\Http\Controllers\PushNotificationController; // push notifications
 // Vetvine Frontend Routes;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Auth\UsersRegistrationController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\VetvineUsers\EventPayments\EventPaymentController;
 use App\Http\Controllers\VetvineUsers\MemberShips\StripePaymentController;
 use App\Http\Controllers\VetvineUsers\MyProfile\EditPhotoController;
@@ -60,7 +61,6 @@ use App\Http\Controllers\LicensureController;
 use App\Models\Generals\TimeZone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
-
 Route::get('/clear', function () {
     Artisan::call('route:clear');
     Artisan::call('cache:clear');
@@ -115,6 +115,11 @@ Route::get('login/{belong}/callback','App\Http\Controllers\Auth\SocialController
 Route::get('check-user-type', [UserTypeController::class, 'checkType'])->name('checkusertype');
 Route::post('loginroute', [UsersRegistrationController::class, 'userLogin'])->name('loginroute');
 Route::get('login', function(){
+    if(session()->get('emailError')){
+        $controller = new Controller();
+        $controller->dangerMessage('Email not valid!');
+        session()->forget('emailError');
+    }
     return view('frontend.home');
 })->name('login');
 
