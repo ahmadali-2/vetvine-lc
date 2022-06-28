@@ -34,7 +34,10 @@ class SubscribeToMailChimp
                     $mailChimpApiKey = env('MAILCHIMP_API_KEY');
                     $mailchimp = new \Mailchimp($mailChimpApiKey);
                     $mailchimp->lists->subscribe(env('MAILCHIMP_LIST_ID'),
-                       ['email'=>$event->user->email],
+                       ['email'     => $event->user->email,
+                        'FNAME'     => 'first_name',
+                        'LNAME'     => 'last_name'
+                        ],
                        null,
                        null,
                        false);
