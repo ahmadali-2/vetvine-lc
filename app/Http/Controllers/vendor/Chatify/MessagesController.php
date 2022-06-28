@@ -32,6 +32,7 @@ class MessagesController extends Controller
     {
         // Auth data
         // $request->dd();
+        // dd($request);
         $authData = json_encode([
             'user_id' => Auth::user()->id,
             'user_info' => [
@@ -58,7 +59,6 @@ class MessagesController extends Controller
      */
     public function index($id = null)
     {
-        // dd('running');
         $routeName = FacadesRequest::route()->getName();
         $type = in_array($routeName, ['user', 'group']) ? $routeName : 'user';
         return view('Chatify::pages.app', [
@@ -77,6 +77,8 @@ class MessagesController extends Controller
      */
     public function idFetchData(Request $request)
     {
+
+        // dd($request);
         // Favorite
         $favorite = Chatify::inFavorite($request['id']);
 
@@ -120,9 +122,6 @@ class MessagesController extends Controller
      */
     public function send(Request $request)
     {
-        // return $request;
-        // dd('runniung');
-        // default variables
         $error = (object) [
             'status' => 0,
             'message' => null,
@@ -157,8 +156,6 @@ class MessagesController extends Controller
         }
 
         if (!$error->status) {
-            // send to database
-            // dd($request);
             $messageID = mt_rand(9, 999999999) + time();
             $msg = Chatify::newMessage([
                 'id' => $messageID,
@@ -171,10 +168,6 @@ class MessagesController extends Controller
                     'old_name' => htmlentities(trim($attachment_title), ENT_QUOTES, 'UTF-8'),
                 ]) : null,
             ]);
-
-            $push_notifications = event(new NotificationEvent(Auth::id(), '1'));
-
-            // fetch message to send it with the response
             $messageData = Chatify::fetchMessage($messageID);
 
             // send to user using pusher
