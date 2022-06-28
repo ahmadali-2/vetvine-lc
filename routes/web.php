@@ -57,6 +57,7 @@ use App\Http\Controllers\VideoDescriptionController;
 use App\Http\Controllers\StaticPageController; // for static pages
 use App\Http\Controllers\TermsController; // for terms of services
 use App\Http\Controllers\LicensureController;
+use App\Models\Generals\TimeZone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 
@@ -100,6 +101,15 @@ Route::get('must-verify',[UsersRegistrationController::class,'verifyEmailPopup']
 /**
  * Social Registeration and  Login  Routes
  */
+Route::get('/test', function(){
+    $timestamp = time();
+    foreach (timezone_identifiers_list(2) as $zone) {
+        date_default_timezone_set('America/Adak');
+        $zones['offset'] = date('P', $timestamp);
+        $zones['diff_from_gtm'] = 'UTC/GMT '.date('P', $timestamp);
+        dump($zone);
+    }
+});
 Route::get('social/{belong}/{user_type}/{network_type}', [SocialController::class, 'redirect']);
 Route::get('login/{belong}/callback','App\Http\Controllers\Auth\SocialController@handleProviderCallback');
 Route::get('check-user-type', [UserTypeController::class, 'checkType'])->name('checkusertype');

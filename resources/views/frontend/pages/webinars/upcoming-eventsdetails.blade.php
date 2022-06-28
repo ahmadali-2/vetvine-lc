@@ -279,18 +279,17 @@
                                     @php
                                         $eventTime = $eventdetail->time;
                                         $timeZone = $eventdetail->user->timezone->timezone;
+                                        // Fetching timezone UTC code : Please don't screw it
+                                        $pieces = explode('(', $timeZone);
+                                        $pieces = explode('C', $pieces[1]);
+                                        $pieces = explode(')', $pieces[1]);
+
+                                        // Formatting the time
+                                        $today = new DateTime($eventdetail->time, new DateTimeZone($pieces[0]));
+
+                                        $userTimeZone = Auth::user()->timezone->timezone;
 
                                         // Fetching timezone UTC code : Please don't screw it
-    $pieces = explode('(', $timeZone);
-    $pieces = explode('C', $pieces[1]);
-    $pieces = explode(')', $pieces[1]);
-
-    // Formatting the time
-    $today = new DateTime($eventdetail->time, new DateTimeZone($pieces[0]));
-
-    $userTimeZone = Auth::user()->timezone->timezone;
-
-    // Fetching timezone UTC code : Please don't screw it
                                         $pieces = explode('(', $userTimeZone);
                                         $pieces = explode('C', $pieces[1]);
                                         $pieces = explode(')', $pieces[1]);
@@ -298,7 +297,7 @@
                                         $userEventTime = new DateTimeZone($pieces[0]);
                                         $convertedTime = $today->setTimeZone($userEventTime);
 
-                                        echo $convertedTime->format('H:i') . ' ' . $userTimeZone;
+                                        echo $convertedTime->format('H:i A') . ' ' . $userTimeZone;
                                     @endphp
                                 </div>
                             </div>
@@ -409,8 +408,8 @@
                                                     </p>
                                                     @if (auth()->user()->id == $review->user_id)
                                                         <button class="edit" type="button" data-toggle="modal"
-                                                            data-target="#ajax-book-model" data-id="{{ $review->id }}">
-                                                            <i class="fas fa-edit text-primary"></i></buttont>
+                                                            data-target="#ajax-book-model" data-id="{{ $review->id }}" data-comment="{{ $review->comments }}">
+                                                            <i class="fas fa-edit text-primary"></i></button>
                                                     @endif
                                                 </div>
                                                 <hr>
@@ -494,7 +493,7 @@
             });
 
             $(document).on('click', '.edit', function() {
-                $("#comments-model").val('');
+                $("#comments-model").val($(this).attr('data-comment'));
                 var id = $(this).data('id');
                 $("#review-id").val(id);
                 $.ajax({
@@ -548,14 +547,14 @@
                     url: "{{ route('comment.update') }}",
                     data: {
                         review_id: $("#review-id").val(),
-                        rating: $(".review1").val(),
+                        rating: $("#rating").val(),
                         comment: $("#comments-model").val()
                     },
                     dataType: 'json',
                     success: function(res) {
-                        window.location.reload();
                         $("#btn-save").html('Submit');
                         $("#btn-save").attr("disabled", false);
+                        location.reload();
                     }
                 });
             });

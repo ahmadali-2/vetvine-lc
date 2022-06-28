@@ -117,7 +117,7 @@
                                     $userEventTime  =  new DateTimeZone($pieces[0]);
                                     $convertedTime  =  $today->setTimeZone($userEventTime);
 
-                                    $formattedTime  =  $convertedTime->format('H:i');
+                                    $formattedTime  =  $convertedTime->format('H:i A');
                             @endphp
                              @endif
                             <div class="video-bottom-description">
