@@ -141,13 +141,13 @@ class PostController extends Controller
                     $liked = ShareLike::where('user_id', Auth::id())->where('share_id', $request->likepostid)->where('ce',$request->ce)->first();
                 }
                 if (!$liked) {
-                    //$push_notifications = event(new NotificationEvent(Auth::id(), (int) $request->likepostid));
-                    // PushNotification::create([
-                    //     'user_id' => Auth::id(),
-                    //     'post_id' => $request->likepostid,
-                    //     'post_user_id' => $request->postUserid,
-                    //     'type' => '0',
-                    // ]);
+                    $push_notifications = event(new NotificationEvent(Auth::id(), (int) $request->likepostid));
+                    PushNotification::create([
+                        'user_id' => Auth::id(),
+                        'post_id' => $request->likepostid,
+                        'post_user_id' => $request->postUserid,
+                        'type' => '0',
+                    ]);
 
                     if($request->likeType == 1){
                         $liked = Like::create([
@@ -188,13 +188,13 @@ class PostController extends Controller
                         ]
                     );
                 } else {
-                    // $push_notifications = event(new NotificationEvent(Auth::id(), (int) $request->likepostid));
-                    // PushNotification::create([
-                    //     'user_id' => Auth::id(),
-                    //     'post_id' => $request->likepostid,
-                    //     'post_user_id' => $request->postUserid,
-                    //     'type' => '0',
-                    // ]);
+                    $push_notifications = event(new NotificationEvent(Auth::id(), (int) $request->likepostid));
+                    PushNotification::create([
+                        'user_id' => Auth::id(),
+                        'post_id' => $request->likepostid,
+                        'post_user_id' => $request->postUserid,
+                        'type' => '0',
+                    ]);
                     $liked->update([
                         "like" => '0',
                     ]);
