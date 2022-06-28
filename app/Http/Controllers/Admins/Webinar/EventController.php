@@ -48,6 +48,7 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
         try{
         $user   = Auth::user()->id;
         $path   = public_path('admin/eventss/');
@@ -73,6 +74,7 @@ class EventController extends Controller
                 "pet_owner_premium_fee"         =>   $input['pet_owner_premium_fee'],
                 "pet_owner_fee"                 =>   $input['pet_owner_fee'],
                 "vet_pet_prof_premium_fee"      =>   $input['vet_pet_prof_premium_fee'],
+                "timezone_url"                  =>   $input['timezone_url']
             ]);
             if($event->wasRecentlyCreated)
             {
@@ -161,6 +163,7 @@ class EventController extends Controller
                     "pet_owner_premium_fee"         =>   $request->input('pet_owner_premium_fee'),
                     "pet_owner_fee"                 =>   $request->input('pet_owner_fee'),
                     "vet_pet_prof_premium_fee"      =>   $request->input('vet_pet_prof_premium_fee'),
+                    'timezone_url'                  =>   $request->input('timezone_url')
                 ]);
                 $selectedMembers    =   $event->sponsers->pluck('id')->toArray();
                 Sponser::whereIn('id',$selectedMembers)->delete();

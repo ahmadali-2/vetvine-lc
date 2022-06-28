@@ -224,8 +224,8 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ url('/') }}" role="button" tabindex="0">Home</a>
                             </li>
-                            <li class="breadcrumb-item"><a onclick="history.back()" href="javascript::void();">UPCOMING
-                                    WEBINARS</a></li>
+                            <li class="breadcrumb-item"><a onclick="history.back()" href="javascript::void();">Upcoming
+                                    Webinars</a></li>
                             <li class="breadcrumb-item active" aria-current="page">{{ $eventdetail->event_title }}</li>
                         </ol>
                     </nav>

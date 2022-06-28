@@ -3,6 +3,7 @@
 namespace App\VetvineHelpers;
 
 use App\Models\Admins\GeneralSetting\GeneralSetting;
+use App\Models\ChMessage;
 use App\Models\Generals\TimeZone;
 use App\Models\MemberPermission;
 use App\Models\User;
@@ -91,12 +92,23 @@ class VetVineHelperClass
     public function allUsers()
     {
         return User::with('toMessage', 'fromMessage')->where('id', '!=', Auth::id())->get();
+    }
 
+    public function chatifyAdmin()
+    {
+        return User::with('toMessage', 'fromMessage')->where('id', '!=', Auth::id())->where('type' ,'1')->get();
     }
 
     public function currentUserProfile()
     {
         return User::find(Auth::id());
+    }
+
+    public function adminUserMessages()
+    {
+        return ChMessage::join('users', 'users.id', '=', 'ch_messages.from_id')
+            ->select('ch_messages.*', 'users.name')
+            ->get();
     }
 
     public function getUserTypePermissions($type)

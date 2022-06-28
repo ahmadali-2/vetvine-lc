@@ -235,7 +235,7 @@
                                                 src="{{ asset('frontend/images/dummy.png') }}" alt=""
                                                 id="user-image"">
                                         @endif
- 
+
                                     </i><br>
                                     Me
                                     <span class="caret"></span></a>
