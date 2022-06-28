@@ -127,6 +127,12 @@ $vetvineLogo =vetvineHelper::vetvineGeneralSetting()
 
     @yield('scripts')
 
+    @stack('scripts')
+
+    {{-- @section('scripts') --}}
+
+
+
 </body>
 
 </html>

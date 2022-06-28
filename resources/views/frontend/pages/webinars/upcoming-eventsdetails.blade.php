@@ -279,18 +279,12 @@
                                     @php
                                         $eventTime = $eventdetail->time;
                                         $timeZone = $eventdetail->user->timezone->timezone;
+                                        $pieces = explode('(', $timeZone);
+                                        $pieces = explode('C', $pieces[1]);
+                                        $pieces = explode(')', $pieces[1]);
+                                        $today = new DateTime($eventdetail->time, new DateTimeZone($[pieces0]));
 
-                                        // Fetching timezone UTC code : Please don't screw it
-    $pieces = explode('(', $timeZone);
-    $pieces = explode('C', $pieces[1]);
-    $pieces = explode(')', $pieces[1]);
-
-    // Formatting the time
-    $today = new DateTime($eventdetail->time, new DateTimeZone($pieces[0]));
-
-    $userTimeZone = Auth::user()->timezone->timezone;
-
-    // Fetching timezone UTC code : Please don't screw it
+                                        $userTimeZone = Auth::user()->timezone->timezone;
                                         $pieces = explode('(', $userTimeZone);
                                         $pieces = explode('C', $pieces[1]);
                                         $pieces = explode(')', $pieces[1]);
@@ -300,6 +294,7 @@
 
                                         echo $convertedTime->format('H:i') . ' ' . $userTimeZone;
                                     @endphp
+                                    <span class="ml-3" ><a target="_blank" style="color: #F27222; " href="{{ $eventdetail->timezone_url }}">View Other Time Zones</a></span>
                                 </div>
                             </div>
                         </div>

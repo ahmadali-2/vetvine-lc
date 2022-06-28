@@ -20,7 +20,8 @@
                     <li>
                         <div id="fav_show_wrapper mt-0">
                             <label for="fav_Show" id="fav_show_label">Category</label>
-                            <select id="category" name="category" class="form-control filter-slect" value="" data-val="true">
+                            <select id="category" name="category" class="form-control filter-slect" value=""
+                                data-val="true">
                                 <option title="" value="" label=""></option>
                                 @foreach ($category as $search)
                                     <option value="{{ $search->id }} ">{{ $search->category_title }}
@@ -46,14 +47,14 @@
             </form>
             {{-- @dd(ROUTE::current()->uri); --}}
             <ul class="page-link-list">
-                {{-- <li @if(ROUTE::current()->uri == 'upcoming-webinars') class="active"  @endif>
+                {{-- <li @if (ROUTE::current()->uri == 'upcoming-webinars') class="active"  @endif>
                     <a href="{{ route('upcoming_webinars') }}">Continuing Education</a>
                 </li>
-                @if(Auth::user())
-                <li @if(ROUTE::current()->uri == 'past-event') class="active"  @endif>
+                @if (Auth::user())
+                <li @if (ROUTE::current()->uri == 'past-event') class="active"  @endif>
                     <a href="{{ route('pastevent') }}">My Past Events</a>
                 </li>
-                <li @if(ROUTE::current()->uri == 'upcoming-event') class="active"  @endif>
+                <li @if (ROUTE::current()->uri == 'upcoming-event') class="active"  @endif>
                     <a href="{{ route('upcomingevent') }}">My Upcoming Events</a>
                 </li>
                 @endif --}}
@@ -89,54 +90,49 @@
 
                                 </div>
                             </div>
-                            {{-- @dd(
-                                $showevents
-                            ); --}}
-                            {{-- @dd($showevents->user->timezone->timezone) --}}
                             @if (Auth::user())
-                            @php
+                                @php
                                     // Time Convert Acoording to timezone
-                                    $eventTime      =   $showevents->time;
-                                    $timeZone       = $showevents->user->timezone->timezone;
+                                    $eventTime = $showevents->time;
+                                    $timeZone = $showevents->user->timezone->timezone;
 
                                     // Fetching timezone UTC code : Please don't screw it
-                                    $pieces = explode("(", $timeZone);
-                                    $pieces = explode("C", $pieces[1]);
-                                    $pieces = explode(")", $pieces[1]);
+    $pieces = explode('(', $timeZone);
+    $pieces = explode('C', $pieces[1]);
+    $pieces = explode(')', $pieces[1]);
 
-                                    // Formatting the time
-                                    $today          =  new DateTime($showevents->time, new DateTimeZone($pieces[0]));
+    // Formatting the time
+    $today = new DateTime($showevents->time, new DateTimeZone($pieces[0]));
 
-                                    $userTimeZone   =  Auth::user()->timezone->timezone;
+    $userTimeZone = Auth::user()->timezone->timezone;
 
-                                    // Fetching timezone UTC code : Please don't screw it
-                                    $pieces = explode("(", $userTimeZone);
-                                    $pieces = explode("C", $pieces[1]);
-                                    $pieces = explode(")", $pieces[1]);
+    // Fetching timezone UTC code : Please don't screw it
+                                    $pieces = explode('(', $userTimeZone);
+                                    $pieces = explode('C', $pieces[1]);
+                                    $pieces = explode(')', $pieces[1]);
 
-                                    $userEventTime  =  new DateTimeZone($pieces[0]);
-                                    $convertedTime  =  $today->setTimeZone($userEventTime);
+                                    $userEventTime = new DateTimeZone($pieces[0]);
+                                    $convertedTime = $today->setTimeZone($userEventTime);
 
-                                    $formattedTime  =  $convertedTime->format('H:i');
-                            @endphp
-                             @endif
+                                    $formattedTime = $convertedTime->format('H:i');
+                                @endphp
+                            @endif
                             <div class="video-bottom-description">
                                 <h5 class="my-3">{{ date('m/d/Y', strtotime($showevents->date)) }}</h5>
-                               {{-- @if (Auth::user())
+                                {{-- @if (Auth::user())
                                 <h5>Start Time : {{ date('g:i a', strtotime($formattedTime)) }}</h5>
                                @endif --}}
                                 <p><strong>Presented by:</strong> <a href="{{ $showevents->presenter_one_url }}"
                                         class="vetvine_a" target="_blank">{{ $showevents->presenter_one }}</a>
 
-                                        <div class="parent_sponser">
+                                <div class="parent_sponser">
 
 
-                                        <strong>Sponsored by:</strong>
-                                        <div class="sposer_name">
+                                    <strong>Sponsored by:</strong>
+                                    <div class="sposer_name">
                                         @foreach ($showevents->members as $item)
-                                    <a href="{{ $item->sponser_link }}"
-                                        class="vetvine_a" target="_blank"
-                                        rel="noopener noreferrer">{{ $item->sponser_name }}</a>
+                                            <a href="{{ $item->sponser_link }}" class="vetvine_a" target="_blank"
+                                                rel="noopener noreferrer">{{ $item->sponser_name }}</a>
                                         @endforeach
 
                                     </div>
