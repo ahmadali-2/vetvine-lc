@@ -182,9 +182,9 @@ $socialLinks = vetvineHelper::vetvineGeneralSetting();
 
             <h4>PetsVetSpace, LLC ©2022. All Rights Reserved.</h4>
 
-            <p class="deepfooter2">Designed &amp; Developed by <a href="https://leadconcept.com/" target="_blank"
+            {{-- <p class="deepfooter2">Designed &amp; Developed by <a href="https://leadconcept.com/" target="_blank"
 
-                    class="">LEADconcpet</a></p>
+                    class="">LEADconcpet</a></p> --}}
 
         </div>
 
