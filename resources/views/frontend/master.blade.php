@@ -118,6 +118,52 @@
 
 
     <script src="{{ asset('bootstrap/jquery/popper.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    <script>
+        $('.show_confirm').click(function() {
+            var id = $(this).attr('data-id');
+            if (id) {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete Me!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: "POST",
+                            url: "{{ route('delete.user') }}",
+                            data: {
+                                id: id,
+                                _token: $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function(response) {
+                                Swal.fire(
+                                    'Deleted!',
+                                    response.message,
+                                    'success'
+                                    // window.reload()
+                                ),
+                                $('.swal2-confirm').on('click', function() {
+                                    location.reload();
+                                });
+                                // window.location.reload()
+                            }
+                        });
+
+                    }
+                });
+            } else {
+                toastr.error('Cannot Delete!');
+            }
+        });
+
+    </script>
 
     <script>
         $(document).ready(function() {
@@ -145,6 +191,7 @@
     <script src="{{ asset('frontend/js/fontawesome.js') }}"></script>
 
     <script src="{{ asset('frontend/js/frontend.js') }}"></script>
+
 
     <script src="https://www.google.com/recaptcha/api.js"></script>
 
