@@ -1,7 +1,6 @@
 @php
 $timezones = vetvineHelper::timezones();
 @endphp
-
 <!-- Registeration Modal Form  Start-->
 <button type="button" class="btn btn-primary d-none" id="registration_modal_box_show_btn" data-toggle="modal"
     data-target="#Registration-modal">
@@ -184,7 +183,7 @@ $timezones = vetvineHelper::timezones();
 
                                                 <div class="col-sm-12">
                                                     <h6><i class="red-star">*</i>Timezone</h6>
-                                                    <select name="timezone" class="form-control input_click">
+                                                    <select id="setCountries" name="timezone" class="form-control input_click">
                                                         <option disabled selected>Select TimeZone</option>
 
                                                         @foreach ($timezones as $timezone)
@@ -201,6 +200,8 @@ $timezones = vetvineHelper::timezones();
                                                         @endforeach
 
                                                     </select>
+                                                    <div id='result'></div>
+                                                    <br>
                                                     @if ($errors->has('timezone'))
                                                         <span class="invalid-feedback"
                                                             style="margin-top:-20px !important">
@@ -366,13 +367,38 @@ $timezones = vetvineHelper::timezones();
 
 @section('scripts')
 <script src="https://www.google.com/recaptcha/api.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+
 <script>
 
 $(document).ready(function(){
 //step1 hide buttons until user select the network level
+
+    // Initialize select2
+    $("#setCountries").select2();
+
+    $('.select2-search--dropdown').css({
+        'border': '1px solid black !important'
+    });
+
+    $('.select2-container').css({
+        'width': '100%'
+    });
+
+    // Read selected option
+    $('#but_read').click(function(){
+        var username = $('#setCountries option:selected').text();
+        var userid = $('#setCountries').val();
+
+        $('#result').html("id : " + userid + ", name : " + username);
+
+    });
+
     $('.socialbtns').css({
         'pointer-events': 'none'
     });
+
     $('#submitbtn').css({
         'pointer-events': 'none'
     });
