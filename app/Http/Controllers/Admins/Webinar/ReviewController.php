@@ -11,10 +11,6 @@ class ReviewController extends Controller
 {
     public function reviewstore(Request $request)
     {
-        $request->validate([
-            'comment' => 'required'
-        ]);
-
         $checkUser =ReviewRating::where('user_id',Auth()->user()->id)->where('event_id', $request->event_id)->first();
         if(!empty($checkUser)){
             parent::warningMessage("You Already Posted A Review On This Event");
@@ -39,8 +35,9 @@ class ReviewController extends Controller
         if(isset($request->rating)){
             $commentData['star_rating'] = $request->rating;
         }
-        $commentData['comments'] = $request->comment;
-
+        if(isset($request->comment)){
+            $commentData['comments'] = $request->comment;
+        }
         try {
             if ($request->ajax()) {
                 ReviewRating::find($request->review_id)
