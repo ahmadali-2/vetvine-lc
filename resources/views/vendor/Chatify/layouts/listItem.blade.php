@@ -17,7 +17,7 @@
     </table>
 @endif
 @php
-    $users = vetvineHelper::allUsers();
+    $users = vetvineHelper::chatifyAdmin(); 
 @endphp
 @if($get != 'search_item' && $get != 'users')
 

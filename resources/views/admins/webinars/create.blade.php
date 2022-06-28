@@ -166,7 +166,7 @@
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="network_id" class="control-label mb-1 form-select">Select Sponsor
-                                                   </label>
+                                                </label>
                                                 <select id="sponser_id" style="width: 100%" name="sponser_id[]"
                                                     aria-label="Default select example"
                                                     class="js-example-basic-multiple form-control" data-val="true"
@@ -184,6 +184,14 @@
                                             <label for="event_description" class="control-label mb-1">Event
                                                 Detail</label>
                                             <textarea class="form-control" id="event_description" rows="3" name="event_description" value=""></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Enter Time Zone link</label>
+                                            <input type="url" name="timezone_url" id="timezone_url" class="form-control timezone_url" placeholder="Enter Url" required>
                                         </div>
                                     </div>
                                 </div>

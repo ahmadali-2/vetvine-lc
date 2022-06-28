@@ -89,9 +89,9 @@ class VideoDescriptionController extends Controller
             ]);
         } else {
             VideoRating::create([
-                'video_id' => $video_id,
+                'video_id'=> $video_id,
                 'user_id' => Auth::id(),
-                'rating' => $length,
+                'rating'  => $length,
             ]);
         }
     }

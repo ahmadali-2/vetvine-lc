@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Admins\Forum\CategoryForum;
 use App\Models\Admins\Forum\Forum;
-use App\Models\Admins\Forum\ForumPost;
 use App\Models\Admins\Forum\Post;
 use App\Models\Admins\VideosonDemand\VideosOnDemand;
 use App\Models\Admins\Webinar\CategoryEvent;
@@ -14,12 +13,7 @@ use App\Models\Admins\Webinar\SponserTable;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
-use App\Models\Sponser;
-use DB;
 use Illuminate\Support\Facades\Hash;
-
-use function Ramsey\Uuid\v1;
 
 class HomeController extends Controller
 {
@@ -156,11 +150,11 @@ class HomeController extends Controller
     {
         // $avg = ;
         return view('frontend.pages.videos-on-demand', [
-            'videos'   => VideosOnDemand::all(),
+            'videos' => VideosOnDemand::all(),
             'category' => CategoryEvent::all(),
-            'sponsor'  => SponserTable::all(),
-            'avg'      => VideosOnDemand::join('video_ratings', 'video_ratings.video_id', 'videos_on_demands.id')
-                                        ->avg('video_ratings.rating')
+            'sponsor' => SponserTable::all(),
+            'avg' => VideosOnDemand::join('video_ratings', 'video_ratings.video_id', 'videos_on_demands.id')
+                ->avg('video_ratings.rating'),
         ]);
     }
     public function ceArchives()
@@ -191,20 +185,21 @@ class HomeController extends Controller
         }
     }
 
-    public function changePassword(){
+    public function changePassword()
+    {
         return view('vetvineUsers.layouts.pages.user_change_password');
     }
 
-    public function updateUserPassword(Request $request){
-      
+    public function updateUserPassword(Request $request)
+    {
         $request->validate([
             'current_password' => 'required',
             'password' => 'required|min:8',
             'confirmpassword' => 'required|same:password',
         ]);
-        $currentUser =  User::find(Auth::id());
-        if($request->current_password){
-            if (Hash::check($request->current_password, $currentUser->password)){
+        $currentUser = User::find(Auth::id());
+        if ($request->current_password) {
+            if (Hash::check($request->current_password, $currentUser->password)) {
 
                 if ($request->password == $request->confirmpassword) {
                     try {
@@ -216,10 +211,10 @@ class HomeController extends Controller
                     } catch (\Exception $e) {
                         return redirect()->back();
                     }
-                }else{
+                } else {
                     parent::dangerMessage('New password and confirm password does not match');
-                    }
-            }else{
+                }
+            } else {
                 parent::dangerMessage('Current password is incorrect');
                 return redirect()->back();
             }

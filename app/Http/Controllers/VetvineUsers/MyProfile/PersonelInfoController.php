@@ -43,7 +43,7 @@ class PersonelInfoController extends Controller
         });
         // $usernetworks   = UserMemberAndNetworkLevel::all();
         $licensurePermissions = User::where('id', Auth::id())->first();
-        return $licensurePermissions;
+        // return $licensurePermissions;
         return view('vetvineUsers.layouts.pages.user_profile', compact('countries', 'employmentInfo', 'timezones', 'usernetworks', 'licensurePermissions'));
     }
 
