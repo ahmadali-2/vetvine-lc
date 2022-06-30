@@ -69,6 +69,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'blocked_search',
         'profile_privacy',
         'profile_posting_privacy',
+        'guest',
 
     ];
     /**
