@@ -121,8 +121,13 @@
 
 </li>
 
+{{-- Ahmad --}}
+<li>
 
+    <a href="{{route('guestRegistrationFee')}}"> <i class="menu-icon fa fa-money" aria-hidden="true"></i>Guest Registration Fee </a>
 
+</li>
+{{-- EndAhmad --}}
 <li class="menu-item-has-children dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i
             class="menu-icon fa fa-table"></i>Static Pages</a>

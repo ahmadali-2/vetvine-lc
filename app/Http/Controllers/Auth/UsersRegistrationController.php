@@ -15,6 +15,8 @@ class UsersRegistrationController extends Controller
         if(isset(auth()->user()->email_verified_at) == false){
             $verifyEmail = true;
             return view('frontend.home', compact('verifyEmail'));
+        }else{
+            return redirect()->route('home');
         }
     }
 

@@ -19,7 +19,6 @@ class MemberTypeController extends Controller
     public function MemberPermissions($id)
     {
         $data = MemberPermission::where('membertype_id', $id)->first();
-
         return view('admins.members.memberpermissions', compact('id', 'data'));
     }
     public function MemberStatus(Request $request)

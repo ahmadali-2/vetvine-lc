@@ -14,7 +14,8 @@ class UserMemberAndNetworkLevel extends Model
     protected $fillable = [
         'parent_id',
         'status',
-        'name'
+        'name',
+        'registration_fee',
     ];
 
     //check user network level
@@ -22,7 +23,7 @@ class UserMemberAndNetworkLevel extends Model
     {
         return $this->hasOne(User::class);
     }
-    
+
     public function campaigns()
     {
         return $this->hasMany(AdCampaign::class);

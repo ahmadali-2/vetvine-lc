@@ -42,10 +42,6 @@ class UserMemberAndNetworkLevelSeeder extends Seeder
             'name' => 'Veterinary Technician',
         ]);
         UserMemberAndNetworkLevel::create([
-            'parent_id' => 2,
-            'name' => 'Veterinary Client Care / Hospital Admin',
-        ]);
-        UserMemberAndNetworkLevel::create([
             'parent_id' => 3,
             'name' => 'Veterinary Client Care / Hospital Admin',
         ]);

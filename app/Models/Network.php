@@ -19,5 +19,5 @@ class Network extends Model
     {
         return $this->morphTo();
     }
-    
+
 }
