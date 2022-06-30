@@ -54,6 +54,8 @@
                     <div class="popup-footer">
                         <input type="submit" id="loginbtn" value="Log In" class="toggle button send-msg">
                     </div>
+
+
                 </div>
 
             </div>

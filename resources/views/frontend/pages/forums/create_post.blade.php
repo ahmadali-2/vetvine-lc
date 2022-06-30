@@ -4,7 +4,7 @@
     #createpost input,#createpost textarea{
         /* border: 2px solid #5c7c85  !important; */
         border-radius: 0px !important;
-        color: #fff;
+        /* color: #fff; */
     }
     .text_editor{
         border: 2px solid #5c7c85  !important;
@@ -14,6 +14,7 @@
         background:  #f27222  !important;
         /* color: #f27222; */
         border: none !important;
+        font-family: "Museo Sans 500";
 
     }
     #createpost .post_submit_btn:hover {

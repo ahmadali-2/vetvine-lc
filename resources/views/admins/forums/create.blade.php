@@ -107,6 +107,7 @@
 @endsection
 @section('scripts')
     <script type="text/javascript">
+
         $('#categoryform').hide();
         $('#forumform').hide();
         $("#select_form").change(function() {

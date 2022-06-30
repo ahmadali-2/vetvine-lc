@@ -17,10 +17,10 @@
                                 @csrf
                                 <div class="form-group text-center">
                                     <ul class="list-inline">
-                                        <li class="list-inline-item"><i class="text-muted fa fa-cc-visa fa-2x"></i></li>
+                                        {{-- <li class="list-inline-item"><i class="text-muted fa fa-cc-visa fa-2x"></i></li>
                                         <li class="list-inline-item"><i class="fa fa-cc-mastercard fa-2x"></i></li>
                                         <li class="list-inline-item"><i class="fa fa-cc-amex fa-2x"></i></li>
-                                        <li class="list-inline-item"><i class="fa fa-cc-discover fa-2x"></i></li>
+                                        <li class="list-inline-item"><i class="fa fa-cc-discover fa-2x"></i></li> --}}
                                     </ul>
                                 </div>
                                 <div class="row">

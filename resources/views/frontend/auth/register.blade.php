@@ -356,6 +356,14 @@ $timezones = vetvineHelper::timezones();
                         <div class="popup-footer">
                             <input type="submit" value="Log In" class="toggle button send-msg">
                         </div>
+
+                        <div class="or text-center mt-2">
+                            OR
+                        </div>
+
+                        <div class="guest text-center">
+                            <a href="">Continue as a guest</a>
+                        </div>
                     </form>
                 </div>
 

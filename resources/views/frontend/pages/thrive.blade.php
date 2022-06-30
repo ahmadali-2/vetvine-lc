@@ -86,7 +86,7 @@
 
 
   <section class="become_member_area ">
-    <div class="container">
+    <div class="container mb-5">
 
       <div class="row">
 

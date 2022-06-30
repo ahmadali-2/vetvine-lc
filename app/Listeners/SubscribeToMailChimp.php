@@ -30,6 +30,7 @@ class SubscribeToMailChimp
      */
     public function handle(UserRegistered $event)
     {
+
             $email = $event->user->email;
             $domain = ltrim(stristr($email, '@'), '@');
             if(checkdnsrr($domain,'ANY') && $domain != 'mailinator.com'){
