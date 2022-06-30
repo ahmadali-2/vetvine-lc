@@ -100,55 +100,17 @@
             </div>
 
             <!-- Modal body -->
-            <div class="modal-body">
-                <div class="popup-body">
-                    <div class="row">
-                        <h2 class="email_heading" style="border-bottom: 1px solid transparent !important; ">Verify
-                            Your Email</h2>
-                        <div class="col-sm-12 mx-auto box" style="background-color: transparent;">
-                            <div class="mb-4 text-sm text-gray-600">
-                                {{ __('Welcome! Youre one step away from
-                                                                                                                                                                                                                                        enjoying the benefits of VetVine.') }}
-                            </div>
-
-                            <p>We just sent an email to <b style="font-weight: 600; color: #4242fc"><a> {{ Str::of(Auth::user()->email)->limit(3) }}.@<?php $explode = explode('@',auth()->user()->email); $explode = explode('.',$explode[1]); echo ($explode[0]);?>.com</a></b>
-                                Click on the link in that email to
-                                complete your registration.</p>
-                            <p>
-                                Didn’t receive an email from us? Check your SPAM
-                                folder. till cant find it?
-                            </p>
-
-
-
-                            @if (session('status') == 'verification-link-sent')
-                                <div class="mb-4 font-medium text-sm text-green-600">
-                                    {{ __('A new verification link has been sent to the email address you provided during registration.') }}
-                                </div>
-                            @endif
-
-                            <x-jet-validation-errors class="mb-4" />
-                            <form method="POST" action="{{ route('verification.send') }}">
-                                @csrf
-                                <div class="flex items-center justify-center mt-4">
-                                    <x-jet-button class="btn_email_resend" type="submit"
-                                        style="margin-left: 20%;  background-color: #f27222;">
-                                        {{ __('Resend Verification Email') }}
-                                    </x-jet-button>
-                                </div>
-                            </form>
-
-                            <p style="margin-top: 30px;">Need Help or Having Trouble? <a href="#"
-                                    style="text-decoration: none; color:#f27222;"> Contact Us</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="popup-footer">
-
-                </div>
+            <div id="login_main_body">
+                {{-- @include('frontend.auth.event_registration_completed') --}}
+                @include('frontend.auth.register_login')
+                {{-- @include('frontend.auth.login_course_registration_payment',[
+                    'event_price' => 25,
+                    'event_id' => 14,
+                ]) --}}
+                {{-- @include('frontend.auth.login_course_registration_detail') --}}
+                {{-- @include('frontend.auth.register_login') --}}
             </div>
-
+            {{-- End Modal body here --}}
         </div>
     </div>
 </div>
@@ -305,6 +267,10 @@
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
+        $(document).on('ready', function(){
+            $('#login_guest_selection')
+        });
+
         if($('#email_verify_modal_close').length){
             $('#email_verify_modal_close').on('click', function(){
             $('#verify-email-modal').removeClass('show');
