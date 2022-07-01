@@ -58,6 +58,11 @@ class GuestController extends Controller
                     'html' => view('frontend.auth.event_registration_completed')->render(),
                 ]);
             }
+            elseif($request->guest_screen == 6){
+                return response()->json([
+                    'html' => view('frontend.auth.course_registration_form')->render(),
+                ]);
+            }
         }
     }
 }
