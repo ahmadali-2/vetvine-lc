@@ -40,7 +40,7 @@
             },
             type: "GET",
             url: '/next-guest-screen',
-            data: {guest_screen: 1},
+            data: {guest_screen: 6},
             success: function(response){
                 $('#login_main_body').empty();
                 $('#login_main_body').append(response.html);
