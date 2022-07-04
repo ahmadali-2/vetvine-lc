@@ -21,7 +21,7 @@
                         <strong class="card-title">Manage Forums</strong>
                     </div>
                     <div class="card-body">
-                        <table class="table manage_forum">
+                        <table class="table manage_forum" id="ForumsTable">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -54,4 +54,12 @@
                 </div>
             </div>
         </div>
+    @endsection
+
+    @section('scripts')
+        <script>
+            $(document).ready(function() {
+                $('#ForumsTable').DataTable();
+            });
+        </script>
     @endsection

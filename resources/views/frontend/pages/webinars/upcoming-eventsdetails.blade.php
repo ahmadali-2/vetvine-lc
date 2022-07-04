@@ -233,21 +233,9 @@
       </div>
     <section class="video-section-wrapper mb-4">
         {{-- @dd($eventdetail->event_title) --}}
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <nav aria-label="breadcrumb" class="breadcrumbs large-font">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ url('/') }}" role="button" tabindex="0">Home</a>
-                            </li>
-                            <li class="breadcrumb-item"><a onclick="history.back()" href="javascript::void();">Upcoming
-                                    Webinars</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">{{ $eventdetail->event_title }}</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-            <form action="{{ route('submitPayment') }}" method="POST">
+        <div class="container-fluid p-0">
+
+            <div action="{{ route('submitPayment') }}" method="POST">
                 <div class="public-detail-inner">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="event_id" value="{{ $eventdetail->id }}">
@@ -255,24 +243,29 @@
                     <div class="public-cat">
                         <img src="{{ asset('/admin/eventss/' . $eventdetail->main_photo) }}" alt="">
                     </div>
+                </div>
+            </div>
+                <div class="container">
+                      <div class="content">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <nav aria-label="breadcrumb" class="breadcrumbs large-font">
+                                    <ol class="breadcrumb">
+
+                                        <li class="breadcrumb-item"><a onclick="history.back()" href="javascript::void();">Upcoming
+                                                Webinars</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">{{ $eventdetail->event_title }}</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
                     <h2>{{ $eventdetail->event_title }}</h2>
+
 
                     <div class="publication-detail">
                         <div class="publication-arrow-icon">
-                            <img src="{{ asset('frontend/img/arrow-right.png') }}" alt="arrow-right icon">
-                        </div>
-                        <div class="public2-info">
-                            <div class="public2-title">
-                                {{-- DESCRIgdgPTION: --}}
-                            </div>
-                            <div class="public2-description">
-                                {{ $eventdetail->event_description }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="publication-detail">
-                        <div class="publication-arrow-icon">
-                            <img src="{{ asset('frontend/img/arrow-right.png') }}" alt="arrow-right icon">
+
                         </div>
                         <div class="public2-info">
                             <div class="public2-title">
@@ -286,12 +279,15 @@
                     @if (Auth::user())
                         <div class="publication-detail">
                             <div class="publication-arrow-icon">
-                                <img src="{{ asset('frontend/img/arrow-right.png') }}" alt="arrow-right icon">
+
                             </div>
 
                             <div class="public2-info">
                                 <div class="public2-title">
                                     Time:
+
+                                </div>
+                                <div class="publication-detail">
                                     @php
                                         $eventTime = $eventdetail->time;
                                         $timeZone = $eventdetail->user->timezone->timezone;
@@ -315,17 +311,36 @@
 
                                         echo $convertedTime->format('H:i A') . ' ' . $userTimeZone;
                                     @endphp
+                                    <a href="" class="time_zone">View Other Time Zone</a>
                                 </div>
                             </div>
                         </div>
                     @endif
+
+
                     <div class="publication-detail">
                         <div class="publication-arrow-icon">
-                            <img src="{{ asset('frontend/img/arrow-right.png') }}" alt="arrow-right icon">
+
                         </div>
                         <div class="public2-info">
                             <div class="public2-title">
-                                Sponsor:
+                                {{-- Presenter(s): --}}
+                                <img src="https://www.w3schools.com/howto/img_avatar.png" alt="arrow-right icon">
+
+                            </div>
+                            <div class="public2-description">
+                               <b class="ml-2 text-uppercase"> {{ $eventdetail->presenter_one }}</b>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="publication-detail">
+                        <div class="publication-arrow-icon">
+
+                        </div>
+                        <div class="public2-info">
+                            <div class="public2-title">
+                                Sponsor(s): vetvine :
                             </div>
                             @foreach ($eventdetail->members as $items)
                                 <div class="public2-description">
@@ -335,21 +350,12 @@
                             @endforeach
                         </div>
                     </div>
-                    <div class="publication-detail">
-                        <div class="publication-arrow-icon">
-                            <img src="{{ asset('frontend/img/arrow-right.png') }}" alt=" arrow-right icon">
-                        </div>
-                        <div class="public2-info">
-                            <div class="public2-title">
-                                Presenter(s):
 
-                            </div>
-                            <div class="public2-description">
-                                {{ $eventdetail->presenter_one }}
-                            </div>
-                        </div>
+                    <div class="publication-detail register_btn">
+                        <a href="">Register</a>
                     </div>
-                    <div class="publication-detail">
+                </div>
+                    {{-- <div class="publication-detail">
                         <div class="publication-arrow-icon">
                             <img src="{{ asset('frontend/img/arrow-right.png') }}" alt="arrow-right icon">
                         </div>
@@ -378,24 +384,34 @@
                                     Fee : ${{ $eventdetail->vet_pet_prof_premium_fee }}</label>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="row">
                         <button id="calendarModelButtonAction" type="button" class="btn btn-primary" data-toggle="modal" data-target="#calendarModel" hidden><i class="fa fa-calendar" aria-hidden="true"></i> - Add to Calendar</button>
                         <button id="calendarModelButton" type="button" class="btn btn-primary" style="background-color: #f27222"><i class="fa fa-calendar" aria-hidden="true"></i> - Add to Calendar</button>
                     </div>
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-sm-12 my-3">
                             <button type="submit" class="click_join">Click me to
                                 Join</button>
                         </div>
-                    </div>
+                    </div> --}}
+
+
 
                 </div>
             </form>
+        </section>
 
-
-
+               <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="desription_p">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam nulla molestiae deserunt harum fuga modi, totam, officiis porro doloribus rerum, dolorem beatae pariatur dolor iste odit. Quae blanditiis sequi labore dolorem nisi rerum neque odit aperiam saepe, eius est fugiat corrupti in ad unde assumenda dolores provident. Commodi, ipsa in?</p>
+                    </div>
+                </div>
+               </div>
             @if (Auth::user())
+            <div class="container">
                 <div class="row">
                     <div class="leftcolumn">
                         <div class="card pt-0">
@@ -445,6 +461,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <!-- Review store Section -->
                             <div class="container">
                                 <div class="row">
@@ -495,9 +512,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
                 @include('frontend.pages.webinars.upcoming_eventjquery')
             @endif
-    </section>
+
 
 @endsection
 

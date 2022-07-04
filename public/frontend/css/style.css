@@ -1,22 +1,30 @@
 /* width */
+
 ::-webkit-scrollbar {
-    width: 10px;
-  }
+    width: 5px;
+}
 
-  /* Track */
-  ::-webkit-scrollbar-track {
+
+/* Track */
+
+ ::-webkit-scrollbar-track {
     background: transparent;
-  }
+}
 
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
+
+/* Handle */
+
+ ::-webkit-scrollbar-thumb {
     background: #fd7e14;
-  }
+}
 
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
+
+/* Handle on hover */
+
+ ::-webkit-scrollbar-thumb:hover {
     background: #ff9d4d;
-  }
+}
+
 *,
  :after,
  :before {
@@ -148,6 +156,7 @@ font-face {
     padding: 0px;
     padding-left: 5px;
     padding-right: 5px;
+    font-family: "Museo Sans 500";
 }
 
 .btn-ce:hover {
@@ -159,6 +168,7 @@ font-face {
 .btn-primary:not(:disabled):not(.disabled):active:focus,
 .show>.btn-primary.dropdown-toggle:focus {
     box-shadow: none !important;
+    font-family: "Museo Sans 500";
 }
 
 .btn-primary:not(:disabled):not(.disabled).active,
@@ -167,13 +177,15 @@ font-face {
     color: #507f87;
     background-color: transparent;
     border-color: none;
+    font-family: "Museo Sans 500";
 }
 
 .btn-primary:not(:disabled):not(.disabled).active,
 .btn-primary:not(:disabled):not(.disabled):active,
 .show>.btn-primary.dropdown-toggle:focus {
     box-shadow: none;
-    border: none
+    border: none;
+    font-family: "Museo Sans 500";
 }
 
 .sidebar-new-bg {
@@ -358,6 +370,7 @@ input:focus {
     text-transform: uppercase;
     background-color: #b75f26;
     padding: 8px 30px;
+    font-family: "Museo Sans 500";
 }
 
 .nav-wrapper-one li:hover {
@@ -455,6 +468,7 @@ input:focus {
     background-color: #507f87;
     color: #fff;
     width: 42px;
+    font-family: "Museo Sans 500";
 }
 
 .btn:focus {
@@ -474,6 +488,7 @@ input:focus {
     line-height: 35px;
     margin-left: 13px;
     position: relative;
+    font-family: "Museo Sans 500";
 }
 
 .reg-login_btn::after {
@@ -484,6 +499,7 @@ input:focus {
     position: absolute;
     right: -15px;
     top: -6px;
+    font-family: "Museo Sans 500";
 }
 
 .main-wrapper nav .nav-wrapper-one {
@@ -558,6 +574,7 @@ input:focus {
     transition: 0.5s linear;
     letter-spacing: 1px;
     font-size: 20px;
+    font-family: "Museo Sans 500";
 }
 
 .home_banner_btn:hover {
@@ -669,6 +686,7 @@ input:focus {
     text-align: left;
     float: left;
     margin-bottom: 40px;
+    font-family: "Museo Sans 500";
 }
 
 .btn_join_thepet:hover {
@@ -1213,9 +1231,10 @@ input:focus {
     border: 2px solid #f27222;
     box-shadow: none;
     transition: all 0.3s;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     text-transform: uppercase;
     line-height: 40px;
+    font-family: "Museo Sans 500";
 }
 
 .send-msg:focus {
@@ -1418,6 +1437,11 @@ input:focus {
 .register-in-login a {
     text-decoration: underline;
     color: #f27222;
+    cursor: pointer;
+}
+
+.register-in-login a:hover {
+    color: #507f87;
 }
 
 .keep-logged,
@@ -1584,6 +1608,7 @@ input:focus {
     text-transform: uppercase;
     background-color: #f27222;
     margin: 30px 0px 38px 0px;
+    font-family: "Museo Sans 500";
 }
 
 .btn-Continue:hover {
@@ -1606,6 +1631,7 @@ input:focus {
     text-transform: uppercase;
     background-color: #f27222;
     margin: 30px 0px 38px 0px;
+    font-family: "Museo Sans 500";
 }
 
 .btn-delete:hover {
@@ -1840,6 +1866,7 @@ input:focus {
     text-transform: uppercase;
     background-color: #f27222;
     margin: 30px 0px 38px 0px;
+    font-family: "Museo Sans 500";
 }
 
 .btn-profile:hover {
@@ -1903,6 +1930,7 @@ input:focus {
 
 .btn_me3 {
     border-radius: 0px;
+    font-family: "Museo Sans 500";
 }
 
 .btn_me3 li {
@@ -2232,7 +2260,7 @@ input:focus {
     width: 100%;
     display: inline-block;
     border-top: 2px solid #68868e !important;
-    padding-top: 23px;
+    /* padding-top: 23px; */
 }
 
 .video-box-main {
@@ -2626,6 +2654,8 @@ select#fav_show:focus>option:checked {
     transition: all 0.5s;
     border-radius: 30px;
     line-height: 15px;
+    font-family: "Museo Sans 500";
+    /* margin-top: 10px; */
 }
 
 .page-link-list {
@@ -2857,6 +2887,7 @@ select#fav_show:focus>option:checked {
     }
     .btn_join_thepet {
         font-size: 16px;
+        font-family: "Museo Sans 500";
     }
     .user-img h4 {
         float: right;
@@ -3691,6 +3722,7 @@ select#fav_show:focus>option:checked {
     display: none;
     width: 120px;
     margin-bottom: 15px;
+    font-family: "Museo Sans 500";
 }
 
 .plans-main .content:hover .hover_content {
@@ -3700,6 +3732,7 @@ select#fav_show:focus>option:checked {
 
 .plans-main .content:hover .hover_content .action-btns {
     display: block;
+    font-family: "Museo Sans 500";
 }
 
 .plans-main .action-btns:hover {
@@ -3882,19 +3915,17 @@ select#fav_show:focus>option:checked {
         padding-right: 0 !important;
     }
     .main_banner_thrive {
-        background-position: 28%, 100%;
+        background-size: 100% 100%;
     }
     .main_banner {
         background-position: 28%, 100%;
     }
     .main_banner_grow,
     .register_main_banner {
-        background-position: center top;
-        background-size: cover;
+        background-size: 100% 100%;
     }
     .main_banner_thrive {
-        background-position: center top;
-        background-size: cover;
+        background-size: 100% 100%;
     }
     .sidebar-new .nav-tabs .nav-link {
         width: 170px;
@@ -6197,12 +6228,13 @@ select#fav_show:focus>option:checked {
     padding: 15px 0;
 }
 
-.publication-arrow-icon {
+
+/* .publication-arrow-icon {
     padding-right: 15px;
-}
+} */
 
 .public2-description {
-    font-size: 14px;
+    font-size: 15px;
     font-family: "Museo 500";
     color: #5c7c85;
 }
@@ -6653,10 +6685,6 @@ table tbody .count td {
     margin-bottom: 0 !important;
 }
 
-.public-detail-inner .public-cat {
-    border: 5px solid #5c7c85 !important;
-}
-
 .btn_post {
     width: 180px;
     height: 40px;
@@ -6915,6 +6943,7 @@ table tbody .count td {
 .send_msg_btn {
     background: #507f87 !important;
     border-color: #ced4da !important;
+    font-family: "Museo Sans 500";
 }
 
 .send_msg_btn:hover {
@@ -7253,6 +7282,7 @@ ul {
     color: #2cdd9b;
     background-color: #e5f7f0;
     border-color: #d8f7eb;
+    font-family: "Museo Sans 500";
 }
 
 .noti_parent .content {
@@ -7576,30 +7606,30 @@ ul {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    font-family: "Museo 500";
+    font-family: "Museo Sans 500";
 }
 
 .chat-details {
     padding-top: 20px;
-    font-family: "Museo 500";
+    font-family: "Museo Sans 500";
 }
 
 .chat-title h3 {
     color: #105965;
     font-size: 24px;
-    font-family: "Museo 500";
+    font-family: "Museo Sans 500";
 }
 
 .chat-title h6 {
     color: #5e7c85;
     font-size: 14px;
-    font-family: "Museo 500";
+    font-family: "Museo Sans 500";
 }
 
 .chat-like-comments {
     width: 350px;
     margin: -10px auto;
-    font-family: "Museo 500";
+    font-family: "Museo Sans 500";
 }
 
 .icons-like {
@@ -7608,7 +7638,7 @@ ul {
     border-bottom: 1px solid #e7f0ef;
     padding-bottom: 7px;
     padding-left: 10px;
-    font-family: "Museo 500";
+    font-family: "Museo Sans 500";
 }
 
 .like-name p {
@@ -7616,13 +7646,13 @@ ul {
     color: #5e7c85;
     font-weight: 500;
     padding-left: 7px;
-    font-family: "Museo 500";
+    font-family: "Museo Sans 500";
 }
 
 .chat-like-comments {
     width: 350px;
     margin: -10px auto;
-    font-family: "Museo 500";
+    font-family: "Museo Sans 500";
 }
 
 .icon-btn {
@@ -7639,7 +7669,7 @@ ul {
 .chat-textarea {
     display: flex;
     margin-top: 30px;
-    font-family: "Museo 500";
+    font-family: "Museo Sans 500";
 }
 
 .comment_forum img {
@@ -7651,7 +7681,7 @@ ul {
     width: 90%;
     padding: 10px;
     position: relative;
-    font-family: "Museo 500";
+    font-family: "Museo Sans 500";
 }
 
 .chat-textarea textarea {
@@ -7666,7 +7696,7 @@ ul {
     left: 50px;
     width: 51px;
     align-items: center;
-    font-family: "Museo 500";
+    font-family: "Museo Sans 500";
 }
 
 .emajo img {
@@ -7679,14 +7709,14 @@ ul {
     position: absolute;
     right: 70px;
     bottom: 15px;
-    font-family: "Museo 500";
+    font-family: "Museo Sans 500";
 }
 
 .btn-cancel a {
     background-color: transparent !important;
     color: orangered !important;
     border: none !important;
-    font-family: "Museo 500";
+    font-family: "Museo Sans 500";
 }
 
 .text-btn a {
@@ -7697,7 +7727,7 @@ ul {
     padding: 10px 20px;
     background-color: orangered;
     border: 1px solid orangered;
-    font-family: "Museo 500";
+    font-family: "Museo Sans 500";
 }
 
 .similar h4 {
@@ -7819,14 +7849,14 @@ ul {
     .chat-textarea {
         display: flex;
         margin-top: 30px;
-        font-family: "Museo 500";
+        font-family: "Museo Sans 500";
         flex-direction: column;
     }
     .chat-textarea textarea {
         width: 100%;
         padding: 10px;
         position: relative;
-        font-family: "Museo 500";
+        font-family: "Museo Sans 500";
     }
     .emajo {
         display: flex;
@@ -7836,15 +7866,14 @@ ul {
         left: 27px;
         width: 51px;
         align-items: center;
-        font-family: "Museo 500";
+        font-family: "Museo Sans 500";
     }
     .text-btn {
         display: flex;
         float: right;
         position: absolute;
         right: 22px;
-        bottom: 15px;
-        font-family: "Museo 500";
+        font-family: "Museo Sans 500";
     }
     .text-btn a {
         width: 94px;
@@ -7854,7 +7883,7 @@ ul {
         padding: 10px 13px;
         background-color: orangered;
         border: 1px solid orangered;
-        font-family: "Museo 500";
+        font-family: "Museo Sans 500";
     }
 }
 
@@ -7983,6 +8012,7 @@ ul {
     text-decoration: none;
     background-color: white;
     border: 1px solid #f27222 !important;
+    font-family: "Museo Sans 500";
 }
 
 .upcoming_view_all:hover {
@@ -8053,6 +8083,7 @@ ul {
     font-size: 14px;
     font-weight: bold;
     cursor: pointer;
+    font-family: "Museo Sans 500";
 }
 
 .post_btn:hover {
@@ -8067,6 +8098,7 @@ ul {
     background: transparent;
     border: 2px solid #f27222 !important;
     color: #f27222;
+    font-family: "Museo Sans 500";
 }
 
 #createpost input,
@@ -8122,7 +8154,8 @@ ul {
 }
 
 .modal-content .btn-danger {
-    background-color: #f27222 !important
+    background-color: #f27222 !important;
+    font-family: "Museo Sans 500";
 }
 
 .listItemA a:hover {
@@ -8520,6 +8553,7 @@ line-height: 31px;
 #comment_btn {
     background-color: #f27222 !important;
     outline: none;
+    font-family: "Museo Sans 500";
 }
 
 .change_password .content input {
@@ -8561,7 +8595,7 @@ line-height: 31px;
     border-radius: 20px;
     font-size: 18px;
     color: #ffffff;
-    font-family: 'museo 300';
+    font-family: "Museo Sans 500";
     text-transform: uppercase;
     background-color: #f27222;
     margin: 30px 0px 38px 92px;
@@ -8572,6 +8606,7 @@ line-height: 31px;
     color: #f27222;
     border: solid 1px #f27222 !important;
     transition: all 0.5s ease;
+    font-family: "Museo Sans 500";
     -webkit-box-shadow: 5px 5px 3px 0px rgb(240 240 240);
     -moz-box-shadow: 5px 5px 3px 0px rgba(240, 240, 240, 1);
     box-shadow: 5px 5px 3px 0px rgb(240 240 240);
@@ -8587,7 +8622,7 @@ line-height: 31px;
         border-radius: 20px;
         font-size: 18px;
         color: #ffffff;
-        font-family: 'museo 300';
+        font-family: "Museo Sans 500";
         text-transform: uppercase;
         background-color: #f27222;
         margin: 30px 0px 38px 51px;
@@ -8601,7 +8636,7 @@ line-height: 31px;
         border-radius: 20px;
         font-size: 18px;
         color: #ffffff;
-        font-family: 'museo 300';
+        font-family: "Museo Sans 500";
         text-transform: uppercase;
         background-color: #f27222;
         margin: 30px 0px 38px 99px;
@@ -8650,6 +8685,7 @@ line-height: 31px;
         text-transform: uppercase;
         background-color: #f27222;
         margin: 30px 0px 38px 0px;
+        font-family: "Museo Sans 500";
     }
 }
 
@@ -8673,12 +8709,13 @@ line-height: 31px;
 
 #reply_btn {
     background-color: #f27222 !important;
+    font-family: "Museo Sans 500";
 }
 
 .like_section_parent .likeButtons .dislike {
     color: #f27222;
     font-weight: bold;
-    font-family: "Museo 500";
+    font-family: "Museo Sans 500";
 }
 
 .like_section_parent .likeButtons .dislike_icon {
@@ -8693,8 +8730,8 @@ line-height: 31px;
 .share_btn {
     color: #f27222 !important;
     font-weight: bold;
-    font-family: "Museo 500";
     cursor: pointer;
+    font-family: "Museo Sans 500";
 }
 
 .liked {
@@ -8791,6 +8828,17 @@ p {
         top: 50%;
         background-color: #f27222;
     }
+    .Section_top {
+        width: 100%;
+        min-height: 100%;
+        background-image: url(../images/bg_1.jpg);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+    .main_banner_grow,
+    .register_main_banner {
+        background-size: 100% 100%;
+    }
 }
 
 @media (max-width:500px) {
@@ -8855,4 +8903,179 @@ p {
 
 .pagination_div .page-item {
     margin: 0px 5px;
+}
+
+.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    height: 46px;
+    padding-top: 11px;
+}
+
+.form-vet-section select {
+    background-color: #ffffff;
+    border: 1px solid #5c7c85 !important;
+    height: 46px;
+    margin-bottom: 20px;
+}
+
+.form-vet-section .select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #aaa !important;
+    border-radius: 4px;
+    height: 46px;
+}
+
+.form-vet-section .select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #aaa !important;
+    border-radius: 4px;
+    height: 46px;
+}
+
+.form-vet-section .select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 1px solid #aaa !important;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 1px solid #aaa !important;
+}
+
+.navbar-expand-md .navbar-nav .nav_res_3 .mm-editdb-text {
+    text-transform: capitalize;
+}
+
+.navbar-expand-md .navbar-nav .nav_res_3 .btn-ce {
+    text-transform: capitalize;
+}
+
+.navbar-expand-md .navbar-nav .ce-toggle-btn {
+    text-transform: capitalize;
+}
+
+.guest a {
+    color: #f27222;
+    text-decoration: underline;
+    font-family: "Museo 500";
+    font-size: 20px;
+}
+
+.add_to_calender_btn {
+    width: auto;
+    height: 47px;
+    border-radius: 0px;
+    background-color: #f27222;
+    display: inline-block;
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: #ffffff;
+    text-align: center;
+    border: 2px solid #f27222;
+    box-shadow: none;
+    transition: all 0.3s;
+    /* margin-top: 20px; */
+    /* text-transform: uppercase; */
+    line-height: 40px;
+    font-family: "Museo Sans 500";
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.guest_screen_text {
+    padding: 10px;
+    padding-top: 20px;
+    text-align: center;
+    color: #5e7c85;
+}
+
+#continue_guest.toggle {
+    line-height: 48px;
+    color: #fff;
+}
+
+#continue_guest.toggle:hover {
+    color: #f27222;
+}
+
+.video-section-wrapper {
+    position: relative;
+}
+
+.video-section-wrapper .content {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    /* left: 5%; */
+}
+
+.breadcrumb {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    list-style: none;
+    background-color: transparent !important;
+    border-radius: 0.25rem;
+    padding-left: 0px;
+}
+
+.breadcrumb li {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.video-section-wrapper h2 {
+    color: #5c7c85;
+}
+
+.video-section-wrapper .public2-info {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.time_zone {
+    margin-left: 20px;
+    color: #f27222;
+    text-transform: capitalize;
+}
+
+.time_zone:hover {
+    color: #5c7c85;
+}
+
+.publication-detail {
+    color: #5c7c85;
+}
+
+.public2-title {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    margin-right: 5px;
+    font-size: 16px;
+}
+
+.video-section-wrapper .public2-title img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.register_btn a {
+    background-color: #f27222;
+    padding: 10px 30px;
+    color: #fff;
+}
+
+.desription_p {
+    font-family: "Museo sans 500";
+    font-size: 18px;
 }

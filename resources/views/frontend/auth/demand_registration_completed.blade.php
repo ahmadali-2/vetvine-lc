@@ -15,8 +15,8 @@
 }
 </style>
 <div class="popup-body">
-    <h2 class="member-login">Course Registration</span></h2>
-    <h2>Completed</h2>
+    <h2 class="member-login"><span>Course Registration</span></h2>
+    <h2 class="mt-5" style="border-bottom: none !important;">Completed</h2>
     <h3 class="guest_screen_text top_heading">CANCER IN PETS - GET TO KNOW YOUR PET'S LUMPH NODES!</h3>
 </div>
 <div class="popup-footer">

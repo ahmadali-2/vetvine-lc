@@ -40,9 +40,10 @@
                 @endif
 
                 <x-jet-button class="ml-4">
-                    {{ __('Log in') }}
+                    {{ __('Log ingfgfgf') }}
                 </x-jet-button>
             </div>
+
         </form>
     </x-jet-authentication-card>
 </x-guest-layout>
