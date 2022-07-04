@@ -215,6 +215,22 @@
 
         /* End */
     </style>
+    <?php
+        $convertedTime = null;
+    ?>
+    <div class="modal fade" id="calendarModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Event Calendar</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" id="eventCalendarDiv"></div>
+          </div>
+        </div>
+      </div>
     <section class="video-section-wrapper mb-4">
         {{-- @dd($eventdetail->event_title) --}}
         <div class="container-fluid p-0">
@@ -369,6 +385,10 @@
                             </div>
                         </div>
                     </div> --}}
+                    <div class="row">
+                        <button id="calendarModelButtonAction" type="button" class="btn btn-primary" data-toggle="modal" data-target="#calendarModel" hidden><i class="fa fa-calendar" aria-hidden="true"></i> - Add to Calendar</button>
+                        <button id="calendarModelButton" type="button" class="btn btn-primary" style="background-color: #f27222"><i class="fa fa-calendar" aria-hidden="true"></i> - Add to Calendar</button>
+                    </div>
                     {{-- <div class="row">
                         <div class="col-sm-12 my-3">
                             <button type="submit" class="click_join">Click me to
@@ -502,6 +522,28 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
+            var event_id = '<?php echo $eventId ?>';
+            $('#calendarModelButton').on('click', function(){
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "GET",
+                    url: "/add-vetvine-event",
+                    data: {event_id: event_id},
+                    success: function(response) {
+                        $('#eventCalendarDiv').empty();
+                        $('#eventCalendarDiv').append(response.html);
+                        if(response.code == 200){
+                            toastr.success(response.message);
+                        }else{
+                            toastr.warning(response.message);
+                        }
+                        $('#calendarModelButtonAction').trigger("click");
+                    }
+                });
+            });
+
             $('html, body').animate({
                 scrollTop: $('#review-section').offset().top
             }, 'slow');

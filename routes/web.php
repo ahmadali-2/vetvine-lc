@@ -59,6 +59,7 @@ use App\Http\Controllers\VideoDescriptionController;
 use App\Http\Controllers\StaticPageController; // for static pages
 use App\Http\Controllers\TermsController; // for terms of services
 use App\Http\Controllers\LicensureController;
+use App\Http\Controllers\VetvineUsers\EventManagement\CalandarEventsController;
 use App\Models\Generals\TimeZone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -166,6 +167,10 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
 });
 // Open routes Ahmad
 Route::get('next-guest-screen', [GuestController::class, 'nextGuestScreen'])->name('nextGuestScreen');
+Route::get('calendar-event', [CalandarEventsController::class, 'index']);
+Route::post('calendar-crud-ajax', [CalandarEventsController::class, 'calendarEvents']);
+Route::get('add-vetvine-event', [CalandarEventsController::class, 'addVetvineEvent']);
+
 // End open routes Ahmad
 Route::get('member-home-paginate',[PostController::class,'paginateMemberHomePost'])->name('member_home_paginate');
 

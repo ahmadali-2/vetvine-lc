@@ -101,8 +101,9 @@
 
             <!-- Modal body -->
             <div id="login_main_body">
-                {{-- @include('frontend.auth.demand_registration_completed') --}}
-                @include('frontend.auth.register_login')
+                {{-- @include('frontend.auth.event_registration_completed') --}}
+                {{-- @include('frontend.auth.register_login') --}}
+                @include('frontend.auth.course_registration_form')
                 {{-- @include('frontend.auth.login_course_registration_payment',[
                     'event_price' => 25,
                     'event_id' => 14,

@@ -13,6 +13,7 @@ class Event extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'id',
         'category_id',
         'user_id',
         'event_title',
@@ -61,7 +62,10 @@ class Event extends Model
     {
         return $this->hasMany(WebinarBuyEventPlan::class);
     }
-
+    public function calendarEvents()
+    {
+        return $this->hasMany(CalendarEvent::class);
+    }
     public function ReviewData()
     {
     return $this->hasMany(ReviewRating::class);

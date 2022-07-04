@@ -40,21 +40,20 @@
     $('#continue_guest').on('click', function() {
         $('#guest_continue_loading').css('display', 'block');
         setTimeout(
-            function() {
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    },
-                    type: "GET",
-                    url: '/next-guest-screen',
-                    data: {
-                        guest_screen: 1
-                    },
-                    success: function(response) {
-                        $('#login_main_body').empty();
-                        $('#login_main_body').append(response.html);
-                    }
-                })
-            }, 1000);;
+        function()
+        {
+            $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            },
+            type: "GET",
+            url: '/next-guest-screen',
+            data: {guest_screen: 6},
+            success: function(response){
+                $('#login_main_body').empty();
+                $('#login_main_body').append(response.html);
+            }
+        })
+        }, 1000);;
     });
 </script>
