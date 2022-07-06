@@ -216,6 +216,7 @@
         /* End */
     </style>
     <?php
+    use App\Models\Generals\TimeZone;
         $convertedTime = null;
     ?>
     <div class="modal fade" id="calendarModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
@@ -272,7 +273,41 @@
                                 Date:
                             </div>
                             <div class="public2-description">
-                                {{ $eventdetail->date }}
+                                {{  date('F,d,Y', strtotime($eventdetail->date)) }}
+                            </div>
+                            <div class="public2-title">
+                                Date:
+                            </div>
+                            <div class="public2-description">
+                                @auth
+                                @php
+                                    $timeZone = $eventdetail->user->timezone->timezone;
+                                    // Fetching timezone UTC code : Please don't screw it
+                                    $pieces = explode('(', $timeZone);
+                                    $pieces = explode('C', $pieces[1]);
+                                    $pieces = explode(')', $pieces[1]);
+
+                                    // Formatting the time
+                                    $today = new DateTime($eventdetail->time, new DateTimeZone($pieces[0]));
+
+                                    $userTimeZone = Auth::user()->timezone->timezone;
+
+                                    // Fetching timezone UTC code : Please don't screw it
+                                    $pieces = explode('(', $userTimeZone);
+                                    $pieces = explode('C', $pieces[1]);
+                                    $pieces = explode(')', $pieces[1]);
+
+                                    $userEventTime = new DateTimeZone($pieces[0]);
+                                    $convertedTime = $today->setTimeZone($userEventTime);
+
+                                    echo $convertedTime->format('H:i A') . ' ' . $userTimeZone;
+                                @endphp
+                                @else
+                                    @php
+                                        echo $eventdetail->time.'.ET';
+                                    @endphp
+                                @endauth
+
                             </div>
                         </div>
                     </div>
@@ -385,10 +420,12 @@
                             </div>
                         </div>
                     </div> --}}
-                    <div class="row">
-                        <button id="calendarModelButtonAction" type="button" class="btn btn-primary" data-toggle="modal" data-target="#calendarModel" hidden><i class="fa fa-calendar" aria-hidden="true"></i> - Add to Calendar</button>
-                        <button id="calendarModelButton" type="button" class="btn btn-primary" style="background-color: #f27222"><i class="fa fa-calendar" aria-hidden="true"></i> - Add to Calendar</button>
-                    </div>
+                    @auth
+                        <div class="row">
+                            <button id="calendarModelButtonAction" type="button" class="btn btn-primary" data-toggle="modal" data-target="#calendarModel" hidden><i class="fa fa-calendar" aria-hidden="true"></i> - Add to Calendar</button>
+                            <button id="calendarModelButton" type="button" class="btn btn-primary" style="background-color: #f27222"><i class="fa fa-calendar" aria-hidden="true"></i> - Add to Calendar</button>
+                        </div>
+                    @endauth
                     {{-- <div class="row">
                         <div class="col-sm-12 my-3">
                             <button type="submit" class="click_join">Click me to

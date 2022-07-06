@@ -19,18 +19,19 @@
     </section>
 </main>
 @if(isset($verifyEmail))
-{{-- <div class="modal fade show" id="verify-email-modal" style="display: block;" aria-modal="true">
-        <div class="modal-dialog custum_popup">
-            <div class="modal-content">
+<div class="modal fade show" id="verify-email-modal" style="display: block;" aria-modal="true">
+    <div class="modal-dialog custum_popup">
+        <div class="modal-content">
 
-                <!-- Modal Header -->
-                <div class="modal-header">
+            <!-- Modal Header -->
+            <div class="modal-header">
 
-                    <div class="popup-header">
-                        <span class="popup-logo"><img src="{{ asset('frontend/images/popup-logo.png') }}" alt="logo"></span>
-                        <span class="close" id="email_verify_modal_close" data-dismiss="modal">&times;</span>
-                    </div>
+                <div class="popup-header">
+                    <span class="popup-logo"><img src="{{ asset('frontend/images/popup-logo.png') }}"
+                            alt="logo"></span>
+                    <span class="close" id="email_verify_modal_close" data-dismiss="modal">&times;</span>
                 </div>
+            </div>
 
             <!-- Modal body -->
             <div class="modal-body">
@@ -64,7 +65,7 @@
                             <form method="POST" action="{{ route('verification.send') }}">
                                 @csrf
                                 <div class="flex items-center justify-center mt-4">
-                                    <x-jet-button class="btn_email_resend" type="submit"
+                                    <x-jet-button class="" type="submit"
                                         style="margin-left: 20%;  background-color: #f27222;">
                                         {{ __('Resend Verification Email') }}
                                     </x-jet-button>
@@ -80,36 +81,6 @@
                 <div class="popup-footer">
 
                 </div>
-            </div>
-
-            </div>
-        </div>
-</div> --}}
-<div class="modal fade show" id="verify-email-modal" style="display: block;" aria-modal="true">
-    <div class="modal-dialog custum_popup">
-        <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-
-                <div class="popup-header">
-                    <span class="popup-logo"><img src="{{ asset('frontend/images/popup-logo.png') }}"
-                            alt="logo"></span>
-                    <span class="close" id="email_verify_modal_close" data-dismiss="modal">&times;</span>
-                </div>
-            </div>
-
-            <!-- Modal body -->
-            <div id="login_main_body">
-                {{-- @include('frontend.auth.event_registration_completed') --}}
-                {{-- @include('frontend.auth.register_login') --}}
-                @include('frontend.auth.course_registration_form')
-                {{-- @include('frontend.auth.login_course_registration_payment',[
-                    'event_price' => 25,
-                    'event_id' => 14,
-                ]) --}}
-                {{-- @include('frontend.auth.login_course_registration_detail') --}}
-                {{-- @include('frontend.auth.register_login') --}}
             </div>
             {{-- End Modal body here --}}
         </div>

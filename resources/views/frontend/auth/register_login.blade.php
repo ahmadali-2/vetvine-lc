@@ -62,6 +62,11 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+    $("#register_show_modal_login").on("click",function(e){
+         e.preventDefault();
+         $("#registration_modal_box_show_btn").trigger("click");
+         $("#email_verify_modal_close").trigger("click");
+    });
     $('#continue_guest').on('click', function(){
         $('#guest_continue_loading').css('display','block');
         setTimeout(
