@@ -38,6 +38,7 @@ class SubscribeToMailChimp
             'apiKey' => env('MAILCHIMP_API_KEY'),
             'server' => 'us17',
         ]);
+
         $email = $event->user->email;
         $domain = ltrim(stristr($email, '@'), '@');
         $response = $client->verifiedDomains->getDomain($domain);
