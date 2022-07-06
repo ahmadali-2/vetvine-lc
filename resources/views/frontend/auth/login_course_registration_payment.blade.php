@@ -50,7 +50,7 @@
                         @csrf
                         <input type="hidden" value="{{ $event_price }}" name="event_price">
                         <input type="hidden" value="{{ $event_id }}" name="event_id">
-                        <input type="hidden" value="{{ Auth::user()->id }}" name="user_id">
+                        <input type="hidden" name="user_id">
                         <div class="num-feild required">
                             <label for="num">Credit Card Number</label>
                             <input autocomplete='off' type="text" name="card_number" id="num"
@@ -126,6 +126,6 @@
                 $('#login_main_body').append(response.html);
             }
         })
-        }, 1000);;
+        }, 1000);
     });
 </script>

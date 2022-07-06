@@ -23,19 +23,19 @@ $(document).ready(function(e) {
         $(".modal-backdrop").hide();
     });
 
-    
+
     $(".tab_1_section_parent").on("click", function(e) {
 
-        
-     
+
+
         $('.tab_2_section').removeClass("active_box");
         $('.tab_3_section').removeClass("active_box");
         $('.tab_4_section').removeClass("active_box");
         $(".ui-tabs-nav li").removeClass('ui-tabs-active');
-        $(this).addClass('ui-tabs-active'); 
+        $(this).addClass('ui-tabs-active');
         $('.tab_1_section').toggleClass('active_box');
-      
-       
+
+
     });
 
     $(".tab_2_section_parent").on("click", function(e) {
@@ -60,7 +60,7 @@ $(document).ready(function(e) {
         $('.tab_1_section').removeClass("active_box");
         $('.tab_2_section').removeClass("active_box");
         $('.tab_3_section').removeClass("active_box");
-        
+
         $(".ui-tabs-nav li").removeClass('ui-tabs-active');
         $(this).addClass('ui-tabs-active');
         $('.tab_4_section').toggleClass('active_box');
@@ -73,15 +73,15 @@ $(document).ready(function(e) {
         $('.tab_4_section').removeClass('active_box');
     });
     $(".form-check-input").on('checked', function() {
-      
+
         $('.tab_1_section').removeClass('active_box');
         $('.tab_2_section').removeClass('active_box');
         $('.tab_3_section').removeClass('active_box');
         $('.tab_4_section').removeClass('active_box');
     });
-    
+
     $(".form-check-label").on('click', function() {
-      
+
         $('.tab_1_section').removeClass('active_box');
         $('.tab_2_section').removeClass('active_box');
         $('.tab_3_section').removeClass('active_box');
@@ -93,13 +93,13 @@ $(document).ready(function(e) {
         $('.tab_3_section').removeClass('active_box');
         $('.tab_4_section').removeClass('active_box');
     });
-    
-   
+
+
     $(".remove_box").on("click",function(e){
-       
+
         $(".registraion_form_pop_up").find('.active_li').removeClass('active_li');
          $(this).closest('.form-check').addClass('active_li');
-        
+
 });
 
 
@@ -115,13 +115,25 @@ $(document).ready(function(e) {
  })
  $("#register_model_show").on("click",function(e){
      e.preventDefault();
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        },
+        type: "GET",
+        url: '/next-guest-screen',
+        data: {guest_screen: 1},
+        success: function(response){
+            $('#login_main_body').empty();
+            $('#login_main_body').append(response.html);
+        }
+    });
     //  $("#registration_modal_box_show_btn").trigger("click");
     $('#login_form_show_btn').trigger("click");
  })
  $("#register_show_modal_login").on("click",function(e){
      e.preventDefault();
      $("#registration_modal_box_show_btn").trigger("click");
-     $("#login_modal_close").trigger("click");
+     $("#email_verify_modal_close").trigger("click");
  })
 })
 
