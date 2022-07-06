@@ -8833,11 +8833,13 @@ p {
         min-height: 100%;
         background-image: url(../images/bg_1.jpg);
         background-repeat: no-repeat;
-        background-size: 100% 100%;
+        background-size: cover;
+        background-position: center;
     }
     .main_banner_grow,
     .register_main_banner {
-        background-size: 100% 100%;
+        background-size: cover;
+        background-position: center;
     }
 }
 
@@ -9078,4 +9080,27 @@ p {
 .desription_p {
     font-family: "Museo sans 500";
     font-size: 18px;
+}
+
+.upcoming-home-bg2 {
+    min-height: 490px;
+    background-image: linear-gradient(90deg, rgb(244, 244, 244, 1) 50%, rgba(255, 255, 255, 0.1) 70%), url(../images/bg_1.jpg);
+    border-bottom: 10px solid #f27222 !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media (max-width:767px) {
+    .video-section-wrapper .content {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        left: 5%;
+    }
+    .btn-celender {
+        margin-left: 15px;
+    }
+    .upcoming-home-bg2 {
+        background-image: linear-gradient(90deg, rgb(244, 244, 244, 1) 50%, rgba(255, 255, 255, 0.8) 70%), url(../images/bg_1.jpg) !important;
+    }
 }

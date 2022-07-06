@@ -241,8 +241,8 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="event_id" value="{{ $eventdetail->id }}">
                     <input type="hidden" name="user_id" value="{{ $eventdetail->user_id }}">
-                    <div class="public-cat">
-                        <img src="{{ asset('/admin/eventss/' . $eventdetail->main_photo) }}" alt="">
+                    <div class="public-cat upcoming-home-bg2">
+                        {{-- <img src="{{ asset('/admin/eventss/' . $eventdetail->main_photo) }}" alt=""> --}}
                     </div>
                 </div>
             </div>
@@ -454,7 +454,6 @@
                         <div class="card pt-0">
                             <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
                                 <div>
-
                                     <div class="row header_row">
                                         <div class="col-lg-4">
                                             <h4>Comment Section </h4>
