@@ -377,9 +377,11 @@
                                         @endphp
                                     @endauth
                                 </div>
-                                <div class="public2-info" style="margin-left: 12px; margin-bottom:0px ;">
-                                    <a href="{{ $eventdetail->timezone_url }}"> View Other Timezone</a>
-                                </div>
+                                @auth
+                                    <div class="public2-info" style="margin-left: 12px; margin-bottom:0px ;">
+                                        <a href="{{ $eventdetail->timezone_url }}"> View Other Timezone</a>
+                                    </div>
+                                @endauth
                             </div>
                         </div>
                     </div>

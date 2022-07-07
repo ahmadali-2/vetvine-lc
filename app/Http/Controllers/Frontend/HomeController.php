@@ -103,8 +103,11 @@ class HomeController extends Controller
         if(auth()->user()){
             $authUser = true;
         }
-
-        $purchasedEvent =BuyEventPlan::where('user_id',auth()->user()->id)->where('event_id', $id)->first();
+        if(auth()->user()){
+            $purchasedEvent =BuyEventPlan::where('user_id',auth()->user()->id)->where('event_id', $id)->first();
+        }else{
+            $purchasedEvent = null;
+        }
         return view('frontend.pages.webinars.upcoming-eventsdetails', compact('eventdetail', 'category', 'eventId','authUser','purchasedEvent'));
     }
 
