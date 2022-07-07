@@ -52,10 +52,6 @@
         </div>
         <div class="popup-footer">
             <input type="submit" value="Log In" class="toggle button send-msg">
-            <h6 style="margin-top: 10px">OR</h6>
-            <div class="register-in-login">
-                <a class="Register-Now" id="continue_guest"><h5>Continue as a Guest <div id="guest_continue_loading" style="display: none"><img src="{{ asset('/frontend/images/orangeLoading.gif')}}" width="40px" style="margin-left:10px;"></div></h5></a>
-            </div>
         </div>
     </form>
 </div>
@@ -67,23 +63,24 @@
          $("#registration_modal_box_show_btn").trigger("click");
          $("#email_verify_modal_close").trigger("click");
     });
+
     $('#continue_guest').on('click', function(){
-        $('#guest_continue_loading').css('display','block');
-        setTimeout(
-        function()
-        {
-            $.ajax({
-			headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-			},
-			type: "GET",
-			url: '/next-guest-screen',
-			data: {guest_screen: 2},
-			success: function(response){
-                $('#login_main_body').empty();
-                $('#login_main_body').append(response.html);
-			}
-		})
-        }, 1000);;
-    });
+    $('#guest_continue_loading').css('display','block');
+    setTimeout(
+    function()
+    {
+        $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        },
+        type: "GET",
+        url: '/next-guest-screen',
+        data: {guest_screen: 2},
+        success: function(response){
+            $('#login_main_body').empty();
+            $('#login_main_body').append(response.html);
+        }
+    })
+    }, 1000);;
+});
 </script>

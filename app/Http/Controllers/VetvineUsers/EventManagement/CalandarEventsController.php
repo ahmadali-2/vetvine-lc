@@ -41,13 +41,16 @@ class CalandarEventsController extends Controller
                 break;
             }
         }
+
+        $specificEvent = Event::where('id', $request->event_id)->first();
+
         if($addEvent){
             CalendarEvent::create([
                 'user_id' => Auth::user()->id,
                 'event_id' => $request->event_id,
-                'event_name' => $event->event_title,
-                'event_start' => date('Y-m-d H:i:s', strtotime(''.$event->date.''.$event->time.'')),
-                'event_end' => date('Y-m-d H:i:s', strtotime(''.$event->date.''.$event->time.'')),
+                'event_name' => $specificEvent->event_title,
+                'event_start' => date('Y-m-d H:i:s', strtotime(''.$specificEvent->date.''.$specificEvent->time.'')),
+                'event_end' => date('Y-m-d H:i:s', strtotime(''.$specificEvent->date.''.$specificEvent->time.'')),
             ]);
             $code = 200;
             $message = 'Event added to calendar successfully!';

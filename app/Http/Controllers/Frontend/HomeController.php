@@ -7,6 +7,7 @@ use App\Models\Admins\Forum\CategoryForum;
 use App\Models\Admins\Forum\Forum;
 use App\Models\Admins\Forum\Post;
 use App\Models\Admins\VideosonDemand\VideosOnDemand;
+use App\Models\Admins\Webinar\BuyEventPlan;
 use App\Models\Admins\Webinar\CategoryEvent;
 use App\Models\Admins\Webinar\Event;
 use App\Models\Admins\Webinar\SponserTable;
@@ -95,10 +96,54 @@ class HomeController extends Controller
     public function upcomingWebinarsdetails($id)
     {
         $eventdetail = Event::with('events', 'sponsers', 'members', 'user', 'buyeventplan', 'ReviewData')->find($id);
+
         $eventId = $eventdetail->id;
         $category = CategoryEvent::all();
-        return view('frontend.pages.webinars.upcoming-eventsdetails', compact('eventdetail', 'category', 'eventId'));
+        $authUser = false;
+        if(auth()->user()){
+            $authUser = true;
+        }
 
+        $purchasedEvent =BuyEventPlan::where('user_id',auth()->user()->id)->where('event_id', $id)->first();
+        return view('frontend.pages.webinars.upcoming-eventsdetails', compact('eventdetail', 'category', 'eventId','authUser','purchasedEvent'));
+    }
+
+    public function getEventPrice(Request $request){
+        $user = User::where('id', auth()->user()->id)->first();
+
+        $eventdetail = Event::with('events', 'sponsers', 'members', 'user', 'buyeventplan', 'ReviewData')->find($request->event_id);
+
+        $data = array();
+
+        $data['user_id'] = auth()->user()->id;
+
+        $data['event_id'] = $request->event_id;
+
+        $data['protocol'] = 'Vetvine Member';
+
+        if($user->type == 4 || $user->type == 5){
+            $data['fee'] = $eventdetail->vet_pet_prof_fee;
+        }
+        else if($user->type == 3){
+            $data['fee'] = $eventdetail->pet_owner_fee;
+        }
+        else if($user->type == 6){
+            $data['fee'] = $eventdetail->pet_owner_premium_fee;
+            $data['protocol'] = 'Vetvine Premium Membership <br> Subscriber';
+        }
+        else if($user->type == 7 || $user->type == 8){
+            $data['fee'] = $eventdetail->vet_pet_prof_premium_fee;
+            $data['protocol'] = 'Vetvine Premium Membership <br> Subscriber';
+        }else{
+            $data['fee'] = 'Free';
+        }
+
+        $data['title'] = $eventdetail->event_title;
+
+        return response()->json([
+            'code' => 200,
+            'data' => $data,
+        ]);
     }
 
     public function searceducations(Request $request)
