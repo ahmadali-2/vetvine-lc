@@ -381,6 +381,10 @@
                                     <a href="" class="time_zone">View Other Time Zone</a>
                                 </div>
                             </div>
+
+                            <div class="public2-info" style="margin-left: 12px">
+                                <a href="{{ $eventdetail->timezone_url }}"> View Other Timezone</a>
+                            </div>
                         </div>
                     @endif
 
