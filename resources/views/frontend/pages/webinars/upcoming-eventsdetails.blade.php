@@ -219,6 +219,38 @@
     use App\Models\Generals\TimeZone;
         $convertedTime = null;
     ?>
+    <!-- Login Modal Form  Start-->
+    <button type="button" class="btn btn-primary d-none" id="register_event_btn" data-toggle="modal"
+        data-target="#event_registration_model">
+        Launch demo modal
+    </button>
+<div class="modal fade" id="event_registration_model">
+    <div class="modal-dialog custum_popup">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="popup-header">
+                    <span class="popup-logo"><img src="{{ asset('frontend/images/popup-logo.png') }}"
+                            alt="logo"></span>
+                    <span class="close" id="login_modal_close" data-dismiss="modal">&times;</span>
+                </div>
+            </div>
+            <!-- Modal body -->
+            <div id="login_main_body">
+                {{-- @include('frontend.auth.event_registration_completed') --}}
+
+                @include('frontend.auth.login_course_registration_detail')
+                {{-- @include('frontend.auth.login_course_registration_payment',[
+                    'event_price' => 25,
+                    'event_id' => 14,
+                ]) --}}
+                {{-- @include('frontend.auth.login_course_registration_detail') --}}
+                {{-- @include('frontend.auth.register_login') --}}
+            </div>
+            {{-- End Modal body here --}}
+        </div>
+    </div>
+</div>
+<!-- Login Modal Form  End-->
     <div class="modal fade" id="calendarModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -387,7 +419,12 @@
                     </div>
 
                     <div class="publication-detail register_btn">
-                        <a href="">Register</a>
+                        @if(isset($purchasedEvent))
+                            <button class="btn btn-primary">View Now!</button>
+                        @else
+                            <button class="btn btn-primary" id="register_event">Register</button>
+                        @endif
+
                     </div>
                 </div>
                     {{-- <div class="publication-detail">
@@ -559,6 +596,32 @@
     <script>
         $(document).ready(function() {
             var event_id = '<?php echo $eventId ?>';
+            var authUser = '<?php echo $authUser ?>';
+        $('#register_event').on('click', function(){
+                console.log(authUser);
+                if(authUser == false){
+                    $('#login_form_show_btn').trigger("click");
+                }else{
+                        $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        type: "POST",
+                        url: "/vetvine-member/getEventPrice",
+                        data: {event_id: event_id},
+                        success: function(response) {
+                            $('#event_detail_heading').html(response.data['title']);
+                            $('#event_protocol_heading').html(response.data['protocol']+': <b>'+'$'+response.data['fee']+'</b>');
+                            $('#continue_guest').html('PAY $'+response.data['fee']);
+                            $('#event_detail_event_id').val(response.data['event_id']);
+                            $('#event_detail_user_id').val(response.data['user_id']);
+                            $('#event_detail_amount').val(response.data['fee']);
+                            $('#event_detail_title').val(response.data['title'])
+                        }
+                    });
+                    $('#register_event_btn').trigger("click");
+                }
+            });
             $('#calendarModelButton').on('click', function(){
                 $.ajax({
                     headers: {
