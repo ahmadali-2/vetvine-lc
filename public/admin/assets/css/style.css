@@ -6750,6 +6750,7 @@ header .form-inline .search-form.close {
     }
     .card-body {
         padding: 15px;
+        overflow-x: scroll !important;
     }
     .badges button {
         margin: 2px 0;

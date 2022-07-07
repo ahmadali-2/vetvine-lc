@@ -6225,7 +6225,7 @@ select#fav_show:focus>option:checked {
 
 .publication-detail {
     display: flex;
-    padding: 15px 0;
+    padding: 0px 0;
 }
 
 
@@ -9006,12 +9006,13 @@ p {
 
 .video-section-wrapper {
     position: relative;
+    overflow: hidden;
 }
 
 .video-section-wrapper .content {
     position: absolute;
     top: 0;
-    width: 50%;
+    width: 70%;
     /* left: 5%; */
 }
 
@@ -9075,6 +9076,7 @@ p {
     background-color: #f27222;
     padding: 10px 30px;
     color: #fff;
+    border-radius: 20px;
 }
 
 .desription_p {
@@ -9088,6 +9090,7 @@ p {
     border-bottom: 10px solid #f27222 !important;
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
 }
 
 @media (max-width:767px) {
@@ -9095,7 +9098,10 @@ p {
         position: absolute;
         top: 0;
         width: 100%;
-        left: 5%;
+        left: 2%;
+    }
+    .video-section-wrapper .public2-info{
+        margin-bottom: 10px !important;
     }
     .btn-celender {
         margin-left: 15px;
@@ -9103,4 +9109,64 @@ p {
     .upcoming-home-bg2 {
         background-image: linear-gradient(90deg, rgb(244, 244, 244, 1) 50%, rgba(255, 255, 255, 0.8) 70%), url(../images/bg_1.jpg) !important;
     }
+}
+.rating_box{
+    padding-left: 0px;
+}
+.rate{
+    padding-left: 0px !important;
+}
+.video-section-wrapper .breadcrumb , .video-section-wrapper .video-title-he,.video-section-wrapper .rating_box {
+
+    padding-left: 10px !important;
+
+}
+.video-section-wrapper .public2-info{
+    margin-bottom: 20px;
+}
+.video-section-wrapper .form-group {
+    margin-bottom: 0px;
+}
+.video-section-wrapper .register_btn{
+
+    padding-left: 10px;
+}
+.video-section-wrapper{
+    margin-bottom: 0px !important;
+}
+.might_margin{
+    margin-top: 40px;
+}
+@media(max-width:500px){
+    .breadcrumb li {
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .video-detail-inner h2 {
+        font-size: 15px;
+    }
+    .video-section-wrapper .sponser{
+        flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    }
+
+    .web_heading {
+        margin-bottom: 40px;
+        padding-left: 10px;
+        font-size: 19px;
+    }
+}
+
+
+.web_heading{
+  margin-bottom: 40px;
+  padding-left: 10px;
+}
+.dte ,.tim ,.sponsor-title{
+    padding-left: 10px;
+}
+.public2-title img{
+    margin-left: 10px;
 }
