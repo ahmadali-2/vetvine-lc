@@ -53,13 +53,16 @@ class EventPaymentController extends Controller
      */
     public function paymentWebinars(Request $request)
     {
-
-
         $checkUser =BuyEventPlan::where('user_id',$request->user_id)->where('event_id', $request->event_id)->first();
         if(!empty($checkUser)){
             parent::warningMessage("You Already Purchased An Event");
             parent::warningMessage("Please Contact With Admin To Proceed Your Query");
-            return redirect()->route('upcoming_webinars');
+            if($request->ajax() == false){
+                if(isset($request->location)){
+                    return redirect('upcoming-webinars-details/'.$request->event_id);
+                }
+                return redirect()->route('upcoming_webinars');
+            }
         }
         try{
 
@@ -67,8 +70,8 @@ class EventPaymentController extends Controller
             $stripeResponse =Stripe\Charge::create ([
                     "amount" => $request->event_price*100,
                     "currency" => "USD",
-                    // "source" => $request->stripeToken,
-                    "source" => 'tok_visa',
+                    "source" => $request->stripeToken,
+                    // "source" => 'tok_visa',
                     "description" => "Vetvine Event Payment Subscription"
             ]);
 
@@ -81,11 +84,22 @@ class EventPaymentController extends Controller
         parent::successMessage("Payment Successful");
         parent::successMessage("Event Subscribed Successfully");
         // parent::successMessage("Your Transaction Id " .$stripeResponse->id);
-        return redirect()->route('upcoming_webinars');
+        if($request->ajax() == false){
+            if(isset($request->location)){
+                return redirect('upcoming-webinars-details/'.$request->event_id);
+            }
+            return redirect()->route('upcoming_webinars');
+        }
+
         } catch(Exception $e) {
             parent::dangerMessage("Something Went Wrong Payment Does Not Proceed");
             parent::dangerMessage("Please Try Again ");
-            return redirect()->route('upcoming_webinars');
+            if($request->ajax() == false){
+                if(isset($request->location)){
+                    return redirect('upcoming-webinars-details/'.$request->event_id);
+                }
+                return redirect()->route('upcoming_webinars');
+            }
         }
     }
 

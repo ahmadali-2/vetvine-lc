@@ -228,6 +228,9 @@ Route::get('ce-archives',[HomeController::class,'ceArchives'])->name('ceArchives
     Route::post('savelike', [PostController::class,'likeSave'])->name('likesave');
 
 Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetvineUserRole']], function(){
+    // AJAX Route
+    Route::post('/getEventPrice', [HomeController::class, 'getEventPrice'])->name('getEventPrice');
+    // End AJAX Route
     Route::get('dashboard',[PersonelInfoController::class,'userdashboard'])->name('userdashboard');
     Route::get('member-home',[PostController::class,'memberHome'])->name('member_home');
     //User dashboard routes

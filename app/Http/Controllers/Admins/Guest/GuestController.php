@@ -44,10 +44,13 @@ class GuestController extends Controller
                 ]);
             }
             elseif($request->guest_screen == 3){
-                $event_price = 25;
-                $event_id = 14;
+                $event_price = $request->event_price;
+                $event_id = $request->event_id;
+                $user_id = $request->user_id;
+                $event_title = $request->event_title;
+
                 return response()->json([
-                    'html' => view('frontend.auth.login_course_registration_payment',compact('event_price','event_id'))->render(),
+                    'html' => view('frontend.auth.login_course_registration_payment',compact('event_price','event_id', 'user_id','event_title'))->render(),
                 ]);
             }elseif($request->guest_screen == 4){
                 return response()->json([
