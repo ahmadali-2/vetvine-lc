@@ -23,6 +23,8 @@ use App\Models\VetvineUsers\UserEducation;
 use Carbon\Carbon;
 use App\Models\UserEducationDegree;
 use App\Http\Controllers\PushNotificationController;
+use App\Models\VetvineUsers\CalendarEvent;
+
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
@@ -69,6 +71,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'blocked_search',
         'profile_privacy',
         'profile_posting_privacy',
+        'guest',
 
     ];
     /**
@@ -146,6 +149,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+    public function sheduledEvents()
+    {
+        return $this->hasMany(CalendarEvent::class);
     }
     public function forumposts()
     {

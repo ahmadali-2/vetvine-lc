@@ -11,6 +11,7 @@
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-lg-12">
+                {{-- Original Card below --}}
                 <div class="card">
                     <div class="card-header">
                         <strong class="card-title">Member Permissions Table</strong>

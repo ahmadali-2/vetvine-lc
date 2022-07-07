@@ -90,7 +90,7 @@ class EventController extends Controller
             parent::successMessage('Event saved successfully.');
             return redirect(route('webinars.index'));
         } catch(Exception $e) {
-            dd($e->getMessage());
+            // dd($e->getMessage());
             parent::dangerMessage("Continue Education Event Does Not Created, Please Try  Again");
             return redirect()->back();
         }

@@ -284,82 +284,37 @@ $timezones = vetvineHelper::timezones();
 
 <!-- Login Modal Form  Start-->
 <button type="button" class="btn btn-primary d-none" id="login_form_show_btn" data-toggle="modal"
-    data-target="#login-modal">
+    data-target="#verify-email-modal">
     Launch demo modal
 </button>
-<div class="modal fade" id="login-modal">
+
+<div class="modal fade show" id="verify-email-modal" style="display: none;" aria-modal="true">
     <div class="modal-dialog custum_popup">
         <div class="modal-content">
+
+            <!-- Modal Header -->
             <div class="modal-header">
+
                 <div class="popup-header">
                     <span class="popup-logo"><img src="{{ asset('frontend/images/popup-logo.png') }}"
                             alt="logo"></span>
-                    <span class="close" id="login_modal_close" data-dismiss="modal">&times;</span>
+                    <span class="close" id="email_verify_modal_close" data-dismiss="modal">&times;</span>
                 </div>
             </div>
-            <div class="modal-body">
-                <div class="popup-body">
-                    <h2 class="member-login"><span>Member Login</span></h2>
-                    <div class="register-in-login">new to VETVINE?
-                        <a class="Register-Now" href="#" id="register_show_modal_login">Register now</a>
-                    </div>
-                    <form action="{{ route('login') }}" method="post" class="custom_form" id="loginRequest">
-                        @csrf
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="alert alert-danger" id="errormsg" style="display: none;">
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="" class="my-custom_label">Email</label>
-                                    <input type="email" id="email" name="email" placeholder="" class="my-custom_input">
-                                    <span id="emailmsg" style="color: red;"></span>
 
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="" class="my-custom_label">password</label>
-                                    <input type="password" id="password" name="password" placeholder=""
-                                        class="my-custom_input">
-                                    <span id="passwordmsg" style="color: red;"></span>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <span class="keep-logged"><label for="checkme"><input type="checkbox" id="checkme">
-                                        Keep me logged
-                                        in</label></span>
-                                <span class="forgaot">
-                                    @if (Route::has('password.request'))
-                                        <a href="{{ route('password.request') }}">
-                                            {{ __('Forgot your password?') }}
-                                        </a>
-                                    @endif
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 text-center">
+            <!-- Modal body -->
+            <div id="login_main_body">
+                {{-- @include('frontend.auth.event_registration_completed') --}}
 
-
-
-                            <div class="social_icons_modal">
-                                <a href="{{ url('social/facebook/0/0') }}" class="socialbtnslogin "><i
-                                        class="fa fa-facebook-square " aria-hidden="true"></i></a>
-                                <a href="{{ url('social/twitter/0/0') }}" class="socialbtnslogin"><i
-                                        class="fa fa-twitter-square " aria-hidden="true"></i></a>
-                                <a href="{{ url('social/google/0/0') }}" class="socialbtnslogin"><i
-                                        class="fa fa-google " aria-hidden="true"></i></a>
-                            </div>
-
-                        </div>
-                        <div class="popup-footer">
-                            <input type="submit" value="Log In" class="toggle button send-msg">
-                        </div>
-                    </form>
-                </div>
-
+                {{-- @include('frontend.auth.course_registration_form') --}}
+                {{-- @include('frontend.auth.login_course_registration_payment',[
+                    'event_price' => 25,
+                    'event_id' => 14,
+                ]) --}}
+                {{-- @include('frontend.auth.login_course_registration_detail') --}}
+                @include('frontend.auth.register_login')
             </div>
+            {{-- End Modal body here --}}
         </div>
     </div>
 </div>

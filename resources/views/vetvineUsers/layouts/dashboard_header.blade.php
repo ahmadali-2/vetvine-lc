@@ -280,12 +280,12 @@
 
                             <a class="nav-link padding_top_0" href="contact.html"></a>
                             <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle btn-ce ce-toggle-btn" type="button"
+                                <button class=" dropdown-toggle btn-ce ce-toggle-btn" type="button"
                                     data-toggle="dropdown" aria-expanded="false">
                                     <i class="my-ce"><img
                                             src="{{ asset('frontend/img/featured-video-icon.png') }}"
                                             style="width:35px;"></i><br>
-                                    My CE
+                                    My Ce
                                     <span class="caret"></span></button>
                                 <ul class="dropdown-menu my_ce_drop_down btn_me3">
                                     <li><a href="{{ route('member_home') }}"> Dashboard</a></li>

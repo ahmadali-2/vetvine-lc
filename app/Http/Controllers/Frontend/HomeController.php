@@ -95,8 +95,9 @@ class HomeController extends Controller
     public function upcomingWebinarsdetails($id)
     {
         $eventdetail = Event::with('events', 'sponsers', 'members', 'user', 'buyeventplan', 'ReviewData')->find($id);
+        $eventId = $eventdetail->id;
         $category = CategoryEvent::all();
-        return view('frontend.pages.webinars.upcoming-eventsdetails', compact('eventdetail', 'category'));
+        return view('frontend.pages.webinars.upcoming-eventsdetails', compact('eventdetail', 'category', 'eventId'));
 
     }
 

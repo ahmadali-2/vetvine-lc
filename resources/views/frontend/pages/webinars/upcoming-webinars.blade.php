@@ -1,5 +1,25 @@
 @extends('frontend.master')
 @section('content')
+
+
+<main>
+    <section class="main_banner main_banner_grow">
+      <div class="container">
+        <div class="flex-box-banner">
+          <div class="grow_banner_box grow_banner_box_web">
+            <div class="grow-heading">GROW</div>
+            <img src="{{ asset('frontend/images/sep-line-2.jpg') }}" width="250" height="2" alt="" class="line_image">
+            <p class="mb-0">Learn from world renowned animal experts to empower yourself and grow.
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="main_banner_bottob_label"></section>
+
     <section class="video-section-wrapper mb-4">
         <div class="container">
             <h1 class="Upcoming-webinars mt-2">Upcoming Webinars</h1>

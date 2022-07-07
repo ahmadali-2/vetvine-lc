@@ -20,6 +20,7 @@ use App\Http\Controllers\Admins\Forum\ForumController;
 use App\Http\Controllers\Admins\Forum\ForumPostController;
 use App\Http\Controllers\Admins\Generalsettings\AdminProfileController;
 use App\Http\Controllers\Admins\Generalsettings\ManageUserController;
+use App\Http\Controllers\Admins\Guest\GuestController;
 use App\Http\Controllers\Admins\Members\MemberTypeController;
 use App\Http\Controllers\Admins\Memberships\MemberShipPlanCategoryController;
 use App\Http\Controllers\Admins\Memberships\MemberShipPlansController;
@@ -58,6 +59,7 @@ use App\Http\Controllers\VideoDescriptionController;
 use App\Http\Controllers\StaticPageController; // for static pages
 use App\Http\Controllers\TermsController; // for terms of services
 use App\Http\Controllers\LicensureController;
+use App\Http\Controllers\VetvineUsers\EventManagement\CalandarEventsController;
 use App\Models\Generals\TimeZone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -90,13 +92,8 @@ Route::get('run-queue',function(){
     Artisan::call('queue:listen');
     return 'Queue Listening';
 });
-Route::get('must-verify',[UsersRegistrationController::class,'verifyEmailPopup'])->name('verifyEmailPopup');
 
-//notification testing route
-// Route::get('test', function () {
-//     event(new NotificationEvent('Omar Hayat'));
-//     return "Event has been sent!";
-// });
+Route::get('must-verify',[UsersRegistrationController::class,'verifyEmailPopup'])->name('verifyEmailPopup');
 
 /**
  * Social Registeration and  Login  Routes
@@ -123,10 +120,6 @@ Route::get('login', function(){
     return view('frontend.home');
 })->name('login');
 
-/**
- * Admin Routes
- */
-// Auth::routes(['verify'=>true]);
 Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRole']], function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('admindashboard');
     Route::get('sample-form', [AdminDashboardController::class, 'sampleForm'])->name('sampleform');
@@ -138,6 +131,10 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
     Route::resource('ads-manage', ManageAdController::class);
     Route::resource('membership', MemberShipPlansController::class);
     Route::resource('membership-category', MemberShipPlanCategoryController::class);
+    //Ahmad
+    Route::get('guest-registration-fee', [GuestController::class, 'guestRegistrationFee'])->name('guestRegistrationFee');
+    Route::post('update-guest-registration-fee', [GuestController::class, 'updateRegistrationFee'])->name('updateRegistrationFee');
+    //EndAhmad    /update-guest-registration-fee
     Route::get('network', [AdminDashboardController::class, 'network'])->name('network');
     Route::get('unapproved-users', [ManageUserController::class, 'unapprovedUsers'])->name('unapproved');
     Route::post('approved-user', [ManageUserController::class, 'approvedUsers'])->name('approveuser');
@@ -168,7 +165,13 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
     Route::post('terms-and-conditions/add-terms', [StaticPageController::class, 'TermsAndConditionsAddDb'])->name('TermsCondition.create.db');
 
 });
+// Open routes Ahmad
+Route::get('next-guest-screen', [GuestController::class, 'nextGuestScreen'])->name('nextGuestScreen');
+Route::get('calendar-event', [CalandarEventsController::class, 'index']);
+Route::post('calendar-crud-ajax', [CalandarEventsController::class, 'calendarEvents']);
+Route::get('add-vetvine-event', [CalandarEventsController::class, 'addVetvineEvent']);
 
+// End open routes Ahmad
 Route::get('member-home-paginate',[PostController::class,'paginateMemberHomePost'])->name('member_home_paginate');
 
 Route::get("/page", function(){
@@ -187,7 +190,7 @@ Route::get('category/forum/posts/{id}',[ForumController::class,'getForumcategory
 Route::group(['middleware'=>['frontendUserRole', 'emailVerification']], function(){
     Route::get('/',function(){
         return view('frontend.home');
-    });
+    })->name('home');
 
 Route::post('delete-user', [HomeController::class, 'delete_user'])->name('delete.user');
 

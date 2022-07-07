@@ -1,7 +1,7 @@
 <button type="button" class="btn btn-primary d-none" id="login_form_show_btn" data-toggle="modal" data-target="#login-modal">
     Launch demo modal
   </button>
-    <div class="modal fade" id="login-modal">
+    <div class="modal fade show" id="login-modal">
         <div class="modal-dialog custum_popup">
             <div class="modal-content">
 
@@ -22,7 +22,7 @@
                         <div class="register-in-login">new to VETVINE?
                             <a class="Register-Now" href="#"  id="register_show_modal_login">Register now</a>
                         </div>
-                        <form action="" method="post" class="custom_form"  >
+                        <form action="" method="post" class="custom_form" >
 
                             <div class="row">
                                 <div class="col-12">
@@ -54,6 +54,8 @@
                     <div class="popup-footer">
                         <input type="submit" id="loginbtn" value="Log In" class="toggle button send-msg">
                     </div>
+
+
                 </div>
 
             </div>
