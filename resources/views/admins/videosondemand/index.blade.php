@@ -1,5 +1,23 @@
 @extends('admins.master')
 @section('content')
+<style>
+    .table tr td:not(:nth-child(1) , :nth-child(2), :last-child) {
+        text-align: center;
+       width: 35%;
+       word-break: break-all;
+       text-align: left;
+    }
+    .table tr td:last-child {
+        width: 10%;
+    }
+    /* @media (max-width: 1200px){
+        .card-body {
+    padding: 15px;
+    overflow-x: scroll !important;
+}
+    } */
+
+</style>
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -119,4 +137,5 @@
                 })
             })
         </script>
+        
     @endsection

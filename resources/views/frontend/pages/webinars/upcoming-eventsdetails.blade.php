@@ -212,7 +212,39 @@
             margin-top: 10px;
             font-family: 'Museo 500';
         }
-
+        .date-info{
+            flex-direction: column;
+            align-items: flex-start !important;
+        }
+        .dte{
+            display: flex;
+    margin-bottom: 10px;
+        }
+        .dte .public2-title{
+            margin-right: 10px;
+        }
+        .tim{
+            display: flex;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .tim .public2-title{
+            margin-right: 10px;
+        }
+        @media (max-width:575px){
+            .sponsor-title{
+                font-size: 11px;
+            }
+            .spon-descripton{
+                font-size: 12px;
+            }
+        }
+        .spon-descripton:not(:last-child)::after{
+            content: " , ";
+        }
+        .tim  .public2-description{
+            width: 86%;
+        }
         /* End */
     </style>
     <?php
@@ -261,57 +293,65 @@
                                 </nav>
                             </div>
                         </div>
-                    <h2>{{ $eventdetail->event_title }}</h2>
+                    <h2 class="web_heading">{{ $eventdetail->event_title }}</h2>
 
 
                     <div class="publication-detail">
                         <div class="publication-arrow-icon">
 
                         </div>
-                        <div class="public2-info">
+                        <div class="public2-info date-info">
+                           <div class="dte">
                             <div class="public2-title">
                                 Date:
                             </div>
                             <div class="public2-description">
                                 {{  date('F,d,Y', strtotime($eventdetail->date)) }}
                             </div>
-                            <div class="public2-title">
-                                Date:
-                            </div>
-                            <div class="public2-description">
-                                @auth
-                                @php
-                                    $timeZone = $eventdetail->user->timezone->timezone;
-                                    // Fetching timezone UTC code : Please don't screw it
-                                    $pieces = explode('(', $timeZone);
-                                    $pieces = explode('C', $pieces[1]);
-                                    $pieces = explode(')', $pieces[1]);
-
-                                    // Formatting the time
-                                    $today = new DateTime($eventdetail->time, new DateTimeZone($pieces[0]));
-
-                                    $userTimeZone = Auth::user()->timezone->timezone;
-
-                                    // Fetching timezone UTC code : Please don't screw it
-                                    $pieces = explode('(', $userTimeZone);
-                                    $pieces = explode('C', $pieces[1]);
-                                    $pieces = explode(')', $pieces[1]);
-
-                                    $userEventTime = new DateTimeZone($pieces[0]);
-                                    $convertedTime = $today->setTimeZone($userEventTime);
-
-                                    echo $convertedTime->format('H:i A') . ' ' . $userTimeZone;
-                                @endphp
-                                @else
+                           </div>
+                            <div class="tim">
+                                <div class="public2-title">
+                                    Time:
+                                </div>
+                                <div class="public2-description">
+                                    @auth
                                     @php
-                                        echo $eventdetail->time.'.ET';
-                                    @endphp
-                                @endauth
+                                        $timeZone = $eventdetail->user->timezone->timezone;
+                                        // Fetching timezone UTC code : Please don't screw it
+                                        $pieces = explode('(', $timeZone);
+                                        $pieces = explode('C', $pieces[1]);
+                                        $pieces = explode(')', $pieces[1]);
 
+                                        // Formatting the time
+                                        $today = new DateTime($eventdetail->time, new DateTimeZone($pieces[0]));
+
+                                        $userTimeZone = Auth::user()->timezone->timezone;
+
+                                        // Fetching timezone UTC code : Please don't screw it
+                                        $pieces = explode('(', $userTimeZone);
+                                        $pieces = explode('C', $pieces[1]);
+                                        $pieces = explode(')', $pieces[1]);
+
+                                        $userEventTime = new DateTimeZone($pieces[0]);
+                                        $convertedTime = $today->setTimeZone($userEventTime);
+
+                                        echo $convertedTime->format('H:i A') . ' ' . $userTimeZone;
+                                    @endphp
+                                    @else
+                                        @php
+                                        $newDateTime = date('h:i A', strtotime($eventdetail->time));
+
+                                            echo $newDateTime. ' ET ';
+                                        @endphp
+                                    @endauth
+                                </div>
+                                <div class="public2-info" style="margin-left: 12px; margin-bottom:0px ;">
+                                    <a href="{{ $eventdetail->timezone_url }}"> View Other Timezone</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    @if (Auth::user())
+                    {{-- @if (Auth::user())
                         <div class="publication-detail">
                             <div class="publication-arrow-icon">
 
@@ -349,12 +389,11 @@
                                     <a href="" class="time_zone">View Other Time Zone</a>
                                 </div>
                             </div>
-
                             <div class="public2-info" style="margin-left: 12px">
                                 <a href="{{ $eventdetail->timezone_url }}"> View Other Timezone</a>
                             </div>
                         </div>
-                    @endif
+                    @endif --}}
 
 
                     <div class="publication-detail">
@@ -378,13 +417,12 @@
 
                         </div>
                         <div class="public2-info">
-                            <div class="public2-title">
+                            <div class="public2-title sponsor-title">
                                 Sponsor(s): vetvine :
                             </div>
                             @foreach ($eventdetail->members as $items)
-                                <div class="public2-description">
+                                <div class="public2-description spon-descripton">
                                     {{ $items->sponser_name }}
-
                                 </div>
                             @endforeach
                         </div>
