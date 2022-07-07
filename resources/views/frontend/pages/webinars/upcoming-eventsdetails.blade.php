@@ -301,6 +301,10 @@
                                     @endphp
                                 </div>
                             </div>
+
+                            <div class="public2-info" style="margin-left: 12px">
+                                <a href="{{ $eventdetail->timezone_url }}"> View Other Timezone</a>
+                            </div>
                         </div>
                     @endif
                     <div class="publication-detail">
