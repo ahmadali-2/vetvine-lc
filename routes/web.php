@@ -40,6 +40,7 @@ use App\Http\Controllers\PushNotificationController; // push notifications
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Auth\UsersRegistrationController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\VetvineUsers\EventPayments\EventPaymentController;
 use App\Http\Controllers\VetvineUsers\MemberShips\StripePaymentController;
 use App\Http\Controllers\VetvineUsers\MyProfile\EditPhotoController;
@@ -59,6 +60,7 @@ use App\Http\Controllers\VideoDescriptionController;
 use App\Http\Controllers\StaticPageController; // for static pages
 use App\Http\Controllers\TermsController; // for terms of services
 use App\Http\Controllers\LicensureController;
+use App\Http\Controllers\PrivacyPolicyController;
 use App\Http\Controllers\VetvineUsers\EventManagement\CalandarEventsController;
 use App\Models\Generals\TimeZone;
 use Illuminate\Http\Request;
@@ -168,6 +170,9 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
 
     Route::get('terms-and-conditions/add', [StaticPageController::class, 'TermsAndConditionsAdd'])->name('TermsCondition.create');
     Route::post('terms-and-conditions/add-terms', [StaticPageController::class, 'TermsAndConditionsAddDb'])->name('TermsCondition.create.db');
+    Route::resource('privacy-policy',PrivacyPolicyController::class);
+    // coupon code
+    Route::resource('coupon-code',CouponController::class);
 });
 
 // Open routes Ahmad
@@ -205,7 +210,8 @@ Route::get('thrive',[HomeController::class,'thrive'])->name('thrive');
 Route::get('heal',[HomeController::class,'heal'])->name('heal');
 Route::get('terms-of-service',[HomeController::class,'termsOfService'])->name('termsofservice');
 Route::post('contact-us',[ContactUsController::class,'submitContactForm'])->name('contactus.submit');
-Route::get('/terms', [TermsController::class, 'indexTerms'])->name('terms.index');
+Route::get('/terms&conditions', [TermsController::class, 'indexTerms'])->name('terms.index');
+Route::get('/privacy&policy', [TermsController::class, 'indexprivacy'])->name('privacypolicy.index');
 
 // upcoming webinars
 Route::get('upcoming-webinars',[HomeController::class,'upcomingWebinars'])->name('upcoming_webinars');
@@ -235,6 +241,7 @@ Route::get('ce-archives',[HomeController::class,'ceArchives'])->name('ceArchives
 Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetvineUserRole']], function(){
     // AJAX Route
     Route::post('/getEventPrice', [HomeController::class, 'getEventPrice'])->name('getEventPrice');
+    Route::post('/getVideoPrice', [HomeController::class, 'getVideoPrice'])->name('getVideoPrice');
     // End AJAX Route
     Route::get('dashboard',[PersonelInfoController::class,'userdashboard'])->name('userdashboard');
     Route::get('member-home',[PostController::class,'memberHome'])->name('member_home');

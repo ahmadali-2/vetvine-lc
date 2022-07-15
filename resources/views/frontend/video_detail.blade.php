@@ -178,6 +178,27 @@
     </style>
 
     <body>
+        <!-- Login Modal Form  Start-->
+        <button type="button" class="btn btn-primary d-none" id="register_video_btn" data-toggle="modal"
+        data-target="#video_registration_model">
+        Launch demo modal
+        </button>
+        <div class="modal fade" id="video_registration_model">
+            <div class="modal-dialog custum_popup">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="popup-header">
+                            <span class="popup-logo"><img src="{{ asset('frontend/images/popup-logo.png') }}"
+                                    alt="logo"></span>
+                            <span class="close" id="login_modal_close" data-dismiss="modal">&times;</span>
+                        </div>
+                    </div>
+                    <!-- Modal body -->
+                    <div id="login_main_body"></div>
+                    {{-- End Modal body here --}}
+                </div>
+            </div>
+        </div>
         <section class="video-section-wrapper mb-4 upcoming-home-bg2">
             <div class="container">
                 <div class="row">
@@ -254,7 +275,7 @@
 
                                     </div>
                                     <div class="public2-description">
-                                       <b class="ml-2 text-uppercase"> Irure Aut Mollitia Q</b>
+                                       <b class="ml-2 text-uppercase"> {{ $videos-> }}</b>
                                     </div>
                                 </div>
 
@@ -264,16 +285,15 @@
                                     <div class="public2-title sponsor-title">
                                         Sponsor(s): vetvine :
                                     </div>
-                                                                    <div class="public2-description spon-descripton">
-                                            Xanthus Mason
-                                        </div>
-                                                                    <div class="public2-description spon-descripton">
-                                            Mollie Alvarez
-                                        </div>
+                                    @foreach ($eventdetail->members as $items)
+                                    <div class="public2-description spon-descripton">
+                                        {{ $items->sponser_name }}
+                                    </div>
+                                @endforeach
                                   </div>
 
                                   <div class="publication-detail register_btn">
-                                    <a href="">Register</a>
+                                    <a id="videoRegister" style="cursor: pointer">Register</a>
                                 </div>
                                 {{-- </form> --}}
                             </div>
@@ -327,6 +347,37 @@
         @section('scripts')
             <script>
                 $(document).ready(function() {
+                    var video_id = '<?php echo $videoId ?>';
+                    var authUser = '<?php echo $authUser ?>';
+                $('#videoRegister').on('click', function(){
+                        refreshFormState();
+                        var url=location.href;
+                        localStorage.setItem('guestLogin', true);
+                        localStorage.setItem("videoUrl",url);
+
+                        if(authUser == false){
+                            $('#login_form_show_btn').trigger("click");
+                        }else{
+                                $.ajax({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },
+                                type: "POST",
+                                url: "/vetvine-member/getVideoPrice",
+                                data: {video_id: video_id},
+                                success: function(response) {
+                                    $('#event_detail_heading').html(response.data['title']);
+                                    $('#event_protocol_heading').html(response.data['protocol']+': <b>'+'$'+response.data['fee']+'</b>');
+                                    $('#continue_guest').html('PAY $'+response.data['fee']);
+                                    $('#event_detail_event_id').val(response.data['event_id']);
+                                    $('#event_detail_user_id').val(response.data['user_id']);
+                                    $('#event_detail_amount').val(response.data['fee']);
+                                    $('#event_detail_title').val(response.data['title'])
+                                }
+                            });
+                            $('#register_video_btn').trigger("click");
+                        }
+                    });
                     $('input[name="rating"]').click(function() {
                         var length = $(this).attr('data-stars');
                         alert(length);
@@ -346,6 +397,21 @@
                         });
                     });
                 });
+
+                function refreshFormState(){
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                        },
+                        type: "GET",
+                        url: '/next-guest-screen',
+                        data: {guest_screen: 2},
+                        success: function(response){
+                            $('#login_main_body').empty();
+                            $('#login_main_body').append(response.html);
+                        }
+                    });
+                }
                 // });
             </script>
         @endsection

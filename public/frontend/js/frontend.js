@@ -115,6 +115,8 @@ $(document).ready(function(e) {
  })
  $("#register_model_show").on("click",function(e){
      e.preventDefault();
+     localStorage.setItem('guestLogin', false);
+     console.log(localStorage.getItem('guestLogin'));
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),

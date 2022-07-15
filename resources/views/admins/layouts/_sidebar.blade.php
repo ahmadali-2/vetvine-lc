@@ -123,6 +123,7 @@
 <li>
 
     <a href="{{route('group.mail.user')}}"> <i class="menu-icon fa-table"></i>Mail to Users </a>
+    <a href="{{route('coupon-code.index')}}"> <i class="menu-icon fa fa-user"></i>Coupons</a>
 
     </li>
 
@@ -138,6 +139,7 @@
             class="menu-icon fa fa-table"></i>Static Pages</a>
     <ul class="sub-menu children dropdown-menu">
         <li><i class="fa fa-table"></i><a href="{{ route('TermsCondition.create') }}">Terms & Conditions</a></li>
+        <li><i class="fa fa-table"></i><a href="{{ route('privacy-policy.store') }}">Privacy & Policy</a></li>
     </ul>
 </li>
 </ul>

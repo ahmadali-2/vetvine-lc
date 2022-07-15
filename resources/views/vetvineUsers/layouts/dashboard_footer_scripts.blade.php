@@ -9,7 +9,7 @@
     <script src="https://kit.fontawesome.com/b8867474d2.js" crossorigin="anonymous"></script>
 
     <script src="{{ asset('frontend/js/fontawesome.js') }}"></script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @toastr_js
@@ -19,6 +19,7 @@
     <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js') }}"></script>
 
     {!! JsValidator::formRequest('App\Http\Requests\UpdateUserPasswordRequest', '#changeUserPasswordForm') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\EventPayementRequest', '#payment-form') !!}
 
     {{-- updated new dashboard --}}
 

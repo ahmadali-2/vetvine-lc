@@ -149,6 +149,44 @@ class HomeController extends Controller
         ]);
     }
 
+    public function getVideoPrice(Request $request){
+        $user = User::where('id', auth()->user()->id)->first();
+
+        $video = VideosOnDemand::find($request->video_id);
+
+        $data = array();
+
+        $data['user_id'] = auth()->user()->id;
+
+        $data['video_id'] = $request->video_id;
+
+        $data['protocol'] = 'Vetvine Member';
+
+        if($user->type == 4 || $user->type == 5){
+            $data['fee'] = $video->vet_pet_prof_fee;
+        }
+        else if($user->type == 3){
+            $data['fee'] = $video->pet_owner_fee;
+        }
+        else if($user->type == 6){
+            $data['fee'] = $video->pet_owner_premium_fee;
+            $data['protocol'] = 'Vetvine Premium Membership <br> Subscriber';
+        }
+        else if($user->type == 7 || $user->type == 8){
+            $data['fee'] = $video->vet_pet_prof_premium_fee;
+            $data['protocol'] = 'Vetvine Premium Membership <br> Subscriber';
+        }else{
+            $data['fee'] = 'Free';
+        }
+
+        $data['title'] = $video->video_title;
+
+        return response()->json([
+            'code' => 200,
+            'data' => $data,
+        ]);
+    }
+
     public function searceducations(Request $request)
     {
         $this->dashboard['filters'] = Event::with('events');

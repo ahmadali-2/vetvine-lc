@@ -26,6 +26,7 @@
         "munafio/chatify": "^1.4",
         "proengsoft/laravel-jsvalidation": "^4.7",
         "pusher/pusher-php-server": "^7.0",
+        "sssurii/laravel-ics": "^0.2.0",
         "stripe/stripe-php": "^7.121",
         "yoeunes/toastr": "^1.2"
     },
