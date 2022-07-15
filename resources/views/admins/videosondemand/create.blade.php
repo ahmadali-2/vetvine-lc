@@ -1,6 +1,6 @@
 @extends('admins.master')
 @section('content')
-    
+
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -8,6 +8,19 @@
                     <strong class="card-title">Add Videos</strong>
                 </div>
                 <div class="card-body">
+
+                    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+
+
                     <div id="pay-invoice">
                         <form action="{{ route('videos-on-demand.store') }}" method="post" enctype="multipart/form-data"
                             id="videosform" novalidate="novalidate">

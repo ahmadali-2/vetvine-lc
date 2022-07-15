@@ -6,22 +6,20 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
 
-class UserContactUs extends Mailable
+class GroupMailToUser extends Mailable
 {
     use Queueable, SerializesModels;
-    public $data;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
+    public $data;
     public function __construct($data)
     {
         $this->data = $data;
-        Log::info("Mail");
-        Log::info($data);
     }
 
     /**
@@ -31,6 +29,6 @@ class UserContactUs extends Mailable
      */
     public function build()
     {
-        return $this->view('frontend.email.contactus',['data' => $this->data]);
+        return $this->markdown('mail.group-mail-to-user',['data' => $this->data]);
     }
 }

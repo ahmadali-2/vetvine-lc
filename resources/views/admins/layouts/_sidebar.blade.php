@@ -120,6 +120,11 @@
 <a href="{{route('manageuser.index')}}"> <i class="menu-icon fa fa-user"></i>Manage Users </a>
 
 </li>
+<li>
+
+    <a href="{{route('group.mail.user')}}"> <i class="menu-icon fa-table"></i>Mail to Users </a>
+
+    </li>
 
 {{-- Ahmad --}}
 <li>

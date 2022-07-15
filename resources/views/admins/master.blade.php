@@ -1,6 +1,6 @@
 @php
 
-$vetvineLogo =vetvineHelper::vetvineGeneralSetting()
+$vetvineLogo = vetvineHelper::vetvineGeneralSetting();
 
 @endphp
 
@@ -19,6 +19,9 @@ $vetvineLogo =vetvineHelper::vetvineGeneralSetting()
         }
     </style>
 
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css" />
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
@@ -30,23 +33,23 @@ $vetvineLogo =vetvineHelper::vetvineGeneralSetting()
 
             <div class="navbar-header">
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"
+                    aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
 
                     <i class="fa fa-bars"></i>
 
                 </button>
 
                 @if ($vetvineLogo === null)
-
-                <a class="navbar-brand" href="./"><img src="{{ asset('admin/images/logo.png')}}" alt="Logo"></a>
-
+                    <a class="navbar-brand" href="./"><img src="{{ asset('admin/images/logo.png') }}"
+                            alt="Logo"></a>
                 @else
-
-                <a class="navbar-brand" href="./"><img src="{{ asset('admin/generalsetting/' .$vetvineLogo->logo)}}" alt="Logo"></a>
-
+                    <a class="navbar-brand" href="./"><img
+                            src="{{ asset('admin/generalsetting/' . $vetvineLogo->logo) }}" alt="Logo"></a>
                 @endif
 
-                <a class="navbar-brand hidden" href="./"><img src="{{ asset('admin/images/logo2.png')}}" alt="Logo"></a>
+                <a class="navbar-brand hidden" href="./"><img src="{{ asset('admin/images/logo2.png') }}"
+                        alt="Logo"></a>
 
             </div>
 
@@ -124,6 +127,11 @@ $vetvineLogo =vetvineHelper::vetvineGeneralSetting()
     @include('admins.layouts._footerscripts')
 
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
 
     @yield('scripts')
 
@@ -136,4 +144,3 @@ $vetvineLogo =vetvineHelper::vetvineGeneralSetting()
 </body>
 
 </html>
-
