@@ -151,6 +151,11 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
     Route::resource('forums', ForumController::class);
     Route::resource('announcements',AnnouncementController::class);
     Route::resource('manageuser',ManageUserController::class);
+    //Group Mailing
+    Route::get('manageuser/group/mail',[ManageUserController::class, 'groupMail'])->name('group.mail.user');
+    Route::post('manageuser/group/mail/sent',[ManageUserController::class, 'groupMailSent'])->name('group.mail.sent');
+
+
     Route::resource('subscribed-users',BuyMemberShipPlanController::class);
     Route::get('user-history/{id}', [BuyMemberShipPlanController::class, 'userHistory'])->name('userhistory');
     Route::resource('news',NewsController::class);
@@ -169,6 +174,7 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
     // coupon code
     Route::resource('coupon-code',CouponController::class);
 });
+
 // Open routes Ahmad
 Route::get('next-guest-screen', [GuestController::class, 'nextGuestScreen'])->name('nextGuestScreen');
 Route::get('calendar-event', [CalandarEventsController::class, 'index']);

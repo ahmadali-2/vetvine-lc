@@ -2,31 +2,30 @@
 
 namespace App\Jobs;
 
+use App\Mail\GroupMailToUser;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\UserContactUs;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
-class ContactUsJob implements ShouldQueue
+class GroupMailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-    public $data;
+
     /**
      * Create a new job instance.
      *
      * @return void
      */
+    public $data;
     public function __construct($data)
     {
         $this->data = $data;
-        Log::info('constructor');
-        Log::info($data);
-
     }
 
     /**
@@ -36,6 +35,10 @@ class ContactUsJob implements ShouldQueue
      */
     public function handle()
     {
-        mail::to('vetvine@gmail.com')->send(new UserContactUs($this->data));
+        foreach($this->data['user'] as $user){
+            $userTo = User::where('id',$user)->first();
+             mail::to($userTo->email)->send(new GroupMailToUser($this->data));
+        }
+
     }
 }

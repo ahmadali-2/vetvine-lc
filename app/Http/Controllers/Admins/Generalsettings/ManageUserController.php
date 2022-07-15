@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Admins\Generalsettings;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\ContactUsJob;
+use App\Jobs\GroupMailJob;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Exception;
 use App\Models\Generals\TimeZone;
 use App\Models\MemberTypes;
 use App\Models\UserMemberAndNetworkLevel;
+use Illuminate\Support\Facades\Log;
+use App\Models\ContactUs;
 class ManageUserController extends Controller
 {
     /**
@@ -167,6 +171,21 @@ class ManageUserController extends Controller
         }
 
     }
-   
+
+    //Group Mailing
+    public function groupMail(){
+        $allUsers =User::with('userMemberType')->where('type','!=','1')->get();
+        return view('admins.generalsettings.manageusers.groupemail',compact('allUsers'));
+    }
+
+    public function groupMailSent(Request $request){
+        dispatch((new GroupMailJob($request->all()))->delay(now()->addSeconds(5)));
+            // return response()->json([
+            //     'status' => 200,
+            //     'message' => 'Mail has been sent to selected users!'
+            // ]);
+        parent::successMessage("Email Has Been Sent Successfully");
+        return back();
+    }
 
 }

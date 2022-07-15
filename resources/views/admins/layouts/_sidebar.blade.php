@@ -122,6 +122,7 @@
 </li>
 <li>
 
+    <a href="{{route('group.mail.user')}}"> <i class="menu-icon fa-table"></i>Mail to Users </a>
     <a href="{{route('coupon-code.index')}}"> <i class="menu-icon fa fa-user"></i>Coupons</a>
 
     </li>
