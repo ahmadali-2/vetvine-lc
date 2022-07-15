@@ -180,6 +180,13 @@
       'JsValidator' => 'Proengsoft\\JsValidation\\Facades\\JsValidatorFacade',
     ),
   ),
+  'sssurii/laravel-ics' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'INSAN\\ICS\\ICSServiceProvider',
+    ),
+  ),
   'yoeunes/toastr' => 
   array (
     'providers' => 

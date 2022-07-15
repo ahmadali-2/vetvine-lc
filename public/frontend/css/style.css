@@ -9170,3 +9170,13 @@ p {
 .public2-title img{
     margin-left: 10px;
 }
+#register_event{
+    background-color: #f27222 !important;
+}
+#pay_event_price{
+    line-height: 50px;
+    color: #fff;
+}
+.video-section-wrapper .public2-info a{
+    color:#f27222 ;
+}
