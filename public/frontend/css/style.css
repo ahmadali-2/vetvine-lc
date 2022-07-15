@@ -9250,3 +9250,9 @@ p {
 .change_password .input_field{
     width: 100%;
 }
+
+#replyfrm_4 button{
+    border-radius: 12px;
+    font-size: 14px;
+    font-family: "Museo Sans 500";
+}
