@@ -81,6 +81,6 @@
             $('#login_main_body').append(response.html);
         }
     })
-    }, 1000);;
+    }, 1000);
 });
 </script>

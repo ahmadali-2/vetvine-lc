@@ -151,6 +151,11 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
     Route::resource('forums', ForumController::class);
     Route::resource('announcements',AnnouncementController::class);
     Route::resource('manageuser',ManageUserController::class);
+    //Group Mailing
+    Route::get('manageuser/group/mail',[ManageUserController::class, 'groupMail'])->name('group.mail.user');
+    Route::post('manageuser/group/mail/sent',[ManageUserController::class, 'groupMailSent'])->name('group.mail.sent');
+
+
     Route::resource('subscribed-users',BuyMemberShipPlanController::class);
     Route::get('user-history/{id}', [BuyMemberShipPlanController::class, 'userHistory'])->name('userhistory');
     Route::resource('news',NewsController::class);
@@ -169,6 +174,7 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
     // coupon code
     Route::resource('coupon-code',CouponController::class);
 });
+
 // Open routes Ahmad
 Route::get('next-guest-screen', [GuestController::class, 'nextGuestScreen'])->name('nextGuestScreen');
 Route::get('calendar-event', [CalandarEventsController::class, 'index']);
@@ -235,6 +241,7 @@ Route::get('ce-archives',[HomeController::class,'ceArchives'])->name('ceArchives
 Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetvineUserRole']], function(){
     // AJAX Route
     Route::post('/getEventPrice', [HomeController::class, 'getEventPrice'])->name('getEventPrice');
+    Route::post('/getVideoPrice', [HomeController::class, 'getVideoPrice'])->name('getVideoPrice');
     // End AJAX Route
     Route::get('dashboard',[PersonelInfoController::class,'userdashboard'])->name('userdashboard');
     Route::get('member-home',[PostController::class,'memberHome'])->name('member_home');

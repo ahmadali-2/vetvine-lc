@@ -297,6 +297,14 @@
 @endsection
 @section('scripts')
     <script>
+        window.onload = function(){
+            if(localStorage.getItem('guestLogin') == 'true'){
+                if(localStorage.getItem("eventUrl") != ''){
+                    location.href=localStorage.getItem("eventUrl");
+                }
+            }
+        }
+
         $('#firstname').on('keyup', function() {
             if ($(this).val().length > 0) {
                 $(this).closest('div').find('#error1').css("visibility", "hidden");

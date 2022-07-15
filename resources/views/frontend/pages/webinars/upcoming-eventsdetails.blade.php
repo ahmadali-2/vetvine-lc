@@ -487,7 +487,7 @@
 
                     <div class="publication-detail register_btn">
                         @if(isset($purchasedEvent))
-                            <button class="btn btn-primary">View Now!</button>
+                            <button class="btn btn-primary">Attend Event?</button>
                         @else
                             <button class="btn btn-primary" id="register_event">Register</button>
                         @endif
@@ -665,7 +665,10 @@
             var event_id = '<?php echo $eventId ?>';
             var authUser = '<?php echo $authUser ?>';
         $('#register_event').on('click', function(){
-                console.log(authUser);
+                var url=location.href;
+                localStorage.setItem('guestLogin', true);
+                localStorage.setItem("eventUrl",url);
+
                 if(authUser == false){
                     $('#login_form_show_btn').trigger("click");
                 }else{
