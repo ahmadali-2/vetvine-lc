@@ -22,8 +22,8 @@
         <input id="event_detail_title" type="text" name="event_title" hidden>
     </form>
     <h2 class="member-login"><span>Course Registration</span></h2>
-    <h5 class="guest_screen_text top_heading" id="event_detail_heading">CANCER IN PETS - GET TO KNOW YOUR PET'S LUMPH NODES!</h5>
-    <p class="guest_screen_text bottom_heading" id="event_protocol_heading">Vetvine Premium Membership Subscriber Registration fee:</p>
+    <h5 class="guest_screen_text top_heading" id="event_detail_heading"></h5>
+    <p class="guest_screen_text bottom_heading" id="event_protocol_heading"></p>
     <p class="guest_screen_text">Sign me up for this Course!</p>
 </div>
 <div class="popup-footer">
@@ -48,8 +48,12 @@
             url: '/next-guest-screen',
             data: formData,
             success: function(response){
-                $('#login_main_body').empty();
-                $('#login_main_body').append(response.html);
+                if(response.refresh){
+                    location.reload();
+                }else{
+                    $('#login_main_body').empty();
+                    $('#login_main_body').append(response.html);
+                }
             }
         })
         }, 1000);

@@ -354,7 +354,7 @@ $timezones = vetvineHelper::timezones();
 
                         </div>
                         <div class="popup-footer">
-                            <input type="submit" value="Log In" class="toggle button send-msg">
+                            <input id="login_user_popup_submit" type="submit" value="Log In" class="toggle button send-msg">
                         </div>
                     </form>
                 </div>
@@ -374,7 +374,6 @@ $timezones = vetvineHelper::timezones();
 
 $(document).ready(function(){
 //step1 hide buttons until user select the network level
-
     // Initialize select2
     $("#setCountries").select2();
 
