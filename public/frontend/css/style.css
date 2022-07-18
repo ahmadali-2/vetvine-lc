@@ -8603,7 +8603,8 @@ line-height: 31px;
     font-family: "Museo Sans 500";
     text-transform: uppercase;
     background-color: #f27222;
-    margin: 30px 0px 38px 92px;
+    /* margin: 30px 0px 38px 92px; */
+    margin-top: 30px;
 }
 
 .btn_change button:hover {
@@ -9246,4 +9247,68 @@ p {
     background: transparent;
     border: 2px solid #f27222 !important;
     color: #f27222;
+}
+#register_event
+{
+    background-color: #f27222;
+    padding: 10px 30px;
+    color: #fff;
+    border-radius: 12px;
+    transition: 0.5s linear;
+    font-family: "Museo Sans 500";
+}
+#register_event:hover
+{
+    background: transparent;
+    border: 2px solid #f27222 !important;
+    color: #f27222;
+}
+
+.verify_btn{
+    border-radius: 12px;
+}
+
+#replyfrm_1 button{
+    border-radius: 12px;
+    font-size: 14px;
+    font-family: "Museo Sans 500";
+}
+.upcoming_btn{
+    background-color: #f27222 !important;
+    padding: 10px 30px;
+    color: #fff;
+    border-radius: 12px;
+    transition: 0.5s linear;
+    font-family: "Museo Sans 500";
+    border: 2px solid #f27222 !important;
+}
+.upcoming_btn:hover
+{
+    background: transparent !important;
+    border: 2px solid #f27222 !important;
+    color: #f27222;
+}
+.publication-detail.register_btn .btn{
+
+    background-color: #f27222;
+    padding: 10px 30px;
+    color: #fff;
+    border-radius: 20px;
+    font-family: "Museo Sans 500";
+    transition: 0.3s all;
+}
+.publication-detail.register_btn .btn:hover{
+
+    background: transparent;
+    border: 2px solid #f27222 !important;
+    color: #f27222;
+}
+.change_password .input_field{
+    width: 100%;
+}
+
+#comments_share_data_0  form .form-group  button{
+    border-radius: 12px;
+    font-size: 14px;
+    font-family: "Museo Sans 500";
 }

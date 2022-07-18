@@ -45,7 +45,7 @@ class MemberShipPlansController extends Controller
     public function store(Request $request)
     {
         try {
-            MemberShipPlan::create([
+            $Membershipplan = MemberShipPlan::create([
                 'plan_name'          => ucwords($request->plan_name),
                 'plan_description'   => ucfirst($request->plan_description),
                 'plan_features'      => ucfirst(json_encode($request->plan_features)),
@@ -67,6 +67,7 @@ class MemberShipPlansController extends Controller
             parent::successMessage("Plan Created Successfully");
             return redirect()->route('membership.index');
         } catch(\Exception $e){
+            dd($e->getMessage());
             parent::dangerMessage("Plan Does Not Created, Please Try Again");
             return redirect()->back();
         }
