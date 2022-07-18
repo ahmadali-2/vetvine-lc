@@ -33,11 +33,12 @@
                             </thead>
                             <tbody>
 
+
                                 @foreach ($forums as $forum)
                                     <tr>
                                         <td scope="row">{{ $loop->iteration }}</td>
                                         <td>{{ $forum->forum_title }}</td>
-                                        <td>{{ $forum->category->category_title }}</td>
+                                        <td>{{ $forum->category->category_title ?? '' }}</td>
                                         <td>{{ $forum->forum_description }}</td>
                                         <td> <a href="{{ route('forums.edit', $forum->id) }}"><i
                                                     class="fas fa-edit text-primary"></i></a>
