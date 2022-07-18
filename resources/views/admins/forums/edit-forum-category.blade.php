@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <div id="pay-invoice">
                         <form action="{{ route('forums-category.update', $CategoryForum->id) }}" method="post"
-                            novalidate="novalidate">
+                            novalidate="novalidate" id="categoryform">
                             @csrf
                             @method('put')
                             <div class="row">

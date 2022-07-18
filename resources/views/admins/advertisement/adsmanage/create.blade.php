@@ -6,8 +6,8 @@
                 <div class="card-header">
                     <strong class="card-title">Add New Advertisement</strong>
                 </div>
-                <div class="card-body">
-                    <div id="pay-invoice">
+
+
                         <div class="card-body">
                             <form action="{{ route('ads-manage.store') }}" method="post" id="createadsmanage"
                                 novalidate="novalidate" enctype="multipart/form-data">
@@ -61,13 +61,13 @@
                                         <span id="payment-button-sending" style="display:none;">Sending…</span>
                                     </button>
                                 </div>
+                            </form>
                         </div>
-                    </div>
-                    </form>
-                </div>
+                   
+
+
             </div>
         </div>
     </div>
-    </div>
-    </div>
+
 @endsection

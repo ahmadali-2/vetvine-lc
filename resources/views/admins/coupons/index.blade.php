@@ -75,7 +75,7 @@
 
                                     @foreach ($coupons as $coupon)
 
-                                  
+
 
                                      <tr>
 
@@ -89,7 +89,7 @@
 
                                          <td>{{ date('d-M-y', strtotime($coupon->expired_at)) }}</td>
 
-                                         <td>{{ $coupon->amount }}</td>
+                                         <td>$ {{ $coupon->amount }}</td>
 
                                          {{-- <td>
 

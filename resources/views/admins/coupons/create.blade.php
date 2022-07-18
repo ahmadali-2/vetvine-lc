@@ -30,11 +30,15 @@
 
                                         <div class="form-group">
 
-                                            <label for="coupon_code" class="control-label mb-1">Coupon Code</label>
+                                            <label for="coupon_code" class="control-label mb-1">Coupon Code (System Generated Coupon)</label>
 
-                                            <input id="coupon_code" placeholder="Enter Coupon Code" name="coupon_code"
+                                            <input id="coupon_code" readonly placeholder="Enter Coupon Code" name="coupon_code"
                                                 type="text" class="form-control" aria-required="true" aria-invalid="false"
-                                                value="">
+                                                value="VETVINE-{{ $random }}">
+
+                                                @error('coupon_code')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
 
                                         </div>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Coupon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Exception;
 
 
@@ -27,7 +28,8 @@ class CouponController extends Controller
      */
     public function create()
     {
-        return view('admins.coupons.create');
+        $random = Str::upper(rand(1000,9000));
+        return view('admins.coupons.create' , compact('random'));
     }
 
     /**
@@ -38,8 +40,12 @@ class CouponController extends Controller
      */
     public function store(Request $request)
     {
-
+        // dd($request->all());
+        // $this->validate($request, [
+        //     'coupon_code'   => 'required|string|max:255|unique:coupons',
+        // ]);
        try{
+
              Coupon::create([
                 "coupon_code" => $request->coupon_code,
                 "coupon_type" => $request->coupon_type,
@@ -87,7 +93,9 @@ class CouponController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        // $this->validate($request, [
+        //     'coupon_code'   => 'required|string|max:255|unique:coupons',
+        // ]);
         try{
             $coupon = Coupon::find($id);
             $coupon->update([
@@ -101,7 +109,6 @@ class CouponController extends Controller
             parent::successMessage('Coupon updated successfully.');
             return redirect(route('coupon-code.index'));
         } catch(Exception $e) {
-            dd($e->getMessage());
             parent::dangerMessage("Coupon Does Not Updated, Please Try  Again");
             return redirect()->back();
         }
@@ -121,7 +128,6 @@ class CouponController extends Controller
             parent::successMessage('Coupon deleted successfully.');
             return redirect(route('coupon-code.index'));
         } catch(Exception $e) {
-            dd($e->getMessage());
             parent::dangerMessage("Coupon Does Not Deleted, Please Try  Again");
             return redirect()->back();
         }

@@ -8,7 +8,7 @@
                 </div>
                 <div class="card-body">
                     <div id="pay-invoice">
-                        <div class="card-body">
+
                             <form action="{{ route('generalsettings.store') }}" method="post"  enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group text-center">
@@ -80,7 +80,7 @@
 
                                 </div>
                             </form>
-                        </div>
+
                     </div>
                 </div>
             </div>

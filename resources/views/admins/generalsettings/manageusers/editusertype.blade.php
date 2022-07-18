@@ -8,7 +8,7 @@
                 </div>
                 <div class="card-body">
                     <div id="pay-invoice">
-                        <div class="card-body">
+
                             <form action="{{ route('updateusertype', $user->id) }}" method="POST" id="editusertype">
                                 @csrf
                                 <div class="row">
@@ -34,13 +34,12 @@
                                         <span id="payment-button-sending" style="display:none;">Sending…</span>
                                     </button>
                                 </div>
-                        </div>
+                            </form>
+
                     </div>
-                    </form>
+
                 </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
 @endsection

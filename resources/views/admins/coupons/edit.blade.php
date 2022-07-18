@@ -9,15 +9,15 @@
 
                 <div id="pay-invoice">
                     <div class="card-body">
-                        <form action="{{ route('coupon-code.update', $coupon->id) }}" method="post" id="createadscampaign"
+                        <form action="{{ route('coupon-code.update', $coupon->id) }}" method="post" id="createcoupon"
                             novalidate="novalidate" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="coupon_code" class="control-label mb-1">Coupon Code</label>
-                                        <input id="coupon_code" name="coupon_code" type="text" class="form-control"
+                                        <label for="coupon_code"  class="control-label mb-1">Coupon Code (System Generated Coupon)</label>
+                                        <input id="coupon_code" readonly name="coupon_code" type="text" class="form-control"
                                             value="{{ $coupon->coupon_code }}">
                                     </div>
                                 </div>

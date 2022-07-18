@@ -8,7 +8,7 @@
                 </div>
                 <div class="card-body">
                     <div id="pay-invoice">
-                        <div class="card-body">
+
                             <form action="{{ route('storegeneralsetting') }}" method="post" id="generalsettingform"
                                 enctype="multipart/form-data">
                                 @csrf
@@ -87,14 +87,16 @@
                                                         class="form-control input__box--wrapper">{{ $data->mission_statement ?? '' }}</textarea>
                                                 </div>
                                             </div>
+                                            <div class="row mt-3">
+                                                <input type="submit" class="btn btn-lg btn-info btn-block" value="Update Setting">
+                                            </div>
                                         </div>
                                     </div>
+
                                 </div>
-                                <div class="row mt-3">
-                                    <input type="submit" class="btn btn-lg btn-info btn-block" value="Update Setting">
-                                </div>
+
                             </form>
-                        </div>
+
                     </div>
                 </div>
             </div>

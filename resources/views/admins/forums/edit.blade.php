@@ -8,7 +8,7 @@
                 </div>
                 <div class="card-body">
                     <div id="pay-invoice">
-                        <form action="{{ route('forums.update', $forum->id) }}" method="post" novalidate="novalidate">
+                        <form action="{{ route('forums.update', $forum->id) }}" method="post" novalidate="novalidate" id="forumform">
                             @csrf
                             @method('PUT')
                             <div class="row">
