@@ -10,12 +10,10 @@ class LicensureController extends Controller
 {
     public function licensure(Request $request)
     {
+        dd($request->network_id);
         $network_id = $request->networkId;
-        User::where('id', Auth::id())->update([
-            'network_id' => $network_id,
-        ]);
-
         $user = User::where('id', Auth::id())->where('network_id', $network_id)->first();
+        dd($user->network_id);
         return $user;
     }
 }

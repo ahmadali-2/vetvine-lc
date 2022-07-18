@@ -275,7 +275,7 @@
 
                                     </div>
                                     <div class="public2-description">
-                                       <b class="ml-2 text-uppercase"> {{ $videos-> }}</b>
+                                       <b class="ml-2 text-uppercase"></b>
                                     </div>
                                 </div>
 
@@ -285,11 +285,9 @@
                                     <div class="public2-title sponsor-title">
                                         Sponsor(s): vetvine :
                                     </div>
-                                    @foreach ($eventdetail->members as $items)
-                                    <div class="public2-description spon-descripton">
-                                        {{ $items->sponser_name }}
+                                    <div>
+                                        <p>Some data here ...</p>
                                     </div>
-                                @endforeach
                                   </div>
 
                                   <div class="publication-detail register_btn">
