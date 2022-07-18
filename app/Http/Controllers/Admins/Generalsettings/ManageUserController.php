@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admins\Generalsettings;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\GroupMailJob;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Exception;
@@ -167,6 +168,30 @@ class ManageUserController extends Controller
         }
 
     }
-   
+    //Group Mailing
+    public function groupMail(){
+        $allUsers =User::with('userMemberType')->where('type','!=','1')->get();
+        return view('admins.generalsettings.manageusers.groupemail',compact('allUsers'));
+    }
+
+    public function groupMailSent(Request $request){
+        $request->validate([
+            'subject' => 'required',
+            'message' => 'required',
+            'user' => 'required'
+        ],[
+            'subject.required' => 'Subject Feild Is Required',
+            'message.required' => 'Message Feild Is Required',
+            'user.required' => 'Please Select User To Send Mail'
+        ]);
+        dispatch((new GroupMailJob($request->all()))->delay(now()->addSeconds(5)));
+            // return response()->json([
+            //     'status' => 200,
+            //     'message' => 'Mail has been sent to selected users!'
+            // ]);
+        parent::successMessage("Email Has Been Sent Successfully");
+        return back();
+    }
+
 
 }

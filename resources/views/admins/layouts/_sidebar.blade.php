@@ -126,6 +126,9 @@
 
     </li>
 
+   <li>
+    <a href="{{route('group.mail.user')}}"> <i class="menu-icon fa fa-user"></i>Mail to Users </a>
+   </li>
 {{-- Ahmad --}}
 <li>
 
