@@ -9,7 +9,7 @@
                 </div>
                 <div class="card-body">
                     <div id="pay-invoice">
-                        <form action="{{ route('videos-on-demand.update', $video->id) }}" method="post" id="videoform"
+                        <form action="{{ route('videos-on-demand.update', $video->id) }}" method="post" id="videosform"
                             enctype="multipart/form-data" novalidate="novalidate">
                             @csrf
                             @method('PUT')

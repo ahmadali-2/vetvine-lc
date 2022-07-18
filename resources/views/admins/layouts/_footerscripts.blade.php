@@ -55,6 +55,7 @@
     {!! JsValidator::formRequest('App\Http\Requests\TermsRequest','#terms-form') !!}
     {!! JsValidator::formRequest('App\Http\Requests\Admin\Coupons\CouponRequest','#createcoupon') !!}
     {!! JsValidator::formRequest('App\Http\Requests\PrivacyPolicyRequest','#privacypolicy') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\VideoOnDemandRequest','#videosform') !!}
 
 
     @toastr_js
