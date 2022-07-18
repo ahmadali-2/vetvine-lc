@@ -127,6 +127,7 @@
                                             <div class="serch-section">
                                                 <div class="inner-input">
                                                     <label>Timezone*</label>
+                                                    {{-- Comments here --}}
                                                     <div class="input_field">
 
                                                         <select class="form-control" name="timezone" id="timezone">
