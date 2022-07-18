@@ -76,7 +76,6 @@
                                     @foreach ($coupons as $coupon)
 
 
-
                                      <tr>
 
                                          <td scope="row">{{ $loop->iteration }}</td>

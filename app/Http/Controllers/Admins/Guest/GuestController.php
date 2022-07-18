@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admins\Guest;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admins\Webinar\BuyEventPlan;
 use App\Models\UserMemberAndNetworkLevel;
 use Exception;
 use Illuminate\Http\Request;
@@ -48,7 +49,17 @@ class GuestController extends Controller
                 $event_id = $request->event_id;
                 $user_id = $request->user_id;
                 $event_title = $request->event_title;
-
+                if($event_price == 'Free'){
+                    BuyEventPlan::create([
+                        'user_id' => $request->user_id,
+                        'event_id' => $request->event_id,
+                        'amount' => 0,
+                        'transaction_id' => 'free',
+                    ]);
+                    return response()->json([
+                        'refresh' => true,
+                    ]);
+                }
                 return response()->json([
                     'html' => view('frontend.auth.login_course_registration_payment',compact('event_price','event_id', 'user_id','event_title'))->render(),
                 ]);

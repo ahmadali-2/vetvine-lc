@@ -253,8 +253,8 @@
                                             </div>
                                             <div class="content_box">
                                                 <b>{{ Auth::user()->name ?? '' }}</b>
-                                                <a href="{{ route('vetvineUserProfile') }}"
-                                                    class="view_profile">View Your Profile</a>
+                                                <a href="#"
+                                                    class="view_profile" id="profileView">View Your Profile</a>
                                             </div>
                                         </div>
                                     </li>
@@ -307,3 +307,13 @@
 </header>
 @include('frontend.pages.general.contactus')
 @include('common.deletemodal')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#profileView').on('click', function(){
+            console.log('hello');
+            localStorage.setItem('eventUrl','');
+            window.location.href="{{ route('vetvineUserProfile') }}";
+        });
+    });
+</script>

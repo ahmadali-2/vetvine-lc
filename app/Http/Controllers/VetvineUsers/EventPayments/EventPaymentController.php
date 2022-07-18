@@ -74,7 +74,13 @@ class EventPaymentController extends Controller
                     "source" => 'tok_visa',
                     "description" => "Vetvine Event Payment Subscription"
             ]);
-
+            // Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+            // $stripeResponse =Stripe\Charge::create ([
+            //         "amount" => $request->event_price*100,
+            //         "currency" => "usd",
+            //         "source" => $request->stripeToken,
+            //         "description" => "Vetvine Payment Subscription"
+            // ]);
             BuyEventPlan::create([
                 'transaction_id' => $stripeResponse->id,
                 'user_id' => $request->user_id,
