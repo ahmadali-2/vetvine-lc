@@ -168,6 +168,10 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
     Route::resource('privacy-policy',PrivacyPolicyController::class);
     // coupon code
     Route::resource('coupon-code',CouponController::class);
+//Group Mailing
+Route::get('manageuser/group/mail',[ManageUserController::class, 'groupMail'])->name('group.mail.user');
+Route::post('manageuser/group/mail/sent',[ManageUserController::class, 'groupMailSent'])->name('group.mail.sent');
+
 });
 // Open routes Ahmad
 Route::get('next-guest-screen', [GuestController::class, 'nextGuestScreen'])->name('nextGuestScreen');
