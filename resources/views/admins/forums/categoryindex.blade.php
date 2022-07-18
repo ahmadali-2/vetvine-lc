@@ -34,6 +34,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+
                                 @foreach ($categories as $category)
                                     <tr>
                                         <td scope="row">{{ $loop->iteration }}</td>

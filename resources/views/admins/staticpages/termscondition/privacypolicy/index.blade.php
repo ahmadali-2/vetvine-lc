@@ -14,7 +14,7 @@
 
                     <div id="pay-invoice">
                         <div class="card-body">
-                            <form action="{{ route('privacy-policy.store') }}" method="post" id="terms-form"
+                            <form action="{{ route('privacy-policy.store') }}" method="post" id="privacypolicy"
                                 novalidate="novalidate" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">

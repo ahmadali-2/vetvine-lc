@@ -101,13 +101,25 @@
                                             </div>
                                         </div>
                                         <div class="serch-section">
-                                            <div class="inner-input" id="license-div">
-                                                <label>Licensure*</label>
-                                                <div class="input_field">
-                                                    <input placeholder="" class="form-control license-inp" name="licensure"
-                                                        id="licensure" value="{{ Auth::user()->licence_no }} "
-                                                        >
-                                                    <span class="asteric" id="error4"></span>
+                                            @if(Auth::user()->networdId != 6 || Auth::user()->networdId != 7)
+                                                <div class="inner-input" id="license-div" style="display: none">
+                                                    <label>Licensure*</label>
+                                                    <div class="input_field">
+                                                        <input placeholder="" class="form-control license-inp" name="licensure"
+                                                            id="licensure" value="{{ Auth::user()->licence_no }} "
+                                                            >
+                                                        <span class="asteric" id="error4"></span>
+                                                    </div>
+                                                </div>
+                                            @else
+                                                <div class="inner-input" id="license-div">
+                                                    <label>Licensure*</label>
+                                                    <div class="input_field">
+                                                        <input placeholder="" class="form-control license-inp" name="licensure"
+                                                            id="licensure" value="{{ Auth::user()->licence_no }} "
+                                                            >
+                                                        <span class="asteric" id="error4"></span>
+                                                    </div>
                                                 </div>
                                             </div>
                                                 {{-- <input type="hidden" name="" id="type" value="{{ Auth::user()->type }}"> --}}
@@ -115,6 +127,7 @@
                                             <div class="serch-section">
                                                 <div class="inner-input">
                                                     <label>Timezone*</label>
+                                                    {{-- Comments here --}}
                                                     <div class="input_field">
 
                                                         <select class="form-control" name="timezone" id="timezone">

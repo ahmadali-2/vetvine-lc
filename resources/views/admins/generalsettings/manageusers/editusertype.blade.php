@@ -8,7 +8,7 @@
                 </div>
                 <div class="card-body">
                     <div id="pay-invoice">
-                        <div class="card-body">
+
                             <form action="{{ route('updateusertype', $user->id) }}" method="POST" id="editusertype">
                                 @csrf
                                 <div class="row">
@@ -19,9 +19,12 @@
                                                 class="form-control cc-number identified visa" value="" data-val="true">
                                                 <option selected value="">Open this select level</option>
                                                 @foreach ($memberTypes as $mt)
-                                                    <option value="{{ $mt->id }}"
-                                                        {{ $user->type == $mt->id ? 'selected' : '' }}>
-                                                        {{ $mt->member_type }}</option>
+                                                    @if($mt->id != 1)
+                                                        <option value="{{ $mt->id }}"
+                                                            {{ $user->type == $mt->id ? 'selected' : '' }}>
+                                                            {{ $mt->member_type }}
+                                                        </option>
+                                                    @endif
                                                 @endforeach
 
                                             </select>
@@ -34,13 +37,12 @@
                                         <span id="payment-button-sending" style="display:none;">Sending…</span>
                                     </button>
                                 </div>
-                        </div>
+                            </form>
+
                     </div>
-                    </form>
+
                 </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
 @endsection

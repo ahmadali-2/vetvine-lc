@@ -6,8 +6,8 @@
                 <div class="card-header">
                     <strong class="card-title">Edit Ad Campaign</strong>
                 </div>
-                <div class="card-body">
-                    <div id="pay-invoice">
+
+
                         <div class="card-body">
                             <form action="{{ route('ads-campaign.update', $adCampaigns->id) }}" method="post"
                                 id="createadscampaign" novalidate="novalidate" enctype="multipart/form-data">
@@ -107,13 +107,13 @@
                                         <span id="payment-button-amount">Update</span>
                                     </button>
                                 </div>
+                            </form>
                         </div>
-                    </div>
-                    </form>
-                </div>
+                   
+
+
             </div>
         </div>
     </div>
-    </div>
-    </div>
+
 @endsection

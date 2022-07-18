@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TermsRequest extends FormRequest
+class PrivacyPolicyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class TermsRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -35,7 +35,7 @@ class TermsRequest extends FormRequest
             'page_title.string'    => 'Page Title Must Be A String',
             'page_title.max'       => 'Page Title Must Be At Least 255 Characters',
             'pageDesc.required'    => 'Page Description Is Required'
-           
+
         ];
     }
 }

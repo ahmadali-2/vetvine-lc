@@ -27,6 +27,7 @@ class ForumController extends Controller
     {
         $categories   =   CategoryForum::all();
         $forums       =   Forum::with('category')->get();
+
         return view('admins.forums.index',compact('categories','forums'));
     }
 

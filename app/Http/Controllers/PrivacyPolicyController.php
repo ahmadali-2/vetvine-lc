@@ -44,12 +44,12 @@ class PrivacyPolicyController extends Controller
             if($exists === 1){
                 PrivacyPolicy::where('page_title', '!=', '')->orWhere('page_desc', '!=', '')->update([
                     'page_title' => $request->page_title,
-                    'page_desc'  => $request->pageDesc
+                    'page_desc'  => $request->pageDesc,
                 ]);
             }else{
                 PrivacyPolicy::create([
                     'page_title' => $request->page_title,
-                    'page_desc'  => $request->pageDesc
+                    'page_desc'  => $request->pageDesc,
                 ]);
             }
             parent::successMessage('Privacy & Policy added successfully.');
@@ -57,7 +57,7 @@ class PrivacyPolicyController extends Controller
         }
         catch(\Exception $e)
         {
-            parent::errorMessage('Something went wrong.');
+            parent::dangerMessage('Something went wrong. Please try again.');
             return redirect()->back();
         }
     }
