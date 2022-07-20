@@ -56,6 +56,7 @@
     {!! JsValidator::formRequest('App\Http\Requests\Admin\Coupons\CouponRequest','#createcoupon') !!}
     {!! JsValidator::formRequest('App\Http\Requests\PrivacyPolicyRequest','#privacypolicy') !!}
     {!! JsValidator::formRequest('App\Http\Requests\VideoOnDemandRequest','#videosform') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\Admin\Generalsetting\AdminProfilRequest','#adminprofilesetting') !!}
 
 
     @toastr_js

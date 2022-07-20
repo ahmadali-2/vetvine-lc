@@ -79,6 +79,7 @@ class AdminProfileController extends Controller
      */
     public function store(Request $request , ManageProfileService $profile)
     {
+
         $profile->updateProfile($request) == 'updated'
         ? parent::successMessage("Your Profile Updated Successfully")
         : parent::dangerMessage("Your Profile Does Not Updated , Please Try Again");

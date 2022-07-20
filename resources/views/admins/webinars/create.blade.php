@@ -8,7 +8,6 @@
                 </div>
                 <div class="card-body">
                     <div id="pay-invoice">
-                        <div class="card-body">
                             <form action="{{ route('webinars.store') }}" method="post" id="continueeducationfrm"
                                 novalidate="novalidate" enctype="multipart/form-data">
                                 @csrf
@@ -183,7 +182,7 @@
                                         <div class="form-group">
                                             <label for="event_description" class="control-label mb-1">Event
                                                 Detail</label>
-                                            <textarea class="form-control" id="event_description" rows="3" name="event_description" value=""></textarea>
+                                            <textarea class="form-control ckeditor" id="event_description" rows="3" name="event_description" value="" required></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -202,10 +201,19 @@
                                     </button>
                                 </div>
                             </form>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            CKEDITOR.editorConfig = function(config) {
+                config.height = '1000px';
+            };
+        })
+    </script>
 @endsection

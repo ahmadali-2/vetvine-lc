@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             LocaleSeeder::class,
             MemberTypeSeeder::class,
             MemberPermissionsSeeder::class,
+            PrivacyPolicySeeder::class,
         ]);
     }
 }

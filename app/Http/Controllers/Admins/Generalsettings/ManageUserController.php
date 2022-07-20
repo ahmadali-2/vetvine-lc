@@ -66,8 +66,6 @@ class ManageUserController extends Controller
         $user =User::with('timezone')->find($id);
         $timezones = TimeZone::all();
         $networklevels = UserMemberAndNetworkLevel::where('parent_id', Null)->get();
-
-
         return view('admins.generalsettings.manageusers.edituser',compact('user','timezones','networklevels'));
     }
 
@@ -141,7 +139,6 @@ class ManageUserController extends Controller
 
     public function userLevelsInNetwork($id)
     {
-
         $userlevels = UserMemberAndNetworkLevel::where('parent_id', $id)->get();
         return json_encode($userlevels);
     }
