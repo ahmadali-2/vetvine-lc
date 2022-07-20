@@ -143,6 +143,23 @@
 
                         <div class='form-row row'>
 
+                            <div class='col-xs-12 col-md-6  form-group card required'>
+
+                               <label class='control-label coupon_code'>Coupon Code</label>
+
+                               <input autocomplete='off' name="card_number" class='form-control card-number' size='20'
+
+                                  type='text'>
+                                  <input type="button" value="apply_coupon" onclick="applycouponcode()">
+
+                            </div>
+
+
+
+                         </div>
+
+                        <div class='form-row row'>
+
                            <div class='col-md-12 error form-group hide'>
 
                               <div class='alert-danger alert'>Please correct the errors and try
