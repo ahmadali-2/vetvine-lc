@@ -306,7 +306,7 @@
     </div>
 </div>
 <!-- Login Modal Form  End-->
-    <div class="modal fade" id="calendarModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+    {{-- <div class="modal fade" id="calendarModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -318,7 +318,7 @@
             <div class="modal-body" id="eventCalendarDiv"></div>
           </div>
         </div>
-      </div>
+      </div> --}}
     <section class="video-section-wrapper mb-4">
         {{-- @dd($eventdetail->event_title) --}}
         <div class="container-fluid p-0">
@@ -703,15 +703,35 @@
                     success: function(response) {
                         $('#eventCalendarDiv').empty();
                         $('#eventCalendarDiv').append(response.html);
+                        downloadEvent(response.event[0]);
                         if(response.code == 200){
                             toastr.success(response.message);
-                        }else{
-                            toastr.warning(response.message);
                         }
                         $('#calendarModelButtonAction').trigger("click");
                     }
                 });
             });
+
+            function downloadEvent(event){
+                var todayDate	= new Date();
+                const startEvent = new Date(event.event_start);
+                const endEvent = new Date(event.event_end);
+
+                var msgData	= todayDate.toISOString();
+                var startDate	= startEvent.toISOString();
+                var endDate	= endEvent.toISOString();
+                var icsMSG1 = "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:https://www.google.com/\r\nBEGIN:VEVENT\r\nUID:https://www.google.com/\r\nDTSTAMP:" + msgData + "Z\r\nDTSTART:" + startDate + "\r\n";
+
+                var icsMSG2 = '';
+                if(endDate != '') {
+                    icsMSG2 = "DTEND:" + endDate +"\r\n";
+                }
+
+                icsMSG3 = "SUMMARY:" + event.event_name + "\r\nEND:VEVENT\r\nEND:VCALENDAR";
+
+                icsMSG = icsMSG1 + icsMSG2 + icsMSG3;
+                window.open( "data:text/calendar;charset=utf8," + escape(icsMSG));
+            }
 
             $('html, body').animate({
                 scrollTop: $('#review-section').offset().top

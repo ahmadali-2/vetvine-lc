@@ -258,7 +258,7 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li><a href="#">Membership</a></li>
+                                    <li><a href="{{ route('usermemberships.index') }}">Membership</a></li>
                                     <li><a href="#">Settings</a></li>
                                     <li><a href="#">Notification Preferences</a></li>
                                     <li><a href="{{ route('change_password') }}">Change Password</a></li>
