@@ -42,7 +42,7 @@
                                         <label for="forum_description" class="control-label mb-1">Announcement
                                             Description</label>
                                         <textarea class="form-control ckeditor" id="Announcement_description" rows="3"
-                                            name="description">{{ $announcements->description }}</textarea>
+                                            name="description" required>{{ $announcements->description }}</textarea>
                                     </div>
                                 </div>
                             </div>

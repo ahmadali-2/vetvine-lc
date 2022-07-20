@@ -6,8 +6,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use App\VetvineHelpers\VetVineHelperClass;
 use Exception;
-use Helpers;
+use vetvineHelper;
 use Validator;
 
 
@@ -24,6 +25,7 @@ class ManageProfileService
 
     public function updateProfile($request)
     {
+
         $currentUser = User::where('type', '=', $request->user_type)->where('email', $request->email)->first();
         if (!empty($request->current_password)) {
             if (!empty($request->password && $request->confirmpassword)) {
@@ -50,11 +52,18 @@ class ManageProfileService
         }
 
         try {
+            $path = public_path('admin/generalsetting/');
+            if(!empty($request->profile_photo)) {
+                $result = VetVineHelper::updateImage($request->profile_photo, $currentUser->profile_photo, $path);
+                $this->parent->successMessage("Your Profile Photo updated successfully");
+            } else {
+                $result = vetvineHelper::saveImage($request->profile_photo, $path);
+            }
             $currentUser->update([
                 'name'          => $request->name,
                 'email'         => $request->email,
+                'profile_photo' => $result,
                 'network_id'    => $currentUser->networklevel,
-                'timezone_id'   => $currentUser->timezone,
                 'type'          => $currentUser->type,
                 'password'      => (!empty($newpassword)) ? $newpassword : $currentUser->password,
             ]);

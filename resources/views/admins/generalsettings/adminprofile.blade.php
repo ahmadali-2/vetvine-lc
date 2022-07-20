@@ -8,8 +8,7 @@
                 </div>
                 <div class="card-body">
                     <div id="pay-invoice">
-
-                            <form action="{{ route('generalsettings.store') }}" method="post"  enctype="multipart/form-data">
+                            <form action="{{ route('generalsettings.store') }}" method="post"  enctype="multipart/form-data" id="adminprofilesetting">
                                 @csrf
                                 <div class="form-group text-center">
                                     <ul class="list-inline">

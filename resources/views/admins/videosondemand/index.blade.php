@@ -44,7 +44,7 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Title</th>
-                                    <th scope="col">link</th>
+                                    <th scope="col">Link</th>
                                     <th scope="col">Description</th>
                                     <th scope="col">Actions</th>
                                 </tr>
@@ -137,5 +137,5 @@
                 })
             })
         </script>
-        
+
     @endsection

@@ -20,6 +20,7 @@ class StripePaymentController extends Controller
     public function index()
     {
         $plans =MemberShipPlan::with('plancategory')->get();
+
         return view('vetvineUsers.memberships.index',compact('plans'));
     }
 

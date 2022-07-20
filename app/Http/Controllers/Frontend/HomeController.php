@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admins\Forum\CategoryForum;
 use App\Models\Admins\Forum\Forum;
 use App\Models\Admins\Forum\Post;
+use App\Models\Admins\Memberships\BuyMemberShipPlan;
 use App\Models\Admins\VideosonDemand\VideosOnDemand;
 use App\Models\Admins\Webinar\BuyEventPlan;
 use App\Models\Admins\Webinar\CategoryEvent;

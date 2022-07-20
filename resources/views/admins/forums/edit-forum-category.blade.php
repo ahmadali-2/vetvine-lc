@@ -27,8 +27,8 @@
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="category_description" class="control-label mb-1">Category Description</label>
-                                        <textarea class="form-control" id="category_description" rows="3" name="category_description"
-                                            value="">{{ $CategoryForum->category_description }}</textarea>
+                                        <textarea class="form-control ckeditor" id="category_description" rows="3" name="category_description"
+                                            value="" required>{{ $CategoryForum->category_description }}</textarea>
                                     </div>
                                 </div>
                             </div>

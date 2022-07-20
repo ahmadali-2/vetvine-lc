@@ -33,7 +33,7 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="news_description" class="control-label mb-1">News Description</label>
-                                            <textarea class="form-control" id="news_description" rows="3" name="news_description" value=""></textarea>
+                                            <textarea class="form-control ckeditor" id="news_description" rows="3" name="news_description" value=""></textarea>
                                         </div>
                                     </div>
                              </div>

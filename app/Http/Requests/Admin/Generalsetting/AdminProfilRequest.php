@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Forums;
+namespace App\Http\Requests\Admin\Generalsetting;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ForumCategoryRequest extends FormRequest
+class AdminProfilRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,16 +24,17 @@ class ForumCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'category_title'=>'required',
-            'category_description'=>'required',
+            'name' => 'required',
+            'email' => 'required|email',
 
         ];
     }
     public function messages()
     {
         return [
-        'category_title.required' => 'The Title Field is Required',
-        'category_description.required' => 'The Description Field is Required',
+            'name.required'  => 'Name is required',
+            'email.required' => 'Email is required',
+            'email.email'    => 'Email is invalid',
         ];
     }
 }
