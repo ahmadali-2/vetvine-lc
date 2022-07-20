@@ -56,13 +56,14 @@ class CalandarEventsController extends Controller
             $message = 'Event added to calendar successfully!';
         }
 
-        $eventData = CalendarEvent::where('user_id', Auth::user()->id)
+        $eventData = CalendarEvent::where('user_id', Auth::user()->id)->where('event_id', $request->event_id)
         ->get(['id', 'event_name', 'event_start', 'event_end'])->toarray();
 
         return response()->json([
             'code' => $code,
             'message' => $message,
             'html' => view('testCalandarEvent', compact('eventData'))->render(),
+            'event' => $eventData,
         ]);
     }
 

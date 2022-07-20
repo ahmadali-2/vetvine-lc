@@ -6,15 +6,9 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                 </div>
-                <div class="col-sm-6">
-                    <a class="btn btn-primary float-right" style="background-color:#f27222" href="{{ route('usermemberships.index') }}">
-                        Go Back
-                    </a>
-                    
-                </div>
             </div>
         </div>
-    </section>
+</section>
 <div class="plans-main">
       <div class="row m-0">
         @foreach($plans as $plan)
@@ -25,7 +19,7 @@
             <ul class="card__text__align">
               @foreach(json_decode($plan->plan_features) as $feature )
               <li class="shr__anchor card-list">{{$feature}}</li>
-              @endforeach             
+              @endforeach
             </ul>
             <div class="hover_content">
               <a href="{{route('usermemberships.show',$plan->id)}}" class="btn action-btns"
@@ -38,7 +32,7 @@
           </div>
         </div>
         @endforeach
-       
+
       </div>
-    </div>
+</div>
 @endsection
