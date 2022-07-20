@@ -8,7 +8,7 @@
                 </div>
                 <div class="card-body">
                     <div id="pay-invoice">
-                        <div class="card-body">
+
                             <form action="{{ route('webinars-category.store') }}" method="post" id="createcategory"
                                 novalidate="novalidate" enctype="multipart/form-data">
                                 @csrf
@@ -27,13 +27,12 @@
                                         <span id="payment-button-sending" style="display:none;">Sending…</span>
                                     </button>
                                 </div>
-                        </div>
+                            </form>
+
                     </div>
-                    </form>
+
                 </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
 @endsection

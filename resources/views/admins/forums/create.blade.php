@@ -50,7 +50,7 @@
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="forum_description" class="control-label mb-1">Forum Description</label>
-                                        <textarea class="form-control" id="forum_description" rows="3" name="forum_description" value=""></textarea>
+                                        <textarea class="form-control ckeditor" id="forum_description" rows="3" name="forum_description" value="" required></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -89,8 +89,9 @@
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="category_description" class="control-label mb-1">Category Description</label>
-                                        <textarea class="form-control" id="category_description" rows="3" name="category_description" value=""></textarea>
+                                        <textarea class="form-control ckeditor" id="category_description" rows="3" name="category_description" value="" required></textarea>
                                     </div>
+
                                 </div>
                             </div>
                             <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">

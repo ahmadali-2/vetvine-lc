@@ -39,6 +39,7 @@ class ForumCategoryController extends Controller
     public function store(Request $request)
     {
         
+
         $input = $request->all();
         try{
             CategoryForum::create([
