@@ -8,7 +8,7 @@
                 </div>
                 <div class="card-body">
                     <div id="pay-invoice">
-                        <div class="card-body">
+
                             <form action="{{ route('sponsors.update' , $sponser->id) }}" method="post" id="createsponser"
                                 novalidate="novalidate" enctype="multipart/form-data">
                                 @csrf
@@ -44,13 +44,12 @@
                                         <span id="payment-button-sending" style="display:none;">Sending…</span>
                                     </button>
                                 </div>
-                        </div>
+                            </form>
                     </div>
-                    </form>
+
                 </div>
             </div>
         </div>
     </div>
-    </div>
-    </div>
+
 @endsection

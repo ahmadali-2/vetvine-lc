@@ -1,6 +1,6 @@
 @extends('admins.master')
 @section('content')
-    
+
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -74,7 +74,7 @@
                                     <div class="form-group">
                                         <label for="news_description" class="control-label mb-1">Video
                                             Description</label>
-                                        <textarea class="form-control" id="video_description" rows="3" name="video_description" value=""></textarea>
+                                        <textarea class="form-control ckeditor" id="video_description" rows="3" name="video_description" value=""></textarea>
                                     </div>
                                 </div>
                             </div>

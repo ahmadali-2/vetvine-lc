@@ -40,8 +40,8 @@
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="forum_description" class="control-label mb-1">Forum Description</label>
-                                        <textarea class="form-control" id="forum_description" rows="3" name="forum_description"
-                                            value="">{{ $forum->forum_description }}</textarea>
+                                        <textarea class="form-control ckeditor" id="forum_description" rows="3" name="forum_description"
+                                            value="" required>{{ $forum->forum_description }}</textarea>
                                     </div>
                                 </div>
                             </div>

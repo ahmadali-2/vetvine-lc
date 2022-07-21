@@ -38,7 +38,7 @@
                                     <div class="form-group">
                                         <label for="forum_description" class="control-label mb-1">Announcement
                                             Description</label>
-                                        <textarea class="form-control ckeditor" id="Announcement_description" rows="3" name="description" value=""></textarea>
+                                        <textarea class="form-control ckeditor" id="Announcement_description" rows="3" name="description" value="" required></textarea>
                                     </div>
                                 </div>
                             </div>

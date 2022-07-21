@@ -41,7 +41,7 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="news_description" class="control-label mb-1">Video Description</label>
-                                        <textarea class="form-control" id="video_description" rows="3" name="video_description" value="">{{ $video->video_description }}</textarea>
+                                        <textarea class="form-control ckeditor" id="video_description" rows="3" name="video_description" value="">{{ $video->video_description }}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-6">

@@ -82,17 +82,16 @@
 
             <div class="dropdown-menu admin-messages" aria-labelledby="message">
 
-                    @foreach ($messages as $item)
+                @foreach ($messages as $item)
                     <a class="dropdown-item media bg-flat-color-1" href="#">
-                        <span class="photo media-left"><img alt="avatar"
-                                src=""></span>
+                        <span class="photo media-left"><img alt="avatar" src=""></span>
                         <span class="message media-body">
                             <span class="name float-left">{{ $item->name }}</span>
-                            <span class="time float-right">{{ $item->created_at->diffForHumans()  }}</span>
+                            <span class="time float-right">{{ $item->created_at->diffForHumans() }}</span>
                             <p>{{ $item->body }}</p>
                         </span>
-                        </a>
-                    @endforeach
+                    </a>
+                @endforeach
                 {{-- <p class="red">You have <span class="count-messages" >0</span> messages</p> --}}
 
 
@@ -111,9 +110,11 @@
     <div class="user-area dropdown float-right">
 
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-            <img class="user-avatar rounded-circle" src="{{ asset('admin/images/admin.jpg') }}" alt="User Avatar">
-
+            @if (auth()->user()->profile_photo)
+                <img class="user-avatar rounded-circle" src="{{ asset('admin/generalsetting/' . auth()->user()->profile_photo) }}" alt="User Avatar">
+            @else
+                <img class="user-avatar rounded-circle" src="{{ asset('admin/images/admin.jpg') }}" alt="User Avatar">
+            @endif
         </a>
 
 
