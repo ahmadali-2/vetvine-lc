@@ -293,3 +293,11 @@ Route::post('/licensure',     [LicensureController::class, 'licensure'])->name('
 
 
 
+
+
+
+//Testing
+Route::get('test', function () {
+    event(new NotificationEvent());
+    return view('test');
+});
