@@ -101,17 +101,7 @@
                                             </div>
                                         </div>
                                         <div class="serch-section">
-                                            @if(Auth::user()->networdId != 6 || Auth::user()->networdId != 7)
-                                                <div class="inner-input" id="license-div" style="display: none">
-                                                    <label>Licensure*</label>
-                                                    <div class="input_field">
-                                                        <input placeholder="" class="form-control license-inp" name="licensure"
-                                                            id="licensure" value="{{ Auth::user()->licence_no }} "
-                                                            >
-                                                        <span class="asteric" id="error4"></span>
-                                                    </div>
-                                                </div>
-                                            @else
+                                            @if($licensurePermissions->network_id == 6 || $licensurePermissions->network_id == 7 )
                                                 <div class="inner-input" id="license-div">
                                                     <label>Licensure*</label>
                                                     <div class="input_field">
@@ -121,13 +111,12 @@
                                                         <span class="asteric" id="error4"></span>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            @endif
                                                 {{-- <input type="hidden" name="" id="type" value="{{ Auth::user()->type }}"> --}}
                                             {{-- @endif --}}
                                             <div class="serch-section">
                                                 <div class="inner-input">
                                                     <label>Timezone*</label>
-                                                    {{-- Comments here --}}
                                                     <div class="input_field">
 
                                                         <select class="form-control" name="timezone" id="timezone">
@@ -459,14 +448,28 @@
             $(this).addClass('new_active');
         })
 
-        $('#usernetwork').on("change", function() {
+        $(document).on("change", "#usernetwork", function() {
             var networdId = $(this).val();
-            if(networdId == 6 || networdId == 7){
-                $('.license-inp').attr('id', 'licensure');
-                $("#license-div").show();
-            }else{
-                $("#license-div").hide();
-            }
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ route('licensure.show') }}",
+                type: "post",
+                data: {
+                    networkId: networdId
+                },
+                success: function(response) {
+                    console.log(response.network_id);
+                    if(response.network_id === 6 || response.network_id === 7){
+                        $('.license-inp').attr('id', 'licensure');
+                        $("#license-div").show();
+                    }else{
+                        $('.license-inp').removeAttr('id');
+                        $("#license-div").hide();
+                    }
+                }
+            });
         });
     </script>
 @endsection
