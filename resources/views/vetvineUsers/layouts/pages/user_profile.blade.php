@@ -109,7 +109,7 @@
                                                         >
                                                     <span class="asteric" id="error4"></span>
                                                 </div>
-                                            @endif
+                                            {{-- @endif --}}
                                                 {{-- <input type="hidden" name="" id="type" value="{{ Auth::user()->type }}"> --}}
                                             {{-- @endif --}}
                                             <div class="serch-section">
