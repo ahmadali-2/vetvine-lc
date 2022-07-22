@@ -547,7 +547,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <p class="desription_p">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam nulla molestiae deserunt harum fuga modi, totam, officiis porro doloribus rerum, dolorem beatae pariatur dolor iste odit. Quae blanditiis sequi labore dolorem nisi rerum neque odit aperiam saepe, eius est fugiat corrupti in ad unde assumenda dolores provident. Commodi, ipsa in?</p>
+                        {!! $eventdetail->event_description !!}
+                        </p>
                     </div>
                 </div>
                </div>

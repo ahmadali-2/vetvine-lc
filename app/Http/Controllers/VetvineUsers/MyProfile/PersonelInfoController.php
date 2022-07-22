@@ -64,13 +64,11 @@ class PersonelInfoController extends Controller
     {
         $notifications = PushNotification::with('posts', 'user')
         ->where('post_user_id', Auth::user()->id)
-        ->where('is_read', '0')
         ->orderBy('id','desc')
-        ->paginate(5);
-        // ->get();
-        // dd($notifications);
-        // dd($notifications);
-        // Log::info(json_decode($notifications));
+        ->paginate(4);
+
+        PushNotification::where('post_user_id',Auth::user()->id)->update(['is_read'=>'0']);
+
         return view('vetvineUsers.layouts.pages.notifications', compact('notifications'));
     }
 
