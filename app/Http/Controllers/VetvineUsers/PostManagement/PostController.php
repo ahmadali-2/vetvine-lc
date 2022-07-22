@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\VetvineUsers\PostManagement;
 
 use App\Events\NotificationEvent;
+use App\Events\NotifyEvent;
+use App\Events\SharePostEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Admins\Forum\Like;
 use App\Models\Admins\Forum\Post;
@@ -17,6 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use vetvineHelper;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
@@ -101,14 +104,16 @@ class PostController extends Controller
                 $share->ce = $request->ce;
                 $share->save();
 
-                PostActivity::create([
+                $result = PostActivity::create([
                     'share_id' => $share->id,
                 ]);
-
+// here
+                Log::info($result);
                 return response()->json([
                     'code' => 200,
                     'message' => 'Post shared successfully!',
                 ]);
+
             }else{
                 return response()->json([
                     'code' => 401,
@@ -131,6 +136,7 @@ class PostController extends Controller
 
     public function likeSave(Request $request)
     {
+        Log::info($request);
         $user = auth()->user();
         if($user){
             $permissions = MemberPermission::where('membertype_id', $user->userMemberType->id)->first();
@@ -139,9 +145,10 @@ class PostController extends Controller
                     $liked = Like::where('user_id', Auth::id())->where('post_id', $request->likepostid)->where('ce',$request->ce)->first();
                 }else{
                     $liked = ShareLike::where('user_id', Auth::id())->where('share_id', $request->likepostid)->where('ce',$request->ce)->first();
+                   Log::info($liked);
                 }
                 if (!$liked) {
-                    $push_notifications = event(new NotificationEvent(Auth::id(), (int) $request->likepostid));
+                    $push_notifications = event(new NotificationEvent(Auth::id(), (int)$request->likepostid));
                     PushNotification::create([
                         'user_id' => Auth::id(),
                         'post_id' => $request->likepostid,
@@ -175,7 +182,7 @@ class PostController extends Controller
                     );
 
                 } elseif ($liked->like == 0) {
-
+                    $push_notifications = event(new NotificationEvent(Auth::id(), (int) $request->likepostid));
                     $liked->update([
                         "like" => '1',
                     ]);
@@ -188,13 +195,7 @@ class PostController extends Controller
                         ]
                     );
                 } else {
-                    $push_notifications = event(new NotificationEvent(Auth::id(), (int) $request->likepostid));
-                    PushNotification::create([
-                        'user_id' => Auth::id(),
-                        'post_id' => $request->likepostid,
-                        'post_user_id' => $request->postUserid,
-                        'type' => '0',
-                    ]);
+                    // $push_notifications = event(new NotificationEvent(Auth::id(), (int) $request->likepostid));
                     $liked->update([
                         "like" => '0',
                     ]);

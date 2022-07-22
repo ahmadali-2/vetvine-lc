@@ -56,6 +56,7 @@ class StripePaymentController extends Controller
         try{
 
             Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
             $stripeResponse =Stripe\Charge::create ([
                     "amount" => $request->plan_price*100,
                     "currency" => "usd",

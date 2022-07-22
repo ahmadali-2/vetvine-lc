@@ -12,6 +12,7 @@ use App\Models\VetvineUsers\UserEmploymentInfo;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use vetvineHelper;
 // use App\Models\VetVineUsers\Settings\Country;
 // use Country
@@ -62,13 +63,15 @@ class PersonelInfoController extends Controller
     public function notifications()
     {
         $notifications = PushNotification::with('posts', 'user')
-        ->where('post_user_id', '2')
+        ->where('post_user_id', Auth::user()->id)
         ->where('is_read', '0')
-        ->get();
-
-        return view('vetvineUsers.layouts.pages.notifications', [
-            'notifications' => $notifications,
-        ]);
+        ->orderBy('id','desc')
+        ->paginate(5);
+        // ->get();
+        // dd($notifications);
+        // dd($notifications);
+        // Log::info(json_decode($notifications));
+        return view('vetvineUsers.layouts.pages.notifications', compact('notifications'));
     }
 
     /**
