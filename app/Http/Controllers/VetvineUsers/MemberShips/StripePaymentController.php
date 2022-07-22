@@ -53,8 +53,9 @@ class StripePaymentController extends Controller
 
 
             Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
             $stripeResponse =Stripe\Charge::create ([
-                    "amount" => $request->plan_price,
+                    "amount" => $request->plan_price*100,
                     "currency" => "usd",
                     "source" => $request->stripeToken,
                     "description" => "Vetvine Payment Subscription"
