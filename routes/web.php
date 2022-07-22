@@ -252,7 +252,7 @@ Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetv
      });
     Route::get('/notifications',[PersonelInfoController::class,'notifications'])->name('vetvineUserNotifications');
 
-
+    Route::post('apply_couponcode',[StripePaymentController::class,'applyCouponCode'])->name('usermemberships.applycouponcode');
     Route::resource('updateprofile',ProfileController::class);
     Route::resource('usermemberships',StripePaymentController::class);
     //User setting routes
