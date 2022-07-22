@@ -67,7 +67,7 @@ class EventPaymentController extends Controller
         try{
 
             Stripe\Stripe::setApiKey('sk_test_51L43BqKuqsAISa0ttkLpNjhOiJPwPK4KjychhTSoNof5g0WHg8uppTYHqpqEz4yQFaNbEcxbnQW0jabEqno6GQn200dm5rjGm1');
-            $stripeResponse =Stripe\Charge::create ([
+            $stripeResponse =Stripe\Charge::create([
                     "amount" => $request->event_price*100,
                     "currency" => "USD",
                     // "source" => $request->stripeToken,
