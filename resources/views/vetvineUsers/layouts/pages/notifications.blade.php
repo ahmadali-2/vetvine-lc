@@ -1,7 +1,7 @@
 @extends('vetvineUsers.dashboard_master')
 @section('dashboardcontent')
     <?php
-        $authUser = Auth::user()->id;
+    $authUser = Auth::user()->id;
     ?>
     <div class="edit-profile-header edit_profile_banner">
 
@@ -34,6 +34,7 @@
                     <div class="box shadow-sm rounded bg-white mb-3">
                         <div class="box-title border-bottom p-3">
                             <h6 class="m-0">Recent</h6>
+
                         </div>
 
                         <div class="box-body p-0" id="notification-card">
@@ -88,16 +89,25 @@
                                     <div class="col-md-12">
 
                                         <div class="p-3 d-flex  border-bottom osahan-post-header">
+                                            @if ($notification->user->profile_photo)
                                             <div class="dropdown-list-image mr-3"><img class="rounded-circle"
-                                                    src="{{ asset('frontend/images/Profile-Images/'.$notification->user->profile_photo) }}"
-                                                    alt="" />
+                                                src="{{ asset('frontend/images/Profile-Images/' . $notification->user->profile_photo) }}"
+                                                alt="" />
                                             </div>
+                                            @else
+                                            <div class="dropdown-list-image mr-3">
+                                                <img class="rounded-circle"
+                                                src="{{ asset('frontend/images/dummy.png') }}" alt=""
+                                                id="user-image">
+                                            </div>
+                                            @endif
+
                                             <div class="font-weight-bold mr-3">
                                                 <div class="text-truncate">{{ $notification->posts->post_title }}:
                                                     {{ $notification->user->name }}</div>
                                                 <div class="content">
                                                     <div class="content_img">
-                                                        <img src="{{ asset('vetvineUsers/posts/'.$notification->posts->post_photo) }}"
+                                                        <img src="{{ asset('vetvineUsers/posts/' . $notification->posts->post_photo) }}"
                                                             alt="">
                                                     </div>
                                                     <div class="small para_pad">
@@ -338,7 +348,7 @@
             // return false;
             console.log(data);
             // if(data.userDesc){
-                $(data).each(function() {
+            $(data).each(function() {
                 var userId = data.userId;
                 var postDesc = data.userDesc;
                 var postTitle = data.postTitle;
@@ -346,7 +356,7 @@
                 var userName = data.userName;
                 var postImg = data.postImg;
                 var postUserId = data.postUserId;
-                var authUser = '<?php echo $authUser ?>';
+                var authUser = '<?php echo $authUser; ?>';
                 var desc = $(postDesc).text();
                 var img = "{{ asset('vetvineUsers/posts') }}" + '/' + postImg;
                 var profileImg = "{{ asset('frontend/images/Profile-Images') }}" + '/' + userPhoto;
@@ -354,15 +364,16 @@
                 console.log(postUserId);
                 console.log(authUser);
 
-                if(postUserId == authUser){
-                var html = $(`
-                <div class="notification p-3 d-flex bg-light border-bottom osahan-post-header">
+                if (postUserId == authUser) {
+                    if (data.actionType == "like") {
+                        var html = $(`
+                                    <div class="notification p-3 d-flex bg-light border-bottom osahan-post-header">
                                     <div class="dropdown-list-image mr-3">
                                         <img class="rounded-circle" src="` + profileImg + `"
                                             alt="" />
                                     </div>
                                     <div class="font-weight-bold mr-3 noti_parent">
-                                        <div class="post-title" class="text-truncate">` + postTitle +`:`+userName+`</div>
+                                        <div class="post-title" class="text-truncate">` + postTitle + `: Liked By ` + userName + `</div>
                                         <div class="content">
                                             <div class="content_img">
                                                 <img class="profile-img" src="` + img + `"
@@ -372,17 +383,38 @@
                                         </div>
                                     </div>
                                 </div>
-                `);
-                $("#notification-card").append(html);
-                var count = parseInt($("#countnotif").text());
-                count += 1;
-                $("#countnotif").html(count);
-            }
+                                `);
+                        $("#notification-card").append(html);
+                    }else{
+                        var html = $(`
+                                    <div class="notification p-3 d-flex bg-light border-bottom osahan-post-header">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="` + profileImg + `"
+                                            alt="" />
+                                    </div>
+                                    <div class="font-weight-bold mr-3 noti_parent">
+                                        <div class="post-title" class="text-truncate">` + postTitle + `: Shared By ` + userName + `</div>
+                                        <div class="content">
+                                            <div class="content_img">
+                                                <img class="profile-img" src="` + img + `"
+                                                    alt="">
+                                            </div>
+                                            <div class="small para_pad">` + desc + `</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                `);
+                        $("#notification-card").append(html);
+                    }
+                    var count = parseInt($("#countnotif").text());
+                    count += 1;
+                    $("#countnotif").html(count);
+                }
             })
             // }else{
             //     console.log("No data found");
             // }
-        // }
+            // }
         });
     </script>
 @endsection
