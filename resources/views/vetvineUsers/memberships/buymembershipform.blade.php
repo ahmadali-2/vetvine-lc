@@ -1,8 +1,9 @@
-@extends('vetvineUsers.dashboard_master')
+{{-- @extends('vetvineUsers.dashboard_master')
 
-@section('dashboardcontent')
+@section('dashboardcontent') --}}
 
-
+@extends('frontend.master')
+@section('content')
 
 <section class="content-header">
 
@@ -97,10 +98,10 @@
 
 
                         </div>
-
-                        <input type="hidden" value="{{$plan->plan_price}}" name="plan_price">
-                        <input type="hidden" value="{{$plan->id}}" name="membershipplan_id">
-                        <input type="hidden" value="{{Auth::user()->id}}" name="user_id">
+                        <input type="hidden" id="planprice" value="{{$plan->plan_price}}" name="plan_price">
+                        <input type="hidden" id="memberplan_id" value="{{$plan->id}}" name="membershipplan_id">
+                        <input type="hidden" id="user_id " value="{{Auth::user()->id}}" name="user_id">
+                        <input type="hidden" id="coupon_id" name="coupon_id">
 
 
 
@@ -154,14 +155,32 @@
                            </div>
 
                         </div>
+                        <div class='form-row row'>
+
+                            <div class='col-xs-12 col-md-6  form-group required'>
+
+                               <label class='control-label coupon_code'>Coupon Code</label>
+
+                               <input autocomplete='off' name="coupon_code" id="coupon_code" class='form-control card-number' size='20'
+
+                                  type='text'>
+                                  <button type="button" id="applycouponcode" class="bt btn-primary">Apply Coupon</button>
+
+                            </div>
 
 
 
-            <input type="submit" class="dashboard-btn mb-3 mt-3" value="Pay {{$plan->plan_price}} $">
+                         </div>
+
+
+
+            <input id="pay_coupon_button" type="submit" class="dashboard-btn mb-3 mt-3" value="Pay {{$plan->plan_price}} $">
 
 
 
                      </form>
+
+
 
                   </div>
 
@@ -179,9 +198,54 @@
 
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 
+<script>
 
+$(document).ready(function() {
+localStorage.setItem('coupon_code', '');
+$('#applycouponcode').on('click', function() {
+    var coupon_code = $('#coupon_code').val();
+    if(coupon_code == localStorage.getItem('coupon_code')){
+        toastr.error('Coupon code already applied');
+    }
+    else{
+    var plan_price = $('#planprice').val();
+    if(coupon_code != '')
+    {
+        $.ajax({
+            url: "{{ route('usermemberships.applycouponcode') }}",
+            type: "POST",
+            data: {
+                plan_price: plan_price,
+                coupon_code: coupon_code,
+                _token: "{{ csrf_token() }}"
+            },
+            success: function(data) {
+                console.log(data);
+                if(data.code == 200){
+                    $('#pay_coupon_button').val('Pay '+data.discounted_price+' $');
+                    $('#planprice').val(data.discounted_price);
+                    $('#coupon_id').val(data.coupon_id);
+                    localStorage.setItem('coupon_code', coupon_code);
+                    toastr.success(data.message);
+                }
+                if(data.code == 400){
+                    toastr.error(data.message);
+                }
+                if(data.code == 401){
+                    toastr.warning(data.message);
+                }
+            }
+        });
+    }
+    else
+    {
+        $('#coupon_code_msg').html('please enter coupon code');
+    }
 
-<script type="text/javascript">
+    }
+
+});
+});
 
 $(function() {
 
