@@ -76,7 +76,7 @@ class HomeController extends Controller
     public function upcomingWebinars()
     {
         $showevent = Event::with('events', 'sponsers', 'members', 'user')->get();
-        
+
         $sponser = SponserTable::all();
         $category = CategoryEvent::all();
         return view('frontend.pages.webinars.upcoming-webinars', compact('showevent', 'sponser', 'category'));
@@ -98,7 +98,7 @@ class HomeController extends Controller
     public function upcomingWebinarsdetails($id)
     {
         $eventdetail = Event::with('events', 'sponsers', 'members', 'user', 'buyeventplan', 'ReviewData')->find($id);
-
+        $eventTime = date('Y-m-d H:i:s', strtotime(''.$eventdetail->date.''.$eventdetail->time.''));
         $eventId = $eventdetail->id;
         $category = CategoryEvent::all();
         $authUser = false;
@@ -110,7 +110,7 @@ class HomeController extends Controller
         }else{
             $purchasedEvent = null;
         }
-        return view('frontend.pages.webinars.upcoming-eventsdetails', compact('eventdetail', 'category', 'eventId','authUser','purchasedEvent'));
+        return view('frontend.pages.webinars.upcoming-eventsdetails', compact('eventdetail', 'category', 'eventId','authUser','purchasedEvent','eventTime'));
     }
 
     public function getEventPrice(Request $request){
