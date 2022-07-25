@@ -24,18 +24,21 @@ class UpdateUserPasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'current_password'                   => ['required'],
-            'password'                           => ['required'],
-            'confirmpassword'                    => ['required', 'same:password'],
+            'current_password'                   => ['required','min:8'],
+            'password'                           => ['required','min:8'],
+            'confirmpassword'                    => ['required', 'min:8','same:password'],
         ];
     }
     public function messages()
     {
         return [
-            'current_password.required'                   => 'Current Password Field Is Required',
-            'password.required'                           => 'Password Field Is Required',
-            'confirmpassword.required'                    => 'Confirm Password Field Is Required',
-            'confirmpassword.same'                        => 'Confirm Password Field Does Not Match',
+            'current_password.required'          => 'Current password is required',
+            'current_password.min'               => 'Current password must be at least 8 characters',
+            'password.required'                 => 'Password is required',
+            'password.min'                      => 'Password must be at least 8 characters',
+            'confirmpassword.required'          => 'Confirm password is required',
+            'confirmpassword.min'               => 'Confirm password must be at least 8 characters',
+            'confirmpassword.same'              => 'Confirm password must be same as password',
         ];
 
     }

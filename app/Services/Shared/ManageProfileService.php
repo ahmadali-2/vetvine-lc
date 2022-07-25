@@ -69,6 +69,7 @@ class ManageProfileService
             ]);
             Auth::login($currentUser);
         } catch (\Exception $e) {
+            // dd($e->getMessage());
             return redirect()->back();
         }
         return 'updated';

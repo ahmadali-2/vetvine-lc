@@ -275,9 +275,11 @@
 
                                     </div>
                                     <div class="public2-description">
-                                       <b class="ml-2 text-uppercase"></b>
+                                        <b class="ml-2 text-uppercase"> {{ $videos->presenter_one }}</b>
                                     </div>
                                 </div>
+
+
 
 
 
@@ -285,8 +287,8 @@
                                     <div class="public2-title sponsor-title">
                                         Sponsor(s): vetvine :
                                     </div>
-                                    <div>
-                                        <p>Some data here ...</p>
+                                    <div class="public2-description spon-descripton">
+                                        john mathews
                                     </div>
                                   </div>
 
@@ -306,7 +308,7 @@
                     <div class="container">
                     <div class="video-detail-para border-0">
                         <p>
-                            {{ $videos->video_description }}
+                            {!! $videos->video_description !!}
                         </p>
                     </div>
                 </div>
@@ -378,7 +380,6 @@
                     });
                     $('input[name="rating"]').click(function() {
                         var length = $(this).attr('data-stars');
-                        alert(length);
                         $.ajax({
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
