@@ -52,7 +52,7 @@
 
 
                       </div>
-                      <div class="btn_change text-center">
+                      <div class="btn_change text-center offset-md-5 col-md-6 pl-lg-2">
                         <button type="submit " class="btn btn-warning">Change Password</button>
                     </div>
                 </form>
