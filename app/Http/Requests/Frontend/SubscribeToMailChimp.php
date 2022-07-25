@@ -29,8 +29,6 @@ class SubscribeToMailChimp
      */
     public function handle(UserRegistered $event)
     {
-
-
         $mailChimpApiKey = env('MAILCHIMP_API_KEY');
         $mailchimp = new \Mailchimp($mailChimpApiKey);
         $mailchimp->lists->subscribe(env('MAILCHIMP_LIST_ID'),

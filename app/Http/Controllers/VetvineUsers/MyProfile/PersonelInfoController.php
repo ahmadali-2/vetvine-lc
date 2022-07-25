@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\VetvineUsers\MyProfile;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admins\Webinar\BuyEventPlan;
 use App\Models\Generals\TimeZone;
 use App\Models\PushNotification;
 use App\Models\User;
@@ -14,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use vetvineHelper;
+use App\Models\Admins\Webinar\Event;
 // use App\Models\VetVineUsers\Settings\Country;
 // use Country
 
@@ -64,13 +66,11 @@ class PersonelInfoController extends Controller
     {
         $notifications = PushNotification::with('posts', 'user')
         ->where('post_user_id', Auth::user()->id)
-        ->where('is_read', '0')
         ->orderBy('id','desc')
-        ->paginate(5);
-        // ->get();
-        // dd($notifications);
-        // dd($notifications);
-        // Log::info(json_decode($notifications));
+        ->paginate(4);
+
+        PushNotification::where('post_user_id',Auth::user()->id)->update(['is_read'=>'0']);
+
         return view('vetvineUsers.layouts.pages.notifications', compact('notifications'));
     }
 
@@ -182,6 +182,18 @@ class PersonelInfoController extends Controller
     public function destroy($id)
     {
 
+    }
+
+    public function myUpcommingEvents(){
+        $events = BuyEventPlan::where(['user_id'=>Auth::id(),'status' => 'Upcoming'])->with('buyevents')->paginate(5);
+
+
+        return view('vetvineUsers.events.myupcomming_events',compact('events'));
+    }
+
+    public function myPastEvents(){
+        $events = BuyEventPlan::where(['user_id'=>Auth::id(),'status' => 'Past'])->with('buyevents')->paginate(5);
+        return view('vetvineUsers.events.pastevents',compact('events'));
     }
 }
 

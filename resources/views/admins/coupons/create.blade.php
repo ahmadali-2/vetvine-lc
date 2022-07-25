@@ -103,7 +103,6 @@
 
                                             <label for="coupon_type" class="control-label mb-1">Coupon Type</label>
 
-
                                             <select name="coupon_type" id="coupon_type" class="form-control">
                                                 <option value="">Select Coupon Type</option>
                                                 <option value="percentage">Percentage</option>
@@ -112,6 +111,17 @@
 
                                         </div>
 
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="status" class="control-label mb-1">Coupon Status</label>
+                                            <br>
+                                            <input type="checkbox" name="status" data-toggle="toggle"
+                                                data-onstyle="outline-success" data-size="md" data-offstyle="outline-danger"
+                                                data-on="<i class='fa fa-unlock'></i> Active"
+                                                data-off="<i class='fa fa-lock'></i> Inactive">
+
+                                        </div>
                                     </div>
                                 </div>
 

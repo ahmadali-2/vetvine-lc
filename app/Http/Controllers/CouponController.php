@@ -40,22 +40,20 @@ class CouponController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        // $this->validate($request, [
-        //     'coupon_code'   => 'required|string|max:255|unique:coupons',
-        // ]);
-       try{
 
+       try{
              Coupon::create([
-                "coupon_code" => $request->coupon_code,
-                "coupon_type" => $request->coupon_type,
-                "amount" => $request->amount,
-                "start_at" => $request->start_at,
-                "expired_at" => $request->expired_at,
+                "coupon_code"   => $request->coupon_code,
+                "coupon_type"   => $request->coupon_type,
+                'status'        => ($request->coupon_status == "on") ? 1 : 0,
+                "amount"        => $request->amount,
+                "start_at"      => $request->start_at,
+                "expired_at"    => $request->expired_at,
             ]);
             parent::successMessage('Coupon saved successfully.');
             return redirect(route('coupon-code.index'));
         } catch(Exception $e) {
+            dd($e->getMessage());
             parent::dangerMessage("Coupon Does Not Created, Please Try  Again");
             return redirect()->back();
         }
@@ -93,22 +91,20 @@ class CouponController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $this->validate($request, [
-        //     'coupon_code'   => 'required|string|max:255|unique:coupons',
-        // ]);
         try{
             $coupon = Coupon::find($id);
             $coupon->update([
-                "coupon_code" => $request->coupon_code,
-                "coupon_type" => $request->coupon_type,
-                "amount" => $request->amount,
-                "count" => $request->count,
-                "start_at" => $request->start_at,
-                "expired_at" => $request->expired_at,
+                "coupon_code"   => $request->coupon_code,
+                "coupon_type"   => $request->coupon_type,
+                'status'        => ($request->coupon_status == "on") ? 1 : 0,
+                "amount"        => $request->amount,
+                "start_at"      => $request->start_at,
+                "expired_at"    => $request->expired_at,
             ]);
             parent::successMessage('Coupon updated successfully.');
             return redirect(route('coupon-code.index'));
         } catch(Exception $e) {
+            dd($e->getMessage());
             parent::dangerMessage("Coupon Does Not Updated, Please Try  Again");
             return redirect()->back();
         }

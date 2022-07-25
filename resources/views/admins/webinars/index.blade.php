@@ -45,7 +45,7 @@
                                                 <img src="{{ asset('admin/eventss/' . $events->main_photo) }}"
                                                     style="border-radius:4px;height:60px; width:60px">
                                             </td>
-                                            <td>{{ Str::limit($events->event_description , 150) }}</td>
+                                            <td>{!! Str::limit($events->event_description , 150) !!}</td>
                                             <td>
                                                 <a href="{{ route('webinars.edit', $events->id) }}">
                                                     <i class="fas fa-edit text-primary"></i>

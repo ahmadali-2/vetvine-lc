@@ -3,6 +3,8 @@
 namespace App\Events;
 
 use App\Models\Admins\Forum\Post;
+use App\Models\PostActivity;
+use App\Models\Share;
 use App\Models\User;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
@@ -37,6 +39,7 @@ class NotificationEvent implements ShouldBroadcast
     public $userId;
     public $postUserId;
     public $authUser;
+    public $actionType;
 
     // public $likes;
     /**.
@@ -44,37 +47,37 @@ class NotificationEvent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($user_id, $body)
+    public function __construct($user_id, $body,$action)
     // public function __construct()
     {
-        // Log::info('Notification Event');
+        Log::info('Notification Event');
         $post = Post::find($body) ?? '';
         $user = User::find($user_id) ?? '';
-
-        // if ($post->user_id === $user_id) {
-            $this->postUserId = $post->user_id;
-            //Data sended in notification
+        if($action === "share"){
+            Log::info("Share Event");
+            $this->actionType = $action;
             $this->userPhoto = $user->profile_photo ?? '';
-            $this->userName = $post->user->name ?? '';
-
+            // $this->userName = $post->user->name ?? '';
+            $this->userName = $user->name;
             $this->postImg = $post->post_photo ?? '';
             $this->userDesc = $post->post_description ?? '';
             $this->postTitle = $post->post_title ?? '';
             $this->userId = $user->id;
             $this->authUser = Auth::user()->id;
-        // }else{
-        //     Log::info('No data found');
-        // }
-
-        //ended
-        // $user_messages = User::find($post_id) ?? '';
-        // Log::info($user_messages);
-
-        // $this->user_messages_name = $user_messages->name ?? '';
-        // $this->user_messages_img = $user_messages->profile_photo ?? '';
-        // $this->from_message = $post_id ?? '';
-        // $this->message = $body ?? '';
-        // $this->likes = $likes;
+            $this->postUserId = $post->user_id;
+        }else{
+            Log::info('Like Event');
+            $this->actionType = $action;
+            $this->userPhoto = $user->profile_photo ?? '';
+            // $this->userName = $post->user->name ?? '';
+            $this->userName = $user->name;
+            $this->postImg = $post->post_photo ?? '';
+            $this->userDesc = $post->post_description ?? '';
+            $this->postTitle = $post->post_title ?? '';
+            $this->userId = $user->id;
+            $this->authUser = Auth::user()->id;
+            $this->postUserId = $post->user_id;
+        }
     }
 
     /**

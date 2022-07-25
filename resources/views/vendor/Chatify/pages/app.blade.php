@@ -84,7 +84,8 @@
                             <div class="avatar av-s header-avatar"
                                 style="margin: 0px 10px; margin-top: -5px; margin-bottom: -5px;">
                             </div>
-                            <a href="#" class="user-name">{{ config('chatify.name') }}</a>
+                            <a href="javascript:void(0)" class="user-name">Starting a Message</a>
+                            {{-- {{ config('chatify.name') }} --}}
                         </div>
                         {{-- header buttons --}}
                         <nav class="m-header-right">

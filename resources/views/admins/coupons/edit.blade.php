@@ -63,6 +63,18 @@
 
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label mb-1">Coupon Status</label>
+                                        <br>
+                                        <input type="checkbox" name="coupon_status"
+                                            {{ $coupon->status == 1 ? 'checked' : '' }} data-toggle="toggle"
+                                            data-onstyle="outline-success" data-size="md" data-offstyle="outline-danger"
+                                            data-on="<i class='fa fa-unlock'></i> Active"
+                                            data-off="<i class='fa fa-lock'></i> Inactive">
+
+                                    </div>
+                                </div>
                             </div>
                             <div>
                                 <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">

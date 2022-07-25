@@ -8,7 +8,6 @@
                 </div>
                 <div class="card-body">
                     <div id="pay-invoice">
-                        <div class="card-body">
                             <div class="card-title">
                                 <h3 class="text-center">Plan Detail</h3>
                             </div>
@@ -120,7 +119,6 @@
                                     </button>
                                 </div>
                             </form>
-                        </div>
                     </div>
                 </div>
             </div>

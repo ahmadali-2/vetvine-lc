@@ -56,7 +56,8 @@
             height: 50px;
             border-radius: 50%;
         }
-/* here */
+
+        /* here */
         .editRate {
             float: left;
             height: 46px;
@@ -212,100 +213,112 @@
             margin-top: 10px;
             font-family: 'Museo 500';
         }
-        .date-info{
+
+        .date-info {
             flex-direction: column;
             align-items: flex-start !important;
         }
-        .dte{
+
+        .dte {
             display: flex;
-    margin-bottom: 10px;
+            margin-bottom: 10px;
         }
-        .dte .public2-title{
+
+        .dte .public2-title {
             margin-right: 10px;
         }
-        .tim{
+
+        .tim {
             display: flex;
             width: 100%;
             margin-bottom: 20px;
         }
-        .tim .public2-title{
+
+        .tim .public2-title {
             margin-right: 10px;
         }
-        @media (max-width:575px){
-            .sponsor-title{
+
+        @media (max-width:575px) {
+            .sponsor-title {
                 font-size: 11px;
             }
-            .spon-descripton{
+
+            .spon-descripton {
                 font-size: 12px;
             }
         }
-        .spon-descripton:not(:last-child)::after{
+
+        .spon-descripton:not(:last-child)::after {
             content: " , ";
         }
-        .tim  .public2-description{
+
+        .tim .public2-description {
             width: 86%;
         }
 
-        .view_time_zone{
+        .view_time_zone {
             color: #f27222;
         }
-        .view_time_zone:hover{
+
+        .view_time_zone:hover {
             color: #5c7c85;
         }
+
         /* End */
 
 
         #ajax-book-model .btn-primary {
-    color: #fff;
-    background-color: #f27222;
-    border-color: #f27222;
-    border-radius: 12px;
-    width: 102px;
-    transition: 0.3s all;
-    border: 2px solid #f27222 !important;
-}
-#ajax-book-model .btn-primary:hover{
-    background: transparent;
-    border: 2px solid #f27222 !important;
-    color: #f27222;
-}
+            color: #fff;
+            background-color: #f27222;
+            border-color: #f27222;
+            border-radius: 12px;
+            width: 102px;
+            transition: 0.3s all;
+            border: 2px solid #f27222 !important;
+        }
+
+        #ajax-book-model .btn-primary:hover {
+            background: transparent;
+            border: 2px solid #f27222 !important;
+            color: #f27222;
+        }
     </style>
     <?php
     use App\Models\Generals\TimeZone;
-        $convertedTime = null;
+    $convertedTime = null;
     ?>
     <!-- Login Modal Form  Start-->
     <button type="button" class="btn btn-primary d-none" id="register_event_btn" data-toggle="modal"
         data-target="#event_registration_model">
         Launch demo modal
     </button>
-<div class="modal fade" id="event_registration_model">
-    <div class="modal-dialog custum_popup">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="popup-header">
-                    <span class="popup-logo"><img src="{{ asset('frontend/images/popup-logo.png') }}"
-                            alt="logo"></span>
-                    <span class="close" id="login_modal_close" data-dismiss="modal">&times;</span>
+    <div class="modal fade" id="event_registration_model">
+        <div class="modal-dialog custum_popup">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="popup-header">
+                        <span class="popup-logo"><img src="{{ asset('frontend/images/popup-logo.png') }}"
+                                alt="logo"></span>
+                        <span class="close" id="login_modal_close" data-dismiss="modal">&times;</span>
+                    </div>
                 </div>
-            </div>
-            <!-- Modal body -->
-            <div id="login_main_body">
-                {{-- @include('frontend.auth.event_registration_completed') --}}
+                <!-- Modal body -->
+                <div id="login_main_body">
+                    {{-- @include('frontend.auth.event_registration_completed') --}}
 
-                @include('frontend.auth.login_course_registration_detail')
-                {{-- @include('frontend.auth.login_course_registration_payment',[
+                    @include('frontend.auth.login_course_registration_detail')
+                    {{-- @include('frontend.auth.login_course_registration_payment',[
                     'event_price' => 25,
                     'event_id' => 14,
                 ]) --}}
-                {{-- @include('frontend.auth.login_course_registration_detail') --}}
-                {{-- @include('frontend.auth.register_login') --}}
+                    {{-- @include('frontend.auth.login_course_registration_detail') --}}
+                    {{-- @include('frontend.auth.register_login') --}}
+                </div>
+                {{-- End Modal body here --}}
             </div>
-            {{-- End Modal body here --}}
         </div>
     </div>
-</div>
-<!-- Login Modal Form  End-->
+    <!-- Login Modal Form  End-->
     {{-- <div class="modal fade" id="calendarModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -333,21 +346,23 @@
                     </div>
                 </div>
             </div>
-                <div class="container">
-                      <div class="content">
+            <div class="container">
+                <div class="content">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <nav aria-label="breadcrumb" class="breadcrumbs large-font">
-                                    <ol class="breadcrumb">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <nav aria-label="breadcrumb" class="breadcrumbs large-font">
+                                <ol class="breadcrumb">
 
-                                        <li class="breadcrumb-item"><a onclick="history.back()" href="javascript::void();">Upcoming
-                                                Webinars</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">{{ $eventdetail->event_title }}</li>
-                                    </ol>
-                                </nav>
-                            </div>
+                                    <li class="breadcrumb-item"><a onclick="history.back()"
+                                            href="javascript::void();">Upcoming
+                                            Webinars</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">{{ $eventdetail->event_title }}
+                                    </li>
+                                </ol>
+                            </nav>
                         </div>
+                    </div>
                     <h2 class="web_heading">{{ $eventdetail->event_title }}</h2>
 
 
@@ -356,53 +371,54 @@
 
                         </div>
                         <div class="public2-info date-info">
-                           <div class="dte">
-                            <div class="public2-title">
-                                Date:
+                            <div class="dte">
+                                <div class="public2-title">
+                                    Date:
+                                </div>
+                                <div class="public2-description">
+                                    {{ date('F,d,Y', strtotime($eventdetail->date)) }}
+                                </div>
                             </div>
-                            <div class="public2-description">
-                                {{  date('F,d,Y', strtotime($eventdetail->date)) }}
-                            </div>
-                           </div>
                             <div class="tim">
                                 <div class="public2-title">
                                     Time:
                                 </div>
                                 <div class="public2-description">
                                     @auth
-                                    @php
-                                        $timeZone = $eventdetail->user->timezone->timezone;
-                                        // Fetching timezone UTC code : Please don't screw it
-                                        $pieces = explode('(', $timeZone);
-                                        $pieces = explode('C', $pieces[1]);
-                                        $pieces = explode(')', $pieces[1]);
+                                        @php
+                                            $timeZone = $eventdetail->user->timezone->timezone;
+                                            // Fetching timezone UTC code : Please don't screw it
+        $pieces = explode('(', $timeZone);
+        $pieces = explode('C', $pieces[1]);
+        $pieces = explode(')', $pieces[1]);
 
-                                        // Formatting the time
-                                        $today = new DateTime($eventdetail->time, new DateTimeZone($pieces[0]));
+        // Formatting the time
+        $today = new DateTime($eventdetail->time, new DateTimeZone($pieces[0]));
 
-                                        $userTimeZone = Auth::user()->timezone->timezone;
+        $userTimeZone = Auth::user()->timezone->timezone;
 
-                                        // Fetching timezone UTC code : Please don't screw it
-                                        $pieces = explode('(', $userTimeZone);
-                                        $pieces = explode('C', $pieces[1]);
-                                        $pieces = explode(')', $pieces[1]);
+        // Fetching timezone UTC code : Please don't screw it
+                                            $pieces = explode('(', $userTimeZone);
+                                            $pieces = explode('C', $pieces[1]);
+                                            $pieces = explode(')', $pieces[1]);
 
-                                        $userEventTime = new DateTimeZone($pieces[0]);
-                                        $convertedTime = $today->setTimeZone($userEventTime);
+                                            $userEventTime = new DateTimeZone($pieces[0]);
+                                            $convertedTime = $today->setTimeZone($userEventTime);
 
-                                        echo $convertedTime->format('H:i A') . ' ' . $userTimeZone;
-                                    @endphp
+                                            echo $convertedTime->format('H:i A') . ' ' . $userTimeZone;
+                                        @endphp
                                     @else
                                         @php
-                                        $newDateTime = date('h:i A', strtotime($eventdetail->time));
+                                            $newDateTime = date('h:i A', strtotime($eventdetail->time));
 
-                                            echo $newDateTime. ' ET ';
+                                            echo $newDateTime . ' ET ';
                                         @endphp
                                     @endauth
                                 </div>
                                 @auth
                                     <div class="public2-info" style="margin-left: 12px; margin-bottom:0px ;">
-                                        <a href="{{ $eventdetail->timezone_url }}" class="view_time_zone"> View Other Timezone</a>
+                                        <a href="{{ $eventdetail->timezone_url }}" class="view_time_zone"> View Other
+                                            Timezone</a>
                                     </div>
                                 @endauth
                             </div>
@@ -464,7 +480,7 @@
 
                             </div>
                             <div class="public2-description">
-                               <b class="ml-2 text-uppercase"> {{ $eventdetail->presenter_one }}</b>
+                                <b class="ml-2 text-uppercase"> {{ $eventdetail->presenter_one }}</b>
                             </div>
                         </div>
                     </div>
@@ -479,14 +495,14 @@
                             </div>
                             @foreach ($eventdetail->members as $items)
                                 <div class="public2-description spon-descripton">
-                                    {{ $items->sponser_name }}
+                                    <a href="{{ $items->sponser_link }}" class="vetvine_a" target="_blank">{{ $items->sponser_name }}</a>
                                 </div>
                             @endforeach
                         </div>
                     </div>
 
                     <div class="publication-detail register_btn">
-                        @if(isset($purchasedEvent))
+                        @if (isset($purchasedEvent))
                             <button class="btn btn-primary">Attend Event?</button>
                         @else
                             <button class="btn btn-primary" id="register_event">Register</button>
@@ -494,7 +510,7 @@
 
                     </div>
                 </div>
-                    {{-- <div class="publication-detail">
+                {{-- <div class="publication-detail">
                         <div class="publication-arrow-icon">
                             <img src="{{ asset('frontend/img/arrow-right.png') }}" alt="arrow-right icon">
                         </div>
@@ -527,7 +543,9 @@
                     @auth
                         <div class="row">
                             <button id="calendarModelButtonAction" type="button" class="upcoming_btn" data-toggle="modal" data-target="#calendarModel" hidden><i class="fa fa-calendar" aria-hidden="true"></i> </button>
-                            <button id="calendarModelButton" type="button" class="upcoming_btn" style="background-color: #f27222"><i class="fa fa-calendar" aria-hidden="true"></i> - Add to Calendar</button>
+                            @if(isset($purchasedEvent))
+                                <button id="calendarModelButton" type="button" class="upcoming_btn" style="background-color: #f27222"><i class="fa fa-calendar" aria-hidden="true"></i> - Add to Calendar</button>
+                            @endif
                         </div>
                     @endauth
                     {{-- <div class="row">
@@ -539,15 +557,15 @@
 
 
 
-                </div>
+            </div>
             </form>
-        </section>
-
+    </section>
                <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <p class="desription_p">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam nulla molestiae deserunt harum fuga modi, totam, officiis porro doloribus rerum, dolorem beatae pariatur dolor iste odit. Quae blanditiis sequi labore dolorem nisi rerum neque odit aperiam saepe, eius est fugiat corrupti in ad unde assumenda dolores provident. Commodi, ipsa in?</p>
+                        {!! $eventdetail->event_description !!}
+                        </p>
                     </div>
                 </div>
                </div>
@@ -563,98 +581,101 @@
                                             <h4>Comment Section </h4>
                                         </div>
                                     </div>
-                                    <div class="row mt-5">
+                                </div>
+                                <div class="row mt-5">
 
-                                        <div class="col-sm-12 mt-5">
+                                    <div class="col-sm-12 mt-5">
 
-                                            @foreach ($eventdetail->ReviewData as $review)
-                                                <div class=" review-content" id="review-section">
-                                                    <img src="https://www.w3schools.com/howto/img_avatar.png"
-                                                        class="avatar ">
-                                                    <span class="font-weight-bold ml-2">
-                                                        {{ $review->users->name ? $review->users->name : 'Annonyomus' }} </span>{{ $review->created_at->diffForHumans() }}
-                                                    <p class="mt-1">
-                                                        @for ($i = 1; $i <= $review->star_rating; $i++)
-                                                            <span><i class="fa fa-star text-warning"></i></span>
-                                                        @endfor
-                                                        {{-- <span class="font ml-2">{{$review->email}}</span> --}}
-                                                    </p>
-                                                    <p class="description ">
-                                                        {{ $review->comments }}
-                                                    </p>
-                                                    @if (auth()->user()->id == $review->user_id)
-                                                        <button class="edit" style="background: transparent;" type="button" data-toggle="modal"
-                                                            data-target="#ajax-book-model" data-id="{{ $review->id }}" data-comment="{{ $review->comments }}">
-                                                            <i class="fas fa-edit text-primary"></i></button>
-                                                    @endif
-                                                </div>
-                                                <hr>
-                                                {{-- <form action="{{ route('review.delete') }}" method="POST">
+                                        @foreach ($eventdetail->ReviewData as $review)
+                                            <div class=" review-content" id="review-section">
+                                                <img src="https://www.w3schools.com/howto/img_avatar.png" class="avatar ">
+                                                <span class="font-weight-bold ml-2">
+                                                    {{ $review->users->name ? $review->users->name : 'Annonyomus' }}
+                                                </span>{{ $review->created_at->diffForHumans() }}
+                                                <p class="mt-1">
+                                                    @for ($i = 1; $i <= $review->star_rating; $i++)
+                                                        <span><i class="fa fa-star text-warning"></i></span>
+                                                    @endfor
+                                                    {{-- <span class="font ml-2">{{$review->email}}</span> --}}
+                                                </p>
+                                                <p class="description ">
+                                                    {{ $review->comments }}
+                                                </p>
+                                                @if (auth()->user()->id == $review->user_id)
+                                                    <button class="edit" style="background: transparent;"
+                                                        type="button" data-toggle="modal" data-target="#ajax-book-model"
+                                                        data-id="{{ $review->id }}"
+                                                        data-comment="{{ $review->comments }}">
+                                                        <i class="fas fa-edit text-primary"></i></button>
+                                                @endif
+                                            </div>
+                                            <hr>
+                                            {{-- <form action="{{ route('review.delete') }}" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="event_id" value="{{ $review->event_id }}">
                                                     <input type="hidden" name="user_id" value="{{ $review->user_id }}">
                                                     <input type="hidden" name="review_id" value="{{ $review->id }}">
                                                     <button type="submit" class="click_join">Delete</button>
                                                 </form> --}}
-                                            @endforeach
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- Review store Section -->
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-sm-10 mt-4  inner_box_chat" id="comment-section">
-                                        <form class="py-2 px-4" action="{{ route('reviewstore') }}"
-                                            style="box-shadow: 0 0 10px 0 #ddd;" method="POST" autocomplete="off">
-                                            @csrf
-                                            <input type="hidden" name="event_id" value="{{ $eventdetail->id }}">
-                                            <input type="hidden" name="user_id" value="{{ $eventdetail->user_id }}">
-                                            <p class="font-weight-bold ">Review</p>
-                                            <div class="form-group row">
-                                                <div class="col-sm-6 rating_box">
-                                                    <div class="rate">
-                                                        <input type="radio" id="star5" class="rate"
-                                                            name="rating" value="5" />
-                                                        <label for="star5" title="text">5 stars</label>
-                                                        <input type="radio" checked id="star4" class="rate"
-                                                            name="rating" value="4" />
-                                                        <label for="star4" title="text">4 stars</label>
-                                                        <input type="radio" id="star3" class="rate"
-                                                            name="rating" value="3" />
-                                                        <label for="star3" title="text">3 stars</label>
-                                                        <input type="radio" id="star2" class="rate"
-                                                            name="rating" value="2">
-                                                        <label for="star2" title="text">2 stars</label>
-                                                        <input type="radio" id="star1" class="rate"
-                                                            name="rating" value="1" />
-                                                        <label for="star1" title="text">1 star</label>
-                                                    </div>
+                        <!-- Review store Section -->
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-10 mt-4  inner_box_chat" id="comment-section">
+                                    <form class="py-2 px-4" action="{{ route('reviewstore') }}"
+                                        style="box-shadow: 0 0 10px 0 #ddd;" method="POST" autocomplete="off">
+                                        @csrf
+                                        <input type="hidden" name="event_id" value="{{ $eventdetail->id }}">
+                                        <input type="hidden" name="user_id" value="{{ $eventdetail->user_id }}">
+                                        <p class="font-weight-bold ">Review</p>
+                                        <div class="form-group row">
+                                            <div class="col-sm-6 rating_box">
+                                                <div class="rate">
+                                                    <input type="radio" id="star5" class="rate" name="rating"
+                                                        value="5" />
+                                                    <label for="star5" title="text">5 stars</label>
+                                                    <input type="radio" checked id="star4" class="rate"
+                                                        name="rating" value="4" />
+                                                    <label for="star4" title="text">4 stars</label>
+                                                    <input type="radio" id="star3" class="rate" name="rating"
+                                                        value="3" />
+                                                    <label for="star3" title="text">3 stars</label>
+                                                    <input type="radio" id="star2" class="rate" name="rating"
+                                                        value="2">
+                                                    <label for="star2" title="text">2 stars</label>
+                                                    <input type="radio" id="star1" class="rate" name="rating"
+                                                        value="1" />
+                                                    <label for="star1" title="text">1 star</label>
                                                 </div>
                                             </div>
-                                            <div class="form-group row mt-4">
-                                                <div class="col-sm-12 ">
-                                                    <textarea class="form-control" name="comment" rows="6 " placeholder="Comment" maxlength="200" required></textarea>
-                                                    @error('comment')
-                                                        <p class="alert alert-danger">{{ $message }}</p>
-                                                    @enderror
-                                                </div>
+                                        </div>
+                                        <div class="form-group row mt-4">
+                                            <div class="col-sm-12 ">
+                                                <textarea class="form-control" name="comment" rows="6 " placeholder="Comment" maxlength="200" required></textarea>
+                                                @error('comment')
+                                                    <p class="alert alert-danger">{{ $message }}</p>
+                                                @enderror
                                             </div>
-                                            <div class="mt-3 ">
-                                                <button class="upcoming_btn  py-2 px-3 btn-info">Submit
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
+                                        </div>
+                                        <div class="mt-3 ">
+                                            <button class="upcoming_btn  py-2 px-3 btn-info">Submit
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-                @include('frontend.pages.webinars.upcoming_eventjquery')
-            @endif
+        </div>
+        @include('frontend.pages.webinars.upcoming_eventjquery')
+    @endif
 
 
 @endsection
@@ -662,27 +683,31 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
+            localStorage.setItem('guestLogin', false);
+            localStorage.setItem("eventUrl",'');
             var event_id = '<?php echo $eventId ?>';
             var authUser = '<?php echo $authUser ?>';
         $('#register_event').on('click', function(){
                 var url=location.href;
-                localStorage.setItem('guestLogin', true);
-                localStorage.setItem("eventUrl",url);
-
                 if(authUser == false){
+                    localStorage.setItem('guestLogin', true);
+                    localStorage.setItem("eventUrl",url);
                     $('#login_form_show_btn').trigger("click");
-                }else{
-                        $.ajax({
+                } else {
+                    $.ajax({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         type: "POST",
                         url: "/vetvine-member/getEventPrice",
-                        data: {event_id: event_id},
+                        data: {
+                            event_id: event_id
+                        },
                         success: function(response) {
                             $('#event_detail_heading').html(response.data['title']);
-                            $('#event_protocol_heading').html(response.data['protocol']+': <b>'+'$'+response.data['fee']+'</b>');
-                            $('#continue_guest').html('PAY $'+response.data['fee']);
+                            $('#event_protocol_heading').html(response.data['protocol'] +
+                                ': <b>' + '$' + response.data['fee'] + '</b>');
+                            $('#continue_guest').html('PAY $' + response.data['fee']);
                             $('#event_detail_event_id').val(response.data['event_id']);
                             $('#event_detail_user_id').val(response.data['user_id']);
                             $('#event_detail_amount').val(response.data['fee']);
@@ -692,19 +717,21 @@
                     $('#register_event_btn').trigger("click");
                 }
             });
-            $('#calendarModelButton').on('click', function(){
+            $('#calendarModelButton').on('click', function() {
                 $.ajax({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     type: "GET",
                     url: "/add-vetvine-event",
-                    data: {event_id: event_id},
+                    data: {
+                        event_id: event_id
+                    },
                     success: function(response) {
                         $('#eventCalendarDiv').empty();
                         $('#eventCalendarDiv').append(response.html);
                         downloadEvent(response.event[0]);
-                        if(response.code == 200){
+                        if (response.code == 200) {
                             toastr.success(response.message);
                         }
                         $('#calendarModelButtonAction').trigger("click");
@@ -712,30 +739,28 @@
                 });
             });
 
-            function downloadEvent(event){
-                var todayDate	= new Date();
+            function downloadEvent(event) {
+                var todayDate = new Date();
                 const startEvent = new Date(event.event_start);
                 const endEvent = new Date(event.event_end);
 
-                var msgData	= todayDate.toISOString();
-                var startDate	= startEvent.toISOString();
-                var endDate	= endEvent.toISOString();
-                var icsMSG1 = "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:https://www.google.com/\r\nBEGIN:VEVENT\r\nUID:https://www.google.com/\r\nDTSTAMP:" + msgData + "Z\r\nDTSTART:" + startDate + "\r\n";
+                var msgData = todayDate.toISOString();
+                var startDate = startEvent.toISOString();
+                var endDate = endEvent.toISOString();
+                var icsMSG1 =
+                    "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:https://www.google.com/\r\nBEGIN:VEVENT\r\nUID:https://www.google.com/\r\nDTSTAMP:" +
+                    msgData + "Z\r\nDTSTART:" + startDate + "\r\n";
 
                 var icsMSG2 = '';
-                if(endDate != '') {
-                    icsMSG2 = "DTEND:" + endDate +"\r\n";
+                if (endDate != '') {
+                    icsMSG2 = "DTEND:" + endDate + "\r\n";
                 }
 
                 icsMSG3 = "SUMMARY:" + event.event_name + "\r\nEND:VEVENT\r\nEND:VCALENDAR";
 
                 icsMSG = icsMSG1 + icsMSG2 + icsMSG3;
-                window.open( "data:text/calendar;charset=utf8," + escape(icsMSG));
+                window.open("data:text/calendar;charset=utf8," + escape(icsMSG));
             }
-
-            $('html, body').animate({
-                scrollTop: $('#review-section').offset().top
-            }, 'slow');
 
             $(document).on('click', 'input[type="checkbox"]', function() {
                 $('input[type="checkbox"]').not(this).prop('checked', false);
@@ -758,21 +783,28 @@
                     success: function(res) {
                         $(".edit-rate-modal").empty();
                         var rating = res.review.star_rating;
-                        console.log('actual rating'+rating);
+                        console.log('actual rating' + rating);
                         for (var i = 1; i <= rating; i++) {
                             $(".edit-rate-modal").append(`
-                        <input type="radio" id="starEdit` + i + `" class="editRate review1 " name="review1"  data-stars="` +
+                        <input type="radio" id="starEdit` + i +
+                                `" class="editRate review1 " name="review1"  data-stars="` +
                                 i +
                                 `" value="` + i + `" />
-                        <label id="starLabel` + i + `" class="" for="starEdit` + i + `" title="text" style="color:#ffc107" data-stars=` + i + `>` + i + `stars</label>
+                        <label id="starLabel` + i + `" class="" for="starEdit` + i +
+                                `" title="text" style="color:#ffc107" data-stars=` + i +
+                                `>` + i + `stars</label>
                         `);
                         }
 
-                        for (var j = rating+1; j <= 5; j++) {
+                        for (var j = rating + 1; j <= 5; j++) {
                             $(".edit-rate-modal").append(`
-                        <input type="radio" id="starEdit` + j + `" class="editRate" name="review1 review1" data-stars="` + j +
+                        <input type="radio" id="starEdit` + j +
+                                `" class="editRate" name="review1 review1" data-stars="` +
+                                j +
                                 `" value="` + j + `" />
-                        <label id="starLabel` + j + `" class="" for="starEdit` + j + `" title="text" style="color:#eee" data-stars=` + j + `>` + j + `stars</label>
+                        <label id="starLabel` + j + `" class="" for="starEdit` + j +
+                                `" title="text" style="color:#eee" data-stars=` + j + `>` +
+                                j + `stars</label>
                         `);
                         }
                         activateStarEvents();
@@ -821,24 +853,24 @@
             });
         });
 
-        function activateStarEvents(){
-                $('.edit-rate-modal label').on('click', function(){
-                    var star = $(this).attr('data-stars');
-                    var i=1;
-                    var remainingStars = 5-star;
-                    for(i=1;i<=star;i++){
-                        var starId = '#starLabel'+i;
-                        if ($(starId).length) {
-                            $(starId).css('color','#ffc107');
-                        }
+        function activateStarEvents() {
+            $('.edit-rate-modal label').on('click', function() {
+                var star = $(this).attr('data-stars');
+                var i = 1;
+                var remainingStars = 5 - star;
+                for (i = 1; i <= star; i++) {
+                    var starId = '#starLabel' + i;
+                    if ($(starId).length) {
+                        $(starId).css('color', '#ffc107');
                     }
-                    for(var j=i;j<=5;j++){
-                        var starId = '#starLabel'+j;
-                        if ($(starId).length) {
-                            $(starId).css('color','#ccc');
-                        }
+                }
+                for (var j = i; j <= 5; j++) {
+                    var starId = '#starLabel' + j;
+                    if ($(starId).length) {
+                        $(starId).css('color', '#ccc');
                     }
-                });
-            }
+                }
+            });
+        }
     </script>
 @endsection
