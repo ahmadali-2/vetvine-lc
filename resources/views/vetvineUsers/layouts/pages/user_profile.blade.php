@@ -319,6 +319,8 @@
             if (localStorage.getItem('guestLogin') == 'true') {
                 if (localStorage.getItem("eventUrl") != '') {
                     location.href = localStorage.getItem("eventUrl");
+                    localStorage.setItem("eventUrl", '');
+                    localStorage.setItem("guestLogin", false);
                 }
             }
         }
