@@ -6795,7 +6795,7 @@ table tbody .count td {
 
 .drop_down_user_dash li a,
 .my_ce_drop_down li a {
-    font-size: 13px;
+    font-size: 15px;
     color: #5c7c85;
 }
 
@@ -9307,8 +9307,215 @@ p {
     width: 100%;
 }
 
-#comments_share_data_0  form .form-group  button{
+#comments_share_data_0  form .form-group  button {
     border-radius: 12px;
     font-size: 14px;
     font-family: "Museo Sans 500";
+}
+
+.forgot_password_para {
+
+    font-family: "Museo 500";
+}
+
+.forgot_box , .reset_box{
+    font-family: "Museo 500" !important;
+}
+
+.reset{
+    font-family: "Museo 500" !important;
+}
+.reset_password_button button{
+    border-radius:12px;
+    background:#f27222;
+    transition: 0.5s all;
+    font-family: "Museo Sans 500";
+    border:2px solid #f27222 !important;
+}
+
+.reset_password_button button:hover{
+    background:transparent;
+    border:2px solid #f27222 !important;
+    color:#f27222 !important;
+
+}
+
+
+
+@media(max-width:450px){
+
+    #Registration-modal .custom_form {
+        padding: 0px 0px 0px;
+        margin-top: 10px;
+    }
+
+
+    .registration-tab p {
+        font-size: 13px;
+        letter-spacing: 0px;
+        color: #5c7c85;
+        margin-bottom: 0px;
+        text-align: center;
+    }
+    .arrow-tabs>ul {
+        padding: 0;
+        position: relative;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+    }
+    .arrow-tabs>ul li {
+        width: 60%;
+        margin-bottom: 20px;
+    }
+    .already-account p {
+        font-size: 13px;
+        letter-spacing: 1px;
+        color: #5c7c85;
+        text-transform: uppercase;
+        margin-bottom: 0;
+        padding: 0px 20px;
+    }
+    .form-vet-section {
+        width: 75% !important;
+    }
+}
+
+
+
+
+@media (max-width: 370px){
+.registration-tab p {
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: #5c7c85;
+    margin-bottom: 0px;
+    text-align: center;
+    padding-left: 45px;
+}
+.arrow-tabs>ul li {
+    width: 60%;
+    margin-bottom: 20px;
+    margin-left: 74px;
+}
+
+.form-vet-section {
+    width: 75% !important;
+    /* margin-left: 111px !important; */
+    margin-right: 0px !important;
+}
+
+.already-account p {
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: #5c7c85;
+    text-transform: uppercase;
+    margin-bottom: 0;
+    padding: 0px 0px;
+    text-align: right;
+}
+}
+
+
+
+.pricingTable{
+    background: #fff;
+    font-family: "Museo 500";
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 1;
+    height: 475px;
+}
+.pricingTable .pricingTable-header{
+    color: #fff;
+
+    background-color: #f27222;
+    padding: 20px 20px 25px;
+    margin: 0 0 43px;
+    border-radius: 0 0 50% 50%/0 0 100% 100%;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+    position: relative;
+}
+.pricingTable .pricingTable-header:before,
+.pricingTable .pricingTable-header:after{
+    content: '';
+    background-color: #f27222;
+    height: 100%;
+    width: 50%;
+    border-radius: 0 0 50% 50%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+}
+.pricingTable .pricingTable-header:after{
+    left: auto;
+    right: 0;
+}
+.pricingTable .title{
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin: 0 0 15px;
+}
+.pricingTable .price-value .amount{
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 40px;
+    display: block;
+}
+.pricingTable .price-value .duration{
+    text-transform: uppercase;
+    display: block;
+    font-family: "Museo 500";
+}
+.pricingTable .pricing-content{
+    padding: 0;
+    margin: 0 0 40px;
+    list-style: none;
+}
+.pricingTable .pricing-content li{
+    color: #7b7b7b;
+    font-size: 17px;
+    line-height: 25px;
+    text-transform: uppercase;
+    margin: 0 0 17px;
+    font-family: "Museo 500";
+}
+.pricingTable .pricing-content li:last-child{ margin: 0; }
+.pricingTable .pricingTable-signup{
+    background-color: #f27222;
+    padding: 10px 10px 8px;
+    border-radius: 50% 50% 0 0/100% 100% 0 0;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+.pricingTable .pricingTable-signup a{
+    color: #fff;
+    font-size: 19px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 0.3s ease 0s;
+    font-family: "Museo 500";
+}
+.pricingTable .pricingTable-signup a:hover{
+    color: #fff;
+    letter-spacing: 2px;
+    text-shadow: 3px 3px 0 rgba(255,255,255,0.2);
+}
+.pricingTable.pink .pricingTable-header,
+.pricingTable.pink .pricingTable-header::before,
+.pricingTable.pink .pricingTable-header::after,
+.pricingTable.pink .pricingTable-signup{
+    background-color: #f27222;
+}
+
+@media only screen and (max-width: 990px){
+    .pricingTable{ margin: 0 0 40px; }
+}
+
+.badge-danger {
+    color: #fff;
+    background-color: #f27222 !important;
 }

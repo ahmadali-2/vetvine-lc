@@ -20,16 +20,16 @@
 
 
 
-<div class="container forgot_container" style="margin-top:50px; margin-bottom:30px">  
+<div class="container forgot_container" style="margin-top:50px; margin-bottom:30px">
 
     <div class="row">
 
         {{-- <div class="col-md-3"></div> --}}
 
         <div class="col-md-12"><h2 class="text-center reset">Reset Your Password</h2></div>
-        <div class="col-md-6 mx-auto box">
+        <div class="col-md-6 mx-auto box reset_box">
 
-          
+
 
         <x-jet-validation-errors class="mb-4" />
 
@@ -81,7 +81,7 @@
 
 
 
-            <div class="flex items-center justify-center mt-4">
+            <div class="flex items-center justify-center mt-4 reset_password_button">
 
                 <x-jet-button>
 
