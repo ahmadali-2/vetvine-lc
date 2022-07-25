@@ -211,7 +211,7 @@
                             <a class="nav-link mm-editdb-text a-position"
                                 href="{{ route('vetvineUserNotifications') }}"> <i
                                     class="fas fa-bell mrg_top_edit"></i>
-                                <span class="badge badge-danger a-ab" id="countnotif">@php
+                                <span class="badge badge-danger a-ab" style="background: #f27222 !important;" id="countnotif">@php
                                     if (Auth::check()) {
                                         $userId = Auth::user()->id;
                                         $notificationCount = DB::table('push_notifications')->where(['post_user_id'=>$userId,'is_read'=>'1'])->count();
@@ -300,8 +300,8 @@
                                 <ul class="dropdown-menu my_ce_drop_down btn_me3">
                                     <li><a href="{{ route('member_home') }}"> Dashboard</a></li>
                                     <li><a href="#">CE Certificates / Documents</a></li>
-                                    <li><a href="#">My Upcoming Events</a></li>
-                                    <li><a href="#">My Past Events</a></li>
+                                    <li><a href="{{ route('myupcomming.events') }}">My Upcoming Events</a></li>
+                                    <li><a href="{{ route('mypast.events') }}">My Past Events</a></li>
                                     <li><a href="#">Help & Support</a></li>
                                     {{-- <li><a href="#">Help & Support</a></li> --}}
                                 </ul>

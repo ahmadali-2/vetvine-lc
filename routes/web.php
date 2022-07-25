@@ -227,7 +227,6 @@ Route::get('faqs',[HomeController::class,'faqs'])->name('faqs');
 Route::get('frontend-news',[NewsController::class,'frontIndex'])->name('newsfrontend');
 Route::post('show-comments',[CommentController::class,'showComments'])->name('showComments');
 
-
 //videos on demand
 Route::get('videos-on-demand',[HomeController::class,'videosOnDemand'])->name('videosOnDemand');
 Route::get('ce-archives',[HomeController::class,'ceArchives'])->name('ceArchives');
@@ -243,6 +242,9 @@ Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetv
     // End AJAX Route
     Route::get('dashboard',[PersonelInfoController::class,'userdashboard'])->name('userdashboard');
     Route::get('member-home',[PostController::class,'memberHome'])->name('member_home');
+    Route::get('myupcomming-event',[PersonelInfoController::class,'myUpcommingEvents'])->name('myupcomming.events');
+    Route::get('mypast-event',[PersonelInfoController::class,'myPastEvents'])->name('mypast.events');
+
     //User dashboard routes
     Route::resource('personelinfo',PersonelInfoController::class);
     Route::get('/profile-info',[PersonelInfoController::class,'userProfile'])->name('vetvineUserProfile');

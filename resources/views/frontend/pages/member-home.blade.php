@@ -8,12 +8,13 @@
         <div class="container">
             <div class="flex-box-banner">
                 <div class="grow_banner_box grow_banner_box_web">
-                    <div class="grow-heading">MEMBERS</div>
-                    <img src="{{ asset('frontend/img/sep-line-2.jpg') }}" width="250" height="2" alt=""
+                    <div class="grow-heading mb-3">WELCOME</div>
+                    <div class="grow-heading">- {{ Auth::user()->name }} -</div>
+                    {{-- <img src="{{ asset('frontend/img/sep-line-2.jpg') }}" width="250" height="2" alt=""
                         class="line_image">
                     <p class="mb-0">A BETTER LIFE FOR ANIMALS
                         AND THE HUMANS
-                    </p>
+                    </p> --}}
 
                 </div>
             </div>

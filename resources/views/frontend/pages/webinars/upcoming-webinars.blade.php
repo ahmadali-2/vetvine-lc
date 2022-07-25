@@ -142,8 +142,8 @@
                                 {{-- @if (Auth::user())
                                 <h5>Start Time : {{ date('g:i a', strtotime($formattedTime)) }}</h5>
                                @endif --}}
-                                <p><strong>Presented by:</strong> <a href="javascript::void(0)"
-                                        class="vetvine_a">{{ $showevents->presenter_one }}</a>
+                                <p><strong>Presented by:</strong> <a href="{{ $showevents->presenter_url_one }}"
+                                        class="vetvine_a" target="_blank" >{{ $showevents->presenter_one }}</a>
 
                                 <div class="parent_sponser">
 
@@ -151,7 +151,7 @@
                                     <strong>Sponsored by:</strong>
                                     <div class="sposer_name">
                                         @foreach ($showevents->members as $item)
-                                            <a href="javascript::void(0)" class="vetvine_a"
+                                            <a href="{{ $item->sponser_link }}" target="_blank" class="vetvine_a"
                                                 rel="noopener noreferrer">{{ $item->sponser_name }}</a>
                                         @endforeach
 
