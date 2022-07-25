@@ -10,18 +10,24 @@
             </div>
         </div>
         <div class="row term_policy mt-5">
-            <div class="col-md-9">
-                <div>
+        <div class="col-md-9">
+
+
+
                     @if (empty($terms->page_desc))
                     <h5>No data found</h5>
                     @else
                     {!! $terms->page_desc ?? '' !!}
                     @endif
-                </div>
-            </div>
+
+
+        </div>
             <div class="col-md-3">
                 <img src="{{ asset('frontend\images\add-img.png') }}" alt="">
             </div>
+
         </div>
+
     </div>
+
 @endsection

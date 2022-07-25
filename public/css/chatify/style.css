@@ -1157,7 +1157,11 @@ div.loadingPlaceholder-date {
 
 .people-head a {
     color: #fff !important;
-    background: #507f87;
+    background: #f27222;
     margin-top: 10px;
-    border-left: 5px solid #f27222 !important;
+    /* border-left: 5px solid #507f87!important; */
+}
+
+.people-head a:hover{
+    color:#fff;
 }

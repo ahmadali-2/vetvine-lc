@@ -295,7 +295,7 @@
                                     <i class="my-ce"><img
                                             src="{{ asset('frontend/img/featured-video-icon.png') }}"
                                             style="width:35px;"></i><br>
-                                    My Ce
+                                    My CE
                                     <span class="caret"></span></button>
                                 <ul class="dropdown-menu my_ce_drop_down btn_me3">
                                     <li><a href="{{ route('member_home') }}"> Dashboard</a></li>
