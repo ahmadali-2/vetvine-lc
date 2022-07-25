@@ -211,7 +211,15 @@
                             <a class="nav-link mm-editdb-text a-position"
                                 href="{{ route('vetvineUserNotifications') }}"> <i
                                     class="fas fa-bell mrg_top_edit"></i>
-                                <span class="badge badge-danger a-ab" id="countnotif">0</span>
+                                <span class="badge badge-danger a-ab" style="background: #f27222 !important;" id="countnotif">@php
+                                    if (Auth::check()) {
+                                        $userId = Auth::user()->id;
+                                        $notificationCount = DB::table('push_notifications')->where(['post_user_id'=>$userId,'is_read'=>'1'])->count();
+                                    }
+
+                                @endphp @isset($notificationCount)
+                                    {{ $notificationCount }}
+                                @endisset</span>
                                 <br>
                                 Notifications</a>
                         </li>
@@ -224,7 +232,9 @@
 
                             <div class="dropdown" id="dropdown-caret" style="padding: 0px 10px 0px 10px ">
                                 <a class="btn btn-primary dropdown-toggle btn-ce padding_top_0 dropdown-cart"
-                                    type="button" data-toggle="dropdown" aria-expanded="true">
+
+
+                                type="button" data-toggle="dropdown" aria-expanded="true">
                                     <i class="employe">
                                         @if (Auth::user()->profile_photo)
                                             <img style="width: 30px; height:30px;"
@@ -290,8 +300,8 @@
                                 <ul class="dropdown-menu my_ce_drop_down btn_me3">
                                     <li><a href="{{ route('member_home') }}"> Dashboard</a></li>
                                     <li><a href="#">CE Certificates / Documents</a></li>
-                                    <li><a href="#">My Upcoming Events</a></li>
-                                    <li><a href="#">My Past Events</a></li>
+                                    <li><a href="{{ route('myupcomming.events') }}">My Upcoming Events</a></li>
+                                    <li><a href="{{ route('mypast.events') }}">My Past Events</a></li>
                                     <li><a href="#">Help & Support</a></li>
                                     {{-- <li><a href="#">Help & Support</a></li> --}}
                                 </ul>

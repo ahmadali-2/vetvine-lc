@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PushNotification;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
     public function successMessage($msg)
     {
         return toastr()->success( $msg);
@@ -25,4 +26,5 @@ class Controller extends BaseController
         return toastr()->warning($msg .'⚡️');
         // return notify()->preset('warning-message', ['title' => 'Error', 'message'=> $msg]);
     }
+
 }

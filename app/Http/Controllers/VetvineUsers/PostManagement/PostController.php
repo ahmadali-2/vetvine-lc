@@ -107,7 +107,7 @@ class PostController extends Controller
                 $result = PostActivity::create([
                     'share_id' => $share->id,
                 ]);
-// here
+                event(new NotificationEvent(Auth::user()->id, $request->sharePostId,'share'));
                 Log::info($result);
                 return response()->json([
                     'code' => 200,
@@ -148,12 +148,13 @@ class PostController extends Controller
                    Log::info($liked);
                 }
                 if (!$liked) {
-                    $push_notifications = event(new NotificationEvent(Auth::id(), (int)$request->likepostid));
+                    $push_notifications = event(new NotificationEvent(Auth::id(), (int)$request->likepostid,'like'));
                     PushNotification::create([
                         'user_id' => Auth::id(),
                         'post_id' => $request->likepostid,
                         'post_user_id' => $request->postUserid,
                         'type' => '0',
+                        'is_read' => '1'
                     ]);
 
                     if($request->likeType == 1){
@@ -182,7 +183,10 @@ class PostController extends Controller
                     );
 
                 } elseif ($liked->like == 0) {
-                    $push_notifications = event(new NotificationEvent(Auth::id(), (int) $request->likepostid));
+                    $push_notifications = event(new NotificationEvent(Auth::id(), (int) $request->likepostid,'like'));
+                    PushNotification::where(['post_user_id'=>$request->postUserid,'post_id' => $request->likepostid,'user_id'=>Auth::user()->id])->update([
+                        'is_read' => '1'
+                    ]);
                     $liked->update([
                         "like" => '1',
                     ]);

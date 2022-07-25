@@ -6,6 +6,7 @@
 
 <head>
     @include('vetvineUsers.layouts.head')
+    @yield('style')
 </head>
 
 <body>

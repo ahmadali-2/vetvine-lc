@@ -113,12 +113,8 @@ $comments = null;
                     <div class="pull-left box_center_small_label">
                         <label>{{ $post->user->name }} posted a new
                             Continuing Education item:</label>
-
                         <p>{{ $post->created_at->diffForHumans() }}</p>
                     </div>
-
-
-
                 </div>
                 <div class=" col-lg-6">
 
@@ -129,11 +125,12 @@ $comments = null;
                         </h6>
                         <p><b></b><u>Posted on</u> : {{ date('m/d/Y', strtotime($post->created_at)) }}</p>
                     </div>
-
-
-
                 </div>
-
+                {{-- <div class="col-lg-12">
+                    <div class="post_image my-3" style="overflow: hidden; border-radius: 5px;">
+                        <img src="{{ asset('vetvineUsers/posts/'.$post->post_photo) }}" class="img-fluid" alt="">
+                    </div>
+                </div> --}}
 
             </div>
 
@@ -423,7 +420,7 @@ $comments = null;
                 ce: 1
             },
             success: function(response) {
-                
+                 console.log(response);
                 if (response.code == 200) {
 
                     component.html("<b class='liked'> <i class='fa fa-thumbs-up'></i> Liked</b>");

@@ -1,4 +1,14 @@
 @extends('vetvineUsers.dashboard_master')
+@section('style')
+ <style>
+    .license-field{
+        display: none;
+    }
+    .show{
+        display: inline-block;
+    }
+ </style>
+@endsection
 @section('dashboardcontent')
     <!-------sidbar------>
     <form method="post" action="{{ route('personelinfo.store') }}" id="profile_form" enctype="multipart/form-data">
@@ -101,16 +111,17 @@
                                             </div>
                                         </div>
                                         <div class="serch-section">
-                                            <div class="inner-input" id="license-div">
+
+                                            <div class="inner-input license-field @if(Auth::user()->network_id===6 || Auth::user()->network_id===7) show @endif" id="license-div">
                                                 <label>Licensure*</label>
-                                                <div class="input_field">
+                                                <div class="input_field" >
                                                     <input placeholder="" class="form-control license-inp" name="licensure"
-                                                        id="licensure" value="{{ Auth::user()->licence_no }} "
-                                                        >
+                                                        id="licensure" value="{{ Auth::user()->licence_no }} ">
                                                     <span class="asteric" id="error4"></span>
                                                 </div>
                                             </div>
-                                                {{-- <input type="hidden" name="" id="type" value="{{ Auth::user()->type }}"> --}}
+
+                                            {{-- <input type="hidden" name="" id="type" value="{{ Auth::user()->type }}"> --}}
                                             {{-- @endif --}}
                                             <div class="serch-section">
                                                 <div class="inner-input">
@@ -272,16 +283,25 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <img src="@if (Auth::user()->profile_photo) {{ asset('/frontend/images/Profile-Images/' . Auth::user()->profile_photo) }} @else {{ asset('frontend/images/thumbnail.jfif') }} @endif"
-                                        alt="" id="user-image" height="200px"> <br>
-                                    <button type="button" class="btn btn-dark mt-3"
-                                        onclick="document.getElementById('profile_photo').click()">Choose File</button>
-                                    <input type="file" style="visibility:hidden" name="profile_photo"
-                                        id="profile_photo"
-                                        onchange="document.getElementById('user-image').src = window.URL.createObjectURL(this.files[0])">
+                                        alt="" id="user-image-profile" height="200px"><br>
+                                    <div class="d-flex justify-content-start align-item-center">
+                                        <div class="left">
+                                            <button type="button" class="btn btn-dark mt-3"
+                                                onclick="document.getElementById('profile_photo').click()">Choose
+                                                File</button>
+                                            <input type="file" style="display:none" name="profile_photo"
+                                                id="profile_photo" onchange="previewImage(this.files[0])">
+                                            {{-- document.getElementById('user-image-profile').src = window.URL.createObjectURL(this.files[0]) --}}
+                                        </div>
+                                        <div class="right">
+                                            <div id="user-image-profile-content" style="margin: 20px"></div>
+                                        </div>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
-
+                        {{-- style="visibility:hidden" --}}
                         <div class="button col-sm-12 text-center"><button type="submit" class="btn btn-Continue">Update
                                 Profile</button></div>
                     </div>
@@ -295,10 +315,12 @@
 @endsection
 @section('scripts')
     <script>
-        window.onload = function(){
-            if(localStorage.getItem('guestLogin') == 'true'){
-                if(localStorage.getItem("eventUrl") != ''){
-                    location.href=localStorage.getItem("eventUrl");
+        window.onload = function() {
+            if (localStorage.getItem('guestLogin') == 'true') {
+                if (localStorage.getItem("eventUrl") != '') {
+                    location.href = localStorage.getItem("eventUrl");
+                    localStorage.setItem("eventUrl", '');
+                    localStorage.setItem("guestLogin", false);
                 }
             }
         }
@@ -379,7 +401,8 @@
             $("#personal_btn").on("click", function(e) {
                 if ($("#licensure").length != 0) {
                     if ($.trim($('#firstname').val()) == '' || $.trim($('#lastname').val()) == '' || $.trim(
-                            $('#licensure').val()) == '' || $.trim($('#usernetwork').val()) == '' || $.trim($('#timezone').val()) == '') {
+                            $('#licensure').val()) == '' || $.trim($('#usernetwork').val()) == '' || $.trim(
+                            $('#timezone').val()) == '') {
                         toastr.error('Make sure compulsory fields are not empty.');
                         return;
                     } else {
@@ -448,12 +471,20 @@
 
         $('#usernetwork').on("change", function() {
             var networdId = $(this).val();
-            if(networdId == 6 || networdId == 7){
+            $('.license-inp').attr('id', '');
+            if (networdId == 6 || networdId == 7) {
                 $('.license-inp').attr('id', 'licensure');
                 $("#license-div").show();
-            }else{
+            } else {
                 $("#license-div").hide();
             }
         });
+
+        function previewImage(image) {
+            $(".image-content-remove").remove();
+            document.getElementById('user-image-profile').src = window.URL.createObjectURL(image);
+            var filename = $('#profile_photo').val().replace(/C:\\fakepath\\/i, '');
+            $("#user-image-profile-content").append('<p class="image-content-remove">' + filename + '</p>');
+        }
     </script>
 @endsection

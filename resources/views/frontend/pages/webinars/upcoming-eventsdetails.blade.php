@@ -495,7 +495,7 @@
                             </div>
                             @foreach ($eventdetail->members as $items)
                                 <div class="public2-description spon-descripton">
-                                    {{ $items->sponser_name }}
+                                    <a href="{{ $items->sponser_link }}" class="vetvine_a" target="_blank">{{ $items->sponser_name }}</a>
                                 </div>
                             @endforeach
                         </div>
@@ -540,16 +540,15 @@
                             </div>
                         </div>
                     </div> --}}
-                @auth
-                    <div class="row">
-                        <button id="calendarModelButtonAction" type="button" class="upcoming_btn" data-toggle="modal"
-                            data-target="#calendarModel" hidden><i class="fa fa-calendar" aria-hidden="true"></i> </button>
-                        <button id="calendarModelButton" type="button" class="upcoming_btn"
-                            style="background-color: #f27222"><i class="fa fa-calendar" aria-hidden="true"></i> - Add to
-                            Calendar</button>
-                    </div>
-                @endauth
-                {{-- <div class="row">
+                    @auth
+                        <div class="row">
+                            <button id="calendarModelButtonAction" type="button" class="upcoming_btn" data-toggle="modal" data-target="#calendarModel" hidden><i class="fa fa-calendar" aria-hidden="true"></i> </button>
+                            @if(isset($purchasedEvent))
+                                <button id="calendarModelButton" type="button" class="upcoming_btn" style="background-color: #f27222"><i class="fa fa-calendar" aria-hidden="true"></i> - Add to Calendar</button>
+                            @endif
+                        </div>
+                    @endauth
+                    {{-- <div class="row">
                         <div class="col-sm-12 my-3">
                             <button type="submit" class="click_join">Click me to
                                 Join</button>
@@ -561,28 +560,26 @@
             </div>
             </form>
     </section>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <p class="desription_p">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam nulla molestiae deserunt harum fuga
-                    modi, totam, officiis porro doloribus rerum, dolorem beatae pariatur dolor iste odit. Quae blanditiis
-                    sequi labore dolorem nisi rerum neque odit aperiam saepe, eius est fugiat corrupti in ad unde assumenda
-                    dolores provident. Commodi, ipsa in?</p>
-            </div>
-        </div>
-    </div>
-    @if (Auth::user())
-        <div class="container">
-            <div class="row">
-                <div class="leftcolumn">
-                    <div class="card pt-0">
-                        <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
-                            <div>
-                                <div class="row header_row">
-                                    <div class="col-lg-4">
-                                        <h4>Comment Section </h4>
+               <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="desription_p">
+                        {!! $eventdetail->event_description !!}
+                        </p>
+                    </div>
+                </div>
+               </div>
+            @if (Auth::user())
+            <div class="container">
+                <div class="row">
+                    <div class="leftcolumn">
+                        <div class="card pt-0">
+                            <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
+                                <div>
+                                    <div class="row header_row">
+                                        <div class="col-lg-4">
+                                            <h4>Comment Section </h4>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row mt-5">
@@ -686,14 +683,15 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
-            var event_id = '<?php echo $eventId; ?>';
-            var authUser = '<?php echo $authUser; ?>';
-            $('#register_event').on('click', function() {
-                var url = location.href;
-                localStorage.setItem('guestLogin', true);
-                localStorage.setItem("eventUrl", url);
-
-                if (authUser == false) {
+            localStorage.setItem('guestLogin', false);
+            localStorage.setItem("eventUrl",'');
+            var event_id = '<?php echo $eventId ?>';
+            var authUser = '<?php echo $authUser ?>';
+        $('#register_event').on('click', function(){
+                var url=location.href;
+                if(authUser == false){
+                    localStorage.setItem('guestLogin', true);
+                    localStorage.setItem("eventUrl",url);
                     $('#login_form_show_btn').trigger("click");
                 } else {
                     $.ajax({
@@ -763,10 +761,6 @@
                 icsMSG = icsMSG1 + icsMSG2 + icsMSG3;
                 window.open("data:text/calendar;charset=utf8," + escape(icsMSG));
             }
-
-            $('html, body').animate({
-                scrollTop: $('#review-section').offset().top
-            }, 'slow');
 
             $(document).on('click', 'input[type="checkbox"]', function() {
                 $('input[type="checkbox"]').not(this).prop('checked', false);

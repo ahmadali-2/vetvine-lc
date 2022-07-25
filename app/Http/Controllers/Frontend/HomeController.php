@@ -76,6 +76,7 @@ class HomeController extends Controller
     public function upcomingWebinars()
     {
         $showevent = Event::with('events', 'sponsers', 'members', 'user')->get();
+        
         $sponser = SponserTable::all();
         $category = CategoryEvent::all();
         return view('frontend.pages.webinars.upcoming-webinars', compact('showevent', 'sponser', 'category'));
