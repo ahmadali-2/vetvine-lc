@@ -475,6 +475,7 @@
             if (networdId == 6 || networdId == 7) {
                 $('.license-inp').attr('id', 'licensure');
                 $("#license-div").show();
+                $("#license-div").addClass("d-flex");
             } else {
                 $("#license-div").hide();
             }
