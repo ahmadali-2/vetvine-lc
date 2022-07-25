@@ -69,6 +69,15 @@
     @section('scripts')
     <script>
         $(document).ready(function () {
+            window.onload = function() {
+                if (localStorage.getItem('guestLogin') == 'true') {
+                    if (localStorage.getItem("eventUrl") != '') {
+                        location.href = localStorage.getItem("eventUrl");
+                        localStorage.setItem("eventUrl", '');
+                        localStorage.setItem("guestLogin", false);
+                    }
+                }
+            }
             // Handler for .ready() called.
             $('html, body').animate({
                 scrollTop: $('#redirect_home_ce_div').offset().top

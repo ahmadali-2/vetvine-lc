@@ -527,7 +527,9 @@
                     @auth
                         <div class="row">
                             <button id="calendarModelButtonAction" type="button" class="upcoming_btn" data-toggle="modal" data-target="#calendarModel" hidden><i class="fa fa-calendar" aria-hidden="true"></i> </button>
-                            <button id="calendarModelButton" type="button" class="upcoming_btn" style="background-color: #f27222"><i class="fa fa-calendar" aria-hidden="true"></i> - Add to Calendar</button>
+                            @if(isset($purchasedEvent))
+                                <button id="calendarModelButton" type="button" class="upcoming_btn" style="background-color: #f27222"><i class="fa fa-calendar" aria-hidden="true"></i> - Add to Calendar</button>
+                            @endif
                         </div>
                     @endauth
                     {{-- <div class="row">
@@ -663,14 +665,15 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
+            localStorage.setItem('guestLogin', false);
+            localStorage.setItem("eventUrl",'');
             var event_id = '<?php echo $eventId ?>';
             var authUser = '<?php echo $authUser ?>';
         $('#register_event').on('click', function(){
                 var url=location.href;
-                localStorage.setItem('guestLogin', true);
-                localStorage.setItem("eventUrl",url);
-
                 if(authUser == false){
+                    localStorage.setItem('guestLogin', true);
+                    localStorage.setItem("eventUrl",url);
                     $('#login_form_show_btn').trigger("click");
                 }else{
                         $.ajax({
@@ -733,10 +736,6 @@
                 icsMSG = icsMSG1 + icsMSG2 + icsMSG3;
                 window.open( "data:text/calendar;charset=utf8," + escape(icsMSG));
             }
-
-            $('html, body').animate({
-                scrollTop: $('#review-section').offset().top
-            }, 'slow');
 
             $(document).on('click', 'input[type="checkbox"]', function() {
                 $('input[type="checkbox"]').not(this).prop('checked', false);
