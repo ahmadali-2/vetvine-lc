@@ -15,14 +15,19 @@ class TimeZoneSeeder extends Seeder
      */
     public function run()
     {
+        // Pushing Timezones.
         $handle = fopen(url('timezones.txt'), "r");
         if ($handle) {
             while (($timezone = fgets($handle)) !== false) {
-                DB::table('time_zones')->insert(['timezone' => $timezone]);
+                $timeZoneArray = explode("||", $timezone);
+                DB::table('time_zones')->insert([
+                    'timezone' => $timeZoneArray[0],
+                    'region' => $timeZoneArray[1],
+                ]);
             }
             fclose($handle);
         } else {
             // error opening the file.
-        } 
+        }
     }
 }

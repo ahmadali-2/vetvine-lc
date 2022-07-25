@@ -73,7 +73,7 @@ $comments = null;
                     <a class="like_color" style="cursor: pointer;" data-post-id="{{ $share->id }}"
                         data-key={{ $key }} data-type="share"><i class="fa fa-comments"
                             aria-hidden="true"></i>
-                        Comments</a>
+                        Comment</a>
                 </div>
                 <div class="shareButtons">
                     <a class="share_btn" style="cursor: pointer;" data-user-id="{{ $share->user_id }}"
@@ -95,7 +95,7 @@ $comments = null;
                     </div>
                     <div class="col-sm-4 send_share_comment" data-key="{{ $key }}">
                         <a class="like_color" data-post-id="{{ $share->id }}" data-key={{ $key }}
-                            style="cursor: pointer;"><i class="fa fa-paper-plane" aria-hidden="true"></i> Comment</a>
+                            style="cursor: pointer;"><i class="fa fa-paper-plane" aria-hidden="true"></i> Send</a>
                     </div>
                 </div>
             </div>
@@ -156,7 +156,7 @@ $comments = null;
                     <a class="like_color" style="cursor: pointer;" data-post-id="{{ $post->id }}"
                         data-key={{ $key }} data-type="post"> <i class="fa fa-comments"
                             aria-hidden="true"></i>
-                        Comments</a>
+                        Comment</a>
                 </div>
                 <div class="shareButtons">
                     <a class="share_btn" style="cursor: pointer;" data-user-id="{{ $post->user->id }}"
@@ -177,7 +177,7 @@ $comments = null;
                     </div>
                     <div class="col-sm-4 send_comment" data-key="{{ $key }}">
                         <a class="like_color" data-post-id="{{ $post->id }}" data-key={{ $key }}
-                            style="cursor: pointer;"><i class="fa fa-paper-plane" aria-hidden="true"></i> Comment</a>
+                            style="cursor: pointer;"><i class="fa fa-paper-plane" aria-hidden="true"></i> Send</a>
                     </div>
                 </div>
             </div>
