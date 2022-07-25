@@ -8,7 +8,7 @@
             <div class="container">
                 <div class="flex-box-banner">
                     <div class="grow_banner_box grow_banner_box_web">
-                        <div class="grow-heading">Forum</div>
+                        <div class="grow-heading">The Forums</div>
                         <img src="{{ asset('frontend/forums/img/sep-line-2.jpg') }}" width="250" height="2" alt=""
                             class="line_image">
                         <p class="mb-0">Guidance, support and wisdom to benefit and maximize the life and

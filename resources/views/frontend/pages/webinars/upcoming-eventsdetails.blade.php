@@ -479,7 +479,7 @@
                             </div>
                             @foreach ($eventdetail->members as $items)
                                 <div class="public2-description spon-descripton">
-                                    {{ $items->sponser_name }}
+                                    <a href="{{ $items->sponser_link }}" class="vetvine_a" target="_blank">{{ $items->sponser_name }}</a>
                                 </div>
                             @endforeach
                         </div>

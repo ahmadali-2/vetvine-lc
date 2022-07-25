@@ -126,11 +126,11 @@ $comments = null;
                         <p><b></b><u>Posted on</u> : {{ date('m/d/Y', strtotime($post->created_at)) }}</p>
                     </div>
                 </div>
-                <div class="col-lg-12">
+                {{-- <div class="col-lg-12">
                     <div class="post_image my-3" style="overflow: hidden; border-radius: 5px;">
                         <img src="{{ asset('vetvineUsers/posts/'.$post->post_photo) }}" class="img-fluid" alt="">
                     </div>
-                </div>
+                </div> --}}
 
             </div>
 

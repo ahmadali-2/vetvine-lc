@@ -133,6 +133,17 @@
       'Livewire' => 'Livewire\\Livewire',
     ),
   ),
+  'martinbutt/laravel-adsense' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'MartinButt\\Laravel\\Adsense\\Providers\\AdsenseServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Adsense' => 'MartinButt\\Laravel\\Adsense\\Facades\\AdsenseFacade',
+    ),
+  ),
   'mckenziearts/laravel-notify' => 
   array (
     'providers' => 
