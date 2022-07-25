@@ -12,6 +12,7 @@ use App\Models\Admins\Webinar\BuyEventPlan;
 use App\Models\Admins\Webinar\CategoryEvent;
 use App\Models\Admins\Webinar\Event;
 use App\Models\Admins\Webinar\SponserTable;
+use App\Models\Generals\TimeZone;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -76,7 +77,7 @@ class HomeController extends Controller
     public function upcomingWebinars()
     {
         $showevent = Event::with('events', 'sponsers', 'members', 'user')->get();
-        
+
         $sponser = SponserTable::all();
         $category = CategoryEvent::all();
         return view('frontend.pages.webinars.upcoming-webinars', compact('showevent', 'sponser', 'category'));
@@ -97,8 +98,12 @@ class HomeController extends Controller
     }
     public function upcomingWebinarsdetails($id)
     {
-        $eventdetail = Event::with('events', 'sponsers', 'members', 'user', 'buyeventplan', 'ReviewData')->find($id);
 
+        $eventdetail = Event::with('events', 'sponsers', 'members', 'user', 'buyeventplan', 'ReviewData')->find($id);
+        $timezones = TimeZone::all();
+        foreach($timezones as $timezone){
+            echo convertToTimeZone($timezone->timezone,"08:28:00");
+        }
         $eventId = $eventdetail->id;
         $category = CategoryEvent::all();
         $authUser = false;
