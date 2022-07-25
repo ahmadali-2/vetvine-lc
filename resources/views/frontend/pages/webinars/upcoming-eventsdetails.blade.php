@@ -628,7 +628,7 @@
                         </div>
 
                         <!-- Review store Section -->
-                        <div class="container">
+                        <div class="container mb-5">
                             <div class="row">
                                 <div class="col-sm-10 mt-4  inner_box_chat" id="comment-section">
                                     <form class="py-2 px-4" action="{{ route('reviewstore') }}"

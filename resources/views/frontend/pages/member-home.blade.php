@@ -1,5 +1,13 @@
 {{-- @extends('frontend.master')
 @section('content') --}}
+
+
+<style>
+    .edit_profile_banner {
+    background-color: #fff !important;
+    padding:0px !important;
+}
+</style>
 @extends('vetvineUsers.dashboard_master')
 @section('dashboardcontent')
     <!-- member home start -->

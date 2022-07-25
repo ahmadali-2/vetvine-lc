@@ -116,7 +116,7 @@ font-face {
 }
 
 .edit-profile-header {
-    background-color: #5c7c85;
+    background-color: #f27222;
     padding: 2px 0px 0px 0px;
 }
 
@@ -2722,6 +2722,7 @@ select#fav_show:focus>option:checked {
     height: 33px;
     font-family: "Museo Sans 500";
     line-height: 31px;
+    margin-top:20px;
 }
 
 .video-bottom-description a:hover {
@@ -6098,6 +6099,7 @@ select#fav_show:focus>option:checked {
     margin-left: 10px;
     border: none !important;
     font-size: 14px;
+    font-family: "Museo 500";
 }
 
 
@@ -6807,7 +6809,7 @@ table tbody .count td {
 .my_ce_drop_down {
     position: absolute;
     top: 100%;
-    left: -95px;
+    left: -130px;
     z-index: 1000;
     display: none;
     min-width: 15rem;
@@ -6842,8 +6844,8 @@ table tbody .count td {
 }
 
 .edit_profile_banner {
-    background-color: #fff;
-    padding: 0px;
+    background-color: #507f87;
+    padding: 1px 0px;
 }
 
 
@@ -9495,7 +9497,12 @@ p {
     background-color: #f27222 !important;
 }
 
-
+.spon-descripton a{
+    color:#f27222;
+}
+.spon-descripton a:hover{
+    color:#5c7c85;
+}
 
 /* cockestyle   */
 
@@ -9620,3 +9627,5 @@ p {
 }
 <div class="open_grepper_editor" title="Edit & Save To Grepper"></div>
 /* cockestyle   */
+
+
