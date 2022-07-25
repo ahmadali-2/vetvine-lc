@@ -39,7 +39,7 @@
                                         <td scope="row">{{ $loop->iteration }}</td>
                                         <td>{{ $forum->forum_title }}</td>
                                         <td>{{ $forum->category->category_title ?? '' }}</td>
-                                        <td>{{ $forum->forum_description }}</td>
+                                        <td>{!! Str::limit($forum->forum_description , 250) !!}</td>
                                         <td> <a href="{{ route('forums.edit', $forum->id) }}"><i
                                                     class="fas fa-edit text-primary"></i></a>
                                             <a href="javascript:void(0);" class="text-decoration-none"

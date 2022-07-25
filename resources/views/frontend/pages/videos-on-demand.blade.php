@@ -50,7 +50,8 @@
                         </div>
                     </li>
                     <li>
-                        <button class="btn filter-searchBtn search_btn_hover" id="search" type="button" style="margin-top: 10px;">Search</button>
+                        <button class="btn filter-searchBtn search_btn_hover" id="search" type="button"
+                            style="margin-top: 10px;">Search</button>
                     </li>
                 </ul>
                 <ul class="page-link-list">
@@ -80,14 +81,13 @@
                                         allowfullscreen></iframe>
                                 </div>
                                 <div class="video-bottom-text">
-                                    <a class="video-title"
-                                        >{{ $item->video_title }}
+                                    <a class="video-title">{{ $item->video_title }}
 
                                     </a>
                                     <div>
                                         <p>55 mins</p>
-                                        @for ($i = 1; $i <= $avg ; $i++)
-                                        <span class="fas fa-star"></span>
+                                        @for ($i = 1; $i <= $avg; $i++)
+                                            <span class="fas fa-star"></span>
                                         @endfor
                                     </div>
                                 </div>
@@ -97,7 +97,7 @@
                                         {{-- <strong>Sponsored by:</strong> VetVine --}}
                                     </p>
                                     <p class="para-decription">
-                                        {{ $item->video_description }}
+                                        {!! Str::limit($item->video_description, 350) !!}
                                     </p>
                                     <a href="{{ route('video_desc', [$item->id, $item->category_id]) }}">Read More</a>
                                 </div>
@@ -110,28 +110,29 @@
                 </div>
             </div>
         </section>
-        @section('scripts')
-            <script>
-                $(document).ready(function() {
-                    $("#search").click(function() {
-                        $.ajax({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            url: "{{ route('videos.search') }}",
-                            type: 'post',
-                            data: {
-                                title: $("#title").val(),
-                                category: $("#category_id").val(),
-                                presenter: $("#presenter").val(),
-                                sponser: $("#sponser_id").val(),
-                            },
-                            success: function(response) {
-                                $("#video-container").html(response.html);
-                            }
-                        })
+
+    @endsection
+    @section('scripts')
+        <script>
+            $(document).ready(function() {
+                $("#search").click(function() {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: "{{ route('videos.search') }}",
+                        type: 'post',
+                        data: {
+                            title: $("#title").val(),
+                            category: $("#category_id").val(),
+                            presenter: $("#presenter").val(),
+                            sponser: $("#sponser_id").val(),
+                        },
+                        success: function(response) {
+                            $("#video-container").html(response.html);
+                        }
                     })
                 })
-            </script>
-        @endsection
+            })
+        </script>
     @endsection

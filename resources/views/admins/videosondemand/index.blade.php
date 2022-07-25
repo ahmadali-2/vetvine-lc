@@ -55,7 +55,7 @@
                                         <td scope="row">{{ $loop->iteration }}</td>
                                         <td>{{ $video->video_title }}</td>
                                         <td>{{ $video->video_link }}</td>
-                                        <td>{{ $video->video_description }}</td>
+                                        <td>{!! Str::limit($video->video_description , 200) !!}</td>
                                         <td> <a href="{{ route('videos-on-demand.edit', $video->id) }}"><i
                                                     class="fas fa-edit text-primary"></i></a>
                                             <a href="javascript:void(0)" id="editCompany" class="video"

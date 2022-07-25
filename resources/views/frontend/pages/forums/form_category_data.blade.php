@@ -12,7 +12,7 @@
                         </a>
                     </div>
 
-                    <p class="forum_desc">{{ Str::limit($category->category_description , 100) }}</p>
+                    <p class="forum_desc">{!! Str::limit($category->category_description , 100) !!}</p>
 
                 </div>
 
