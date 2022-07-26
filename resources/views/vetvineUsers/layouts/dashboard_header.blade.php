@@ -269,8 +269,8 @@
                                         </div>
                                     </li>
                                     <li><a href="{{ route('usermemberships.index') }}">Membership</a></li>
-                                    <li><a href="{{ route('vetvineUserProfile') }}">Settings</a></li>
-                                    {{-- <li><a href="#">Notification Preferences</a></li> --}}
+                                    <li><a href="#">Settings</a></li>
+                                    <li><a href="#">Notification Preferences</a></li>
                                     <li><a href="{{ route('change_password') }}">Change Password</a></li>
                                     <li>
                                         <a type="submit" class="show_confirm" data-id={{ Auth::id() }}>Delete

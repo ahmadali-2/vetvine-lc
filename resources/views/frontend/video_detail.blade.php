@@ -274,9 +274,8 @@
                                         <img src="https://www.w3schools.com/howto/img_avatar.png" alt="arrow-right icon">
 
                                     </div>
-
                                     <div class="public2-description">
-                                        <b class="ml-2 text-uppercase"> {{ $videos->presented_by }}</b>
+                                        <b class="ml-2 text-uppercase"> {{ $videos->presenter_one }}</b>
                                     </div>
                                 </div>
 
@@ -288,11 +287,9 @@
                                     <div class="public2-title sponsor-title">
                                         Sponsor(s): vetvine :
                                     </div>
-                                    @foreach ($sponsor as $items)
                                     <div class="public2-description spon-descripton">
-                                        <a href="{{ $items->sponser_link }}" class="vetvine_a" target="_blank">{{ $items->sponser_name }}</a>
+                                        john mathews
                                     </div>
-                                @endforeach
                                   </div>
 
                                   <div class="publication-detail register_btn">
@@ -340,7 +337,6 @@
                                     </div>
                                 </div>
                             @empty
-
                             @endforelse
                         </div>
                     </div>
