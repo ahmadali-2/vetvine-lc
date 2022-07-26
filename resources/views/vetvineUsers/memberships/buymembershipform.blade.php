@@ -5,17 +5,66 @@
 @extends('frontend.master')
 @section('content')
 
+<style>
+    .form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da !important;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.coupan_btn{
+    background: #f27222 !important;
+    padding: 5px;
+    border-radius: 12px;
+    font-family: "Museo Sans 500";
+    margin: 20px 0px;
+    color: #fff;
+    border: 1px solid #f27222 !important;
+    transition: 0.5s all;
+}
+.coupan_btn:hover{
+    background: transparent !important;
+    border: 1px solid #f27222 !important;
+    color: #f27222;
+}
+
+.dashboard-btn{
+    border-radius: 12px;
+    font-family: "Museo Sans 500";
+    margin: 20px 0px;
+    color: #fff;
+    border: 2px solid #f27222 !important;
+    transition: 0.5s all;
+}
+.dashboard-btn:hover {
+    background-color: transparent;
+    border: 2px solid #f27222 !important;
+    color: #f27222 !mportant;
+}
+</style>
+<div class="edit-profile-header edit_profile_banner">
+
+</div>
 <section class="content-header">
 
         <div class="container-fluid">
 
             <div class="row mb-2">
 
-                <div class="col-sm-6">
+                <div class="col-sm-6 ">
 
                 </div>
 
-                <div class="col-sm-6">
+                {{-- <div class="col-sm-6">
 
                      <a class="btn btn-primary float-right" style="background-color:#f27222" href="{{ route('usermemberships.index') }}">
                        Go Back
@@ -23,7 +72,7 @@
 
 
 
-                </div>
+                </div> --}}
 
             </div>
 
@@ -32,10 +81,17 @@
     </section>
 
     <div class="container">
-
+        <section class="become_member_area">
+            <div class="container">
+              <h2>
+                <span>Payment Method</span>
+              </h2>
+              <!-- <p class="membership-text">Please review the following details for this transaction.</p> -->
+            </div>
+          </section>
          <div class="row">
 
-            <div class="col-md-12">
+            <div class="col-md-6 mx-auto card p-4">
 
                <div class="panel panel-default credit-card-box">
 
@@ -85,7 +141,7 @@
 
                         <div class='form-row row'>
 
-                           <div class='col-xs-12 col-md-6  form-group card required'>
+                           <div class='col-xs-12 col-md-12  form-group  required'>
 
                               <label class='control-label'>Card Number</label>
 
@@ -152,7 +208,7 @@
                                <input autocomplete='off' name="coupon_code" id="coupon_code" class='form-control card-number' size='20'
 
                                   type='text'>
-                                  <button type="button" id="applycouponcode" class="bt btn-primary">Apply Coupon</button>
+                                  <button type="button" id="applycouponcode" class="bt btn-primary coupan_btn">Apply Coupon</button>
 
                             </div>
 
@@ -174,7 +230,10 @@
 
 
 
-            <input id="pay_coupon_button" type="submit" class="dashboard-btn mb-3 mt-3" value="Pay {{$plan->plan_price}} $">
+                         <div class="row justify-content-center">
+                            <input id="pay_coupon_button" type="submit" class="dashboard-btn mb-3 mt-3" value="Pay {{$plan->plan_price}} $">
+                         </div>
+
 
 
 
