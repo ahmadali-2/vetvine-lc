@@ -477,6 +477,8 @@
                 $("#license-div").show();
                 $("#license-div").addClass("d-flex");
             } else {
+                $('.license-inp').attr('id', '');
+                $("#license-div").removeClass('d-flex');
                 $("#license-div").hide();
             }
         });
