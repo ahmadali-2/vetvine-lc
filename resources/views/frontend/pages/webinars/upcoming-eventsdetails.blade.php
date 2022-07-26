@@ -578,7 +578,7 @@
                                 <div>
                                     <div class="row header_row">
                                         <div class="col-lg-4">
-                                            <h4>Comment Section </h4>
+                                            <h4>Review Section</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -656,7 +656,7 @@
                                         </div>
                                         <div class="form-group row mt-4">
                                             <div class="col-sm-12 ">
-                                                <textarea class="form-control" name="comment" rows="6 " placeholder="Comment" maxlength="200" required></textarea>
+                                                <textarea class="form-control" name="comment" rows="6 " placeholder="Review" maxlength="200" required></textarea>
                                                 @error('comment')
                                                     <p class="alert alert-danger">{{ $message }}</p>
                                                 @enderror

@@ -5,8 +5,6 @@
             <div class="container">
 
                 <h1 class="Upcoming-webinars mt-2">Videos on Demand</h1>
-                {{-- <input type="text"> --}}
-                {{ $avg }}
                 <ul class="filter_list upcoming_filter">
 
 
