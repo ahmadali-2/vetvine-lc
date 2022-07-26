@@ -11,8 +11,10 @@
                     <span class="close" data-dismiss="modal">&times;</span>
                 </div>
             </div>
+
             <!-- Modal body -->
             <div class="modal-body">
+
                 <div class="popup-body">
                     <h2><span>Contact Us</span></h2>
                     <form action="{{ route('contactus.submit') }}" method="POST" class="custom_form" id="conatctusform">
@@ -42,13 +44,21 @@
                                     <textarea name="message" id="" class="my-custom_textarea"></textarea>
                                 </div>
                             </div>
+
                         </div>
+
+
+
+
                 </div>
                 <div class="popup-footer">
                     <button type="submit" class="toggle button send-msg">Submit</button>
                 </div>
             </div>
             </form>
+
+
+
         </div>
     </div>
 </div>

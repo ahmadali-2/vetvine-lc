@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admins\VideosonDemand\VideosOnDemand;
-use App\Models\Admins\Webinar\SponserTable;
 use App\Models\VideoRating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +18,6 @@ class VideoDescriptionController extends Controller
             $authUser = true;
         }
         return view('frontend.video_detail', [
-            'sponsor' => SponserTable::all(),
             'videos'    => VideosOnDemand::find($id),
             'more_info' => VideosOnDemand::where('category_id', $category)->where('id', '!=', $id)->get(),
             'rating'    => VideoRating::where('video_id', $id)->where('user_id', Auth::id())->first(),

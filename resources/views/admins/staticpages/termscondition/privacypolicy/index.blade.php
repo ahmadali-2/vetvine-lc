@@ -37,7 +37,7 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="pageDesc"> Description</label>
-                                            <textarea name="pageDesc" class="ckeditor" id="" cols="100" rows="100" required>{!! isset($privacy->page_desc) ? $privacy->page_desc : '' !!}</textarea>
+                                            <textarea name="pageDesc" class="ckeditor" id="" cols="100" rows="100" required>{{ isset($privacy->page_desc) ? $privacy->page_desc : '' }}</textarea>
                                             @error('pageDesc')
                                                 <span class="error">{{ $message }}</span>
                                             @enderror
@@ -58,8 +58,6 @@
             </div>
         </div>
     </div>
-
-@endsection
 @section('scripts')
     <script>
         $(document).ready(function() {
@@ -68,4 +66,5 @@
             };
         })
     </script>
+@endsection
 @endsection
