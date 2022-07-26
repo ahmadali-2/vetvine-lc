@@ -417,8 +417,8 @@
                                 </div>
                                 @auth
                                     <div class="public2-info" style="margin-left: 12px; margin-bottom:0px ;">
-                                        <a href="{{ $eventdetail->timezone_url }}" class="view_time_zone"> View Other
-                                            Timezone</a>
+                                        <a href="{{ url('upcoming-webinars-details/timezone/'.$eventdetail->user->id) }}" class="view_time_zone"> View Other
+                                            Timezones</a>
                                     </div>
                                 @endauth
                             </div>
@@ -495,7 +495,8 @@
                             </div>
                             @foreach ($eventdetail->members as $items)
                                 <div class="public2-description spon-descripton">
-                                    <a href="{{ $items->sponser_link }}" class="vetvine_a" target="_blank">{{ $items->sponser_name }}</a>
+                                    <a href="{{ $items->sponser_link }}" class="vetvine_a"
+                                        target="_blank">{{ $items->sponser_name }}</a>
                                 </div>
                             @endforeach
                         </div>
@@ -544,15 +545,18 @@
                             </div>
                         </div>
                     </div> --}}
-                    @auth
-                        <div class="row">
-                            <button id="calendarModelButtonAction" type="button" class="upcoming_btn" data-toggle="modal" data-target="#calendarModel" hidden><i class="fa fa-calendar" aria-hidden="true"></i> </button>
-                            @if(isset($purchasedEvent))
-                                <button id="calendarModelButton" type="button" class="upcoming_btn" style="background-color: #f27222"><i class="fa fa-calendar" aria-hidden="true"></i> - Add to Calendar</button>
-                            @endif
-                        </div>
-                    @endauth
-                    {{-- <div class="row">
+                @auth
+                    <div class="row">
+                        <button id="calendarModelButtonAction" type="button" class="upcoming_btn" data-toggle="modal"
+                            data-target="#calendarModel" hidden><i class="fa fa-calendar" aria-hidden="true"></i> </button>
+                        @if (isset($purchasedEvent))
+                            <button id="calendarModelButton" type="button" class="upcoming_btn"
+                                style="background-color: #f27222"><i class="fa fa-calendar" aria-hidden="true"></i> - Add to
+                                Calendar</button>
+                        @endif
+                    </div>
+                @endauth
+                {{-- <div class="row">
                         <div class="col-sm-12 my-3">
                             <button type="submit" class="click_join">Click me to
                                 Join</button>
@@ -582,7 +586,7 @@
                                 <div>
                                     <div class="row header_row">
                                         <div class="col-lg-4">
-                                            <h4>Comment Section </h4>
+                                            <h4>Review Section</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -660,7 +664,7 @@
                                         </div>
                                         <div class="form-group row mt-4">
                                             <div class="col-sm-12 ">
-                                                <textarea class="form-control" name="comment" rows="6 " placeholder="Comment" maxlength="200" required></textarea>
+                                                <textarea class="form-control" name="comment" rows="6 " placeholder="Review" maxlength="200" required></textarea>
                                                 @error('comment')
                                                     <p class="alert alert-danger">{{ $message }}</p>
                                                 @enderror
@@ -728,7 +732,7 @@
                 var url=location.href;
                 if(authUser == false){
                     localStorage.setItem('guestLogin', true);
-                    localStorage.setItem("eventUrl",url);
+                    localStorage.setItem("eventUrl", url);
                     $('#login_form_show_btn').trigger("click");
                 } else {
                     $.ajax({

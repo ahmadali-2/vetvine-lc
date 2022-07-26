@@ -11,5 +11,6 @@ class TimeZone extends Model
     protected $fillable = [
         'id',
         'timezone',
+        'region',
     ];
 }
