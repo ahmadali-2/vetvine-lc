@@ -1,29 +1,4 @@
-/* width */
 
-::-webkit-scrollbar {
-    width: 5px;
-}
-
-
-/* Track */
-
- ::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-
-/* Handle */
-
- ::-webkit-scrollbar-thumb {
-    background: #fd7e14;
-}
-
-
-/* Handle on hover */
-
- ::-webkit-scrollbar-thumb:hover {
-    background: #ff9d4d;
-}
 
 *,
  :after,
@@ -141,7 +116,7 @@ font-face {
 }
 
 .edit-profile-header {
-    background-color: #5c7c85;
+    background-color: #f27222;
     padding: 2px 0px 0px 0px;
 }
 
@@ -2747,6 +2722,7 @@ select#fav_show:focus>option:checked {
     height: 33px;
     font-family: "Museo Sans 500";
     line-height: 31px;
+    margin-top:20px;
 }
 
 .video-bottom-description a:hover {
@@ -6123,6 +6099,7 @@ select#fav_show:focus>option:checked {
     margin-left: 10px;
     border: none !important;
     font-size: 14px;
+    font-family: "Museo 500";
 }
 
 
@@ -6444,7 +6421,7 @@ button:focus {
 form label {
     color: #5c7c85;
     font-family: "Museo 500";
-    font-size: 14px;
+    font-size: 17px;
     margin-bottom: 0 !important;
     font-style: normal;
     letter-spacing: normal;
@@ -6832,7 +6809,7 @@ table tbody .count td {
 .my_ce_drop_down {
     position: absolute;
     top: 100%;
-    left: -95px;
+    left: -130px;
     z-index: 1000;
     display: none;
     min-width: 15rem;
@@ -6867,8 +6844,8 @@ table tbody .count td {
 }
 
 .edit_profile_banner {
-    background-color: #5c7c85;
-    padding: 1px 30px;
+    background-color: #507f87;
+    padding: 1px 0px;
 }
 
 
@@ -9519,3 +9496,136 @@ p {
     color: #fff;
     background-color: #f27222 !important;
 }
+
+.spon-descripton a{
+    color:#f27222;
+}
+.spon-descripton a:hover{
+    color:#5c7c85;
+}
+
+/* cockestyle   */
+
+.cockie .modal-box .show-modal{
+    color: #4C5B67;
+    background-color: #ddf0f7;
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: capitalize;
+    padding: 10px 15px;
+    margin: 80px auto 0;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: block;
+    transition: all 0.3s ease 0s;
+
+}
+.cockie .modal-box .show-modal:hover,
+.cockie .modal-box .show-modal:focus{
+    color: #4C5B67;
+    border: none;
+    outline: none;
+    text-decoration: none;
+}
+.cockie .modal-backdrop.in{ opacity: 0; }
+.cockie .modal-box .modal-dialog{
+    width: 500px;
+    margin: 50px auto 0;
+}
+.cockie .modal.fade .modal-dialog{
+    /* transform: skew(20deg); */
+    transition: all 400ms cubic-bezier(.47,1.64,.41,.8);
+}
+/* .cockie .modal.in .modal-dialog{ transform: skew(0); } */
+.cockie .modal-box .modal-dialog .modal-content{
+    color: #4C5B67;
+    background: #ddf0f7;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.cockie .modal-box .modal-dialog .modal-content .close{
+    font-size: 35px;
+    font-weight: 300;
+    line-height: 25px;
+    text-shadow: none;
+    opacity: 1;
+    position: absolute;
+    left: auto;
+    right: 10px;
+    top: 10px;
+    z-index: 1;
+    transition: all 0.3s;
+}
+.cockie .modal-box .modal-dialog .modal-content .close span{
+    margin: -2px 0 0 0;
+    display: block;
+}
+.cockie .modal-content .close:hover{ color: #4C5B67; }
+.cockie .modal-box .modal-dialog .modal-content .modal-body{ padding: 60px 30px 50px !important; }
+.cockie .modal-box .modal-dialog .modal-content .modal-body .title{
+    font-weight: 600;
+    margin:10px 10px 20px;
+    font-family: "Museo 500";
+    font-size: 28px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.cockie .modal-box .modal-dialog .modal-content .modal-body .description{
+
+    margin: 0 0 60px;
+    font-family: "Museo Sans 500";
+    font-size: 16pt;
+
+}
+.cockie .modal-box .modal-dialog .modal-content .modal-body .links{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.cockie .modal-box .modal-dialog .modal-content .modal-body .links li{
+    display: inline-block;
+    margin: 0 7px;
+    font-family: "Museo Sans 500";
+    font-size: 16pt;
+
+}
+.cockie .modal-box .modal-dialog .modal-content .modal-body .links li a{
+    color: #B7BCC4;
+    font-size: 35px;
+    padding: 10px 15px;
+    display: block;
+    transition: all 0.3s ease-in-out;
+    font-family: "Museo Sans 500";
+    font-size: 16pt;
+
+}
+.cockie .modal-box .modal-dialog .modal-content .modal-body .links li a:hover{
+    color:#95B0D2;
+    box-shadow: rgb(0 0 0 / 10%) 0px 10px 15px -3px, rgb(0 0 0 / 5%) 0px 4px 6px -2px;
+}
+.cockie  a{
+    background:#f27222;
+    padding:10px;
+    border-radius:12px;
+    font-family: "Museo Sans 500";
+    margin:0px 20px;
+    color:#fff;
+    border:2px solid #f27222 !important;
+    transition:0.5s all;
+}
+.cockie a:hover{
+    background:transparent;
+    border:2px solid #f27222 !important;
+    color:#f27222;
+}
+@media only screen and (max-width: 767px){
+    .cockie .modal-box .modal-dialog{ width: 95% !important; }
+}
+<div class="open_grepper_editor" title="Edit & Save To Grepper"></div>
+/* cockestyle   */
+
+

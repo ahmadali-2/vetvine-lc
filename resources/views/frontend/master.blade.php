@@ -112,6 +112,7 @@
 
 
 
+  
     <!-- </footer> -->
     <script src="{{ asset('bootstrap/jquery/popper.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -128,6 +129,15 @@
 
 
     <script>
+
+        $(document).ready(function(){
+            $(".cockie_modal").trigger("click");
+            $(".confirm").on("click",function(e){
+                e.preventDefault();
+                  $(".close").trigger("click");
+
+            })
+        })
         $('.show_confirm').click(function() {
             var id = $(this).attr('data-id');
             if (id) {

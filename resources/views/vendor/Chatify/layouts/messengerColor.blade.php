@@ -80,4 +80,8 @@
     border-color: {{ $messengerColor }};
     box-shadow: 0 0 2px {{ $messengerColor }};
 }
+
+.messenger-listView-tabs a:hover, .messenger-listView-tabs a:focus {
+    color: #fff !important;
+}
 </style>
