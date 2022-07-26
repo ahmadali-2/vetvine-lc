@@ -3,15 +3,16 @@
 use Illuminate\Support\Facades\Auth;
 
 //(selectionTimeZone,time,)
-function convertToTimeZone($array, $time){
+function convertToTimeZone($array, $time, $region){
     $timeZone = $array;
+    // dd($region);
     // Fetching timezone UTC code : Please don't screw it
     $pieces = explode('(', $timeZone);
     $pieces = explode('C', $pieces[1]);
     $pieces = explode(')', $pieces[1]);
     // Formatting the time
     // dd($pieces[1]);
-    $today = new DateTime($time, new DateTimeZone('Asia/Dushanbe')); //todays.........
+    $today = new DateTime($time, new DateTimeZone($region)); //todays.........
     $userTimeZone = $array;
     // Fetching timezone UTC code : Please don't screw it
     $pieces = explode('(', $userTimeZone);

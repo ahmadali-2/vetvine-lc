@@ -214,6 +214,7 @@ Route::get('/privacy&policy', [TermsController::class, 'indexprivacy'])->name('p
 // upcoming webinars
 Route::get('upcoming-webinars',[HomeController::class,'upcomingWebinars'])->name('upcoming_webinars');
 Route::get('upcoming-webinars-details/{id}',[HomeController::class,'upcomingWebinarsdetails'])->name('upcoming_details');
+Route::get('upcoming-webinars-details/timezone/{id}',[HomeController::class,'upcomingEventTimeZone'])->name('upcoming_details.timezone');
 Route::get('past-event',[HomeController::class,'pastevent'])->name('pastevent');
 Route::get('upcoming-event',[HomeController::class,'upcomingevent'])->name('upcomingevent');
 Route::post('submit-payment',[EventPaymentController::class,'index'])->name('submitPayment');

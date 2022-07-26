@@ -13,7 +13,7 @@ class Coupon extends Model
         'coupon_code',
         'coupon_type',
         'amount',
-        'count',
+        'status',
         'start_at',
         'expired_at',
     ];

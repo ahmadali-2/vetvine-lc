@@ -98,27 +98,44 @@ class HomeController extends Controller
     }
     public function upcomingWebinarsdetails($id)
     {
-
         $eventdetail = Event::with('events', 'sponsers', 'members', 'user', 'buyeventplan', 'ReviewData')->find($id);
-        $timezones = TimeZone::all();
-        foreach($timezones as $timezone){
-            echo convertToTimeZone($timezone->timezone,"08:28:00");
-        }
+        // dd($eventdetail->toArray());
+        // $timezones = TimeZone::all();
+        // foreach($timezones as $timezone){
+        //     echo convertToTimeZone($timezone->timezone, "08:00:00", trim($timezone->region));
+        // }
+        $eventdetail = Event::with('events', 'sponsers', 'members', 'user', 'buyeventplan', 'ReviewData')->find($id);
+        $eventTime = date('Y-m-d H:i:s', strtotime('' . $eventdetail->date . '' . $eventdetail->time . ''));
         $eventId = $eventdetail->id;
         $category = CategoryEvent::all();
         $authUser = false;
-        if(auth()->user()){
+        if (auth()->user()) {
             $authUser = true;
         }
-        if(auth()->user()){
-            $purchasedEvent =BuyEventPlan::where('user_id',auth()->user()->id)->where('event_id', $id)->first();
-        }else{
+        if (auth()->user()) {
+            $purchasedEvent = BuyEventPlan::where('user_id', auth()->user()->id)->where('event_id', $id)->first();
+        } else {
             $purchasedEvent = null;
         }
-        return view('frontend.pages.webinars.upcoming-eventsdetails', compact('eventdetail', 'category', 'eventId','authUser','purchasedEvent'));
+        return view('frontend.pages.webinars.upcoming-eventsdetails', compact('eventdetail', 'category', 'eventId', 'authUser', 'purchasedEvent', 'eventTime'));
     }
 
-    public function getEventPrice(Request $request){
+    public function upcomingEventTimeZone($id)
+    {
+        $timeZoneArray = [];
+        $timezon = User::find($id)->timezone;
+        $events = User::find($id)->events;
+        $timezones = TimeZone::get();
+        foreach($events as $event){
+            foreach ($timezones as $timezone) {
+                array_push($timeZoneArray, convertToTimeZone($timezone->timezone,date('Y-m-d H:i:s', strtotime(''.$event->date.''.$event->time.'')), trim($timezone->region)));
+            }
+        }
+        return view('frontend.pages.webinars.upcoming-event-timezone', compact('timeZoneArray'));
+    }
+
+    public function getEventPrice(Request $request)
+    {
         $user = User::where('id', auth()->user()->id)->first();
 
         $eventdetail = Event::with('events', 'sponsers', 'members', 'user', 'buyeventplan', 'ReviewData')->find($request->event_id);
@@ -131,20 +148,17 @@ class HomeController extends Controller
 
         $data['protocol'] = 'Vetvine Member';
 
-        if($user->type == 4 || $user->type == 5){
+        if ($user->type == 4 || $user->type == 5) {
             $data['fee'] = $eventdetail->vet_pet_prof_fee;
-        }
-        else if($user->type == 3){
+        } else if ($user->type == 3) {
             $data['fee'] = $eventdetail->pet_owner_fee;
-        }
-        else if($user->type == 6){
+        } else if ($user->type == 6) {
             $data['fee'] = $eventdetail->pet_owner_premium_fee;
             $data['protocol'] = 'Vetvine Premium Membership <br> Subscriber';
-        }
-        else if($user->type == 7 || $user->type == 8){
+        } else if ($user->type == 7 || $user->type == 8) {
             $data['fee'] = $eventdetail->vet_pet_prof_premium_fee;
             $data['protocol'] = 'Vetvine Premium Membership <br> Subscriber';
-        }else{
+        } else {
             $data['fee'] = 'Free';
         }
 
@@ -156,7 +170,8 @@ class HomeController extends Controller
         ]);
     }
 
-    public function getVideoPrice(Request $request){
+    public function getVideoPrice(Request $request)
+    {
         $user = User::where('id', auth()->user()->id)->first();
 
         $video = VideosOnDemand::find($request->video_id);
@@ -169,20 +184,17 @@ class HomeController extends Controller
 
         $data['protocol'] = 'Vetvine Member';
 
-        if($user->type == 4 || $user->type == 5){
+        if ($user->type == 4 || $user->type == 5) {
             $data['fee'] = $video->vet_pet_prof_fee;
-        }
-        else if($user->type == 3){
+        } else if ($user->type == 3) {
             $data['fee'] = $video->pet_owner_fee;
-        }
-        else if($user->type == 6){
+        } else if ($user->type == 6) {
             $data['fee'] = $video->pet_owner_premium_fee;
             $data['protocol'] = 'Vetvine Premium Membership <br> Subscriber';
-        }
-        else if($user->type == 7 || $user->type == 8){
+        } else if ($user->type == 7 || $user->type == 8) {
             $data['fee'] = $video->vet_pet_prof_premium_fee;
             $data['protocol'] = 'Vetvine Premium Membership <br> Subscriber';
-        }else{
+        } else {
             $data['fee'] = 'Free';
         }
 
