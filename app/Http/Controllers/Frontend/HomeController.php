@@ -12,6 +12,7 @@ use App\Models\Admins\Webinar\BuyEventPlan;
 use App\Models\Admins\Webinar\CategoryEvent;
 use App\Models\Admins\Webinar\Event;
 use App\Models\Admins\Webinar\SponserTable;
+use App\Models\Generals\TimeZone;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -98,6 +99,12 @@ class HomeController extends Controller
     public function upcomingWebinarsdetails($id)
     {
         $eventdetail = Event::with('events', 'sponsers', 'members', 'user', 'buyeventplan', 'ReviewData')->find($id);
+        // dd($eventdetail->toArray());
+        // $timezones = TimeZone::all();
+        // foreach($timezones as $timezone){
+        //     echo convertToTimeZone($timezone->timezone, "08:00:00", trim($timezone->region));
+        // }
+        $eventdetail = Event::with('events', 'sponsers', 'members', 'user', 'buyeventplan', 'ReviewData')->find($id);
         $eventTime = date('Y-m-d H:i:s', strtotime(''.$eventdetail->date.''.$eventdetail->time.''));
         $eventId = $eventdetail->id;
         $category = CategoryEvent::all();
@@ -111,6 +118,19 @@ class HomeController extends Controller
             $purchasedEvent = null;
         }
         return view('frontend.pages.webinars.upcoming-eventsdetails', compact('eventdetail', 'category', 'eventId','authUser','purchasedEvent','eventTime'));
+    }
+
+    public function upcomingEventTimeZone($id){
+        $timeZoneArray = [];
+        $timezon = User::find($id)->timezone;
+        $events = User::find($id)->events;
+        $timezones = TimeZone::get();
+        foreach($events as $event){
+            foreach ($timezones as $timezone) {
+                array_push($timeZoneArray, convertToTimeZone($timezone->timezone,date('Y-m-d H:i:s', strtotime(''.$event->date.''.$event->time.'')), trim($timezone->region)));
+            }
+        }
+        return view('frontend.pages.webinars.upcoming-event-timezone', compact('timeZoneArray'));
     }
 
     public function getEventPrice(Request $request){
@@ -178,16 +198,9 @@ class HomeController extends Controller
             $data['fee'] = $video->vet_pet_prof_premium_fee;
             $data['protocol'] = 'Vetvine Premium Membership <br> Subscriber';
         }else{
-            $data['fee'] = 'Free';
+            $data['protocol'] = 'Vetvine Premium Membership <br> Subscriber';
         }
-
-        $data['title'] = $video->video_title;
-
-        return response()->json([
-            'code' => 200,
-            'data' => $data,
-        ]);
-    }
+  }
 
     public function searceducations(Request $request)
     {
