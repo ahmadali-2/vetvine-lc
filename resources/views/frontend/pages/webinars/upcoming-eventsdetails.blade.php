@@ -417,7 +417,7 @@
                                 </div>
                                 @auth
                                     <div class="public2-info" style="margin-left: 12px; margin-bottom:0px ;">
-                                        <a href="{{ $eventdetail->timezone_url }}" class="view_time_zone"> View Other
+                                        <a href="{{ url('upcoming-webinars-details/timezone/'.$eventdetail->user->id) }}" class="view_time_zone"> View Other
                                             Timezones</a>
                                     </div>
                                 @endauth

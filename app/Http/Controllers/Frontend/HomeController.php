@@ -121,9 +121,16 @@ class HomeController extends Controller
     }
 
     public function upcomingEventTimeZone($id){
-
-        $timezones = User::where('id',$id)->with('timezone')->get();
-        return view('frontend.pages.webinars.upcoming-event-timezone',compact('timezone'));
+        $timeZoneArray = [];
+        $timezon = User::find($id)->timezone;
+        $events = User::find($id)->events;
+        $timezones = TimeZone::get();
+        foreach($events as $event){
+            foreach ($timezones as $timezone) {
+                array_push($timeZoneArray, convertToTimeZone($timezone->timezone,date('Y-m-d H:i:s', strtotime(''.$event->date.''.$event->time.'')), trim($timezone->region)));
+            }
+        }
+        return view('frontend.pages.webinars.upcoming-event-timezone', compact('timeZoneArray'));
     }
 
     public function getEventPrice(Request $request){
