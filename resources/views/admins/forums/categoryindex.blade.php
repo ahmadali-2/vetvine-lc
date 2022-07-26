@@ -41,7 +41,7 @@
 
                                         <td scope="row">{{ $loop->iteration }}</td>
                                         <td>{{ $category->category_title }}</td>
-                                        <td>{!! Str::limit($category->category_description, 80) !!}</td>
+                                        <td>{!! Str::limit($category->category_description, 150) !!}</td>
                                         <td> <a href="{{ route('forums-category.edit', $category->id) }}"><i
                                                     class="fas fa-edit text-primary"></i></a>
                                             <a href="javascript:void(0);" class="text-decoration-none"

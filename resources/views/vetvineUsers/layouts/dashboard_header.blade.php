@@ -269,8 +269,8 @@
                                         </div>
                                     </li>
                                     <li><a href="{{ route('usermemberships.index') }}">Membership</a></li>
-                                    <li><a href="#">Settings</a></li>
-                                    <li><a href="#">Notification Preferences</a></li>
+                                    <li><a href="{{ route('vetvineUserProfile') }}">Settings</a></li>
+                                    {{-- <li><a href="#">Notification Preferences</a></li> --}}
                                     <li><a href="{{ route('change_password') }}">Change Password</a></li>
                                     <li>
                                         <a type="submit" class="show_confirm" data-id={{ Auth::id() }}>Delete
@@ -295,7 +295,7 @@
                                     <i class="my-ce"><img
                                             src="{{ asset('frontend/img/featured-video-icon.png') }}"
                                             style="width:35px;"></i><br>
-                                    My Ce
+                                    My CE
                                     <span class="caret"></span></button>
                                 <ul class="dropdown-menu my_ce_drop_down btn_me3">
                                     <li><a href="{{ route('member_home') }}"> Dashboard</a></li>

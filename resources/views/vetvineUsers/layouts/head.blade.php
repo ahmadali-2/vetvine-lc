@@ -58,14 +58,14 @@
     font-size: 25px;
 }
  .messenger-listView-tabs a:hover, .messenger-listView-tabs a:focus {
-    color: #f27222 !important;
+    color: #fff !important;
 }
 .mc-sender p {
     background: #f27222 !important;
     color: #fff !important;
 }
 .m-list-active{
-    background: #507f87 !important;
+    background: #f27222 !important;
     border-left: 5px solid  #f27222 !important;
 
 }

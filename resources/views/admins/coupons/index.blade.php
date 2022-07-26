@@ -56,11 +56,14 @@
 
                                         <th scope="col">Coupon Type</th>
 
+
+
                                         <th scope="col">Start Date</th>
 
                                         <th scope="col">End Date</th>
 
                                         <th scope="col">Price</th>
+                                        <th scope="col">Coupon Status</th>
 
                                         <th scope="col">Action</th>
 
@@ -72,8 +75,8 @@
                              </thead>
 
                              <tbody>
-
                                     @foreach ($coupons as $coupon)
+
 
 
                                      <tr>
@@ -90,7 +93,7 @@
 
                                          <td>$ {{ $coupon->amount }}</td>
 
-                                         {{-- <td>
+                                         <td>
 
                                              @if ($coupon->status == 1)
                                                  <span class="badge badge-pill badge-success">Active</span>
@@ -98,7 +101,7 @@
                                                  <span class="badge badge-pill badge-danger">Inactive</span>
                                              @endif
 
-                                         </td> --}}
+                                         </td>
 
                                          <td>
 

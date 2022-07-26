@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Edit Comment</h4>
+                <h4 class="modal-title">Edit Review</h4>
             </div>
             <div class="modal-body">
                 <form action="javascript:void(0)" id="addEditBookForm" name="addEditBookForm"
@@ -14,7 +14,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="name" class="col-sm-2 control-label">Comment</label>
+                        <label for="name" class="col-sm-2 control-label"></label>
                         <div class="col-sm-12">
                             <input type="text" class="form-control" id="comments-model" name="comment"
                                 placeholder="Enter Comment" value="" maxlength="50"

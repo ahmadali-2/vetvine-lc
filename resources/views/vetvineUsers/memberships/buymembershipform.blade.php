@@ -142,19 +142,7 @@
 
                         </div>
 
-                        <div class='form-row row'>
 
-                           <div class='col-md-12 error form-group hide'>
-
-                              <div class='alert-danger alert'>Please correct the errors and try
-
-                                 again.
-
-                              </div>
-
-                           </div>
-
-                        </div>
                         <div class='form-row row'>
 
                             <div class='col-xs-12 col-md-6  form-group required'>
@@ -168,7 +156,19 @@
 
                             </div>
 
+                         </div>
 
+                         <div class='form-row row'>
+
+                            <div class='col-md-12 error form-group hide'>
+
+                               <div class='alert-danger alert'>Please correct the errors and try
+
+                                  again.
+
+                               </div>
+
+                            </div>
 
                          </div>
 

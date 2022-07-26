@@ -274,10 +274,13 @@
                                         <img src="https://www.w3schools.com/howto/img_avatar.png" alt="arrow-right icon">
 
                                     </div>
+
                                     <div class="public2-description">
-                                       <b class="ml-2 text-uppercase"></b>
+                                        <b class="ml-2 text-uppercase"> {{ $videos->presented_by }}</b>
                                     </div>
                                 </div>
+
+
 
 
 
@@ -285,9 +288,11 @@
                                     <div class="public2-title sponsor-title">
                                         Sponsor(s): vetvine :
                                     </div>
-                                    <div>
-                                        <p>Some data here ...</p>
+                                    @foreach ($sponsor as $items)
+                                    <div class="public2-description spon-descripton">
+                                        <a href="{{ $items->sponser_link }}" class="vetvine_a" target="_blank">{{ $items->sponser_name }}</a>
                                     </div>
+                                @endforeach
                                   </div>
 
                                   <div class="publication-detail register_btn">
@@ -306,7 +311,7 @@
                     <div class="container">
                     <div class="video-detail-para border-0">
                         <p>
-                            {{ $videos->video_description }}
+                            {!! $videos->video_description !!}
                         </p>
                     </div>
                 </div>
@@ -335,6 +340,7 @@
                                     </div>
                                 </div>
                             @empty
+
                             @endforelse
                         </div>
                     </div>
@@ -378,7 +384,6 @@
                     });
                     $('input[name="rating"]').click(function() {
                         var length = $(this).attr('data-stars');
-                        alert(length);
                         $.ajax({
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

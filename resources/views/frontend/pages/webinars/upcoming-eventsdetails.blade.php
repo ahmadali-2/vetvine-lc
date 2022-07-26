@@ -391,19 +391,20 @@
                                             $pieces = explode('(', $timeZone);
                                             $pieces = explode('C', $pieces[1]);
                                             $pieces = explode(')', $pieces[1]);
+
                                             // Formatting the time
                                             $today = new DateTime($eventdetail->time, new DateTimeZone($pieces[0]));
+
                                             $userTimeZone = Auth::user()->timezone->timezone;
+
                                             // Fetching timezone UTC code : Please don't screw it
                                             $pieces = explode('(', $userTimeZone);
                                             $pieces = explode('C', $pieces[1]);
                                             $pieces = explode(')', $pieces[1]);
 
                                             $userEventTime = new DateTimeZone($pieces[0]);
-                                            // dd($userEventTime);
                                             $convertedTime = $today->setTimeZone($userEventTime);
-                                            $result = $convertedTime->format('H:i A') . ' ' . $userTimeZone;
-                                            dd($userTimeZone);
+
                                             echo $convertedTime->format('H:i A') . ' ' . $userTimeZone;
                                         @endphp
                                     @else
@@ -503,7 +504,11 @@
 
                     <div class="publication-detail register_btn">
                         @if (isset($purchasedEvent))
-                            <button class="btn btn-primary">Attend Event?</button>
+                            <div id="startsIn" class="public2-title sponsor-title" style="padding-left: 0px">
+
+                            </div>
+                            <h1 id="eventCountdown"></h1>
+                            {{-- <button class="btn btn-primary">Attend Event?</button> --}}
                         @else
                             <button class="btn btn-primary" id="register_event">Register</button>
                         @endif
@@ -563,26 +568,26 @@
             </div>
             </form>
     </section>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <p class="desription_p">
-                    {!! $eventdetail->event_description !!}
-                </p>
-            </div>
-        </div>
-    </div>
-    @if (Auth::user())
-        <div class="container">
-            <div class="row">
-                <div class="leftcolumn">
-                    <div class="card pt-0">
-                        <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
-                            <div>
-                                <div class="row header_row">
-                                    <div class="col-lg-4">
-                                        <h4>Comment Section </h4>
+               <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="desription_p">
+                        {!! $eventdetail->event_description !!}
+                        </p>
+                    </div>
+                </div>
+               </div>
+            @if (Auth::user())
+            <div class="container">
+                <div class="row">
+                    <div class="leftcolumn">
+                        <div class="card pt-0">
+                            <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
+                                <div>
+                                    <div class="row header_row">
+                                        <div class="col-lg-4">
+                                            <h4>Review Section</h4>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row mt-5">
@@ -627,7 +632,7 @@
                         </div>
 
                         <!-- Review store Section -->
-                        <div class="container">
+                        <div class="container mb-5">
                             <div class="row">
                                 <div class="col-sm-10 mt-4  inner_box_chat" id="comment-section">
                                     <form class="py-2 px-4" action="{{ route('reviewstore') }}"
@@ -659,7 +664,7 @@
                                         </div>
                                         <div class="form-group row mt-4">
                                             <div class="col-sm-12 ">
-                                                <textarea class="form-control" name="comment" rows="6 " placeholder="Comment" maxlength="200" required></textarea>
+                                                <textarea class="form-control" name="comment" rows="6 " placeholder="Review" maxlength="200" required></textarea>
                                                 @error('comment')
                                                     <p class="alert alert-danger">{{ $message }}</p>
                                                 @enderror
@@ -687,12 +692,45 @@
     <script>
         $(document).ready(function() {
             localStorage.setItem('guestLogin', false);
-            localStorage.setItem("eventUrl", '');
-            var event_id = '<?php echo $eventId; ?>';
-            var authUser = '<?php echo $authUser; ?>';
-            $('#register_event').on('click', function() {
-                var url = location.href;
-                if (authUser == false) {
+            localStorage.setItem("eventUrl",'');
+            var event_id = '<?php echo $eventId ?>';
+            var authUser = '<?php echo $authUser ?>';
+            var eventTime = '<?php echo $eventTime ?>'
+            // Event counter starts
+            // Set the date we're counting down to
+            var countDownDate = new Date(eventTime).getTime();
+
+            // Update the count down every 1 second
+            var x = setInterval(function() {
+
+            // Get today's date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+
+            // If the count down is over, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("eventCountdown").innerHTML = '<button class="btn btn-primary">Attend Event</button>';
+            }else{
+                // Time calculations for days, hours, minutes and seconds
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Output the result in an element with id="demo"
+                document.getElementById("eventCountdown").innerHTML = '<b>' + days + "d " + hours + "h "
+                + minutes + "m " + seconds + "s " + '</b>';
+                document.getElementById('startsIn').innerHTML = 'Starts In :';
+            }
+            }, 1000);
+            //Event counter End.
+
+            $('#register_event').on('click', function(){
+                var url=location.href;
+                if(authUser == false){
                     localStorage.setItem('guestLogin', true);
                     localStorage.setItem("eventUrl", url);
                     $('#login_form_show_btn').trigger("click");

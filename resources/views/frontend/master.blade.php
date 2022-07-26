@@ -112,6 +112,7 @@
 
 
 
+  
     <!-- </footer> -->
     <script src="{{ asset('bootstrap/jquery/popper.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -128,6 +129,15 @@
 
 
     <script>
+
+        $(document).ready(function(){
+            $(".cockie_modal").trigger("click");
+            $(".confirm").on("click",function(e){
+                e.preventDefault();
+                  $(".close").trigger("click");
+
+            })
+        })
         $('.show_confirm').click(function() {
             var id = $(this).attr('data-id');
             if (id) {
@@ -255,7 +265,7 @@
     $('#regform').submit(function(e) {
 
         if (grecaptcha.getResponse() == '') {
-            toastr.error('Please verify captcha first!');
+            toastr.error('Please verify captcha!');
             e.preventDefault();
             return;
         } else {
@@ -278,33 +288,6 @@
 
         });
     </script>
-
-    <script src="{{ asset('frontend/js/bootstrap.js') }}"></script>
-
-    <script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
-
-
-
-    <script src="https://kit.fontawesome.com/b8867474d2.js" crossorigin="anonymous"></script>
-
-    <script src="{{ asset('frontend/js/fontawesome.js') }}"></script>
-
-    <script src="{{ asset('frontend/js/frontend.js') }}"></script>
-
-
-    <script src="https://www.google.com/recaptcha/api.js"></script>
-
-    <script>
-        CKEDITOR.replace('description');
-    </script>
-    <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js') }}"></script>
-
-    {!! JsValidator::formRequest('App\Http\Requests\Frontend\RegistrationRequest', '#regform') !!}
-    {!! JsValidator::formRequest('App\Http\Requests\Frontend\ContactUsRequest', '#conatctusform') !!}
-    {!! JsValidator::formRequest('App\Http\Requests\Frontend\LoginInRequest', '#loginRequest') !!}
-
-
-
     <script src="{{ asset('bootstrap/jquery/popper.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
@@ -325,7 +308,6 @@
     <script src="{{ asset('frontend/js/frontend.js') }}"></script>
 
     <script src="https://www.google.com/recaptcha/api.js"></script>
-
 
 
     <script>

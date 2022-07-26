@@ -98,12 +98,14 @@ class HomeController extends Controller
     }
     public function upcomingWebinarsdetails($id)
     {
-
         $eventdetail = Event::with('events', 'sponsers', 'members', 'user', 'buyeventplan', 'ReviewData')->find($id);
-        $timezones = TimeZone::all();
-        foreach($timezones as $timezone){
-            echo convertToTimeZone($timezone->timezone,"08:28:00");
-        }
+        // dd($eventdetail->toArray());
+        // $timezones = TimeZone::all();
+        // foreach($timezones as $timezone){
+        //     echo convertToTimeZone($timezone->timezone, "08:00:00", trim($timezone->region));
+        // }
+        $eventdetail = Event::with('events', 'sponsers', 'members', 'user', 'buyeventplan', 'ReviewData')->find($id);
+        $eventTime = date('Y-m-d H:i:s', strtotime(''.$eventdetail->date.''.$eventdetail->time.''));
         $eventId = $eventdetail->id;
         $category = CategoryEvent::all();
         $authUser = false;
@@ -115,7 +117,13 @@ class HomeController extends Controller
         }else{
             $purchasedEvent = null;
         }
-        return view('frontend.pages.webinars.upcoming-eventsdetails', compact('eventdetail', 'category', 'eventId','authUser','purchasedEvent'));
+        return view('frontend.pages.webinars.upcoming-eventsdetails', compact('eventdetail', 'category', 'eventId','authUser','purchasedEvent','eventTime'));
+    }
+
+    public function upcomingEventTimeZone($id){
+
+        $timezones = User::where('id',$id)->with('timezone')->get();
+        return view('frontend.pages.webinars.upcoming-event-timezone',compact('timezone'));
     }
 
     public function getEventPrice(Request $request){
@@ -183,16 +191,9 @@ class HomeController extends Controller
             $data['fee'] = $video->vet_pet_prof_premium_fee;
             $data['protocol'] = 'Vetvine Premium Membership <br> Subscriber';
         }else{
-            $data['fee'] = 'Free';
+            $data['protocol'] = 'Vetvine Premium Membership <br> Subscriber';
         }
-
-        $data['title'] = $video->video_title;
-
-        return response()->json([
-            'code' => 200,
-            'data' => $data,
-        ]);
-    }
+  }
 
     public function searceducations(Request $request)
     {

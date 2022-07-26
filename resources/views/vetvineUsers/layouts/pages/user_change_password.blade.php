@@ -14,7 +14,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-5">
-                                    <label for="">Enter Your Old Password</label>
+                                    <label for="">Old Password</label>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input_field">
@@ -26,7 +26,7 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-5">
-                                    <label for="">Enter Your New Password</label>
+                                    <label for="">New Password</label>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input_field">
@@ -52,7 +52,7 @@
 
 
                       </div>
-                      <div class="btn_change text-center">
+                      <div class="btn_change text-center offset-md-5 col-md-6 pl-lg-2">
                         <button type="submit " class="btn btn-warning">Change Password</button>
                     </div>
                 </form>
