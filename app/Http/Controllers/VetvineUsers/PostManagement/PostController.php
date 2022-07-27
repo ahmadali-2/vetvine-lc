@@ -107,6 +107,9 @@ class PostController extends Controller
                 $result = PostActivity::create([
                     'share_id' => $share->id,
                 ]);
+                Log::info("share");
+                Log::info($result);
+                Log::info("share");
                 event(new NotificationEvent(Auth::user()->id, $request->sharePostId,'share'));
                 Log::info($result);
                 return response()->json([
