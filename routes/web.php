@@ -81,6 +81,12 @@ Route::get('/migrate',function(){
     return 'migrated successfully';
 });
 
+Route::get('/seed/timezones',function(){
+    $wSeeder = new \Database\Seeders\TimeZoneSeeder();
+    $wSeeder->run();
+    return 'Timezone seeded successfully';
+});
+
 Route::get('phpinfo', function () {
     phpinfo();
 });
