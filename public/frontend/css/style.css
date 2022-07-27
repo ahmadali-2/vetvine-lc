@@ -181,7 +181,7 @@ font-face {
     float: left;
     text-align: left;
     color: #507f87;
-    font-size: 14px;
+    font-size: 18px;
     font-family: "Museo 500";
     padding-top: 20px;
     padding-left: 10px;
@@ -249,11 +249,11 @@ font-face {
 }
 
 .video-title {
-    font-family: "Museo Sans 500";
+    font-family: "Museo 500";
     font-size: 18px;
     line-height: 21.6px;
-    text-decoration: none;
-    color: rgb(92, 124, 133);
+    text-decoration: none !important;
+    color: rgb(92, 124, 133) !important;
     text-align: left;
     text-transform: uppercase;
     word-spacing: 0px;
@@ -587,7 +587,7 @@ input:focus {
     border-radius: 12px;
     background-color: #f27222;
     display: inline-block;
-    font-size: 16px;
+    font-size: 18px;
     color: #ffffff;
     text-align: center;
     line-height: 40px;
@@ -1251,7 +1251,7 @@ input:focus {
     padding: 5px 10px;
     height: 44px;
     color: #5c7c85;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .my-custom_textarea {
@@ -1911,12 +1911,13 @@ input:focus {
 }
 
 .btn_me3 li a {
-    font-size: 16px;
+    font-size: 15px;
     padding-top: 5px;
     padding-bottom: 5px;
     margin-bottom: 3px;
     display: block;
     text-transform: inherit !important;
+    font-family: 'Source Sans Pro';
 }
 
 .nav-wrapper-one .nav-anchor {
@@ -2065,7 +2066,7 @@ input:focus {
 
 .mm-new-checkbox a {
     padding-left: 10px;
-    font-size: 15px;
+    font-size: 18px;
     letter-spacing: 1px;
     color: #5c7c85;
     text-decoration: none;
@@ -2249,13 +2250,13 @@ input:focus {
 
 .filter-div {
     max-width: 203px;
-    font-family: "Museo Sans 500";
+    font-family: "Museo 500";
 }
 
 .filter-div label {
     color: #5c7c85;
-    font-size: 17px;
-    font-family: "Museo Sans 500";
+    font-size: 18px;
+    font-family: "Museo 500";
     margin-bottom: 12px;
 }
 
@@ -2318,7 +2319,7 @@ input:focus {
 }
 
 .Upcoming-webinars {
-    font-size: 21px;
+    font-size: 20px;
     color: #5c7c85;
     text-transform: uppercase;
     font-family: "Museo 500";
@@ -2620,7 +2621,7 @@ select#fav_show:focus>option:checked {
     color: #fff;
     font-family: "Museo Sans 500";
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: 15px;
     text-align: center;
     display: inline-block;
     border: 1px solid #f27222;
@@ -2679,17 +2680,17 @@ select#fav_show:focus>option:checked {
 }
 
 .video-bottom-description h5 {
-    font-family: 'Museo Sans 700';
+    font-family: 'Museo 500';
     font-size: 14px;
     color: #507f87;
-    margin-bottom: 0rem !important;
+    margin-bottom: 1rem !important;
+    margin-top: 1rem;
 }
 
 .video-bottom-description p {
-    font-family: "Museo Sans 500";
+    font-family: "Museo 500";
     font-size: 14px;
     color: #507f87;
-    text-transform: uppercase;
     margin-bottom: -7px;
 }
 
@@ -2698,12 +2699,18 @@ select#fav_show:focus>option:checked {
     font-size: 14px;
     color: #507f87;
     text-transform: initial;
-    margin-bottom: 18px;
-    margin-top: 8px;
+    /* margin-bottom: 18px; */
+    margin-top: 1rem;
 }
 
 .video-bottom-description p span {
-    font-family: 'Museo Sans 700';
+    font-family: 'Museo 500';
+    font-size: 13px;
+    color: #507f87;
+    margin-top: 6px;
+    text-transform: uppercase;
+    font-weight: bolder;
+
 }
 
 .video-bottom-description a {
@@ -2715,19 +2722,22 @@ select#fav_show:focus>option:checked {
     border-radius: 12px;
     display: inline-block;
     background-color: #f27222;
-    font-size: 14px;
+    font-size: 15px;
     text-transform: capitalize;
     transition: all 0.3s;
     width: 125px;
     height: 33px;
     font-family: "Museo Sans 500";
     line-height: 31px;
-    margin-top:20px;
+    /* margin-top:20px */
 }
 
 .video-bottom-description a:hover {
     background-color: #fff;
     color: #f27222;
+}
+.read_more_btn{
+    margin-top:20px
 }
 
 
@@ -6226,7 +6236,6 @@ select#fav_show:focus>option:checked {
 
 .click_join {
     text-decoration: none;
-    font-family: "Museo 700";
     border: 1px solid #f27222;
     text-align: center;
     color: #fff;
@@ -6304,16 +6313,21 @@ select#fav_show:focus>option:checked {
 
 .visa-card-detail .title p {
     color: #ff9800;
-    font-family: "Museo Sans ";
-    font-size: 16px;
-    font-weight: 700;
-    font-style: normal;
+    font-family: "Museo 500";
+    font-size: 18px;
     letter-spacing: normal;
     line-height: 26px;
     text-align: left;
     margin-top: 10px;
 }
-
+.billing-description{
+    font-family: 'Museo 500';
+    font-size: 18px;
+}
+.billing-info .description p{
+    font-family: 'Museo 500' !important;
+    font-size: 18px !important;
+}
 .credit-card-details .card-title p {
     color: #5c7c85;
     font-family: "Museo 500";
@@ -6334,8 +6348,8 @@ select#fav_show:focus>option:checked {
 
 .billing-btn button {
     color: #ffffff;
-    font-family: "Museo 500";
-    font-size: 16px;
+    font-family: "Museo Sans 500";
+    font-size: 18px;
     font-style: normal;
     letter-spacing: normal;
     line-height: normal;
@@ -6421,7 +6435,7 @@ button:focus {
 form label {
     color: #5c7c85;
     font-family: "Museo 500";
-    font-size: 17px;
+    font-size: 18px;
     margin-bottom: 0 !important;
     font-style: normal;
     letter-spacing: normal;
@@ -6595,8 +6609,8 @@ table tbody tr .remove {
 
 table thead tr th {
     color: #5c7c85;
-    font-family: "Museo 700";
-    font-size: 16px;
+    font-family: "Museo 500" !important;
+    font-size: 20px;
     margin-bottom: 0 !important;
     font-style: normal;
     letter-spacing: normal;
@@ -6717,12 +6731,19 @@ table tbody .count td {
     display: flex;
     flex-wrap: wrap;
 }
-
-.parent_sponser strong {
-    font-family: 'Museo Sans 700';
+.video-bottom-description strong{
+    font-family: 'Museo 500';
     font-size: 13px;
     color: #507f87;
     margin-top: 6px;
+    text-transform:uppercase;
+}
+.parent_sponser strong {
+    font-family: 'Museo 500';
+    font-size: 13px;
+    color: #507f87;
+    margin-top: 6px;
+    text-transform:uppercase;
 }
 
 .parent_sponser .sposer_name a {
@@ -6777,7 +6798,7 @@ table tbody .count td {
 }
 
 .drop_down_user_dash b {
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .drop_down_user_dash .content {
@@ -7414,8 +7435,8 @@ ul {
     width: 100%;
     display: inline-block;
     color: #5c7c85;
-    font-size: 17px;
-    font-family: "Museo Sans 500";
+    font-size: 18px;
+    font-family: "Museo 500";
     border: 2px solid #68868e !important;
     /* padding: 20px; */
     /* margin-bottom: 35px; */
@@ -7531,8 +7552,8 @@ ul {
 
 .forum_table h4 {
     color: #105965;
-    font-family: "Museo Sans 500";
-    font-size: 20px;
+    font-family: "Museo 500";
+    font-size: 18px;
     font-style: normal;
     letter-spacing: normal;
     line-height: normal;
@@ -7744,12 +7765,13 @@ ul {
 .specialty-detail h2 {
     color: #105965;
     font-family: "Museo 500";
-    font-size: 25px;
+    font-size: 20px;
     font-style: normal;
     letter-spacing: normal;
     line-height: normal;
     text-align: center;
     text-transform: uppercase;
+    font-weight: bold;
 }
 
 .topics-section {
@@ -7787,8 +7809,8 @@ ul {
 
 .topics-section .behavior-card .behavior-details a h2 {
     color: #105965;
-    font-family: "Museo Sans 700";
-    font-size: 20px;
+    font-family: "Museo 500";
+    font-size: 18px;
     font-style: normal;
     letter-spacing: normal;
     line-height: normal;
@@ -7796,7 +7818,8 @@ ul {
 }
 
 .forum_desc {
-    font-weight: 700;
+    font-family: "Museo 500";
+    font-size: 16px;
     color: #5e7c85;
     margin-bottom: 0 !important;
 }
@@ -8060,8 +8083,8 @@ ul {
     border: 1px solid #f27222;
     padding: 10px;
     border-radius: 12px;
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 16px;
+    /* font-weight: bold; */
     cursor: pointer;
     font-family: "Museo Sans 500";
     transition: 0.3s all;
@@ -8173,7 +8196,7 @@ ul {
 }
 
 .post_bg {
-    background-image: url("../img/post_banner.png") !important;
+    background-image: url("../images/post_banner1.jpg") !important;
     background-size: cover;
 }
 
@@ -8464,6 +8487,8 @@ line-height: 31px;
     border: 2px solid #68868e !important;
     height: 49px;
     border-radius: 0px;
+    font-size: 18px;
+    font-family: 'Museo 500';
 }
 
 .search_filter input {
@@ -9224,6 +9249,7 @@ p {
     background: transparent;
     border: 2px solid #f27222 !important;
     color: #f27222;
+
 }
 #register_event
 {
@@ -9233,6 +9259,7 @@ p {
     border-radius: 12px;
     transition: 0.5s linear;
     font-family: "Museo Sans 500";
+    font-size: 18px;
 }
 #register_event:hover
 {
@@ -9258,6 +9285,8 @@ p {
     transition: 0.5s linear;
     font-family: "Museo Sans 500";
     border: 2px solid #f27222 !important;
+    font-size: 18px;
+
 }
 .upcoming_btn:hover
 {
@@ -9402,7 +9431,7 @@ p {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     position: relative;
     z-index: 1;
-    height: 475px;
+    height: 100%;
 }
 .pricingTable .pricingTable-header{
     color: #fff;
@@ -9431,11 +9460,11 @@ p {
     right: 0;
 }
 .pricingTable .title{
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 18px;
     letter-spacing: 0.5px;
     text-transform: uppercase;
     margin: 0 0 15px;
+    font-family: 'Museo 500';
 }
 .pricingTable .price-value .amount{
     font-size: 40px;
@@ -9449,13 +9478,13 @@ p {
     font-family: "Museo 500";
 }
 .pricingTable .pricing-content{
-    padding: 0;
-    margin: 0 0 40px;
+    padding: 0px 10px;
+    margin: 0 0 65px;
     list-style: none;
 }
 .pricingTable .pricing-content li{
     color: #7b7b7b;
-    font-size: 17px;
+    font-size: 16px;
     line-height: 25px;
     text-transform: uppercase;
     margin: 0 0 17px;
@@ -9467,11 +9496,15 @@ p {
     padding: 10px 10px 8px;
     border-radius: 50% 50% 0 0/100% 100% 0 0;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin-top:20px;
 }
 .pricingTable .pricingTable-signup a{
     color: #fff;
     font-size: 19px;
-    font-weight: 600;
+    /* font-weight: 600; */
     text-transform: uppercase;
     transition: all 0.3s ease 0s;
     font-family: "Museo 500";
@@ -9578,7 +9611,7 @@ p {
 
     margin: 0 0 60px;
     font-family: "Museo Sans 500";
-    font-size: 16pt;
+    font-size: 18pt;
 
 }
 .cockie .modal-box .modal-dialog .modal-content .modal-body .links{
@@ -9616,6 +9649,8 @@ p {
     color:#fff;
     border:2px solid #f27222 !important;
     transition:0.5s all;
+    font-size: 18px;
+
 }
 .cockie a:hover{
     background:transparent;
@@ -9627,5 +9662,73 @@ p {
 }
 <div class="open_grepper_editor" title="Edit & Save To Grepper"></div>
 /* cockestyle   */
+/* .custom-file-input::-webkit-file-upload-button */
+
+/* #createpost input::-webkit-file-selector-button {
+    font-weight: bold;
+    color: dodgerblue;
+    padding: 0.5em;
+    border: thin solid grey;
+    border-radius: 3px;
+    background:green !important;
+} */
+/* ::-webkit-file-upload-button {
+    visibility: hidden !important;
+  }
+
+  ::-webkit-file-upload-button {
+        color: red;
+
+    visibility:hidden;
+  } */
+/* #createpost input::before {
+    content: 'Select some files';
+    color: black;
+    display: inline-block;
+    background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+    font-weight: 700;
+    font-size: 10pt;
+    margin-bottom:20px;
+  } */
 
 
+
+  #createpost .post_submit_btn {
+    background: #f27222 !important;
+    color: #fff;
+    border: none !important;
+    font-family: "Museo Sans 500";
+    width: 143px;
+    height: 37px;
+    border-radius: 12px !important;
+    transition: 0.3s all;
+    font-size: 18px !important;
+}
+
+
+.guest_screen_text {
+    padding: 10px;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 18px;
+    font-family: "Museo 500";
+}
+
+#videoRegister{
+    font-size: 18px;
+}
+#pay_event_price {
+    line-height: 50px;
+    color: #fff;
+    font-size: 18px;
+    font-family: 'Museo Sans 500';
+
+}
