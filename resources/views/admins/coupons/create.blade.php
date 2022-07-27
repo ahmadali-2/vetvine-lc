@@ -30,7 +30,7 @@
 
                                         <div class="form-group">
 
-                                            <label for="coupon_code" class="control-label mb-1">Coupon Code (System Generated Coupon)</label>
+                                            <label for="coupon_code" class="control-label mb-1">Coupon Code (System Generated)</label>
 
                                             <input id="coupon_code" readonly placeholder="Enter Coupon Code" name="coupon_code"
                                                 type="text" class="form-control" aria-required="true" aria-invalid="false"

@@ -130,14 +130,15 @@
 
     <script>
 
-        $(document).ready(function(){
-            $(".cockie_modal").trigger("click");
-            $(".confirm").on("click",function(e){
-                e.preventDefault();
-                  $(".close").trigger("click");
+    //    $(document).on("click","#login_form_show",function(e){
+    //     e.preventDefault();
+    //     $("#login_form_show_btn").trigger("click");
+    //     $(this).closest("#register_modal_close").trigger("click");
 
-            })
-        })
+    //    });
+
+
+
         $('.show_confirm').click(function() {
             var id = $(this).attr('data-id');
             if (id) {

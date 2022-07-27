@@ -245,14 +245,14 @@
         <div class="col-md-12">
             <div class="modal-box">
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary d-none cockie_modal btn-lg show-modal" data-toggle="modal" data-target="#myModal">
+                <button type="button" class="btn btn-primary d-none cockie_modal btn-lg show-modal" data-toggle="modal" data-target="#c_Modal">
                   view modal
                 </button>
                 <!-- Modal -->
-                <div class="modal fade" id="myModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal fade" id="c_Modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            <button type="button" class="close d-none" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close d-none c_close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
                             <div class="modal-body">
@@ -282,6 +282,14 @@
   {{-- Cockie Modal box  --}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
+          $(document).ready(function(){
+            $(".cockie_modal").trigger("click");
+            $(".confirm").on("click",function(e){
+                e.preventDefault();
+                  $(".c_close").trigger("click");
+
+            })
+        })
         $(document).on('ready', function(){
             $('#login_guest_selection')
         });

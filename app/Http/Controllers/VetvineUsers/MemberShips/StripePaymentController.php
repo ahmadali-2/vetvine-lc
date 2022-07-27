@@ -142,28 +142,31 @@ class StripePaymentController extends Controller
     public function applyCouponCode(Request $request)
     {
         $coupon = Coupon::where('coupon_code', $request->coupon_code)->where('expired_at','>=',Carbon::today())->first();
-        $couponuser = CouponUser::where('user_id', auth()->id())->where('coupon_id',$coupon->id)->first();
-        if(!empty($couponuser)){
-            return response()->json(['code'=>400, 'message'=>'Coupon already applied!', 'success' => false]);
-        }else{
-            if (!empty($coupon)) {
-                if($coupon->status == 1){
-                    if($coupon->coupon_type == 'percentage'){
-                        $discount = $coupon->amount;
-                        $discounted_price = $request->plan_price - ($request->plan_price * $discount / 100);
-                        return response()->json(['code'=>200, 'coupon_id'=>$coupon->id, 'status' => 'success', 'message'=>'Coupon code applied!', 'discount' => $discount, 'discounted_price' => $discounted_price]);
-                    }elseif($coupon->coupon_type == 'fixed'){
-                        $discount = $coupon->amount;
-                        $discounted_price = $request->plan_price - $discount;
-                        return response()->json(['code'=>200, 'coupon_id'=>$coupon->id, 'status' => 'success', 'message'=>'Coupon code applied!', 'discount' => $discount, 'discounted_price' => $discounted_price]);
+        if(isset($coupon)){
+            $couponuser = CouponUser::where('user_id', auth()->id())->where('coupon_id',$coupon->id)->first();
+            if(!empty($couponuser)){
+                return response()->json(['code'=>400, 'message'=>'Coupon already applied!', 'success' => false]);
+            }else{
+                if (!empty($coupon)) {
+                    if($coupon->status == 1){
+                        if($coupon->coupon_type == 'percentage'){
+                            $discount = $coupon->amount;
+                            $discounted_price = $request->plan_price - ($request->plan_price * $discount / 100);
+                            return response()->json(['code'=>200, 'coupon_id'=>$coupon->id, 'status' => 'success', 'message'=>'Coupon code applied!', 'discount' => $discount, 'discounted_price' => $discounted_price]);
+                        }elseif($coupon->coupon_type == 'fixed'){
+                            $discount = $coupon->amount;
+                            $discounted_price = $request->plan_price - $discount;
+                            return response()->json(['code'=>200, 'coupon_id'=>$coupon->id, 'status' => 'success', 'message'=>'Coupon code applied!', 'discount' => $discount, 'discounted_price' => $discounted_price]);
+                        }
+                    }else{
+                        return response()->json(['code'=>400, 'message'=>'Coupon expired!', 'success' => false]);
                     }
-                }else{
-                    return response()->json(['code'=>400, 'message'=>'Coupon expired!', 'success' => false]);
+                } else {
+                    return response()->json(['code'=>401, 'message'=>'Invalid coupon code!', 'success' => false]);
                 }
-            } else {
-                return response()->json(['code'=>401, 'message'=>'Coupon not found!', 'success' => false]);
             }
+        }else{
+            return response()->json(['code'=>400, 'message'=>'Invalid coupon code!', 'success' => false]);
         }
-
     }
 }

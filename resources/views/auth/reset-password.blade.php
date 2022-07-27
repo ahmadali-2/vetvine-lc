@@ -3,7 +3,7 @@
         padding: 10px 0px 50px 0px;
     }
     .box{
-        background-color: #e6e6e6;
+        background-color: #E4F7FD;
         padding: 30px;
     }
     .reset{
@@ -13,20 +13,46 @@
         text-transform: uppercase;
         color: #5c7c85;
     }
+
+    .block input {
+    width: 100%;
+    display: inline-block;
+    border: 1px solid #5c7c85 !important;
+    padding: 5px 10px;
+    height: 44px;
+    color: #5c7c85;
+    font-size: 18px;
+}
+
+.reset_password_button button{
+        background: #f27222;
+    border-radius: 12px;
+    font-size: 18px;
+    transition: 0.5s all;
+    font-family: 'Museo Sans 500';
+
+    }
     </style>
 @extends('frontend.master')
 
 @section('content')
 
 
-
+<div class="edit-profile-header edit_profile_banner"></div>
 <div class="container forgot_container" style="margin-top:50px; margin-bottom:30px">
-
+    <section class="become_member_area">
+        <div class="container">
+          <h2>
+            <span>Reset Your Password</span>
+          </h2>
+          <!-- <p class="membership-text">Please review the following details for this transaction.</p> -->
+        </div>
+      </section>
     <div class="row">
 
         {{-- <div class="col-md-3"></div> --}}
 
-        <div class="col-md-12"><h2 class="text-center reset">Reset Your Password</h2></div>
+
         <div class="col-md-6 mx-auto box reset_box">
 
 
@@ -80,7 +106,7 @@
             </div>
 
 
-
+<div class="row justify-content-center">
             <div class="flex items-center justify-center mt-4 reset_password_button">
 
                 <x-jet-button>
@@ -90,7 +116,7 @@
                 </x-jet-button>
 
             </div>
-
+        </div>
         </form>
 
         </div>

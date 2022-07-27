@@ -1,6 +1,30 @@
 @extends('frontend.master')
 @section('content')
+<style>
+    .video-section-wrapper {
+    width: 100%;
+    display: inline-block;
+    border-top: 2px solid #fff !important;
+    /* padding-top: 23px; */
+}
+</style>
     <main>
+
+        <section class="main_banner main_banner_grow">
+            <div class="container">
+              <div class="flex-box-banner">
+                <div class="grow_banner_box grow_banner_box_web">
+                  <div class="grow-heading">GROW</div>
+                  <img src="http://127.0.0.1:8000/frontend/images/sep-line-2.jpg" width="250" height="2" alt="" class="line_image">
+                  <p class="mb-0">Learn from world renowned animal experts to empower yourself and grow.
+                  </p>
+
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="main_banner_bottob_label"></section>
         <section class="video-section-wrapper mb-4">
             <div class="container">
 
@@ -97,7 +121,7 @@
                                     <p class="para-decription">
                                         {!! Str::limit($item->video_description, 350) !!}
                                     </p>
-                                    <a href="{{ route('video_desc', [$item->id, $item->category_id]) }}">Read More</a>
+                                    <a class="read_more_btn" href="{{ route('video_desc', [$item->id, $item->category_id]) }}">Read More</a>
                                 </div>
                             </div>
                         </div>
