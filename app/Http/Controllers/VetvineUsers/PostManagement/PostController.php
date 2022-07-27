@@ -139,7 +139,6 @@ class PostController extends Controller
 
     public function likeSave(Request $request)
     {
-        Log::info($request);
         $user = auth()->user();
         if($user){
             $permissions = MemberPermission::where('membertype_id', $user->userMemberType->id)->first();
@@ -148,18 +147,16 @@ class PostController extends Controller
                     $liked = Like::where('user_id', Auth::id())->where('post_id', $request->likepostid)->where('ce',$request->ce)->first();
                 }else{
                     $liked = ShareLike::where('user_id', Auth::id())->where('share_id', $request->likepostid)->where('ce',$request->ce)->first();
-                   Log::info($liked);
                 }
                 if (!$liked) {
-                    $push_notifications = event(new NotificationEvent(Auth::id(), (int)$request->likepostid,'like'));
-                    PushNotification::create([
+                    event(new NotificationEvent(Auth::id(), (int)$request->likepostid,'like'));
+                    $pusherNotification = PushNotification::create([
                         'user_id' => Auth::id(),
                         'post_id' => $request->likepostid,
                         'post_user_id' => $request->postUserid,
                         'type' => '0',
                         'is_read' => '1'
                     ]);
-
                     if($request->likeType == 1){
                         $liked = Like::create([
                             "post_id" => $request->likepostid,
@@ -174,6 +171,9 @@ class PostController extends Controller
                             "like" => 1,
                             "ce" => $request->ce,
                         ]);
+                        $share = Share::where('id',$request->likepostid)->first();
+                        event(new NotificationEvent(Auth::id(), $share->post_id,'like'));
+
                     }
 
                     return response()->json(
@@ -186,13 +186,16 @@ class PostController extends Controller
                     );
 
                 } elseif ($liked->like == 0) {
-                    $push_notifications = event(new NotificationEvent(Auth::id(), (int) $request->likepostid,'like'));
+
+                    $share = Share::where('id',$request->likepostid)->first();
                     PushNotification::where(['post_user_id'=>$request->postUserid,'post_id' => $request->likepostid,'user_id'=>Auth::user()->id])->update([
                         'is_read' => '1'
                     ]);
                     $liked->update([
                         "like" => '1',
                     ]);
+
+                    event(new NotificationEvent(Auth::id(), (int)$share->post_id,'like'));
                     return response()->json(
                         [
                             'success' => true,
@@ -202,7 +205,7 @@ class PostController extends Controller
                         ]
                     );
                 } else {
-                    // $push_notifications = event(new NotificationEvent(Auth::id(), (int) $request->likepostid));
+                    // $push_notifications = event(new NotificationEvent(Auth::id(), (int) $request->likepostid,'like'));
                     $liked->update([
                         "like" => '0',
                     ]);

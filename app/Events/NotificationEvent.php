@@ -47,12 +47,10 @@ class NotificationEvent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($user_id, $body,$action)
-    // public function __construct()
+    public function __construct($user_id, $post_id,$action)
     {
-        Log::info('Notification Event');
-        $post = Post::find($body) ?? '';
-        $user = User::find($user_id) ?? '';
+        $post = Post::find((int)$post_id) ?? '';
+        $user = User::find((int)$user_id) ?? '';
         if($action === "share"){
             Log::info("Share Event");
             $this->actionType = $action;
