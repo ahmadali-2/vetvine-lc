@@ -112,7 +112,7 @@
 
 
 
-  
+
     <!-- </footer> -->
     <script src="{{ asset('bootstrap/jquery/popper.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -318,6 +318,10 @@
     {!! JsValidator::formRequest('App\Http\Requests\Frontend\RegistrationRequest', '#regform') !!}
     {!! JsValidator::formRequest('App\Http\Requests\Frontend\ContactUsRequest', '#conatctusform') !!}
     {!! JsValidator::formRequest('App\Http\Requests\Frontend\LoginInRequest', '#loginRequest') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\ForgetPasswordRequest', '#forget_password') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\EventPayementRequest', '#payment-form') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\ResetPasswordRequest', '#reset_password') !!}
+
 
 
 

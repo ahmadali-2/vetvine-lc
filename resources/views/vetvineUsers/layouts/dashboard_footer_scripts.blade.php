@@ -20,6 +20,8 @@
 
     {!! JsValidator::formRequest('App\Http\Requests\UpdateUserPasswordRequest', '#changeUserPasswordForm') !!}
     {!! JsValidator::formRequest('App\Http\Requests\EventPayementRequest', '#payment-form') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\ForgetPasswordRequest', '#forget_password') !!}
+
 
     {{-- updated new dashboard --}}
 
