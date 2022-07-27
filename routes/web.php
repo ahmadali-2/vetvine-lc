@@ -65,6 +65,7 @@ use App\Http\Controllers\VetvineUsers\EventManagement\CalandarEventsController;
 use App\Models\Generals\TimeZone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+
 Route::get('/clear', function () {
     Artisan::call('route:clear');
     Artisan::call('cache:clear');

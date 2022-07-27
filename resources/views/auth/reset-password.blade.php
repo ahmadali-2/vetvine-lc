@@ -61,7 +61,7 @@
 
 
 
-        <form method="POST" action="{{ route('password.update') }}">
+        <form method="POST" action="{{ route('password.update') }}" id="reset_password">
 
             @csrf
 

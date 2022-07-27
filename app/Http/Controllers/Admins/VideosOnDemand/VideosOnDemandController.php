@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admins\VideosOnDemand;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\VideoOnDemandRequest;
 use App\Http\Requests\VideoRequest;
 use App\Models\Admins\VideosonDemand\VideosOnDemand;
 use App\Models\Admins\Webinar\CategoryEvent;
@@ -52,11 +53,9 @@ class VideosOnDemandController extends Controller
     {
         $request->validated();
         $input = $request->all();
-        // dd( $input);
         $user = Auth::user()->id;
         $path = public_path('vetvineUsers/videos/');
         $video = vetvineHelper::saveImage($request->post_add_video, $path);
-        // return $video;
         try {
             $videos = VideosOnDemand::create([
                 "user_id" => $user,
@@ -68,12 +67,10 @@ class VideosOnDemandController extends Controller
                 'category_id' => $input['category'],
                 'sponsor_id' => '1',
             ]);
-
             $videos->sponsers()->attach($request->sponser_id);
             parent::successMessage('Video saved successfully.');
             return redirect(route('videos-on-demand.index'));
         } catch (Exception $e) {
-            // dd($e);
             parent::dangerMessage("Video Does Not Created, Please Try  Again");
             return redirect()->back();
         }
@@ -106,7 +103,9 @@ class VideosOnDemandController extends Controller
         try {
             $video = VideosOnDemand::find($id);
             $category = CategoryEvent::all();
-            return view('admins.videosondemand.edit', compact('video', 'category'));
+            $sponser = SponserTable::all();
+            $selectedMembers    =   $video->sponsers->pluck('sponser_id')->toArray();
+            return view('admins.videosondemand.edit', compact('video', 'category', 'sponser', 'selectedMembers'));
         } catch (Exception $e) {
             parent::dangerMessage("Post Does Not Edited, Please Try  Again");
             return redirect()->back();
@@ -122,30 +121,35 @@ class VideosOnDemandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // return $request;
+        //detach purpose
+        $video_data = VideosOnDemand::find($id);
+        $video_data->sponsers()->detach($request->sponsor_id);
+
         if ($request->category_id === null) {
             $category = $request->category;
         } else {
             $category = $request->category_id;
         }
-
-        $input = $request->all();
-        $path = public_path('vetvineUsers/videos/');
-        $video = vetvineHelper::saveImage($request->post_add_video, $path);
-        $user = Auth::user()->id;
         try {
-            VideosOnDemand::find($id)->update([
-                "user_id" => $user,
-                "video_title" => ucwords($input['video_title']),
-                "video_link" => $input['video_link'],
-                "video_description" => ucfirst($input['video_description']),
-                "post_add_video" => $video,
-                "presented_by" => $input['presented_by'],
-                "category_id" => $category,
+            $user = Auth::user()->id;
+            $videos =VideosOnDemand::find($id);
+            $path = public_path('vetvineUsers/videos/');
+            $video = vetvineHelper::updateImage($request->post_addvideo, $videos->post_add_video, $path);
+            $videos->update([
+                "user_id"             => $user,
+                "video_title"         => ucwords($request->input('video_title')),
+                "video_link"          => $request->input('video_link'),
+                "video_description"   => ucfirst($request->input('video_description')),
+                "post_add_video"      => $video,
+                "presented_by"        => $request->input('presented_by'),
+                "category_id"         => $category,
+                "sponsor_id"          => '1',
             ]);
+            $videos->sponsers()->attach($request->sponser_id);
             parent::successMessage('Video Updated successfully.');
             return redirect(route('videos-on-demand.index'));
         } catch (Exception $e) {
+
             parent::dangerMessage("Video Does Not Updated, Please Try  Again");
             return redirect()->back();
         }
@@ -159,15 +163,11 @@ class VideosOnDemandController extends Controller
      */
     public function destroy($id)
     {
-        // dd($id);
-        // return $id;
         try {
             VideosOnDemand::find($id)->delete();
             parent::successMessage('Video Deleted successfully.');
             return redirect(route('videos-on-demand.index'));
         } catch (Exception $e) {
-            dd($e->getMessage());
-            // return false;
             parent::dangerMessage("Video Does Not Deleted, Please Try  Again");
             return redirect()->back();
         }

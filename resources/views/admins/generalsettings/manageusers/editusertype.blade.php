@@ -30,6 +30,18 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="blocked_user" class="control-label mb-1">Blocked Status</label>
+                                            <br>
+                                            <input type="checkbox" name="blocked_user"
+                                                {{ $user->blocked_user == 1 ? 'checked' : '' }} data-toggle="toggle"
+                                                data-onstyle="outline-danger" data-size="md" data-offstyle="outline-success"
+                                                data-on="<i class='fa fa-unlock'></i> Blocked"
+                                                data-off="<i class='fa fa-lock'></i> Unblocked">
+
+                                        </div>
+                                    </div>
                                 </div>
                                 <div>
                                     <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">

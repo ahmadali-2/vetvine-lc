@@ -20,7 +20,7 @@
             @foreach ($plans as $plan)
                 <div class="col-lg-4 col-md-6">
                     <div class="content text-center">
-                        <p class="free_paln">{{ $plan->plancategory->category_name ?? ''}} Plan</p>
+                        <p class="free_paln">{{ $plan->plancategory->category_name ?? ''}}</p>
                         <h1 class="free-bold"><span>$</span>{{ $plan->plan_price }}</h1>
                         <ul class="card__text__align">
                             @foreach (json_decode($plan->plan_features) as $feature)
