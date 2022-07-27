@@ -105,10 +105,8 @@
                             @endif
                             <div class="video-bottom-text">
                                 <h3>{{ $showevents->event_title }}</h3>
-                                </h3>
-                                <div>
 
-                                </div>
+
                             </div>
                             @if (Auth::user())
                                 @php
@@ -139,9 +137,6 @@
                              @endif
                             <div class="video-bottom-description">
                                 <h5 class="my-3">{{ date('m/d/Y', strtotime($showevents->date)) }}</h5>
-                                {{-- @if (Auth::user())
-                                <h5>Start Time : {{ date('g:i a', strtotime($formattedTime)) }}</h5>
-                               @endif --}}
                                 <p><strong>Presented by:</strong> <a href="{{ $showevents->presenter_url_one }}"
                                         class="vetvine_a" target="_blank" >{{ $showevents->presenter_one }}</a>
 
@@ -158,15 +153,13 @@
                                     </div>
 
                                 </div>
-                                </p>
 
-
-                                </p>
                                 <p class="para-decription">
+
                                     {!! Str::limit($showevents->event_description, 250) !!}
                                 </p>
 
-                                <a href="{{ route('upcoming_details', $showevents->id) }}">Read More</a>
+                                <a href="{{ route('upcoming_details', $showevents->id) }}" class="read_more_btn">Read More</a>
                             </div>
                         </div>
                     </div>
