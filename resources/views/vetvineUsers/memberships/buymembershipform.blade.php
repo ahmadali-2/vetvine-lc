@@ -263,7 +263,8 @@ $(document).ready(function() {
 localStorage.setItem('coupon_code', '');
 $('#applycouponcode').on('click', function() {
     var coupon_code = $('#coupon_code').val();
-    if(coupon_code == localStorage.getItem('coupon_code')){
+    if(coupon_code != ''){
+        if(coupon_code == localStorage.getItem('coupon_code')){
         toastr.error('Coupon code already applied');
     }
     else{
@@ -302,7 +303,9 @@ $('#applycouponcode').on('click', function() {
     }
 
     }
-
+    }else{
+        toastr.error('Please insert coupon code first!');
+    }
 });
 });
 
