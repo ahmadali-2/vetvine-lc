@@ -21,7 +21,7 @@
                                 <strong class="card-title"> Table</strong>
                             </div>
                             <div class="card-body">
-                                <table class="table" style="width: 100%;">
+                                <table class="table" style="width: 100%;" id="ForumsTable">
                                 <colgroup>
                                     <col span="1" style="width: 5%;">
                                     <col span="1" style="width: 10%;">

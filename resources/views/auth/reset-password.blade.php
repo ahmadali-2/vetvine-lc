@@ -3,7 +3,7 @@
         padding: 10px 0px 50px 0px;
     }
     .box{
-        background-color: #E4F7FD;
+             background-color: #E4F7FD;
         padding: 30px;
     }
     .reset{
@@ -117,12 +117,3 @@
 
             </div>
         </div>
-        </form>
-
-        </div>
-
-</div>
-
-</div>
-
-  @endsection
