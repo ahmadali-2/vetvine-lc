@@ -137,7 +137,7 @@
                              @endif
                             <div class="video-bottom-description">
                                 <h5 class="my-3">{{ date('m/d/Y', strtotime($showevents->date)) }}</h5>
-                                <p><strong>Presented by:</strong> <a href="{{ $showevents->presenter_url_one }}"
+                                <p><strong>Presented by:</strong> <a href="{{ $showevents->presenter_one_url }}"
                                         class="vetvine_a" target="_blank" >{{ $showevents->presenter_one }}</a>
 
                                 <div class="parent_sponser">

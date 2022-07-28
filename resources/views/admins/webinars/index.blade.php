@@ -21,8 +21,7 @@
                         <strong class="card-title">Manage Events</strong>
                     </div>
                         <div class="card-body">
-                           <table class="table">
-                               <thead>
+                           <table class="table" id="ForumsTable">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -58,7 +57,6 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                               </thead>
                            </table>
                 </div>
             </div>
