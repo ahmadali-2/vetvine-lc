@@ -1,6 +1,5 @@
 @extends('admins.master')
 @section('content')
-
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -74,7 +73,7 @@
                                             multiple="multiple">
                                             @foreach ($sponser as $sponsers)
                                             <option value="{{ $sponsers->id }}"
-                                                @if (in_array($sponsers->id, $selectedMembers)) selected @endif>
+                                                @if (in_array($sponsers->id, $sponserIds)) selected @endif>
                                                 {{ $sponsers->sponser_name  }}</option>
                                             @endforeach
                                         </select>

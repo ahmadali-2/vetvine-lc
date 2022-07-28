@@ -49,6 +49,9 @@
     color: #5c7c85;
     font-size: 18px;
 }
+.text-red-600{
+    color: red;
+}
     </style>
     @extends('frontend.master')
     @section('content')
