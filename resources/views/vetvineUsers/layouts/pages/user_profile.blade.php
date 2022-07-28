@@ -112,7 +112,7 @@
                                         </div>
                                         <div class="serch-section">
 
-                                            <div class="inner-input license-field @if(Auth::user()->network_id===6 || Auth::user()->network_id===7) show @endif" id="license-div">
+                                            <div class="inner-input license-field d-flex @if(Auth::user()->network_id===6 || Auth::user()->network_id===7) show @endif" id="license-div">
                                                 <label>Licensure*</label>
                                                 <div class="input_field" >
                                                     <input placeholder="" class="form-control license-inp" name="licensure" @if(Auth::user()->network_id===6 || Auth::user()->network_id===7)
