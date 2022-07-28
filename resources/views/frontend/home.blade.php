@@ -1,5 +1,26 @@
 @extends('frontend.master')
 @section('content')
+<style>
+    .emailVerify p {
+        font-size: 18px;
+        font-family: 'Museo 500';
+        color: #5e7c85;
+    }
+    .verifyButton button{
+        margin-left: 20%;
+    background-color: #f27222;
+    font-size: 18px;
+    font-family: 'Museo Sans 500';
+    transition: 0.5s all;
+}
+    .verifyButton button:hover{
+     border: 2px solid #f27222 !important;
+     background-color: transparent !important;
+     color: #f27222 !important;
+}
+
+
+</style>
 <main>
     <section class="Section_top">
         <div class="container">
@@ -34,7 +55,7 @@
             </div>
 
             <!-- Modal body -->
-            <div class="modal-body">
+            <div class="modal-body emailVerify">
                 <div class="popup-body">
                     <div class="row">
                         <h2 class="email_heading" style="border-bottom: 1px solid transparent !important; ">Verify
@@ -64,7 +85,7 @@
                             <x-jet-validation-errors class="mb-4" />
                             <form method="POST" action="{{ route('verification.send') }}">
                                 @csrf
-                                <div class="flex items-center justify-center mt-4">
+                                <div class="flex items-center justify-center mt-4 verifyButton">
                                     <x-jet-button class="verify_btn" type="submit"
                                         style="margin-left: 20%;  background-color: #f27222;">
                                         {{ __('Resend Verification Email') }}

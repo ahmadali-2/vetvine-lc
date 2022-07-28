@@ -88,6 +88,12 @@ Route::get('/seed/timezones',function(){
     return 'Timezone seeded successfully';
 });
 
+Route::get('/seed/privacy',function(){
+    $wSeeder = new \Database\Seeders\PrivacyPolicySeeder();
+    $wSeeder->run();
+    return 'Timezone seeded successfully';
+});
+
 Route::get('phpinfo', function () {
     phpinfo();
 });
