@@ -16,7 +16,7 @@
                                 <strong class="card-title">Member Type Table</strong>
                             </div>
                             <div class="card-body">
-                                <table class="table">
+                                <table class="table" id="ForumsTable">
                                     <thead>
                                         <tr>
                                             <th scope="col">No #</th>

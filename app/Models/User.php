@@ -70,6 +70,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'locale_id',
         'blocked_search',
         'profile_privacy',
+        'blocked_user',
         'profile_posting_privacy',
         'guest',
 

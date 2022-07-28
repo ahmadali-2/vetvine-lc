@@ -22,7 +22,7 @@
                         <strong class="card-title">Basic Table</strong>
                     </div>
                     <div class="card-body">
-                        <table class="table">
+                        <table class="table" id="ForumsTable">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>

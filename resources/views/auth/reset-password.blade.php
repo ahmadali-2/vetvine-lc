@@ -3,7 +3,7 @@
         padding: 10px 0px 50px 0px;
     }
     .box{
-        background-color: #E4F7FD;
+             background-color: #E4F7FD;
         padding: 30px;
     }
     .reset{
@@ -61,7 +61,7 @@
 
 
 
-        <form method="POST" action="{{ route('password.update') }}">
+        <form method="POST" action="{{ route('password.update') }}" id="reset_password">
 
             @csrf
 
@@ -117,12 +117,3 @@
 
             </div>
         </div>
-        </form>
-
-        </div>
-
-</div>
-
-</div>
-
-  @endsection

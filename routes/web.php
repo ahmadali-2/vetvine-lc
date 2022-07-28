@@ -65,6 +65,7 @@ use App\Http\Controllers\VetvineUsers\EventManagement\CalandarEventsController;
 use App\Models\Generals\TimeZone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+
 Route::get('/clear', function () {
     Artisan::call('route:clear');
     Artisan::call('cache:clear');
@@ -83,6 +84,12 @@ Route::get('/migrate',function(){
 
 Route::get('/seed/timezones',function(){
     $wSeeder = new \Database\Seeders\TimeZoneSeeder();
+    $wSeeder->run();
+    return 'Timezone seeded successfully';
+});
+
+Route::get('/seed/privacy',function(){
+    $wSeeder = new \Database\Seeders\PrivacyPolicySeeder();
     $wSeeder->run();
     return 'Timezone seeded successfully';
 });
