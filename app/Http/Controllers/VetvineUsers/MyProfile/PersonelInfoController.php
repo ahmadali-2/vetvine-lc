@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use vetvineHelper;
 use App\Models\Admins\Webinar\Event;
+use App\Models\NotificationHistory;
+use App\Models\PostActivity;
+
 // use App\Models\VetVineUsers\Settings\Country;
 // use Country
 
@@ -64,11 +67,11 @@ class PersonelInfoController extends Controller
     }
     public function notifications()
     {
-        $notifications = PushNotification::with('posts', 'user')
-        ->where('post_user_id', Auth::user()->id)
-        ->orderBy('id','desc')
-        ->paginate(4);
-
+        // $notifications = PushNotification::with('posts', 'user')
+        // ->where('post_user_id', Auth::user()->id)
+        // ->orderBy('id','desc')
+        // ->paginate(4);
+        $notifications = NotificationHistory::with('post','actionBy')->where('user_id',Auth::user()->id)->orderBy('id','desc')->paginate(4);
         PushNotification::where('post_user_id',Auth::user()->id)->update(['is_read'=>'0']);
 
         return view('vetvineUsers.layouts.pages.notifications', compact('notifications'));

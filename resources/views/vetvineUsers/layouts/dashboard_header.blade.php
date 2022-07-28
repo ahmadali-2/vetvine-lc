@@ -1,4 +1,5 @@
 <header class="main-wrapper">
+    <?php $authUser= null; auth()->user() ? $authUser = Auth::user()->id : null; ?>
     <div class="top_Wrapper">
         <div class="container-fluid">
 
@@ -211,15 +212,8 @@
                             <a class="nav-link mm-editdb-text a-position"
                                 href="{{ route('vetvineUserNotifications') }}"> <i
                                     class="fas fa-bell mrg_top_edit"></i>
-                                <span class="badge badge-danger a-ab" style="background: #f27222 !important;" id="countnotif">@php
-                                    if (Auth::check()) {
-                                        $userId = Auth::user()->id;
-                                        $notificationCount = DB::table('push_notifications')->where(['post_user_id'=>$userId,'is_read'=>'1'])->count();
-                                    }
+                                <span class="badge badge-danger a-ab" style="background: #f27222 !important;" id="countnotif">0</span>
 
-                                @endphp @isset($notificationCount)
-                                    {{ $notificationCount }}
-                                @endisset</span>
                                 <br>
                                 Notifications</a>
                         </li>
@@ -318,12 +312,49 @@
 @include('frontend.pages.general.contactus')
 @include('common.deletemodal')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#profileView').on('click', function(){
-            console.log('hello');
-            localStorage.setItem('eventUrl','');
-            window.location.href="{{ route('vetvineUserProfile') }}";
+<script src="https://js.pusher.com/7.1/pusher.min.js"></script>
+    <script type="text/javascript">
+
+        var authUser = '<?php echo $authUser?>';
+        var notificationsWrapper = $('.dropdown-notifications');
+        var notificationsToggle = notificationsWrapper.find('a[data-toggle]');
+        var notificationsCountElem = notificationsToggle.find('i[data-count]');
+        var notificationsCount = parseInt(notificationsCountElem.data('count'));
+        var notifications = notificationsWrapper.find('ul.dropdown-menu');
+        $(document).ready(function() {
+            $('#profileView').on('click', function(){
+                console.log('hello');
+                localStorage.setItem('eventUrl','');
+                window.location.href="{{ route('vetvineUserProfile') }}";
+            });
         });
-    });
-</script>
+        if (notificationsCount <= 0) {
+            notificationsWrapper.hide();
+        }
+
+        var pusher = new Pusher('c1e77302d4c4ec349e3a', {
+            cluster: 'ap2',
+        });
+
+        var channel = pusher.subscribe('my-channel');
+        // console.log(channel);
+
+        channel.bind('notification-event', function(data) {
+            // return false;
+            console.log(data);
+            // if(data.userDesc){
+            if(data.postUserId == authUser){
+                $(data).each(function() {
+                    var userId = data.userId;
+                    var userName = data.userName;
+                    var count = parseInt($("#countnotif").text());
+                            count += 1;
+                        $("#countnotif").html(count);
+                });
+            }
+            // }else{
+            //     console.log("No data found");
+            // }
+            // }
+        });
+    </script>

@@ -10,6 +10,7 @@
 </head>
 
 <body>
+
     @include('vetvineUsers.layouts.dashboard_header')
     <div class="edit-profile-header edit_profile_banner">
 
@@ -30,7 +31,4 @@
 @yield('scripts')
 
 </body>
-
-
-
 </html>

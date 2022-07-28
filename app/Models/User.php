@@ -199,4 +199,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function unreadMessage(){
         return $this->hasMany(ChMessage::class,'from_id','id')->where('from_id',$this->id)->where('seen',0)->count();
     }
+
+    public function notificationHistory(){
+        return $this->hasMany(NotificationHistory::class);
+    }
 }

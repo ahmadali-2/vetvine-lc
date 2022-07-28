@@ -17,10 +17,11 @@ class CreatePushNotificationsTable extends Migration
             $table->id();
             $table->unsignedbigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedbigInteger('post_id');
-
-            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
-
+            $table->unsignedbigInteger('post_id')->nullable();
+            $table->unsignedbigInteger('share_id')->nullable();
+            $table->integer('is_like')->nullable();
+            $table->integer('is_comment')->nullable();
+            $table->integer('ce')->nullable();
             $table->timestamps();
         });
     }
