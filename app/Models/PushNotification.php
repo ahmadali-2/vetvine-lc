@@ -15,7 +15,10 @@ class PushNotification extends Model
         'user_id',
         'type',
         'post_user_id',
-        'is_read'
+        'is_read',
+        'share_id',
+        'is_like',
+        'is_comment'
     ];
 
     public function user(){
@@ -23,5 +26,8 @@ class PushNotification extends Model
     }
     public function posts(){
         return $this->belongsTo(Post::class, 'post_id');
+    }
+    public function share(){
+        return $this->belongsTo(Share::class);
     }
 }
