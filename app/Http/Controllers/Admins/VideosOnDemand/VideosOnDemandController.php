@@ -104,8 +104,9 @@ class VideosOnDemandController extends Controller
             $video = VideosOnDemand::find($id);
             $category = CategoryEvent::all();
             $sponser = SponserTable::all();
+            $sponserIds = $video->sponsers->pluck('id')->toArray();
             $selectedMembers    =   $video->sponsers->pluck('sponser_id')->toArray();
-            return view('admins.videosondemand.edit', compact('video', 'category', 'sponser', 'selectedMembers'));
+            return view('admins.videosondemand.edit', compact('video', 'category', 'sponser', 'sponserIds', 'selectedMembers'));
         } catch (Exception $e) {
             parent::dangerMessage("Post Does Not Edited, Please Try  Again");
             return redirect()->back();
