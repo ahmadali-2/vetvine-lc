@@ -15,11 +15,12 @@ class CreateNotificationHistoriesTable extends Migration
     {
         Schema::create('notification_histories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('post_id');
             $table->unsignedBigInteger('action_by');
-            $table->enum('action', ['Like', 'Comment', 'Share','Create']);
+            $table->integer('is_read');
+            $table->enum('action', ['liked', 'commented', 'shared','created']);
             $table->timestamps();
         });
     }

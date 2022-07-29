@@ -171,7 +171,7 @@ class PostController extends Controller
                             'is_like' => 1,
                             "ce" => $request->ce,
                         ];
-                        dd(PushNotification::create($postLikeNotification));
+                        PushNotification::create($postLikeNotification);
                         event(new NotificationEvent($postLikeNotification)); //Event listen for Simple Post Like
                     } else {
                         $postShareLike = [
@@ -286,6 +286,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
         $user = Auth::user()->id;
         $path = public_path('vetvineUsers/posts/');
         $result = vetvineHelper::saveImage($request->post_photo, $path);
@@ -301,11 +302,10 @@ class PostController extends Controller
             $post->post_link = $request->post_link;
             $post->post_add_video = $video;
             $post->save();
-
+            Log::info('post created');
             PostActivity::create([
                 'post_id' => $post->id,
             ]);
-
             parent::successMessage('Post saved successfully.');
             return redirect(route('post.index'));
         } catch (Exception $e) {

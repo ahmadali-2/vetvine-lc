@@ -212,7 +212,16 @@
                             <a class="nav-link mm-editdb-text a-position"
                                 href="{{ route('vetvineUserNotifications') }}"> <i
                                     class="fas fa-bell mrg_top_edit"></i>
-                                <span class="badge badge-danger a-ab" style="background: #f27222 !important;" id="countnotif">0</span>
+                                <span class="badge badge-danger a-ab" style="background: #f27222 !important;" id="countnotif">
+                                    @php
+                                        $counter = DB::table('notification_histories')->where(['user_id'=>Auth::user()->id, 'is_read'=>1])->count();
+                                    @endphp
+                                    @if ($counter)
+                                        {{ $counter }}
+                                    @else
+                                    0
+                                    @endif
+                                   </span>
 
                                 <br>
                                 Notifications</a>

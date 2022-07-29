@@ -71,9 +71,9 @@ class PersonelInfoController extends Controller
         // ->where('post_user_id', Auth::user()->id)
         // ->orderBy('id','desc')
         // ->paginate(4);
-        $notifications = NotificationHistory::with('post','actionBy')->where('user_id',Auth::user()->id)->orderBy('id','desc')->paginate(4);
-        PushNotification::where('post_user_id',Auth::user()->id)->update(['is_read'=>'0']);
-
+        $notifications = NotificationHistory::with('post','actionBy')->where(['user_id'=>Auth::user()->id])->orderBy('id','desc')->paginate(4);
+        // PushNotification::where('post_user_id',Auth::user()->id)->update(['is_read'=>'0']);
+        NotificationHistory::where('user_id',Auth::user()->id)->update(['is_read' => 0]);
         return view('vetvineUsers.layouts.pages.notifications', compact('notifications'));
     }
 
