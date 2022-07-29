@@ -174,6 +174,13 @@
             font-family: 'Museo 500';
         }
 
+        .video-section-wrapper {
+    width: 100%;
+    display: inline-block;
+    border-top: 0px solid #68868e !important;
+    /* padding-top: 23px; */
+}
+
         /* End */
     </style>
 
