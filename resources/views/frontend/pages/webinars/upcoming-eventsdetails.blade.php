@@ -276,13 +276,84 @@
             transition: 0.3s all;
             border: 2px solid #f27222 !important;
         }
-
+        .timezone_btn_close{
+            color: #fff;
+            background-color: #f27222;
+            border-color: #f27222;
+            border-radius: 12px;
+            width: 102px;
+            transition: 0.3s all;
+            border: 2px solid #f27222 !important;
+        }
+        .timezone_btn_close:hover {
+            background: transparent;
+            border: 2px solid #f27222 !important;
+            color: #f27222;
+        }
         #ajax-book-model .btn-primary:hover {
             background: transparent;
             border: 2px solid #f27222 !important;
             color: #f27222;
         }
+
+
+        .video-section-wrapper {
+    width: 100%;
+    display: inline-block;
+    border-top: 0px solid #68868e !important;
+    /* padding-top: 23px; */
+}
+.time_zone_content{
+
+    color: #4C5B67;
+    background: #ddf0f7;
+}
     </style>
+
+     {{-- timezone modal box  --}}
+
+<!-- Button trigger modal -->
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="timzeZone" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content time_zone_content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle"><nav aria-label="breadcrumb" class="breadcrumbs large-font">
+            <ol class="breadcrumb">
+
+                <li class="breadcrumb-item"><a onclick="history.back()" href="javascript::void();">Upcoming
+                        Webinars</a></li>
+                <li class="breadcrumb-item" aria-current="page">
+                    <a onclick="history.back()" href="javascript::void();">Molestiae Repellendu</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    Timezone
+                </li>
+            </ol>
+        </nav></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body" style="overflow-y: scroll; height: 400px">
+            <div id="eventTimezonesBody"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary timezone_btn_close" data-dismiss="modal" >Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+     {{-- timezone modal box  --}}
+
+
+
+
+
+
     <?php
     use App\Models\Generals\TimeZone;
     $convertedTime = null;
@@ -417,7 +488,7 @@
                                 </div>
                                 @auth
                                     <div class="public2-info" style="margin-left: 12px; margin-bottom:0px ;">
-                                        <a href="{{ url('upcoming-webinars-details/timezone/'.$eventdetail->user->id) }}" class="view_time_zone"> View Other
+                                        <a id="timezoneLink" data-toggle="modal" data-target="#timzeZone" class="view_time_zone" href="#"> View Other
                                             Timezones</a>
                                     </div>
                                 @endauth
@@ -570,7 +641,7 @@
     </section>
                <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-12 upcoming_para">
                         <p class="desription_p">
                         {!! $eventdetail->event_description !!}
                         </p>
@@ -727,6 +798,25 @@
             }
             }, 1000);
             //Event counter End.
+            $('#timezoneLink').on('click', function(){
+                var event_id = '<?php echo $eventId ?>';
+                var eventTime = '<?php echo $eventTime ?>';
+                $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        type: "POST",
+                        url: "/load-other-timezones",
+                        data: {
+                            event_id: event_id,
+                            event_time: eventTime,
+                        },
+                        success: function(response) {
+                            $('#eventTimezonesBody').empty();
+                            $('#eventTimezonesBody').append(response.html);
+                        }
+                    });
+            });
 
             $('#register_event').on('click', function(){
                 var url=location.href;
