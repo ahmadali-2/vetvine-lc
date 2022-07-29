@@ -203,4 +203,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function notificationHistory(){
         return $this->hasMany(NotificationHistory::class);
     }
+
+    public function network(){
+        return $this->belongsTo(UserMemberAndNetworkLevel::class, 'network_id');
+    }
 }
