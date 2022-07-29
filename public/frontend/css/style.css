@@ -9598,13 +9598,14 @@ p {
     display: block;
 }
 .cockie .modal-content .close:hover{ color: #4C5B67; }
-.cockie .modal-box .modal-dialog .modal-content .modal-body{ padding: 20px 30px 50px !important; }
+.cockie .modal-box .modal-dialog .modal-content .modal-body{ padding: 0px 0px 35px 0px !important; }
 
 
 .cockie .modal-box .modal-dialog{
     position:fixed;
-    right:0;
+    left:0;
     bottom:0;
+    min-width:100%;
 }
 .cockie .modal-box .modal-dialog .modal-content .modal-body .title{
     font-weight: 600;
@@ -9616,7 +9617,7 @@ p {
 }
 .cockie .modal-box .modal-dialog .modal-content .modal-body .description{
 
-    margin: 0 0 60px;
+    margin: 0 0 25px;
     font-family: "Museo Sans 500";
     font-size: 18pt;
 
