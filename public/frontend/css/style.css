@@ -2446,7 +2446,7 @@ select#fav_show:focus>option:checked {
 
 .video-detail-para p {
     font-family: "Museo Sans 500";
-    font-size: 18px;
+    font-size: 16pt;
     color: #507f87;
 }
 
@@ -9598,7 +9598,14 @@ p {
     display: block;
 }
 .cockie .modal-content .close:hover{ color: #4C5B67; }
-.cockie .modal-box .modal-dialog .modal-content .modal-body{ padding: 60px 30px 50px !important; }
+.cockie .modal-box .modal-dialog .modal-content .modal-body{ padding: 20px 30px 50px !important; }
+
+
+.cockie .modal-box .modal-dialog{
+    position:fixed;
+    right:0;
+    bottom:0;
+}
 .cockie .modal-box .modal-dialog .modal-content .modal-body .title{
     font-weight: 600;
     margin:10px 10px 20px;
@@ -9731,4 +9738,16 @@ p {
     font-size: 18px;
     font-family: 'Museo Sans 500';
 
+}
+
+.upcoming_para p{
+    font-family: "Museo Sans 500";
+    font-size: 16pt;
+    color: #507f87;
+}
+
+
+#eventCountdown{
+    font-size:22px;
+    margin-bottom:0px;
 }
