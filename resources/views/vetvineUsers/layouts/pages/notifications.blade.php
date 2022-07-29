@@ -32,13 +32,13 @@
                 </div>
                 <div class="col-lg-6 right">
                     <div class="box shadow-sm rounded bg-white mb-3">
-                        <div class="box-title border-bottom p-3">
+                        {{-- <div class="box-title border-bottom p-3">
                             <h6 class="m-0">Recent</h6>
 
-                        </div>
+                        </div> --}}
 
-                        <div class="box-body p-0" id="notification-card">
-                            {{-- <div class="p-3 d-flex bg-light border-bottom osahan-post-header">
+                        {{-- <div class="box-body p-0" id="notification-card"> --}}
+                        {{-- <div class="p-3 d-flex bg-light border-bottom osahan-post-header">
                                 <div class="dropdown-list-image mr-3">
                                     <img class="rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar3.png"
                                         alt="" />
@@ -70,18 +70,14 @@
 
                             </div> --}}
 
-                        </div>
+                        {{-- </div> --}}
                     </div>
-
-
-
-
                     <!-- earlier section start  -->
-
                     <div class="box shadow-sm rounded bg-white mb-3 noti_parent ">
                         <div class="box-title border-bottom p-3">
-                            <h6 class="m-0">Earlier</h6>
+                            <h6 class="m-0">Notifications</h6>
                         </div>
+                        <div class="box-body p-0" id="notification-card"></div>
                         <div class="box-body p-0">
                             <!-- row loop start  -->
                             @foreach ($notifications as $notification)
@@ -90,31 +86,36 @@
 
                                         <div class="p-3 d-flex  border-bottom osahan-post-header">
                                             @if ($notification->actionBy->profile_photo)
-                                            <div class="dropdown-list-image mr-3"><img class="rounded-circle"
-                                                src="{{ asset('frontend/images/Profile-Images/' . $notification->actionBy->profile_photo) }}"
-                                                alt="" />
-                                            </div>
+                                                <div class="dropdown-list-image mr-3"><img class="rounded-circle"
+                                                        src="{{ asset('frontend/images/Profile-Images/' . $notification->actionBy->profile_photo) }}"
+                                                        alt="" />
+                                                </div>
                                             @else
-                                            <div class="dropdown-list-image mr-3">
-                                                <img class="rounded-circle"
-                                                src="{{ asset('frontend/images/dummy.png') }}" alt=""
-                                                id="user-image">
-                                            </div>
+                                                <div class="dropdown-list-image mr-3">
+                                                    <img class="rounded-circle"
+                                                        src="{{ asset('frontend/images/dummy.png') }}" alt=""
+                                                        id="user-image">
+                                                </div>
                                             @endif
 
                                             <div class="font-weight-bold mr-3">
-                                                <div class="text-truncate">{{ $notification->post->post_title }}: {{ $notification->action }}
-                                                    {{ $notification->actionBy->name }}</div>
+                                                <div class="text-truncate">
+                                                    {{ $notification->actionBy->name }} <span
+                                                        style="font-weight:lighter;">{{ $notification->action }} your
+                                                        post</span> {{ $notification->post->post_title }}.</div>
+                                                <p style="font-size: 13px; font-weight:lighter;">
+                                                    {{ $notification->created_at->diffForHumans() }}</p>
                                                 <div class="content">
                                                     <div class="content_img">
                                                         <img src="{{ asset('vetvineUsers/posts/' . $notification->post->post_photo) }}"
                                                             alt="">
                                                     </div>
-                                                    <div class="small para_pad">
+                                                    <div class="small para_pad" style="font-size: 88%;">
                                                         {{-- {!! $notification->post->post_description !!} --}}
                                                         {!! Str::limit($notification->post->post_description, 160) !!}
                                                     </div>
                                                 </div>
+
 
                                                 {{-- <div class="comment mt-2">
                                                     <div class="small mr-3">
@@ -353,40 +354,63 @@
                 var userPhoto = data.userPhoto;
                 var userName = data.userName;
                 var postImg = data.postImg;
+                var sendToAll = data.sendToAll;
                 var postUserId = data.postUserId;
                 var authUser = '<?php echo $authUser; ?>';
                 var desc = $(postDesc).text();
                 var img = "{{ asset('vetvineUsers/posts') }}" + '/' + postImg;
                 var profileImg = "{{ asset('frontend/images/Profile-Images') }}" + '/' + userPhoto;
-                // var likes = data.likes;
-                console.log(postUserId);
-                console.log(authUser);
-
-                if (postUserId == authUser) {
-                    if (data.actionType) {
-                        var html = $(`
+                if (sendToAll) {
+                    var html = $(`
                                     <div class="notification p-3 d-flex bg-light border-bottom osahan-post-header">
                                     <div class="dropdown-list-image mr-3">
                                         <img class="rounded-circle" src="` + profileImg + `"
                                             alt="" />
                                     </div>
                                     <div class="font-weight-bold mr-3 noti_parent">
-                                        <div class="post-title" class="text-truncate">` + postTitle + `: `+data.actionType+` By ` + userName + `</div>
+                                        <div class="post-title" class="text-truncate">` + userName +
+                        ` <span style="font-weight:lighter;">` + data.actionType + ` </span> ` +
+                        postTitle + `</div>
                                         <div class="content">
                                             <div class="content_img">
                                                 <img class="profile-img" src="` + img + `"
                                                     alt="">
                                             </div>
-                                            <div class="small para_pad">` + desc + `</div>
+                                            <div class="small para_pad" style="font-size: 88%;">` + desc + `</div>
                                         </div>
                                     </div>
                                 </div>
                                 `);
-                        $("#notification-card").append(html);
+                    $("#notification-card").append(html);
+                } else {
+                    if (postUserId == authUser) {
+                        if (data.actionType) {
+                            var html = $(`
+                                    <div class="notification p-3 d-flex bg-light border-bottom osahan-post-header">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="` + profileImg + `"
+                                            alt="" />
+                                    </div>
+                                    <div class="font-weight-bold mr-3 noti_parent">
+                                        <div class="post-title" class="text-truncate">` + userName +
+                                ` <span style="font-weight:lighter;">` + data.actionType + ` </span> ` +
+                                postTitle + `</div>
+                                        <div class="content">
+                                            <div class="content_img">
+                                                <img class="profile-img" src="` + img + `"
+                                                    alt="">
+                                            </div>
+                                            <div class="small para_pad" style="font-size: 88%;">` + desc + `</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                `);
+                            $("#notification-card").append(html);
+                        }
+                        // var count = parseInt($("#countnotif").text());
+                        // count += 1;
+                        // $("#countnotif").html(count);
                     }
-                    // var count = parseInt($("#countnotif").text());
-                    // count += 1;
-                    // $("#countnotif").html(count);
                 }
             })
             // }else{
