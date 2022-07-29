@@ -277,7 +277,7 @@
                                 <span aria-hidden="true">×</span>
                             </button>
                             <div class="modal-body">
-                                <img src="{{asset('frontend/images/dog-bowl.png')}}" alt="" height="130" width="130">
+                                <img src="{{asset('frontend/images/dog-bowl.png')}}" alt="" height="100" width="100">
                                 <div class="header d-flex justify-content-center align-items-center">
                                 <img src="{{asset('frontend/images/bone1.png')}}" alt="" height="20" width="40">
                                 <h3 class="title">Cookies, anyone?</h3>
