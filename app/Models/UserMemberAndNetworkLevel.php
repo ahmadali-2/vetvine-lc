@@ -28,4 +28,8 @@ class UserMemberAndNetworkLevel extends Model
     {
         return $this->hasMany(AdCampaign::class);
     }
+
+    public function user(){
+        return $this->hasOne(User::class);
+    }
 }
