@@ -120,17 +120,17 @@ class HomeController extends Controller
         return view('frontend.pages.webinars.upcoming-eventsdetails', compact('eventdetail', 'category', 'eventId','authUser','purchasedEvent','eventTime'));
     }
 
-    public function upcomingEventTimeZone($id){
+    public function loadOtherTimeZones(Request $request){
         $timeZoneArray = [];
-        $timezon = User::find($id)->timezone;
-        $events = User::find($id)->events;
+        $events = Event::find($request->event_id)->first();
         $timezones = TimeZone::get();
-        foreach($events as $event){
-            foreach ($timezones as $timezone) {
-                array_push($timeZoneArray, convertToTimeZone($timezone->timezone,date('Y-m-d H:i:s', strtotime(''.$event->date.''.$event->time.'')), trim($timezone->region)));
-            }
+        foreach ($timezones as $timezone) {
+            array_push($timeZoneArray, convertToTimeZone($timezone->timezone,date('Y-m-d H:i:s', strtotime(''.$events->date.''.$events->time.'')), trim($timezone->region)));
         }
-        return view('frontend.pages.webinars.upcoming-event-timezone', compact('timeZoneArray'));
+        return response()->json([
+            'code' => 200,
+            'html' => view('frontend.pages.webinars.upcoming-event-timezone', compact('timeZoneArray'))->render(),
+        ]);
     }
 
     public function getEventPrice(Request $request){
