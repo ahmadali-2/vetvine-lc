@@ -14,7 +14,7 @@ $vetvineLogo =vetvineHelper::vetvineGeneralSetting()
 
                 <ul class="list__icons">
 
-                    <li>
+                    <li class="search_sec">
 
                         <div class="input-group mb-3">
 
@@ -38,7 +38,7 @@ $vetvineLogo =vetvineHelper::vetvineGeneralSetting()
 
                     @auth
 
-                    <li> <form method="POST" action="{{ route('logout') }}">
+                    <li class="logout_sec"> <form method="POST" action="{{ route('logout') }}">
 
                         @csrf
 

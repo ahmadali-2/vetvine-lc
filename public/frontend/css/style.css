@@ -9110,7 +9110,7 @@ p {
 
 .upcoming-home-bg2 {
     min-height: 490px;
-    background-image: linear-gradient(90deg, rgb(244, 244, 244, 1) 50%, rgba(255, 255, 255, 0.1) 70%), url('../images/bg_pay.png');
+    background-image: linear-gradient(90deg, rgb(244, 244, 244, 1) 50%, rgba(255, 255, 255, 0.1) 70%), url('../images/bg_pay_1.jpg');
     border-bottom: 10px solid #f27222 !important;
     background-repeat: no-repeat;
     background-size: cover;
@@ -9531,10 +9531,12 @@ p {
 }
 
 .spon-descripton a{
-    color:#f27222;
+
+    color:#5c7c85;
+    font-size:18px;
 }
 .spon-descripton a:hover{
-    color:#5c7c85;
+    color:#f27222;
 }
 
 /* cockestyle   */
@@ -9598,7 +9600,7 @@ p {
     display: block;
 }
 .cockie .modal-content .close:hover{ color: #4C5B67; }
-.cockie .modal-box .modal-dialog .modal-content .modal-body{ padding: 0px 0px 35px 0px !important; }
+.cockie .modal-box .modal-dialog .modal-content .modal-body{ padding: 0px 0px 15px 0px !important; }
 
 
 .cockie .modal-box .modal-dialog{
@@ -9612,12 +9614,12 @@ p {
     margin:10px 10px 20px;
     font-family: "Museo 500";
     font-size: 28px;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 .cockie .modal-box .modal-dialog .modal-content .modal-body .description{
 
-    margin: 0 0 25px;
+    margin: 0 0 12px;
     font-family: "Museo Sans 500";
     font-size: 18pt;
 
@@ -9751,4 +9753,52 @@ p {
 #eventCountdown{
     font-size:22px;
     margin-bottom:0px;
+}
+
+
+@media(max-width:500px){
+
+
+    .cockie .modal-box .modal-dialog .modal-content .modal-body .title {
+        font-weight: 600;
+        margin: 10px 10px 20px;
+        font-family: "Museo 500";
+        font-size: 24px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .cockie .modal-box .modal-dialog .modal-content .modal-body .description {
+        margin: 0 0 12px;
+        font-family: "Museo Sans 500";
+        font-size: 12pt;
+    }
+
+    .cockie a {
+        background: #f27222;
+        padding: 5px;
+        border-radius: 12px;
+        font-family: "Museo Sans 500";
+        margin: 0px 20px;
+        color: #fff;
+        border: 2px solid #f27222 !important;
+        transition: 0.5s all;
+        font-size: 14px;
+    }
+}
+
+
+
+@media(max-width:568px){
+.search_sec{
+    width:100%;
+}
+.logout_sec{
+    margin-bottom: 20px;
+}
+
+.logout {
+    margin-right: 0px;
+}
+
 }

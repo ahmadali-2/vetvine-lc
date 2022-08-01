@@ -58,7 +58,7 @@ class EventController extends Controller
                 "category_id"                   =>   $input['category_id'],
                 "user_id"                       =>   $user,
                 "event_title"                   =>   ucwords($input['event_title']),
-                "tags"                          =>   $input['tags'],
+                "tags"                          =>   '['.$input['tags'].']',
                 "main_photo"                    =>   $result,
                 "event_add_ytlink"              =>   $input['event_add_ytlink'],
                 "date"                          =>   $input['date'],

@@ -7,7 +7,7 @@
                 <div class="top-social">
 
                     <ul class="list__icons dash-top-list">
-                        <li>
+                        <li class="search_sec">
                             <div class="input-group mb-3">
                                 <span class="search-text">Search: &nbsp;</span>
                                 <input type="text" class="form-control top-search" placeholder=""
@@ -18,7 +18,8 @@
                             </div>
                         </li>
 
-                        <li>
+
+                        <li class="logout_sec">
                             <a href="#" class="toggle-contact" data-toggle="modal" data-target="#myPopup"><span
                                     class="mail-logo"><i class="fa fa-envelope"></i></span> Stay in touch</a>
                         </li>

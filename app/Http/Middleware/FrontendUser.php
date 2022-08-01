@@ -23,9 +23,22 @@ class FrontendUser
         }elseif(Auth::check()){
             if(Auth::user()->type == 1){
                 return redirect()->route('admindashboard');
-            }else{
+            }
+            else if(Auth::user()->type == 9){
+                return redirect()->route('admindashboard');
+            }
+            else if(Auth::user()->type == 10){
+                return redirect()->route('admindashboard');
+            }
+            else if(Auth::user()->type == 11){
+                return redirect()->route('admindashboard');
+            }
+            else if(Auth::user()->type == 12){
+                return redirect()->route('admindashboard');
+            }
+            else{
               return $next($request);
-          }
+            }
       }else{
           return redirect()->back();
       }

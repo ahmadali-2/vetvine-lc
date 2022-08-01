@@ -98,13 +98,23 @@ class HomeController extends Controller
     }
     public function upcomingWebinarsdetails($id)
     {
+
+        $relatedEvents = [];
+        $lastEvents = null;
         $eventdetail = Event::with('events', 'sponsers', 'members', 'user', 'buyeventplan', 'ReviewData')->find($id);
-        // dd($eventdetail->toArray());
-        // $timezones = TimeZone::all();
-        // foreach($timezones as $timezone){
-        //     echo convertToTimeZone($timezone->timezone, "08:00:00", trim($timezone->region));
-        // }
-        $eventdetail = Event::with('events', 'sponsers', 'members', 'user', 'buyeventplan', 'ReviewData')->find($id);
+        $tags = $eventdetail->tags;
+        $eventTags = explode(',',$tags);
+        $count = 0;
+        foreach($eventTags as $eventTag){
+            $lastEvents = Event::orWhere('tags','like','%'.$eventTag.'%')->get()->toArray();
+            foreach($lastEvents as $event){
+                if(in_array($event['id'], array_column($relatedEvents, 'id')) == false){
+                    array_push($relatedEvents, $event);
+                }
+            }
+        }
+
+        $youMaylikePost = array_slice($relatedEvents, 0, 4);
         $eventTime = date('Y-m-d H:i:s', strtotime(''.$eventdetail->date.''.$eventdetail->time.''));
         $eventId = $eventdetail->id;
         $category = CategoryEvent::all();
@@ -117,7 +127,7 @@ class HomeController extends Controller
         }else{
             $purchasedEvent = null;
         }
-        return view('frontend.pages.webinars.upcoming-eventsdetails', compact('eventdetail', 'category', 'eventId','authUser','purchasedEvent','eventTime'));
+        return view('frontend.pages.webinars.upcoming-eventsdetails', compact('eventdetail', 'category', 'eventId','authUser','purchasedEvent','eventTime','youMaylikePost'));
     }
 
     public function loadOtherTimeZones(Request $request){
