@@ -562,7 +562,7 @@
                         </div>
                         <div class="public2-info">
                             <div class="public2-title sponsor-title">
-                                Sponsor(s): vetvine :
+                                Sponsor(s): vetvine ;
                             </div>
                             @foreach ($eventdetail->members as $items)
                                 <div class="public2-description spon-descripton">
@@ -581,7 +581,7 @@
                             <h1 id="eventCountdown"></h1>
                             {{-- <button class="btn btn-primary">Attend Event?</button> --}}
                         @else
-                            <button class="btn btn-primary" id="register_event">Register</button>
+                            <button class="btn btn-primary" id="register_event">Register Now</button>
                         @endif
 
                     </div>
