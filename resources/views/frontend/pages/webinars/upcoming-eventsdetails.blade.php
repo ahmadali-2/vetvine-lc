@@ -276,7 +276,8 @@
             transition: 0.3s all;
             border: 2px solid #f27222 !important;
         }
-        .timezone_btn_close{
+
+        .timezone_btn_close {
             color: #fff;
             background-color: #f27222;
             border-color: #f27222;
@@ -285,11 +286,13 @@
             transition: 0.3s all;
             border: 2px solid #f27222 !important;
         }
+
         .timezone_btn_close:hover {
             background: transparent;
             border: 2px solid #f27222 !important;
             color: #f27222;
         }
+
         #ajax-book-model .btn-primary:hover {
             background: transparent;
             border: 2px solid #f27222 !important;
@@ -298,56 +301,60 @@
 
 
         .video-section-wrapper {
-    width: 100%;
-    display: inline-block;
-    border-top: 0px solid #68868e !important;
-    /* padding-top: 23px; */
-}
-.time_zone_content{
+            width: 100%;
+            display: inline-block;
+            border-top: 0px solid #68868e !important;
+            /* padding-top: 23px; */
+        }
 
-    color: #4C5B67;
-    background: #ddf0f7;
-}
+        .time_zone_content {
+
+            color: #4C5B67;
+            background: #ddf0f7;
+        }
     </style>
 
-     {{-- timezone modal box  --}}
+    {{-- timezone modal box --}}
 
-<!-- Button trigger modal -->
+    <!-- Button trigger modal -->
 
 
-  <!-- Modal -->
-  <div class="modal fade" id="timzeZone" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-      <div class="modal-content time_zone_content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle"><nav aria-label="breadcrumb" class="breadcrumbs large-font">
-            <ol class="breadcrumb">
+    <!-- Modal -->
+    <div class="modal fade" id="timzeZone" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content time_zone_content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">
+                        <nav aria-label="breadcrumb" class="breadcrumbs large-font">
+                            <ol class="breadcrumb">
 
-                <li class="breadcrumb-item"><a onclick="history.back()" href="javascript::void();">Upcoming
-                        Webinars</a></li>
-                <li class="breadcrumb-item" aria-current="page">
-                    <a onclick="history.back()" href="javascript::void();">Molestiae Repellendu</a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">
-                    Timezone
-                </li>
-            </ol>
-        </nav></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
+                                <li class="breadcrumb-item"><a onclick="history.back()" href="javascript::void();">Upcoming
+                                        Webinars</a></li>
+                                <li class="breadcrumb-item" aria-current="page">
+                                    <a onclick="history.back()" href="javascript::void();">Molestiae Repellendu</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    Timezone
+                                </li>
+                            </ol>
+                        </nav>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="overflow-y: scroll; height: 400px">
+                    <div id="eventTimezonesBody"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary timezone_btn_close" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body" style="overflow-y: scroll; height: 400px">
-            <div id="eventTimezonesBody"></div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary timezone_btn_close" data-dismiss="modal" >Close</button>
-        </div>
-      </div>
     </div>
-  </div>
 
-     {{-- timezone modal box  --}}
+    {{-- timezone modal box --}}
 
 
 
@@ -459,16 +466,16 @@
                                         @php
                                             $timeZone = $eventdetail->user->timezone->timezone;
                                             // Fetching timezone UTC code : Please don't screw it
-                                            $pieces = explode('(', $timeZone);
-                                            $pieces = explode('C', $pieces[1]);
-                                            $pieces = explode(')', $pieces[1]);
+        $pieces = explode('(', $timeZone);
+        $pieces = explode('C', $pieces[1]);
+        $pieces = explode(')', $pieces[1]);
 
-                                            // Formatting the time
-                                            $today = new DateTime($eventdetail->time, new DateTimeZone($pieces[0]));
+        // Formatting the time
+        $today = new DateTime($eventdetail->time, new DateTimeZone($pieces[0]));
 
-                                            $userTimeZone = Auth::user()->timezone->timezone;
+        $userTimeZone = Auth::user()->timezone->timezone;
 
-                                            // Fetching timezone UTC code : Please don't screw it
+        // Fetching timezone UTC code : Please don't screw it
                                             $pieces = explode('(', $userTimeZone);
                                             $pieces = explode('C', $pieces[1]);
                                             $pieces = explode(')', $pieces[1]);
@@ -488,7 +495,8 @@
                                 </div>
                                 @auth
                                     <div class="public2-info" style="margin-left: 12px; margin-bottom:0px ;">
-                                        <a id="timezoneLink" data-toggle="modal" data-target="#timzeZone" class="view_time_zone" href="#"> View Other
+                                        <a id="timezoneLink" data-toggle="modal" data-target="#timzeZone" class="view_time_zone"
+                                            href="#"> View Other
                                             Timezones</a>
                                     </div>
                                 @endauth
@@ -639,119 +647,175 @@
             </div>
             </form>
     </section>
-               <div class="container">
-                <div class="row">
-                    <div class="col-md-12 upcoming_para">
-                        <p class="desription_p">
-                        {!! $eventdetail->event_description !!}
-                        </p>
-                    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 upcoming_para">
+                <p class="desription_p">
+                    {!! $eventdetail->event_description !!}
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    {{-- You May Also Like  --}}
+    <section class="video-section-wrapper border-top-0 mb-4">
+        <div class="container">
+            <div class="col-12 might_margin">
+                <h1 class="Upcoming-webinars">You might also like</h1>
+            </div>
+                <div class="row w-100 video-cat-main m-0">
+                    @foreach ($youMaylikePost as $showevents)
+                        <div class="col-md-6 col-lg-4 p-0">
+                            <div class="video-box-main upcoming_content">
+                                @if ($showevents['main_photo'])
+                                    <div class="   pl-0">
+                                        <img src="{{ asset('/admin/eventss/' . $showevents['main_photo']) }} " alt=""
+                                            id="user-image" height="100px">
+                                    </div>
+                                @endif
+                                <div class="video-bottom-text">
+                                    <h3>{{ $showevents['event_title'] }}</h3>
+
+
+                                </div>
+
+                                <div class="video-bottom-description">
+                                    <h5 class="my-3">{{ date('m/d/Y', strtotime($showevents['date'])) }}</h5>
+                                    <p><strong>Presented by:</strong> <a href="{{ $showevents['presenter_one_url'] }}"
+                                            class="vetvine_a" target="_blank">{{ $showevents['presenter_one'] }}</a>
+
+                                    <p class="para-decription">
+
+                                        {!! Str::limit($showevents['event_description'], 200) !!}
+                                    </p>
+                                    <a href="{{ route('upcoming_details', $showevents['id']) }}" class="read_more_btn">Read
+                                        More</a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-               </div>
-            @if (Auth::user())
-            <div class="container">
-                <div class="row">
-                    <div class="leftcolumn">
-                        <div class="card pt-0">
-                            <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
-                                <div>
-                                    <div class="row header_row">
-                                        <div class="col-lg-4">
-                                            <h4>Review Section</h4>
-                                        </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+    @if (Auth::user())
+        {{-- <div class="container">
+            <div class="row">
+                <div class="leftcolumn">
+                    <div class="card pt-0">
+                        <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
+                            <div>
+                                <div class="row header_row">
+                                    <div class="col-lg-4">
+                                        <h4>Review Section</h4>
                                     </div>
                                 </div>
-                                <div class="row mt-5">
+                            </div>
+                            <div class="row mt-5">
 
-                                    <div class="col-sm-12 mt-5">
+                                <div class="col-sm-12 mt-5">
 
-                                        @foreach ($eventdetail->ReviewData as $review)
-                                            <div class=" review-content" id="review-section">
-                                                <img src="https://www.w3schools.com/howto/img_avatar.png" class="avatar ">
-                                                <span class="font-weight-bold ml-2">
-                                                    {{ $review->users->name ? $review->users->name : 'Annonyomus' }}
-                                                </span>{{ $review->created_at->diffForHumans() }}
-                                                <p class="mt-1">
-                                                    @for ($i = 1; $i <= $review->star_rating; $i++)
-                                                        <span><i class="fa fa-star text-warning"></i></span>
-                                                    @endfor
-                                                    {{-- <span class="font ml-2">{{$review->email}}</span> --}}
-                                                </p>
-                                                <p class="description ">
-                                                    {{ $review->comments }}
-                                                </p>
-                                                @if (auth()->user()->id == $review->user_id)
-                                                    <button class="edit" style="background: transparent;"
-                                                        type="button" data-toggle="modal" data-target="#ajax-book-model"
-                                                        data-id="{{ $review->id }}"
-                                                        data-comment="{{ $review->comments }}">
-                                                        <i class="fas fa-edit text-primary"></i></button>
-                                                @endif
-                                            </div>
-                                            <hr>
-                                            {{-- <form action="{{ route('review.delete') }}" method="POST">
+                                    @foreach ($eventdetail->ReviewData as $review)
+                                        <div class=" review-content" id="review-section">
+                                            <img src="https://www.w3schools.com/howto/img_avatar.png" class="avatar ">
+                                            <span class="font-weight-bold ml-2">
+                                                {{ $review->users->name ? $review->users->name : 'Annonyomus' }}
+                                            </span>{{ $review->created_at->diffForHumans() }}
+                                            <p class="mt-1">
+                                                @for ($i = 1; $i <= $review->star_rating; $i++)
+                                                    <span><i class="fa fa-star text-warning"></i></span>
+                                                @endfor
+                                                <span class="font ml-2">{{$review->email}}</span>
+                                            </p>
+                                            <p class="description ">
+                                                {{ $review->comments }}
+                                            </p>
+                                            @if (auth()->user()->id == $review->user_id)
+                                                <button class="edit" style="background: transparent;" type="button"
+                                                    data-toggle="modal" data-target="#ajax-book-model"
+                                                    data-id="{{ $review->id }}"
+                                                    data-comment="{{ $review->comments }}">
+                                                    <i class="fas fa-edit text-primary"></i></button>
+                                            @endif
+                                        </div>
+                                        <hr>
+                                        <form action="{{ route('review.delete') }}" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="event_id" value="{{ $review->event_id }}">
                                                     <input type="hidden" name="user_id" value="{{ $review->user_id }}">
                                                     <input type="hidden" name="review_id" value="{{ $review->id }}">
                                                     <button type="submit" class="click_join">Delete</button>
-                                                </form> --}}
-                                        @endforeach
-                                    </div>
+                                                </form>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Review store Section -->
-                        <div class="container mb-5">
-                            <div class="row">
-                                <div class="col-sm-10 mt-4  inner_box_chat" id="comment-section">
-                                    <form class="py-2 px-4" action="{{ route('reviewstore') }}"
-                                        style="box-shadow: 0 0 10px 0 #ddd;" method="POST" autocomplete="off">
-                                        @csrf
-                                        <input type="hidden" name="event_id" value="{{ $eventdetail->id }}">
-                                        <input type="hidden" name="user_id" value="{{ $eventdetail->user_id }}">
-                                        <p class="font-weight-bold ">Review</p>
-                                        <div class="form-group row">
-                                            <div class="col-sm-6 rating_box">
-                                                <div class="rate">
-                                                    <input type="radio" id="star5" class="rate" name="rating"
-                                                        value="5" />
-                                                    <label for="star5" title="text">5 stars</label>
-                                                    <input type="radio" checked id="star4" class="rate"
-                                                        name="rating" value="4" />
-                                                    <label for="star4" title="text">4 stars</label>
-                                                    <input type="radio" id="star3" class="rate" name="rating"
-                                                        value="3" />
-                                                    <label for="star3" title="text">3 stars</label>
-                                                    <input type="radio" id="star2" class="rate" name="rating"
-                                                        value="2">
-                                                    <label for="star2" title="text">2 stars</label>
-                                                    <input type="radio" id="star1" class="rate" name="rating"
-                                                        value="1" />
-                                                    <label for="star1" title="text">1 star</label>
-                                                </div>
+                    <!-- Review store Section -->
+                    <div class="container mb-5">
+                        <div class="row">
+                            <div class="col-sm-10 mt-4  inner_box_chat" id="comment-section">
+                                <form class="py-2 px-4" action="{{ route('reviewstore') }}"
+                                    style="box-shadow: 0 0 10px 0 #ddd;" method="POST" autocomplete="off">
+                                    @csrf
+                                    <input type="hidden" name="event_id" value="{{ $eventdetail->id }}">
+                                    <input type="hidden" name="user_id" value="{{ $eventdetail->user_id }}">
+                                    <p class="font-weight-bold ">Review</p>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 rating_box">
+                                            <div class="rate">
+                                                <input type="radio" id="star5" class="rate" name="rating"
+                                                    value="5" />
+                                                <label for="star5" title="text">5 stars</label>
+                                                <input type="radio" checked id="star4" class="rate"
+                                                    name="rating" value="4" />
+                                                <label for="star4" title="text">4 stars</label>
+                                                <input type="radio" id="star3" class="rate" name="rating"
+                                                    value="3" />
+                                                <label for="star3" title="text">3 stars</label>
+                                                <input type="radio" id="star2" class="rate" name="rating"
+                                                    value="2">
+                                                <label for="star2" title="text">2 stars</label>
+                                                <input type="radio" id="star1" class="rate" name="rating"
+                                                    value="1" />
+                                                <label for="star1" title="text">1 star</label>
                                             </div>
                                         </div>
-                                        <div class="form-group row mt-4">
-                                            <div class="col-sm-12 ">
-                                                <textarea class="form-control" name="comment" rows="6 " placeholder="Review" maxlength="200" required></textarea>
-                                                @error('comment')
-                                                    <p class="alert alert-danger">{{ $message }}</p>
-                                                @enderror
-                                            </div>
+                                    </div>
+                                    <div class="form-group row mt-4">
+                                        <div class="col-sm-12 ">
+                                            <textarea class="form-control" name="comment" rows="6 " placeholder="Review" maxlength="200" required></textarea>
+                                            @error('comment')
+                                                <p class="alert alert-danger">{{ $message }}</p>
+                                            @enderror
                                         </div>
-                                        <div class="mt-3 ">
-                                            <button class="upcoming_btn  py-2 px-3 btn-info">Submit
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                    <div class="mt-3 ">
+                                        <button class="upcoming_btn  py-2 px-3 btn-info">Submit
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div> --}}
         </div>
         @include('frontend.pages.webinars.upcoming_eventjquery')
     @endif
@@ -763,10 +827,10 @@
     <script>
         $(document).ready(function() {
             localStorage.setItem('guestLogin', false);
-            localStorage.setItem("eventUrl",'');
-            var event_id = '<?php echo $eventId ?>';
-            var authUser = '<?php echo $authUser ?>';
-            var eventTime = '<?php echo $eventTime ?>'
+            localStorage.setItem("eventUrl", '');
+            var event_id = '<?php echo $eventId; ?>';
+            var authUser = '<?php echo $authUser; ?>';
+            var eventTime = '<?php echo $eventTime; ?>'
             // Event counter starts
             // Set the date we're counting down to
             var countDownDate = new Date(eventTime).getTime();
@@ -774,53 +838,55 @@
             // Update the count down every 1 second
             var x = setInterval(function() {
 
-            // Get today's date and time
-            var now = new Date().getTime();
+                // Get today's date and time
+                var now = new Date().getTime();
 
-            // Find the distance between now and the count down date
-            var distance = countDownDate - now;
+                // Find the distance between now and the count down date
+                var distance = countDownDate - now;
 
-            // If the count down is over, write some text
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("eventCountdown").innerHTML = '<button class="btn btn-primary">Attend Event</button>';
-            }else{
-                // Time calculations for days, hours, minutes and seconds
-                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                // If the count down is over, write some text
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("eventCountdown").innerHTML =
+                        '<button class="btn btn-primary">Attend Event</button>';
+                } else {
+                    // Time calculations for days, hours, minutes and seconds
+                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                // Output the result in an element with id="demo"
-                document.getElementById("eventCountdown").innerHTML = '<b>' + days + "d " + hours + "h "
-                + minutes + "m " + seconds + "s " + '</b>';
-                document.getElementById('startsIn').innerHTML = 'Starts In :';
-            }
+                    // Output the result in an element with id="demo"
+                    document.getElementById("eventCountdown").innerHTML = '<b>' + days + "d " + hours +
+                        "h " +
+                        minutes + "m " + seconds + "s " + '</b>';
+                    document.getElementById('startsIn').innerHTML = 'Starts In :';
+                }
             }, 1000);
             //Event counter End.
-            $('#timezoneLink').on('click', function(){
-                var event_id = '<?php echo $eventId ?>';
-                var eventTime = '<?php echo $eventTime ?>';
+            $('#timezoneLink').on('click', function() {
+                var event_id = '<?php echo $eventId; ?>';
+                var eventTime = '<?php echo $eventTime; ?>';
                 $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        type: "POST",
-                        url: "/load-other-timezones",
-                        data: {
-                            event_id: event_id,
-                            event_time: eventTime,
-                        },
-                        success: function(response) {
-                            $('#eventTimezonesBody').empty();
-                            $('#eventTimezonesBody').append(response.html);
-                        }
-                    });
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "POST",
+                    url: "/load-other-timezones",
+                    data: {
+                        event_id: event_id,
+                        event_time: eventTime,
+                    },
+                    success: function(response) {
+                        $('#eventTimezonesBody').empty();
+                        $('#eventTimezonesBody').append(response.html);
+                    }
+                });
             });
 
-            $('#register_event').on('click', function(){
-                var url=location.href;
-                if(authUser == false){
+            $('#register_event').on('click', function() {
+                var url = location.href;
+                if (authUser == false) {
                     localStorage.setItem('guestLogin', true);
                     localStorage.setItem("eventUrl", url);
                     $('#login_form_show_btn').trigger("click");

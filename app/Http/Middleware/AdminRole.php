@@ -19,7 +19,6 @@ class AdminRole
     {
 
         $admin =Auth::check() ? Auth::user() : null;
-
         if($admin->type != 1) {
             notify()->warning("You are a not Adminl" .'⚡️');
             return redirect('/');
