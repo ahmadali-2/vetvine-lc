@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 
 class AdminRole
 {
@@ -17,11 +18,28 @@ class AdminRole
      */
     public function handle(Request $request, Closure $next)
     {
-
-        $admin =Auth::check() ? Auth::user() : null;
-        if($admin->type != 1) {
-            notify()->warning("You are a not Adminl" .'⚡️');
-            return redirect('/');
+        $user =Auth::user();
+        switch($user->type){
+            case 1:
+                return $next($request);
+            break;
+            case 9:
+                return $next($request);
+            break;
+            case 10:
+                return $next($request);
+            break;
+            case 11:
+                return $next($request);
+            break;
+            case 12:
+                return $next($request);
+            break;
+            default:
+                if (strpos(URL::current(), 'superadmin') !== false) {
+                    return redirect('/');
+                }
+            break;
         }
         return $next($request);
     }
