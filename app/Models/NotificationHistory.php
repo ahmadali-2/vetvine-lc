@@ -10,7 +10,7 @@ class NotificationHistory extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id','post_id','action_by','action'
+        'user_id','post_id','action_by','action','is_read'
     ];
 
     public function post(){

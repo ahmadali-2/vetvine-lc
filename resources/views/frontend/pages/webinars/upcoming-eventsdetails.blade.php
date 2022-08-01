@@ -337,8 +337,8 @@
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">
-          ...
+        <div class="modal-body" style="overflow-y: scroll; height: 400px">
+            <div id="eventTimezonesBody"></div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary timezone_btn_close" data-dismiss="modal" >Close</button>
@@ -488,7 +488,7 @@
                                 </div>
                                 @auth
                                     <div class="public2-info" style="margin-left: 12px; margin-bottom:0px ;">
-                                        <a data-toggle="modal" data-target="#timzeZone" href="{{ url('upcoming-webinars-details/timezone/'.$eventdetail->user->id) }}" class="view_time_zone"> View Other
+                                        <a id="timezoneLink" data-toggle="modal" data-target="#timzeZone" class="view_time_zone" href="#"> View Other
                                             Timezones</a>
                                     </div>
                                 @endauth
@@ -798,6 +798,25 @@
             }
             }, 1000);
             //Event counter End.
+            $('#timezoneLink').on('click', function(){
+                var event_id = '<?php echo $eventId ?>';
+                var eventTime = '<?php echo $eventTime ?>';
+                $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        type: "POST",
+                        url: "/load-other-timezones",
+                        data: {
+                            event_id: event_id,
+                            event_time: eventTime,
+                        },
+                        success: function(response) {
+                            $('#eventTimezonesBody').empty();
+                            $('#eventTimezonesBody').append(response.html);
+                        }
+                    });
+            });
 
             $('#register_event').on('click', function(){
                 var url=location.href;
