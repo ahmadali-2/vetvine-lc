@@ -4,6 +4,7 @@ namespace App\Http\Controllers\VetvineUsers\MyProfile;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admins\Webinar\BuyEventPlan;
+use App\Models\Admins\Webinar\CategoryEvent;
 use App\Models\Generals\TimeZone;
 use App\Models\PushNotification;
 use App\Models\User;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use vetvineHelper;
 use App\Models\Admins\Webinar\Event;
+use App\Models\Admins\Webinar\SponserTable;
 use App\Models\NotificationHistory;
 use App\Models\PostActivity;
 
@@ -188,15 +190,30 @@ class PersonelInfoController extends Controller
     }
 
     public function myUpcommingEvents(){
-        $events = BuyEventPlan::where(['user_id'=>Auth::id(),'status' => 'Upcoming'])->with('buyevents')->paginate(5);
-
-
-        return view('vetvineUsers.events.myupcomming_events',compact('events'));
+        $showevent = [];
+        $myupcomingevent = BuyEventPlan::where("user_id",auth()->user()->id)->get();
+            foreach($myupcomingevent as $upcomingevent){
+                $event=Event::with('sponsers', 'members', 'user')->find($upcomingevent->event_id);
+                if(date('Y-m-d H:i:s', strtotime(''.$event->date.''.$event->time.'')) >= date('Y-m-d H:i:s')){
+                    array_push($showevent,$event);
+                }
+            }
+        // $sponser = SponserTable::all();
+        $category = CategoryEvent::all();
+        return view('vetvineUsers.events.myupcomming_events',compact('category','showevent'));
     }
 
     public function myPastEvents(){
-        $events = BuyEventPlan::where(['user_id'=>Auth::id(),'status' => 'Past'])->with('buyevents')->paginate(5);
-        return view('vetvineUsers.events.pastevents',compact('events'));
+        $showevent = [];
+        $pastevent = BuyEventPlan::where("user_id",auth()->user()->id)->get();
+            foreach($pastevent as $pastevents){
+                $event=Event::with('sponsers', 'members', 'user')->find($pastevents->event_id);
+                if(date('Y-m-d H:i:s', strtotime(''.$event->date.''.$event->time.'')) <= date('Y-m-d H:i:s')){
+                    array_push($showevent,$event);
+                }
+            }
+        $category = CategoryEvent::all();
+        return view('vetvineUsers.events.pastevents',compact('category','showevent'));
     }
 }
 

@@ -109,7 +109,9 @@ class HomeController extends Controller
             $lastEvents = Event::orWhere('tags','like','%'.$eventTag.'%')->get()->toArray();
             foreach($lastEvents as $event){
                 if(in_array($event['id'], array_column($relatedEvents, 'id')) == false){
-                    array_push($relatedEvents, $event);
+                    if($id != $event['id']){
+                        array_push($relatedEvents, $event);
+                    }
                 }
             }
         }
