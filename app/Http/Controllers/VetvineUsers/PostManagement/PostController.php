@@ -42,6 +42,7 @@ class PostController extends Controller
             $likesPermission = $permissions->likes;
             $commentsPermission = $permissions->comments;
             $sharesPermission = $permissions->shares;
+
             $posts = array();
 
             $news = News::all();

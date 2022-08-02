@@ -6,6 +6,7 @@ use App\Models\PushNotification;
 use App\Models\User;
 use Facade\FlareClient\View;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 
@@ -28,6 +29,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        Blade::if('hasPermission', function ($permission) {
+            if($permission == "1"){
+                return true;
+            }
+        });
 
     }
 }

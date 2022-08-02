@@ -207,4 +207,13 @@ class User extends Authenticatable implements MustVerifyEmail
     public function network(){
         return $this->belongsTo(UserMemberAndNetworkLevel::class, 'network_id');
     }
+
+
+    public static function hasPermission($id){
+        if($id == "1"){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

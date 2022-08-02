@@ -62,7 +62,11 @@ use App\Http\Controllers\TermsController; // for terms of services
 use App\Http\Controllers\LicensureController;
 use App\Http\Controllers\PrivacyPolicyController;
 use App\Http\Controllers\VetvineUsers\EventManagement\CalandarEventsController;
+use App\Models\Generals\Member;
 use App\Models\Generals\TimeZone;
+use App\Models\MemberPermission;
+use App\Models\MemberTypes;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 
@@ -77,18 +81,18 @@ Route::get('/cache', function () {
     Artisan::call('config:cache');
 });
 
-Route::get('/migrate',function(){
+Route::get('/migrate', function () {
     Artisan::call('migrate');
     return 'migrated successfully';
 });
 
-Route::get('/seed/timezones',function(){
+Route::get('/seed/timezones', function () {
     $wSeeder = new \Database\Seeders\TimeZoneSeeder();
     $wSeeder->run();
     return 'Timezone seeded successfully';
 });
 
-Route::get('/seed/privacy',function(){
+Route::get('/seed/privacy', function () {
     $wSeeder = new \Database\Seeders\PrivacyPolicySeeder();
     $wSeeder->run();
     return 'Timezone seeded successfully';
@@ -98,36 +102,36 @@ Route::get('phpinfo', function () {
     phpinfo();
 });
 
-Route::get('contactusschedule', function(){
+Route::get('contactusschedule', function () {
     Artisan::call('schedule:run');
     return 'Contact Us Cron Job Schedule Run Successfully';
 });
 
-Route::get('run-queue',function(){
+Route::get('run-queue', function () {
     Artisan::call('queue:listen');
     return 'Queue Listening';
 });
 
-Route::get('must-verify',[UsersRegistrationController::class,'verifyEmailPopup'])->name('verifyEmailPopup');
+Route::get('must-verify', [UsersRegistrationController::class, 'verifyEmailPopup'])->name('verifyEmailPopup');
 
 /**
  * Social Registeration and  Login  Routes
  */
-Route::get('/test', function(){
+Route::get('/test', function () {
     $timestamp = time();
     foreach (timezone_identifiers_list(2) as $zone) {
         date_default_timezone_set('America/Adak');
         $zones['offset'] = date('P', $timestamp);
-        $zones['diff_from_gtm'] = 'UTC/GMT '.date('P', $timestamp);
+        $zones['diff_from_gtm'] = 'UTC/GMT ' . date('P', $timestamp);
         dump($zone);
     }
 });
 Route::get('social/{belong}/{user_type}/{network_type}', [SocialController::class, 'redirect']);
-Route::get('login/{belong}/callback','App\Http\Controllers\Auth\SocialController@handleProviderCallback');
+Route::get('login/{belong}/callback', 'App\Http\Controllers\Auth\SocialController@handleProviderCallback');
 Route::get('check-user-type', [UserTypeController::class, 'checkType'])->name('checkusertype');
 Route::post('loginroute', [UsersRegistrationController::class, 'userLogin'])->name('loginroute');
-Route::get('login', function(){
-    if(session()->get('emailError')){
+Route::get('login', function () {
+    if (session()->get('emailError')) {
         $controller = new Controller();
         $controller->dangerMessage('Email not valid!');
         session()->forget('emailError');
@@ -135,15 +139,18 @@ Route::get('login', function(){
     return view('frontend.home');
 })->name('login');
 
-Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRole']], function () {
-    Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('admindashboard');
-    Route::get('sample-form', [AdminDashboardController::class, 'sampleForm'])->name('sampleform');
-    Route::get('sample-table', [AdminDashboardController::class, 'sampleTable'])->name('sampletable');
-    Route::get('general-setting', [AdminProfileController::class, 'generalsetting'])->name('generalsetting');
+
+
+
+Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum', 'adminRole']], function () {
+    Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('admindashboard')->middleware('permission:dashboard');
+    Route::get('sample-form', [AdminDashboardController::class, 'sampleForm'])->name('sampleform')->middleware('permission:dashboard');
+    Route::get('sample-table', [AdminDashboardController::class, 'sampleTable'])->name('sampletable')->middleware('permission:dashboard');
+    Route::get('general-setting', [AdminProfileController::class, 'generalsetting'])->name('generalsetting')->middleware('permission:settings');
     Route::post('store-setting', [AdminProfileController::class, 'storegeneralsetting'])->name('storegeneralsetting');
     Route::resource('generalsettings', AdminProfileController::class);
-    Route::resource('ads-campaign', CampaignController::class);
-    Route::resource('ads-manage', ManageAdController::class);
+    Route::resource('ads-campaign', CampaignController::class)->middleware('permission:ads');
+    Route::resource('ads-manage', ManageAdController::class)->middleware('permission:ads');
     Route::resource('membership', MemberShipPlansController::class);
     Route::resource('membership-category', MemberShipPlanCategoryController::class);
     //Ahmad
@@ -161,30 +168,29 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum','adminRo
     Route::post('update-users-type/{id}', [ManageUserController::class, 'updateUserType'])->name('updateusertype');
 
     Route::resource('forums-category', ForumCategoryController::class);
-    Route::resource('forums', ForumController::class);
-    Route::resource('announcements',AnnouncementController::class);
-    Route::resource('manageuser',ManageUserController::class);
-    Route::resource('subscribed-users',BuyMemberShipPlanController::class);
+    Route::resource('forums', ForumController::class)->middleware('permission:forums');
+    Route::resource('announcements', AnnouncementController::class);
+    Route::resource('manageuser', ManageUserController::class);
+    Route::resource('subscribed-users', BuyMemberShipPlanController::class)->middleware('permission:membership_plans');
     Route::get('user-history/{id}', [BuyMemberShipPlanController::class, 'userHistory'])->name('userhistory');
-    Route::resource('news',NewsController::class);
+    Route::resource('news', NewsController::class);
     Route::get('naveed-testing', [AdminDashboardController::class, 'testing'])->name('testing');
-    Route::resource('webinars-category', EventCategoryController::class);
+    Route::resource('webinars-category', EventCategoryController::class)->middleware('permission:webinars');
     Route::resource('webinars', EventController::class);
-    Route::resource('sponsors',SponserController::class);
-    Route::resource('videos-on-demand',VideosOnDemandController::class);
-    Route::post('videodata',[VideosOnDemandController::class,'videodata'])->name('videoajaxdata');
-    Route::resource('buyevent-users',BuyEventController::class);
+    Route::resource('sponsors', SponserController::class);
+    Route::resource('videos-on-demand', VideosOnDemandController::class);
+    Route::post('videodata', [VideosOnDemandController::class, 'videodata'])->name('videoajaxdata');
+    Route::resource('buyevent-users', BuyEventController::class);
     Route::get('userevent-history/{id}', [BuyEventController::class, 'usereventHistory'])->name('usereventhistory');
 
     Route::get('terms-and-conditions/add', [StaticPageController::class, 'TermsAndConditionsAdd'])->name('TermsCondition.create');
     Route::post('terms-and-conditions/add-terms', [StaticPageController::class, 'TermsAndConditionsAddDb'])->name('TermsCondition.create.db');
-    Route::resource('privacy-policy',PrivacyPolicyController::class);
+    Route::resource('privacy-policy', PrivacyPolicyController::class);
     // coupon code
-    Route::resource('coupon-code',CouponController::class);
-//Group Mailing
-Route::get('manageuser/group/mail',[ManageUserController::class, 'groupMail'])->name('group.mail.user');
-Route::post('manageuser/group/mail/sent',[ManageUserController::class, 'groupMailSent'])->name('group.mail.sent');
-
+    Route::resource('coupon-code', CouponController::class);
+    //Group Mailing
+    Route::get('manageuser/group/mail', [ManageUserController::class, 'groupMail'])->name('group.mail.user');
+    Route::post('manageuser/group/mail/sent', [ManageUserController::class, 'groupMailSent'])->name('group.mail.sent');
 });
 // Open routes Ahmad
 Route::get('next-guest-screen', [GuestController::class, 'nextGuestScreen'])->name('nextGuestScreen');
@@ -193,109 +199,109 @@ Route::post('calendar-crud-ajax', [CalandarEventsController::class, 'calendarEve
 Route::get('add-vetvine-event', [CalandarEventsController::class, 'addVetvineEvent']);
 
 // End open routes Ahmad
-Route::get('member-home-paginate',[PostController::class,'paginateMemberHomePost'])->name('member_home_paginate');
+Route::get('member-home-paginate', [PostController::class, 'paginateMemberHomePost'])->name('member_home_paginate');
 
-Route::get("/page", function(){
+Route::get("/page", function () {
     return view("frontend.pages.forums.post_detail");
- });
-Route::post('share-post',[PostController::class,'sharePost'])->name('share.post');
-Route::get('frontend-forums',[ForumController::class,'frontendIndex'])->name('forumsfrontend');
-Route::get('forums/{id}',[ForumController::class,'getForums'])->name('getForums');
-Route::resource('forums-posts',ForumPostController::class);
-Route::post('search-form-category',[ForumController::class,'searchFormCategory'])->name('searchFormCategory');
-Route::post('search-category-form',[ForumController::class,'searchCategoryForm'])->name('searchCategoryForm');
-Route::post('search-form-post',[ForumController::class,'searchFormPosts'])->name('searchFormPosts');
-Route::get('forum/posts/{id}',[ForumController::class,'getForumPosts'])->name('getForumPosts');
-Route::get('category/forum/posts/{id}',[ForumController::class,'getForumcategoryPosts'])->name('getForumcategoryPosts');
+});
+Route::post('share-post', [PostController::class, 'sharePost'])->name('share.post');
+Route::get('frontend-forums', [ForumController::class, 'frontendIndex'])->name('forumsfrontend');
+Route::get('forums/{id}', [ForumController::class, 'getForums'])->name('getForums');
+Route::resource('forums-posts', ForumPostController::class);
+Route::post('search-form-category', [ForumController::class, 'searchFormCategory'])->name('searchFormCategory');
+Route::post('search-category-form', [ForumController::class, 'searchCategoryForm'])->name('searchCategoryForm');
+Route::post('search-form-post', [ForumController::class, 'searchFormPosts'])->name('searchFormPosts');
+Route::get('forum/posts/{id}', [ForumController::class, 'getForumPosts'])->name('getForumPosts');
+Route::get('category/forum/posts/{id}', [ForumController::class, 'getForumcategoryPosts'])->name('getForumcategoryPosts');
 
-Route::group(['middleware'=>['frontendUserRole', 'emailVerification']], function(){
-    Route::get('/',function(){
+Route::group(['middleware' => ['frontendUserRole', 'emailVerification']], function () {
+    Route::get('/', function () {
         return view('frontend.home');
     })->name('home');
 
-Route::post('delete-user', [HomeController::class, 'delete_user'])->name('delete.user');
+    Route::post('delete-user', [HomeController::class, 'delete_user'])->name('delete.user');
 
-Route::get('why-vetvine',[HomeController::class,'whyVetvine'])->name('why_vetvine');
-Route::get('grow',[HomeController::class,'grow'])->name('grow');
-Route::get('thrive',[HomeController::class,'thrive'])->name('thrive');
-Route::get('heal',[HomeController::class,'heal'])->name('heal');
-Route::get('terms-of-service',[HomeController::class,'termsOfService'])->name('termsofservice');
-Route::post('contact-us',[ContactUsController::class,'submitContactForm'])->name('contactus.submit');
-Route::get('/terms&conditions', [TermsController::class, 'indexTerms'])->name('terms.index');
-Route::get('/privacy&policy', [TermsController::class, 'indexprivacy'])->name('privacypolicy.index');
+    Route::get('why-vetvine', [HomeController::class, 'whyVetvine'])->name('why_vetvine');
+    Route::get('grow', [HomeController::class, 'grow'])->name('grow');
+    Route::get('thrive', [HomeController::class, 'thrive'])->name('thrive');
+    Route::get('heal', [HomeController::class, 'heal'])->name('heal');
+    Route::get('terms-of-service', [HomeController::class, 'termsOfService'])->name('termsofservice');
+    Route::post('contact-us', [ContactUsController::class, 'submitContactForm'])->name('contactus.submit');
+    Route::get('/terms&conditions', [TermsController::class, 'indexTerms'])->name('terms.index');
+    Route::get('/privacy&policy', [TermsController::class, 'indexprivacy'])->name('privacypolicy.index');
 
-// upcoming webinars
-Route::get('upcoming-webinars',[HomeController::class,'upcomingWebinars'])->name('upcoming_webinars');
-Route::get('upcoming-webinars-details/{id}',[HomeController::class,'upcomingWebinarsdetails'])->name('upcoming_details');
+    // upcoming webinars
+    Route::get('upcoming-webinars', [HomeController::class, 'upcomingWebinars'])->name('upcoming_webinars');
+    Route::get('upcoming-webinars-details/{id}', [HomeController::class, 'upcomingWebinarsdetails'])->name('upcoming_details');
 
-Route::post('load-other-timezones',[HomeController::class,'loadOtherTimeZones']);
+    Route::post('load-other-timezones', [HomeController::class, 'loadOtherTimeZones']);
 
-Route::get('past-event',[HomeController::class,'pastevent'])->name('pastevent');
-Route::get('upcoming-event',[HomeController::class,'upcomingevent'])->name('upcomingevent');
-Route::post('submit-payment',[EventPaymentController::class,'index'])->name('submitPayment');
-Route::post('payment',[EventPaymentController::class,'paymentWebinars'])->name('payementwebinars');
+    Route::get('past-event', [HomeController::class, 'pastevent'])->name('pastevent');
+    Route::get('upcoming-event', [HomeController::class, 'upcomingevent'])->name('upcomingevent');
+    Route::post('submit-payment', [EventPaymentController::class, 'index'])->name('submitPayment');
+    Route::post('payment', [EventPaymentController::class, 'paymentWebinars'])->name('payementwebinars');
 
-Route::get('publications',[HomeController::class,'publications'])->name('upcoming_publications');
-Route::post('educations',[HomeController::class,'searceducations'])->name('search_educations');
-Route::resource('eventpayments',EventPaymentController::class);
+    Route::get('publications', [HomeController::class, 'publications'])->name('upcoming_publications');
+    Route::post('educations', [HomeController::class, 'searceducations'])->name('search_educations');
+    Route::resource('eventpayments', EventPaymentController::class);
 
-Route::get('faqs',[HomeController::class,'faqs'])->name('faqs');
-Route::get('frontend-news',[NewsController::class,'frontIndex'])->name('newsfrontend');
-Route::post('show-comments',[CommentController::class,'showComments'])->name('showComments');
+    Route::get('faqs', [HomeController::class, 'faqs'])->name('faqs');
+    Route::get('frontend-news', [NewsController::class, 'frontIndex'])->name('newsfrontend');
+    Route::post('show-comments', [CommentController::class, 'showComments'])->name('showComments');
 
-//videos on demand
-Route::get('videos-on-demand',[HomeController::class,'videosOnDemand'])->name('videosOnDemand');
-Route::get('ce-archives',[HomeController::class,'ceArchives'])->name('ceArchives');
+    //videos on demand
+    Route::get('videos-on-demand', [HomeController::class, 'videosOnDemand'])->name('videosOnDemand');
+    Route::get('ce-archives', [HomeController::class, 'ceArchives'])->name('ceArchives');
 
     //Forum-posts Comments Routes
-    Route::post('/comment/store', [CommentController::class,'store'])->name('comment.add');
-    Route::post('savelike', [PostController::class,'likeSave'])->name('likesave');
+    Route::post('/comment/store', [CommentController::class, 'store'])->name('comment.add');
+    Route::post('savelike', [PostController::class, 'likeSave'])->name('likesave');
 
-Route::group(['prefix'=>'vetvine-member', 'middleware' => ['auth:sanctum', 'vetvineUserRole']], function(){
-    // AJAX Route
-    Route::post('/getEventPrice', [HomeController::class, 'getEventPrice'])->name('getEventPrice');
-    Route::post('/getVideoPrice', [HomeController::class, 'getVideoPrice'])->name('getVideoPrice');
-    // End AJAX Route
-    Route::get('dashboard',[PersonelInfoController::class,'userdashboard'])->name('userdashboard');
-    Route::get('member-home',[PostController::class,'memberHome'])->name('member_home');
-    Route::get('myupcomming-event',[PersonelInfoController::class,'myUpcommingEvents'])->name('myupcomming.events');
-    Route::get('mypast-event',[PersonelInfoController::class,'myPastEvents'])->name('mypast.events');
+    Route::group(['prefix' => 'vetvine-member', 'middleware' => ['auth:sanctum', 'vetvineUserRole']], function () {
+        // AJAX Route
+        Route::post('/getEventPrice', [HomeController::class, 'getEventPrice'])->name('getEventPrice');
+        Route::post('/getVideoPrice', [HomeController::class, 'getVideoPrice'])->name('getVideoPrice');
+        // End AJAX Route
+        Route::get('dashboard', [PersonelInfoController::class, 'userdashboard'])->name('userdashboard');
+        Route::get('member-home', [PostController::class, 'memberHome'])->name('member_home');
+        Route::get('myupcomming-event', [PersonelInfoController::class, 'myUpcommingEvents'])->name('myupcomming.events');
+        Route::get('mypast-event', [PersonelInfoController::class, 'myPastEvents'])->name('mypast.events');
 
-    //User dashboard routes
-    Route::resource('personelinfo',PersonelInfoController::class);
-    Route::get('/profile-info',[PersonelInfoController::class,'userProfile'])->name('vetvineUserProfile');
-    Route::get('/chat',[PersonelInfoController::class,'chat'])->name('vetvineUserChat');
-    Route::get("/chatify", function(){
-        return view("vendor.chatify.pages.app");
-     });
-    Route::get('/notifications',[PersonelInfoController::class,'notifications'])->name('vetvineUserNotifications');
+        //User dashboard routes
+        Route::resource('personelinfo', PersonelInfoController::class);
+        Route::get('/profile-info', [PersonelInfoController::class, 'userProfile'])->name('vetvineUserProfile');
+        Route::get('/chat', [PersonelInfoController::class, 'chat'])->name('vetvineUserChat');
+        Route::get("/chatify", function () {
+            return view("vendor.chatify.pages.app");
+        });
+        Route::get('/notifications', [PersonelInfoController::class, 'notifications'])->name('vetvineUserNotifications');
 
-    Route::post('apply_couponcode',[StripePaymentController::class,'applyCouponCode'])->name('usermemberships.applycouponcode');
-    Route::resource('updateprofile',ProfileController::class);
-    Route::resource('usermemberships',StripePaymentController::class);
-    //User setting routes
-    Route::resource('general',GeneralSettingController::class);
-    Route::resource('privacy',PrivacySettingController::class);
-    // User Post management routes
-    Route::resource('post', PostController::class);
-    //forum posts
-    Route::get('create-forumpost/{id}',[ForumPostController::class,'createPost'])->name('createforumpost');
-    Route::get('forumpostlist/{id}',[ForumPostController::class,'forumPostList'])->name('forumpostlist');
-    Route::post('comment-destroy/{id}', [CommentController::class,'destroy'])->name('comment.destroy');
-    Route::post('reply/store', [CommentController::class,'replyStore'])->name('reply.add');
+        Route::post('apply_couponcode', [StripePaymentController::class, 'applyCouponCode'])->name('usermemberships.applycouponcode');
+        Route::resource('updateprofile', ProfileController::class);
+        Route::resource('usermemberships', StripePaymentController::class);
+        //User setting routes
+        Route::resource('general', GeneralSettingController::class);
+        Route::resource('privacy', PrivacySettingController::class);
+        // User Post management routes
+        Route::resource('post', PostController::class);
+        //forum posts
+        Route::get('create-forumpost/{id}', [ForumPostController::class, 'createPost'])->name('createforumpost');
+        Route::get('forumpostlist/{id}', [ForumPostController::class, 'forumPostList'])->name('forumpostlist');
+        Route::post('comment-destroy/{id}', [CommentController::class, 'destroy'])->name('comment.destroy');
+        Route::post('reply/store', [CommentController::class, 'replyStore'])->name('reply.add');
 
-    //User events Routes
-    Route::post('review-store',[ReviewController::class, 'reviewstore'])->name('reviewstore');
-    Route::post('review-delete',[HomeController::class, 'reviewdelete'])->name('review.delete');
+        //User events Routes
+        Route::post('review-store', [ReviewController::class, 'reviewstore'])->name('reviewstore');
+        Route::post('review-delete', [HomeController::class, 'reviewdelete'])->name('review.delete');
 
 
-    Route::post('update-comment', [ReviewController::class, 'commentupdate'])->name('comment.update');
-    Route::post('edit-comment', [ReviewController::class, 'edit'])->name('comment.edit');
+        Route::post('update-comment', [ReviewController::class, 'commentupdate'])->name('comment.update');
+        Route::post('edit-comment', [ReviewController::class, 'edit'])->name('comment.edit');
 
-    Route::get('change-password',[HomeController::class,'changePassword'])->name('change_password');
+        Route::get('change-password', [HomeController::class, 'changePassword'])->name('change_password');
 
-    Route::post('update-password',[HomeController::class,'updateUserPassword'])->name('updateUserPassword');
-});
+        Route::post('update-password', [HomeController::class, 'updateUserPassword'])->name('updateUserPassword');
+    });
 });
 
 Route::get('testing', function () {
@@ -315,7 +321,5 @@ Route::post('/licensure',     [LicensureController::class, 'licensure'])->name('
 
 
 //Testing
-// Route::get('test', function () {
-//     event(new NotificationEvent());
-//     return view('test');
-// });
+Route::get('test', function () {
+})->middleware('permission');
