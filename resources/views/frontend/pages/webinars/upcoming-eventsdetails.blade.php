@@ -666,7 +666,9 @@
     <section class="video-section-wrapper border-top-0 mb-4">
         <div class="container">
             <div class="col-12 might_margin">
-                <h1 class="Upcoming-webinars">You might also like</h1>
+                @if(count($youMaylikePost) > 0)
+                    <h1 class="Upcoming-webinars">You might also like</h>
+                @endif
             </div>
                 <div class="row w-100 video-cat-main m-0">
                     @foreach ($youMaylikePost as $showevents)
