@@ -20,7 +20,7 @@ const messagesContainer = $(".messenger-messagingView .m-body"),
   defaultMessengerColor = $("meta[name=messenger-color]").attr("content"),
   access_token = $('meta[name="csrf-token"]').attr("content");
 
-const getMessengerId = () => $("meta[name=id]").attr("content");
+getMessengerId = () => $("meta[name=id]").attr("content");
 const getMessengerType = () => $("meta[name=type]").attr("content");
 const setMessengerId = (id) => $("meta[name=id]").attr("content", id);
 const setMessengerType = (type) => $("meta[name=type]").attr("content", type);
@@ -422,10 +422,11 @@ function sendMessage() {
   const inputValue = $.trim(messageInput.val());
   if (inputValue.length > 0 || hasFile) {
     const formData = new FormData($("#message-form")[0]);
-    formData.append("id", getMessengerId());
+    formData.append("id", localStorage.getItem('sendToId'));
     formData.append("type", getMessengerType());
     formData.append("temporaryMsgId", tempID);
     formData.append("_token", access_token);
+    alert($("#message-form").attr("action"));
     $.ajax({
       url: $("#message-form").attr("action"),
       method: "POST",
