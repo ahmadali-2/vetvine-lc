@@ -96,7 +96,12 @@ class VetVineHelperClass
 
     public function chatifyAdmin()
     {
-        return User::with('toMessage', 'fromMessage')->where('id', '!=', Auth::id())->where('type' ,'1')->get();
+        return User::with('toMessage', 'fromMessage')->where('id', '!=', Auth::id())->where('type' ,'1')->orWhere('type' ,'9')->orWhere('type' ,'10')->orWhere('type' ,'11')->orWhere('type' ,'12')->get();
+    }
+
+    public function chatifyUsers()
+    {
+        return User::with('toMessage', 'fromMessage')->where('id', '!=', Auth::id())->where('type' ,'!=','1')->where('type' ,'!=','9')->where('type' ,'!=','10')->where('type' ,'!=','11')->where('type' ,'!=','12')->get();
     }
 
     public function currentUserProfile()

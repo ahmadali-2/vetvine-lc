@@ -70,11 +70,13 @@
             <button class="btn btn-secondary dropdown-toggle" type="button" id="message" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
 
-                <i class="ti-email"></i>
+                <a><i class="ti-email"></i></a>
 
                 <span class="count-messages bg-primary">0</span>
 
             </button>
+
+            <a href="{{route('admin-chat')}}">Chat Button</a>
 
             @php
                 $messages = vetvineHelper::adminUserMessages();

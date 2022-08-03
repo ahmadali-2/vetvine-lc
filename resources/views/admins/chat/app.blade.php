@@ -1,10 +1,13 @@
+@extends('admins.master')
 
-@extends('vetvineUsers.dashboard_master')
-
-@section('dashboardcontent')
+@section('content')
+<?php
+    $type = 'user';
+    $messengerColor = Auth::user()->messenger_color ?? $this->messengerFallbackColor;
+    $dark_mode = Auth::user()->dark_mode < 1 ? 'light' : 'dark';
+?>
     <!-------sidbar------>
     <div class="container my-5">
-
         <div class="messenger">
             {{-- ----------------------Users/Groups lists side---------------------- --}}
             <div class="messenger-listView">
@@ -45,7 +48,7 @@
                         </div>
 
                         {{-- Saved Messages --}}
-                        {!! view('Chatify::layouts.listItem', ['get' => 'saved']) !!}
+                        {!! view('Chatify::layouts.adminListItem', ['get' => 'saved']) !!}
 
                         {{-- Contact --}}
                         <div class="listOfContacts" style="width: 100%;height: calc(100% - 200px);position: relative;">

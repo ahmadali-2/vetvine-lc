@@ -21,7 +21,7 @@ $vetvineLogo =vetvineHelper::vetvineGeneralSetting()
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    
+
 </head>
 
 <body>
@@ -124,8 +124,6 @@ $vetvineLogo =vetvineHelper::vetvineGeneralSetting()
     @include('notify::components.notify')
 
     @include('admins.layouts._footerscripts')
-
-
 
     @yield('scripts')
 
