@@ -68,7 +68,7 @@
     </div>
   </section>
 
-  <section class="become_member_area become_member_area_bottom">
+  <section class="become_member_area become_member_area_bottom mb-5">
     <div class="container">
       <h2>
         <span>Educational Resources</span>

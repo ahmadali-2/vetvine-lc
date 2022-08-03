@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Models\Admins\Forum\Post;
+use App\Models\NotificationHistory;
 use App\Models\PostActivity;
 use App\Models\Share;
 use App\Models\User;
@@ -41,43 +42,179 @@ class NotificationEvent implements ShouldBroadcast
     public $authUser;
     public $actionType;
 
+    public $sendToAll;
+
+
     // public $likes;
     /**.
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($user_id, $body,$action)
-    // public function __construct()
+    public function __construct($data)
     {
-        Log::info('Notification Event');
-        $post = Post::find($body) ?? '';
-        $user = User::find($user_id) ?? '';
-        if($action === "share"){
-            Log::info("Share Event");
-            $this->actionType = $action;
-            $this->userPhoto = $user->profile_photo ?? '';
-            // $this->userName = $post->user->name ?? '';
-            $this->userName = $user->name;
-            $this->postImg = $post->post_photo ?? '';
-            $this->userDesc = $post->post_description ?? '';
-            $this->postTitle = $post->post_title ?? '';
-            $this->userId = $user->id;
-            $this->authUser = Auth::user()->id;
-            $this->postUserId = $post->user_id;
-        }else{
-            Log::info('Like Event');
-            $this->actionType = $action;
-            $this->userPhoto = $user->profile_photo ?? '';
-            // $this->userName = $post->user->name ?? '';
-            $this->userName = $user->name;
-            $this->postImg = $post->post_photo ?? '';
-            $this->userDesc = $post->post_description ?? '';
-            $this->postTitle = $post->post_title ?? '';
-            $this->userId = $user->id;
-            $this->authUser = Auth::user()->id;
-            $this->postUserId = $post->user_id;
+        Log::info($data);
+        $user = User::find($data['user_id']) ?? '';
+        if (isset($data['post_id'])) {
+            $post = Post::find($data['post_id']) ?? '';
+            if (isset($data['is_like'])) {
+                Log::info('Simple Post liked');
+                Log::info("Inner Like Post");
+                NotificationHistory::create([
+                    'user_id' => $post->user_id,
+                    'action_by' => $user->id,
+                    'post_id' => $post->id,
+                    'action' => 'liked',
+                    'is_read' => 1
+                ]);
+                $this->userName = $user->name ?? '';
+                $this->userPhoto = $user->profile_photo ?? '';
+                $this->postImg = $post->post_photo ?? '';
+                $this->userDesc = $post->post_description ?? '';
+                $this->postTitle = $post->post_title ?? '';
+                $this->postUserId = $post->user_id;
+                $this->actionType = "liked your post";
+                Log::info("Inner Like Post");
+            } elseif (isset($data['is_comment'])) {
+                //Simple Post Comment
+                Log::info('Simple Post Comment');
+                NotificationHistory::create([
+                    'user_id' => $post->user_id,
+                    'action_by' => $user->id,
+                    'post_id' => $post->id,
+                    'action' => 'commented',
+                    'is_read' => 1
+                ]);
+                $this->userName = $user->name ?? '';
+                $this->userPhoto = $user->profile_photo ?? '';
+                $this->postImg = $post->post_photo ?? '';
+                $this->userDesc = $post->post_description ?? '';
+                $this->postTitle = $post->post_title ?? '';
+                $this->postUserId = $post->user_id;
+                $this->actionType = "commented your post";
+            } elseif (isset($data['is_create'])) {
+                //Simple Post Comment
+                Log::info('Simple Post Created');
+                NotificationHistory::create([
+                    'action_by' => $user->id,
+                    'post_id' => $post->id,
+                    'action' => 'created',
+                    'is_read' => 1
+                ]);
+                $this->userName = $user->name ?? '';
+                $this->userPhoto = $user->profile_photo ?? '';
+                $this->postImg = $post->post_photo ?? '';
+                $this->userDesc = $post->post_description ?? '';
+                $this->postTitle = $post->post_title ?? '';
+                $this->postUserId = $post->user_id;
+                $this->actionType = "created a post";
+                $this->sendToAll = true;
+            } else {
+                //Simple Post Create
+                Log::info('Simple Post Shared');
+                NotificationHistory::create([
+                    'user_id' => $post->user_id,
+                    'action_by' => $user->id,
+                    'post_id' => $post->id,
+                    'action' => 'shared',
+                    'is_read' => 1
+                ]);
+                $this->userName = $user->name ?? '';
+                $this->userPhoto = $user->profile_photo ?? '';
+                $this->postImg = $post->post_photo ?? '';
+                $this->userDesc = $post->post_description ?? '';
+                $this->postTitle = $post->post_title ?? '';
+                $this->postUserId = $post->user_id;
+                $this->actionType = "shared your post";
+            }
+        } else {
+            Log::info('Shared Post liked');
+            $sharePost = Share::find($data['share_id']) ?? '';
+            Log::info($sharePost);
+            $post = Post::find($sharePost->post_id) ?? '';
+            Log::info($post);
+            if (isset($data['is_like'])) {
+                //Share Post Like
+                Log::info('Share Post liked');
+                Log::info("Inner Share Like Post");
+                NotificationHistory::create([
+                    'user_id' => $post->user_id,
+                    'action_by' => $user->id,
+                    'post_id' => $post->id,
+                    'action' => 'liked',
+                    'is_read' => 1
+                ]);
+                $this->userName = $user->name ?? '';
+                $this->userPhoto = $user->profile_photo ?? '';
+                $this->postImg = $post->post_photo ?? '';
+                $this->userDesc = $post->post_description ?? '';
+                $this->postTitle = $post->post_title ?? '';
+                $this->postUserId = $post->user_id;
+                Log::info("Inner Share Like Post");
+                $this->actionType = "liked your shared post";
+            } else if (isset($data['is_comment'])) {
+                //Share Post Comment
+                Log::info('Share Post Comment');
+                NotificationHistory::create([
+                    'user_id' => $post->user_id,
+                    'action_by' => $user->id,
+                    'post_id' => $post->id,
+                    'action' => 'commented',
+                    'is_read' => 1
+                ]);
+                $this->userName = $user->name ?? '';
+                $this->userPhoto = $user->profile_photo ?? '';
+                $this->postImg = $post->post_photo ?? '';
+                $this->userDesc = $post->post_description ?? '';
+                $this->postTitle = $post->post_title ?? '';
+                $this->postUserId = $post->user_id;
+                $this->actionType = "commented your shared post";
+            } else {
+                //Share Post Create
+                Log::info('Share Post created');
+                NotificationHistory::create([
+                    'user_id' => $post->user_id,
+                    'action_by' => $user->id,
+                    'post_id' => $post->id,
+                    'action' => 'shared',
+                    'is_read' => 1
+                ]);
+                $this->userName = $user->name ?? '';
+                $this->userPhoto = $user->profile_photo ?? '';
+                $this->postImg = $post->post_photo ?? '';
+                $this->userDesc = $post->post_description ?? '';
+                $this->postTitle = $post->post_title ?? '';
+                $this->postUserId = $post->user_id;
+                $this->actionType = "shared your post";
+            }
         }
+
+        // $user = User::find((int)$user_id) ?? '';
+        // if($action === "share"){
+        //     Log::info("Share Event");
+        //     $this->actionType = $action;
+        //     $this->userPhoto = $user->profile_photo ?? '';
+        //     // $this->userName = $post->user->name ?? '';
+        //     $this->userName = $user->name;
+        //     $this->postImg = $post->post_photo ?? '';
+        //     $this->userDesc = $post->post_description ?? '';
+        //     $this->postTitle = $post->post_title ?? '';
+        //     $this->userId = $user->id;
+        //     $this->authUser = Auth::user()->id;
+        //     $this->postUserId = $post->user_id;
+        // }else{
+        //     Log::info('Like Event');
+        //     $this->actionType = $action;
+        //     $this->userPhoto = $user->profile_photo ?? '';
+        //     // $this->userName = $post->user->name ?? '';
+        //     $this->userName = $user->name;
+        //     $this->postImg = $post->post_photo ?? '';
+        //     $this->userDesc = $post->post_description ?? '';
+        //     $this->postTitle = $post->post_title ?? '';
+        //     $this->userId = $user->id;
+        //     $this->authUser = Auth::user()->id;
+        //     $this->postUserId = $post->user_id;
+        // }
     }
 
     /**

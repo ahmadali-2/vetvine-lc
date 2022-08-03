@@ -57,10 +57,10 @@
         </div>
     @endsection
 
-    @section('scripts')
+    {{-- @section('scripts')
         <script>
             $(document).ready(function() {
                 $('#ForumsTable').DataTable();
             });
         </script>
-    @endsection
+    @endsection --}}

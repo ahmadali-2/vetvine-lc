@@ -30,7 +30,7 @@
 
                                         <div class="form-group">
 
-                                            <label for="coupon_code" class="control-label mb-1">Coupon Code (System Generated Coupon)</label>
+                                            <label for="coupon_code" class="control-label mb-1">Coupon Code (System Generated)</label>
 
                                             <input id="coupon_code" readonly placeholder="Enter Coupon Code" name="coupon_code"
                                                 type="text" class="form-control" aria-required="true" aria-invalid="false"
@@ -114,9 +114,9 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="status" class="control-label mb-1">Coupon Status</label>
+                                            <label for="coupon_status" class="control-label mb-1">Coupon Status</label>
                                             <br>
-                                            <input type="checkbox" name="status" data-toggle="toggle"
+                                            <input type="checkbox" name="coupon_status" data-toggle="toggle"
                                                 data-onstyle="outline-success" data-size="md" data-offstyle="outline-danger"
                                                 data-on="<i class='fa fa-unlock'></i> Active"
                                                 data-off="<i class='fa fa-lock'></i> Inactive">

@@ -174,6 +174,13 @@
             font-family: 'Museo 500';
         }
 
+        .video-section-wrapper {
+    width: 100%;
+    display: inline-block;
+    border-top: 0px solid #68868e !important;
+    /* padding-top: 23px; */
+}
+
         /* End */
     </style>
 
@@ -286,7 +293,7 @@
 
                                 <div class="public2-info sponser">
                                     <div class="public2-title sponsor-title">
-                                        Sponsor(s): vetvine :
+                                        Sponsor(s): vetvine ;
                                     </div>
                                     @foreach ($sponsor as $items)
                                     <div class="public2-description spon-descripton">
@@ -296,7 +303,7 @@
                                   </div>
 
                                   <div class="publication-detail register_btn">
-                                    <a id="videoRegister" style="cursor: pointer">Register</a>
+                                    <a id="videoRegister" style="cursor: pointer">Register Now</a>
                                 </div>
                                 {{-- </form> --}}
                             </div>

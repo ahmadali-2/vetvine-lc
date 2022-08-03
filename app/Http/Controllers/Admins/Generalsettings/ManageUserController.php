@@ -10,6 +10,7 @@ use Exception;
 use App\Models\Generals\TimeZone;
 use App\Models\MemberTypes;
 use App\Models\UserMemberAndNetworkLevel;
+use Illuminate\Support\Facades\Log;
 class ManageUserController extends Controller
 {
     /**
@@ -144,6 +145,7 @@ class ManageUserController extends Controller
     }
     public function changeUserType($id)
     {
+
         $memberTypes = MemberTypes::all();
         $user =User::with('userMemberType')->where('id',$id)->first();
         return view('admins.generalsettings.manageusers.editusertype',compact('memberTypes','user'));
@@ -154,14 +156,14 @@ class ManageUserController extends Controller
         try{
             $user =User::where('id', $request->id)->first();
             $user->update([
-                'type'  => $request->type,
+                'type'                => $request->type,
+                'blocked_user'        => ($request->blocked_user == "on") ? '1' : '0',
             ]);
             parent::successMessage("User Status Updated Successfully");
              return redirect(route('manageuser.index'));
         } catch(Exception $e) {
             parent::dangerMessage("User Does Not  Updated Successfully , Please Try Again");
-
-           return  redirect()->back();
+            return  redirect()->back();
         }
 
     }
@@ -174,7 +176,7 @@ class ManageUserController extends Controller
     public function groupMailSent(Request $request){
         $request->validate([
             'subject' => 'required',
-            'message' => 'required',
+            'message' => 'required', 
             'user' => 'required'
         ],[
             'subject.required' => 'Subject Feild Is Required',

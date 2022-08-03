@@ -69,12 +69,14 @@ $comments = null;
                     @endif
                     <?php $displayLike = false; ?>
                 </div>
-                <div class="shareCommentButtons">
-                    <a class="like_color" style="cursor: pointer;" data-post-id="{{ $share->id }}"
-                        data-key={{ $key }} data-type="share"><i class="fa fa-comments"
-                            aria-hidden="true"></i>
-                        Comment</a>
-                </div>
+                @if(Auth::user()->network->parent_id != 2)
+                    <div class="shareCommentButtons">
+                        <a class="like_color" style="cursor: pointer;" data-post-id="{{ $share->id }}"
+                            data-key={{ $key }} data-type="share"><i class="fa fa-comments"
+                                aria-hidden="true"></i>
+                            Comment</a>
+                    </div>
+                @endif
                 <div class="shareButtons">
                     <a class="share_btn" style="cursor: pointer;" data-user-id="{{ $share->user_id }}"
                         data-post-id="{{ $share->post_id }}"> <i class="fa fa-share" aria-hidden="true"></i>
@@ -152,12 +154,14 @@ $comments = null;
                     @endif
                     <?php $displayLike = false; ?>
                 </div>
-                <div class="commentButtons">
-                    <a class="like_color" style="cursor: pointer;" data-post-id="{{ $post->id }}"
-                        data-key={{ $key }} data-type="post"> <i class="fa fa-comments"
-                            aria-hidden="true"></i>
-                        Comment</a>
-                </div>
+                @if(Auth::user()->network->parent_id != 2)
+                    <div class="commentButtons">
+                        <a class="like_color" style="cursor: pointer;" data-post-id="{{ $post->id }}"
+                            data-key={{ $key }} data-type="post"> <i class="fa fa-comments"
+                                aria-hidden="true"></i>
+                            Comment</a>
+                    </div>
+                @endif
                 <div class="shareButtons">
                     <a class="share_btn" style="cursor: pointer;" data-user-id="{{ $post->user->id }}"
                         data-post-id="{{ $post->id }}"> <i class="fa fa-share" aria-hidden="true"></i>

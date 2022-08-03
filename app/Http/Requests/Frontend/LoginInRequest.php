@@ -35,7 +35,7 @@ class LoginInRequest extends FormRequest
         return [
 
             'email.required'             => 'Email Field Is Required',
-            'email.email'                => 'Email Must Be Valid Email with @gmail.com ',
+            'email.email'                => 'Email Must Be Valid Email with @',
             'email.string'               => 'Email Must Be In String Format',
             'email.max'                  => 'Email Max Length 255',
             'password.required'          => 'Password Field Is Required',

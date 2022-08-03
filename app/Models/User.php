@@ -70,6 +70,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'locale_id',
         'blocked_search',
         'profile_privacy',
+        'blocked_user',
         'profile_posting_privacy',
         'guest',
 
@@ -197,5 +198,22 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function unreadMessage(){
         return $this->hasMany(ChMessage::class,'from_id','id')->where('from_id',$this->id)->where('seen',0)->count();
+    }
+
+    public function notificationHistory(){
+        return $this->hasMany(NotificationHistory::class);
+    }
+
+    public function network(){
+        return $this->belongsTo(UserMemberAndNetworkLevel::class, 'network_id');
+    }
+
+
+    public static function hasPermission($id){
+        if($id == "1"){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

@@ -6,7 +6,7 @@
                 <div class="col-sm-6">
                     <h1>Subscribed Users / Plans</h1>
                 </div>
-               
+
             </div>
         </div>
     </section>
@@ -18,7 +18,7 @@
                                 <strong class="card-title">Subscribed Plans</strong>
                             </div>
                             <div class="card-body">
-                                <table class="table">
+                                <table class="table" id="ForumsTable">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -35,7 +35,7 @@
                                             <td>{{$plans->plan_name ?? ''}}</td>
                                             <td>{{$plans->plancategory->category_name ?? ''}}</td>
                                             <td>{{$plans->totalUsersInPlans ?? ''}}</td>
-                                           
+
                                             <td>
                                             <a href="{{route('subscribed-users.show',$plans->id)}}"> <i class="far fa-eye text-info"></i></a>
                                             </td>

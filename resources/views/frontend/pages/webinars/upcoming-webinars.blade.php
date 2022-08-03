@@ -1,24 +1,23 @@
 @extends('frontend.master')
 @section('content')
+    <main>
+        <section class="main_banner main_banner_grow">
+            <div class="container">
+                <div class="flex-box-banner">
+                    <div class="grow_banner_box grow_banner_box_web">
+                        <div class="grow-heading">GROW</div>
+                        <img src="{{ asset('frontend/images/sep-line-2.jpg') }}" width="250" height="2" alt=""
+                            class="line_image">
+                        <p class="mb-0">Learn from world renowned animal experts to empower yourself and grow.
+                        </p>
 
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-<main>
-    <section class="main_banner main_banner_grow">
-      <div class="container">
-        <div class="flex-box-banner">
-          <div class="grow_banner_box grow_banner_box_web">
-            <div class="grow-heading">GROW</div>
-            <img src="{{ asset('frontend/images/sep-line-2.jpg') }}" width="250" height="2" alt="" class="line_image">
-            <p class="mb-0">Learn from world renowned animal experts to empower yourself and grow.
-            </p>
-
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <section class="main_banner_bottob_label"></section>
+    <section class="main_banner_bottob_label"></section>
 
     <section class="video-section-wrapper mb-4" style="border: none !important;">
         <div class="container">
@@ -105,10 +104,8 @@
                             @endif
                             <div class="video-bottom-text">
                                 <h3>{{ $showevents->event_title }}</h3>
-                                </h3>
-                                <div>
 
-                                </div>
+
                             </div>
                             @if (Auth::user())
                                 @php
@@ -134,16 +131,13 @@
                                     $userEventTime = new DateTimeZone($pieces[0]);
                                     $convertedTime = $today->setTimeZone($userEventTime);
 
-                                    $formattedTime  =  $convertedTime->format('H:i A');
-                            @endphp
-                             @endif
+                                    $formattedTime = $convertedTime->format('H:i A');
+                                @endphp
+                            @endif
                             <div class="video-bottom-description">
                                 <h5 class="my-3">{{ date('m/d/Y', strtotime($showevents->date)) }}</h5>
-                                {{-- @if (Auth::user())
-                                <h5>Start Time : {{ date('g:i a', strtotime($formattedTime)) }}</h5>
-                               @endif --}}
-                                <p><strong>Presented by:</strong> <a href="{{ $showevents->presenter_url_one }}"
-                                        class="vetvine_a" target="_blank" >{{ $showevents->presenter_one }}</a>
+                                <p><strong>Presented by:</strong> <a href="{{ $showevents->presenter_one_url }}"
+                                        class="vetvine_a" target="_blank">{{ $showevents->presenter_one }}</a>
 
                                 <div class="parent_sponser">
 
@@ -158,15 +152,14 @@
                                     </div>
 
                                 </div>
-                                </p>
 
-
-                                </p>
                                 <p class="para-decription">
+
                                     {!! Str::limit($showevents->event_description, 250) !!}
                                 </p>
 
-                                <a href="{{ route('upcoming_details', $showevents->id) }}">Read More</a>
+                                <a href="{{ route('upcoming_details', $showevents->id) }}" class="read_more_btn">Read
+                                    More</a>
                             </div>
                         </div>
                     </div>

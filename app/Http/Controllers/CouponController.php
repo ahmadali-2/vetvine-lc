@@ -45,7 +45,7 @@ class CouponController extends Controller
              Coupon::create([
                 "coupon_code"   => $request->coupon_code,
                 "coupon_type"   => $request->coupon_type,
-                'status'        => ($request->coupon_status == "on") ? 1 : 0,
+                "status"        => ($request->coupon_status == "on") ? 1 : 0,
                 "amount"        => $request->amount,
                 "start_at"      => $request->start_at,
                 "expired_at"    => $request->expired_at,
@@ -96,7 +96,7 @@ class CouponController extends Controller
             $coupon->update([
                 "coupon_code"   => $request->coupon_code,
                 "coupon_type"   => $request->coupon_type,
-                'status'        => ($request->coupon_status == "on") ? 1 : 0,
+                "status"        => ($request->coupon_status == "on") ? 1 : 0,
                 "amount"        => $request->amount,
                 "start_at"      => $request->start_at,
                 "expired_at"    => $request->expired_at,

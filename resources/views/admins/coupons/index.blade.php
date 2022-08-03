@@ -44,7 +44,7 @@
 
                      <div class="card-body">
 
-                         <table class="table">
+                         <table class="table" id="ForumsTable">
 
                              <thead>
 

@@ -21,7 +21,7 @@
                         <strong class="card-title">News</strong>
                     </div>
                         <div class="card-body">
-                           <table class="table">
+                           <table class="table" id="ForumsTable">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>

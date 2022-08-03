@@ -37,52 +37,53 @@ class PostController extends Controller
     public function memberHome()
     {
         $user = auth()->user();
-        if($user){
+        if ($user) {
             $permissions = MemberPermission::where('membertype_id', $user->userMemberType->id)->first();
             $likesPermission = $permissions->likes;
             $commentsPermission = $permissions->comments;
             $sharesPermission = $permissions->shares;
+
             $posts = array();
 
             $news = News::all();
 
-            $postActivities = PostActivity::orderBy('id','desc')->paginate(3);
+            $postActivities = PostActivity::orderBy('id', 'desc')->paginate(3);
 
-            foreach($postActivities as $postActivity){
-                if(isset($postActivity->post_id)){
+            foreach ($postActivities as $postActivity) {
+                if (isset($postActivity->post_id)) {
                     $post = Post::with('user', 'likes')->where('id', $postActivity->post_id)->first();
                     array_push($posts, $post);
-                }else{
+                } else {
                     $share = Share::with('users', 'posts', 'likes')->where('id', $postActivity->share_id)->first();
                     array_push($posts, $share);
                 }
             }
         }
 
-        return view('frontend.pages.member-home', compact('posts', 'news', 'postActivities','likesPermission','commentsPermission','sharesPermission'));
+        return view('frontend.pages.member-home', compact('posts', 'news', 'postActivities', 'likesPermission', 'commentsPermission', 'sharesPermission'));
     }
 
-    public function paginateMemberHomePost(){
+    public function paginateMemberHomePost()
+    {
         $posts = array();
-        $postActivities = PostActivity::orderBy('id','desc')->paginate(3);
+        $postActivities = PostActivity::orderBy('id', 'desc')->paginate(3);
 
         $user = auth()->user();
-        if($user){
+        if ($user) {
             $permissions = MemberPermission::where('membertype_id', $user->userMemberType->id)->first();
             $likesPermission = $permissions->likes;
             $commentsPermission = $permissions->comments;
             $sharesPermission = $permissions->shares;
 
-            foreach($postActivities as $postActivity){
-                if(isset($postActivity->post_id)){
+            foreach ($postActivities as $postActivity) {
+                if (isset($postActivity->post_id)) {
                     $post = Post::with('user', 'likes')->where('id', $postActivity->post_id)->first();
                     array_push($posts, $post);
-                }else{
+                } else {
                     $share = Share::with('users', 'posts', 'likes')->where('id', $postActivity->share_id)->first();
                     array_push($posts, $share);
                 }
             }
-
         }
 
         return response()->json([
@@ -91,88 +92,107 @@ class PostController extends Controller
         ]);
     }
 
-    public function sharePost(Request $request){
+    public function sharePost(Request $request)
+    {
         $user = auth()->user();
-        if($user){
+        if ($user) {
             $permissions = MemberPermission::where('membertype_id', $user->userMemberType->id)->first();
-            if($permissions->shares == 1){
-            if(isset(auth()->user()->email_verified_at)){
+            if ($permissions->shares == 1) {
+                if (isset(auth()->user()->email_verified_at)) {
+                    $data = [
+                        "user_id" => auth()->user()->id,
+                        "post_id" => $request->sharePostId,
+                        "ce"      => $request->ce,
+                    ];
+                    $share = Share::create($data);
+                    PostActivity::create([
+                        'share_id' => $share->id,
+                    ]);
+                    PushNotification::where(['post_user_id' => Auth::user()->id, 'share_id' =>  $request->sharePostId])->update([
+                        'is_read' => '1',
+                    ]);
+                    $postSharePostNotification = [
+                        'user_id' => Auth::id(),
+                        'post_id' =>  $request->sharePostId,
+                        'is_read' => '1',
+                        "ce" => $request->ce,
+                    ];
+                    Log::info($postSharePostNotification);
+                    event(new NotificationEvent($postSharePostNotification));
 
-                $share = new Share();
-                $share->user_id = auth()->user()->id;
-                $share->post_id = $request->sharePostId;
-                $share->ce = $request->ce;
-                $share->save();
-
-                $result = PostActivity::create([
-                    'share_id' => $share->id,
-                ]);
-                event(new NotificationEvent(Auth::user()->id, $request->sharePostId,'share'));
-                Log::info($result);
+                    return response()->json([
+                        'code' => 200,
+                        'message' => 'Post shared successfully!',
+                    ]);
+                } else {
+                    return response()->json([
+                        'code' => 401,
+                        'message' => 'Please verify your email to continue!',
+                    ]);
+                }
+            } else {
                 return response()->json([
-                    'code' => 200,
-                    'message' => 'Post shared successfully!',
-                ]);
-
-            }else{
-                return response()->json([
-                    'code' => 401,
-                    'message' => 'Please verify your email to continue!',
+                    'code' => 402,
+                    'message' => 'You dont have permission to share!',
                 ]);
             }
-        }else{
+        } else {
             return response()->json([
-                'code' => 402,
-                'message' => 'You dont have permission to share!',
+                'code' => 400,
+                'message' => 'Please login first to continue!',
             ]);
         }
-    }else{
-        return response()->json([
-            'code' => 400,
-            'message' => 'Please login first to continue!',
-        ]);
-    }
     }
 
     public function likeSave(Request $request)
     {
-        Log::info($request);
         $user = auth()->user();
-        if($user){
+        if ($user) {
             $permissions = MemberPermission::where('membertype_id', $user->userMemberType->id)->first();
-            if($permissions->likes == 1){
-                if($request->likeType == 1){
-                    $liked = Like::where('user_id', Auth::id())->where('post_id', $request->likepostid)->where('ce',$request->ce)->first();
-                }else{
-                    $liked = ShareLike::where('user_id', Auth::id())->where('share_id', $request->likepostid)->where('ce',$request->ce)->first();
-                   Log::info($liked);
+            if ($permissions->likes == 1) {
+                if ($request->likeType == 1) {
+                    $liked = Like::where('user_id', Auth::id())->where('post_id', $request->likepostid)->where('ce', $request->ce)->first();
+                } else {
+                    $liked = ShareLike::where('user_id', Auth::id())->where('share_id', $request->likepostid)->where('ce', $request->ce)->first();
                 }
                 if (!$liked) {
-                    $push_notifications = event(new NotificationEvent(Auth::id(), (int)$request->likepostid,'like'));
-                    PushNotification::create([
-                        'user_id' => Auth::id(),
-                        'post_id' => $request->likepostid,
-                        'post_user_id' => $request->postUserid,
-                        'type' => '0',
-                        'is_read' => '1'
-                    ]);
-
-                    if($request->likeType == 1){
-                        $liked = Like::create([
+                    if ($request->likeType == 1) {
+                        $postLike = [
                             "post_id" => $request->likepostid,
                             "user_id" => Auth::id(),
                             "like" => 1,
                             "ce" => $request->ce,
-                        ]);
-                    }else{
-                        $liked = ShareLike::create([
+                        ];
+                        Like::create($postLike);
+                        $postLikeNotification = [
+                            'user_id' => Auth::id(),
+                            'post_id' => $request->likepostid,
+                            'post_user_id' => $request->postUserid,
+                            'is_read' => '1',
+                            'is_like' => 1,
+                            "ce" => $request->ce,
+                        ];
+                        PushNotification::create($postLikeNotification);
+                        event(new NotificationEvent($postLikeNotification)); //Event listen for Simple Post Like
+                    } else {
+                        $postShareLike = [
                             "share_id" => $request->likepostid,
                             "user_id" => Auth::id(),
                             "like" => 1,
                             "ce" => $request->ce,
-                        ]);
+                        ];
+                        ShareLike::create($postShareLike);
+                        $postShareLikeNotification = [
+                            'user_id' => Auth::id(),
+                            'share_id' => $request->likepostid,
+                            'post_user_id' => $request->postUserid,
+                            'is_read' => '1',
+                            'is_like' => 1,
+                            "ce" => $request->ce,
+                        ];
+                        PushNotification::create($postShareLikeNotification);
+                        event(new NotificationEvent($postShareLikeNotification)); //Event listen for Share Post Like
                     }
-
                     return response()->json(
                         [
                             'success' => true,
@@ -181,15 +201,34 @@ class PostController extends Controller
                             'like' => $liked,
                         ]
                     );
-
                 } elseif ($liked->like == 0) {
-                    $push_notifications = event(new NotificationEvent(Auth::id(), (int) $request->likepostid,'like'));
-                    PushNotification::where(['post_user_id'=>$request->postUserid,'post_id' => $request->likepostid,'user_id'=>Auth::user()->id])->update([
-                        'is_read' => '1'
-                    ]);
-                    $liked->update([
-                        "like" => '1',
-                    ]);
+                    if ($request->likeType == 1) {
+                        $liked->update([
+                            "like" => '1',
+                        ]);
+                        $postShareLikeNotification = [
+                            'user_id' => Auth::id(),
+                            'post_id' => $request->likepostid,
+                            'post_user_id' => $request->postUserid,
+                            'is_read' => '1',
+                            'is_like' => 1,
+                            "ce" => $request->ce,
+                        ];
+                        event(new NotificationEvent($postShareLikeNotification)); //Event listen on Update like
+                    } else {
+                        $liked->update([
+                            "like" => '1',
+                        ]);
+                        $postShareLikeNotification = [
+                            'user_id' => Auth::id(),
+                            'share_id' => $request->likepostid,
+                            'post_user_id' => $request->postUserid,
+                            'is_read' => '1',
+                            'is_like' => 1,
+                            "ce" => $request->ce,
+                        ];
+                        event(new NotificationEvent($postShareLikeNotification)); //Event listen on Update Sharelike
+                    }
                     return response()->json(
                         [
                             'success' => true,
@@ -199,7 +238,6 @@ class PostController extends Controller
                         ]
                     );
                 } else {
-                    // $push_notifications = event(new NotificationEvent(Auth::id(), (int) $request->likepostid));
                     $liked->update([
                         "like" => '0',
                     ]);
@@ -212,7 +250,7 @@ class PostController extends Controller
                         ]
                     );
                 }
-            }else{
+            } else {
                 return response()->json(
                     [
                         'success' => false,
@@ -221,7 +259,7 @@ class PostController extends Controller
                     ]
                 );
             }
-        }else{
+        } else {
             return response()->json(
                 [
                     'success' => false,
@@ -249,6 +287,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
         $user = Auth::user()->id;
         $path = public_path('vetvineUsers/posts/');
         $result = vetvineHelper::saveImage($request->post_photo, $path);
@@ -264,11 +303,10 @@ class PostController extends Controller
             $post->post_link = $request->post_link;
             $post->post_add_video = $video;
             $post->save();
-
+            Log::info('post created');
             PostActivity::create([
                 'post_id' => $post->id,
             ]);
-
             parent::successMessage('Post saved successfully.');
             return redirect(route('post.index'));
         } catch (Exception $e) {

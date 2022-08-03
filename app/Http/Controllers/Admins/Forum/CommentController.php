@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admins\Forum;
 
+use App\Events\NotificationEvent;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admins\Forum\Post;
@@ -9,6 +10,8 @@ use App\Models\Admins\Forum\Comment;
 use App\Models\Share;
 use Auth;
 use Exception;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
+use Illuminate\Support\Facades\Log;
 
 class CommentController extends Controller
 {
@@ -57,8 +60,26 @@ class CommentController extends Controller
 
                 if($request->type == 'post'){
                     $post = Post::find($request->post_id);
+                    Log::info('Comment Section');
+                    Log::info($post);
+                    $data = [
+                        "user_id" => auth()->user()->id,
+                        "post_id" => $post->id,
+                        "is_read" => '1',
+                        "is_comment" => 1,
+                    ];
+                    event(new NotificationEvent($data));
                 }else{
                     $post = Share::find($request->post_id);
+                    Log::info('Comment Section Share');
+                    Log::info($post);
+                    $data = [
+                        "user_id" => auth()->user()->id,
+                        "share_id" => $post->post_id,
+                        "is_read" => '1',
+                        "is_comment" => 1,
+                    ];
+                    event(new NotificationEvent($data));
                 }
 
                 $post->comments()->save($comment);

@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\PermissionMiddleware;
 use App\Http\Middleware\PreventBackBrowserHistory;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -73,6 +74,7 @@ class Kernel extends HttpKernel
         'frontendUserRole' => \App\Http\Middleware\FrontendUser::class,
         'emailVerification' => \App\Http\Middleware\CheckEmailVerification::class,
         'guestUser' => \App\Http\Middleware\guestUser::class,
+        'permission' => PermissionMiddleware::class,
 
 
     ];

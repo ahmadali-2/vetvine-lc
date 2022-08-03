@@ -22,7 +22,7 @@ class PrivacyPolicySeeder extends Seeder
         </b>
 
         <li>
-            <strong> Copyright of <a href="{{url('/')}}"> www.vetvine.com </a>.</strong> This site as a whole is copyrighted as a collective work, and individual works appearing on or accessible through this site are likewise subject to copyright protection, including the copyrights of individual Members who author or create works for use on PVS. You agree to honor the copyrights in this site (including the selection, coordination and arrangement of the contents of this site) and in the works available on or through this site. In addition, trademarks belonging to us or to third parties appear on this site or are accessible through this site; the fact that we have permitted you access to this site does not constitute authorization to reproduce such trademarks for any other purpose.
+            <strong> Copyright of <a href="{{url("/")}}"> www.vetvine.com </a>.</strong> This site as a whole is copyrighted as a collective work, and individual works appearing on or accessible through this site are likewise subject to copyright protection, including the copyrights of individual Members who author or create works for use on PVS. You agree to honor the copyrights in this site (including the selection, coordination and arrangement of the contents of this site) and in the works available on or through this site. In addition, trademarks belonging to us or to third parties appear on this site or are accessible through this site; the fact that we have permitted you access to this site does not constitute authorization to reproduce such trademarks for any other purpose.
         </li>
         <li>
             <strong> Content Voluntarily Provided. </strong> Content voluntarily provided by a Guest or Member on the PVS website will be presumed by PVS to be owned by the party who provided the information. For content voluntarily provided to PVS, the additional provisions apply:
@@ -156,7 +156,7 @@ class PrivacyPolicySeeder extends Seeder
             'page_desc'  => '<b>PLEASE READ THESE TERMS AND CONDITIONS OF USE CAREFULLY BEFORE USING THE WEB SITE.</b>
             <p>
                 By using this Web site or any other of our Web sites, you signify your assent to these terms of use. If you do not agree to these terms of use, please do not use the site.
-                <a href="{{url("/>")}}">  www.vetvine.com </a>("PVS") reserves the right, at our discretion, to change, modify, add, or remove portions of these terms at any time. Please check these terms periodically for changes. Your continued use of the Web site following the posting of changes to these terms will mean you accept those changes.
+                <a href="{{url("/")}}">  www.vetvine.com </a>("PVS") reserves the right, at our discretion, to change, modify, add, or remove portions of these terms at any time. Please check these terms periodically for changes. Your continued use of the Web site following the posting of changes to these terms will mean you accept those changes.
             </p>
             <b>Disclaimers and Limitations of Warranties</b>
             <ol>

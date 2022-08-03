@@ -6,9 +6,9 @@
                  <div class="col-sm-6">
                  </div>
                  <div class="col-sm-6">
-                     <a class="btn btn-primary float-right" href="{{route('unapproved')}}">
+                     {{-- <a class="btn btn-primary float-right" href="{{route('unapproved')}}">
                        New User Requests ({{$allUsers->where('status',0)->count()}})
-                     </a>
+                     </a> --}}
                  </div>
              </div>
          </div>
@@ -21,7 +21,7 @@
                                 <strong class="card-title"> Table</strong>
                             </div>
                             <div class="card-body">
-                                <table class="table" style="width: 100%;">
+                                <table class="table" style="width: 100%;" id="ForumsTable">
                                 <colgroup>
                                     <col span="1" style="width: 5%;">
                                     <col span="1" style="width: 10%;">
@@ -38,7 +38,9 @@
                                             <th scope="col">Email</th>
                                             <th scope="col">Network</th>
                                             <th scope="col">User Type</th>
+
                                             <th scope="col">Verification Status</th>
+                                            <th scope="col">Blocked User</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
@@ -55,6 +57,11 @@
                                                 <td><span class="badge badge-pill badge-success">Verified</span></td>
                                             @else
                                                 <td><span class="badge badge-pill badge-primary">Pending</span></td>
+                                            @endif
+                                            @if($approveuser->blocked_user == 1)
+                                                <td><span class="badge badge-pill badge-danger">Blocked</span></td>
+                                            @else
+                                                <td><span class="badge badge-pill badge-success">Active</span></td>
                                             @endif
                                             <td>
                                             <a href="{{route('changeusertype',$approveuser->id )}}"><i class="fas fa-edit text-primary"></i></a>

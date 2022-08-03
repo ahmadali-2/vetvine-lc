@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admins\Forum;
 
+use App\Events\NotificationEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Admins\Forum\Forum;
 use App\Models\Admins\Forum\Post;
@@ -10,6 +11,7 @@ use Exception;
 use vetvineHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
 
 class ForumPostController extends Controller
@@ -61,7 +63,17 @@ class ForumPostController extends Controller
             PostActivity::create([
                 'post_id' => $post->id,
             ]);
-            
+            $postShareLikeNotification = [
+                'user_id' => Auth::id(),
+                'post_id' => $post->id,
+                'is_read' => '1',
+                'is_create' => 1,
+            ];
+            Log::info($postShareLikeNotification);
+            Log::info('post created');
+            event(new NotificationEvent($postShareLikeNotification));
+            Log::info('event created');
+
             parent::successMessage('Post saved successfully.');
             return redirect(route('getForumPosts',$request->forum_id));
         } catch (Exception $e) {
