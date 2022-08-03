@@ -426,7 +426,6 @@ function sendMessage() {
     formData.append("type", getMessengerType());
     formData.append("temporaryMsgId", tempID);
     formData.append("_token", access_token);
-    alert($("#message-form").attr("action"));
     $.ajax({
       url: $("#message-form").attr("action"),
       method: "POST",
