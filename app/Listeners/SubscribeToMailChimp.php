@@ -5,7 +5,7 @@ namespace App\Listeners;
 use App\Events\UserRegistered;
 use App\Http\Controllers\Controller;
 use Exception;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Mailchimp;
 use Yoeunes\Toastr\Facades\Toastr;
 
@@ -58,18 +58,17 @@ class SubscribeToMailChimp
             $mailchimp = new \Mailchimp($mailChimpApiKey);
 
             // $mailchimp->subscribte
-            try {
-                $mailchimp->lists->subscribe(
-                    env('MAILCHIMP_LIST_ID'),
-                    ['email' => $event->user->email],
+            try{
+                $mailchimp->lists->subscribe(env('MAILCHIMP_LIST_ID'),
+                    ['email'=>$event->user->email],
                     null,
                     null,
-                    false
-                );
-            } catch (\Mailchimp_List_AlreadySubscribed $e) {
-                return redirect()->back()->with('error', 'Email is Already Subscribed');
-            } catch (\Mailchimp_Error $e) {
-                return redirect()->back()->with('error', 'Error from MailChimp');
+                    false);
+            }
+           catch(Exception $e){
+                toastr()->success('You have successfully subscribed to our mailing list.');
+                Auth::loginUsingId($event->user->id);
+                return redirect('/');
             }
         } else {
             return true;

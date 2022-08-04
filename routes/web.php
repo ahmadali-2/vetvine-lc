@@ -144,6 +144,9 @@ Route::get('login', function () {
 
 
 Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum', 'adminRole']], function () {
+    Route::get("/admin-chatify", function () {
+        return view("admins.chat.app");
+    })->name('admin-chat');
     Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('admindashboard')->middleware('permission:dashboard');
     Route::get('sample-form', [AdminDashboardController::class, 'sampleForm'])->name('sampleform')->middleware('permission:dashboard');
     Route::get('sample-table', [AdminDashboardController::class, 'sampleTable'])->name('sampletable')->middleware('permission:dashboard');
@@ -245,8 +248,8 @@ Route::group(['middleware' => ['frontendUserRole', 'emailVerification']], functi
 
     Route::post('load-other-timezones', [HomeController::class, 'loadOtherTimeZones']);
 
-    Route::get('past-event', [HomeController::class, 'pastevent'])->name('pastevent');
-    Route::get('upcoming-event', [HomeController::class, 'upcomingevent'])->name('upcomingevent');
+    // Route::get('past-event', [HomeController::class, 'pastevent'])->name('pastevent');
+    // Route::get('upcoming-event', [HomeController::class, 'upcomingevent'])->name('upcomingevent');
     Route::post('submit-payment', [EventPaymentController::class, 'index'])->name('submitPayment');
     Route::post('payment', [EventPaymentController::class, 'paymentWebinars'])->name('payementwebinars');
 
@@ -283,6 +286,7 @@ Route::group(['middleware' => ['frontendUserRole', 'emailVerification']], functi
         Route::get("/chatify", function () {
             return view("vendor.chatify.pages.app");
         });
+
         Route::get('/notifications', [PersonelInfoController::class, 'notifications'])->name('vetvineUserNotifications');
 
         Route::post('apply_couponcode', [StripePaymentController::class, 'applyCouponCode'])->name('usermemberships.applycouponcode');
