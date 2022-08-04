@@ -40,12 +40,19 @@ class SubscribeToMailChimp
             'server' => 'us17',
         ]);
 
+
+        //Get Domains
+        // Log::info("List of Domains");
+        // $res = $client->verifiedDomains->getVerifiedDomainsAll();
+        // $verifiedDomains = json_decode(json_encode($res),true);
+        // Log::info($verifiedDomains);
+
         $email = $event->user->email;
         $domain = ltrim(stristr($email, '@'), '@');
-        $response = $client->verifiedDomains->getDomain($domain);
-        // dd($response);
+        $response = $client->verifiedDomains->getDomain(strval($domain));
 
-
+        $data = json_decode(json_encode($response), true);
+        Log::info($data);
         if (checkdnsrr($domain, 'ANY') && $domain != 'mailinator.com') {
             $mailChimpApiKey = env('MAILCHIMP_API_KEY');
             $mailchimp = new \Mailchimp($mailChimpApiKey);

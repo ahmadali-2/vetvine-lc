@@ -14,6 +14,19 @@ class MemberPermission extends Model
         'membertype_id',
         'view_ads',
         'comments',
+        'dashboard',
+        'ads',
+        'webinars',
+        'forums',
+        'videos',
+        'manage',
+        'settings',
+        'membership_plans',
+        'member_level',
+        'manage_users',
+        'coupons',
+        'guest_registration_fee',
+        'static_pages'
     ];
     public function memberPermission()
     {

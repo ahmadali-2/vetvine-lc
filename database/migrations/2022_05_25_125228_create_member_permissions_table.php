@@ -30,6 +30,7 @@ class CreateMemberPermissionsTable extends Migration
             $table->enum('membership_plans', ['0', '1'])->default(0);
             $table->enum('member_level', ['0', '1'])->default(0);
             $table->enum('manage_users', ['0', '1'])->default(0);
+            $table->enum('coupons', ['0', '1'])->default(0);
             $table->enum('mail_to_users', ['0', '1'])->default(0);
             $table->enum('guest_registration_fee', ['0', '1'])->default(0);
             $table->enum('static_pages', ['0', '1'])->default(0);
