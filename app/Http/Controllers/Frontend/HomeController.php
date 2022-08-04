@@ -14,6 +14,7 @@ use App\Models\Admins\Webinar\Event;
 use App\Models\Admins\Webinar\SponserTable;
 use App\Models\Generals\TimeZone;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -76,46 +77,48 @@ class HomeController extends Controller
     }
     public function upcomingWebinars()
     {
-        $showevent = Event::with('events', 'sponsers', 'members', 'user')->get();
-
+        $showevent = Event::with('events', 'sponsers', 'members', 'user')->where('date', '>=',Carbon::now())
+        ->orderBy('date')->get();
         $sponser = SponserTable::all();
         $category = CategoryEvent::all();
         return view('frontend.pages.webinars.upcoming-webinars', compact('showevent', 'sponser', 'category'));
     }
-    public function pastevent()
-    {
-        $showevent = Event::with('events')->where('date', '<=', date('Y-m-d'))
-            ->orderBy('date')->get();
-        $category = CategoryEvent::all();
-        return view('frontend.pages.webinars.upcoming-webinars', compact('showevent', 'category'));
-    }
-    public function upcomingevent()
-    {
-        $showevent = Event::with('events')->where('date', '>=', date('Y-m-d'))
-            ->orderBy('date')->get();
-        $category = CategoryEvent::all();
-        return view('frontend.pages.webinars.upcoming-webinars', compact('showevent', 'category'));
-    }
+    // public function pastevent()
+    // {
+    //     $showevent = Event::with('events')->where('date', '<=', date('Y-m-d'))
+    //         ->orderBy('date')->get();
+    //     $category = CategoryEvent::all();
+    //     return view('frontend.pages.webinars.upcoming-webinars', compact('showevent', 'category'));
+    // }
+    // public function upcomingevent()
+    // {
+    //     $showevent = Event::with('events')->where('date', '>=', date('Y-m-d'))
+    //         ->orderBy('date')->get();
+    //     $category = CategoryEvent::all();
+    //     return view('frontend.pages.webinars.upcoming-webinars', compact('showevent', 'category'));
+    // }
     public function upcomingWebinarsdetails($id)
     {
 
         $relatedEvents = [];
         $lastEvents = null;
-        $eventdetail = Event::with('events', 'sponsers', 'members', 'user', 'buyeventplan', 'ReviewData')->find($id);
+        $eventdetail = Event::with('events', 'sponsers', 'members', 'user', 'buyeventplan', 'ReviewData')->where('id',$id)->first(); // jiki detail
         $tags = $eventdetail->tags;
         $eventTags = explode(',',$tags);
         $count = 0;
         foreach($eventTags as $eventTag){
-            $lastEvents = Event::orWhere('tags','like','%'.$eventTag.'%')->get()->toArray();
+            $lastEvents = Event::orWhere('tags','like','%'.$eventTag.'%')->get()->toArray(); // more like
             foreach($lastEvents as $event){
+                $purchasedEvent =BuyEventPlan::where('user_id',auth()->user()->id)->where('event_id', $event['id'])->first();
                 if(in_array($event['id'], array_column($relatedEvents, 'id')) == false){
                     if($id != $event['id']){
-                        array_push($relatedEvents, $event);
+                        if(isset($purchasedEvent) == false){
+                            array_push($relatedEvents, $event);
+                        }
                     }
                 }
             }
         }
-
         $youMaylikePost = array_slice($relatedEvents, 0, 4);
         $eventTime = date('Y-m-d H:i:s', strtotime(''.$eventdetail->date.''.$eventdetail->time.''));
         $eventId = $eventdetail->id;

@@ -236,8 +236,8 @@ Route::group(['middleware' => ['frontendUserRole', 'emailVerification']], functi
 
     Route::post('load-other-timezones', [HomeController::class, 'loadOtherTimeZones']);
 
-    Route::get('past-event', [HomeController::class, 'pastevent'])->name('pastevent');
-    Route::get('upcoming-event', [HomeController::class, 'upcomingevent'])->name('upcomingevent');
+    // Route::get('past-event', [HomeController::class, 'pastevent'])->name('pastevent');
+    // Route::get('upcoming-event', [HomeController::class, 'upcomingevent'])->name('upcomingevent');
     Route::post('submit-payment', [EventPaymentController::class, 'index'])->name('submitPayment');
     Route::post('payment', [EventPaymentController::class, 'paymentWebinars'])->name('payementwebinars');
 

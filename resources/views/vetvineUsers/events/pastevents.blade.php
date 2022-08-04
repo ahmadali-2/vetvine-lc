@@ -29,7 +29,6 @@
 
                     <li class="top-three-input first_li">
                         <label>Search By :</label>
-                        {{-- <input type="text" class=" form-control" name="name"> --}}
                     </li>
 
                     <li class="top-three-input">
@@ -46,7 +45,6 @@
                                     <option value="{{ $search->id }} ">{{ $search->category_title }}
                                     </option>
                                 @endforeach
-
                             </select>
                         </div>
                     </li>
@@ -58,28 +56,11 @@
                         <label>Sponsor</label>
                         <input type="text" class=" form-control" name="sponser">
                     </li>
-
                     <li>
                         <button class="btn filter-searchBtn search_btn_hover" type="submit" value="search">Search</button>
                     </li>
                 </ul>
             </form>
-            {{-- @dd(ROUTE::current()->uri); --}}
-            <ul class="page-link-list">
-                {{-- <li @if (ROUTE::current()->uri == 'upcoming-webinars') class="active"  @endif>
-                    <a href="{{ route('upcoming_webinars') }}">Continuing Education</a>
-                </li>
-                @if (Auth::user())
-                <li @if (ROUTE::current()->uri == 'past-event') class="active"  @endif>
-                    <a href="{{ route('pastevent') }}">My Past Events</a>
-                </li>
-                <li @if (ROUTE::current()->uri == 'upcoming-event') class="active"  @endif>
-                    <a href="{{ route('upcomingevent') }}">My Upcoming Events</a>
-                </li>
-                @endif --}}
-            </ul>
-
-
             <div class="row mb-2">
                 <div class="col-md-4 ml-auto text-right">
                     <a href="#" class="upcoming_view_all">View All >></a>
@@ -104,60 +85,23 @@
                             @endif
                             <div class="video-bottom-text">
                                 <h3>{{ $showevents->event_title }}</h3>
-
-
                             </div>
-                            @if (Auth::user())
-                                @php
-                                    // Time Convert Acoording to timezone
-                                    $eventTime = $showevents->time;
-                                    $timeZone = $showevents->user->timezone->timezone;
-
-                                    // Fetching timezone UTC code : Please don't screw it
-    $pieces = explode('(', $timeZone);
-    $pieces = explode('C', $pieces[1]);
-    $pieces = explode(')', $pieces[1]);
-
-    // Formatting the time
-    $today = new DateTime($showevents->time, new DateTimeZone($pieces[0]));
-
-    $userTimeZone = Auth::user()->timezone->timezone;
-
-    // Fetching timezone UTC code : Please don't screw it
-                                    $pieces = explode('(', $userTimeZone);
-                                    $pieces = explode('C', $pieces[1]);
-                                    $pieces = explode(')', $pieces[1]);
-
-                                    $userEventTime = new DateTimeZone($pieces[0]);
-                                    $convertedTime = $today->setTimeZone($userEventTime);
-
-                                    $formattedTime = $convertedTime->format('H:i A');
-                                @endphp
-                            @endif
                             <div class="video-bottom-description">
                                 <h5 class="my-3">{{ date('m/d/Y', strtotime($showevents->date)) }}</h5>
                                 <p><strong>Presented by:</strong> <a href="{{ $showevents->presenter_one_url }}"
                                         class="vetvine_a" target="_blank">{{ $showevents->presenter_one }}</a>
-
                                 <div class="parent_sponser">
-
-
                                     <strong>Sponsored by:</strong>
                                     <div class="sposer_name">
                                         @foreach ($showevents->members as $item)
                                             <a href="{{ $item->sponser_link }}" target="_blank" class="vetvine_a"
                                                 rel="noopener noreferrer">{{ $item->sponser_name }}</a>
                                         @endforeach
-
                                     </div>
-
                                 </div>
-
                                 <p class="para-decription">
-
                                     {!! Str::limit($showevents->event_description, 250) !!}
                                 </p>
-
                                 <a href="{{ route('upcoming_details', $showevents->id) }}" class="read_more_btn">Read
                                     More</a>
                             </div>

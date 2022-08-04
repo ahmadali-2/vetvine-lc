@@ -198,7 +198,6 @@ class PersonelInfoController extends Controller
                     array_push($showevent,$event);
                 }
             }
-        // $sponser = SponserTable::all();
         $category = CategoryEvent::all();
         return view('vetvineUsers.events.myupcomming_events',compact('category','showevent'));
     }

@@ -15,7 +15,7 @@ class MemberPermissionsSeeder extends Seeder
     public function run()
     {
         DB::table('member_permissions')->insert([
-            ['membertype_id' => 1], // Super Admin
+            ['membertype_id' => 1], // Super Admin 
 
             ['membertype_id' => 2], // Public
 
@@ -30,6 +30,6 @@ class MemberPermissionsSeeder extends Seeder
             ['membertype_id' => 7], // Vet Professional Premium
 
             ['membertype_id' => 8], // Pet professional Premium
-        ]);  
+        ]);
     }
 }
