@@ -673,7 +673,7 @@
             <div class="container">
                 <div class="col-12 might_margin">
                     @if(count($youMaylikePost) > 0)
-                        <h1 class="Upcoming-webinars">You might also like</h>
+                        <h1 class="Upcoming-webinars">You might also like</h1>
                     @endif
                 </div>
                     <div class="row w-100 video-cat-main m-0">

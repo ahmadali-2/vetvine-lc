@@ -233,43 +233,17 @@
                                 <input type="hidden" name="event_id" value="{{ $videos->id }}">
                                 <input type="hidden" name="user_id" value="{{ $videos->user_id }}">
                                 {{-- <p class="font-weight-bold ">Review</p> --}}
-                                <div class="form-group row">
-                                    <div class="col-sm-6 rating_box">
-                                        <div class="rate d-flex ">
-                                    @if (isset($rating->rating))
-                                            @for ($i = 1; $i <= $rating->rating; $i++)
-                                                <label for="star{{ $i }}" title="text">{{{ $i }}} stars</label>
-                                                <input type="radio" id="star{{ $i }}" data-stars="{{ $i }}"class="rate"
-                                                    name="rating" value="{{ $i }}" checked />
-                                            @endfor
-                                            @for ($j = 0; $j < 5 - $rating->rating; $j++)
-                                                <input type="radio" checked id="star{{ $i  }}" data-stars="{{ $i }} "class="rate"
-                                                    name="rating" value="{{ $i }}" />
-                                                <label for="star{{ $i  }}" title="text">{{ $i  }} stars</label>
-                                                <div class="d-none">{{ $i = $i+ 1 }}</div>
-                                            @endfor
-                                    @else
-                                        <div class="rate">
-                                            <input type="radio" id="star5" class="rate" data-stars="5"  name="rating"
-                                                value="5" />
-                                            <label for="star5" title="text">5 stars</label>
-                                            <input type="radio" checked id="star4"  data-stars="4" class="rate"
-                                                name="rating" value="4" />
-                                            <label for="star4" title="text">4 stars</label>
-                                            <input type="radio" id="star3" class="rate" data-stars="3"  name="rating"
-                                                value="3" />
-                                            <label for="star3" title="text">3 stars</label>
-                                            <input type="radio" id="star2" class="rate"  data-stars="2" name="rating"
-                                                value="2">
-                                            <label for="star2" title="text">2 stars</label>
-                                            <input type="radio" id="star1" class="rate" data-stars="1"  name="rating"
-                                                value="1" />
-                                            <label for="star1" title="text">1 star</label>
-                                        </div>
-                                    @endif
-                                        </div>
-                                    </div>
+                                <div>
+                                    <select name="" class="videostars">
+                                        <option value="">--</option>
+                                        <option value="1" @if($rating == 1 || $rating == 0) selected @endif>1</option>
+                                        <option value="2" @if($rating == 2) selected @endif>2</option>
+                                        <option value="3" @if($rating == 3) selected @endif>3</option>
+                                        <option value="4" @if($rating == 4) selected @endif>4</option>
+                                        <option value="5" @if($rating == 5) selected @endif>5</option>
+                                    </select>
                                 </div>
+                                <br>
                                 <div class="time">
                                     <p>1 hr 4 min</p>
                                 </div>
@@ -356,10 +330,35 @@
             </div>
 
         @section('scripts')
+            <script src="{{asset('js/jquery.fontstar.js')}}"></script>
             <script>
                 $(document).ready(function() {
                     var video_id = '<?php echo $videoId ?>';
                     var authUser = '<?php echo $authUser ?>';
+                    var rating = '<?php echo $rating ?>';
+
+                    $('.videostars').fontstar({
+                        icon:"fa fa-star-o",
+                        iconfull:"fa fa-star",
+                        hovercolor:"#F39F25",
+                        starcolor:"#969696",
+                        selectable:true
+                    },function(value,self){
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            url: "{{ route('rating.videos') }}",
+                            type: "POST",
+                            data: {
+                                length: value,
+                                video_id: $('input[name="event_id"]').val(),
+                                user_id: $('input[name="user_id"]').val()
+                            },
+                            success: function(response) {
+                            }
+                        });
+                    });
                 $('#videoRegister').on('click', function(){
                         refreshFormState();
                         var url=location.href;
@@ -388,23 +387,6 @@
                             });
                             $('#register_video_btn').trigger("click");
                         }
-                    });
-                    $('input[name="rating"]').click(function() {
-                        var length = $(this).attr('data-stars');
-                        $.ajax({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            url: "{{ route('rating.videos') }}",
-                            type: "POST",
-                            data: {
-                                length: length,
-                                video_id: $('input[name="event_id"]').val(),
-                                user_id: $('input[name="user_id"]').val()
-                            },
-                            success: function(response) {
-                            }
-                        });
                     });
                 });
 

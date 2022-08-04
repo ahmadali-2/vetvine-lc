@@ -47,7 +47,7 @@
                             <select name="category" id="category_id" class="filter-slect category ">
                                 <option value="" selected disabled>Select Category</option>
                                 @forelse ($category as $item)
-                                    <option value="{{ $item->id }}">{{ $item->category_title }}</option>
+                                    <option value="{{ $item['id'] }}">{{ $item['category_title'] }}</option>
                                 @empty
                                     <h5>No Category</h5>
                                 @endforelse
@@ -64,7 +64,7 @@
                             <select name="sponser_id" id="sponser_id" class="form-control filter-slect  sponser_id ">
                                 <option value="" selected disabled>Select Sponsor</option>
                                 @forelse ($sponsor as $item)
-                                    <option value="{{ $item->id }}">{{ $item->sponser_name }}</option>
+                                    <option value="{{ $item['id'] }}">{{ $item['sponser_name'] }}</option>
                                 @empty
                                     <h5>No Data found1</h5>
                                 @endforelse
@@ -98,30 +98,35 @@
                         <div class="col-md-6 col-lg-4">
                             <div class="video-box-main">
                                 <div class="video-box">
-                                    <iframe src="{{ $item->video_link }}" title="YouTube video player" frameborder="0"
+                                    <iframe src="{{ $item['video_link'] }}" title="YouTube video player" frameborder="0"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                         allowfullscreen></iframe>
                                 </div>
                                 <div class="video-bottom-text">
-                                    <a class="video-title">{{ $item->video_title }}
-
+                                    <a class="video-title">{{ $item['video_title'] }}
                                     </a>
                                     <div>
                                         <p>55 mins</p>
-                                        @for ($i = 1; $i <= $avg; $i++)
+                                        <?php
+                                            $remainingRating = floor(5 - $item['rating']);
+                                        ?>
+                                        @for ($i = 1; $i <= $item['rating']; $i++)
                                             <span class="fas fa-star"></span>
+                                        @endfor
+                                        @for ($i = 1; $i <= $remainingRating; $i++)
+                                            <span class="fa fa-star-o"></span>
                                         @endfor
                                     </div>
                                 </div>
                                 <div class="video-bottom-description">
                                     <h5>02/17/2022</h5>
-                                    <p><span>Presented by:</span> {{ $item->presented_by }}<br />
+                                    <p><span>Presented by:</span> {{ $item['presented_by'] }}<br />
                                         {{-- <strong>Sponsored by:</strong> VetVine --}}
                                     </p>
                                     <p class="para-decription">
-                                        {!! Str::limit($item->video_description, 350) !!}
+                                        {!! Str::limit($item['video_description'], 350) !!}
                                     </p>
-                                    <a class="read_more_btn" href="{{ route('video_desc', [$item->id, $item->category_id]) }}">Read More</a>
+                                    <a class="read_more_btn" href="{{ route('video_desc', [$item['id'], $item['category_id']]) }}">Read More</a>
                                 </div>
                             </div>
                         </div>
