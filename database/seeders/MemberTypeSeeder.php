@@ -31,6 +31,12 @@ class MemberTypeSeeder extends Seeder
             ['member_type' => 'Vet Professional Premium'],
 
             ['member_type' => 'Pet Professional Premium'],
+            ['member_type' => 'VetVine Client Care (Admin)'],
+            ['member_type' => 'VetVine CE  (Webinars)'],
+            ['member_type' => 'VetVine Pet Loss Support'],
+            ['member_type' => 'VetVine Wellness for Professionals'],
+
+
         ]);
     }
 }

@@ -52,7 +52,6 @@ class SubscribeToMailChimp
         $response = $client->verifiedDomains->getDomain(strval($domain));
 
         $data = json_decode(json_encode($response), true);
-        Log::info($data);
         if (checkdnsrr($domain, 'ANY') && $domain != 'mailinator.com') {
             $mailChimpApiKey = env('MAILCHIMP_API_KEY');
             $mailchimp = new \Mailchimp($mailChimpApiKey);
