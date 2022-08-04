@@ -22,7 +22,7 @@ class PermissionMiddleware
     public function handle(Request $request, Closure $next, $routeData)
     {
         $user = Auth::user();
-        $permission = MemberPermission::where('membertype_id', $user->id)->first();
+        $permission = MemberPermission::where('membertype_id', $user->type)->first();
         if (str_contains($routeData, 'dashboard')) {
             if (!User::hasPermission($permission->dashboard)) {
                 abort(403);

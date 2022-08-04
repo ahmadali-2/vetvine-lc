@@ -24,6 +24,15 @@
    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
        rel="stylesheet">
 
+  {{-- chatiy meta links --}}
+  @if (ROUTE::current()->uri == 'chatify')
+      <meta name="id" content="{{ $id }}">
+      <meta name="type" content="{{ $type }}">
+  @endif
+  {{-- <meta name="messenger-color" content="{{ $messengerColor }}"> --}}
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="url" content="{{ url('') . '/' . config('chatify.routes.prefix') }}"
+      data-user="{{ Auth::user()->id }}">
 
 
    <link rel="stylesheet" href="{{ asset('admin/vendors/font-awesome/css/font-awesome.min.css') }}">
@@ -45,6 +54,17 @@
    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+
+        {{-- chatify additonal css --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{-- <script src="{{ asset('js/chatify/font.awesome.min.js') }}"></script> --}}
+    <script src="{{ asset('js/chatify/autosize.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src='https://unpkg.com/nprogress@0.2.0/nprogress.js'></script>
+
+    {{-- styles --}}
+    <link rel='stylesheet' href='https://unpkg.com/nprogress@0.2.0/nprogress.css' />
+    <link href="{{ asset('css/chatify/style.css') }}" rel="stylesheet" />
 
    <meta name="csrf-token" content="{{ csrf_token() }}" />
    <style>
