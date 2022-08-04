@@ -5,6 +5,7 @@ namespace App\Listeners;
 use App\Events\UserRegistered;
 use App\Http\Controllers\Controller;
 use Exception;
+use Illuminate\Support\Facades\Log;
 use Mailchimp;
 use Yoeunes\Toastr\Facades\Toastr;
 
@@ -39,24 +40,37 @@ class SubscribeToMailChimp
             'server' => 'us17',
         ]);
 
+
+        //Get Domains
+        // Log::info("List of Domains");
+        // $res = $client->verifiedDomains->getVerifiedDomainsAll();
+        // $verifiedDomains = json_decode(json_encode($res),true);
+        // Log::info($verifiedDomains);
+
         $email = $event->user->email;
         $domain = ltrim(stristr($email, '@'), '@');
-        $response = $client->verifiedDomains->getDomain($domain);
-        // dd($response);
+        $response = $client->verifiedDomains->getDomain(strval($domain));
 
-
+        $data = json_decode(json_encode($response), true);
+        Log::info($data);
         if (checkdnsrr($domain, 'ANY') && $domain != 'mailinator.com') {
             $mailChimpApiKey = env('MAILCHIMP_API_KEY');
             $mailchimp = new \Mailchimp($mailChimpApiKey);
 
             // $mailchimp->subscribte
-            $mailchimp->lists->subscribe(
-                env('MAILCHIMP_LIST_ID'),
-                ['email' => $event->user->email],
-                null,
-                null,
-                false
-            );
+            try {
+                $mailchimp->lists->subscribe(
+                    env('MAILCHIMP_LIST_ID'),
+                    ['email' => $event->user->email],
+                    null,
+                    null,
+                    false
+                );
+            } catch (\Mailchimp_List_AlreadySubscribed $e) {
+                return redirect()->back()->with('error', 'Email is Already Subscribed');
+            } catch (\Mailchimp_Error $e) {
+                return redirect()->back()->with('error', 'Error from MailChimp');
+            }
         } else {
             return true;
         }
