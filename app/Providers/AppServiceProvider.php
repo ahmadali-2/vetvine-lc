@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Admins\Webinar\BuyEventPlan;
+use App\Models\Admins\Webinar\Event;
 use App\Models\PushNotification;
 use App\Models\User;
 use Facade\FlareClient\View;
@@ -36,5 +38,14 @@ class AppServiceProvider extends ServiceProvider
             }
         });
 
+        Blade::if('pastevents', function ($eventid) {
+            $event=Event::with('sponsers', 'members', 'user')->find($eventid);
+            if(date('Y-m-d H:i:s', strtotime(''.$event->date.''.$event->time.'')) <= date('Y-m-d H:i:s')){
+                return false;
+            }
+            else{
+                return true;
+            }
+        });
     }
 }

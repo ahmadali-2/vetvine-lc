@@ -14,6 +14,7 @@ use App\Http\Controllers\Admins\AdsCampaign\CampaignController;
 use App\Http\Controllers\Admins\AdsCampaign\ManageAdController;
 use App\Http\Controllers\Admins\Advertisment\AdCampaignController;
 use App\Http\Controllers\Admins\Announcement\AnnouncementController;
+use App\Http\Controllers\Admins\CMS\CMSController;
 use App\Http\Controllers\Admins\Forum\CommentController;
 use App\Http\Controllers\Admins\Forum\ForumCategoryController;
 use App\Http\Controllers\Admins\Forum\ForumController;
@@ -191,6 +192,11 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum', 'adminR
     //Group Mailing
     Route::get('manageuser/group/mail', [ManageUserController::class, 'groupMail'])->name('group.mail.user');
     Route::post('manageuser/group/mail/sent', [ManageUserController::class, 'groupMailSent'])->name('group.mail.sent');
+    //CMS
+    Route::get('/cms-pages',[CMSController::class, 'index'])->name('cms.pages');
+    Route::get('/cms-page/create',[CMSController::class, 'create'])->name('cms.pages.create');
+    Route::post('/cms-page/store',[CMSController::class, 'store'])->name('cms.page.store');
+
 });
 // Open routes Ahmad
 Route::get('next-guest-screen', [GuestController::class, 'nextGuestScreen'])->name('nextGuestScreen');
@@ -214,6 +220,9 @@ Route::post('search-form-post', [ForumController::class, 'searchFormPosts'])->na
 Route::get('forum/posts/{id}', [ForumController::class, 'getForumPosts'])->name('getForumPosts');
 Route::get('category/forum/posts/{id}', [ForumController::class, 'getForumcategoryPosts'])->name('getForumcategoryPosts');
 
+
+Route::get('/pages/{slug}',[CMSController::class, 'pages'])->name('cms.page.content');
+
 Route::group(['middleware' => ['frontendUserRole', 'emailVerification']], function () {
     Route::get('/', function () {
         return view('frontend.home');
@@ -236,8 +245,8 @@ Route::group(['middleware' => ['frontendUserRole', 'emailVerification']], functi
 
     Route::post('load-other-timezones', [HomeController::class, 'loadOtherTimeZones']);
 
-    Route::get('past-event', [HomeController::class, 'pastevent'])->name('pastevent');
-    Route::get('upcoming-event', [HomeController::class, 'upcomingevent'])->name('upcomingevent');
+    // Route::get('past-event', [HomeController::class, 'pastevent'])->name('pastevent');
+    // Route::get('upcoming-event', [HomeController::class, 'upcomingevent'])->name('upcomingevent');
     Route::post('submit-payment', [EventPaymentController::class, 'index'])->name('submitPayment');
     Route::post('payment', [EventPaymentController::class, 'paymentWebinars'])->name('payementwebinars');
 

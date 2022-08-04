@@ -494,11 +494,13 @@
                                     @endauth
                                 </div>
                                 @auth
+                                @pastevents($eventdetail->id)
                                     <div class="public2-info" style="margin-left: 12px; margin-bottom:0px ;">
                                         <a id="timezoneLink" data-toggle="modal" data-target="#timzeZone" class="view_time_zone"
                                             href="#"> View Other
                                             Timezones</a>
                                     </div>
+                                @endpastevents
                                 @endauth
                             </div>
                         </div>
@@ -580,7 +582,7 @@
                             @endforeach
                         </div>
                     </div>
-
+                    @pastevents($eventdetail->id)
                     <div class="publication-detail register_btn">
                         @if (isset($purchasedEvent))
                             <div id="startsIn" class="public2-title sponsor-title" style="padding-left: 0px">
@@ -593,6 +595,7 @@
                         @endif
 
                     </div>
+                    @endpastevents
                 </div>
                 {{-- <div class="publication-detail">
                         <div class="publication-arrow-icon">
@@ -625,6 +628,7 @@
                         </div>
                     </div> --}}
                 @auth
+                @pastevents($eventdetail->id)
                     <div class="row">
                         <button id="calendarModelButtonAction" type="button" class="upcoming_btn" data-toggle="modal"
                             data-target="#calendarModel" hidden><i class="fa fa-calendar" aria-hidden="true"></i> </button>
@@ -634,6 +638,7 @@
                                 Calendar</button>
                         @endif
                     </div>
+                    @endpastevents
                 @endauth
                 {{-- <div class="row">
                         <div class="col-sm-12 my-3">
@@ -662,50 +667,51 @@
 
 
 
+    @pastevents($eventdetail->id)
     {{-- You May Also Like  --}}
-    <section class="video-section-wrapper border-top-0 mb-4">
-        <div class="container">
-            <div class="col-12 might_margin">
-                @if(count($youMaylikePost) > 0)
-                    <h1 class="Upcoming-webinars">You might also like</h>
-                @endif
-            </div>
-                <div class="row w-100 video-cat-main m-0">
-                    @foreach ($youMaylikePost as $showevents)
-                        <div class="col-md-6 col-lg-4 p-0">
-                            <div class="video-box-main upcoming_content">
-                                @if ($showevents['main_photo'])
-                                    <div class="   pl-0">
-                                        <img src="{{ asset('/admin/eventss/' . $showevents['main_photo']) }} " alt=""
-                                            id="user-image" height="100px">
+        <section class="video-section-wrapper border-top-0 mb-4">
+            <div class="container">
+                <div class="col-12 might_margin">
+                    @if(count($youMaylikePost) > 0)
+                        <h1 class="Upcoming-webinars">You might also like</h>
+                    @endif
+                </div>
+                    <div class="row w-100 video-cat-main m-0">
+                        @foreach ($youMaylikePost as $showevents)
+                            <div class="col-md-6 col-lg-4 p-0">
+                                <div class="video-box-main upcoming_content">
+                                    @if ($showevents['main_photo'])
+                                        <div class="   pl-0">
+                                            <img src="{{ asset('/admin/eventss/' . $showevents['main_photo']) }} " alt=""
+                                                id="user-image" height="100px">
+                                        </div>
+                                    @endif
+                                    <div class="video-bottom-text">
+                                        <h3>{{ $showevents['event_title'] }}</h3>
+
+
                                     </div>
-                                @endif
-                                <div class="video-bottom-text">
-                                    <h3>{{ $showevents['event_title'] }}</h3>
 
+                                    <div class="video-bottom-description">
+                                        <h5 class="my-3">{{ date('m/d/Y', strtotime($showevents['date'])) }}</h5>
+                                        <p><strong>Presented by:</strong> <a href="{{ $showevents['presenter_one_url'] }}"
+                                                class="vetvine_a" target="_blank">{{ $showevents['presenter_one'] }}</a>
 
-                                </div>
+                                        <p class="para-decription">
 
-                                <div class="video-bottom-description">
-                                    <h5 class="my-3">{{ date('m/d/Y', strtotime($showevents['date'])) }}</h5>
-                                    <p><strong>Presented by:</strong> <a href="{{ $showevents['presenter_one_url'] }}"
-                                            class="vetvine_a" target="_blank">{{ $showevents['presenter_one'] }}</a>
-
-                                    <p class="para-decription">
-
-                                        {!! Str::limit($showevents['event_description'], 200) !!}
-                                    </p>
-                                    <a href="{{ route('upcoming_details', $showevents['id']) }}" class="read_more_btn">Read
-                                        More</a>
+                                            {!! Str::limit($showevents['event_description'], 200) !!}
+                                        </p>
+                                        <a href="{{ route('upcoming_details', $showevents['id']) }}" class="read_more_btn">Read
+                                            More</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-
+        </section>
+    @endpastevents
 
 
 

@@ -141,10 +141,11 @@ $hasPermission = DB::table('member_permissions')
         <a href="{{ route('manageuser.index') }}"> <i class="menu-icon fa fa-user"></i>Manage Users </a>
     </li>
     @endhasPermission
-
+    @hasPermission($hasPermission->coupons)
     <li>
         <a href="{{ route('coupon-code.index') }}"> <i class="menu-icon fa fa-user"></i>Coupons</a>
     </li>
+    @endhasPermission
     @hasPermission($hasPermission->mail_to_users)
     <li>
         <a href="{{ route('group.mail.user') }}"> <i class="menu-icon fa fa-user"></i>Mail to Users </a>
