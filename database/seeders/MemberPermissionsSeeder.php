@@ -15,7 +15,7 @@ class MemberPermissionsSeeder extends Seeder
     public function run()
     {
         DB::table('member_permissions')->insert([
-            ['membertype_id' => 1], // Super Admin
+            ['membertype_id' => 1], // Super Admin 
 
             ['membertype_id' => 2], // Public
 
