@@ -1,11 +1,11 @@
 @extends('admins.master')
 
 @section('content')
-<?php
-    $type = 'user';
-    $messengerColor = Auth::user()->messenger_color ?? $this->messengerFallbackColor;
-    $dark_mode = Auth::user()->dark_mode < 1 ? 'light' : 'dark';
-?>
+    <?php
+        $type = 'user';
+        $messengerColor = Auth::user()->messenger_color ?? $this->messengerFallbackColor;
+        $dark_mode = Auth::user()->dark_mode < 1 ? 'light' : 'dark';
+    ?>
     <!-------sidbar------>
     <div class="container my-5">
         <div class="messenger">

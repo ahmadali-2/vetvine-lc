@@ -139,9 +139,6 @@ Route::get('login', function () {
     return view('frontend.home');
 })->name('login');
 
-
-
-
 Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum', 'adminRole']], function () {
     Route::get("/admin-chatify", function () {
         return view("admins.chat.app");
