@@ -4,6 +4,7 @@ namespace App\Models\Admins\VideosonDemand;
 
 use App\Models\Admins\Webinar\CategoryEvent;
 use App\Models\Admins\Webinar\SponserTable;
+use App\Models\VideoRating;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -31,6 +32,10 @@ class VideosOnDemand extends Model
     public function sponsers()
     {
         return $this->belongsToMany(SponserTable::class, 'videos_on_demands_sponser_tables', 'video_id', 'sponsers_id');
+    }
+
+    public function starts(){
+        return $this->hasMany(VideoRating::class);
     }
 
 }

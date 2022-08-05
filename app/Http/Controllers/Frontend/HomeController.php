@@ -14,6 +14,7 @@ use App\Models\Admins\Webinar\Event;
 use App\Models\Admins\Webinar\SponserTable;
 use App\Models\Generals\TimeZone;
 use App\Models\User;
+use App\Models\VideoRating;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -264,14 +265,24 @@ class HomeController extends Controller
 
     public function videosOnDemand()
     {
+        $getVideos = VideosOnDemand::all();
+        $videos= [];
+
+        foreach($getVideos as $video){
+            $videoRating = VideoRating::where('video_id', $video->id)->get()->pluck('rating')->toArray();
+            $averageRating = floor(array_sum($videoRating)/count($videoRating));
+            $video = array_merge($video->toArray(), ['rating' => $averageRating]);
+            array_push($videos, $video);
+        }
         // $avg = ;
         return view('frontend.pages.videos-on-demand', [
-            'videos' => VideosOnDemand::all(),
+            'videos' => $videos,
             'category' => CategoryEvent::all(),
             'sponsor' => SponserTable::all(),
             'avg' => VideosOnDemand::join('video_ratings', 'video_ratings.video_id', 'videos_on_demands.id')
                 ->avg('video_ratings.rating'),
         ]);
+
     }
     public function ceArchives()
     {

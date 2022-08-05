@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
@@ -235,6 +236,7 @@ class MessagesController extends Controller
      */
     public function seen(Request $request)
     {
+        Log::info('Seen message'.($request->toArray()));
         // make as seen
         $seen = Chatify::makeSeen($request['id']);
         // send the response

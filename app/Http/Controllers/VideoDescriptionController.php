@@ -18,11 +18,12 @@ class VideoDescriptionController extends Controller
         if(auth()->user()){
             $authUser = true;
         }
+        $starRating  = VideoRating::select('rating')->where('video_id', $id)->where('user_id', Auth::id())->first();
         return view('frontend.video_detail', [
             'sponsor' => SponserTable::all(),
             'videos'    => VideosOnDemand::find($id),
             'more_info' => VideosOnDemand::where('category_id', $category)->where('id', '!=', $id)->get(),
-            'rating'    => VideoRating::where('video_id', $id)->where('user_id', Auth::id())->first(),
+            'rating'    => $starRating ? $starRating->rating : 0,
             'videoId' => $id,
             'authUser' => $authUser,
         ]);

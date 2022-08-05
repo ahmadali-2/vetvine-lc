@@ -11,6 +11,7 @@ use Chatify\Facades\ChatifyMessenger as Chatify;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -202,6 +203,7 @@ class MessagesController extends Controller
      */
     public function seen(Request $request)
     {
+        Log::info('Seen message'.($request->toArray()));
         // make as seen
         $seen = Chatify::makeSeen($request['id']);
         // send the response

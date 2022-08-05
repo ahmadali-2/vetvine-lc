@@ -31,7 +31,6 @@ class MemberTypeSeeder extends Seeder
             ['member_type' => 'Vet Professional Premium'],
 
             ['member_type' => 'Pet Professional Premium'],
-
         ]);
     }
 }
