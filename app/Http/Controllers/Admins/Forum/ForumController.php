@@ -27,7 +27,6 @@ class ForumController extends Controller
     {
         $categories   =   CategoryForum::all();
         $forums       =   Forum::with('category')->get();
-
         return view('admins.forums.index',compact('categories','forums'));
     }
 
@@ -167,7 +166,7 @@ class ForumController extends Controller
     public function create()
     {
         $categories =   CategoryForum::all();
-        $members    =   UserMemberAndNetworkLevel::all();
+        $members = UserMemberAndNetworkLevel::where('parent_id','!=',null)->get();
         return view('admins.forums.create',compact('categories','members'));
     }
 
