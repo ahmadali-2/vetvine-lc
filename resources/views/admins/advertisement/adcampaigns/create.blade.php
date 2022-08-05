@@ -125,7 +125,7 @@
 
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="network_id" class="control-label mb-1 form-select">Network
+                                        <label for="network_id" class="control-label mb-1 form-select">Member
                                             Level</label>
                                         <select id="network_id" style="width: 100%" name="network_id[]"
                                             aria-label="Default select example"

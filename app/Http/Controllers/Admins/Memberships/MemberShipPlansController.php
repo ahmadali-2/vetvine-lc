@@ -31,7 +31,7 @@ class MemberShipPlansController extends Controller
      */
     public function create()
     {
-        $nerworklevels =UserMemberAndNetworkLevel::get();
+        $nerworklevels =UserMemberAndNetworkLevel::where('parent_id','!=',null)->get();
         $planCategories =MemberShipPlanCategory::where('status',1)->get();
         return view('admins.memberships.create',compact('nerworklevels','planCategories'));
     }
