@@ -21,7 +21,8 @@
                         <strong class="card-title">Manage Events</strong>
                     </div>
                         <div class="card-body">
-                           <table class="table table-responsive" id="ForumsTable">
+
+                           <table class="table table-responsive-md" id="ForumsTable">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>

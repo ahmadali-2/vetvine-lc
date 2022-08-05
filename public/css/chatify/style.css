@@ -1165,3 +1165,67 @@ div.loadingPlaceholder-date {
 .people-head a:hover{
     color:#fff;
 }
+.m-list-active {
+    background: #f27222 !important;
+    border-left: 5px solid #f27222 !important;
+}
+
+
+.mc-sender p {
+    background: #f27222 !important;
+    color: #fff !important;
+}
+
+
+.message-card p {
+    background: #5c7c85;
+    color: #fff !important;
+    box-shadow: 0px 6px 11px rgb(18 67 105 / 3%);
+}
+
+.messenger-sendCard form {
+    width: 100%;
+    display: inline-flex;
+    margin: 0;
+    padding: 0px 10px;
+    /* background: #5c7c85; */
+    border: 3px solid #5c7c85 !important;
+}
+
+
+.messenger-sendCard form span {
+    color: #f27222;
+    font-size: 25px;
+}
+
+
+.messenger-sendCard form span {
+    color: #f27222;
+    font-size: 25px;
+}
+.messenger-sendCard form {
+    width: 100%;
+    display: inline-flex;
+    margin: 0;
+    padding: 0px 10px;
+    /* background: #5c7c85; */
+    border: 3px solid #5c7c85 !important;
+}
+form label {
+    color: #5c7c85;
+    font-family: "Museo 500";
+    font-size: 18px;
+    margin-bottom: 0 !important;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 26px;
+    text-align: left;
+    padding-top: 5px;
+}
+
+.m-header-messaging .avatar {
+    background-color: #fff;
+}
+
+
+
