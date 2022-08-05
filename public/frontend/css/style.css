@@ -9613,15 +9613,15 @@ p {
     font-weight: 600;
     margin:10px 10px 20px;
     font-family: "Museo 500";
-    font-size: 28px;
+    font-size: 24px;
     margin-top: 0px;
     margin-bottom: 0px;
 }
 .cockie .modal-box .modal-dialog .modal-content .modal-body .description{
 
-    margin: 0 0 12px;
+    margin: 5px 0 12px;
     font-family: "Museo Sans 500";
-    font-size: 18pt;
+    font-size: 14pt;
 
 }
 .cockie .modal-box .modal-dialog .modal-content .modal-body .links{
@@ -9659,13 +9659,16 @@ p {
     color:#fff;
     border:2px solid #f27222 !important;
     transition:0.5s all;
-    font-size: 18px;
+    font-size: 14px;
 
 }
 .cockie a:hover{
     background:transparent;
     border:2px solid #f27222 !important;
     color:#f27222;
+}
+.cockie .header {
+    margin:10px 0px;
 }
 @media only screen and (max-width: 767px){
     .cockie .modal-box .modal-dialog{ width: 95% !important; }

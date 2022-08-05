@@ -6,6 +6,34 @@
         $messengerColor = Auth::user()->messenger_color ?? $this->messengerFallbackColor;
         $dark_mode = Auth::user()->dark_mode < 1 ? 'light' : 'dark';
     ?>
+
+<style>
+    .messenger-infoView {
+        display: none;
+    }
+
+
+    .messenger-messagingView {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+
+}
+    .messenger-listView {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 1;
+    background: transparent;
+    width: 45%;
+    min-width: 200px;
+    overflow: auto;
+    /* border-top: 1px solid #5c7c85 !important; */
+    border-right: 1px solid #5c7c85 !important;
+
+}
+</style>
     <!-------sidbar------>
     <div class="container my-5">
         <div class="messenger">
