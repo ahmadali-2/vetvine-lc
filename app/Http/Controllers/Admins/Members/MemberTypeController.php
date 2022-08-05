@@ -13,7 +13,7 @@ class MemberTypeController extends Controller
     public function MemberTypes()
     {
 
-        $membertype = MemberTypes::with('userTypeCheck')->get();
+        $membertype = MemberTypes::with('userTypeCheck')->where('id','!=',1)->get();
         // dd($membertype[0]->userTypeCheck->count());
         return view('admins.members.membertype', compact('membertype'));
     }
