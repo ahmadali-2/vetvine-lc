@@ -214,16 +214,11 @@
 @endsection
 
 @section('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"
-        integrity="sha512-9UR1ynHntZdqHnwXKTaOm1s6V9fExqejKvg5XMawEMToW4sSw+3jtLrYfZPijvnwnnE8Uol1O9BcAskoxgec+g=="
-        crossorigin="anonymous"></script>
-    <script>
+      <script>
         $(document).ready(function() {
             CKEDITOR.editorConfig = function(config) {
                 config.height = '1000px';
             };
-            var tagInputEle = $('#tags');
-            tagInputEle.tagsinput();
         })
     </script>
 @endsection
