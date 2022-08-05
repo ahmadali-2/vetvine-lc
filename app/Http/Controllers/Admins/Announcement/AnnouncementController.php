@@ -29,7 +29,7 @@ class AnnouncementController extends Controller
      */
     public function create()
     {
-        $members    =   UserMemberAndNetworkLevel::all();
+        $members    =   UserMemberAndNetworkLevel::where('parent_id','!=',null)->get();
         return view('admins.announcement.create',compact('members'));
     }
 

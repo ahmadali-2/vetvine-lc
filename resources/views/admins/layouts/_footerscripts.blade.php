@@ -5,7 +5,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous">
     </script>
-
+     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
 
     <script src="{{ asset('admin/vendors/popper.js/dist/umd/popper.min.js') }}"></script>
@@ -22,7 +22,7 @@
 
     <script src="{{ asset('vendor/ckeditor/ckeditor.js') }}"></script>
 
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
 
     <script>
         $(document).ready(function() {
@@ -40,7 +40,7 @@
         $(document).ready(function() {
             $('#ForumsTable').DataTable({
                 order: [
-                    [3, 'desc']
+                    [2, 'desc']
                 ],
             });
         });
