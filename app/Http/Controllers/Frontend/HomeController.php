@@ -99,7 +99,6 @@ class HomeController extends Controller
     // }
     public function upcomingWebinarsdetails($id)
     {
-
         $relatedEvents = [];
         $lastEvents = null;
         $eventdetail = Event::with('events', 'sponsers', 'members', 'user', 'buyeventplan', 'ReviewData')->where('id',$id)->first(); // jiki detail
