@@ -22,7 +22,7 @@
 
     <script src="{{ asset('vendor/ckeditor/ckeditor.js') }}"></script>
 
-
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -32,7 +32,6 @@
             $('.js-example-basic-multiple').select2();
 
             CKEDITOR.replace('description');
-
         });
     </script>
 
