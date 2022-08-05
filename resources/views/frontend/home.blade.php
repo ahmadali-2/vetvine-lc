@@ -261,43 +261,8 @@
 
 
   {{-- Cockie Modal box  --}}
-  <div class="container cockie">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="modal-box">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary d-none cockie_modal btn-lg show-modal" data-toggle="modal" data-target="#c_Modal">
-                  view modal
-                </button>
-                <!-- Modal -->
-                <div class="modal fade" id="c_Modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <button type="button" class="close d-none c_close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                            <div class="modal-body">
-                                {{-- <img src="{{asset('frontend/images/dog-bowl.png')}}" alt="" height="100" width="100"> --}}
-                                <div class="header d-flex justify-content-center align-items-center">
-                                <img src="{{asset('frontend/images/bone1.png')}}" alt="" height="20" width="40">
-                                <h3 class="title">Cookies, anyone?</h3>
-                                <img src="{{asset('frontend/images/bone1.png')}}" alt="" width="40" height="20">
-                                </div>
+  @include('cookie-consent::index')
 
-                                <p class="description">We use cookies to treat you to the best experience possible and
-                                    analyze traffic in our website and other media.</p>
-
-                                    <a href="" class="confirm">Yes Please</a>
-                                    <a href="" class="confirm">No Thanks</a>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="open_grepper_editor" title="Edit & Save To Grepper"></div>
 
   {{-- Cockie Modal box  --}}
