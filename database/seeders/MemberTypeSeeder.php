@@ -35,8 +35,6 @@ class MemberTypeSeeder extends Seeder
             ['member_type' => 'VetVine CE  (Webinars)'],
             ['member_type' => 'VetVine Pet Loss Support'],
             ['member_type' => 'VetVine Wellness for Professionals'],
-
-
         ]);
     }
 }

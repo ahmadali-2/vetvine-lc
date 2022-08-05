@@ -31,7 +31,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
         Blade::if('hasPermission', function ($permission) {
             if($permission == "1"){
                 return true;
