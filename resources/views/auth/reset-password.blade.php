@@ -89,9 +89,7 @@
 
                         <x-jet-label for="password" value="{{ __('Password') }}" />
 
-                        <input id="password" style="border: 1px solid #ced4da !important;
-
-                "
+                        <input id="password" style="border: 1px solid #ced4da !important;"
                             class="form-control block mt-1 w-full" type="password" name="password" required
                             autocomplete="new-password" />
 
