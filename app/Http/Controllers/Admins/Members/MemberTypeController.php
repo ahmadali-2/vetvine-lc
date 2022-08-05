@@ -24,10 +24,8 @@ class MemberTypeController extends Controller
     }
     public function MemberStatus(Request $request)
     {
-        Log::info($request);
         $id = $request->memberId;
         $data = MemberPermission::where('membertype_id', $id)->get();
-        Log::info($data);
         if (!$data->isEmpty()) {
             if ($request->name == 'view_ads') {
                 if ($request->checkbox1 == 'true') {
