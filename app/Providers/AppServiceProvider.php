@@ -10,6 +10,7 @@ use Facade\FlareClient\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -44,6 +45,14 @@ class AppServiceProvider extends ServiceProvider
             }
             else{
                 return true;
+            }
+        });
+
+        Blade::if('checkAdmin', function ($adminId) {
+            if($adminId == 1 || $adminId == 9 || $adminId == 10 || $adminId == 11 || $adminId == 12){
+                return redirect()->route('admin-chat')->send();
+            }else{
+                return false;
             }
         });
     }
