@@ -140,10 +140,12 @@ Route::get('login', function () {
     return view('frontend.home');
 })->name('login');
 
+Route::get("/admin-chatify", function () {
+    return view("admins.chat.app");
+})->name('admin-chat');
+
 Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum', 'adminRole']], function () {
-    Route::get("/admin-chatify", function () {
-        return view("admins.chat.app");
-    })->name('admin-chat');
+
     Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('admindashboard')->middleware('permission:dashboard');
     Route::get('sample-form', [AdminDashboardController::class, 'sampleForm'])->name('sampleform')->middleware('permission:dashboard');
     Route::get('sample-table', [AdminDashboardController::class, 'sampleTable'])->name('sampletable')->middleware('permission:dashboard');
