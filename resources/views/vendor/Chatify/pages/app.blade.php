@@ -1,6 +1,9 @@
-
+@php
+$user = Auth::user();
+@endphp
+@checkAdmin($user->id)
+@endcheckAdmin
 @extends('vetvineUsers.dashboard_master')
-
 @section('dashboardcontent')
     <!-------sidbar------>
     <div class="container my-5">
@@ -136,9 +139,4 @@
         @include('Chatify::layouts.modals')
         @include('Chatify::layouts.footerLinks')
     </div>
-@endsection
-@section('scripts')
-<script>
-
-</script>
 @endsection
