@@ -191,6 +191,13 @@
       'JsValidator' => 'Proengsoft\\JsValidation\\Facades\\JsValidatorFacade',
     ),
   ),
+  'spatie/laravel-cookie-consent' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\CookieConsent\\CookieConsentServiceProvider',
+    ),
+  ),
   'sssurii/laravel-ics' => 
   array (
     'providers' => 
