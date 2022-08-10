@@ -176,7 +176,7 @@ class ManageUserController extends Controller
     public function groupMailSent(Request $request){
         $request->validate([
             'subject' => 'required',
-            'message' => 'required', 
+            'message' => 'required',
             'user' => 'required'
         ],[
             'subject.required' => 'Subject Feild Is Required',
