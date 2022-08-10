@@ -53,7 +53,9 @@
 
    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
-   <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+   <link rel="stylesheet" href="{{ asset('admin/datatables/datatable.css') }}">
+   <link rel="stylesheet" href="{{ asset('admin/datatables/datatable-style.css') }}">
+
 
         {{-- chatify additonal css --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
