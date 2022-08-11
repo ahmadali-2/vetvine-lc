@@ -46,7 +46,6 @@ class StripePaymentController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $checkUser =BuyMemberShipPlan::where('user_id',$request->user_id)->first();
         if(!empty($checkUser)){
             parent::warningMessage("You Already Subscribed A Member Ship Plan");

@@ -36,6 +36,7 @@
     <script src="{{ asset('admin/datatables/pdfmaker.js') }}"></script>
     <script src="{{ asset('admin/datatables/print.js') }}"></script>
     <script src="{{ asset('admin/datatables/vfs_font.js') }}"></script>
+    <script src="{{ asset('admin/tags/tags.js') }}"></script>
 
 
 

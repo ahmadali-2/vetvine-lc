@@ -185,7 +185,6 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum', 'adminR
     Route::post('videodata', [VideosOnDemandController::class, 'videodata'])->name('videoajaxdata');
     Route::resource('buyevent-users', BuyEventController::class);
     Route::get('userevent-history/{id}', [BuyEventController::class, 'usereventHistory'])->name('usereventhistory');
-
     Route::get('terms-and-conditions/add', [StaticPageController::class, 'TermsAndConditionsAdd'])->name('TermsCondition.create');
     Route::post('terms-and-conditions/add-terms', [StaticPageController::class, 'TermsAndConditionsAddDb'])->name('TermsCondition.create.db');
     Route::resource('privacy-policy', PrivacyPolicyController::class);
@@ -195,10 +194,9 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum', 'adminR
     Route::get('manageuser/group/mail', [ManageUserController::class, 'groupMail'])->name('group.mail.user');
     Route::post('manageuser/group/mail/sent', [ManageUserController::class, 'groupMailSent'])->name('group.mail.sent');
     //CMS
-    Route::get('/cms-pages',[CMSController::class, 'index'])->name('cms.pages');
-    Route::get('/cms-page/create',[CMSController::class, 'create'])->name('cms.pages.create');
-    Route::post('/cms-page/store',[CMSController::class, 'store'])->name('cms.page.store');
-
+    Route::get('/cms-pages', [CMSController::class, 'index'])->name('cms.pages');
+    Route::get('/cms-page/create', [CMSController::class, 'create'])->name('cms.pages.create');
+    Route::post('/cms-page/store', [CMSController::class, 'store'])->name('cms.page.store');
 });
 // Open routes Ahmad
 Route::get('next-guest-screen', [GuestController::class, 'nextGuestScreen'])->name('nextGuestScreen');
@@ -223,15 +221,13 @@ Route::get('forum/posts/{id}', [ForumController::class, 'getForumPosts'])->name(
 Route::get('category/forum/posts/{id}', [ForumController::class, 'getForumcategoryPosts'])->name('getForumcategoryPosts');
 
 
-Route::get('/pages/{slug}',[CMSController::class, 'pages'])->name('cms.page.content');
+Route::get('/pages/{slug}', [CMSController::class, 'pages'])->name('cms.page.content');
 
 Route::group(['middleware' => ['frontendUserRole', 'emailVerification']], function () {
     Route::get('/', function () {
         return view('frontend.home');
     })->name('home');
-
     Route::post('delete-user', [HomeController::class, 'delete_user'])->name('delete.user');
-
     Route::get('why-vetvine', [HomeController::class, 'whyVetvine'])->name('why_vetvine');
     Route::get('grow', [HomeController::class, 'grow'])->name('grow');
     Route::get('thrive', [HomeController::class, 'thrive'])->name('thrive');
@@ -240,13 +236,10 @@ Route::group(['middleware' => ['frontendUserRole', 'emailVerification']], functi
     Route::post('contact-us', [ContactUsController::class, 'submitContactForm'])->name('contactus.submit');
     Route::get('/terms&conditions', [TermsController::class, 'indexTerms'])->name('terms.index');
     Route::get('/privacy&policy', [TermsController::class, 'indexprivacy'])->name('privacypolicy.index');
-
     // upcoming webinars
     Route::get('upcoming-webinars', [HomeController::class, 'upcomingWebinars'])->name('upcoming_webinars');
     Route::get('upcoming-webinars-details/{id}', [HomeController::class, 'upcomingWebinarsdetails'])->name('upcoming_details');
-
     Route::post('load-other-timezones', [HomeController::class, 'loadOtherTimeZones']);
-
     // Route::get('past-event', [HomeController::class, 'pastevent'])->name('pastevent');
     // Route::get('upcoming-event', [HomeController::class, 'upcomingevent'])->name('upcomingevent');
     Route::post('submit-payment', [EventPaymentController::class, 'index'])->name('submitPayment');
@@ -326,10 +319,6 @@ Route::post('/videos-search', [VideoDescriptionController::class, 'video_search'
 Route::post('/rating-videos', [VideoDescriptionController::class, 'rating_videos'])->name('rating.videos');
 Route::post('/mark-as-read',  [PushNotificationController::class, 'mark_as_read'])->name('read.notification');
 Route::post('/licensure',     [LicensureController::class, 'licensure'])->name('licensure.show');
-
-
-
-
 
 
 //Testing

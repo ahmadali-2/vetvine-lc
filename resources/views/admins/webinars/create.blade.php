@@ -22,8 +22,8 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="tags" class="control-label mb-1">Tags (Keywords)</label>
-                                        <input id="tags" placeholder="Enter Tags/Keywords" name="tags" type="text"
-                                            class="form-control" value="">
+                                        <input id="tags" placeholder="Enter Tags/Keywords" name="tags"
+                                            type="text" class="form-control" value="">
                                     </div>
                                 </div>
                             </div>
@@ -214,11 +214,13 @@
 @endsection
 
 @section('scripts')
-      <script>
+    <script>
         $(document).ready(function() {
             CKEDITOR.editorConfig = function(config) {
                 config.height = '1000px';
             };
+            var tagInputEle = $('#tags');
+            tagInputEle.tagsinput();
         })
     </script>
 @endsection
