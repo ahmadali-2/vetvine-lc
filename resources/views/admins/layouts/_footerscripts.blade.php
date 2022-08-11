@@ -12,7 +12,9 @@
 
     <script src="{{ asset('admin/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
+    <script src="https://kit.fontawesome.com/b8867474d2.js" crossorigin="anonymous"></script>
 
+    <script src="{{ asset('frontend/js/fontawesome.js') }}"></script>
 
     <script src="{{ asset('admin/js/admin.js') }}"></script>
 
