@@ -5,11 +5,11 @@
 @section('content')
 
 
-<section class="news_banner">
+<section class="news_banner anouce_banner">
     <div class="container">
         <div class="flex-box-banner">
             <div class="grow_banner_box grow_banner_box_web">
-                <div class="grow-heading mt-lg-3">NEWS SOURCE</div>
+                <div class="grow-heading mt-lg-3">ANNAOUCEMENT</div>
                 <img src="http://127.0.0.1:8000/frontend/images/sep-line-2.jpg" width="250" height="2" alt="" class="line_image">
 
 
@@ -22,7 +22,7 @@
 <section class="become_member_area">
     <div class="container">
         <h2>
-            <span>News Source
+            <span>ANNAOUCEMENT
             </span>
         </h2>
     </div>
@@ -30,33 +30,18 @@
 
 <section>
 
-    <div class="container forum_top_section mb-5">
-        <div class="row align-items-center">
 
-            <div class="col-md-3 index_forum_search">
-                <label for="">Search</label>
-                <div class="input-group">
-
-
-
-                    <input id="category_search_field" type="text" class="form-control top-search" placeholder="Search category" aria-label="Recipient's username" aria-describedby="basic-addon2">
-
-                    <div class="input-group-append">
-
-                        <button class="btn search_btn" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
-
-                    </div>
-
-                </div>
-            </div>
-
-
-
-        </div>
-    </div>
    <div class="container news">
     <div class="row">
         <div class="col-md-12 mb-3">
+
+            <div class="date">
+                <ul>
+                    <li><i class="fa fa-circle" aria-hidden="true"></i>
+                         Augast 8, 2022</li>
+                </ul>
+            </div>
+
             <div class="content">
                 <div class="heading d-flex align-items-center">
                     <img src="{{asset('frontend/images/arrow.png')}}" alt="" width="16" height="18">
