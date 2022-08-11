@@ -143,6 +143,9 @@ Route::get('login', function () {
 Route::get("/admin-chatify", function () {
     return view("admins.chat.app");
 })->name('admin-chat');
+Route::get("/annauncement", function () {
+    return view("frontend.pages.announcement.index");
+})->name('admin-chat');
 
 Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum', 'adminRole']], function () {
 
@@ -258,7 +261,8 @@ Route::group(['middleware' => ['frontendUserRole', 'emailVerification']], functi
 
     Route::get('faqs', [HomeController::class, 'faqs'])->name('faqs');
     Route::get('frontend-news', [NewsController::class, 'frontIndex'])->name('newsfrontend');
-    Route::get('frontend-news-detail', [NewsController::class, 'frontDetail'])->name('newsfrontend');
+    Route::get('frontend-news-detail', [NewsController::class, 'frontDetail']);
+
     Route::post('show-comments', [CommentController::class, 'showComments'])->name('showComments');
 
     //videos on demand

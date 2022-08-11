@@ -9864,3 +9864,24 @@ margin-left:10px;
    padding:10px;
    border:2px solid #d6dddf !important;
 }
+
+.news .date {
+    background:#f27222;
+    color:#fff;
+    font-weight:bold;
+    list-style:style;
+    padding:10px 15px;
+    margin-bottom:20px;
+}
+.news .date ul li{
+    display:flex;
+}
+.news .date i {
+ font-size:10px;
+ margin-top:7px;
+ margin-right:10px;
+}
+.anouce_banner {
+    background-image: url('../images/annauncement.png') !important;
+    background-repeat:no-repeat;
+}
