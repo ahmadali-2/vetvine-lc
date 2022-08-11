@@ -46,6 +46,7 @@
                                     <th scope="col">Title</th>
                                     <th scope="col">Link</th>
                                     <th scope="col">Description</th>
+                                    <th scope="col">Rating</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
@@ -56,6 +57,21 @@
                                         <td>{{ $video->video_title }}</td>
                                         <td>{{ $video->video_link }}</td>
                                         <td>{!! Str::limit($video->video_description , 200) !!}</td>
+                                        <td class="editRatingParent">
+                                            <div id="stars_{{$video->id}}">
+                                                <?php
+                                                    $remainingRating = floor(5 - $video->average_rating);
+                                                ?>
+                                                @for ($i = 1; $i <= $video->average_rating; $i++)
+                                                    <span class="fas fa-star" style="color: #FFC300"></span>
+                                                @endfor
+                                                @for ($i = 1; $i <= $remainingRating; $i++)
+                                                    <span class="fa fa-star-o" style="color: #FFC300"></span>
+                                                @endfor
+                                            </div>
+                                            <a data-id="{{$video->id}}" data-rating="{{$video->average_rating}}" style="cursor: pointer;"><i
+                                                class="fas fa-edit text-primary"></i></a>
+                                        </td>
                                         <td> <a href="{{ route('videos-on-demand.edit', $video->id) }}"><i
                                                     class="fas fa-edit text-primary"></i></a>
                                             <a href="javascript:void(0)" id="editCompany" class="video"
@@ -106,10 +122,72 @@
             </form>
         </div>
     </div>
+
+    <div class="modal fade" id="edit_rating_modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Video Rating Stars</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {{-- <input type="hidden" id="color_id" name="color_id" value=""> --}}
+                <div class="modal-body">
+                    <form class="form-group" id="edit_rating_modal_data">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <input  type="number" name="edit_video_id" id="edit_video_id" hidden>
+                                <input class="form-control" id="edit_rating_field" name="edit_rating_field" type="number" placeholder="Enter rating" min="1" max="5">
+                            </div>
+                            <div class="col-sm-4">
+                                <a id="submit_edit_rating" class="btn btn-primary" style="">Update</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     @section('scripts')
         <script type="text/javascript">
             // deleteRecord();
             $(document).ready(function(e) {
+                $('.editRatingParent a').on('click', function(){
+                    $('#edit_rating_modal').modal("show");
+                    $('#edit_rating_field').val($(this).attr('data-rating'));
+                    $('#edit_video_id').val($(this).attr('data-id'));
+                });
+
+                $('#submit_edit_rating').on('click', function(){
+                    var formData = $('#edit_rating_modal_data').serialize();
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+
+                        url: "{{ route('updateVideoRating') }}",
+                        method: 'POST',
+                        data: formData,
+                        success: function(response) {
+                            if(response.code == 200){
+                                var video_star = '#stars_'+response.video_id;
+                                $(video_star).empty();
+                                $(video_star).append(response.html);
+                                toastr.success(response.message);
+                                $('#edit_rating_modal').modal("hide");
+                            }else{
+                                toastr.error(response.message);
+                            }
+                        },
+                    });
+                });
+
                 $(".video").on("click", function(e) {
                     e.preventDefault();
                     var id = $(this).attr('data-id');

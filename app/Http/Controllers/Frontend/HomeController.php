@@ -87,6 +87,37 @@ class HomeController extends Controller
         return view('frontend.pages.webinars.upcoming-webinars', compact('showevent', 'sponser', 'category'));
     }
 
+    public function updateVideoRating(Request $request){
+        if($request->edit_rating_field > 5 || $request->edit_rating_field < 1){
+            return response()->json([
+                'code' => 400,
+                'message' => 'Rating must be valid (1 to 5) stars!',
+            ]);
+        }
+        $video = VideosOnDemand::find($request->edit_video_id);
+        $video->update([
+            'average_rating' => $request->edit_rating_field,
+        ]);
+        return response()->json([
+            'code' => 200,
+            'video_id' => $request->edit_video_id,
+            'html' => view('admins.videosondemand.dynamic_stars', ['average_rating' => $video->average_rating])->render(),
+            'message' => 'Video rating updated successfully!',
+        ],200);
+    // public function pastevent()
+    // {
+    //     $showevent = Event::with('events')->where('date', '<=', date('Y-m-d'))
+    //         ->orderBy('date')->get();
+    //     $category = CategoryEvent::all();
+    //     return view('frontend.pages.webinars.upcoming-webinars', compact('showevent', 'category'));
+    // }
+    // public function upcomingevent()
+    // {
+    //     $showevent = Event::with('events')->where('date', '>=', date('Y-m-d'))
+    //         ->orderBy('date')->get();
+    //     $category = CategoryEvent::all();
+    //     return view('frontend.pages.webinars.upcoming-webinars', compact('showevent', 'category'));
+    }
     public function upcomingWebinarsdetails($id)
     {
         $relatedEvents = [];
@@ -261,22 +292,12 @@ class HomeController extends Controller
 
     public function videosOnDemand()
     {
-        $getVideos = VideosOnDemand::all();
-        $videos= [];
-
-        foreach($getVideos as $video){
-            $videoRating = VideoRating::where('video_id', $video->id)->get()->pluck('rating')->toArray();
-            $averageRating = floor(array_sum($videoRating)/count($videoRating));
-            $video = array_merge($video->toArray(), ['rating' => $averageRating]);
-            array_push($videos, $video);
-        }
+        $videos = VideosOnDemand::all();
         // $avg = ;
         return view('frontend.pages.videos-on-demand', [
             'videos' => $videos,
             'category' => CategoryEvent::all(),
             'sponsor' => SponserTable::all(),
-            'avg' => VideosOnDemand::join('video_ratings', 'video_ratings.video_id', 'videos_on_demands.id')
-                ->avg('video_ratings.rating'),
         ]);
 
     }

@@ -93,6 +93,18 @@ Route::get('/seed/timezones', function () {
     return 'Timezone seeded successfully';
 });
 
+Route::get('/seed/permissions', function () {
+    $wSeeder = new \Database\Seeders\MemberPermissionsSeeder();
+    $wSeeder->run();
+    return 'Permissions seeded successfully';
+});
+
+Route::get('/seed/membertypes', function () {
+    $wSeeder = new \Database\Seeders\MemberTypeSeeder();
+    $wSeeder->run();
+    return 'Types seeded successfully';
+});
+
 Route::get('/seed/privacy', function () {
     $wSeeder = new \Database\Seeders\PrivacyPolicySeeder();
     $wSeeder->run();
@@ -143,6 +155,9 @@ Route::get('login', function () {
 Route::get("/admin-chatify", function () {
     return view("admins.chat.app");
 })->name('admin-chat');
+Route::get("/annauncement", function () {
+    return view("frontend.pages.announcement.index");
+})->name('admin-chat');
 
 Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum', 'adminRole']], function () {
 
@@ -169,6 +184,9 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum', 'adminR
     Route::delete('delete-users/{id}', [ManageUserController::class, 'deleteUser']);
     Route::get('change-users-type/{id}', [ManageUserController::class, 'changeUserType'])->name('changeusertype');
     Route::post('update-users-type/{id}', [ManageUserController::class, 'updateUserType'])->name('updateusertype');
+
+    Route::post('update-video-rating', [HomeController::class, 'updateVideoRating'])->name('updateVideoRating');
+
 
     Route::resource('forums-category', ForumCategoryController::class);
     Route::resource('forums', ForumController::class)->middleware('permission:forums');
@@ -257,6 +275,8 @@ Route::group(['middleware' => ['frontendUserRole', 'emailVerification']], functi
 
     Route::get('faqs', [HomeController::class, 'faqs'])->name('faqs');
     Route::get('frontend-news', [NewsController::class, 'frontIndex'])->name('newsfrontend');
+    Route::get('frontend-news-detail', [NewsController::class, 'frontDetail']);
+
     Route::post('show-comments', [CommentController::class, 'showComments'])->name('showComments');
 
     //videos on demand
@@ -315,21 +335,11 @@ Route::group(['middleware' => ['frontendUserRole', 'emailVerification']], functi
     });
 });
 
-Route::get('testing', function () {
-    event(new TestEvent('irtaza imran'));
-    return "working!";
-});
-
 Route::get('/video-description/{id}{category}', [VideoDescriptionController::class, 'video_desc'])->name('video_desc');
 Route::post('/videos-search', [VideoDescriptionController::class, 'video_search'])->name('videos.search');
 Route::post('/rating-videos', [VideoDescriptionController::class, 'rating_videos'])->name('rating.videos');
 Route::post('/mark-as-read',  [PushNotificationController::class, 'mark_as_read'])->name('read.notification');
 Route::post('/licensure',     [LicensureController::class, 'licensure'])->name('licensure.show');
-
-
-
-
-
 
 //Testing
 Route::get('test', function () {
