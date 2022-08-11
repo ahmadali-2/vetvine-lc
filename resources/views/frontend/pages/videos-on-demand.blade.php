@@ -9,7 +9,6 @@
 }
 </style>
     <main>
-
         <section class="main_banner main_banner_grow">
             <div class="container">
               <div class="flex-box-banner">
@@ -108,9 +107,9 @@
                                     <div>
                                         <p>55 mins</p>
                                         <?php
-                                            $remainingRating = floor(5 - $item['rating']);
+                                            $remainingRating = floor(5 - $item['average_rating']);
                                         ?>
-                                        @for ($i = 1; $i <= $item['rating']; $i++)
+                                        @for ($i = 1; $i <= $item['average_rating']; $i++)
                                             <span class="fas fa-star"></span>
                                         @endfor
                                         @for ($i = 1; $i <= $remainingRating; $i++)

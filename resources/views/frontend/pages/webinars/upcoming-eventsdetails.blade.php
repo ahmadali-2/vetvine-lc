@@ -591,6 +591,10 @@
                             <h1 id="eventCountdown"></h1>
                             {{-- <button class="btn btn-primary">Attend Event?</button> --}}
                         @else
+                        <div id="startsIn" class="public2-title sponsor-title" style="padding-left: 0px" hidden>
+
+                        </div>
+                        <h1 id="eventCountdown" hidden></h1>
                             <button class="btn btn-primary" id="register_event">Register Now</button>
                         @endif
 

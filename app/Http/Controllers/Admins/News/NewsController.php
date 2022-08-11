@@ -79,6 +79,10 @@ class NewsController extends Controller
         }
 
     }
+
+    public function frontDetail(){
+        return view('frontend.pages.news.detail');
+    }
     /**
      * Show the form for editing the specified resource.
      *
