@@ -236,7 +236,6 @@ Route::group(['middleware' => ['frontendUserRole', 'emailVerification']], functi
     Route::get('grow', [HomeController::class, 'grow'])->name('grow');
     Route::get('thrive', [HomeController::class, 'thrive'])->name('thrive');
     Route::get('heal', [HomeController::class, 'heal'])->name('heal');
-    Route::get('terms-of-service', [HomeController::class, 'termsOfService'])->name('termsofservice');
     Route::post('contact-us', [ContactUsController::class, 'submitContactForm'])->name('contactus.submit');
     Route::get('/terms&conditions', [TermsController::class, 'indexTerms'])->name('terms.index');
     Route::get('/privacy&policy', [TermsController::class, 'indexprivacy'])->name('privacypolicy.index');
