@@ -91,9 +91,10 @@ class VideoDescriptionController extends Controller
         $user_id = $request->user_id;
         $video_id = $request->video_id;
 
-        $exists = VideoRating::where('user_id', Auth::id())->where('video_id', $video_id)->count();
+        $videoRating = VideoRating::where('video_id', $video_id)->get()->pluck('rating')->toArray();
+        $averageRating = floor(array_sum($videoRating)/count($videoRating));
 
-        if ($exists > 0) {
+        if (count($videoRating) > 0) {
             VideoRating::where('user_id', Auth::id())->where('video_id', $video_id)->update([
                 'rating' => $length,
             ]);
@@ -103,6 +104,13 @@ class VideoDescriptionController extends Controller
                 'user_id' => Auth::id(),
                 'rating'  => $length,
             ]);
+
         }
+
+        $demandVideo = VideosOnDemand::find($request->video_id);
+
+        $demandVideo->update([
+            'average_rating' => $averageRating,
+        ]);
     }
 }

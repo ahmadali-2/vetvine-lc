@@ -12,6 +12,7 @@ class VideosOnDemand extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'id',
         'user_id',
         'video_title',
         'video_description',
@@ -21,7 +22,8 @@ class VideosOnDemand extends Model
         'status',
         'category_id',
         'sponser_id',
-        'isDeleted'
+        'isDeleted',
+        'average_rating',
     ];
 
     public function category()

@@ -8,6 +8,7 @@ use App\Http\Requests\VideoRequest;
 use App\Models\Admins\VideosonDemand\VideosOnDemand;
 use App\Models\Admins\Webinar\CategoryEvent;
 use App\Models\Admins\Webinar\SponserTable;
+use App\Models\VideoRating;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
