@@ -126,10 +126,10 @@
                                 alt="behavior img"></div>
                         <div class="behavior-details ">
                             <div class="behavior-title">
-                                <a href="{{$new->news_link}}"><h2>{{$new->news_title}}</h2></a>
+                                <a target="blank" href="{{$new->news_link}}"><h2>{{$new->news_title}}</h2></a>
                             </div>
                             <div class="behavior-description">
-                                <p>{{$new->news_description}}</p>
+                                <p>{!! $new->news_description !!}</p>
                             </div>
                             <div class="behavior-description">
                                 <div class="file">

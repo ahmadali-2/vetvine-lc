@@ -37,8 +37,8 @@
                                             <input type="checkbox" name="blocked_user"
                                                 {{ $user->blocked_user == 1 ? 'checked' : '' }} data-toggle="toggle"
                                                 data-onstyle="outline-danger" data-size="md" data-offstyle="outline-success"
-                                                data-on="<i class='fa fa-unlock'></i> Blocked"
-                                                data-off="<i class='fa fa-lock'></i> Unblocked">
+                                                data-on="<i class='fa fa-lock'></i> Blocked"
+                                                data-off="<i class='fa fa-unlock'></i> Unblocked">
 
                                         </div>
                                     </div>
