@@ -102,19 +102,6 @@ class HomeController extends Controller
             'html' => view('admins.videosondemand.dynamic_stars', ['average_rating' => $video->average_rating])->render(),
             'message' => 'Video rating updated successfully!',
         ],200);
-    // public function pastevent()
-    // {
-    //     $showevent = Event::with('events')->where('date', '<=', date('Y-m-d'))
-    //         ->orderBy('date')->get();
-    //     $category = CategoryEvent::all();
-    //     return view('frontend.pages.webinars.upcoming-webinars', compact('showevent', 'category'));
-    // }
-    // public function upcomingevent()
-    // {
-    //     $showevent = Event::with('events')->where('date', '>=', date('Y-m-d'))
-    //         ->orderBy('date')->get();
-    //     $category = CategoryEvent::all();
-    //     return view('frontend.pages.webinars.upcoming-webinars', compact('showevent', 'category'));
     }
     public function upcomingWebinarsdetails($id)
     {
