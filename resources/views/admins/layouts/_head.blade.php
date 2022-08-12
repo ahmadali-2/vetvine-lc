@@ -14,11 +14,6 @@
 
    <link rel="shortcut icon" href="favicon.ico">
 
-   {{-- <link rel="stylesheet"
-       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css"
-       integrity="sha512-xmGTNt20S0t62wHLmQec2DauG9T+owP9e6VU8GigI0anN7OXLip9i7IwEhelasml2osdxX71XcYm6BQunTQeQg=="
-       crossorigin="anonymous" /> --}}
-
    <link rel="stylesheet" href="{{ asset('admin/vendors/bootstrap/dist/css/bootstrap.min.css ') }}">
 
    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
@@ -53,7 +48,9 @@
 
    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
-   <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+   <link rel="stylesheet" href="{{ asset('admin/datatables/datatable.css') }}">
+   <link rel="stylesheet" href="{{ asset('admin/datatables/datatable-style.css') }}">
+
 
         {{-- chatify additonal css --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

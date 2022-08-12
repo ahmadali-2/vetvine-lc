@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Admins\News\News;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class NewsController extends Controller
 {
@@ -17,8 +16,8 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news  =   News::all();
-        return view('admins.news.index',compact('news'));
+        $news = News::all();
+        return view('admins.news.index', compact('news'));
     }
 
     /**
@@ -40,15 +39,15 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        try{
-            $news  = News::create([
-            "news_title"        => ucwords($input['news_title']),
-            "news_link"         => $input['news_link'],
-            "news_description"  => ucfirst($input['news_description']),
+        try {
+            $news = News::create([
+                "news_title" => ucwords($input['news_title']),
+                "news_link" => $input['news_link'],
+                "news_description" => ucfirst($input['news_description']),
             ]);
             parent::successMessage('News saved successfully.');
             return redirect(route('news.index'));
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             parent::dangerMessage("News Does Not Created, Please Try  Again");
             return redirect()->back();
         }
@@ -66,17 +65,8 @@ class NewsController extends Controller
     }
     public function frontIndex()
     {
-        $user=Auth::user();
-        if($user)
-        {
-            $news   =   News::all();
-            return view('frontend.pages.news.index',compact('news'));
-        }
-        else
-        {
-            parent::dangerMessage("Your Are Not Logged in, Please Login And Try  Again");
-            return redirect('login');
-        }
+        $news = News::all();
+        return view('frontend.pages.news.index', compact('news'));
 
     }
 
@@ -91,10 +81,10 @@ class NewsController extends Controller
      */
     public function edit($id)
     {
-        try{
-            $news   =   News::find($id);
-            return view('admins.news.edit',compact('news'));
-        } catch(Exception $e) {
+        try {
+            $news = News::find($id);
+            return view('admins.news.edit', compact('news'));
+        } catch (Exception $e) {
             parent::dangerMessage("News Does Not Edited, Please Try  Again");
             return redirect()->back();
         }
@@ -109,17 +99,17 @@ class NewsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $input  = $request->all();
-        $news   = News::find($id);
-        try{
-               $news->update([
-                "news_title"        => ucwords($input['news_title']),
-                "news_link"         => $input['news_link'],
-                "news_description"  => ucfirst($input['news_description']),
+        $input = $request->all();
+        $news = News::find($id);
+        try {
+            $news->update([
+                "news_title" => ucwords($input['news_title']),
+                "news_link" => $input['news_link'],
+                "news_description" => ucfirst($input['news_description']),
             ]);
             parent::successMessage('News updated successfully.');
             return redirect(route('news.index'));
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             parent::dangerMessage("News Does Not Updated, Please Try  Again");
             return redirect()->back();
         }
@@ -133,11 +123,11 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        try{
+        try {
             News::find($id)->delete();
             parent::successMessage('News Deleted successfully.');
             return redirect(route('news.index'));
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             parent::dangerMessage("News Does Not Deleted, Please Try  Again");
             return redirect()->back();
         }

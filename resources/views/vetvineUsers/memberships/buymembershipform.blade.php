@@ -176,23 +176,36 @@
 
                            </div>
 
+
+                            @php
+                                $year = date('Y');
+                            @endphp
+
+
                            <div class='col-xs-12 col-md-4 form-group expiration required'>
 
-                              <label class='control-label'>Expiration Month</label> <input
-
-                                 class='form-control card-expiry-month' name="exp_month" placeholder='MM' size='2'
-
-                                 type='text'>
+                              <label class='control-label'>Expiration Month</label>
+                                 <select class='form-control card-expiry-month' id="ex-month" name="exp_month">
+                                    <option value="" disabled selected>Select Month</option>
+                                    @for ($i = 1; $i <= 12; $i++)
+                                        <option value="{{ $i }}">
+                                            {{date('F', mktime(0, 0, 0, $i, 10)) }}
+                                        </option>
+                                    @endfor
+                                </select>
 
                            </div>
 
                            <div class='col-xs-12 col-md-4 form-group expiration required'>
 
-                              <label class='control-label'>Expiration Year</label> <input
-
-                                 class='form-control card-expiry-year' name="exp_year" placeholder='YYYY' size='4'
-
-                                 type='text'>
+                              <label class='control-label'>Expiration Year</label>
+                                 <select name="exp_year" id="exp_year" class='form-control card-expiry-year'>
+                                    <option value="" disabled selected>Select Year</option>
+                                    @for ($i = $year; $i <= $year + 10; $i++)
+                                        <option value="{{ $i }}">{{ $i }}
+                                        </option>
+                                    @endfor
+                                </select>
 
                            </div>
 
@@ -214,7 +227,7 @@
 
                          </div>
 
-                         <div class='form-row row'>
+                         {{-- <div class='form-row row'>
 
                             <div class='col-md-12 error form-group hide'>
 
@@ -226,7 +239,7 @@
 
                             </div>
 
-                         </div>
+                         </div> --}}
 
 
 
@@ -408,8 +421,6 @@ $(function() {
         }
 
     }
-
-
 
 });
 

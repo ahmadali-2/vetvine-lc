@@ -218,7 +218,7 @@ $timezones = vetvineHelper::timezones();
                                                             name="termsofservice">
                                                         <span><a href="#" class="">
                                                                 <sup>*</sup>I have read and agree to the<a
-                                                                    href="{{ route('termsofservice') }}"
+                                                                    href="{{ route('terms.index') }}"
                                                                     target="_blank" style="color: #f27222;">Terms of
                                                                     Service</a>
                                                             </a></span>

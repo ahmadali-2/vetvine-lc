@@ -24,7 +24,7 @@ class UserTypeController extends Controller
         }
         if ($userType->blocked_user) {
             Auth::logout();
-            parent::dangerMessage('Your Account has been Deleted.Please Contact with Administrator!');
+            parent::dangerMessage('Your Account has been blocked.Please Contact with Administrator!');
             return redirect('/');
         }
         switch ($userType->type) {
@@ -51,9 +51,9 @@ class UserTypeController extends Controller
                     break;
                 }
 
-            // default:
-            //     parent::dangerMessage("Your Role Connot be Accessed Please Try Again");
-            //     return redirect('/');
+                // default:
+                //     parent::dangerMessage("Your Role Connot be Accessed Please Try Again");
+                //     return redirect('/');
         }
     }
 }
