@@ -5,7 +5,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous">
     </script>
-     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
 
     <script src="{{ asset('admin/vendors/popper.js/dist/umd/popper.min.js') }}"></script>
@@ -23,8 +23,31 @@
     <script src="{{ asset('vendor/select2/dist/js/select2.min.js') }}"></script>
 
     <script src="{{ asset('vendor/ckeditor/ckeditor.js') }}"></script>
-
+    {{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>\
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script> --}}
+    <script src="{{ asset('admin/datatables/datatable.js') }}"></script>
+    <script src="{{ asset('admin/datatables/datatable-buttons.js') }}"></script>
+    <script src="{{ asset('admin/datatables/html5.js') }}"></script>
+    <script src="{{ asset('admin/datatables/jszip.js') }}"></script>
+    <script src="{{ asset('admin/datatables/pdfmaker.js') }}"></script>
+    <script src="{{ asset('admin/datatables/print.js') }}"></script>
+    <script src="{{ asset('admin/datatables/vfs_font.js') }}"></script>
+    <script src="{{ asset('admin/tags/tags.js') }}"></script>
+
+
+
+
+
+
+
+
+
 
     <script>
         $(document).ready(function() {
@@ -40,9 +63,13 @@
     <script>
         $(document).ready(function() {
             $('#ForumsTable').DataTable({
-                order: [
-                    [2, 'desc']
-                ],
+                // order: [
+                //     [2, 'desc']
+                // ],
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
             });
         });
     </script>

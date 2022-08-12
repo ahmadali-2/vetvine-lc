@@ -223,4 +223,11 @@
 
 @section('scripts')
 
+    <script>
+        $(document).ready(function(){
+            var tagInputEle = $('#tags');
+            tagInputEle.tagsinput();
+        });
+    </script>
+
 @endsection

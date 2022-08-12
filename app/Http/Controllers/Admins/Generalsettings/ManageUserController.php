@@ -169,14 +169,14 @@ class ManageUserController extends Controller
     }
     //Group Mailing
     public function groupMail(){
-        $allUsers =User::with('userMemberType')->where('type','!=','1')->get();
+        $allUsers =User::with('userMemberType')->whereNotIn('type',[1,9,10,11,12])->get();
         return view('admins.generalsettings.manageusers.groupemail',compact('allUsers'));
     }
 
     public function groupMailSent(Request $request){
         $request->validate([
             'subject' => 'required',
-            'message' => 'required', 
+            'message' => 'required',
             'user' => 'required'
         ],[
             'subject.required' => 'Subject Feild Is Required',
