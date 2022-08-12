@@ -28,14 +28,14 @@
         <h5 class="guest_screen_text top_heading" style="font-size: 16px">{{$event_title}}</h5>
         <div class="payment-method-form">
             <div class="billing-info">
-                <div class="billing-description">
+                {{-- <div class="billing-description">
                     <div class="title">
                         <p style="margin: 0px">Billing Information</p>
                     </div>
                     <div class="description">
                         <p>Enter your payment details below.</p>
                     </div>
-                </div>
+                </div> --}}
                 <div class="visa-card-detail">
                     <div class="title">
                         <P style="margin-top: 5px; margin-bottom: 0px">Cards Accepted</P>
@@ -49,9 +49,9 @@
                     </div>
                 </div>
                 <div class="credit-card-details">
-                    <div class="card-title" style="margin: 0px;">
+                    {{-- <div class="card-title" style="margin: 0px;">
                         <p style="margin: 2px">Credit Card * </p>
-                    </div>
+                    </div> --}}
                         <form action="{{ route('payementwebinars') }}" method="POST"
                         class="require-validation" data-cc-on-file="false"
                         data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">

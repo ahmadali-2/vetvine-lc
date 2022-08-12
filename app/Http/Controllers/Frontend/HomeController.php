@@ -41,24 +41,24 @@ class HomeController extends Controller
     {
         return view('frontend.pages.grow');
     }
+
     public function thrive()
     {
         return view('frontend.pages.thrive');
     }
+
     public function heal()
     {
         return view('frontend.pages.heal');
     }
 
-    public function termsOfService()
-    {
-        return view('frontend.pages.general.termsofservicecs');
-    }
+
     public function userdashboard()
     {
 
         return view('vetvineUsers.MyProfile.dashboard');
     }
+
     public function Faqs()
     {
         return view('frontend.pages.faqs');
@@ -70,12 +70,14 @@ class HomeController extends Controller
         $categories = CategoryForum::all();
         return view('frontend.pages.forums.index', compact('forums', 'categories'));
     }
+
     public function forumposts($id)
     {
         $posts = Post::where('forum_id', $id)->get();
         $forum = Forum::find($id);
         return view('frontend.pages.forums.forums_post', compact('posts', 'forum'));
     }
+
     public function upcomingWebinars()
     {
         $showevent = Event::with('events', 'sponsers', 'members', 'user')->where('date', '>=',Carbon::now())
@@ -127,7 +129,12 @@ class HomeController extends Controller
         foreach($eventTags as $eventTag){
             $lastEvents = Event::orWhere('tags','like','%'.$eventTag.'%')->get()->toArray(); // more like
             foreach($lastEvents as $event){
-                $purchasedEvent =BuyEventPlan::where('user_id',auth()->user()->id)->where('event_id', $event['id'])->first();
+                if(auth()->user()){
+                    $purchasedEvent =BuyEventPlan::where('user_id',Auth()->user()->id)->where('event_id', $event['id'])->first();
+                }
+                else{
+                    $purchasedEvent =BuyEventPlan::where('event_id', $event['id'])->first();
+                }
                 if(in_array($event['id'], array_column($relatedEvents, 'id')) == false){
                     if($id != $event['id']){
                         if(isset($purchasedEvent) == false){
@@ -167,6 +174,7 @@ class HomeController extends Controller
     }
 
     public function getEventPrice(Request $request){
+
         $user = User::where('id', auth()->user()->id)->first();
 
         $eventdetail = Event::with('events', 'sponsers', 'members', 'user', 'buyeventplan', 'ReviewData')->find($request->event_id);
@@ -205,6 +213,7 @@ class HomeController extends Controller
     }
 
     public function getVideoPrice(Request $request){
+
         $user = User::where('id', auth()->user()->id)->first();
 
         $video = VideosOnDemand::find($request->video_id);
@@ -327,11 +336,7 @@ class HomeController extends Controller
 
     public function updateUserPassword(Request $request)
     {
-        $request->validate([
-            'current_password' => 'required',
-            'password' => 'required|min:8',
-            'confirmpassword' => 'required|same:password',
-        ]);
+
         $currentUser = User::find(Auth::id());
         if ($request->current_password) {
             if (Hash::check($request->current_password, $currentUser->password)) {
@@ -341,6 +346,7 @@ class HomeController extends Controller
                         $currentUser->update([
                             'password' => Hash::make($request->password),
                         ]);
+                        // dd("stop");
                         parent::successMessage('Password Updated Successfully');
                         return redirect()->back();
                     } catch (\Exception $e) {
