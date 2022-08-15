@@ -70,8 +70,9 @@ class NewsController extends Controller
 
     }
 
-    public function frontDetail(){
-        return view('frontend.pages.news.detail');
+    public function frontDetail($id){
+        $newsdetail = News::where('id',$id)->first();
+        return view('frontend.pages.news.detail',compact('newsdetail'));
     }
     /**
      * Show the form for editing the specified resource.

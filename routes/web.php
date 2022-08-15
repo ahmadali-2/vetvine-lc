@@ -155,9 +155,9 @@ Route::get('login', function () {
 Route::get("/admin-chatify", function () {
     return view("admins.chat.app");
 })->name('admin-chat');
-Route::get("/annauncement", function () {
-    return view("frontend.pages.announcement.index");
-})->name('admin-chat');
+// Route::get("/annauncement", function () {
+//     return view("frontend.pages.announcement.index");
+// })->name('admin-chat');
 
 Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum', 'adminRole']], function () {
 
@@ -267,8 +267,8 @@ Route::group(['middleware' => ['frontendUserRole', 'emailVerification']], functi
     Route::resource('eventpayments', EventPaymentController::class);
 
     Route::get('faqs', [HomeController::class, 'faqs'])->name('faqs');
-    Route::get('frontend-news', [NewsController::class, 'frontIndex'])->name('newsfrontend');
-    Route::get('frontend-news-detail', [NewsController::class, 'frontDetail']);
+    Route::get('news', [NewsController::class, 'frontIndex'])->name('newsfrontend');
+    Route::get('news-detail/{id}', [NewsController::class, 'frontDetail'])->name('newsdetail');
 
     Route::post('show-comments', [CommentController::class, 'showComments'])->name('showComments');
 
