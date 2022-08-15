@@ -24,6 +24,13 @@ class ManageUserController extends Controller
         return view('admins.generalsettings.manageusers.index',compact('allUsers'));
     }
 
+    public function emailCompaign(){
+        $mailchimp = new \MailchimpTransactional\ApiClient();
+        $mailchimp->setApiKey(env('TRANSECTIONAL_MAILCHIMP_KEY'));
+        $email_templetes = $mailchimp->templates->list();
+        return view('admins.compaigns.email_templetes', compact('email_templetes'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
