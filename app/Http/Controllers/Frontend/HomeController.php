@@ -101,6 +101,7 @@ class HomeController extends Controller
         return response()->json([
             'code' => 200,
             'video_id' => $request->edit_video_id,
+            'latest_rating' => $request->edit_rating_field,
             'html' => view('admins.videosondemand.dynamic_stars', ['average_rating' => $video->average_rating])->render(),
             'message' => 'Video rating updated successfully!',
         ],200);
