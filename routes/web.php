@@ -337,3 +337,22 @@ Route::post('/licensure',     [LicensureController::class, 'licensure'])->name('
 //Testing
 Route::get('test', function () {
 })->middleware('permission');
+
+
+
+Route::get('/test/api', function () {
+    $client = new \MailchimpMarketing\ApiClient();
+
+    $client->setConfig([
+        'apiKey' => env('MAILCHIMP_API_KEY'),
+        'server' => 'us17',
+    ]);
+
+    $response = $client->templates->list();
+    // $response = $client->templates->getTemplate("11579038");
+    // $response = $client->templates->create([
+    //     "name" => "Wajid Ali",
+    //     "html" => "html",
+    // ]);
+    dd($response);
+});

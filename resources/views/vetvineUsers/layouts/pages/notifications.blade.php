@@ -101,7 +101,9 @@
                                             <div class="font-weight-bold mr-3">
                                                 <div class="text-truncate">
                                                     {{ $notification->actionBy->name }} <span
-                                                        style="font-weight:lighter;">{{ $notification->action }} your
+                                                        style="font-weight:lighter;">{{ $notification->action }} your @if ($notification->type == "shared")
+                                                            {{ $notification->type }}
+                                                        @endif
                                                         post</span> {{ $notification->post->post_title }}.</div>
                                                 <p style="font-size: 13px; font-weight:lighter;">
                                                     {{ $notification->created_at->diffForHumans() }}</p>

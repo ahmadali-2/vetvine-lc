@@ -6,6 +6,7 @@ use App\Events\UserRegistered;
 use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Mailchimp;
 use Yoeunes\Toastr\Facades\Toastr;
 
@@ -39,7 +40,6 @@ class SubscribeToMailChimp
             'apiKey' => env('MAILCHIMP_API_KEY'),
             'server' => 'us17',
         ]);
-
 
         //Get Domains
         // Log::info("List of Domains");

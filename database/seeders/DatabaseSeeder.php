@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             MemberTypeSeeder::class,
             MemberPermissionsSeeder::class,
             PrivacyPolicySeeder::class,
+            UserSeeder::class
         ]);
     }
 }
