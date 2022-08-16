@@ -71,7 +71,7 @@ $user = Auth::user();
                         {{-- items --}}
                         <p class="messenger-title">Search</p>
                         <div class="search-records">
-                            <p class="message-hint center-el"><span>Type to search..</span></p>
+                            <p class="message-hint center-el"><span>Type to search...</span></p>
                         </div>
                     </div>
                 </div>

@@ -71,6 +71,37 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 
+Route::get('/templete-list', function(){
+    // /$client = new \MailchimpMarketing\ApiClient();
+    $mailchimp = new \MailchimpTransactional\ApiClient();
+    $apiKey = env('MAILCHIMP_API_KEY'); // business api key
+    $mailchimp->setApiKey(env('TRANSECTIONAL_MAILCHIMP_KEY'));
+
+
+    // $response = $mailchimp->templates->list();
+    $response = $mailchimp->templates->info(["name" => "sajjawal"]);
+    // return ($response->code);
+    // $response = $mailchimp->templates->update(["sajjawal" => "SAJJAWAL BHAI"]);
+
+    // $client = new MailchimpMarketing\ApiClient();
+    // $client->setConfig([
+    //     'apiKey' => env('MAILCHIMP_API_KEY'),
+    //     'server' => 'sajjawal',
+    // ]);
+
+
+
+    $response2 = $mailchimp->templates->update([
+        "name" => "sajjawal",
+        "code" => str_replace('BANANACO','AHMAD',$response->code),
+        "publish" => true,
+    ]);
+
+    // // $response = $client->campaigns->create(["type" => "absplit"]);
+    return $response2->code;
+
+});
+
 Route::get('/clear', function () {
     Artisan::call('route:clear');
     Artisan::call('cache:clear');
@@ -155,9 +186,9 @@ Route::get('login', function () {
 Route::get("/admin-chatify", function () {
     return view("admins.chat.app");
 })->name('admin-chat');
-Route::get("/annauncement", function () {
-    return view("frontend.pages.announcement.index");
-})->name('admin-chat');
+// Route::get("/annauncement", function () {
+//     return view("frontend.pages.announcement.index");
+// })->name('admin-chat');
 
 Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum', 'adminRole']], function () {
 
@@ -211,6 +242,7 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum', 'adminR
     //Group Mailing
     Route::get('manageuser/group/mail', [ManageUserController::class, 'groupMail'])->name('group.mail.user');
     Route::post('manageuser/group/mail/sent', [ManageUserController::class, 'groupMailSent'])->name('group.mail.sent');
+    Route::get('email-compaign', [ManageUserController::class, 'emailCompaign'])->name('emailCompaign');
     //CMS
     Route::get('/cms-pages', [CMSController::class, 'index'])->name('cms.pages');
     Route::get('/cms-page/create', [CMSController::class, 'create'])->name('cms.pages.create');
@@ -267,8 +299,8 @@ Route::group(['middleware' => ['frontendUserRole', 'emailVerification']], functi
     Route::resource('eventpayments', EventPaymentController::class);
 
     Route::get('faqs', [HomeController::class, 'faqs'])->name('faqs');
-    Route::get('frontend-news', [NewsController::class, 'frontIndex'])->name('newsfrontend');
-    Route::get('frontend-news-detail', [NewsController::class, 'frontDetail']);
+    Route::get('news', [NewsController::class, 'frontIndex'])->name('newsfrontend');
+    Route::get('news-detail/{id}', [NewsController::class, 'frontDetail'])->name('newsdetail');
 
     Route::post('show-comments', [CommentController::class, 'showComments'])->name('showComments');
 

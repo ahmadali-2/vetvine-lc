@@ -33,7 +33,6 @@ class SubscribeToMailChimp
      */
     public function handle(UserRegistered $event)
     {
-
         $client = new \MailchimpMarketing\ApiClient();
 
         $client->setConfig([
@@ -73,4 +72,6 @@ class SubscribeToMailChimp
             return true;
         }
     }
+
+
 }

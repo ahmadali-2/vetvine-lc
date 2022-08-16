@@ -69,7 +69,7 @@
                                                     <span class="fa fa-star-o" style="color: #FFC300"></span>
                                                 @endfor
                                             </div>
-                                            <a data-id="{{$video->id}}" data-rating="{{$video->average_rating}}" style="cursor: pointer;"><i
+                                            <a id="edit_{{$video->id}}" data-id="{{$video->id}}" data-rating="{{$video->average_rating}}" style="cursor: pointer;"><i
                                                 class="fas fa-edit text-primary"></i></a>
                                         </td>
                                         <td> <a href="{{ route('videos-on-demand.edit', $video->id) }}"><i
@@ -177,8 +177,10 @@
                         success: function(response) {
                             if(response.code == 200){
                                 var video_star = '#stars_'+response.video_id;
+                                var video_edit = '#edit_'+response.latest_rating;
                                 $(video_star).empty();
                                 $(video_star).append(response.html);
+                                $()
                                 toastr.success(response.message);
                                 $('#edit_rating_modal').modal("hide");
                             }else{

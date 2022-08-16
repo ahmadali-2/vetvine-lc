@@ -145,6 +145,11 @@ $hasPermission = DB::table('member_permissions')
         <a href="{{ route('group.mail.user') }}"><i class="menu-icon fas fa-at"></i>Mail to Users </a>
     </li>
     @endhasPermission
+    @hasPermission($hasPermission->mail_to_users)
+    <li>
+        <a href="{{ route('emailCompaign') }}"><i class="menu-icon fas fa-at"></i>Email Compaigns </a>
+    </li>
+    @endhasPermission
     {{-- Ahmad --}}
     @hasPermission($hasPermission->guest_registration_fee)
     <li>

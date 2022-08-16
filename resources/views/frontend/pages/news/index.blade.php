@@ -54,44 +54,28 @@
 
         </div>
     </div>
+
+
+
    <div class="container news">
     <div class="row">
+        @forelse ($news as $new)
         <div class="col-md-12 mb-3">
+
             <div class="content">
                 <div class="heading d-flex align-items-center">
                     <img src="{{asset('frontend/images/arrow.png')}}" alt="" width="16" height="18">
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit </h3>
+                    <h3>{{ $new->news_title }}</h3>
 
                 </div>
+                <p class="ml-4">{!! Str::limit($new->news_description ,230) !!}<a href="{{ route('newsdetail', $new->id) }}" class="read_more">Read More</a>  </p>
 
-                <p class="ml-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel iusto hic eius atque ad quaerat veritatis quia facilis nostrum saepe voluptates delectus labore accusantium, soluta totam odit necessitatibus corporis et!   <a href="{{url('frontend-news-detail')}}" class="read_more">Read More</a>  </p>
             </div>
+
         </div>
-        <div class="col-md-12 mb-3">
-            <div class="content">
-                <div class="heading d-flex align-items-center">
-                    <img src="{{asset('frontend/images/arrow.png')}}" alt="" width="16" height="18">
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit </h3>
-
-                </div>
-
-                <p class="ml-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel iusto hic eius atque ad quaerat veritatis quia facilis nostrum saepe voluptates delectus labore accusantium, soluta totam odit necessitatibus corporis et!   <a href="{{url('frontend-news-detail')}}" class="read_more">Read More</a>  </p>
-            </div>
-        </div>
-        <div class="col-md-12 mb-3">
-            <div class="content">
-                <div class="heading d-flex align-items-center">
-                    <img src="{{asset('frontend/images/arrow.png')}}" alt="" width="16" height="18">
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit </h3>
-
-                </div>
-
-                <p class="ml-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel iusto hic eius atque ad quaerat veritatis quia facilis nostrum saepe voluptates delectus labore accusantium, soluta totam odit necessitatibus corporis et!   <a href="{{url('frontend-news-detail')}}" class="read_more">Read More</a>  </p>
-            </div>
-        </div>
-
-
-
+        @empty
+        Not Found
+           @endforelse
         <div class="col-md-12 pagination_col my-5">
             <ul class="pagination pagination-lg">
                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
@@ -107,6 +91,7 @@
           </div>
     </div>
    </div>
+
 
 
 
