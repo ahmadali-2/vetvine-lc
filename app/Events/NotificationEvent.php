@@ -13,7 +13,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-
+use Symfony\Component\HttpFoundation\File\Exception\NoFileException;
 
 class NotificationEvent implements ShouldBroadcast
 {
@@ -58,15 +58,21 @@ class NotificationEvent implements ShouldBroadcast
         if (isset($data['post_id'])) {
             $post = Post::find($data['post_id']) ?? '';
             if (isset($data['is_like'])) {
-                Log::info('Simple Post liked');
-                Log::info("Inner Like Post");
-                NotificationHistory::create([
-                    'user_id' => $post->user_id,
-                    'action_by' => $user->id,
-                    'post_id' => $post->id,
-                    'action' => 'liked',
-                    'is_read' => 1
-                ]);
+                if(NotificationHistory::where(['user_id'=>$post->user_id, 'post_id' => $post->id, 'action' => 'liked','type' => 'simple'])->first()){
+                    NotificationHistory::where(['user_id'=>$post->user_id, 'post_id' => $post->id, 'action' => 'liked','type' => 'simple'])->update([
+                        'updated_at' => now(),
+                        'created_at' => now(),
+                    ]);
+                }else{
+                    NotificationHistory::create([
+                        'user_id' => $post->user_id,
+                        'action_by' => $user->id,
+                        'post_id' => $post->id,
+                        'action' => 'liked',
+                        'is_read' => 1,
+                        'type' => 'simple'
+                    ]);
+                }
                 $this->userName = $user->name ?? '';
                 $this->userPhoto = $user->profile_photo ?? '';
                 $this->postImg = $post->post_photo ?? '';
@@ -78,13 +84,21 @@ class NotificationEvent implements ShouldBroadcast
             } elseif (isset($data['is_comment'])) {
                 //Simple Post Comment
                 Log::info('Simple Post Comment');
-                NotificationHistory::create([
-                    'user_id' => $post->user_id,
-                    'action_by' => $user->id,
-                    'post_id' => $post->id,
-                    'action' => 'commented',
-                    'is_read' => 1
-                ]);
+                if(NotificationHistory::where(['user_id'=>$post->user_id, 'post_id' => $post->id, 'action' => 'commented','type' => 'simple'])->first()){
+                    NotificationHistory::where(['user_id'=>$post->user_id, 'post_id' => $post->id, 'action' => 'commented','type' => 'simple'])->update([
+                        'updated_at' => now(),
+                        'created_at' => now(),
+                    ]);
+                }else{
+                    NotificationHistory::create([
+                        'user_id' => $post->user_id,
+                        'action_by' => $user->id,
+                        'post_id' => $post->id,
+                        'action' => 'commented',
+                        'is_read' => 1,
+                        'type' => 'simple'
+                    ]);
+                }
                 $this->userName = $user->name ?? '';
                 $this->userPhoto = $user->profile_photo ?? '';
                 $this->postImg = $post->post_photo ?? '';
@@ -95,12 +109,20 @@ class NotificationEvent implements ShouldBroadcast
             } elseif (isset($data['is_create'])) {
                 //Simple Post Comment
                 Log::info('Simple Post Created');
-                NotificationHistory::create([
-                    'action_by' => $user->id,
-                    'post_id' => $post->id,
-                    'action' => 'created',
-                    'is_read' => 1
-                ]);
+                if(NotificationHistory::where(['user_id'=>$post->user_id, 'post_id' => $post->id, 'action' => 'created','type' => 'simple'])->first()){
+                    NotificationHistory::where(['user_id'=>$post->user_id, 'post_id' => $post->id, 'action' => 'created','type' => 'simple'])->update([
+                        'updated_at' => now(),
+                        'created_at' => now(),
+                    ]);
+                }else{
+                    NotificationHistory::create([
+                        'action_by' => $user->id,
+                        'post_id' => $post->id,
+                        'action' => 'created',
+                        'is_read' => 1,
+                        'type' => 'simple'
+                    ]);
+                }
                 $this->userName = $user->name ?? '';
                 $this->userPhoto = $user->profile_photo ?? '';
                 $this->postImg = $post->post_photo ?? '';
@@ -112,13 +134,21 @@ class NotificationEvent implements ShouldBroadcast
             } else {
                 //Simple Post Create
                 Log::info('Simple Post Shared');
-                NotificationHistory::create([
-                    'user_id' => $post->user_id,
-                    'action_by' => $user->id,
-                    'post_id' => $post->id,
-                    'action' => 'shared',
-                    'is_read' => 1
-                ]);
+                if(NotificationHistory::where(['user_id'=>$post->user_id, 'post_id' => $post->id, 'action' => 'shared','type' => 'simple'])->first()){
+                    NotificationHistory::where(['user_id'=>$post->user_id, 'post_id' => $post->id, 'action' => 'shared','type' => 'simple'])->update([
+                        'updated_at' => now(),
+                        'created_at' => now(),
+                    ]);
+                }else{
+                    NotificationHistory::create([
+                        'user_id' => $post->user_id,
+                        'action_by' => $user->id,
+                        'post_id' => $post->id,
+                        'action' => 'shared',
+                        'is_read' => 1,
+                        'type' => 'simple'
+                    ]);
+                }
                 $this->userName = $user->name ?? '';
                 $this->userPhoto = $user->profile_photo ?? '';
                 $this->postImg = $post->post_photo ?? '';
@@ -137,13 +167,22 @@ class NotificationEvent implements ShouldBroadcast
                 //Share Post Like
                 Log::info('Share Post liked');
                 Log::info("Inner Share Like Post");
-                NotificationHistory::create([
-                    'user_id' => $post->user_id,
-                    'action_by' => $user->id,
-                    'post_id' => $post->id,
-                    'action' => 'liked',
-                    'is_read' => 1
-                ]);
+                if(NotificationHistory::where(['user_id'=>$post->user_id, 'post_id' => $post->id, 'action' => 'liked','type' => 'shared'])->first()){
+                    NotificationHistory::where(['user_id'=>$post->user_id, 'post_id' => $post->id, 'action' => 'liked','type' => 'shared'])->update([
+                        'updated_at' => now(),
+                        'created_at' => now(),
+                    ]);
+                }else{
+                    NotificationHistory::create([
+                        'user_id' => $post->user_id,
+                        'action_by' => $user->id,
+                        'post_id' => $post->id,
+                        'action' => 'liked',
+                        'is_read' => 1,
+                        'type' => 'shared'
+                    ]);
+                }
+
                 $this->userName = $user->name ?? '';
                 $this->userPhoto = $user->profile_photo ?? '';
                 $this->postImg = $post->post_photo ?? '';
@@ -155,13 +194,21 @@ class NotificationEvent implements ShouldBroadcast
             } else if (isset($data['is_comment'])) {
                 //Share Post Comment
                 Log::info('Share Post Comment');
-                NotificationHistory::create([
-                    'user_id' => $post->user_id,
-                    'action_by' => $user->id,
-                    'post_id' => $post->id,
-                    'action' => 'commented',
-                    'is_read' => 1
-                ]);
+                if(NotificationHistory::where(['user_id'=>$post->user_id, 'post_id' => $post->id, 'action' => 'commented','type' => 'shared'])->first()){
+                    NotificationHistory::where(['user_id'=>$post->user_id, 'post_id' => $post->id, 'action' => 'commented','type' => 'shared'])->update([
+                        'updated_at' => now(),
+                        'created_at' => now(),
+                    ]);
+                }else{
+                    NotificationHistory::create([
+                        'user_id' => $post->user_id,
+                        'action_by' => $user->id,
+                        'post_id' => $post->id,
+                        'action' => 'commented',
+                        'is_read' => 1,
+                        'type' => 'shared'
+                    ]);
+                }
                 $this->userName = $user->name ?? '';
                 $this->userPhoto = $user->profile_photo ?? '';
                 $this->postImg = $post->post_photo ?? '';
@@ -172,13 +219,21 @@ class NotificationEvent implements ShouldBroadcast
             } else {
                 //Share Post Create
                 Log::info('Share Post created');
+                if(NotificationHistory::where(['user_id'=>$post->user_id, 'post_id' => $post->id, 'action' => 'shared','type' => 'shared'])->first()){
+                    NotificationHistory::where(['user_id'=>$post->user_id, 'post_id' => $post->id, 'action' => 'shared','type' => 'shared'])->update([
+                        'updated_at' => now(),
+                        'created_at' => now(),
+                    ]);
+                }else{
                 NotificationHistory::create([
                     'user_id' => $post->user_id,
                     'action_by' => $user->id,
                     'post_id' => $post->id,
                     'action' => 'shared',
-                    'is_read' => 1
+                    'is_read' => 1,
+                    'type' => 'shared'
                 ]);
+            }
                 $this->userName = $user->name ?? '';
                 $this->userPhoto = $user->profile_photo ?? '';
                 $this->postImg = $post->post_photo ?? '';

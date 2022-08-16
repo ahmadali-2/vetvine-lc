@@ -21,6 +21,7 @@ class CreateNotificationHistoriesTable extends Migration
             $table->unsignedBigInteger('action_by');
             $table->integer('is_read');
             $table->enum('action', ['liked', 'commented', 'shared','created']);
+            $table->enum('type', ['simple', 'shared']);
             $table->timestamps();
         });
     }
