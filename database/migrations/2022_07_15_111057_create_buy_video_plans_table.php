@@ -20,7 +20,7 @@ class CreateBuyVideoPlansTable extends Migration
             $table->unSignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->unSignedBigInteger('video_id');
-            $table->foreign('video_id')->references('id')->on('events');
+            $table->foreign('video_id')->references('id')->on('videos_on_demands');
             $table->timestamps();
         });
     }

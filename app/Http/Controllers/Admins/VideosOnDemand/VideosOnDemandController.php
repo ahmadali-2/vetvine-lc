@@ -52,6 +52,8 @@ class VideosOnDemandController extends Controller
      */
     public function store(VideoRequest $request)
     {
+
+        // dd($request->toArray());
         $request->validated();
         $input = $request->all();
         $user = Auth::user()->id;
@@ -67,6 +69,11 @@ class VideosOnDemandController extends Controller
                 "presented_by" => $input['presented_by'],
                 'category_id' => $input['category'],
                 'sponsor_id' => '1',
+                'vet_pet_prof_fee' => $input['pet_pro_fee'],
+                'pet_owner_premium_fee' => $input['pet_owner_premium_fee'],
+                'pet_owner_fee' => $input['pet_owner_fee'],
+                'vet_pet_prof_premium_fee' => $input['vet_pet_pro_premium_fee']
+
             ]);
             $videos->sponsers()->attach($request->sponser_id);
             parent::successMessage('Video saved successfully.');

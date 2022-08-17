@@ -26,6 +26,7 @@ class VideoDescriptionController extends Controller
             'rating'    => $starRating ? $starRating->rating : 0,
             'videoId' => $id,
             'authUser' => $authUser,
+            'categoryId' => $category,
         ]);
     }
 

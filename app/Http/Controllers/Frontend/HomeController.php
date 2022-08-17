@@ -19,6 +19,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -202,15 +203,21 @@ class HomeController extends Controller
 
     public function getVideoPrice(Request $request){
 
+
         $user = User::where('id', auth()->user()->id)->first();
 
+        Log::info($user);
+
         $video = VideosOnDemand::find($request->video_id);
+
+        Log::info($video);
 
         $data = array();
 
         $data['user_id'] = auth()->user()->id;
 
         $data['video_id'] = $request->video_id;
+        $data['category_id'] = $request->category_id;
 
         $data['protocol'] = 'Vetvine Member';
 
@@ -229,7 +236,13 @@ class HomeController extends Controller
             $data['protocol'] = 'Vetvine Premium Membership <br> Subscriber';
         }else{
             $data['protocol'] = 'Vetvine Premium Membership <br> Subscriber';
+            $data['fee'] = 'Free';
         }
+
+        return response()->json([
+            'status' => 200,
+            'data' => $data
+        ]);
   }
 
     public function searceducations(Request $request)

@@ -913,6 +913,7 @@
                             event_id: event_id
                         },
                         success: function(response) {
+                            console.log(response);
                             $('#event_detail_heading').html(response.data['title']);
                             $('#event_protocol_heading').html(response.data['protocol'] +
                                 ': <b>' + '$' + response.data['fee'] + '</b>');
@@ -920,7 +921,9 @@
                             $('#event_detail_event_id').val(response.data['event_id']);
                             $('#event_detail_user_id').val(response.data['user_id']);
                             $('#event_detail_amount').val(response.data['fee']);
-                            $('#event_detail_title').val(response.data['title'])
+                            $('#event_detail_title').val(response.data['title']);
+                            $("#category_id").val("");
+                            $("#video").val(0);
                         }
                     });
                     $('#register_event_btn').trigger("click");

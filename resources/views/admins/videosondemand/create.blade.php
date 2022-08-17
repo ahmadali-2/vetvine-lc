@@ -65,6 +65,38 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
+                                        <label for="pet_owner_fee" class="control-label mb-1">Pet Owner Fee $</label>
+                                        <input id="pet_owner_fee" placeholder=" Enter fee" name="pet_owner_fee"
+                                            type="text" class="form-control" aria-required="true" aria-invalid="false"
+                                            value="">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="pet_owner_premium_fee" class="control-label mb-1">Pet Owner Premium Fee $</label>
+                                        <input id="pet_owner_premium_fee" placeholder=" Enter fee" name="pet_owner_premium_fee"
+                                            type="text" class="form-control" aria-required="true" aria-invalid="false"
+                                            value="">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="pet_pro_fee" class="control-label mb-1">Vet/Pet Prof. Fee $</label>
+                                        <input id="pet_pro_fee" placeholder=" Enter fee" name="pet_pro_fee"
+                                            type="text" class="form-control" aria-required="true" aria-invalid="false"
+                                            value="">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="vet_pet_pro_premium_fee" class="control-label mb-1">Vet/Pet Prof. Premium Fee $</label>
+                                        <input id="vet_pet_pro_premium_fee" placeholder=" Enter fee" name="vet_pet_pro_premium_fee"
+                                            type="text" class="form-control" aria-required="true" aria-invalid="false"
+                                            value="">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
                                         <label for="aad_video" class="control-label mb-1">Add Video</label>
                                         <input id="post_add_video" placeholder="" name="post_add_video" type="file"
                                             class="form-control" aria-required="true" aria-invalid="false" value="">
