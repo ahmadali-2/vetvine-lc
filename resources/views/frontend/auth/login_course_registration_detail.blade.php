@@ -26,7 +26,11 @@
 }
 </style>
 <div class="popup-body">
+
+
     <form id="event_detail_submit">
+        <input type="text" id="video" name="video" hidden>
+        <input type="text" id="category_id" name="category_id" hidden>
         <input id="event_detail_event_id" type="text" name="event_id" hidden>
         <input id="event_detail_user_id" type="text" name="user_id" hidden>
         <input id="event_detail_amount" type="text" name="event_price" hidden>
@@ -46,8 +50,9 @@
 <script>
     $('#pay_event_price').on('click', function(){
         $('#guest_continue_loading').css('display','block');
-        var formData = $('#event_detail_submit').serialize();
-        formData+= '&guest_screen=3';
+            var formData = $('#event_detail_submit').serialize();
+            formData+= '&guest_screen=3';
+
         setTimeout(
         function()
         {

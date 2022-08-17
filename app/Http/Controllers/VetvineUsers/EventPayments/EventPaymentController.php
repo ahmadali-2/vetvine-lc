@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admins\Webinar\BuyEventPlan;
 use App\Models\Admins\Webinar\Event;
+use App\Models\BuyVideoPlan;
 use Session;
 use Stripe;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+
 class EventPaymentController extends Controller
 {
     /**
@@ -53,27 +56,41 @@ class EventPaymentController extends Controller
      */
     public function paymentWebinars(Request $request)
     {
-        $checkUser =BuyEventPlan::where('user_id',$request->user_id)->where('event_id', $request->event_id)->first();
+        // dd($request->event_price*100);
+        if($request->video == "1"){
+            $checkUser =BuyVideoPlan::where('user_id',$request->user_id)->where('video_id', $request->event_id)->first();
+        }else{
+            $checkUser =BuyEventPlan::where('user_id',$request->user_id)->where('event_id', $request->event_id)->first();
+        }
         if(!empty($checkUser)){
             parent::warningMessage("You Already Purchased An Event");
             parent::warningMessage("Please Contact With Admin To Proceed Your Query");
             if($request->ajax() == false){
                 if(isset($request->location)){
-                    return redirect('upcoming-webinars-details/'.$request->event_id);
+                    if($request->video == "1"){
+                        return redirect('video-description/'.$request->event_id.$request->category_id);
+                    }else{
+                        return redirect('upcoming-webinars-details/'.$request->event_id);
+                    }
                 }
-                return redirect()->route('upcoming_webinars');
+                if($request->video == "1"){
+                    return redirect()->url('videos-on-demand');
+                }else{
+                    return redirect()->route('upcoming_webinars');
+                }
             }
         }
         try{
-
             Stripe\Stripe::setApiKey('sk_test_51L43BqKuqsAISa0ttkLpNjhOiJPwPK4KjychhTSoNof5g0WHg8uppTYHqpqEz4yQFaNbEcxbnQW0jabEqno6GQn200dm5rjGm1');
             $stripeResponse =Stripe\Charge::create([
-                    "amount" => $request->event_price*100,
+                    "amount" => (int)$request->event_price*100,
                     "currency" => "USD",
-                    // "source" => $request->stripeToken,
+                    "source" => $request->stripeToken,
                     "source" => 'tok_visa',
                     "description" => "Vetvine Event Payment Subscription"
             ]);
+
+            // dd($stripeResponse);
             // Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
             // $stripeResponse =Stripe\Charge::create ([
             //         "amount" => $request->event_price*100,
@@ -81,18 +98,41 @@ class EventPaymentController extends Controller
             //         "source" => $request->stripeToken,
             //         "description" => "Vetvine Payment Subscription"
             // ]);
-            BuyEventPlan::create([
-                'transaction_id' => $stripeResponse->id,
-                'user_id' => $request->user_id,
-                'event_id' => $request->event_id,
-                'amount' => $request->event_price,
-            ]);
-        parent::successMessage("Payment Successful");
-        parent::successMessage("Event Subscribed Successfully");
-        // parent::successMessage("Your Transaction Id " .$stripeResponse->id);
+            // dd("success");
+            // parent::successMessage("Payment Successful");
+            // parent::successMessage("Event Subscribed Successfully");
+            // dd("Payment success:",$table);
+            if($request->video == "1"){
+                BuyVideoPlan::create([
+                    'transaction_id' => $stripeResponse->id,
+                    'user_id' => $request->user_id,
+                    'video_id' => $request->event_id,
+                    'amount' => $request->event_price,
+                ]);
+                parent::successMessage("Payment Successful");
+                parent::successMessage("Event Subscribed Successfully");
+                parent::successMessage("Your Transaction Id " .$stripeResponse->id);
+
+            }else{
+                BuyEventPlan::create([
+                    'transaction_id' => $stripeResponse->id,
+                    'user_id' => $request->user_id,
+                    'event_id' => $request->event_id,
+                    'amount' => $request->event_price,
+                ]);
+                parent::successMessage("Payment Successful");
+                parent::successMessage("Event Subscribed Successfully");
+                parent::successMessage("Your Transaction Id " .$stripeResponse->id);
+            }
+
+
         if($request->ajax() == false){
             if(isset($request->location)){
-                return redirect('upcoming-webinars-details/'.$request->event_id);
+                if($request->video == "1"){
+                    return redirect('video-description/'.$request->event_id.$request->category_id);
+                }else{
+                    return redirect('upcoming-webinars-details/'.$request->event_id);
+                }
             }
             return redirect()->route('upcoming_webinars');
         }
@@ -102,7 +142,11 @@ class EventPaymentController extends Controller
             parent::dangerMessage("Please Try Again ");
             if($request->ajax() == false){
                 if(isset($request->location)){
-                    return redirect('upcoming-webinars-details/'.$request->event_id);
+                    if($request->video == "1"){
+                        return redirect('video-description/'.$request->event_id.$request->category_id);
+                    }else{
+                        return redirect('upcoming-webinars-details/'.$request->event_id);
+                    }
                 }
                 return redirect()->route('upcoming_webinars');
             }

@@ -336,6 +336,7 @@
                     var video_id = '<?php echo $videoId ?>';
                     var authUser = '<?php echo $authUser ?>';
                     var rating = '<?php echo $rating ?>';
+                    var category_id = '<?php echo $categoryId ?>'
 
                     $('.videostars').fontstar({
                         icon:"fa fa-star-o",
@@ -374,15 +375,22 @@
                                 },
                                 type: "POST",
                                 url: "/vetvine-member/getVideoPrice",
-                                data: {video_id: video_id},
+                                data: {video_id: video_id, category_id:category_id},
                                 success: function(response) {
+                                    console.log(response);
                                     $('#event_detail_heading').html(response.data['title']);
                                     $('#event_protocol_heading').html(response.data['protocol']+': <b>'+'$'+response.data['fee']+'</b>');
                                     $('#continue_guest').html('PAY $'+response.data['fee']);
-                                    $('#event_detail_event_id').val(response.data['event_id']);
+                                    $('#event_detail_event_id').val(response.data['video_id']);
+                                    $('#category_id').val(response.data['category_id']);
                                     $('#event_detail_user_id').val(response.data['user_id']);
-                                    $('#event_detail_amount').val(response.data['fee']);
-                                    $('#event_detail_title').val(response.data['title'])
+                                    if(response.data['fee'] == "Free"){
+                                        $('#event_detail_amount').val(0);
+                                    }else{
+                                        $('#event_detail_amount').val(response.data['fee']);
+                                    }
+                                    $('#event_detail_title').val(response.data['title']);
+                                    $("#video").val(1);
                                 }
                             });
                             $('#register_video_btn').trigger("click");

@@ -24,6 +24,10 @@ class VideosOnDemand extends Model
         'sponser_id',
         'isDeleted',
         'average_rating',
+        'vet_pet_prof_fee',
+        'pet_owner_premium_fee',
+        'pet_owner_fee',
+        'vet_pet_prof_premium_fee'
     ];
 
     public function category()

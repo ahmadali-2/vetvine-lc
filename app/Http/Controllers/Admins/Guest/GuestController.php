@@ -4,27 +4,31 @@ namespace App\Http\Controllers\Admins\Guest;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admins\Webinar\BuyEventPlan;
+use App\Models\BuyVideoPlan;
 use App\Models\UserMemberAndNetworkLevel;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class GuestController extends Controller
 {
-    public function guestRegistrationFee(){
+    public function guestRegistrationFee()
+    {
         $userNetworkLevels = UserMemberAndNetworkLevel::where('parent_id', '!=', null)->paginate(10);
-        return view('admins.guest.guest_registration_fee',compact('userNetworkLevels'));
+        return view('admins.guest.guest_registration_fee', compact('userNetworkLevels'));
     }
 
-    public function updateRegistrationFee(Request $request){
+    public function updateRegistrationFee(Request $request)
+    {
         $data = array();
         $data['registration_fee'] = $request->registration_fee;
-        try{
+        try {
             UserMemberAndNetworkLevel::find($request->network_level_id)->update($data);
             return response()->json([
                 'code' => 200,
                 'message' => 'Registration Fee Successfully Updated!',
             ]);
-        }catch(Exception $ex){
+        } catch (Exception $ex) {
             return response()->json([
                 'code' => 400,
                 'message' => 'Action faild, user might not exist!',
@@ -32,47 +36,76 @@ class GuestController extends Controller
         }
     }
 
-    public function nextGuestScreen(Request $request){
-        if(isset($request->guest_screen)){
-            if($request->guest_screen == 1){
+    public function nextGuestScreen(Request $request)
+    {
+
+        if (isset($request->guest_screen)) {
+            if ($request->guest_screen == 1) {
                 return response()->json([
                     'html' => view('frontend.auth.register_login')->render(),
                 ]);
             }
-            if($request->guest_screen == 2){
+            if ($request->guest_screen == 2) {
                 return response()->json([
                     'html' => view('frontend.auth.login_course_registration_detail')->render(),
                 ]);
-            }
-            elseif($request->guest_screen == 3){
-                $event_price = $request->event_price;
-                $event_id = $request->event_id;
-                $user_id = $request->user_id;
-                $event_title = $request->event_title;
-                if($event_price == 'Free'){
-                    BuyEventPlan::create([
-                        'user_id' => $request->user_id,
-                        'event_id' => $request->event_id,
-                        'amount' => 0,
-                        'transaction_id' => 'free',
-                    ]);
+            } elseif ($request->guest_screen == 3) {
+                if ($request->video == '1') {
+                    Log::info("Video Form");
+                    $video = $request->video;
+                    $event_price = $request->event_price;
+                    Log::info($event_price);
+                    $event_id = $request->event_id;
+                    $user_id = $request->user_id;
+                    $event_title = $request->event_title;
+                    $category_id = $request->category_id;
+                    Log::info($category_id);
+                    if ($event_price == 'Free') {
+                        BuyVideoPlan::create([
+                            'user_id' => $request->user_id,
+                            'video_id' => $request->event_id,
+                            'amount' => 0,
+                            'transaction_id' => 'free',
+                        ]);
+                        return response()->json([
+                            'refresh' => true,
+                        ]);
+                    }
+                    Log::info("Video Form");
+
                     return response()->json([
-                        'refresh' => true,
+                        'html' => view('frontend.auth.login_course_registration_payment', compact('event_price', 'event_id', 'user_id', 'event_title','video','category_id'))->render(),
+                    ]);
+                } else {
+                    Log::info("Event Form");
+                    $event_price = $request->event_price;
+                    $event_id = $request->event_id;
+                    $user_id = $request->user_id;
+                    $event_title = $request->event_title;
+                    if ($event_price == 'Free') {
+                        BuyEventPlan::create([
+                            'user_id' => $request->user_id,
+                            'event_id' => $request->event_id,
+                            'amount' => 0,
+                            'transaction_id' => 'free',
+                        ]);
+                        return response()->json([
+                            'refresh' => true,
+                        ]);
+                    }
+                    return response()->json([
+                        'html' => view('frontend.auth.login_course_registration_payment', compact('event_price', 'event_id', 'user_id', 'event_title'))->render(),
                     ]);
                 }
-                return response()->json([
-                    'html' => view('frontend.auth.login_course_registration_payment',compact('event_price','event_id', 'user_id','event_title'))->render(),
-                ]);
-            }elseif($request->guest_screen == 4){
+            } elseif ($request->guest_screen == 4) {
                 return response()->json([
                     'html' => view('frontend.auth.demand_registration_completed')->render(),
                 ]);
-            }elseif($request->guest_screen == 5){
+            } elseif ($request->guest_screen == 5) {
                 return response()->json([
                     'html' => view('frontend.auth.event_registration_completed')->render(),
                 ]);
-            }
-            elseif($request->guest_screen == 6){
+            } elseif ($request->guest_screen == 6) {
                 return response()->json([
                     'html' => view('frontend.auth.course_registration_form')->render(),
                 ]);
