@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admins\AdsCampaign;
 use App\Http\Controllers\Controller;
 use App\Models\Admins\Advertisement\Ad;
 use App\Models\Admins\Advertisement\AdCampaign;
+use App\Models\AdsPage;
 use vetvineHelper;
 use Illuminate\Http\Request;
 use Exception;
@@ -30,7 +31,8 @@ class ManageAdController extends Controller
     public function create()
     {
         $advertisement = AdCampaign::where('status', '1')->get();
-        return view('admins.advertisement.adsmanage.create', compact("advertisement"));
+        $adspages =AdsPage::all();
+        return view('admins.advertisement.adsmanage.create', compact("advertisement" , "adspages"));
     }
 
     /**
@@ -45,14 +47,24 @@ class ManageAdController extends Controller
         $result = vetvineHelper::saveImage($request->ad_media, $path);
         $input  = $request->all();
         try{
-            Ad::create([
-                "ad_name"                  =>  ucwords($input['ad_name']),
-                "ad_media"                 =>  $result,
-                "banner_image_url"         =>  $input['banner_image_url'],
-                "campaign_id"              =>  $input['campaign_id']
-            ]);
-            parent::successMessage('Advertisement saved successfully.');
-            return redirect(route('ads-manage.index'));
+            $count = Ad::where('ads_page_id',$input['set_pages'])->count();
+            if($count < 3){
+
+                Ad::create([
+                    "ad_name"                  =>  ucwords($input['ad_name']),
+                    "ad_media"                 =>  $result,
+                    "banner_image_url"         =>  $input['banner_image_url'],
+                    "campaign_id"              =>  $input['campaign_id'],
+                    "ads_page_id"              =>  $input['set_pages'],
+                ]);
+                parent::successMessage('Advertisement saved successfully.');
+                return redirect(route('ads-manage.index'));
+            }else{
+                parent::dangerMessage("Advertisement Does Not Created, You have reached the maximum limit of advertisements for this page");
+                return redirect(route('ads-manage.index'));
+            }
+
+
         } catch(Exception $e) {
             parent::dangerMessage("Advertisement Does Not Created, Please Try  Again");
             return redirect()->back();

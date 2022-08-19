@@ -63,16 +63,51 @@ class NewsController extends Controller
     {
         //
     }
-    public function frontIndex()
+    public function frontIndex(Request $request)
     {
-        $news = News::all();
+        $news = News::paginate(5);
+        if($request->ajax()){
+            return response()->json([
+                'html' => view('frontend.pages.news.filternews',compact('news'))->render(),
+            ]);
+        }
         return view('frontend.pages.news.index', compact('news'));
-
     }
 
-    public function frontDetail($id){
-        $newsdetail = News::where('id',$id)->first();
-        return view('frontend.pages.news.detail',compact('newsdetail'));
+
+    // public function frontDetail($id){
+    //     $newsdetail = News::where('id',$id)->first();
+    //     return view('frontend.pages.news.detail',compact('newsdetail'));
+    // }
+    public function newsSearch(Request $request){
+        if($request->ajax())
+        {
+            $news = '';
+            $news=News::where('news_title','LIKE','%'.$request->search_field."%")->get();
+            return response()->json([
+                'html' => view('frontend.pages.news.loop-news',compact('news'))->render(),
+            ]);
+        }
+
+    }
+    public function showmore(Request $request){
+        $texttype = $request->show_text;
+        $description = $request->show_desc;
+        $button_text="";
+        if($texttype == 0){
+            $texttype = 1;
+            $button_text = "Read More";
+            $description = substr($description,0,230);
+        }
+        else{
+            $texttype = 0;
+            $button_text = "Read Less";
+        }
+        return response()->json([
+            'show_text' => $texttype,
+            'description' => $description,
+            'button_text' => $button_text,
+        ]);
     }
     /**
      * Show the form for editing the specified resource.
