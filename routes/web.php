@@ -300,7 +300,10 @@ Route::group(['middleware' => ['frontendUserRole', 'emailVerification']], functi
 
     Route::get('faqs', [HomeController::class, 'faqs'])->name('faqs');
     Route::get('news', [NewsController::class, 'frontIndex'])->name('newsfrontend');
-    Route::get('news-detail/{id}', [NewsController::class, 'frontDetail'])->name('newsdetail');
+    // Route::get('news-detail/{id}', [NewsController::class, 'frontDetail'])->name('newsdetail');
+    Route::post('search-news', [NewsController::class, 'newsSearch'])->name('searchNews');
+    Route::post('show-more', [NewsController::class, 'showmore'])->name('showmore');
+    
 
     Route::post('show-comments', [CommentController::class, 'showComments'])->name('showComments');
 

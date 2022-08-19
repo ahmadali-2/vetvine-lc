@@ -22,6 +22,7 @@ class CreateAdsTable extends Migration
             $table->string('ad_media')->nullable();
             $table->text('banner_image_url')->nullable();
             $table->enum('status', ['0', '1'])->comment('0.disable,1.enable')->default('1');
+            $table->unsignedBigInteger('ads_page_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

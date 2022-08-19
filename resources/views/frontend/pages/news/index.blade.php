@@ -1,101 +1,75 @@
 @extends('frontend.master')
 @section('extra_css')
-<link rel="stylesheet" href="{{ asset('frontend/forums/css/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('frontend/forums/css/style.css') }}" />
 @endsection
 @section('content')
+    <section class="news_banner">
+        <div class="container">
+            <div class="flex-box-banner">
+                <div class="grow_banner_box grow_banner_box_web">
+                    <div class="grow-heading mt-lg-3">NEWS SOURCE</div>
+                    <img src="http://127.0.0.1:8000/frontend/images/sep-line-2.jpg" width="250" height="2"
+                        alt="" class="line_image">
 
 
-<section class="news_banner">
-    <div class="container">
-        <div class="flex-box-banner">
-            <div class="grow_banner_box grow_banner_box_web">
-                <div class="grow-heading mt-lg-3">NEWS SOURCE</div>
-                <img src="http://127.0.0.1:8000/frontend/images/sep-line-2.jpg" width="250" height="2" alt="" class="line_image">
-
-
+                </div>
             </div>
         </div>
-    </div>
-</section>
-<section class="main_banner_bottob_label"></section>
+    </section>
+    <section class="main_banner_bottob_label"></section>
 
-<section class="become_member_area">
-    <div class="container">
-        <h2>
-            <span>News Source
-            </span>
-        </h2>
-    </div>
-</section>
+    <section class="become_member_area">
+        <div class="container">
+            <h2>
+                <span>News Source
+                </span>
+            </h2>
+        </div>
+    </section>
 
-<section>
+    <section>
 
-    <div class="container forum_top_section mb-5">
-        <div class="row align-items-center">
+        <div class="container forum_top_section mb-5">
+            <div class="row align-items-center">
 
-            <div class="col-md-3 index_forum_search">
-                <label for="">Search</label>
-                <div class="input-group">
-
+                <div class="col-md-3 index_forum_search">
+                    <label for="">Search</label>
+                    <div class="input-group">
 
 
-                    <input id="category_search_field" type="text" class="form-control top-search" placeholder="Search category" aria-label="Recipient's username" aria-describedby="basic-addon2">
 
-                    <div class="input-group-append">
+                        <input id="search_field" name="search_field" type="text" class="form-control top-search"
+                            placeholder="Search News" aria-label="Recipient's username" aria-describedby="basic-addon2">
 
-                        <button class="btn search_btn" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        <div class="input-group-append">
+
+                            <button class="btn search_btn" type="button"><i class="fa fa-search"
+                                    aria-hidden="true"></i></button>
+
+                        </div>
 
                     </div>
-
                 </div>
-            </div>
 
 
-
-        </div>
-    </div>
-
-
-
-   <div class="container news">
-    <div class="row">
-        @forelse ($news as $new)
-        <div class="col-md-12 mb-3">
-
-            <div class="content">
-                <div class="heading d-flex align-items-center">
-                    <img src="{{asset('frontend/images/arrow.png')}}" alt="" width="16" height="18">
-                    <h3>{{ $new->news_title }}</h3>
-
-                </div>
-                <p class="ml-4">{!! Str::limit($new->news_description ,230) !!}<a href="{{ route('newsdetail', $new->id) }}" class="read_more">Read More</a>  </p>
 
             </div>
-
         </div>
-        @empty
-        Not Found
-           @endforelse
-        <div class="col-md-12 pagination_col my-5">
-            <ul class="pagination pagination-lg">
-               <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-               <li class="page-item"><a class="page-link" href="#">1</a></li>
-               <li class="page-item"><a class="page-link " href="#">2</a></li>
-               <li class="page-item"><a class="page-link" href="#">3</a></li>
-               <li class="page-item active"><a class="page-link" href="#">4</a></li>
-               <li class="page-item"><a class="page-link" href="#">5</a></li>
-               <li class="page-item"><a class="page-link" href="#">6</a></li>
-               <li class="page-item"><a class="page-link" href="#">7</a></li>
-               <li class="page-item"><a class="page-link" href="#">Next</a></li>
-             </ul>
-          </div>
-    </div>
-   </div>
+
+
+
+        <div class="container news">
+            <div class="row">
+                <div id="news_search">
+                    @include('frontend.pages.news.filternews')
+                </div>
+            </div>
+        </div>
 
 
 
 
-    {{-- <div class="specialty-topics">
+        {{-- <div class="specialty-topics">
         <div class="container">
             <div class="specialty-info">
                 <div class="search-feild float-right">
@@ -151,14 +125,62 @@
 
     </div> --}}
 
-</section>
-<section>
-    <div class="container">
-        <div class="advertising-sec">
-            <div class="advertising-img-1"><img src="{{ asset('frontend/forums/img/add-1.png') }}" alt=""></div>
-            <div class="advertising-img-2"><img src="{{ asset('frontend/forums/img/add-2.png') }}" alt=""></div>
-            <div class="advertising-img-3"><img src="{{ asset('frontend/forums/img/add-3.png') }}" alt=""></div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="advertising-sec">
+                <div class="advertising-img-1"><img src="{{ asset('frontend/forums/img/add-1.png') }}" alt=""></div>
+                <div class="advertising-img-2"><img src="{{ asset('frontend/forums/img/add-2.png') }}" alt=""></div>
+                <div class="advertising-img-3"><img src="{{ asset('frontend/forums/img/add-3.png') }}" alt=""></div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).on('click', '.pagination a', function(event) {
+            event.preventDefault();
+            var page = $(this).attr('href').split('page=')[1];
+            localStorage.setItem('news-page', page);
+            fetch_news(page);
+        });
+        function fetch_news(page) {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                type: "GET",
+                url: '/news?page=' + page,
+                success: function(data) {
+                   $("#news_search").html(data.html);
+
+                }
+            });
+        }
+
+        $('#search_field').on('keyup', function() {
+            filterFormCategory();
+        });
+
+        function filterFormCategory() {
+            var search_field = $('#search_field').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                type: "POST",
+                url: '/search-news',
+                data: {
+
+                    search_field: search_field
+                },
+                success: function(data) {
+                    $('#news_data_search').empty();
+                    $('#news_data_search').append(data.html);
+                }
+            });
+        }
+    </script>
 @endsection
