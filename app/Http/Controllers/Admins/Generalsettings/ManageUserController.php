@@ -10,7 +10,10 @@ use Exception;
 use App\Models\Generals\TimeZone;
 use App\Models\MemberTypes;
 use App\Models\UserMemberAndNetworkLevel;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+
 class ManageUserController extends Controller
 {
     /**
@@ -26,9 +29,16 @@ class ManageUserController extends Controller
 
     public function emailCompaign(){
         $mailchimp = new \MailchimpTransactional\ApiClient();
-        $mailchimp->setApiKey(env('TRANSECTIONAL_MAILCHIMP_KEY'));
-        $email_templetes = $mailchimp->templates->list();
-        return view('admins.compaigns.email_templetes', compact('email_templetes'));
+        $mailchimp->setApiKey('ELZZDOtKJALoSB3qNBKmjA');
+        // $response = $mailchimp->templates->update([
+        //     "name" => "vetvine_template",
+        //     "code" => File::get(public_path('mailchimp_template.html')),
+        // ]);
+        $email_template = $mailchimp->templates->info(['name' => 'vetvine_template']);
+        if(isset($email_template)){
+            $email_template = $email_template->code;
+        }
+        return view('admins.compaigns.email_templetes', compact('email_template'));
     }
 
     /**
