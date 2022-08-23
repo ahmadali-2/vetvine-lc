@@ -71,37 +71,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 
-Route::get('/templete-list', function(){
-    // /$client = new \MailchimpMarketing\ApiClient();
-    $mailchimp = new \MailchimpTransactional\ApiClient();
-    $apiKey = env('MAILCHIMP_API_KEY'); // business api key
-    $mailchimp->setApiKey(env('TRANSECTIONAL_MAILCHIMP_KEY'));
-
-
-    // $response = $mailchimp->templates->list();
-    $response = $mailchimp->templates->info(["name" => "sajjawal"]);
-    // return ($response->code);
-    // $response = $mailchimp->templates->update(["sajjawal" => "SAJJAWAL BHAI"]);
-
-    // $client = new MailchimpMarketing\ApiClient();
-    // $client->setConfig([
-    //     'apiKey' => env('MAILCHIMP_API_KEY'),
-    //     'server' => 'sajjawal',
-    // ]);
-
-
-
-    $response2 = $mailchimp->templates->update([
-        "name" => "sajjawal",
-        "code" => str_replace('BANANACO','AHMAD',$response->code),
-        "publish" => true,
-    ]);
-
-    // // $response = $client->campaigns->create(["type" => "absplit"]);
-    return $response2->code;
-
-});
-
 Route::get('/clear', function () {
     Artisan::call('route:clear');
     Artisan::call('cache:clear');
@@ -303,7 +272,7 @@ Route::group(['middleware' => ['frontendUserRole', 'emailVerification']], functi
     // Route::get('news-detail/{id}', [NewsController::class, 'frontDetail'])->name('newsdetail');
     Route::post('search-news', [NewsController::class, 'newsSearch'])->name('searchNews');
     Route::post('show-more', [NewsController::class, 'showmore'])->name('showmore');
-    
+
 
     Route::post('show-comments', [CommentController::class, 'showComments'])->name('showComments');
 
