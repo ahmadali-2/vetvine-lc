@@ -54,7 +54,21 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="set_pages" class="control-label mb-1 form-select">Select Page</label>
+                                            <select id="set_pages" name="set_pages" aria-label="Default select example"
+                                                class="form-control cc-number identified visa" value="" data-val="true">
+                                                <option selected value="">Open this select</option>
+                                                @foreach ($adspages as $page)
+                                                    <option value="{{ $page->id }}">{{ $page->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
+
                                 <div>
                                     <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
                                         <span id="payment-button-amount">Submit</span>
@@ -63,7 +77,7 @@
                                 </div>
                             </form>
                         </div>
-                   
+
 
 
             </div>

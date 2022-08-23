@@ -17,9 +17,9 @@ class AdsPageSeeder extends Seeder
         $pages = [
             [
                 'name' => 'Form Post',
-                'slug' => 'form_post'
+                'slug' => 'form-post',
             ]
             ];
-            AdsPage::insert($pages);
+        AdsPage::insert($pages);
     }
 }

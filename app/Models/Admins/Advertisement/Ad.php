@@ -5,6 +5,7 @@ namespace App\Models\Admins\Advertisement;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\AdsPage;
 
 /**
  * Class Ad
@@ -30,12 +31,17 @@ class Ad extends Model
         'ad_name',
         'ad_media',
         'banner_image_url',
+        'ads_page_id',
         'status'
     ];
 
     public function campaigns()
     {
         return $this->belongsTo(AdCampaign::class ,"campaign_id");
+    }
+    public function Adspages()
+    {
+        return $this->belongsTo(AdsPage::class ,"ads_page_id");
     }
 
 }

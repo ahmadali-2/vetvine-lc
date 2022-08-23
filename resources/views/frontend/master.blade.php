@@ -93,6 +93,7 @@
 
     @yield('extra_css')
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}" />
+
 </head>
 
 
@@ -117,6 +118,8 @@
     <script src="{{ asset('bootstrap/jquery/popper.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
         {{-- Scripts --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>

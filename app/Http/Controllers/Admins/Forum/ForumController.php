@@ -115,7 +115,7 @@ class ForumController extends Controller
 
 
         $categories   =   CategoryForum::all();
-        $ads          =   Ad::all();
+        $ads          =   Ad::with('Adspages')->get();
         $forums       =   Forum::all();
         $userLoggedIn = 0;
         if(auth()->user()){
