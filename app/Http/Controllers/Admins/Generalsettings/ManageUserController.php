@@ -94,9 +94,20 @@ class ManageUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+
+        $mailchimp = new \MailchimpTransactional\ApiClient();
+        $mailchimp->setApiKey('ELZZDOtKJALoSB3qNBKmjA');
+        $response = $mailchimp->templates->update([
+            "name" => "vetvine_template",
+            "code" => $request->content,
+        ]);
+        return response()->json([
+            'status' => 201,
+            'message'=> 'Template updated successfully!',
+            'content'=> $request->content
+        ]);
     }
 
     /**
