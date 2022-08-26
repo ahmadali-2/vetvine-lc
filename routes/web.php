@@ -69,8 +69,16 @@ use App\Models\Generals\TimeZone;
 use App\Models\MemberPermission;
 use App\Models\MemberTypes;
 use App\Models\User;
+use App\VetvineFacades\VetvineHelperFacade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+
+Route::get('/mailchimp', function(){
+
+    $folders = VetvineHelperFacade::getMailchimpMarketing()->campaignFolders->list();
+    dd($folders);
+    // VetvineHelperFacade::getMailchimpMarketing()->campaigns->send($compaign_data->id);
+});
 
 Route::get('/clear', function () {
     Artisan::call('route:clear');

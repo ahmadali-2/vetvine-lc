@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Admins\Webinar\BuyEventPlan;
 use App\Models\Admins\Webinar\Event;
 use App\Models\BuyVideoPlan;
+use App\Models\User;
+use App\VetvineFacades\VetvineHelperFacade;
 use Session;
 use Stripe;
 use Exception;
@@ -56,7 +58,6 @@ class EventPaymentController extends Controller
      */
     public function paymentWebinars(Request $request)
     {
-        // dd($request->event_price*100);
         if($request->video == "1"){
             $checkUser =BuyVideoPlan::where('user_id',$request->user_id)->where('video_id', $request->event_id)->first();
         }else{
@@ -120,6 +121,25 @@ class EventPaymentController extends Controller
                     'event_id' => $request->event_id,
                     'amount' => $request->event_price,
                 ]);
+
+                $event = BuyEventPlan::with('buyevents', 'user')
+                ->whereHas('user', function($query) use($request){
+                    $query->where('id',$request->user_id);
+                })->whereHas('buyevents', function($query2) use($request){
+                    $query2->where('id', $request->event_id);
+                })->first();
+
+                $tags = explode(',',$event->buyevents->tags);
+
+                for($i=0;$i<count($tags);$i++){
+                    VetvineHelperFacade::getMailchimpMarketing()->lists->updateListMemberTags(env('MAILCHIMP_LIST_ID'), strtolower(md5($event->user->email)),[
+                        "tags" => [["name" => $tags[$i], "status" => "active"]],
+                    ]);
+                }
+
+                // $response = $client->searchMembers->search($user->email);
+                // dd($response->exact_matches->members[0]);
+
                 parent::successMessage("Payment Successful");
                 parent::successMessage("Event Subscribed Successfully");
                 parent::successMessage("Your Transaction Id " .$stripeResponse->id);
@@ -138,6 +158,7 @@ class EventPaymentController extends Controller
         }
 
         } catch(Exception $e) {
+            dd($e->getMessage());
             parent::dangerMessage("Something Went Wrong Payment Does Not Proceed");
             parent::dangerMessage("Please Try Again ");
             if($request->ajax() == false){

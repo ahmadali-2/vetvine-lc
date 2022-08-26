@@ -3,14 +3,17 @@
 namespace App\Http\Controllers\Admins\Webinar;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\VetvineUsersRole;
 use Illuminate\Http\Request;
 use App\Models\Admins\Webinar\Event;
 use App\Models\Admins\Webinar\CategoryEvent;
 use App\Models\Admins\Webinar\ReviewRating;
 use App\Models\Admins\Webinar\SponserTable;
 use App\Models\Sponser;
+use App\VetvineFacades\VetvineHelperFacade;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\Console\Input\Input;
 use vetvineHelper;
 
@@ -58,7 +61,7 @@ class EventController extends Controller
                 "category_id"                   =>   $input['category_id'],
                 "user_id"                       =>   $user,
                 "event_title"                   =>   ucwords($input['event_title']),
-                "tags"                          =>   '['.$input['tags'].']',
+                "tags"                          =>   $input['tags'],
                 "main_photo"                    =>   $result,
                 "event_add_ytlink"              =>   $input['event_add_ytlink'],
                 "date"                          =>   $input['date'],
@@ -87,14 +90,50 @@ class EventController extends Controller
                     ]);
                 }
             }
+            $compaign_folder = VetvineHelperFacade::getMailchimpMarketing()->campaignFolders->create(["name" => ucwords($input['event_title'])]);
+            Event::find($event->id)->update(['compaign_folder' => ''.$compaign_folder->id]);
+            $tags = explode(',', $input['tags']);
+            foreach($tags as $tag){
+                $data = array (
+                    'name' => $tag,
+                    'options' =>
+                    array (
+                      'match' => 'any',
+                      'conditions' =>
+                      array (
+                        array (
+                            "field" => "timestamp_opt",
+                            "op" =>  "greater",
+                            "value" => "date",
+                            "extra" => "2021-01-01"
+                        ),
+                      ),
+                    ),
+                );
+
+            $segment = VetvineHelperFacade::getMailchimpMarketing()->lists->createSegment(env('MAILCHIMP_LIST_ID'), $data);
+
+            dump($segment);
+
+            $segment_opt = array(
+                'saved_segment_id' => $segment->id,
+                'prebuilt_segment_id' => 'subscribers-female',
+            );
+
+            $data = array("recipients" => array("list_id" => env('MAILCHIMP_LIST_ID'), 'segment_opts' => $segment_opt), "type" => "regular", "settings" => array("subject_line" => "Subject", "title" => "Webinar Compaign", "reply_to" => env('mail_from_address'), "template_id" => ''.env('MAILCHIMP_TEMPLATE_ID') , "from_name" => env('APP_NAME'), "folder_id" => $compaign_folder->id));
+
+            dump($data);
+            dd(VetvineHelperFacade::getMailchimpMarketing()->campaigns->create($data)->getResponseBody());
+            //Created compaign in a folder of compaigns.
+        }
             parent::successMessage('Event saved successfully.');
             return redirect(route('webinars.index'));
         } catch(Exception $e) {
-            // dd($e->getMessage());
+            Log::info('mailchimp Log:'.$e);
+            dd($e);
             parent::dangerMessage("Continue Education Event Does Not Created, Please Try  Again");
             return redirect()->back();
         }
-
     }
 
 
