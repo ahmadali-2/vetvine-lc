@@ -63,6 +63,7 @@ use App\Http\Controllers\TermsController; // for terms of services
 use App\Http\Controllers\LicensureController;
 use App\Http\Controllers\PrivacyPolicyController;
 use App\Http\Controllers\VetvineUsers\EventManagement\CalandarEventsController;
+use App\Models\ChMessage;
 use App\Models\Generals\Member;
 use App\Models\Generals\TimeZone;
 use App\Models\MemberPermission;
@@ -363,4 +364,14 @@ Route::get('/test/api', function () {
     //     "html" => "html",
     // ]);
     dd($response);
+});
+
+
+
+
+
+Route::get('/mongo',function(){
+    dd(ChMessage::join('users', 'users.id', '=', 'ch_messages.from_id')
+    ->select('ch_messages.*', 'users.name')
+    ->get());
 });
