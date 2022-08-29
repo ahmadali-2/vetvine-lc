@@ -224,6 +224,10 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum', 'adminR
     Route::get('/cms-pages', [CMSController::class, 'index'])->name('cms.pages');
     Route::get('/cms-page/create', [CMSController::class, 'create'])->name('cms.pages.create');
     Route::post('/cms-page/store', [CMSController::class, 'store'])->name('cms.page.store');
+
+    //Mailchimp Compaign
+
+    Route::post('/email/compaign/update',[ManageUserController::class, 'update'])->name('email.compaign.update');
 });
 // Open routes Ahmad
 Route::get('next-guest-screen', [GuestController::class, 'nextGuestScreen'])->name('nextGuestScreen');
