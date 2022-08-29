@@ -34,7 +34,8 @@ class Event extends Model
         'pet_owner_fee',
         'vet_pet_prof_premium_fee',
         'status',
-        'timezone_url'
+        'timezone_url',
+        'compaign_folder',
     ];
     public function events()
     {

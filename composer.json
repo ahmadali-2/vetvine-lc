@@ -21,7 +21,7 @@
         "laravelcollective/html": "^6.2",
         "livewire/livewire": "^2.5",
         "mailchimp/mailchimp": "^2.0",
-        "mailchimp/marketing": "^3.0",
+        "mailchimp/marketing": "^3.0.78",
         "mailchimp/transactional": "^1.0",
         "martinbutt/laravel-adsense": "^2.0",
         "mckenziearts/laravel-notify": "^2.2",

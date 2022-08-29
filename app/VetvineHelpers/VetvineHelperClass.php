@@ -10,9 +10,32 @@ use App\Models\User;
 use App\Models\UserMemberAndNetworkLevel;
 use File;
 use Illuminate\Support\Facades\Auth;
+use MCAPI;
 
 class VetVineHelperClass
 {
+    private $mailchimp_marketing = null;
+    private $mailchimp_transectional = null;
+    private $mcapi = null;
+
+    function __Construct(){
+
+        //$this->mcapi = new MCAPI(env('MAILCHIMP_API_KEY'));
+        $marketing = new \MailchimpMarketing\ApiClient();
+        $transectional = new \MailchimpTransactional\ApiClient();
+
+        $transectional->setApiKey([
+            'apiKey' => env('TRANSECTIONAL_MAILCHIMP_KEY'),
+            'server' => 'us17',
+        ]);
+        $marketing->setConfig([
+            'apiKey' => env('MAILCHIMP_API_KEY'),
+            'server' => 'us17',
+        ]);
+
+        $this->mailchimp_marketing = $marketing;
+        $this->mailchimp_transectional = $transectional;
+    }
     /**
      * @author Muhammad Naveed
      * @github https://github.com/naveed504
@@ -28,6 +51,19 @@ class VetVineHelperClass
     /**
      * get all timezones
      */
+
+    // public function mcApi(){
+    //     return $this->mcapi;
+    // }
+
+    public function getMailchimpMarketing(){
+        return $this->mailchimp_marketing;
+    }
+
+    public function getMailchimpTransectional(){
+        return $this->mailchimp_transectional;
+    }
+
     public function timezones()
     {
         return $timezones = TimeZone::all();

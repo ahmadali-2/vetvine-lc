@@ -168,7 +168,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     public function buyevents()
     {
-        return $this->hasOne(BuyEventPlan::class);
+        return $this->hasMany(BuyEventPlan::class);
     }
     public function likes()
     {
