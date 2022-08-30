@@ -12,6 +12,7 @@ class VideoDescriptionController extends Controller
 {
     public function video_desc($id, $category)
     {
+
         // return $rating;
         $authUser = false;
 

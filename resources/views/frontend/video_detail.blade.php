@@ -180,7 +180,6 @@
     border-top: 0px solid #68868e !important;
     /* padding-top: 23px; */
 }
-
         /* End */
     </style>
 

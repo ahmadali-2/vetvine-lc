@@ -1,10 +1,14 @@
-@php
+{{-- @php
 $user = Auth::user();
 @endphp
 @checkAdmin($user->id)
-@endcheckAdmin
+@endcheckAdmin --}}
 @extends('vetvineUsers.dashboard_master')
 @section('dashboardcontent')
+
+<?php
+    $isAdmin = false;
+?>
     <!-------sidbar------>
     <div class="container my-5">
 
@@ -47,8 +51,14 @@ $user = Auth::user();
                             <div class="messenger-favorites app-scroll-thin"></div>
                         </div>
 
-                        {{-- Saved Messages --}}
-                        {!! view('Chatify::layouts.listItem', ['get' => 'saved']) !!}
+                        @checkAdmin(Auth::user()->id)
+                            <?php
+                                $isAdmin = true;
+                            ?>
+                            {!! view('Chatify::layouts.adminListItem', ['get' => 'saved']) !!}
+                        @else
+                            {!! view('Chatify::layouts.listItem', ['get' => 'saved']) !!}
+                        @endcheckAdmin
 
                         {{-- Contact --}}
                         <div class="listOfContacts" style="width: 100%;height: calc(100% - 200px);position: relative;">
@@ -140,3 +150,16 @@ $user = Auth::user();
         @include('Chatify::layouts.footerLinks')
     </div>
 @endsection
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script type="text/javascript">
+    var adminUser = '<?php echo $isAdmin ?>';
+    $(document).ready(function() {
+        if(adminUser == true){
+            $('#userHeader').css('display','none');
+            $('#userFooter').css('display','none');
+        }else{
+            $('#userHeader').css('display','block');
+            $('#userFooter').css('display','block');
+        }
+    });
+</script>

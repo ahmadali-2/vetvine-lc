@@ -74,7 +74,7 @@
 
             </button> --}}
 
-            <a href="{{route('admin-chat')}}"><i class="ti-email"></i></a>
+            <a href="{{ url('/chatify')}}"><i class="ti-email"></i></a>
 
             @php
                 $messages = vetvineHelper::adminUserMessages();

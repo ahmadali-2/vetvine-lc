@@ -4,7 +4,7 @@ $socialLinks = vetvineHelper::vetvineGeneralSetting();
 
 @endphp
 
-<section class="footer_bg">
+<section class="footer_bg" id="userFooter">
 
 
 

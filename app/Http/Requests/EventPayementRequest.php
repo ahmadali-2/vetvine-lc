@@ -24,10 +24,10 @@ class EventPayementRequest extends FormRequest
     public function rules()
     {
         return [
-            'card_number'         => 'required',
-            'cvc_number'          => 'required',
-            'exp_month'           => 'required',
-            'exp_year'            => 'required',
+            'card_number'         => ['required', 'number', 'min:1' ,'max:16'],
+            'cvc_number'          => ['required', 'number', 'min:1' ,'max:3'],
+            'exp_month'           => ['required','number'],
+            'exp_year'            => ['required','number'],
 
         ];
     }
@@ -35,7 +35,9 @@ class EventPayementRequest extends FormRequest
     public function messages(){
         return [
             'card_number.required'       => 'Card Number is required',
+            'card_number.number'         => 'Card Number Must Be Number',
             'cvc_number.required'        => 'CVC Number is required',
+            'cvc_number.number'          => 'CVC Must Be Number',
             'exp_month.required'         => 'Expired Month is required',
             'exp_year.required'          => 'Expired Year is required',
 
