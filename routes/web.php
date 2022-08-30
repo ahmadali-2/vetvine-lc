@@ -63,6 +63,7 @@ use App\Http\Controllers\TermsController; // for terms of services
 use App\Http\Controllers\LicensureController;
 use App\Http\Controllers\PrivacyPolicyController;
 use App\Http\Controllers\VetvineUsers\EventManagement\CalandarEventsController;
+use App\Models\ChMessage;
 use App\Models\Generals\Member;
 use App\Models\Generals\TimeZone;
 use App\Models\MemberPermission;
@@ -76,7 +77,7 @@ Route::get('/mailchimp', function(){
 
     $folders = VetvineHelperFacade::getMailchimpMarketing()->campaignFolders->list();
     dd($folders);
-    // VetvineHelperFacade::getMailchimpMarketing()->campaigns->send($compaign_data->id);
+    // VetvineHelperFacade::getMailchimpMarketing()->campaigns->send('a8f2b761f5');
 });
 
 Route::get('/clear', function () {
@@ -371,4 +372,13 @@ Route::get('/test/api', function () {
     //     "html" => "html",
     // ]);
     dd($response);
+});
+
+
+
+
+
+Route::get('/mongodb',function(){
+   dd(VetvineHelperFacade::getMailchimpMarketing()->campaigns->send("a8f2b761f5"));
+
 });

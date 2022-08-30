@@ -3,6 +3,9 @@ $user = Auth::user();
 @endphp
 @checkAdmin($user->id)
 @endcheckAdmin
+
+
+
 @extends('vetvineUsers.dashboard_master')
 @section('dashboardcontent')
     <!-------sidbar------>
