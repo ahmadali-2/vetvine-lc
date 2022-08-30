@@ -50,7 +50,7 @@ class AppServiceProvider extends ServiceProvider
 
         Blade::if('checkAdmin', function ($adminId) {
             if($adminId == 1 || $adminId == 9 || $adminId == 10 || $adminId == 11 || $adminId == 12){
-                return redirect()->route('admin-chat')->send();
+                return true;
             }else{
                 return false;
             }

@@ -161,9 +161,9 @@ Route::get('login', function () {
     return view('frontend.home');
 })->name('login');
 
-Route::get("/admin-chatify", function () {
-    return view("admins.chat.app");
-})->name('admin-chat');
+// Route::get("/admin-chatify", function () {
+//     return view("admins.chat.app");
+// })->name('admin-chat');
 // Route::get("/annauncement", function () {
 //     return view("frontend.pages.announcement.index");
 // })->name('admin-chat');
@@ -312,8 +312,8 @@ Route::group(['middleware' => ['frontendUserRole', 'emailVerification']], functi
         Route::get('/profile-info', [PersonelInfoController::class, 'userProfile'])->name('vetvineUserProfile');
         Route::get('/chat', [PersonelInfoController::class, 'chat'])->name('vetvineUserChat');
         Route::get("/chatify", function () {
-            return view("vendor.chatify.pages.app");
-        });
+            return view("vendor.chatify.pages.app", ['type' => 'user', 'messengerColor' => 'red']);
+        })->name('chatify');
 
         Route::get('/notifications', [PersonelInfoController::class, 'notifications'])->name('vetvineUserNotifications');
 

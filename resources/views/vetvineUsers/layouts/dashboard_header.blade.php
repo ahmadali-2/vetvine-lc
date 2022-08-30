@@ -1,4 +1,4 @@
-<header class="main-wrapper">
+<header class="main-wrapper" id="userHeader">
     <?php $authUser= null; auth()->user() ? $authUser = Auth::user()->id : null; ?>
     <div class="top_Wrapper">
         <div class="container-fluid">

@@ -145,9 +145,9 @@
 
                               <label class='control-label'>Card Number</label>
 
-                              <input autocomplete='off' name="card_number" class='form-control card-number' size='20'
+                              <input autocomplete='off' name="card_number" class='form-control card-number'  size='20'
 
-                                 type='text'>
+                                 type='number' min="1">
 
                            </div>
 
@@ -170,9 +170,9 @@
 
                               <label class='control-label'>CVC</label> <input autocomplete='off'
 
-                                 class='form-control card-cvc' name="cvc_number" placeholder='ex. 311' size='4'
+                                 class='form-control card-cvc' name="cvc_number" min='1' placeholder='ex. 311' size='4'
 
-                                 type='text'>
+                                 type='number'>
 
                            </div>
 
@@ -332,7 +332,7 @@ $(function() {
 
         inputSelector = ['input[type=email]', 'input[type=password]',
 
-                         'input[type=text]', 'input[type=file]',
+                         'input[type=number]', 'input[type=file]',
 
                          'textarea'].join(', '),
 
