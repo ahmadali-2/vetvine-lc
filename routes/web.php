@@ -77,7 +77,7 @@ Route::get('/mailchimp', function(){
 
     $folders = VetvineHelperFacade::getMailchimpMarketing()->campaignFolders->list();
     dd($folders);
-    // VetvineHelperFacade::getMailchimpMarketing()->campaigns->send($compaign_data->id);
+    // VetvineHelperFacade::getMailchimpMarketing()->campaigns->send('a8f2b761f5');
 });
 
 Route::get('/clear', function () {
@@ -378,8 +378,7 @@ Route::get('/test/api', function () {
 
 
 
-Route::get('/mongo',function(){
-    dd(ChMessage::join('users', 'users.id', '=', 'ch_messages.from_id')
-    ->select('ch_messages.*', 'users.name')
-    ->get());
+Route::get('/mongodb',function(){
+   dd(VetvineHelperFacade::getMailchimpMarketing()->campaigns->send("a8f2b761f5"));
+
 });
