@@ -63,43 +63,21 @@ use App\Http\Controllers\TermsController; // for terms of services
 use App\Http\Controllers\LicensureController;
 use App\Http\Controllers\PrivacyPolicyController;
 use App\Http\Controllers\VetvineUsers\EventManagement\CalandarEventsController;
+use App\Models\ChMessage;
 use App\Models\Generals\Member;
 use App\Models\Generals\TimeZone;
 use App\Models\MemberPermission;
 use App\Models\MemberTypes;
 use App\Models\User;
+use App\VetvineFacades\VetvineHelperFacade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 
-Route::get('/templete-list', function(){
-    // /$client = new \MailchimpMarketing\ApiClient();
-    $mailchimp = new \MailchimpTransactional\ApiClient();
-    $apiKey = env('MAILCHIMP_API_KEY'); // business api key
-    $mailchimp->setApiKey(env('TRANSECTIONAL_MAILCHIMP_KEY'));
+Route::get('/mailchimp', function(){
 
-
-    // $response = $mailchimp->templates->list();
-    $response = $mailchimp->templates->info(["name" => "sajjawal"]);
-    // return ($response->code);
-    // $response = $mailchimp->templates->update(["sajjawal" => "SAJJAWAL BHAI"]);
-
-    // $client = new MailchimpMarketing\ApiClient();
-    // $client->setConfig([
-    //     'apiKey' => env('MAILCHIMP_API_KEY'),
-    //     'server' => 'sajjawal',
-    // ]);
-
-
-
-    $response2 = $mailchimp->templates->update([
-        "name" => "sajjawal",
-        "code" => str_replace('BANANACO','AHMAD',$response->code),
-        "publish" => true,
-    ]);
-
-    // // $response = $client->campaigns->create(["type" => "absplit"]);
-    return $response2->code;
-
+    $folders = VetvineHelperFacade::getMailchimpMarketing()->campaignFolders->list();
+    dd($folders);
+    // VetvineHelperFacade::getMailchimpMarketing()->campaigns->send('a8f2b761f5');
 });
 
 Route::get('/clear', function () {
@@ -247,6 +225,10 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth:sanctum', 'adminR
     Route::get('/cms-pages', [CMSController::class, 'index'])->name('cms.pages');
     Route::get('/cms-page/create', [CMSController::class, 'create'])->name('cms.pages.create');
     Route::post('/cms-page/store', [CMSController::class, 'store'])->name('cms.page.store');
+
+    //Mailchimp Compaign
+
+    Route::post('/email/compaign/update',[ManageUserController::class, 'update'])->name('email.compaign.update');
 });
 // Open routes Ahmad
 Route::get('next-guest-screen', [GuestController::class, 'nextGuestScreen'])->name('nextGuestScreen');
@@ -390,4 +372,13 @@ Route::get('/test/api', function () {
     //     "html" => "html",
     // ]);
     dd($response);
+});
+
+
+
+
+
+Route::get('/mongodb',function(){
+   dd(VetvineHelperFacade::getMailchimpMarketing()->campaigns->send("a8f2b761f5"));
+
 });
