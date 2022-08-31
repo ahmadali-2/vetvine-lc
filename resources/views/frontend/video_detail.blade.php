@@ -233,6 +233,9 @@
                                 <input type="hidden" name="event_id" value="{{ $videos->id }}">
                                 <input type="hidden" name="user_id" value="{{ $videos->user_id }}">
                                 {{-- <p class="font-weight-bold ">Review</p> --}}
+                               @isset($purchasedvideo)
+
+
                                 <div>
                                     <select name="" class="videostars">
                                         <option value="">--</option>
@@ -243,11 +246,12 @@
                                         <option value="5" @if($rating == 5) selected @endif>5</option>
                                     </select>
                                 </div>
+
                                 <br>
                                 <div class="time">
                                     <p>1 hr 4 min</p>
                                 </div>
-
+ @endisset
 
                                 <div class="public2-info">
                                     <div class="public2-title">
@@ -275,10 +279,15 @@
                                     </div>
                                 @endforeach
                                   </div>
-
+                                  @if (isset($purchasedvideo))
+                                  <div class="publication-detail register_btn">
+                                    <a id="" style="cursor: pointer">Attend Video!</a>
+                                </div>
+                                  @else
                                   <div class="publication-detail register_btn">
                                     <a id="videoRegister" style="cursor: pointer">Register Now</a>
                                 </div>
+                                @endif
                                 {{-- </form> --}}
                             </div>
                         </div>

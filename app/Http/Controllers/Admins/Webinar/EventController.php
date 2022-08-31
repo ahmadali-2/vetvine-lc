@@ -210,8 +210,9 @@ class EventController extends Controller
             parent::successMessage('Event saved successfully.');
             return redirect(route('webinars.index'));
         } catch (Exception $e) {
+            dd($e->getMessage());
             Log::info('mailchimp Log:' . $e);
-            dd($e);
+
             parent::dangerMessage("Continue Education Event Does Not Created, Please Try  Again");
             return redirect()->back();
         }

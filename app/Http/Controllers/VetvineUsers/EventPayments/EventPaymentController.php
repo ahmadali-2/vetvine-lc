@@ -158,7 +158,7 @@ class EventPaymentController extends Controller
         }
 
         } catch(Exception $e) {
-            dd($e->getMessage());
+            // dd($e->getMessage());
             parent::dangerMessage("Something Went Wrong Payment Does Not Proceed");
             parent::dangerMessage("Please Try Again ");
             if($request->ajax() == false){
