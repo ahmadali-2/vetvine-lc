@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admins\VideosonDemand\VideosOnDemand;
 use App\Models\Admins\Webinar\SponserTable;
+use App\Models\BuyVideoPlan;
 use App\Models\VideoRating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,11 @@ class VideoDescriptionController extends Controller
             $authUser = true;
         }
         $starRating  = VideoRating::select('rating')->where('video_id', $id)->where('user_id', Auth::id())->first();
+        if(auth()->user()){
+            $purchasedvideo =BuyVideoPlan::where('user_id',auth()->user()->id)->where('video_id', $id)->first();
+        }else{
+            $purchasedvideo = null;
+        }
         return view('frontend.video_detail', [
             'sponsor' => SponserTable::all(),
             'videos'    => VideosOnDemand::find($id),
@@ -28,6 +34,7 @@ class VideoDescriptionController extends Controller
             'videoId' => $id,
             'authUser' => $authUser,
             'categoryId' => $category,
+            'purchasedvideo' => $purchasedvideo
         ]);
     }
 
@@ -90,26 +97,32 @@ class VideoDescriptionController extends Controller
     public function rating_videos(Request $request)
     {
         $length = $request->length;
-        $user_id = $request->user_id;
         $video_id = $request->video_id;
 
-        $videoRating = VideoRating::where('video_id', $video_id)->get()->pluck('rating')->toArray();
-        $averageRating = floor(array_sum($videoRating)/count($videoRating));
+        VideoRating::where('user_id', Auth::id())->where('video_id', $video_id)->update([
+            'rating' => $length,
+        ]);
 
-        if (count($videoRating) > 0) {
-            VideoRating::where('user_id', Auth::id())->where('video_id', $video_id)->update([
-                'rating' => $length,
-            ]);
-        } else {
+        $data = VideoRating::where('user_id', Auth::id())->where('video_id', $video_id)->first();
+
+        if(isset($data) == false){
             VideoRating::create([
                 'video_id'=> $video_id,
                 'user_id' => Auth::id(),
                 'rating'  => $length,
             ]);
-
         }
 
-        $demandVideo = VideosOnDemand::find($request->video_id);
+        $videoRating = VideoRating::where('video_id', $video_id)->get()->pluck('rating')->toArray();
+        $totalRating = count($videoRating);
+
+        if($totalRating == 0){
+            $totalRating = 1;
+        }
+
+        $averageRating = ceil(array_sum($videoRating)/$totalRating);
+
+        $demandVideo = VideosOnDemand::where('id', $request->video_id)->first();
 
         $demandVideo->update([
             'average_rating' => $averageRating,

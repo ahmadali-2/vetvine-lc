@@ -33,6 +33,7 @@ class SubscribeToMailChimp
      */
     public function handle(UserRegistered $event)
     {
+
         $client = new \MailchimpMarketing\ApiClient();
 
         $client->setConfig([
@@ -45,7 +46,7 @@ class SubscribeToMailChimp
         // $res = $client->verifiedDomains->getVerifiedDomainsAll();
         // $verifiedDomains = json_decode(json_encode($res),true);
         // Log::info($verifiedDomains);
-
+        try{
         $email = $event->user->email;
         $domain = ltrim(stristr($email, '@'), '@');
         $response = $client->verifiedDomains->getDomain(strval($domain));
@@ -72,6 +73,9 @@ class SubscribeToMailChimp
             return true;
         }
     }
+    catch(\Exception $e)
+    {
 
-
+    }
+}
 }
